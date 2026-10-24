@@ -1,0 +1,1072 @@
+/* =========================================================
+   OptionsCrafted™ Premium Tools — Probability Station™
+   Complete CSS replacement
+   File target: tools/probability-station/probability-station.css
+
+   Scope:
+   - Visual alignment with Edge Station™ / Tools Hub™ premium style
+   - No JavaScript logic changed
+   - No HTML IDs or functional class dependencies changed
+   ========================================================= */
+
+:root {
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --panel-soft: #f9fafb;
+  --ink: #111827;
+  --muted: #6b7280;
+  --line: #d8dee8;
+
+  --blue: #10233f;
+  --blue-soft: #17365f;
+  --gold: #c9a227;
+
+  --green: #166534;
+  --green-soft: #edf7f1;
+  --red: #991b1b;
+  --red-soft: #fbefef;
+  --warning-soft: #fffaf0;
+
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.05);
+  --radius: 22px;
+  --radius-md: 18px;
+  --radius-sm: 13px;
+  --max: 1240px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.55;
+}
+
+body.probability-station-page {
+  background:
+    radial-gradient(circle at top right, rgba(201, 162, 39, 0.08), transparent 28rem),
+    radial-gradient(circle at top left, rgba(16, 35, 63, 0.10), transparent 34rem),
+    var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.station-shell {
+  width: min(var(--max), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 0 0 44px;
+}
+
+/* =========================================================
+   Topbar
+   ========================================================= */
+
+.station-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100vw;
+  min-height: 72px;
+  margin: 0 0 0 calc(50% - 50vw);
+  padding-inline: max(20px, calc((100vw - var(--max)) / 2));
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.station-logo {
+  display: inline-flex;
+  align-items: center;
+  color: var(--blue);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: color 0.18s ease;
+}
+
+.station-logo:hover {
+  color: var(--gold);
+}
+
+.station-site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 22px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.station-site-nav a {
+  font-weight: 600;
+  line-height: 1;
+  transition: color 0.18s ease;
+}
+
+.station-site-nav a:hover {
+  color: var(--blue);
+}
+
+/* =========================================================
+   Header / hero
+   ========================================================= */
+
+.station-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 46px;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top right, rgba(201, 162, 39, 0.18), transparent 32%),
+    linear-gradient(135deg, var(--blue), var(--blue-soft));
+  color: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.station-kicker {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.station-header h1 {
+  margin: 0;
+  max-width: 780px;
+  font-size: clamp(2.35rem, 5vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.station-subtitle {
+  max-width: 780px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+}
+
+.header-panel {
+  align-self: center;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(10px);
+}
+
+.panel-label,
+.panel-note {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel-note {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+.header-panel strong {
+  display: block;
+  margin: 10px 0 5px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+}
+
+/* =========================================================
+   Premium navigation
+   ========================================================= */
+
+.premium-nav {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin: -26px 0 34px;
+}
+
+.premium-nav-card {
+  display: flex;
+  min-height: 92px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.premium-nav-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 162, 39, 0.55);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.11);
+}
+
+.premium-nav-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.premium-nav-card strong {
+  display: block;
+  color: var(--blue);
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.premium-nav-card.active {
+  background: linear-gradient(135deg, #ffffff, #fffaf0);
+  border-color: rgba(201, 162, 39, 0.75);
+}
+
+.premium-nav-card.muted {
+  opacity: 0.58;
+  cursor: default;
+}
+
+.premium-nav-card.muted:hover {
+  transform: none;
+  border-color: var(--line);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+}
+
+/* =========================================================
+   Market pulse
+   ========================================================= */
+
+.market-pulse-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+.market-pulse-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 58px;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow-soft);
+}
+
+.market-pulse-label {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.market-pulse-value {
+  font-size: 1.05rem;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.market-pulse-positive {
+  color: var(--green);
+}
+
+.market-pulse-negative {
+  color: var(--red);
+}
+
+.market-pulse-neutral {
+  color: var(--muted);
+}
+
+/* =========================================================
+   Controls and metric dashboard
+   ========================================================= */
+
+.control-panel {
+  display: grid;
+  grid-template-columns: 1.45fr repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--gold);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.control-block label,
+.scenario-grid label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.control-block input,
+.control-block select,
+.scenario-grid input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel-soft);
+  color: var(--ink);
+  outline: none;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.control-block input:focus,
+.control-block select:focus,
+.scenario-grid input:focus {
+  background: #ffffff;
+  border-color: rgba(201, 162, 39, 0.9);
+  box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.14);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.metric-card,
+.station-section {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.metric-card {
+  padding: 22px;
+}
+
+.metric-label {
+  display: block;
+  min-height: 38px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 8px 0 10px;
+  color: var(--blue);
+  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.metric-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* =========================================================
+   Sections
+   ========================================================= */
+
+.station-section {
+  margin-bottom: 18px;
+  padding: 28px;
+}
+
+.station-section.compact {
+  margin-bottom: 0;
+}
+
+.section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 440px);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.section-heading.simple,
+.section-heading.strategy-heading {
+  display: block;
+}
+
+.section-heading.strategy-heading {
+  max-width: 920px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: var(--blue);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.strategy-heading p#strategyNote {
+  margin-top: 14px;
+  color: #4b5563;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* =========================================================
+   Seasonality summary and notes
+   ========================================================= */
+
+.seasonality-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 18px;
+}
+
+.seasonality-card {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.seasonality-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.seasonality-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--blue);
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.seasonality-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.seasonality-card.positive {
+  border-color: rgba(22, 101, 52, 0.18);
+  background: var(--green-soft);
+}
+
+.seasonality-card.negative {
+  border-color: rgba(153, 27, 27, 0.18);
+  background: var(--red-soft);
+}
+
+.smart-note {
+  margin: 16px 0 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.smart-note strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.smart-note p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.seasonality-note,
+.probability-note,
+.premium-note {
+  background: #ffffff;
+}
+
+.probability-note,
+.premium-note {
+  margin-top: 14px;
+}
+
+.warning-note {
+  margin-top: 0;
+  background: var(--warning-soft);
+  border-color: rgba(201, 162, 39, 0.28);
+}
+
+/* =========================================================
+   Tables
+   ========================================================= */
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+th,
+td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  white-space: nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--panel-soft);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.score-positive,
+.positive {
+  color: var(--green);
+  font-weight: 850;
+}
+
+.score-negative,
+.negative {
+  color: var(--red);
+  font-weight: 850;
+}
+
+.score-neutral {
+  color: #92400e;
+  font-weight: 850;
+}
+
+/* =========================================================
+   Result lists and charts
+   ========================================================= */
+
+.result-list {
+  display: grid;
+  gap: 10px;
+}
+
+.result-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel-soft);
+}
+
+.result-list span {
+  color: var(--muted);
+}
+
+.result-list strong {
+  color: var(--blue);
+  font-size: 1.05rem;
+}
+
+.probability-chart-wrap,
+.seasonality-chart-wrap {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+}
+
+.probability-chart-wrap {
+  margin-top: 18px;
+}
+
+#probabilityBellChart {
+  display: block;
+  width: 100%;
+  height: 320px;
+}
+
+.seasonality-chart-wrap {
+  min-height: 360px;
+}
+
+#seasonalityEquityChart {
+  display: block;
+  width: 100%;
+  height: 340px;
+}
+
+/* =========================================================
+   Scenario engine
+   ========================================================= */
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.scenario-results {
+  margin-top: 10px;
+}
+
+.diagnostic-section {
+  margin-top: 18px;
+}
+
+.diagnostic-box {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  border-left: 4px solid var(--gold);
+  border-radius: 16px;
+  background: var(--warning-soft);
+  color: #3f3210;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   Seasonality tabs, matrix, equity curve
+   ========================================================= */
+
+.seasonality-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2px 0 16px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-soft);
+}
+
+.seasonality-tab,
+.matrix-range-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  padding: 10px 12px;
+  text-transform: uppercase;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.seasonality-tab:hover,
+.matrix-range-btn:hover {
+  background: #ffffff;
+  color: var(--blue);
+}
+
+.seasonality-tab.active,
+.matrix-range-btn.active {
+  border-color: rgba(201, 162, 39, 0.55);
+  background: #ffffff;
+  color: var(--blue);
+  box-shadow: var(--shadow-soft);
+}
+
+.seasonality-panel {
+  display: none;
+}
+
+.seasonality-panel.active {
+  display: block;
+}
+
+.matrix-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: -2px 0 12px;
+}
+
+.matrix-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+}
+
+.seasonality-matrix-table {
+  width: 100%;
+  min-width: 980px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.seasonality-matrix-table th,
+.seasonality-matrix-table td {
+  box-sizing: border-box;
+  padding: 9px 6px;
+  font-size: 0.76rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-align: center;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.seasonality-matrix-table th:nth-child(1),
+.seasonality-matrix-table td:nth-child(1) {
+  width: 7%;
+  text-align: left;
+  font-weight: 850;
+}
+
+.seasonality-matrix-table th:nth-child(n+2):nth-child(-n+13),
+.seasonality-matrix-table td:nth-child(n+2):nth-child(-n+13) {
+  width: 7.15%;
+  text-align: center;
+}
+
+.seasonality-matrix-table th:nth-child(14),
+.seasonality-matrix-table td:nth-child(14) {
+  width: 7.2%;
+  text-align: right;
+  font-weight: 850;
+}
+
+.seasonality-matrix-table thead th {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.seasonality-matrix-table .matrix-positive {
+  background: rgba(22, 101, 52, 0.14);
+  color: #14532d;
+  font-weight: 750;
+}
+
+.seasonality-matrix-table .matrix-negative {
+  background: rgba(153, 27, 27, 0.13);
+  color: #7f1d1d;
+  font-weight: 750;
+}
+
+.seasonality-matrix-table .matrix-neutral {
+  background: rgba(107, 114, 128, 0.08);
+  color: #4b5563;
+}
+
+.seasonality-matrix-table .matrix-summary-row td {
+  border-top: 2px solid rgba(16, 35, 63, 0.18);
+  font-weight: 850;
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.station-footer {
+  margin-top: 28px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.station-footer p {
+  margin: 0;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (min-width: 1021px) {
+  .matrix-wrap {
+    overflow-x: visible;
+  }
+
+  .seasonality-matrix-table {
+    min-width: 0;
+  }
+
+  .seasonality-matrix-table th,
+  .seasonality-matrix-table td {
+    padding: 8px 5px;
+    font-size: 0.72rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media (min-width: 1180px) {
+  .seasonality-matrix-table th,
+  .seasonality-matrix-table td {
+    padding: 9px 6px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 1040px) {
+  .station-header {
+    grid-template-columns: 1fr;
+  }
+
+  .header-panel {
+    max-width: 420px;
+  }
+
+  .premium-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .control-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-heading,
+  .two-column-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .matrix-wrap {
+    overflow-x: auto;
+  }
+
+  .seasonality-matrix-table {
+    min-width: 1040px;
+  }
+}
+
+@media (max-width: 760px) {
+  .station-shell {
+    width: min(100% - 24px, var(--max));
+  }
+
+  .station-topbar {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+    min-height: auto;
+    padding: 16px 0;
+  }
+
+  .station-site-nav {
+    justify-content: flex-start;
+    gap: 12px 18px;
+  }
+
+  .station-site-nav a {
+    font-size: 0.92rem;
+  }
+
+  .station-header {
+    padding: 32px 24px;
+    border-radius: 24px;
+  }
+
+  .premium-nav,
+  .market-pulse-bar,
+  .control-panel,
+  .dashboard-grid,
+  .scenario-grid,
+  .seasonality-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-nav-card {
+    min-height: auto;
+  }
+
+  .station-section {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .metric-label {
+    min-height: auto;
+  }
+
+  .probability-chart-wrap,
+  .seasonality-chart-wrap {
+    padding: 12px;
+  }
+
+  #probabilityBellChart {
+    height: 280px;
+  }
+
+  #seasonalityEquityChart {
+    height: 300px;
+  }
+
+  .seasonality-tabs {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .matrix-controls {
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================================
+   v1.1 — Full-width premium hero alignment
+   Fix: make Probability Station™ use the same full-bleed blue
+   header rhythm as Options Strategy Lab™ and Edge Station™.
+   ========================================================= */
+
+body.probability-station-page {
+  overflow-x: hidden;
+}
+
+.station-shell {
+  width: min(var(--max), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 0 0 44px;
+}
+
+.station-header {
+  width: 100vw;
+  max-width: none;
+  margin: 0 calc(50% - 50vw) 0;
+  padding: 72px max(24px, calc((100vw - var(--max)) / 2)) 82px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.premium-nav {
+  position: relative;
+  z-index: 5;
+  margin-top: -38px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 760px) {
+  .station-shell {
+    width: min(100% - 24px, var(--max));
+  }
+
+  .station-header {
+    grid-template-columns: 1fr;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 48px max(16px, calc((100vw - var(--max)) / 2)) 60px;
+  }
+
+  .premium-nav {
+    margin-top: -26px;
+  }
+}
