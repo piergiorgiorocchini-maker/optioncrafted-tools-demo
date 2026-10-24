@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Options Strategy Lab™ | OptionsCrafted™ Premium Tools</title>
+  <meta name="description" content="Model option strategies, multi-leg structures, payoff profiles, breakevens, risk, reward and cashflow behaviour inside the OptionsCrafted™ Premium Tools area." />
+
+  <link rel="stylesheet" href="../assets/css/tools.css" />
+</head>
+
+<body class="tools-app strategy-lab-page">
+  <div class="strategy-lab-shell">
+
+    <header class="lab-topbar">
+      <a class="lab-logo" href="../../index.html">OptionsCrafted™</a>
+
+      <nav class="lab-site-nav" aria-label="Main navigation">
+        <a href="../../options.html">Options</a>
+        <a href="../../investing.html">Investing</a>
+        <a href="../../wealth.html">Wealth</a>
+        <a href="../../advanced.html">Advanced</a>
+        <a href="../../starter-kit.html">Start Here</a>
+      </nav>
+    </header>
+
+    <section class="lab-hero">
+      <p class="lab-kicker">Premium Tools · Options Strategy Lab™</p>
+      <h1>Options Strategy Lab™</h1>
+      <p>
+        Build, compare and understand option strategies through payoff diagrams,
+        multi-leg structures, breakevens, maximum risk, maximum reward and cashflow logic.
+      </p>
+    </section>
+
+    <section class="premium-nav" aria-label="Premium tools navigation">
+      <a class="premium-card" href="../index.html">
+        <span>Core Tools</span>
+        <strong>Tools Hub™</strong>
+      </a>
+
+      <a class="premium-card" href="../probability-station/">
+        <span>Probability Station™</span>
+        <strong>Seasonality & probability</strong>
+      </a>
+
+      <a class="premium-card active" href="./">
+        <span>Options Strategy Lab™</span>
+        <strong>Payoff & structures</strong>
+      </a>
+
+      <a class="premium-card" href="../edge-station/">
+        <span>Edge Station™</span>
+        <strong>Hedge & repair engine</strong>
+      </a>
+
+      <a class="premium-card disabled" href="#">
+        <span>Course Materials</span>
+        <strong>Coming soon</strong>
+      </a>
+    </section>
+
+    <main class="lab-main">
+
+      <section class="lab-panel strategy-control-panel">
+        <div>
+          <p class="section-kicker">Step 1</p>
+          <h2>Select a Strategy</h2>
+          <p>
+            Choose a preset structure or build your own custom multi-leg strategy.
+          </p>
+          <p class="micro-note">
+            One option contract controls 100 shares. Preset strategies display real quantities: 1 option contract = 100 shares, 2 contracts = 200 shares, and so on. Custom added legs remain independent.
+          </p>
+        </div>
+
+        <div class="input-grid">
+          <label>
+            Strategy
+            <select id="strategySelect">
+              <option value="long-call">Long Call</option>
+              <option value="long-put">Long Put</option>
+              <option value="covered-call">Covered Call</option>
+              <option value="cash-secured-put">Cash-Secured Put</option>
+              <option value="protective-put">Protective Put</option>
+              <option value="bull-call-spread">Bull Call Spread</option>
+              <option value="bear-put-spread">Bear Put Spread</option>
+              <option value="bull-put-credit-spread">Bull Put Credit Spread</option>
+              <option value="bear-call-credit-spread">Bear Call Credit Spread</option>
+              <option value="long-straddle">Long Straddle</option>
+              <option value="long-strangle">Long Strangle</option>
+              <option value="iron-condor">Iron Condor</option>
+              <option value="wheel-entry">Wheel Entry</option>
+              <option value="wheel-covered-call">Wheel Covered Call</option>
+              <option value="wheel-full-cycle">Wheel Full Cycle</option>
+              <option value="custom-multileg">Custom Multi-Leg</option>
+              <option value="naked-short-put">Naked Short Put</option>
+              <option value="naked-short-call">Naked Short Call</option>
+            </select>
+          </label>
+
+          <label>
+            Underlying Price
+            <input id="underlyingPrice" type="number" step="0.01" value="100" />
+          </label>
+
+          <label>
+            Number of Contracts
+            <input id="contractCount" type="number" step="1" value="1" />
+          </label>
+
+          <label>
+            Days to Expiration
+            <input id="daysToExpiration" type="number" step="1" value="30" />
+          </label>
+        </div>
+      </section>
+
+      <section class="lab-panel">
+        <div class="panel-header">
+          <div>
+            <p class="section-kicker">Step 2</p>
+            <h2>Strategy Legs</h2>
+          </div>
+
+          <button id="addLegBtn" class="secondary-button" type="button">
+            Add Leg
+          </button>
+        </div>
+
+        <div class="legs-table-wrap">
+          <table class="legs-table">
+            <thead>
+              <tr>
+                <th>Side</th>
+                <th>Instrument</th>
+                <th>Strike</th>
+                <th>Premium / Cost</th>
+                <th>Contracts / Shares</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="legsTableBody">
+              <!-- JS renders legs here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="lab-grid">
+        <article class="metric-card">
+          <span id="metricOneLabel">Option Net Cashflow</span>
+          <strong id="netDebitCredit">—</strong>
+        </article>
+
+        <article class="metric-card">
+          <span id="metricTwoLabel">Max Profit</span>
+          <strong id="maxProfit">—</strong>
+        </article>
+
+        <article class="metric-card">
+          <span id="metricThreeLabel">Max Loss</span>
+          <strong id="maxLoss">—</strong>
+        </article>
+
+        <article class="metric-card">
+          <span id="metricFourLabel">Breakeven</span>
+          <strong id="breakeven">—</strong>
+        </article>
+      </section>
+
+      <section class="lab-panel">
+        <div class="panel-header">
+          <div>
+            <p class="section-kicker">Step 3</p>
+            <h2>Payoff Diagram</h2>
+            <p class="micro-note">
+              The chart will show the current underlying price, breakeven line, strike context and profit/loss areas.
+            </p>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <canvas id="payoffChart" width="900" height="420"></canvas>
+        </div>
+      </section>
+
+      <section class="lab-panel accounting-panel">
+        <p class="section-kicker">Accounting Lens</p>
+        <h2>Costs, Proceeds & Cashflow Logic</h2>
+        <div id="accountingLens" class="smart-comment">
+          The accounting view will explain premium received or paid, assignment cash requirements,
+          effective share cost, breakeven, upside cap, downside cushion and strategy-specific cashflow logic.
+        </div>
+      </section>
+
+      <section class="lab-two-column">
+        <article class="lab-panel">
+          <p class="section-kicker">Step 4</p>
+          <h2>Scenario Table</h2>
+
+          <div class="scenario-table-wrap">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>Underlying at Expiry</th>
+                  <th>P/L</th>
+                  <th>Return on Risk</th>
+                </tr>
+              </thead>
+              <tbody id="scenarioTableBody">
+                <!-- JS renders scenarios here -->
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="lab-panel">
+          <p class="section-kicker">Smart Lens</p>
+          <h2>Strategy Diagnostics</h2>
+          <div id="strategyDiagnostics" class="smart-comment">
+            Select or edit a strategy to generate diagnostics.
+          </div>
+        </article>
+      </section>
+
+      
+
+    </main>
+
+    <footer class="lab-footer">
+      <p>
+        OptionsCrafted™ Premium Tools · Options Strategy Lab™ · Educational strategy modelling only.<br />© 2026 OptionsCrafted. All rights reserved.
+      </p>
+    </footer>
+
+  </div>
+
+  <script src="../assets/js/options-strategy-lab.js"></script>
+</body>
+</html>
