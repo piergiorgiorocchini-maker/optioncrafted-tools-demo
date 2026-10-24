@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Edge Station™ | OptionsCrafted™ Premium Tools</title>
+  <meta name="description" content="Edge Station™ helps investors hedge, repair, and restructure exposed option and stock positions using scenario-based defensive actions." />
+
+  <link rel="stylesheet" href="../assets/css/tools.css" />
+</head>
+
+<body class="tools-app edge-page edge-station-page">
+  <header class="edge-topbar">
+    <div class="edge-shell edge-topbar-inner">
+      <a class="edge-logo" href="../index.html">OptionsCrafted™</a>
+
+      <nav class="edge-site-nav" aria-label="Main navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../options.html">Options</a>
+        <a href="../../investing.html">Investing</a>
+        <a href="../../start-here.html">Start Here</a>
+        <a href="../index.html">Premium Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="edge-header">
+      <div class="edge-shell edge-header-grid">
+        <div class="edge-header-copy">
+          <p class="edge-kicker">Premium Tools · Hedge & Repair Engine</p>
+          <h1>Edge Station™</h1>
+          <p class="edge-subtitle">
+            Repair, hedge, and control exposed option or stock positions when the trade moves into the danger zone.
+          </p>
+          <p class="edge-header-note">
+            Edge Station™ is not a strategy builder. It starts from an existing position, identifies the defensive trigger,
+            and shows one recommended action with net capital impact, net payoff, and residual risk.
+          </p>
+        </div>
+
+        <aside class="edge-status-panel">
+          <p class="edge-status-label">Tool Status</p>
+          <strong>Core Redesign</strong>
+          <span>v4.9 free hand hedge scaffold</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="edge-shell premium-nav-section" aria-label="Premium tools navigation">
+      <div class="premium-nav">
+        <a class="premium-nav-card" href="../index.html">
+          <span>Core Tools</span>
+          <strong>Tools Hub™</strong>
+        </a>
+
+        <a class="premium-nav-card" href="../probability-station/index.html">
+          <span>Context</span>
+          <strong>Probability Station™</strong>
+        </a>
+
+        <a class="premium-nav-card" href="../options-strategy-lab/index.html">
+          <span>Payoff</span>
+          <strong>Options Strategy Lab™</strong>
+        </a>
+
+        <a class="premium-nav-card is-active" href="index.html">
+          <span>Repair</span>
+          <strong>Edge Station™</strong>
+        </a>
+
+        <a class="premium-nav-card is-muted" href="#">
+          <span>Learning</span>
+          <strong>Course Materials</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="edge-shell edge-main">
+
+      <section class="edge-section edge-control-panel">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Step 1</p>
+          <h2>What needs protection?</h2>
+          <p>
+            Select the current problem. Edge Station™ will recommend one defensive action, not a menu of elegant ways to overcomplicate a bad day.
+          </p>
+        </div>
+
+        <div class="edge-input-grid">
+          <label class="edge-field edge-field-wide">
+            <span>Repair Scenario</span>
+            <select id="scenarioSelect">
+              <option value="short-put-pressure">Naked Put Repair</option>
+              <option value="short-call-pressure">Naked Call Repair</option>
+              <option value="long-stock-protection">Long Stock Protection</option>
+              <option value="covered-call-adjustment">Covered Call Adjustment</option>
+              <option value="free-hand-hedge">Free Hand Hedge</option>
+            </select>
+          </label>
+
+          <label class="edge-field">
+            <span>Current Underlying Price</span>
+            <input id="currentUnderlyingPrice" type="number" min="0" step="0.01" value="178.30" />
+          </label>
+
+          <label class="edge-field">
+            <span>Option Multiplier</span>
+            <input id="optionMultiplier" type="number" min="1" step="1" value="100" />
+          </label>
+        </div>
+      </section>
+
+      <section class="edge-two-column">
+        <section class="edge-section">
+          <div class="edge-section-heading">
+            <p class="edge-kicker">Step 2</p>
+            <h2>Current position</h2>
+            <p id="currentPositionDescription">
+              Enter the position that already exists before any hedge is added.
+            </p>
+          </div>
+
+          <div id="positionInputs" class="edge-input-grid edge-dynamic-inputs">
+            <label class="edge-field">
+              <span>Underlying Price at Entry</span>
+              <input id="entryUnderlyingPrice" type="number" min="0" step="0.01" value="190.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>Short Option Strike</span>
+              <input id="shortOptionStrike" type="number" min="0" step="0.01" value="178.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>Short Put Contracts</span>
+              <input id="contracts" type="number" min="1" step="1" value="1" />
+            </label>
+
+            <label class="edge-field">
+              <span>Days to Expiration</span>
+              <input id="daysToExpiration" type="number" min="1" step="1" value="30" />
+            </label>
+
+            <label class="edge-field">
+              <span>Premium Received Per Share</span>
+              <input id="premiumReceived" type="number" min="0" step="0.01" value="3.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>Average Stock Cost</span>
+              <input id="averageStockCost" type="number" min="0" step="0.01" value="190.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>Shares Owned</span>
+              <input id="sharesOwned" type="number" min="0" step="1" value="100" />
+            </label>
+
+            <label class="edge-field">
+              <span>Premium Paid / Debit</span>
+              <input id="premiumPaid" type="number" min="0" step="0.01" value="0.00" />
+            </label>
+          </div>
+
+          <div id="currentPositionSummary" class="edge-summary-card">
+            <p class="edge-kicker">Current position cash summary</p>
+            <table class="edge-summary-table">
+              <tbody>
+                <tr>
+                  <th>Contracts</th>
+                  <td id="summaryContracts">—</td>
+                </tr>
+                <tr>
+                  <th>Strike</th>
+                  <td id="summaryStrike">—</td>
+                </tr>
+                <tr>
+                  <th>Premium quote</th>
+                  <td id="summaryPremiumPerContract">—</td>
+                </tr>
+                <tr>
+                  <th>Total premium received</th>
+                  <td id="summaryPremiumFormula">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="edge-section">
+          <div class="edge-section-heading">
+            <p class="edge-kicker">Step 3</p>
+            <h2>Hedge / decision preset</h2>
+            <p>
+              Use the scenario-specific preset. For repair scenarios, edit the hedge strike and cost. For Covered Call Adjustment, compare assignment, buyback, roll, and wait outcomes.
+            </p>
+          </div>
+
+          <div class="edge-input-grid edge-dynamic-inputs">
+            <label class="edge-field edge-field-wide">
+              <span>Hedge Preset</span>
+              <select id="hedgePreset">
+                <option value="protective-put-at-sold-strike">Protective Put at Sold Strike</option>
+              </select>
+            </label>
+
+            <label class="edge-field">
+              <span>Protective Put Strike</span>
+              <input id="protectionStrike" type="number" min="0" step="0.01" value="178.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>Estimated Put Cost Per Share</span>
+              <input id="hedgeCost" type="number" min="0" step="0.01" value="3.10" />
+            </label>
+
+            <label class="edge-field edge-field-wide">
+              <span>Primary Objective</span>
+              <select id="primaryObjective">
+                <option value="compare-objectively">Compare objectively</option>
+                <option value="maximize-realized-profit">Maximize realized profit</option>
+                <option value="keep-shares">Keep the shares</option>
+                <option value="avoid-assignment-reasonable">Avoid assignment if reasonable</option>
+                <option value="roll-efficiently">Roll only if economically efficient</option>
+                <option value="minimize-cash-outlay">Minimize extra cash outlay</option>
+              </select>
+            </label>
+
+            <label class="edge-field">
+              <span>Roll Target Strike</span>
+              <input id="rollTargetStrike" type="number" min="0" step="0.01" value="195.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>New Call Premium</span>
+              <input id="newCallPremium" type="number" min="0" step="0.01" value="3.00" />
+            </label>
+
+            <label class="edge-field">
+              <span>New Expiration Days</span>
+              <input id="newExpirationDays" type="number" min="1" step="1" value="45" />
+            </label>
+          </div>
+
+          <div id="hedgePresetSummary" class="edge-summary-card">
+            <p class="edge-kicker">Editable preset summary</p>
+            <table class="edge-summary-table">
+              <tbody>
+                <tr>
+                  <th>Preset</th>
+                  <td id="hedgePresetName">Protective Put at Sold Strike</td>
+                </tr>
+                <tr>
+                  <th>Recommended edge size</th>
+                  <td id="hedgePresetSize">—</td>
+                </tr>
+                <tr>
+                  <th>Total estimated hedge cost</th>
+                  <td id="hedgePresetCostFormula">—</td>
+                </tr>
+                <tr>
+                  <th>Coverage</th>
+                  <td id="hedgeCoverageFormula">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="edge-section edge-recommendation-section">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Step 4</p>
+          <h2>Recommended action</h2>
+          <p>
+            One action only. If the hedge does not improve the position, Edge Station™ should say so instead of decorating the wreckage.
+          </p>
+        </div>
+
+        <div class="edge-recommendation-card">
+          <div>
+            <p class="edge-kicker">Best Defensive Action</p>
+            <h3 id="recommendedActionTitle">Buy protective put at trigger</h3>
+            <p id="recommendedActionText">
+              If the underlying reaches the short put strike, buy protection at the same strike to stop further downside expansion.
+            </p>
+          </div>
+
+          <div class="edge-action-badge" id="recommendedActionBadge">
+            Best hedge
+          </div>
+        </div>
+
+        <div class="edge-legs-table-wrap">
+          <table class="edge-legs-table">
+            <thead>
+              <tr>
+                <th>Leg</th>
+                <th>Action</th>
+                <th>Type</th>
+                <th>Strike / Avg. Price</th>
+                <th>Premium / Cost</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody id="recommendedLegsBody">
+              <tr>
+                <td>1</td>
+                <td>Buy</td>
+                <td>Put</td>
+                <td id="recLegStrike">178.00</td>
+                <td id="recLegCost">3.10 paid</td>
+                <td id="recLegQty">1 contract</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="coveredCallDecisionSection" class="edge-section edge-hide">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Covered call utility matrix</p>
+          <h2>Assignment vs buyback vs roll</h2>
+          <p>
+            Covered Call Adjustment compares each available action from the same starting position. The best action is ranked through objective-specific utility weights, cash impact, capped upside, share-retention preference, and payoff trade-off.
+          </p>
+        </div>
+
+        <div class="edge-legs-table-wrap">
+          <table class="edge-legs-table">
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Cash Impact / Option Result</th>
+                <th>Outcome / Payoff</th>
+                <th>Upside Reopened</th>
+                <th>Cap Level</th>
+                <th>Score</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody id="coveredCallDecisionBody">
+              <!-- JS renders Covered Call Adjustment decision branches here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="coveredCallDecisionPathSection" class="edge-section edge-hide">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Decision tree</p>
+          <h2>Why the utility engine chose this branch</h2>
+          <p>
+            The matrix scores the branches. The decision path explains the mechanical logic behind the ranking, because a black-box “Best” label is how dashboards become decorative furniture.
+          </p>
+        </div>
+
+        <table class="edge-table">
+          <tbody id="coveredCallDecisionPathBody">
+            <!-- JS renders the Covered Call Adjustment decision path here -->
+          </tbody>
+        </table>
+      </section>
+
+
+      <section id="freeHandHedgeSection" class="edge-section edge-manual-section edge-hide">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Free Hand Hedge</p>
+          <h2>Build the current position and hedge manually</h2>
+          <p>
+            Add any combination of stock, futures, calls, and puts. Edge Station™ calculates the current position,
+            the hedge position, and the combined payoff at the selected underlying price.
+          </p>
+        </div>
+
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Current Position</p>
+          <h2>Position before hedge</h2>
+          <p>
+            Insert the legs that already exist. Stock and futures default to a 1× multiplier. Options default to a 100× multiplier, unless edited.
+          </p>
+        </div>
+
+        <div class="edge-legs-table-wrap">
+          <table class="edge-legs-table" aria-label="Free hand current position legs">
+            <thead>
+              <tr>
+                <th>Side</th>
+                <th>Instrument</th>
+                <th>Entry / Strike</th>
+                <th>Premium</th>
+                <th>Qty / Contracts</th>
+                <th>Multiplier</th>
+                <th>DTE</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="freeHandCurrentLegsBody">
+              <!-- JS renders current position legs here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="edge-manual-actions">
+          <button id="addFreeHandCurrentLegButton" class="edge-secondary-button" type="button">
+            Add current leg
+          </button>
+        </div>
+
+        <div class="edge-section-heading" style="margin-top: 28px;">
+          <p class="edge-kicker">Hedge Position</p>
+          <h2>Adjustment / hedge legs</h2>
+          <p>
+            Add the hedge structure. The result area will show current P/L, hedge P/L, and combined P/L on the slider, DOM, and chart.
+          </p>
+        </div>
+
+        <div class="edge-legs-table-wrap">
+          <table class="edge-legs-table" aria-label="Free hand hedge position legs">
+            <thead>
+              <tr>
+                <th>Side</th>
+                <th>Instrument</th>
+                <th>Entry / Strike</th>
+                <th>Premium</th>
+                <th>Qty / Contracts</th>
+                <th>Multiplier</th>
+                <th>DTE</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="freeHandHedgeLegsBody">
+              <!-- JS renders hedge position legs here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="edge-manual-actions">
+          <button id="addFreeHandHedgeLegButton" class="edge-secondary-button" type="button">
+            Add hedge leg
+          </button>
+        </div>
+
+        <div id="freeHandExpiryWarning" class="edge-summary-card edge-hide" style="margin-top: 22px;">
+          <p class="edge-kicker">Expiry warning</p>
+          <table class="edge-summary-table">
+            <tbody>
+              <tr>
+                <th>Expiry mismatch</th>
+                <td id="freeHandExpiryWarningText">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="edge-section edge-manual-section">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Optional custom adjustment</p>
+          <h2>Add or test extra legs</h2>
+          <p>
+            Optional manual adjustment. Add extra option or underlying legs only if you understand the added risk, cost, and exposure. The core recommendation above is already the main defensive action.
+          </p>
+        </div>
+
+        <div class="edge-legs-table-wrap">
+          <table class="edge-legs-table">
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Type</th>
+                <th>Strike / Avg. Price</th>
+                <th>Premium / Cost</th>
+                <th>Quantity</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="manualLegsBody">
+              <!-- JS renders optional manual hedge legs here -->
+            </tbody>
+          </table>
+        </div>
+
+        <button id="addManualLegButton" class="edge-secondary-button" type="button">
+          Add optional leg
+        </button>
+      </section>
+
+
+      <section class="edge-section edge-chart-section">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Net payoff combination</p>
+          <h2>Combined position payoff</h2>
+          <p>
+            The DOM and chart show the net payoff of the current position plus the hedge legs at each underlying price.
+          </p>
+        </div>
+
+        <div class="edge-payoff-layout">
+          <aside class="edge-dom-panel" aria-label="DOM-style payoff ladder">
+            <div class="edge-dom-header">
+              <div>
+                <p class="edge-kicker">Payoff DOM</p>
+                <h3>Price vs Net Trade P/L</h3>
+              </div>
+              <p id="payoffTapeScenario">Scenario: —</p>
+            </div>
+
+            <div class="edge-dom-table">
+              <div class="edge-dom-row edge-dom-row-head">
+                <span>Underlying</span>
+                <span>Net Trade P/L</span>
+              </div>
+
+              <div id="payoffTapeGrid">
+                <!-- JS renders DOM payoff rows here -->
+              </div>
+            </div>
+
+            <p class="edge-dom-note">
+              Key levels and the current underlying context are highlighted.
+            </p>
+          </aside>
+
+          <div class="edge-chart-column">
+            <div class="edge-chart-wrap">
+              <canvas id="edgePayoffChart" width="1100" height="480" aria-label="Net payoff comparison chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="edge-two-column">
+        <section class="edge-section">
+          <div class="edge-section-heading">
+            <p class="edge-kicker">Position combination</p>
+            <h2>Current plus hedge</h2>
+          </div>
+
+          <table class="edge-table">
+            <tbody>
+              <tr>
+                <th>Current position</th>
+                <td id="beforeStructure">Position before hedge</td>
+              </tr>
+              <tr>
+                <th>Combined position</th>
+                <td id="afterStructure">Current position plus hedge legs</td>
+              </tr>
+              <tr>
+                <th>Risk change</th>
+                <td id="riskChangeText">Downside loss stops expanding below the protection strike.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="edge-section">
+          <div class="edge-section-heading">
+            <p class="edge-kicker">Capital impact</p>
+            <h2>Funds required</h2>
+          </div>
+
+          <table class="edge-table">
+            <tbody>
+              <tr>
+                <th>Premium received</th>
+                <td id="capitalPremiumReceived">—</td>
+              </tr>
+              <tr>
+                <th>Hedge cost</th>
+                <td id="capitalHedgeCost">—</td>
+              </tr>
+              <tr>
+                <th>Net premium after hedge</th>
+                <td id="capitalNetPremium">—</td>
+              </tr>
+              <tr>
+                <th>Estimated funds required</th>
+                <td id="capitalFundsRequired">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <section class="edge-section">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Net result</p>
+          <h2>Defensive metrics</h2>
+          <p>
+            Metrics are calculated after premiums received, hedge costs, and position economics.
+          </p>
+        </div>
+
+        <div class="edge-metric-grid">
+          <article class="edge-metric-card">
+            <span>Original Breakeven</span>
+            <strong id="metricOriginalBreakeven">—</strong>
+          </article>
+
+          <article class="edge-metric-card">
+            <span>New Breakeven</span>
+            <strong id="metricNewBreakeven">—</strong>
+          </article>
+
+          <article class="edge-metric-card">
+            <span>Estimated Max Loss</span>
+            <strong id="metricMaxLoss">—</strong>
+          </article>
+
+          <article class="edge-metric-card">
+            <span>Risk Profile</span>
+            <strong id="metricRiskProfile">—</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="edge-section edge-accounting-lens">
+        <div class="edge-section-heading">
+          <p class="edge-kicker">Calculation lens</p>
+          <h2>How Net Trade P/L is calculated</h2>
+          <p>
+            This block explains the trade result after premium received and hedge cost.
+          </p>
+        </div>
+
+        <div id="netTradeCalculation" class="edge-calculation-box">
+          Select a scenario to calculate the full Net Trade P/L.
+        </div>
+      </section>
+
+      <section class="edge-two-column">
+        <article class="edge-smart-note">
+          <p class="edge-kicker">Operating rule</p>
+          <h2 id="operatingRuleTitle">When this hedge makes sense</h2>
+          <p id="operatingRuleText">
+            Use Edge Station™ when a position has moved into a danger zone and the goal is to control risk, not maximize theoretical payoff.
+          </p>
+        </article>
+
+        <article class="edge-warning-note">
+          <p class="edge-kicker">Trade-off box</p>
+          <h2>What you give up</h2>
+          <p id="tradeOffText">
+            Protection has a cost. Some repairs cap upside. Some hedges reduce risk but lock in a small loss. That is still better than pretending risk is a personality trait.
+          </p>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer class="edge-footer">
+    <div class="edge-shell">
+      <p>
+        OptionsCrafted™ Premium Tools · Edge Station™ · Educational hedge and repair modelling only.<br />© 2026 OptionsCrafted. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/edge-station.js"></script>
+</body>
+</html>
