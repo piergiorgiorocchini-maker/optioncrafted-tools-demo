@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Probability Station™ | OptionsCrafted™ Premium Tools</title>
+  <meta name="description" content="Probability Station™ by OptionsCrafted™: seasonality, strike probability, volatility risk and option scenario modelling for income investors." />
+
+  <link rel="stylesheet" href="../assets/css/tools.css" />
+</head>
+
+<body class="tools-app probability-page probability-station-page">
+  <div class="station-shell">
+
+    <header class="station-topbar" aria-label="Site navigation">
+      <a class="station-logo" href="../../index.html">OptionsCrafted™</a>
+
+      <nav class="station-site-nav" aria-label="Main navigation">
+        <a href="../../options.html">Options</a>
+        <a href="../../investing.html">Investing</a>
+        <a href="../../wealth.html">Wealth</a>
+        <a href="../../advanced.html">Advanced</a>
+        <a href="../../starter-kit.html">Start Here</a>
+      </nav>
+    </header>
+
+    <header class="station-header">
+      <div>
+        <p class="station-kicker">Premium Analytical Tool</p>
+        <h1>Probability Station™</h1>
+        <p class="station-subtitle">
+          Seasonality, strike probability, volatility risk and premium context for income investors.
+        </p>
+      </div>
+
+      <div class="header-panel">
+        <span class="panel-label">Tool Status</span>
+        <strong>Live Beta</strong>
+        <span class="panel-note">Google Sheet data engine</span>
+      </div>
+    </header>
+
+    <nav class="premium-nav" aria-label="Premium tools navigation">
+      <a class="premium-nav-card" href="../index.html">
+        <span>Core Tools</span>
+        <strong>Tools Hub™</strong>
+      </a>
+
+      <a class="premium-nav-card active" href="./" aria-current="page">
+        <span>Probability Station™</span>
+        <strong>Seasonality & Strike Context</strong>
+      </a>
+
+      <a class="premium-nav-card" href="../options-strategy-lab/">
+        <span>Options Strategy Lab™</span>
+        <strong>Payoff & Strategy Structures</strong>
+      </a>
+
+      <a class="premium-nav-card" href="../edge-station/">
+        <span>Edge Station™</span>
+        <strong>Hedge & Repair Engine</strong>
+      </a>
+
+      <a class="premium-nav-card muted" href="#" aria-disabled="true">
+        <span>Course Materials</span>
+        <strong>Future Premium Library</strong>
+      </a>
+    </nav>
+
+    <main>
+
+
+    <section class="market-pulse-bar" aria-label="Market daily pulse">
+      <article class="market-pulse-card">
+        <span class="market-pulse-label">S&amp;P 500</span>
+        <strong id="marketPulseSPY" class="market-pulse-value">—</strong>
+      </article>
+
+      <article class="market-pulse-card">
+        <span class="market-pulse-label">Nasdaq 100</span>
+        <strong id="marketPulseQQQ" class="market-pulse-value">—</strong>
+      </article>
+
+      <article class="market-pulse-card">
+        <span class="market-pulse-label">VIX</span>
+        <strong id="marketPulseVIX" class="market-pulse-value">—</strong>
+      </article>
+    </section>
+
+
+      <section class="control-panel">
+        <div class="control-block">
+          <label for="assetSelect">Asset</label>
+          <select id="assetSelect">
+            <option value="XLK">XLK · Technology Select Sector SPDR</option>
+            <option value="SPY">SPY · S&amp;P 500 ETF</option>
+            <option value="QQQ">QQQ · Nasdaq 100 ETF</option>
+          </select>
+        </div>
+
+        <div class="control-block">
+          <label for="spotPrice">Spot Price</label>
+          <input id="spotPrice" type="number" step="0.01" value="176.26" />
+        </div>
+
+        <div class="control-block">
+          <label for="strikePrice">Strike Price</label>
+          <input id="strikePrice" type="number" step="0.01" value="165" />
+        </div>
+
+        <div class="control-block">
+          <label for="expiryDate">Expiration Date</label>
+          <input id="expiryDate" type="date" />
+        </div>
+
+        <div class="control-block">
+          <label for="daysToExpiry">Days to Expiration</label>
+          <input id="daysToExpiry" type="number" step="1" value="35" />
+        </div>
+
+        <div class="control-block">
+          <label for="optionType">Option Type</label>
+          <select id="optionType">
+            <option value="put">Put</option>
+            <option value="call">Call</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+
+        <article class="metric-card">
+          <span class="metric-label">Distance to Strike</span>
+          <strong id="distanceToStrike">-6.39%</strong>
+          <p>How far the selected strike is from the current spot price.</p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-label">Historical Probability Above</span>
+          <strong id="probAbove">—</strong>
+          <p>Estimated from historical forward returns over the selected duration.</p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-label">Historical Probability Below</span>
+          <strong id="probBelow">—</strong>
+          <p>Useful for cash-secured puts and assignment-risk planning.</p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-label">Expected Move</span>
+          <strong id="expectedMove">—</strong>
+          <p>Approximate move based on realised or scenario volatility.</p>
+        </article>
+
+      </section>
+
+      <section class="station-section">
+        <div class="section-heading">
+          <div>
+            <p class="station-kicker">Seasonality Engine</p>
+            <h2>10-Year Monthly Seasonality</h2>
+          </div>
+          <p>
+            Monthly return profile for the selected asset. Median and downside dispersion matter more than headline averages.
+          </p>
+        </div>
+
+        <div class="seasonality-summary">
+          <article class="seasonality-card positive">
+            <span>Best Seasonal Month</span>
+            <strong id="bestSeasonalMonth">—</strong>
+            <p id="bestSeasonalStats">—</p>
+          </article>
+
+          <article class="seasonality-card negative">
+            <span>Worst Seasonal Month</span>
+            <strong id="worstSeasonalMonth">—</strong>
+            <p id="worstSeasonalStats">—</p>
+          </article>
+        </div>
+
+        <div class="smart-note seasonality-note">
+          <strong>Seasonality Reading</strong>
+          <p id="seasonalityReading">
+            Select an asset to read its strongest and weakest historical monthly windows.
+          </p>
+        </div>
+
+        <div class="seasonality-tabs" role="tablist" aria-label="Seasonality views">
+          <button class="seasonality-tab active" type="button" data-seasonality-tab="summary" aria-selected="true">
+            Summary Stats
+          </button>
+          <button class="seasonality-tab" type="button" data-seasonality-tab="matrix" aria-selected="false">
+            Seasonality Matrix
+          </button>
+          <button class="seasonality-tab" type="button" data-seasonality-tab="equity" aria-selected="false">
+            Equity Curve
+          </button>
+        </div>
+
+        <div class="seasonality-panel active" id="seasonalityPanelSummary" data-seasonality-panel="summary">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Avg Return</th>
+                  <th>Median Return</th>
+                  <th>Positive %</th>
+                  <th>Best Month</th>
+                  <th>Worst Month</th>
+                  <th>Seasonality Score</th>
+                </tr>
+              </thead>
+              <tbody id="seasonalityTable">
+                <tr>
+                  <td>January</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>Neutral</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="seasonality-panel" id="seasonalityPanelMatrix" data-seasonality-panel="matrix">
+          <div class="matrix-controls" aria-label="Seasonality matrix range">
+            <button class="matrix-range-btn active" type="button" data-matrix-range="10Y">10Y</button>
+            <button class="matrix-range-btn" type="button" data-matrix-range="5Y">5Y</button>
+          </div>
+
+          <div class="table-wrap matrix-wrap">
+            <table class="seasonality-matrix-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Jan</th>
+                  <th>Feb</th>
+                  <th>Mar</th>
+                  <th>Apr</th>
+                  <th>May</th>
+                  <th>Jun</th>
+                  <th>Jul</th>
+                  <th>Aug</th>
+                  <th>Sep</th>
+                  <th>Oct</th>
+                  <th>Nov</th>
+                  <th>Dec</th>
+                  <th>Sum</th>
+                </tr>
+              </thead>
+              <tbody id="seasonalityMatrixBody">
+                <tr>
+                  <td colspan="14">Seasonality matrix will load after data is available.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="seasonality-panel" id="seasonalityPanelEquity" data-seasonality-panel="equity">
+          <div class="seasonality-chart-wrap">
+            <canvas id="seasonalityEquityChart" width="960" height="340"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="two-column-grid">
+
+        <article class="station-section compact">
+          <div class="section-heading simple">
+            <div>
+              <p class="station-kicker">Strike Probability</p>
+              <h2>Forward Return Distribution</h2>
+            </div>
+          </div>
+
+          <div class="result-list">
+            <div>
+              <span>Required return to stay above strike</span>
+              <strong id="requiredReturn">—</strong>
+            </div>
+            <div>
+              <span>5th percentile move</span>
+              <strong id="p5Move">—</strong>
+            </div>
+            <div>
+              <span>1st percentile move</span>
+              <strong id="p1Move">—</strong>
+            </div>
+            <div>
+              <span>Worst historical move</span>
+              <strong id="worstMove">—</strong>
+            </div>
+            <div>
+              <span>Estimated probability of touch</span>
+              <strong id="probTouch">—</strong>
+            </div>
+          </div>
+
+          <div class="probability-chart-wrap">
+            <canvas id="probabilityBellChart" width="720" height="320"></canvas>
+          </div>
+
+          <div class="smart-note probability-note">
+            <strong>Probability Reading</strong>
+            <p id="probabilityReading">
+              The distribution will update after the asset, strike and expiration window are selected.
+            </p>
+          </div>
+        </article>
+
+        <article class="station-section compact">
+          <div class="section-heading simple">
+            <div>
+              <p class="station-kicker">Quick Premium Lens</p>
+              <h2>Premium Scenario Check</h2>
+            </div>
+          </div>
+
+          <div class="scenario-grid">
+            <label>
+              Implied Volatility %
+              <input id="impliedVol" type="number" step="0.1" value="28" />
+            </label>
+
+            <label>
+              Risk-Free Rate %
+              <input id="riskFreeRate" type="number" step="0.1" value="4.5" />
+            </label>
+
+            <label>
+              Dividend Yield %
+              <input id="dividendYield" type="number" step="0.1" value="0.8" />
+            </label>
+
+            <label>
+              Market Premium
+              <input id="marketPremium" type="number" step="0.01" value="3.20" />
+            </label>
+
+            <label>
+              Scenario Spot
+              <input id="scenarioSpot" type="number" step="0.01" value="168" />
+            </label>
+
+            <label>
+              Scenario IV %
+              <input id="scenarioVol" type="number" step="0.1" value="34" />
+            </label>
+
+            <label>
+              Scenario Days Left
+              <input id="scenarioDaysLeft" type="number" step="1" value="20" />
+            </label>
+          </div>
+
+          <div class="result-list scenario-results">
+            <div>
+              <span>Theoretical premium today</span>
+              <strong id="theoreticalPremium">—</strong>
+            </div>
+            <div>
+              <span>Scenario theoretical premium</span>
+              <strong id="scenarioPremium">—</strong>
+            </div>
+            <div>
+              <span>Estimated short-option P/L</span>
+              <strong id="shortOptionPL">—</strong>
+            </div>
+          </div>
+
+          <div class="smart-note premium-note">
+            <strong>Premium Reading</strong>
+            <p id="premiumReading">
+              Enter a market premium and scenario assumptions to compare market price, model value and short-option risk. This is a quick lens, not a full strategy modeler.
+            </p>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="station-section premium-quality-section" id="premiumQualitySection">
+        <div class="section-heading strategy-heading">
+          <div>
+            <p class="station-kicker">Premium Quality Rating</p>
+            <h2>Market Quality &amp; Objective Fit</h2>
+          </div>
+          <p>
+            First assess whether the option premium adequately compensates current volatility and execution risk. Then test whether the trade fits the investor's selected objective.
+          </p>
+        </div>
+
+        <div class="control-panel premium-quality-controls">
+          <div class="control-block">
+            <label for="qualityObjective">Trade Objective</label>
+            <select id="qualityObjective">
+              <optgroup label="Covered Call">
+                <option value="keep_shares">Generate income and keep shares</option>
+                <option value="balanced_income">Balance income and assignment risk</option>
+                <option value="exit_at_target">Exit shares near a target price</option>
+                <option value="maximize_income">Maximize short-term income</option>
+              </optgroup>
+              <optgroup label="Cash-Secured Put">
+                <option value="avoid_assignment" selected>Generate income and avoid assignment</option>
+                <option value="acquire_at_discount">Acquire shares at a discount</option>
+                <option value="start_wheel">Start or continue the Wheel</option>
+                <option value="maximize_yield">Maximize yield on secured capital</option>
+                <option value="aggressive_entry">Seek an aggressive entry</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="control-block">
+            <label for="historicalVol">Historical Volatility %</label>
+            <input id="historicalVol" type="number" min="0" step="0.1" placeholder="e.g. 24" />
+          </div>
+
+          <div class="control-block">
+            <label for="ivRank">IV Rank / Percentile %</label>
+            <input id="ivRank" type="number" min="0" max="100" step="0.1" placeholder="e.g. 58" />
+          </div>
+
+          <div class="control-block">
+            <label for="optionDelta">Option Delta</label>
+            <input id="optionDelta" type="number" min="-1" max="1" step="0.01" placeholder="e.g. 0.24" />
+          </div>
+
+          <div class="control-block">
+            <label for="eventRisk">Event Risk %</label>
+            <input id="eventRisk" type="number" min="0" max="100" step="1" placeholder="0–100" />
+          </div>
+
+          <div class="control-block">
+            <label for="qualityTargetPrice">Target / Desired Entry Price</label>
+            <input id="qualityTargetPrice" type="number" min="0" step="0.01" placeholder="Optional" />
+          </div>
+
+          <div class="control-block">
+            <label for="optionBid">Option Bid</label>
+            <input id="optionBid" type="number" min="0" step="0.01" placeholder="Optional" />
+          </div>
+
+          <div class="control-block">
+            <label for="optionAsk">Option Ask</label>
+            <input id="optionAsk" type="number" min="0" step="0.01" placeholder="Optional" />
+          </div>
+
+          <div class="control-block">
+            <label for="openInterest">Open Interest</label>
+            <input id="openInterest" type="number" min="0" step="1" placeholder="Optional" />
+          </div>
+
+          <div class="control-block">
+            <label for="optionVolume">Option Volume</label>
+            <input id="optionVolume" type="number" min="0" step="1" placeholder="Optional" />
+          </div>
+        </div>
+
+        <div class="dashboard-grid premium-quality-grid">
+          <article class="metric-card">
+            <span class="metric-label">Market Quality</span>
+            <strong id="marketQualityScore">—</strong>
+            <p id="marketQualityStatus">Is the premium adequate for current volatility and execution risk?</p>
+          </article>
+
+          <article class="metric-card">
+            <span class="metric-label">Objective Fit</span>
+            <strong id="objectiveFitScore">—</strong>
+            <p id="objectiveFitStatus">Does the selected option fit the investor's stated objective?</p>
+          </article>
+
+          <article class="metric-card">
+            <span class="metric-label">Risk Exposure</span>
+            <strong id="riskExposureScore">—</strong>
+            <p id="riskExposureStatus">Assignment, event, directional, gamma and liquidity exposure.</p>
+          </article>
+
+          <article class="metric-card premium-quality-overall">
+            <span class="metric-label">Overall Rating</span>
+            <strong id="overallQualityScore">—</strong>
+            <p id="overallQualityStatus">Waiting for sufficient market and objective data.</p>
+          </article>
+        </div>
+
+        <div class="smart-note premium-quality-note">
+          <strong>Rating Reading</strong>
+          <p id="premiumQualityReading">
+            Complete the volatility, premium and objective inputs to evaluate market quality before judging whether the trade fits its intended purpose.
+          </p>
+        </div>
+
+        <div class="smart-note premium-quality-confidence-note">
+          <strong>Data Confidence</strong>
+          <p id="premiumQualityConfidence">
+            Confidence will reflect how many relevant market, probability and execution inputs are available.
+          </p>
+        </div>
+      </section>
+
+      <section class="station-section diagnostic-section">
+        <div class="section-heading strategy-heading">
+          <div>
+            <p class="station-kicker">Risk Diagnostics</p>
+            <h2>Strategy Context</h2>
+          </div>
+          <p id="strategyNote">
+            Enter asset, strike, duration and volatility assumptions to generate a probability-supported strategy context.
+          </p>
+        </div>
+
+        <div class="smart-note warning-note">
+          <strong>Execution Hint</strong>
+          <p id="executionHint">
+            Check liquidity, bid-ask spread and position sizing before treating any probability reading as actionable.
+          </p>
+        </div>
+
+        <div class="diagnostic-box">
+          <strong>Core rule:</strong>
+          Do not sell premium because the option pays. Sell premium only when probability, volatility, seasonality and strike distance justify the obligation.
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="station-footer">
+      <p>
+        OptionsCrafted™ Premium Tools · Probability Station™ · Educational probability and seasonality modelling only.<br />© 2026 OptionsCrafted. All rights reserved.
+      </p>
+    </footer>
+
+  </div>
+
+  <script src="../assets/js/premium-quality-engine.js"></script>
+  <script src="../assets/js/probability-station.js"></script>
+</body>
+</html>
