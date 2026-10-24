@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Tools Hub™ | OptionsCrafted™ Premium Tools</title>
+
+  <meta name="description" content="OptionsCrafted™ Premium Tools: fair value, dividend value, Graham-Lynch valuation, cash-secured puts, covered calls, Wheel strategy planning, portfolio income, Probability Station™, Options Strategy Lab™, and Edge Station™.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="assets/css/tools.css">
+  <script src="assets/js/tools-hub.js" defer></script>
+</head>
+
+<body class="tools-app tools-hub-page tools-page">
+
+  <header class="site-header">
+    <a class="logo" href="../index.html">OptionsCrafted™</a>
+
+    <nav class="site-nav">
+      <a href="../options.html">Options</a>
+      <a href="../investing.html">Investing</a>
+      <a href="../wealth.html">Wealth</a>
+      <a href="../advanced.html">Advanced</a>
+      <a href="../starter-kit.html">Start Here</a>
+    </nav>
+  </header>
+
+  <main class="tools-shell">
+
+    <section class="tools-hero">
+      <div class="tools-hero-content">
+        <p class="eyebrow">OptionsCrafted™ Premium Tools</p>
+        <h1>Tools Hub™</h1>
+        <p>
+          A structured toolkit for valuation, option income, Wheel strategy planning,
+          portfolio-level cashflow analysis, probability context, payoff modelling, and hedge repair work.
+        </p>
+      </div>
+    </section>
+
+    <section class="premium-navigation" aria-label="Premium area navigation">
+      <div class="premium-navigation-header">
+        <p class="eyebrow">Premium Area</p>
+        <h2>Navigate the OptionsCrafted™ toolkit</h2>
+        <p>
+          Start with the core calculators below, or move into the probability, strategy,
+          edge, hedge repair, and course areas as the premium suite expands.
+        </p>
+      </div>
+
+      <div class="premium-navigation-grid">
+        <a class="premium-nav-card premium-nav-card-live premium-nav-card-active" href="./" aria-current="page">
+          <span>00</span>
+          <strong>Tools Hub™</strong>
+          <p>Core calculators for fair value, dividend value, Graham-Lynch valuation, cash-secured puts, covered calls, Wheel cycles, and portfolio income planning.</p>
+        </a>
+
+        <a class="premium-nav-card premium-nav-card-live" href="probability-station/">
+          <span>01</span>
+          <strong>Probability Station™</strong>
+          <p>Seasonality, strike context, forward-return distribution, and probability readings for Wheel decisions.</p>
+        </a>
+
+        <a class="premium-nav-card premium-nav-card-live" href="options-strategy-lab/">
+          <span>02</span>
+          <strong>Options Strategy Lab™</strong>
+          <p>Model multi-leg option strategies, payoff curves, breakevens, cashflow logic and risk/reward structures.</p>
+        </a>
+
+        <a class="premium-nav-card premium-nav-card-live" href="edge-station/">
+          <span>03</span>
+          <strong>Edge Station™</strong>
+          <p>Scenario-based hedge and repair engine for exposed stock and option positions.</p>
+        </a>
+
+        <a class="premium-nav-card premium-nav-card-soon" href="#" aria-disabled="true">
+          <span>04</span>
+          <strong>Course Materials</strong>
+          <p>Future hub for premium lessons, PDFs, workbooks, frameworks, and OptionsCrafted™ course resources.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="tools-layout">
+
+      <aside class="tools-sidebar" aria-label="Premium tools navigation">
+        <button class="tool-tab active" data-tool="fair-value" type="button">
+          <span>01</span>
+          Fair Value
+        </button>
+
+        <button class="tool-tab" data-tool="dividend-value" type="button">
+          <span>02</span>
+          Dividend Value
+        </button>
+
+        <button class="tool-tab" data-tool="graham-lynch" type="button">
+          <span>03</span>
+          Graham–Lynch
+        </button>
+
+        <button class="tool-tab" data-tool="cash-secured-put" type="button">
+          <span>04</span>
+          Cash-Secured Put
+        </button>
+
+        <button class="tool-tab" data-tool="covered-call" type="button">
+          <span>05</span>
+          Covered Call
+        </button>
+
+        <button class="tool-tab" data-tool="wheel-strategy" type="button">
+          <span>06</span>
+          Wheel Strategy
+        </button>
+
+        <button class="tool-tab" data-tool="portfolio-income" type="button">
+          <span>07</span>
+          Portfolio Income
+        </button>
+      </aside>
+
+      <div class="tools-content">
+
+        <!-- FAIR VALUE TOOL -->
+        <section class="tool-panel active" id="tool-fair-value">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 01</p>
+            <h2>Fair Value Calculator</h2>
+            <p>
+              Estimate the maximum price you should pay today using current EPS or free cash flow,
+              two-stage growth assumptions, dividends, an expected P/E at sale, and your required return.
+              The default values mirror the original Excel Two-Stage Valuation Model preset.
+            </p>
+          </div>
+
+          <form class="tool-form" id="fv-form" onsubmit="return false;">
+            <div class="tool-input-grid">
+              <label>
+                Current annual EPS / FCF
+                <input type="number" id="fv-current-eps" value="6.89" step="0.01" min="0">
+              </label>
+
+              <label>
+                EPS / FCF growth years 1–5 <span class="input-hint">(%)</span>
+                <input type="number" id="fv-growth-stage-one" value="25" step="0.1">
+              </label>
+
+              <label>
+                EPS / FCF growth years 6–10 <span class="input-hint">(%)</span>
+                <input type="number" id="fv-growth-stage-two" value="5" step="0.1">
+              </label>
+
+              <label>
+                Current annual dividend
+                <input type="number" id="fv-current-dividend" value="3.12" step="0.01" min="0">
+              </label>
+
+              <label>
+                Dividend growth years 1–5 <span class="input-hint">(%)</span>
+                <input type="number" id="fv-dividend-growth-stage-one" value="10" step="0.1">
+              </label>
+
+              <label>
+                Dividend growth years 6–10 <span class="input-hint">(%)</span>
+                <input type="number" id="fv-dividend-growth-stage-two" value="10" step="0.1">
+              </label>
+
+              <label>
+                Target annual return <span class="input-hint">(enter 10 for 10%)</span>
+                <input type="number" id="fv-target-return" value="12" step="0.1" min="0">
+              </label>
+
+              <label>
+                Expected P/E at sale
+                <input type="number" id="fv-exit-multiple" value="18" step="0.1" min="0">
+              </label>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Fair Value
+            </button>
+          </form>
+
+          <div class="tool-results-grid fv-results-grid" id="fv-results" aria-live="polite">
+            <div class="tool-result-card">
+              <span>Sale Price in 10 Yrs</span>
+              <strong id="fv-sale-price">$483.05</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Dividend Yield at Sale</span>
+              <strong id="fv-dividend-yield-at-sale">1.68%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Sum of Reinvested Dividends</span>
+              <strong id="fv-dividend-value">$87.88</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Total Value at Sale</span>
+              <strong id="fv-total-value">$570.92</strong>
+            </div>
+
+            <div class="tool-result-card tool-result-card-primary fv-buy-now-card">
+              <span>Buy Now Below</span>
+              <strong id="fv-buy-below">$183.82</strong>
+            </div>
+          </div>
+
+          <div class="tool-table-card fv-schedule-card">
+            <div class="tool-card-header-simple">
+              <h3>10-Year EPS / Dividend Schedule</h3>
+              <p>
+                The model projects EPS or free cash flow and annual dividends year by year,
+                using the two growth stages entered above. This is the same 10-year schedule logic as the original spreadsheet, adapted to the OptionsCrafted interface.
+              </p>
+            </div>
+
+            <div class="tool-table-wrap">
+              <table class="tool-vertical-table fv-vertical-table">
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>EPS / FCF</th>
+                    <th>Dividends</th>
+                  </tr>
+                </thead>
+                <tbody id="fv-projection-body">
+                  
+                  <tr>
+                    <td>1</td>
+                    <td>$8.61</td>
+                    <td>$3.43</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>$10.77</td>
+                    <td>$3.78</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>$13.46</td>
+                    <td>$4.15</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>$16.82</td>
+                    <td>$4.57</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>$21.03</td>
+                    <td>$5.02</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>$22.08</td>
+                    <td>$5.53</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>$23.18</td>
+                    <td>$6.08</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>$24.34</td>
+                    <td>$6.69</td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>$25.56</td>
+                    <td>$7.36</td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>$26.84</td>
+                    <td>$8.09</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tool-chart-card fv-chart-card">
+            <div class="tool-chart-header">
+              <div>
+                <h3>Expected EPS / FCF and Dividend Growth</h3>
+                <p>
+                  The blue bars show projected EPS or free cash flow per share.
+                  The gold bars show projected annual dividend per share.
+                </p>
+              </div>
+            </div>
+
+            <div id="fv-growth-chart" class="bar-chart" aria-label="Expected EPS or free cash flow and dividend growth bar chart">
+              <svg viewBox="0 0 900 390" role="img" aria-label="Expected EPS or free cash flow and dividend growth bar chart">
+              <rect x="0" y="0" width="900" height="390" fill="#ffffff"></rect>
+              <line x1="78" y1="332.00" x2="866" y2="332.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="66" y="336.00" text-anchor="end" font-size="12" fill="#64748b">$0.00</text>
+              <line x1="78" y1="182.00" x2="866" y2="182.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="66" y="186.00" text-anchor="end" font-size="12" fill="#64748b">$15.83</text>
+              <line x1="78" y1="32.00" x2="866" y2="32.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="66" y="36.00" text-anchor="end" font-size="12" fill="#64748b">$31.67</text>
+              <line x1="78" y1="332" x2="866" y2="332" stroke="#94a3b8" stroke-width="1"></line>
+              <line x1="78" y1="32" x2="78" y2="332" stroke="#94a3b8" stroke-width="1"></line>
+              <rect x="92.18" y="250.41" width="22.06" height="81.59" rx="5" fill="#10233f"></rect>
+              <rect x="120.55" y="299.49" width="22.06" height="32.51" rx="5" fill="#c9a227"></rect>
+              <text x="117.40" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y1</text>
+              <rect x="170.98" y="230.01" width="22.06" height="101.99" rx="5" fill="#10233f"></rect>
+              <rect x="199.35" y="296.23" width="22.06" height="35.77" rx="5" fill="#c9a227"></rect>
+              <text x="196.20" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y2</text>
+              <rect x="249.78" y="204.51" width="22.06" height="127.49" rx="5" fill="#10233f"></rect>
+              <rect x="278.15" y="292.66" width="22.06" height="39.34" rx="5" fill="#c9a227"></rect>
+              <text x="275.00" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y3</text>
+              <rect x="328.58" y="172.64" width="22.06" height="159.36" rx="5" fill="#10233f"></rect>
+              <rect x="356.95" y="288.72" width="22.06" height="43.28" rx="5" fill="#c9a227"></rect>
+              <text x="353.80" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y4</text>
+              <rect x="407.38" y="132.80" width="22.06" height="199.20" rx="5" fill="#10233f"></rect>
+              <rect x="435.75" y="284.40" width="22.06" height="47.60" rx="5" fill="#c9a227"></rect>
+              <text x="432.60" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y5</text>
+              <rect x="486.18" y="122.84" width="22.06" height="209.16" rx="5" fill="#10233f"></rect>
+              <rect x="514.55" y="279.64" width="22.06" height="52.36" rx="5" fill="#c9a227"></rect>
+              <text x="511.40" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y6</text>
+              <rect x="564.98" y="112.38" width="22.06" height="219.62" rx="5" fill="#10233f"></rect>
+              <rect x="593.35" y="274.40" width="22.06" height="57.60" rx="5" fill="#c9a227"></rect>
+              <text x="590.20" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y7</text>
+              <rect x="643.78" y="101.40" width="22.06" height="230.60" rx="5" fill="#10233f"></rect>
+              <rect x="672.15" y="268.64" width="22.06" height="63.36" rx="5" fill="#c9a227"></rect>
+              <text x="669.00" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y8</text>
+              <rect x="722.58" y="89.87" width="22.06" height="242.13" rx="5" fill="#10233f"></rect>
+              <rect x="750.95" y="262.30" width="22.06" height="69.70" rx="5" fill="#c9a227"></rect>
+              <text x="747.80" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y9</text>
+              <rect x="801.38" y="77.76" width="22.06" height="254.24" rx="5" fill="#10233f"></rect>
+              <rect x="829.75" y="255.33" width="22.06" height="76.67" rx="5" fill="#c9a227"></rect>
+              <text x="826.60" y="368" text-anchor="middle" font-size="12" fill="#64748b">Y10</text>
+              </svg>
+            </div>
+
+            <div class="chart-legend">
+              <span><i class="legend-eps"></i> EPS / FCF</span>
+              <span><i class="legend-fv-dividend"></i> Dividend</span>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Interpretation</h3>
+            <p id="fv-interpretation">
+              This calculator estimates the price you can pay today to target your required return over ten years,
+              using projected earnings or free cash flow, dividends, and an expected P/E at sale.
+            </p>
+          </div>
+        </section>
+
+        <!-- DIVIDEND VALUE TOOL -->
+        <section class="tool-panel" id="tool-dividend-value">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 02</p>
+            <h2>Dividend Value Calculator</h2>
+            <p>
+              Estimate dividend-based fair value using the original Dividend Discount Model logic:
+              current annual dividend, a 0–10 year growth rate, a perpetual growth rate after year 10,
+              and your required annual return. The default values mirror the Excel Dividend Discount Model preset.
+            </p>
+          </div>
+
+          <form class="tool-form" id="dv-form" onsubmit="return false;">
+            <div class="tool-input-grid dv-input-grid">
+              <label>
+                Current annual dividend
+                <input type="number" id="dv-current-dividend" value="3.12" step="0.01" min="0">
+              </label>
+
+              <label>
+                0–10 year expected dividend growth <span class="input-hint">(%)</span>
+                <input type="number" id="dv-growth-rate" value="7" step="0.1">
+              </label>
+
+              <label>
+                10+ year perpetual growth <span class="input-hint">(%)</span>
+                <input type="number" id="dv-perpetual-growth" value="5" step="0.1">
+              </label>
+
+              <label>
+                Target rate of return <span class="input-hint">(enter 10 for 10%)</span>
+                <input type="number" id="dv-discount-rate" value="10" step="0.1" min="0">
+              </label>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Dividend Value
+            </button>
+          </form>
+
+          <div class="tool-results-grid dv-results-grid" id="dv-results" aria-live="polite">
+            <div class="tool-result-card tool-result-card-primary dv-buy-now-card">
+              <span>Buy Now Below</span>
+              <strong id="dv-buy-now-below">$76.57</strong>
+            </div>
+
+            <div class="tool-result-card dv-yield-card">
+              <span>Target Dividend Yield</span>
+              <strong id="dv-target-dividend-yield">4.07%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>PV of 30-Year Dividends</span>
+              <strong id="dv-pv-dividends">$56.98</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Terminal Value</span>
+              <strong id="dv-terminal-value">$341.98</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>PV of Terminal Value</span>
+              <strong id="dv-pv-terminal-value">$19.60</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Year 30 Dividend</span>
+              <strong id="dv-year-thirty-dividend">$16.28</strong>
+            </div>
+          </div>
+
+          <div class="tool-table-card dv-schedule-card">
+            <div class="tool-card-header-simple">
+              <h3>30-Year Dividend Discount Schedule</h3>
+              <p>
+                The table projects annual dividends for 30 years, discounts each payment back to today,
+                and adds a terminal value at year 30. This mirrors the original Dividend Discount Model structure.
+              </p>
+            </div>
+
+            <div class="tool-table-wrap">
+              <table class="tool-vertical-table dv-vertical-table">
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>Dividends</th>
+                    <th>Discounted Dividends</th>
+                    <th>Terminal Value</th>
+                  </tr>
+                </thead>
+                <tbody id="dv-projection-body">
+                  <tr>
+                    <td>1</td>
+                    <td>$3.34</td>
+                    <td>$3.03</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>$3.57</td>
+                    <td>$2.95</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>$3.82</td>
+                    <td>$2.87</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>$4.09</td>
+                    <td>$2.79</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>$4.38</td>
+                    <td>$2.72</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>$4.68</td>
+                    <td>$2.64</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>$5.01</td>
+                    <td>$2.57</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>$5.36</td>
+                    <td>$2.50</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>$5.74</td>
+                    <td>$2.43</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>$6.14</td>
+                    <td>$2.37</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>11</td>
+                    <td>$6.44</td>
+                    <td>$2.26</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>12</td>
+                    <td>$6.77</td>
+                    <td>$2.16</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>13</td>
+                    <td>$7.10</td>
+                    <td>$2.06</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>14</td>
+                    <td>$7.46</td>
+                    <td>$1.96</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>15</td>
+                    <td>$7.83</td>
+                    <td>$1.88</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>16</td>
+                    <td>$8.22</td>
+                    <td>$1.79</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>17</td>
+                    <td>$8.64</td>
+                    <td>$1.71</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>18</td>
+                    <td>$9.07</td>
+                    <td>$1.63</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>19</td>
+                    <td>$9.52</td>
+                    <td>$1.56</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>20</td>
+                    <td>$10.00</td>
+                    <td>$1.49</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>21</td>
+                    <td>$10.50</td>
+                    <td>$1.42</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>22</td>
+                    <td>$11.02</td>
+                    <td>$1.35</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>23</td>
+                    <td>$11.57</td>
+                    <td>$1.29</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>24</td>
+                    <td>$12.15</td>
+                    <td>$1.23</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>25</td>
+                    <td>$12.76</td>
+                    <td>$1.18</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>26</td>
+                    <td>$13.40</td>
+                    <td>$1.12</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>27</td>
+                    <td>$14.07</td>
+                    <td>$1.07</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>28</td>
+                    <td>$14.77</td>
+                    <td>$1.02</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>29</td>
+                    <td>$15.51</td>
+                    <td>$0.98</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>30</td>
+                    <td>$16.28</td>
+                    <td>$0.93</td>
+                    <td>—</td>
+                  </tr>
+                  <tr class="dv-terminal-row">
+                    <td>Terminal Value</td>
+                    <td>$341.98</td>
+                    <td>$19.60</td>
+                    <td>$341.98</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tool-chart-card dv-chart-card">
+            <div class="tool-chart-header">
+              <div>
+                <h3>Dividend Projection and Discounted Value</h3>
+                <p>
+                  The blue bars show projected annual dividends. The gold bars show the present value of each dividend.
+                  The terminal value is included in the valuation but kept separate from the annual dividend bars.
+                </p>
+              </div>
+            </div>
+
+            <div id="dv-bar-chart" class="bar-chart" aria-label="Dividend projection and discounted dividend bar chart">
+              <svg viewBox="0 0 980 430" role="img" aria-label="Dividend projection and discounted dividend bar chart">
+              <rect x="0" y="0" width="980" height="430" fill="#ffffff"></rect>
+              <line x1="76" y1="376.00" x2="952" y2="376.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="64" y="380.00" text-anchor="end" font-size="12" fill="#64748b">$0.00</text>
+              <line x1="76" y1="205.00" x2="952" y2="205.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="64" y="209.00" text-anchor="end" font-size="12" fill="#64748b">$9.45</text>
+              <line x1="76" y1="34.00" x2="952" y2="34.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="64" y="38.00" text-anchor="end" font-size="12" fill="#64748b">$18.89</text>
+              <line x1="76" y1="376" x2="952" y2="376" stroke="#94a3b8" stroke-width="1"></line>
+              <line x1="76" y1="34" x2="76" y2="376" stroke="#94a3b8" stroke-width="1"></line>
+              <rect x="81.01" y="315.56" width="7.59" height="60.44" rx="4" fill="#10233f"></rect>
+              <rect x="92.60" y="321.05" width="7.59" height="54.95" rx="4" fill="#c9a227"></rect>
+              <text x="90.60" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y1</text>
+              <rect x="110.21" y="311.33" width="7.59" height="64.67" rx="4" fill="#10233f"></rect>
+              <rect x="121.80" y="322.55" width="7.59" height="53.45" rx="4" fill="#c9a227"></rect>
+              <rect x="139.41" y="306.80" width="7.59" height="69.20" rx="4" fill="#10233f"></rect>
+              <rect x="151.00" y="324.01" width="7.59" height="51.99" rx="4" fill="#c9a227"></rect>
+              <rect x="168.61" y="301.96" width="7.59" height="74.04" rx="4" fill="#10233f"></rect>
+              <rect x="180.20" y="325.43" width="7.59" height="50.57" rx="4" fill="#c9a227"></rect>
+              <rect x="197.81" y="296.77" width="7.59" height="79.23" rx="4" fill="#10233f"></rect>
+              <rect x="209.40" y="326.81" width="7.59" height="49.19" rx="4" fill="#c9a227"></rect>
+              <text x="207.40" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y5</text>
+              <rect x="227.01" y="291.23" width="7.59" height="84.77" rx="4" fill="#10233f"></rect>
+              <rect x="238.60" y="328.15" width="7.59" height="47.85" rx="4" fill="#c9a227"></rect>
+              <rect x="256.21" y="285.30" width="7.59" height="90.70" rx="4" fill="#10233f"></rect>
+              <rect x="267.80" y="329.45" width="7.59" height="46.55" rx="4" fill="#c9a227"></rect>
+              <rect x="285.41" y="278.95" width="7.59" height="97.05" rx="4" fill="#10233f"></rect>
+              <rect x="297.00" y="330.72" width="7.59" height="45.28" rx="4" fill="#c9a227"></rect>
+              <rect x="314.61" y="272.15" width="7.59" height="103.85" rx="4" fill="#10233f"></rect>
+              <rect x="326.20" y="331.96" width="7.59" height="44.04" rx="4" fill="#c9a227"></rect>
+              <rect x="343.81" y="264.88" width="7.59" height="111.12" rx="4" fill="#10233f"></rect>
+              <rect x="355.40" y="333.16" width="7.59" height="42.84" rx="4" fill="#c9a227"></rect>
+              <text x="353.40" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y10</text>
+              <rect x="373.01" y="259.33" width="7.59" height="116.67" rx="4" fill="#10233f"></rect>
+              <rect x="384.60" y="335.11" width="7.59" height="40.89" rx="4" fill="#c9a227"></rect>
+              <rect x="402.21" y="253.49" width="7.59" height="122.51" rx="4" fill="#10233f"></rect>
+              <rect x="413.80" y="336.97" width="7.59" height="39.03" rx="4" fill="#c9a227"></rect>
+              <rect x="431.41" y="247.37" width="7.59" height="128.63" rx="4" fill="#10233f"></rect>
+              <rect x="443.00" y="338.74" width="7.59" height="37.26" rx="4" fill="#c9a227"></rect>
+              <rect x="460.61" y="240.94" width="7.59" height="135.06" rx="4" fill="#10233f"></rect>
+              <rect x="472.20" y="340.43" width="7.59" height="35.57" rx="4" fill="#c9a227"></rect>
+              <rect x="489.81" y="234.18" width="7.59" height="141.82" rx="4" fill="#10233f"></rect>
+              <rect x="501.40" y="342.05" width="7.59" height="33.95" rx="4" fill="#c9a227"></rect>
+              <text x="499.40" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y15</text>
+              <rect x="519.01" y="227.09" width="7.59" height="148.91" rx="4" fill="#10233f"></rect>
+              <rect x="530.60" y="343.59" width="7.59" height="32.41" rx="4" fill="#c9a227"></rect>
+              <rect x="548.21" y="219.65" width="7.59" height="156.35" rx="4" fill="#10233f"></rect>
+              <rect x="559.80" y="345.07" width="7.59" height="30.93" rx="4" fill="#c9a227"></rect>
+              <rect x="577.41" y="211.83" width="7.59" height="164.17" rx="4" fill="#10233f"></rect>
+              <rect x="589.00" y="346.47" width="7.59" height="29.53" rx="4" fill="#c9a227"></rect>
+              <rect x="606.61" y="203.62" width="7.59" height="172.38" rx="4" fill="#10233f"></rect>
+              <rect x="618.20" y="347.81" width="7.59" height="28.19" rx="4" fill="#c9a227"></rect>
+              <rect x="635.81" y="195.00" width="7.59" height="181.00" rx="4" fill="#10233f"></rect>
+              <rect x="647.40" y="349.10" width="7.59" height="26.90" rx="4" fill="#c9a227"></rect>
+              <text x="645.40" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y20</text>
+              <rect x="665.01" y="185.95" width="7.59" height="190.05" rx="4" fill="#10233f"></rect>
+              <rect x="676.60" y="350.32" width="7.59" height="25.68" rx="4" fill="#c9a227"></rect>
+              <rect x="694.21" y="176.45" width="7.59" height="199.55" rx="4" fill="#10233f"></rect>
+              <rect x="705.80" y="351.49" width="7.59" height="24.51" rx="4" fill="#c9a227"></rect>
+              <rect x="723.41" y="166.47" width="7.59" height="209.53" rx="4" fill="#10233f"></rect>
+              <rect x="735.00" y="352.60" width="7.59" height="23.40" rx="4" fill="#c9a227"></rect>
+              <rect x="752.61" y="156.00" width="7.59" height="220.00" rx="4" fill="#10233f"></rect>
+              <rect x="764.20" y="353.66" width="7.59" height="22.34" rx="4" fill="#c9a227"></rect>
+              <rect x="781.81" y="144.99" width="7.59" height="231.01" rx="4" fill="#10233f"></rect>
+              <rect x="793.40" y="354.68" width="7.59" height="21.32" rx="4" fill="#c9a227"></rect>
+              <text x="791.40" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y25</text>
+              <rect x="811.01" y="133.44" width="7.59" height="242.56" rx="4" fill="#10233f"></rect>
+              <rect x="822.60" y="355.65" width="7.59" height="20.35" rx="4" fill="#c9a227"></rect>
+              <rect x="840.21" y="121.32" width="7.59" height="254.68" rx="4" fill="#10233f"></rect>
+              <rect x="851.80" y="356.57" width="7.59" height="19.43" rx="4" fill="#c9a227"></rect>
+              <rect x="869.41" y="108.58" width="7.59" height="267.42" rx="4" fill="#10233f"></rect>
+              <rect x="881.00" y="357.46" width="7.59" height="18.54" rx="4" fill="#c9a227"></rect>
+              <rect x="898.61" y="95.21" width="7.59" height="280.79" rx="4" fill="#10233f"></rect>
+              <rect x="910.20" y="358.30" width="7.59" height="17.70" rx="4" fill="#c9a227"></rect>
+              <rect x="927.81" y="81.17" width="7.59" height="294.83" rx="4" fill="#10233f"></rect>
+              <rect x="939.40" y="359.10" width="7.59" height="16.90" rx="4" fill="#c9a227"></rect>
+              <text x="937.40" y="408" text-anchor="middle" font-size="11" fill="#64748b">Y30</text>
+              </svg>
+            </div>
+
+            <div class="chart-legend">
+              <span><i class="legend-dividend"></i> Projected dividend</span>
+              <span><i class="legend-present-value"></i> Discounted dividend</span>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Interpretation</h3>
+            <p id="dv-interpretation">
+              This calculator estimates what price you can pay today for a dividend stream if your assumptions hold.
+              Buy Now Below is the discounted value of 30 projected dividends plus the discounted terminal value.
+            </p>
+          </div>
+        </section>
+
+        <!-- GRAHAM-LYNCH TOOL -->
+        <section class="tool-panel" id="tool-graham-lynch">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 03</p>
+            <h2>Graham–Lynch Calculator</h2>
+            <p>
+              Estimate a rough Graham fair value and a Peter Lynch-style PEG lens using earnings,
+              growth, dividends, and the current interest-rate environment. Use this as a fast valuation
+              sanity check before moving into a full StockCrafted valuation model.
+            </p>
+          </div>
+
+          <form class="tool-form" id="gl-form" onsubmit="return false;">
+            <div class="tool-input-grid gl-input-grid">
+              <label>
+                Ticker <span class="input-hint">(optional, used for data links)</span>
+                <input type="text" id="gl-ticker" value="MRK" autocomplete="off" spellcheck="false">
+              </label>
+
+              <label>
+                Current stock price
+                <input type="number" id="gl-current-price" value="100" step="0.01" min="0">
+              </label>
+
+              <label>
+                Diluted EPS <span class="input-hint">(LTM / TTM, normalized if cyclical)</span>
+                <input type="number" id="gl-eps" value="5.00" step="0.01">
+              </label>
+
+              <label>
+                Expected EPS growth <span class="input-hint">(3–5 year annual estimate, %)</span>
+                <input type="number" id="gl-growth-rate" value="7" step="0.1">
+              </label>
+
+              <label>
+                Current P/E <span class="input-hint">(TTM; leave 0 to use Price ÷ EPS)</span>
+                <input type="number" id="gl-current-pe" value="20" step="0.1" min="0">
+              </label>
+
+              <label>
+                Dividend yield <span class="input-hint">(%, forward or trailing consistently)</span>
+                <input type="number" id="gl-dividend-yield" value="3" step="0.1" min="0">
+              </label>
+
+              <label>
+                AAA corporate yield <span class="input-hint">(%, for Graham rate adjustment)</span>
+                <input type="number" id="gl-aaa-yield" value="5.2" step="0.01" min="0">
+              </label>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Graham–Lynch Value
+            </button>
+          </form>
+
+          <div class="tool-results-grid gl-results-grid" id="gl-results" aria-live="polite">
+            <div class="tool-result-card">
+              <span>Graham Fair Value</span>
+              <strong id="gl-graham-value">$112.50</strong>
+            </div>
+
+            <div class="tool-result-card tool-result-card-primary gl-adjusted-value-card">
+              <span>Interest-Adjusted Graham Value</span>
+              <strong id="gl-adjusted-graham-value">$95.19</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Adjusted Upside / Downside</span>
+              <strong id="gl-upside-downside">-4.81%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>PEG</span>
+              <strong id="gl-peg">2.86</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Dividend-Adjusted PEG</span>
+              <strong id="gl-dividend-adjusted-peg">2.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>StockCrafted Verdict</span>
+              <strong id="gl-verdict">Fair / neutral</strong>
+            </div>
+          </div>
+
+          <div class="tool-table-card gl-data-card">
+            <div class="tool-card-header-simple">
+              <h3>Input Guide and Data Sources</h3>
+              <p>
+                For consistency, use diluted EPS on an LTM / TTM basis. For cyclical, commodity, or temporarily distorted businesses,
+                use normalized EPS instead of a one-year peak or trough. Expected growth should usually be a 3–5 year annual EPS growth estimate.
+              </p>
+            </div>
+
+            <div class="tool-table-wrap">
+              <table class="tool-vertical-table gl-vertical-table">
+                <thead>
+                  <tr>
+                    <th>Input</th>
+                    <th>Preferred Data</th>
+                    <th>Where to Look</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>EPS</td>
+                    <td>Diluted EPS, LTM / TTM. Use normalized EPS when the last year is distorted.</td>
+                    <td>Company filings, annual report, Yahoo Finance statistics, StockAnalysis financials.</td>
+                  </tr>
+                  <tr>
+                    <td>Growth</td>
+                    <td>Expected annual EPS growth over 3–5 years.</td>
+                    <td>Analyst consensus pages, company guidance, historical EPS trend, StockCrafted internal assumptions.</td>
+                  </tr>
+                  <tr>
+                    <td>P/E</td>
+                    <td>Current trailing P/E. If set to 0, the calculator uses Price ÷ EPS.</td>
+                    <td>Broker platform, Yahoo Finance statistics, StockAnalysis ratios.</td>
+                  </tr>
+                  <tr>
+                    <td>Dividend Yield</td>
+                    <td>Forward yield is preferred for stable dividend payers; trailing yield is acceptable if used consistently.</td>
+                    <td>Company dividend page, broker platform, dividend history source.</td>
+                  </tr>
+                  <tr>
+                    <td>AAA Yield</td>
+                    <td>Moody's Seasoned Aaa Corporate Bond Yield or equivalent AAA corporate yield.</td>
+                    <td>FRED or another fixed-income data source.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="gl-source-links" aria-label="External data source links">
+              <a id="gl-yahoo-link" href="https://finance.yahoo.com/quote/MRK/key-statistics/" target="_blank" rel="noopener">Open Yahoo Finance Statistics</a>
+              <a id="gl-stockanalysis-link" href="https://stockanalysis.com/stocks/mrk/statistics/" target="_blank" rel="noopener">Open StockAnalysis Statistics</a>
+              <a href="https://fred.stlouisfed.org/series/AAA" target="_blank" rel="noopener">Open FRED AAA Yield</a>
+              <a id="gl-sec-link" href="https://www.sec.gov/edgar/search/" target="_blank" rel="noopener">Open SEC Filings Search</a>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Interpretation</h3>
+            <p id="gl-interpretation">
+              This calculator combines Graham's earnings-growth valuation with Lynch's PEG logic. Treat it as a quick valuation anchor,
+              not a final target price. High-quality compounders, cyclicals, banks, REITs, and temporarily depressed earnings often require a fuller model.
+            </p>
+          </div>
+        </section>
+
+        <!-- CASH-SECURED PUT TOOL -->
+        <section class="tool-panel" id="tool-cash-secured-put">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 04</p>
+            <h2>Cash-Secured Put Calculator</h2>
+            <p>
+              Model a fully cash-secured put using the original OptionWeaver-style structure:
+              inputs, return outputs, a stock-price matrix, and a line chart comparing buy-and-hold return with the put strategy.
+            </p>
+          </div>
+
+          <form class="tool-form" id="csp-form" onsubmit="return false;">
+
+            <div class="tool-input-grid">
+              <label>
+                Current stock price
+                <input type="number" id="csp-stock-price" value="69.50" step="0.01" min="0">
+              </label>
+
+              <label>
+                Put strike price
+                <input type="number" id="csp-strike-price" value="67.50" step="0.01" min="0">
+              </label>
+
+              <label>
+                Put bid premium <span class="input-hint">(per share)</span>
+                <input type="number" id="csp-premium" value="2.04" step="0.01" min="0">
+              </label>
+
+              <label>
+                Months until expiration
+                <input type="number" id="csp-months" value="2.5" step="0.1" min="0.1">
+              </label>
+
+              <label>
+                Dividends until expiration <span class="input-hint">(per share, for buy-and-hold comparison)</span>
+                <input type="number" id="csp-dividend" value="0.225" step="0.001" min="0">
+              </label>
+
+              <label>
+                Number of contracts
+                <input type="number" id="csp-contracts" value="1" step="1" min="1">
+              </label>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Cash-Secured Put
+            </button>
+          </form>
+
+          <div class="tool-results-grid csp-results-grid" id="csp-results" aria-live="polite">
+
+            <div class="tool-result-card">
+              <span>Capital Secured</span>
+              <strong id="csp-capital-secured">$6,750.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Total Premium</span>
+              <strong id="csp-total-premium">$204.00</strong>
+            </div>
+
+            <div class="tool-result-card tool-result-card-primary csp-cost-basis-card">
+              <span>Purchase Cost Basis</span>
+              <strong id="csp-breakeven">$65.46</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Period Rate of Return</span>
+              <strong id="csp-return">3.12%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Annualized Rate of Return</span>
+              <strong id="csp-annualised">15.87%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Discount to Current Price</span>
+              <strong id="csp-discount">5.81%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Distance to Strike</span>
+              <strong id="csp-distance">2.88%</strong>
+            </div>
+
+          </div>
+
+          <div class="tool-table-card csp-matrix-card">
+            <div class="tool-card-header-simple">
+              <h3>Expiration Price Return Matrix</h3>
+              <p>
+                This matrix compares the return from buying the stock outright with the return from selling a cash-secured put.
+                The put return is capped at the premium when the stock finishes above the strike, and declines if the stock finishes below the effective cost basis.
+              </p>
+            </div>
+
+            <div class="tool-table-wrap">
+              <table class="tool-vertical-table csp-vertical-table">
+                <thead>
+                  <tr>
+                    <th>Stock Price at Expiration</th>
+                    <th>Buy-and-Hold RoR</th>
+                    <th>Cash-Secured Put RoR</th>
+                  </tr>
+                </thead>
+                <tbody id="csp-matrix-body">
+                  <tr>
+                    <td>$55.35</td>
+                    <td>-20.04%</td>
+                    <td>-15.44%</td>
+                  </tr>
+                  <tr>
+                    <td>$56.70</td>
+                    <td>-18.09%</td>
+                    <td>-13.38%</td>
+                  </tr>
+                  <tr>
+                    <td>$58.05</td>
+                    <td>-16.15%</td>
+                    <td>-11.32%</td>
+                  </tr>
+                  <tr>
+                    <td>$59.40</td>
+                    <td>-14.21%</td>
+                    <td>-9.26%</td>
+                  </tr>
+                  <tr>
+                    <td>$60.75</td>
+                    <td>-12.27%</td>
+                    <td>-7.20%</td>
+                  </tr>
+                  <tr>
+                    <td>$62.10</td>
+                    <td>-10.32%</td>
+                    <td>-5.13%</td>
+                  </tr>
+                  <tr>
+                    <td>$63.45</td>
+                    <td>-8.38%</td>
+                    <td>-3.07%</td>
+                  </tr>
+                  <tr>
+                    <td>$64.80</td>
+                    <td>-6.44%</td>
+                    <td>-1.01%</td>
+                  </tr>
+                  <tr>
+                    <td>$66.15</td>
+                    <td>-4.50%</td>
+                    <td>1.05%</td>
+                  </tr>
+                  <tr class="csp-strike-row">
+                    <td>$67.50 <span class="csp-strike-badge">Strike</span></td>
+                    <td>-2.55%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$68.85</td>
+                    <td>-0.61%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$70.20</td>
+                    <td>1.33%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$71.55</td>
+                    <td>3.27%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$72.90</td>
+                    <td>5.22%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$74.25</td>
+                    <td>7.16%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$75.60</td>
+                    <td>9.10%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$76.95</td>
+                    <td>11.04%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$78.30</td>
+                    <td>12.99%</td>
+                    <td>3.12%</td>
+                  </tr>
+                  <tr>
+                    <td>$79.65</td>
+                    <td>14.93%</td>
+                    <td>3.12%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tool-chart-card csp-chart-card">
+            <div class="tool-chart-header">
+              <div>
+                <h3>Buy-and-Hold vs Cash-Secured Put Return</h3>
+                <p>
+                  The blue line shows the return from buying the stock today, including dividends until expiration.
+                  The gold line shows the cash-secured put return across possible expiration prices.
+                </p>
+              </div>
+            </div>
+
+            <div id="csp-ror-chart" class="line-chart" aria-label="Cash-secured put return comparison chart">
+              <svg viewBox="0 0 900 390" role="img" aria-label="Cash-secured put return comparison line chart">
+              <rect x="0" y="0" width="900" height="390" fill="#ffffff"></rect>
+              <line x1="78" y1="336.00" x2="866" y2="336.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="66" y="340.00" text-anchor="end" font-size="12" fill="#64748b">-24.23%</text>
+              <line x1="78" y1="185.00" x2="866" y2="185.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="66" y="189.00" text-anchor="end" font-size="12" fill="#64748b">-2.55%</text>
+              <line x1="78" y1="34.00" x2="866" y2="34.00" stroke="#e5e7eb" stroke-width="1"></line>
+              <text x="66" y="38.00" text-anchor="end" font-size="12" fill="#64748b">19.12%</text>
+              <line x1="78" y1="336" x2="866" y2="336" stroke="#94a3b8" stroke-width="1"></line>
+              <line x1="78" y1="34" x2="78" y2="336" stroke="#94a3b8" stroke-width="1"></line>
+              <line x1="78" y1="167.21" x2="866" y2="167.21" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5"></line>
+              <line x1="472.00" y1="34" x2="472.00" y2="336" stroke="#10233f" stroke-width="1.5" stroke-dasharray="6 5"></line>
+              <text x="472.00" y="48" text-anchor="middle" font-size="12" fill="#10233f">Strike</text>
+              <path d="M78.00,306.77 L121.78,293.24 L165.56,279.71 L209.33,266.18 L253.11,252.65 L296.89,239.12 L340.67,225.59 L384.44,212.06 L428.22,198.53 L472.00,185.00 L515.78,171.47 L559.56,157.94 L603.33,144.41 L647.11,130.88 L690.89,117.35 L734.67,103.82 L778.44,90.29 L822.22,76.76 L866.00,63.23" fill="none" stroke="#10233f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M78.00,274.79 L121.78,260.43 L165.56,246.06 L209.33,231.70 L253.11,217.33 L296.89,202.96 L340.67,188.60 L384.44,174.23 L428.22,159.87 L472.00,145.50 L515.78,145.50 L559.56,145.50 L603.33,145.50 L647.11,145.50 L690.89,145.50 L734.67,145.50 L778.44,145.50 L822.22,145.50 L866.00,145.50" fill="none" stroke="#c9a227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+              <text x="78.00" y="372" text-anchor="middle" font-size="12" fill="#64748b">$55.35</text>
+              <text x="472.00" y="372" text-anchor="middle" font-size="12" fill="#64748b">Strike</text>
+              <text x="866.00" y="372" text-anchor="middle" font-size="12" fill="#64748b">$79.65</text>
+              </svg>
+            </div>
+
+            <div class="chart-legend">
+              <span><i class="legend-base-ror"></i> Buy-and-Hold RoR</span>
+              <span><i class="legend-put-ror"></i> Cash-Secured Put RoR</span>
+              <span><i class="legend-marker"></i> Strike reference</span>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Interpretation</h3>
+            <p id="csp-interpretation">
+              This cash-secured put collects premium upfront while reserving enough capital to buy the shares if assigned.
+              If the stock stays above the strike, the return is limited to the premium. If assigned, the premium lowers your effective purchase cost basis.
+            </p>
+          </div>
+        </section>
+
+        <!-- COVERED CALL TOOL -->
+        <section class="tool-panel" id="tool-covered-call">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 05</p>
+            <h2>Covered Call Calculator</h2>
+            <p>
+              Model a fully covered call using the original OptionWeaver-style Sell Calls structure:
+              inputs, return outputs, an expiration-price matrix, and a line chart comparing buy-and-hold return with the covered call strategy.
+            </p>
+          </div>
+
+          <form class="tool-form" id="cc-form" onsubmit="return false;">
+
+            <div class="tool-input-grid">
+              <label>
+                Current stock price
+                <input type="number" id="cc-stock-price" value="45.00" step="0.01" min="0">
+              </label>
+
+              <label>
+                Call strike price
+                <input type="number" id="cc-strike-price" value="47.00" step="0.01" min="0">
+              </label>
+
+              <label>
+                Call bid premium <span class="input-hint">(per share)</span>
+                <input type="number" id="cc-premium" value="0.85" step="0.01" min="0">
+              </label>
+
+              <label>
+                Months until expiration
+                <input type="number" id="cc-months" value="4" step="0.1" min="0.1">
+              </label>
+
+              <label>
+                Dividends until expiration <span class="input-hint">(per share)</span>
+                <input type="number" id="cc-dividend" value="0.31" step="0.001" min="0">
+              </label>
+
+              <label>
+                Number of contracts
+                <input type="number" id="cc-contracts" value="1" step="1" min="1">
+              </label>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Covered Call
+            </button>
+          </form>
+
+          <div class="tool-results-grid cc-results-grid" id="cc-results" aria-live="polite">
+
+            <div class="tool-result-card">
+              <span>Shares Value</span>
+              <strong id="cc-shares-value">$4,500.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Total Premium</span>
+              <strong id="cc-total-premium">$85.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Dividend Income</span>
+              <strong id="cc-dividend-income">$31.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Breakeven After Premium</span>
+              <strong id="cc-breakeven">$43.84</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Period Bonus If Expired</span>
+              <strong id="cc-period-bonus">1.89%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Annualized Bonus If Expired</span>
+              <strong id="cc-annualised-bonus">5.77%</strong>
+            </div>
+
+            <div class="tool-result-card tool-result-card-primary cc-called-return-card">
+              <span>Period RoR If Called Away</span>
+              <strong id="cc-return-called">7.02%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Annualized RoR If Called</span>
+              <strong id="cc-annualised-called">22.58%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Max Profit If Called Away</span>
+              <strong id="cc-max-profit">$316.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Upside to Strike</span>
+              <strong id="cc-upside">4.44%</strong>
+            </div>
+
+          </div>
+
+          <div class="tool-table-card cc-matrix-card">
+            <div class="tool-card-header-simple">
+              <h3>Expiration Price Return Matrix</h3>
+              <p>
+                This matrix compares the return from buying the stock outright with the return from selling a covered call.
+                The covered call return participates below the strike, then caps once the stock finishes above the call strike.
+              </p>
+            </div>
+
+            <div class="tool-table-wrap">
+              <table class="tool-vertical-table cc-vertical-table">
+                <thead>
+                  <tr>
+                    <th>Stock Price at Expiration</th>
+                    <th>Buy-and-Hold RoR</th>
+                    <th>Covered Call RoR</th>
+                  </tr>
+                </thead>
+                <tbody id="cc-matrix-body">
+                  <tr>
+                    <td>$38.54</td>
+                    <td>-13.67%</td>
+                    <td>-11.78%</td>
+                  </tr>
+                  <tr>
+                    <td>$39.95</td>
+                    <td>-10.53%</td>
+                    <td>-8.64%</td>
+                  </tr>
+                  <tr>
+                    <td>$41.36</td>
+                    <td>-7.40%</td>
+                    <td>-5.51%</td>
+                  </tr>
+                  <tr>
+                    <td>$42.77</td>
+                    <td>-4.27%</td>
+                    <td>-2.38%</td>
+                  </tr>
+                  <tr>
+                    <td>$44.18</td>
+                    <td>-1.13%</td>
+                    <td>0.76%</td>
+                  </tr>
+                  <tr>
+                    <td>$45.59</td>
+                    <td>2.00%</td>
+                    <td>3.89%</td>
+                  </tr>
+                  <tr class="cc-strike-row">
+                    <td>$47.00 <span class="cc-strike-badge">Strike</span></td>
+                    <td>5.13%</td>
+                    <td>7.02%</td>
+                  </tr>
+                  <tr>
+                    <td>$48.41</td>
+                    <td>8.27%</td>
+                    <td>7.02%</td>
+                  </tr>
+                  <tr>
+                    <td>$49.82</td>
+                    <td>11.40%</td>
+                    <td>7.02%</td>
+                  </tr>
+                  <tr>
+                    <td>$51.23</td>
+                    <td>14.53%</td>
+                    <td>7.02%</td>
+                  </tr>
+                  <tr>
+                    <td>$52.64</td>
+                    <td>17.67%</td>
+                    <td>7.02%</td>
+                  </tr>
+                  <tr>
+                    <td>$54.05</td>
+                    <td>20.80%</td>
+                    <td>7.02%</td>
+                  </tr>
+                  <tr>
+                    <td>$55.46</td>
+                    <td>23.93%</td>
+                    <td>7.02%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tool-chart-card cc-chart-card">
+            <div class="tool-chart-header">
+              <div>
+                <h3>Buy-and-Hold vs Covered Call Return</h3>
+                <p>
+                  The blue line shows the return from buying and holding the stock through expiration, including dividends.
+                  The gold line shows the covered call return, including premium and dividends, capped above the strike.
+                </p>
+              </div>
+            </div>
+
+            <div id="cc-ror-chart" class="line-chart" aria-label="Covered call return comparison chart">
+              <svg viewBox="0 0 900 390" role="img" aria-label="Covered call return comparison line chart">
+              <rect x="0" y="0" width="900" height="390" fill="#ffffff"></rect>
+              <line x1="78" y1="336.00" x2="866" y2="336.00" stroke="#e5e7eb" stroke-width="1"></line>
+<text x="66" y="340.00" text-anchor="end" font-size="12" fill="#64748b">-18.18%</text>
+<line x1="78" y1="185.00" x2="866" y2="185.00" stroke="#e5e7eb" stroke-width="1"></line>
+<text x="66" y="189.00" text-anchor="end" font-size="12" fill="#64748b">5.13%</text>
+<line x1="78" y1="34.00" x2="866" y2="34.00" stroke="#e5e7eb" stroke-width="1"></line>
+<text x="66" y="38.00" text-anchor="end" font-size="12" fill="#64748b">28.45%</text>
+              <line x1="78" y1="336" x2="866" y2="336" stroke="#94a3b8" stroke-width="1"></line>
+              <line x1="78" y1="34" x2="78" y2="336" stroke="#94a3b8" stroke-width="1"></line>
+              <line x1="78" y1="218.25" x2="866" y2="218.25" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5"></line>
+              <line x1="472.00" y1="34" x2="472.00" y2="336" stroke="#10233f" stroke-width="1.5" stroke-dasharray="6 5"></line>
+              <text x="472.00" y="48" text-anchor="middle" font-size="12" fill="#10233f">Strike</text>
+              <path d="M78.00,306.77 L143.67,286.48 L209.33,266.18 L275.00,245.89 L340.67,225.59 L406.33,205.30 L472.00,185.00 L537.67,164.70 L603.33,144.41 L669.00,124.11 L734.67,103.82 L800.33,83.52 L866.00,63.23" fill="none" stroke="#10233f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M78.00,294.54 L143.67,274.24 L209.33,253.95 L275.00,233.65 L340.67,213.36 L406.33,193.06 L472.00,172.77 L537.67,172.77 L603.33,172.77 L669.00,172.77 L734.67,172.77 L800.33,172.77 L866.00,172.77" fill="none" stroke="#c9a227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+              <text x="78.00" y="372" text-anchor="middle" font-size="12" fill="#64748b">$38.54</text>
+<text x="472.00" y="372" text-anchor="middle" font-size="12" fill="#64748b">Strike</text>
+<text x="866.00" y="372" text-anchor="middle" font-size="12" fill="#64748b">$55.46</text>
+              </svg>
+            </div>
+
+            <div class="chart-legend">
+              <span><i class="legend-base-ror"></i> Buy-and-Hold RoR</span>
+              <span><i class="legend-call-ror"></i> Covered Call RoR</span>
+              <span><i class="legend-marker"></i> Strike reference</span>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Interpretation</h3>
+            <p id="cc-interpretation">
+              This covered call collects premium upfront while keeping the shares covered. If the stock finishes below the strike,
+              you keep the shares, the premium, and any dividends. If it finishes above the strike, the upside is capped at the strike,
+              but the strategy produces a defined maximum return.
+            </p>
+          </div>
+        </section>
+
+        <!-- WHEEL STRATEGY TOOL -->
+        <section class="tool-panel" id="tool-wheel-strategy">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 06</p>
+            <h2>Wheel Strategy Calculator</h2>
+            <p>
+              Model a complete cash-secured Wheel cycle from one central engine:
+              short put, possible assignment, covered call, dividends, final price, and cycle outcome.
+            </p>
+          </div>
+
+          <form class="tool-form" id="wheel-strategy-form" onsubmit="return false;">
+            <div class="tool-input-grid">
+              <label>
+                Current stock price
+                <input type="number" id="wheel-current-price" value="50" step="0.01" min="0">
+              </label>
+
+              <label>
+                Number of contracts
+                <input type="number" id="wheel-contracts" value="1" step="1" min="1">
+              </label>
+
+              <label>
+                Put strike price
+                <input type="number" id="wheel-put-strike" value="45" step="0.01" min="0">
+              </label>
+
+              <label>
+                Put premium received per share <span class="input-hint">(use Bid price when selling)</span>
+                <input type="number" id="wheel-put-premium" value="1.50" step="0.01" min="0">
+              </label>
+
+              <label>
+                Put days to expiration
+                <input type="number" id="wheel-put-days" value="30" step="1" min="1">
+              </label>
+
+              <label>
+                Expected dividend per share during ownership
+                <input type="number" id="wheel-dividend" value="0" step="0.01" min="0">
+              </label>
+
+              <label>
+                Call strike price
+                <input type="number" id="wheel-call-strike" value="50" step="0.01" min="0">
+              </label>
+
+              <label>
+                Call premium received per share <span class="input-hint">(use Bid price when selling)</span>
+                <input type="number" id="wheel-call-premium" value="2.00" step="0.01" min="0">
+              </label>
+
+              <label>
+                Call days to expiration
+                <input type="number" id="wheel-call-days" value="30" step="1" min="1">
+              </label>
+
+              <label>
+                Scenario
+                <select id="wheel-scenario">
+                  <option value="put-expires">Put expires worthless</option>
+                  <option value="assigned-holding">Assigned + holding shares</option>
+                  <option value="assigned-called">Assigned + called away</option>
+                </select>
+              </label>
+
+              <label>
+                Final stock price for selected scenario
+                <input type="number" id="wheel-final-price" value="50" step="0.01" min="0">
+              </label>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Wheel Strategy
+            </button>
+          </form>
+
+          <div class="tool-results-grid wheel-results-grid" id="wheel-results" aria-live="polite">
+            <div class="tool-result-card wheel-selected-scenario-card">
+              <span>Selected Scenario</span>
+              <strong>Put Expires Worthless</strong>
+            </div>
+            <div class="tool-result-card tool-result-card-primary wheel-primary-card">
+              <span>Put Premium Received</span>
+              <strong>$150.00</strong>
+            </div>
+            <div class="tool-result-card">
+              <span>Capital Secured</span>
+              <strong>$4,500.00</strong>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Selected Scenario Interpretation</h3>
+            <p id="wheel-interpretation">
+              In this scenario, the put expires worthless and only the put premium is realised.
+            </p>
+          </div>
+
+          <div class="tool-table-card wheel-summary-card">
+            <div class="tool-card-header-simple">
+              <h3>Wheel Cycle Components</h3>
+              <p>
+                These cards separate the income engine from the selected scenario, so premiums, dividends, capital and breakeven are always visible.
+              </p>
+            </div>
+            <div class="tool-results-grid" id="wheel-cycle-components" aria-live="polite">
+              <div class="tool-summary-card">
+                <span class="tool-summary-label">Put Premium</span>
+                <strong>$150.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-table-card wheel-summary-card">
+            <div class="tool-card-header-simple">
+              <h3>Scenario Summary</h3>
+              <p>
+                The selected scenario changes the realised path. The matrix and chart below always show the full range of possible final prices.
+              </p>
+            </div>
+            <div class="tool-results-grid" id="wheel-summary" aria-live="polite">
+              <div class="tool-summary-card tool-summary-card-active">
+                <span class="tool-summary-label">Scenario 1</span>
+                <strong>Put Expires Worthless</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-table-card wheel-matrix-card">
+            <div class="tool-card-header-simple">
+              <h3>Wheel Outcome Matrix</h3>
+              <p>
+                This matrix is the source of truth for the chart. It compares simple stock ownership with the Wheel cycle across final stock prices.
+                Current price, put strike, income breakeven and call strike are highlighted as operating thresholds.
+              </p>
+            </div>
+
+            <div class="tool-table-wrap">
+              <table class="tool-vertical-table wheel-vertical-table">
+                <thead>
+                  <tr>
+                    <th>Final Stock Price</th>
+                    <th>Outcome</th>
+                    <th>Stock Only P/L</th>
+                    <th>Stock Only RoR</th>
+                    <th>Wheel P/L</th>
+                    <th>Wheel RoR</th>
+                  </tr>
+                </thead>
+                <tbody id="wheel-matrix-body">
+                  <tr>
+                    <td>$40.00</td>
+                    <td>Assigned + Holding</td>
+                    <td>-$1,000.00</td>
+                    <td>-20.00%</td>
+                    <td>-$150.00</td>
+                    <td>-3.33%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tool-chart-card wheel-chart-card">
+            <div class="tool-chart-header">
+              <div>
+                <h3>Wheel Cycle vs Stock-Only P/L</h3>
+                <p>
+                  The blue line shows simple stock ownership. The gold line shows the Wheel path, using the same rows as the outcome matrix.
+                </p>
+              </div>
+            </div>
+
+            <div id="wheel-cycle-chart" class="line-chart" aria-label="Wheel cycle profit and loss comparison line chart">
+              <svg viewBox="0 0 900 390" role="img" aria-label="Wheel cycle return comparison line chart fallback">
+                <rect x="0" y="0" width="900" height="390" fill="#ffffff"></rect>
+                <line x1="82" y1="320" x2="862" y2="320" stroke="#94a3b8" stroke-width="1"></line>
+                <line x1="82" y1="40" x2="82" y2="320" stroke="#94a3b8" stroke-width="1"></line>
+                <line x1="82" y1="260" x2="862" y2="120" stroke="#10233f" stroke-width="4" stroke-linecap="round"></line>
+                <line x1="82" y1="280" x2="600" y2="150" stroke="#c9a227" stroke-width="4" stroke-linecap="round"></line>
+                <line x1="600" y1="150" x2="862" y2="150" stroke="#c9a227" stroke-width="4" stroke-linecap="round"></line>
+                <text x="450" y="360" text-anchor="middle" font-size="13" fill="#64748b">Wheel chart loads automatically after calculation</text>
+              </svg>
+            </div>
+
+            <div class="chart-legend">
+              <span><i class="legend-dividend"></i> Stock Only</span>
+              <span><i class="legend-wheel-ror"></i> Wheel Cycle</span>
+              <span><i class="legend-marker"></i> Current / Strike / Breakeven</span>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Annualised Figures</h3>
+            <p>
+              Annualised figures are mechanical comparisons. They assume that similar cycle returns could be repeated over a full year.
+              That assumption is useful for comparison, but it is not a forecast, guarantee, or invitation to annoy probability itself.
+            </p>
+          </div>
+
+          <div class="tool-note">
+            <h3>Wheel Logic</h3>
+            <p>
+              The Wheel is modelled as one sequence: sell a cash-secured put, accept assignment if it occurs, sell a covered call, then either remain long or exit at the call strike.
+              Premiums and dividends are included only in the paths where they are actually earned.
+            </p>
+          </div>
+        </section>
+
+        <!-- PORTFOLIO INCOME TOOL -->
+        <section class="tool-panel" id="tool-portfolio-income">
+          <div class="tool-panel-header">
+            <p class="tool-kicker">Step 07</p>
+            <h2>Portfolio Income Planner</h2>
+            <p>
+              Estimate portfolio-level premium income, dividend income, capital allocated,
+              assignment exposure, concentration risk, and simplified compounding potential.
+            </p>
+          </div>
+
+          <form class="tool-form" id="portfolio-income-form" onsubmit="return false;">
+
+            <div class="tool-table-card">
+              <h3>Income Positions</h3>
+              <p>
+                Enter up to five active income positions. Use cash-secured puts for entry income,
+                covered calls for ownership income, and dividend-only rows for long stock or ETF positions.
+              </p>
+
+              <div class="tool-table-wrap">
+                <table class="tool-horizontal-table portfolio-input-table">
+                  <thead>
+                    <tr>
+                      <th>Position</th>
+                      <th>Type</th>
+                      <th>Ticker</th>
+                      <th>Current Price</th>
+                      <th>Strike</th>
+                      <th>Premium</th>
+                      <th>Days</th>
+                      <th>Contracts</th>
+                      <th>Shares</th>
+                      <th>Dividend / Share</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        <select id="pi-strategy-1">
+                          <option value="cash-secured-put">Cash-Secured Put</option>
+                          <option value="covered-call">Covered Call</option>
+                          <option value="dividend-only">Dividend Only</option>
+                        </select>
+                      </td>
+                      <td><input type="text" id="pi-ticker-1" value="XOM"></td>
+                      <td><input type="number" id="pi-current-price-1" value="100" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-strike-1" value="95" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-premium-1" value="2.20" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-days-1" value="30" step="1" min="1"></td>
+                      <td><input type="number" id="pi-contracts-1" value="1" step="1" min="0"></td>
+                      <td><input type="number" id="pi-shares-1" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-dividend-1" value="0" step="0.01" min="0"></td>
+                    </tr>
+
+                    <tr>
+                      <td>2</td>
+                      <td>
+                        <select id="pi-strategy-2">
+                          <option value="cash-secured-put">Cash-Secured Put</option>
+                          <option value="covered-call" selected>Covered Call</option>
+                          <option value="dividend-only">Dividend Only</option>
+                        </select>
+                      </td>
+                      <td><input type="text" id="pi-ticker-2" value="XLE"></td>
+                      <td><input type="number" id="pi-current-price-2" value="85" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-strike-2" value="90" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-premium-2" value="1.40" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-days-2" value="30" step="1" min="1"></td>
+                      <td><input type="number" id="pi-contracts-2" value="1" step="1" min="0"></td>
+                      <td><input type="number" id="pi-shares-2" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-dividend-2" value="0" step="0.01" min="0"></td>
+                    </tr>
+
+                    <tr>
+                      <td>3</td>
+                      <td>
+                        <select id="pi-strategy-3">
+                          <option value="cash-secured-put">Cash-Secured Put</option>
+                          <option value="covered-call">Covered Call</option>
+                          <option value="dividend-only" selected>Dividend Only</option>
+                        </select>
+                      </td>
+                      <td><input type="text" id="pi-ticker-3" value="SCHD"></td>
+                      <td><input type="number" id="pi-current-price-3" value="78" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-strike-3" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-premium-3" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-days-3" value="365" step="1" min="1"></td>
+                      <td><input type="number" id="pi-contracts-3" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-shares-3" value="100" step="1" min="0"></td>
+                      <td><input type="number" id="pi-dividend-3" value="3.00" step="0.01" min="0"></td>
+                    </tr>
+
+                    <tr>
+                      <td>4</td>
+                      <td>
+                        <select id="pi-strategy-4">
+                          <option value="cash-secured-put">Cash-Secured Put</option>
+                          <option value="covered-call">Covered Call</option>
+                          <option value="dividend-only">Dividend Only</option>
+                        </select>
+                      </td>
+                      <td><input type="text" id="pi-ticker-4" value=""></td>
+                      <td><input type="number" id="pi-current-price-4" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-strike-4" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-premium-4" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-days-4" value="30" step="1" min="1"></td>
+                      <td><input type="number" id="pi-contracts-4" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-shares-4" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-dividend-4" value="0" step="0.01" min="0"></td>
+                    </tr>
+
+                    <tr>
+                      <td>5</td>
+                      <td>
+                        <select id="pi-strategy-5">
+                          <option value="cash-secured-put">Cash-Secured Put</option>
+                          <option value="covered-call">Covered Call</option>
+                          <option value="dividend-only">Dividend Only</option>
+                        </select>
+                      </td>
+                      <td><input type="text" id="pi-ticker-5" value=""></td>
+                      <td><input type="number" id="pi-current-price-5" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-strike-5" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-premium-5" value="0" step="0.01" min="0"></td>
+                      <td><input type="number" id="pi-days-5" value="30" step="1" min="1"></td>
+                      <td><input type="number" id="pi-contracts-5" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-shares-5" value="0" step="1" min="0"></td>
+                      <td><input type="number" id="pi-dividend-5" value="0" step="0.01" min="0"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tool-table-card">
+              <h3>Compounding Assumptions</h3>
+              <p>
+                Estimate how reinvesting part of the generated income may affect capital over time.
+                This is a simplified projection, not a forecast.
+              </p>
+
+              <div class="tool-input-grid">
+                <label>
+                  Reinvestment rate <span class="input-hint">(%)</span>
+                  <input type="number" id="pi-reinvestment-rate" value="70" step="1" min="0" max="100">
+                </label>
+
+                <label>
+                  Projected cycles per year
+                  <input type="number" id="pi-cycles-per-year" value="12" step="0.1" min="0">
+                </label>
+
+                <label>
+                  Projection years
+                  <input type="number" id="pi-projection-years" value="5" step="0.1" min="0">
+                </label>
+              </div>
+            </div>
+
+            <button class="tool-calculate-btn" type="button">
+              Calculate Portfolio Income
+            </button>
+          </form>
+
+          <div class="tool-results-grid" id="pi-results" aria-live="polite">
+            <div class="tool-result-card">
+              <span>Capital Allocated</span>
+              <strong>$29,800.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Premium Income</span>
+              <strong>$360.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Dividend Income</span>
+              <strong>$300.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Total Expected Income</span>
+              <strong>$660.00</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Current Cycle Yield</span>
+              <strong>2.21%</strong>
+            </div>
+
+            <div class="tool-result-card">
+              <span>Annualised Income Yield</span>
+              <strong>17.37%</strong>
+            </div>
+          </div>
+
+          <div class="tool-table-card">
+            <h3>Portfolio Risk Snapshot</h3>
+            <div class="tool-results-grid" id="pi-risk-snapshot" aria-live="polite">
+              <div class="tool-summary-card">
+                <span class="tool-summary-label">Largest Position</span>
+                <strong>XOM</strong>
+                <p>Estimated exposure: $9,500.00</p>
+                <p>Portfolio share: 31.88%</p>
+              </div>
+
+              <div class="tool-summary-card">
+                <span class="tool-summary-label">Assignment Exposure</span>
+                <strong>Moderate</strong>
+                <p>Cash-secured put exposure: $9,500.00</p>
+                <p>Portfolio share: 31.88%</p>
+              </div>
+
+              <div class="tool-summary-card">
+                <span class="tool-summary-label">Income Mix</span>
+                <strong>Balanced</strong>
+                <p>Premium mix: 54.55%</p>
+                <p>Dividend mix: 45.45%</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-table-card">
+            <h3>Compounding Estimate</h3>
+            <div class="tool-results-grid" id="pi-compounding-results" aria-live="polite">
+              <div class="tool-result-card">
+                <span>Income Reinvested per Cycle</span>
+                <strong>$462.00</strong>
+              </div>
+
+              <div class="tool-result-card">
+                <span>Income Withdrawn per Cycle</span>
+                <strong>$198.00</strong>
+              </div>
+
+              <div class="tool-result-card">
+                <span>Projected Capital</span>
+                <strong>$74,000.00</strong>
+              </div>
+
+              <div class="tool-result-card">
+                <span>Capital Growth from Reinvestment</span>
+                <strong>$44,200.00</strong>
+              </div>
+
+              <div class="tool-result-card">
+                <span>Projected Cycle Income</span>
+                <strong>$1,638.00</strong>
+              </div>
+
+              <div class="tool-result-card">
+                <span>Projected Annual Income</span>
+                <strong>$19,656.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-chart-card">
+            <div class="tool-chart-header">
+              <div>
+                <h3>Projected Capital: Reinvestment vs Withdrawal</h3>
+                <p>
+                  The flat line shows capital if income is withdrawn. The rising line shows the simplified effect of reinvesting part of the income back into the portfolio.
+                </p>
+              </div>
+            </div>
+
+            <div id="pi-capital-projection-chart" class="line-chart" aria-label="Portfolio capital projection chart"></div>
+
+            <div class="chart-legend">
+              <span><i class="legend-present-value"></i> No reinvestment</span>
+              <span><i class="legend-dividend"></i> With reinvestment</span>
+            </div>
+          </div>
+
+          <div class="tool-note">
+            <h3>Interpretation</h3>
+            <p id="pi-interpretation">
+              This planner estimates current income, assignment exposure, concentration, and simplified compounding potential across multiple income positions.
+            </p>
+          </div>
+
+          <div class="tool-note">
+            <h3>Compounding Projection Note</h3>
+            <p>
+              Compounding projections are simplified mechanical estimates. They assume that similar average income yields can be repeated and reinvested over time.
+              Actual results will vary because option premiums, volatility, assignment, dividends, prices, liquidity, and available opportunities change.
+            </p>
+          </div>
+
+          <div class="tool-note">
+            <h3>Annualised Figures</h3>
+            <p>
+              Annualised figures assume that comparable cycle returns could be repeated continuously over a full year.
+              They are useful for comparing setups, but they are not forecasts, guarantees, or realistic promises of future return.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="tools-risk-note">
+      <p>
+        These calculators are educational tools. They do not provide financial advice,
+        recommendations, tax guidance, or guarantees of future results. Options involve
+        risk and require disciplined position sizing, liquidity awareness, and full
+        understanding of assignment obligations.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>OptionsCrafted™ Premium Tools · Tools Hub™ · Educational modelling only.<br />© 2026 OptionsCrafted. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
