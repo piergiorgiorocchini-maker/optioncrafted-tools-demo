@@ -1,0 +1,77 @@
+{
+  "protect-long-underlying": {
+    "label": "Protect Long Underlying",
+    "shortLabel": "Long Underlying Protection",
+    "description": "Use option overlays to protect an existing stock or ETF position.",
+    "defaultStructure": "protective-put",
+    "allowedStructures": [
+      "protective-put",
+      "put-spread",
+      "collar"
+    ],
+    "positionDescription": "You own the underlying and want to reduce downside exposure without selling the position.",
+    "hedgeDescription": "Add a protective put, put spread, or collar to define the downside zone and compare the new payoff.",
+    "beforeRiskNote": "The original long underlying position has full downside exposure until the position is sold or hedged.",
+    "operatingRule": "Use this hedge when downside protection is more important than preserving all upside or avoiding hedge cost.",
+    "tradeOff": "Protection has a cost. Collars can reduce or offset that cost, but they usually cap upside.",
+    "riskProfile": "Downside exposure reduced after hedge",
+    "preferredOutcome": "protect-gain"
+  },
+  "repair-short-put": {
+    "label": "Repair Short Put / Naked Put",
+    "shortLabel": "Short Put Repair",
+    "description": "Define or reduce risk on a challenged short put position.",
+    "defaultStructure": "buy-lower-put",
+    "allowedStructures": [
+      "buy-lower-put",
+      "roll-down-out",
+      "close-position",
+      "accept-assignment"
+    ],
+    "positionDescription": "You are short a put and the underlying is moving toward or below the strike.",
+    "hedgeDescription": "Buy a lower-strike put to convert the short put into a defined-risk spread, or compare the repair alternatives later.",
+    "beforeRiskNote": "A short put has substantial downside exposure. If assignment is not desired, risk definition becomes more important as price approaches the strike.",
+    "operatingRule": "Consider this repair when the short put is near or below the strike and assignment is not desired.",
+    "tradeOff": "Buying protection reduces open downside, but lowers the net credit and can move the breakeven against the trader.",
+    "riskProfile": "Defined risk after buying lower put",
+    "preferredOutcome": "define-risk"
+  },
+  "repair-short-call": {
+    "label": "Repair Short Call / Naked Call",
+    "shortLabel": "Short Call Repair",
+    "description": "Define or reduce risk on a challenged short call position.",
+    "defaultStructure": "buy-higher-call",
+    "allowedStructures": [
+      "buy-higher-call",
+      "roll-up-out",
+      "close-position",
+      "buy-underlying"
+    ],
+    "positionDescription": "You are short a call and the underlying is moving toward or above the strike.",
+    "hedgeDescription": "Buy a higher-strike call to convert the short call into a defined-risk spread, or reduce directional exposure later.",
+    "beforeRiskNote": "A naked short call has theoretically unlimited upside risk. Risk definition usually takes priority over preserving premium.",
+    "operatingRule": "If a short call is moving against you, defining risk usually comes before chasing more premium.",
+    "tradeOff": "Buying a higher call caps risk, but reduces or can reverse the original credit.",
+    "riskProfile": "Unlimited risk capped after hedge",
+    "preferredOutcome": "define-risk"
+  },
+  "stock-break-even-repair": {
+    "label": "Stock Break-even Repair",
+    "shortLabel": "Stock Repair",
+    "description": "Use option overlays to improve the recovery profile of a losing long stock position.",
+    "defaultStructure": "stock-repair",
+    "allowedStructures": [
+      "stock-repair",
+      "covered-call",
+      "collar",
+      "protective-put"
+    ],
+    "positionDescription": "You own the underlying below cost basis and want to improve the recovery profile.",
+    "hedgeDescription": "Use a stock repair structure, covered call, or collar to shift the recovery profile while making upside caps explicit.",
+    "beforeRiskNote": "The original long stock position still has downside exposure and requires a full recovery to return to cost basis.",
+    "operatingRule": "Use only when the investor is willing to cap part of the upside in exchange for a lower recovery threshold.",
+    "tradeOff": "Repair structures can improve the path toward breakeven, but usually cap upside or add complexity.",
+    "riskProfile": "Recovery profile improved, upside partly capped",
+    "preferredOutcome": "move-to-breakeven"
+  }
+}
