@@ -9280,3 +9280,10 @@ body.probability-station-page .premium-quality-confidence-note strong::before {
     min-height: 0;
   }
 }
+
+/* Fair Value schedule: maintain readable explanatory text on white cards. */
+body.tools-hub-page #tool-fair-value .fv-schedule-card .tool-card-header-simple p,
+body.tools-page #tool-fair-value .fv-schedule-card .tool-card-header-simple p {
+  color: #334155;
+  opacity: 1;
+}
