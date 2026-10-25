@@ -131,7 +131,7 @@
             <p>
               Estimate the maximum price you should pay today using current EPS or free cash flow,
               two-stage growth assumptions, dividends, an expected P/E at sale, and your required return.
-              The default values mirror the original Excel Two-Stage Valuation Model preset.
+              The prefilled inputs illustrate a hypothetical dividend-paying stock. Adjust the assumptions to test your own valuation scenario.
             </p>
           </div>
 
@@ -139,42 +139,42 @@
             <div class="tool-input-grid">
               <label>
                 Current annual EPS / FCF
-                <input type="number" id="fv-current-eps" value="6.89" step="0.01" min="0">
+                <input type="number" id="fv-current-eps" value="2.00" step="0.01" min="0">
               </label>
 
               <label>
                 EPS / FCF growth years 1–5 <span class="input-hint">(%)</span>
-                <input type="number" id="fv-growth-stage-one" value="25" step="0.1">
+                <input type="number" id="fv-growth-stage-one" value="8" step="0.1">
               </label>
 
               <label>
                 EPS / FCF growth years 6–10 <span class="input-hint">(%)</span>
-                <input type="number" id="fv-growth-stage-two" value="5" step="0.1">
+                <input type="number" id="fv-growth-stage-two" value="4" step="0.1">
               </label>
 
               <label>
                 Current annual dividend
-                <input type="number" id="fv-current-dividend" value="3.12" step="0.01" min="0">
+                <input type="number" id="fv-current-dividend" value="0.80" step="0.01" min="0">
               </label>
 
               <label>
                 Dividend growth years 1–5 <span class="input-hint">(%)</span>
-                <input type="number" id="fv-dividend-growth-stage-one" value="10" step="0.1">
+                <input type="number" id="fv-dividend-growth-stage-one" value="5" step="0.1">
               </label>
 
               <label>
                 Dividend growth years 6–10 <span class="input-hint">(%)</span>
-                <input type="number" id="fv-dividend-growth-stage-two" value="10" step="0.1">
+                <input type="number" id="fv-dividend-growth-stage-two" value="4" step="0.1">
               </label>
 
               <label>
                 Target annual return <span class="input-hint">(enter 10 for 10%)</span>
-                <input type="number" id="fv-target-return" value="12" step="0.1" min="0">
+                <input type="number" id="fv-target-return" value="10" step="0.1" min="0">
               </label>
 
               <label>
                 Expected P/E at sale
-                <input type="number" id="fv-exit-multiple" value="18" step="0.1" min="0">
+                <input type="number" id="fv-exit-multiple" value="15" step="0.1" min="0">
               </label>
             </div>
 
@@ -215,7 +215,7 @@
               <h3>10-Year EPS / Dividend Schedule</h3>
               <p>
                 The model projects EPS or free cash flow and annual dividends year by year,
-                using the two growth stages entered above. This is the same 10-year schedule logic as the original spreadsheet, adapted to the OptionsCrafted interface.
+                using the two growth stages entered above. The projection compounds the two stages of growth over ten years and calculates the present buy-under price using the selected target return.
               </p>
             </div>
 
@@ -363,7 +363,7 @@
             <p>
               Estimate dividend-based fair value using the original Dividend Discount Model logic:
               current annual dividend, a 0–10 year growth rate, a perpetual growth rate after year 10,
-              and your required annual return. The default values mirror the Excel Dividend Discount Model preset.
+              and your required annual return. The inputs are illustrative and can be adjusted to examine alternative dividend-growth assumptions.
             </p>
           </div>
 
@@ -903,7 +903,7 @@
             <p class="tool-kicker">Step 04</p>
             <h2>Cash-Secured Put Calculator</h2>
             <p>
-              Model a fully cash-secured put using the original OptionWeaver-style structure:
+              Model a fully cash-secured put using an illustrative trade setup:
               inputs, return outputs, a stock-price matrix, and a line chart comparing buy-and-hold return with the put strategy.
             </p>
           </div>
@@ -913,27 +913,27 @@
             <div class="tool-input-grid">
               <label>
                 Current stock price
-                <input type="number" id="csp-stock-price" value="69.50" step="0.01" min="0">
+                <input type="number" id="csp-stock-price" value="30.50" step="0.01" min="0">
               </label>
 
               <label>
                 Put strike price
-                <input type="number" id="csp-strike-price" value="67.50" step="0.01" min="0">
+                <input type="number" id="csp-strike-price" value="27.50" step="0.01" min="0">
               </label>
 
               <label>
                 Put bid premium <span class="input-hint">(per share)</span>
-                <input type="number" id="csp-premium" value="2.04" step="0.01" min="0">
+                <input type="number" id="csp-premium" value="1.25" step="0.01" min="0">
               </label>
 
               <label>
                 Months until expiration
-                <input type="number" id="csp-months" value="2.5" step="0.1" min="0.1">
+                <input type="number" id="csp-months" value="3.5" step="0.1" min="0.1">
               </label>
 
               <label>
                 Dividends until expiration <span class="input-hint">(per share, for buy-and-hold comparison)</span>
-                <input type="number" id="csp-dividend" value="0.225" step="0.001" min="0">
+                <input type="number" id="csp-dividend" value="0.20" step="0.001" min="0">
               </label>
 
               <label>
