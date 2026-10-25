@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "source": "DEMO",
+    "asOf": "2026-10-24",
+    "currency": "USD",
+    "isLive": false
+  },
+  "securities": [
+    {
+      "ticker": "DEMO",
+      "name": "Illustrative Dividend Company",
+      "sector": "Industrials",
+      "price": 30.5,
+      "eps": 2,
+      "dividend": 0.8,
+      "roic": 16.2,
+      "debtToEquity": 0.42,
+      "fcf": 185000000,
+      "revenue": 1650000000,
+      "valuation": {
+        "buyUnder": 26.85,
+        "assumptions": "8% / 4% EPS growth; 15x terminal P/E; 10% required return"
+      },
+      "option": {
+        "kind": "Cash-Secured Put",
+        "strike": 27.5,
+        "premium": 1.25,
+        "months": 3.5
+      }
+    },
+    {
+      "ticker": "ALPHA",
+      "name": "Illustrative Quality Business",
+      "sector": "Technology",
+      "price": 72.4,
+      "eps": 3.8,
+      "dividend": 0.4,
+      "roic": 22.3,
+      "debtToEquity": 0.18,
+      "fcf": 475000000,
+      "revenue": 2800000000,
+      "valuation": {
+        "buyUnder": 64.2,
+        "assumptions": "Illustrative model only"
+      },
+      "option": {
+        "kind": "Cash-Secured Put",
+        "strike": 65,
+        "premium": 2.1,
+        "months": 2
+      }
+    },
+    {
+      "ticker": "BETA",
+      "name": "Illustrative Defensive Business",
+      "sector": "Consumer Staples",
+      "price": 48.8,
+      "eps": 2.9,
+      "dividend": 1.65,
+      "roic": 12.4,
+      "debtToEquity": 0.65,
+      "fcf": 320000000,
+      "revenue": 2200000000,
+      "valuation": {
+        "buyUnder": 46.3,
+        "assumptions": "Illustrative model only"
+      },
+      "option": {
+        "kind": "Cash-Secured Put",
+        "strike": 45,
+        "premium": 1.05,
+        "months": 3
+      }
+    }
+  ]
+}
