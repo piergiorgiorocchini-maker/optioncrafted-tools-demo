@@ -283,8 +283,7 @@ function calculateFairValue(inputs, outputs) {
   const estimatedSalePrice = yearTen.eps * exitMultiple;
   const dividendYieldAtSale = estimatedSalePrice > 0 ? yearTen.dividend / estimatedSalePrice : 0;
 
-  // Matches the original Excel Two-Stage Valuation Model:
-  // each projected dividend is compounded forward to year 10 at the target return.
+  // Compound each projected dividend forward to year 10 at the target return.
   const futureValueOfDividends = projection.reduce(function (sum, row) {
     return sum + row.futureValueDividend;
   }, 0);
