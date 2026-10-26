@@ -11,7 +11,7 @@ Development: `npm install && npm run dev` from this folder. Build: `npm run buil
 - Tools remain in `../tools/` untouched
 
 ## Commercial model
-WordPress + Thrive remain the storefront, content CMS, and checkout for the initial 1–2 products. App authentication, product access, purchases and real entitlements must later be implemented through a secure backend (e.g. verified WordPress purchase events), never trusted from the frontend.
+WordPress + Thrive remain the public marketing, editorial, SEO and communication environment. Checkout is deliberately undecided: purchases and upgrades may be initiated and completed inside the app, on WordPress, or through a hosted checkout. Subscription tiers, standalone products, add-ons and internal upgrades must be supported by a payment-provider-independent product/entitlement model. Backend verification of purchases and access rights will be required before launch.
 
 ## Important
 No API keys or private algorithms should be committed to this public repository. The current financial data are entirely illustrative. Do not imply a working options pricing engine exists in the new frontend yet.
