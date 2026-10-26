@@ -27,6 +27,12 @@ jobs:
       - name: Validate and build
         working-directory: platform-app
         run: npm run build
+      - name: Upload compiled preview for debugging
+        uses: actions/upload-artifact@v4
+        with:
+          name: optioncrafted-react-preview
+          path: platform-app/dist
+          if-no-files-found: error
       - name: Publish static preview within repository
         run: |
           mkdir -p platform-preview
@@ -36,6 +42,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A platform-preview
+          echo 'Built preview files:'
+          find platform-preview -maxdepth 2 -type f | sort | head -30
           if ! git diff --cached --quiet; then
             git commit -m "chore: update OptionsCrafted app preview [skip ci]"
             git push
