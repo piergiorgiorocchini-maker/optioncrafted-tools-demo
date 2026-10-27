@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
 import type {Security} from "../core/contracts";
-import "./company.css";
+import "./company.css";import {FilingPeers} from "./FilingPeers";
 const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
 export function CompanyIntelligence({company}:{company:Security}){
  const earningsYield=company.eps/company.price*100;
@@ -37,6 +37,6 @@ export function CompanyIntelligence({company}:{company:Security}){
    <section className="ci-panel ci-wide"><div className="ci-panel-head"><h3>From quality to valuation</h3><span>Connected workflow</span></div>
     <div className="ci-next"><div><span>Illustrative buy-under target</span><strong>{fmt(company.buyBelow)}</strong><small>Gap versus price: {gap.toFixed(1)}%</small></div><p>Review business fundamentals, select an appropriate valuation model, and carry the same ticker into the Options Lab. Current buy-under values are illustrative inputs, not computed fair values.</p><NavLink to="/valuation">Continue to Valuation Lab <ArrowRight size={16}/></NavLink></div>
    </section>
-  </div><div className="ci-foot"><ShieldCheck size={15}/> DEMO ONLY · NO VERIFIED FILINGS, PEER DATA, FAIR VALUES OR INVESTMENT RECOMMENDATIONS</div>
+  </div><FilingPeers company={company}/><div className="ci-foot"><ShieldCheck size={15}/> DEMO ONLY · NO VERIFIED FILINGS, PEER DATA, FAIR VALUES OR INVESTMENT RECOMMENDATIONS</div>
  </div>;
 }
