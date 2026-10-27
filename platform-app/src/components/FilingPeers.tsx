@@ -5,15 +5,15 @@ import "./intelligence.css";
 type Peer={symbol:string;company:string;sector:string;ev:number;ebitda:number;revenue:number;earnings:number;marketCap:number;roic:number;growth:number;netDebt:number};
 type Filing={form:string;date:string;title:string;summary:string;signals:{label:string;detail:string;kind:"neutral"|"risk"|"good"}[]};
 const model:Record<string,{filings:Filing[];peers:Peer[];target:Peer}>={
- DEMO:{target:{symbol:"DEMO",company:"Illustrative Dividend Company",sector:"Industrials",ev:645,ebitda:54,revenue:310,earnings:26,marketCap:610,roic:16.2,growth:5,netDebt:35},peers:[
+ DEMO:{filings:[],target:{symbol:"DEMO",company:"Illustrative Dividend Company",sector:"Industrials",ev:645,ebitda:54,revenue:310,earnings:26,marketCap:610,roic:16.2,growth:5,netDebt:35},peers:[
  {symbol:"IND-A",company:"Model Industrial Alpha",sector:"Industrials",ev:980,ebitda:83,revenue:460,earnings:44,marketCap:880,roic:18,growth:7,netDebt:100},
  {symbol:"IND-B",company:"Model Industrial Beta",sector:"Industrials",ev:1200,ebitda:92,revenue:510,earnings:40,marketCap:1060,roic:13,growth:4,netDebt:140},
  {symbol:"IND-C",company:"Model Industrial Gamma",sector:"Industrials",ev:770,ebitda:70,revenue:350,earnings:30,marketCap:700,roic:19,growth:6,netDebt:70}]},
- ALPHA:{target:{symbol:"ALPHA",company:"Illustrative Quality Business",sector:"Technology",ev:1530,ebitda:103,revenue:520,earnings:68,marketCap:1450,roic:22.3,growth:13,netDebt:80},peers:[
+ ALPHA:{filings:[],target:{symbol:"ALPHA",company:"Illustrative Quality Business",sector:"Technology",ev:1530,ebitda:103,revenue:520,earnings:68,marketCap:1450,roic:22.3,growth:13,netDebt:80},peers:[
  {symbol:"TECH-A",company:"Model Software Alpha",sector:"Technology",ev:1800,ebitda:110,revenue:610,earnings:70,marketCap:1740,roic:25,growth:15,netDebt:60},
  {symbol:"TECH-B",company:"Model Software Beta",sector:"Technology",ev:1320,ebitda:90,revenue:490,earnings:60,marketCap:1200,roic:20,growth:11,netDebt:120},
  {symbol:"TECH-C",company:"Model Software Gamma",sector:"Technology",ev:2100,ebitda:125,revenue:720,earnings:84,marketCap:2010,roic:28,growth:17,netDebt:90}]},
- BETA:{target:{symbol:"BETA",company:"Illustrative Defensive Business",sector:"Consumer Staples",ev:850,ebitda:86,revenue:590,earnings:42,marketCap:780,roic:12.4,growth:3,netDebt:70},peers:[
+ BETA:{filings:[],target:{symbol:"BETA",company:"Illustrative Defensive Business",sector:"Consumer Staples",ev:850,ebitda:86,revenue:590,earnings:42,marketCap:780,roic:12.4,growth:3,netDebt:70},peers:[
  {symbol:"STPL-A",company:"Model Staples Alpha",sector:"Consumer Staples",ev:960,ebitda:94,revenue:640,earnings:46,marketCap:880,roic:14,growth:4,netDebt:80},
  {symbol:"STPL-B",company:"Model Staples Beta",sector:"Consumer Staples",ev:1150,ebitda:110,revenue:770,earnings:57,marketCap:1030,roic:11,growth:2,netDebt:120},
  {symbol:"STPL-C",company:"Model Staples Gamma",sector:"Consumer Staples",ev:790,ebitda:72,revenue:530,earnings:34,marketCap:740,roic:15,growth:5,netDebt:50}]}
