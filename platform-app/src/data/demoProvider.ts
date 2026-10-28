@@ -1,8 +1,8 @@
 import type {MarketDataProvider,Security} from "../core/contracts";
-const records:Security[]=[
-{ticker:"DEMO",name:"Illustrative Dividend Company",sector:"Industrials",currency:"USD",snapshotDate:"2026-10-24",price:30.50,eps:2,fcfPerShare:2.2,roic:16.2,buyBelow:26.85},
-{ticker:"ALPHA",name:"Illustrative Quality Business",sector:"Technology",currency:"USD",snapshotDate:"2026-10-24",price:72.4,eps:3.8,fcfPerShare:4.2,roic:22.3,buyBelow:64.2},
-{ticker:"BETA",name:"Illustrative Defensive Business",sector:"Consumer Staples",currency:"USD",snapshotDate:"2026-10-24",price:48.8,eps:2.9,fcfPerShare:3.15,roic:12.4,buyBelow:46.3}
-];
+import assets from "./assetsSnapshot.json";
+import research from "./aaplResearch.json";
+const a=assets.records.find(x=>x.ticker==="AAPL");
+const records:Security[]=a?[{ticker:a.ticker,name:a.name,sector:a.sector,currency:a.currency,snapshotDate:assets.exportedAt,price:a.price??0,eps:a.eps??0,fcfPerShare:research.fcfPerShare,roic:0,buyBelow:0}]:[];
+// Compatibility adapter for the visual shell. ROIC and buyBelow = 0 mean unavailable;
+// never present these fields as validated AAPL research metrics.
 export const demoProvider:MarketDataProvider={async listSecurities(){return records},async getSecurity(ticker){return records.find(x=>x.ticker===ticker)||null}};
-// Later replace this adapter with Sheets/JSON/API provider returning the same Security contract.
