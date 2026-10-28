@@ -1,5 +1,5 @@
 import {useMemo,useState} from "react";
-import snapshot from "../data/assetsSnapshot.json";
+import snapshot from "../data/assetsSnapshot.json";import appleResearch from "../data/aaplResearch.json";
 import type {RealAsset} from "./RealResearch";
 import type {Security} from "../core/contracts";
 import "./financial-charts.css";
@@ -16,17 +16,17 @@ export function FinancialCharts({asset,company}:{asset?:RealAsset;company:Securi
  const [metric,setMetric]=useState<View>("revenue");
  const [showOnlySector,setShowOnlySector]=useState(true);
  const [sort,setSort]=useState<"pe"|"yield">("pe");
- const sector=asset?.sector||company.sector;
+ const sector=asset?.sector||company.sector;const apple=asset?.ticker==="AAPL";const annual=appleResearch.annualData;const values=apple?annual.map(y=>metric==="revenue"?y.revenueB:metric==="fcf"?y.fcfB:y.eps):sample[metric];const periodsShown=apple?annual.map(y=>y.year):periods;const maxValue=Math.max(1,...values);
  const peers=useMemo(()=>snapshot.records.filter(x=>x.ticker!==asset?.ticker&&x.price!==null&&x.pe!==null&&x.pe>0&&x.pe<150&&x.beta!==null&&x.beta>=0&&x.beta<5&&(showOnlySector?x.sector===sector:true)).sort((a,b)=>sort==="pe"?(a.pe!-b.pe!):((b.dividendYield??-1)-(a.dividendYield??-1))).slice(0,12),[asset?.ticker,sector,showOnlySector,sort]);
  const scatter=[...(asset&&asset.pe!==null&&asset.pe>0&&asset.beta!==null?[asset]:[]),...peers];
  const xMax=Math.max(2,Math.ceil(Math.max(...scatter.map(s=>s.beta||0),0)/0.5)*0.5);
  const yMax=Math.max(20,Math.ceil(Math.max(...scatter.map(s=>s.pe||0),0)/10)*10);
  return <div className="fc-grid">
   <section className="ci-panel fc-block">
-   <div className="ci-panel-head"><h3>Financial Performance</h3><span>INDEXED DEMO · NOT HISTORICAL FINANCIALS</span></div>
+   <div className="ci-panel-head"><h3>Financial Performance</h3><span>{apple?"REAL SEC HISTORY · FY2023–TTM JUN 2026":"INDEXED DESIGN PREVIEW"}</span></div>
    <div className="fc-controls" role="group" aria-label="Choose financial performance metric">{(["revenue","fcf","eps"] as View[]).map(m=><button key={m} type="button" className={metric===m?"fc-active":""} onClick={()=>setMetric(m)}>{m==="revenue"?"Revenue":m==="fcf"?"Free Cash Flow":"EPS"}</button>)}</div>
-   <div className="fc-bars" role="img" aria-label={metric+" fictional indexed growth 2022-2026"}>{sample[metric].map((v,i)=><div className="fc-column" key={periods[i]}><span className="fc-number">{v}</span><div className="fc-bar-area"><div style={{height:(v/120*100)+"%"}}/></div><b>{periods[i]}</b></div>)}</div>
-   <p className="ci-note">Illustrative five-year index, independent of the selected ticker. Actual historical revenue, EPS and FCF will replace this series when validated statements are connected.</p>
+   <div className="fc-bars" role="img" aria-label={metric+(apple?" Apple SEC historical values":" sample design values")}>{values.map((v,i)=><div className="fc-column" key={periodsShown[i]}><span className="fc-number">{fmt(v)}</span><div className="fc-bar-area"><div style={{height:(v/maxValue*100)+"%"}}/></div><b>{periodsShown[i]}</b></div>)}</div>
+   <p className="ci-note">{apple?"Apple SEC filings: revenue and FCF in USD billions; EPS in USD/share. TTM built from FY2025 + nine months FY2026 − nine months FY2025. FY2026 is not a completed fiscal year.":"Preview series only; verified histories pending for this ticker."}</p>
   </section>
   <section className="ci-panel fc-block">
    <div className="ci-panel-head"><h3>Relative Valuation Map</h3><span>GOOGLE SHEETS SNAPSHOT · {snapshot.exportedAt}</span></div>
