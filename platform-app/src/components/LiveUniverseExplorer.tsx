@@ -2,7 +2,7 @@ import {useMemo,useState} from "react";
 import snapshot from "../data/assetsSnapshot.json";
 const number=(x:number|null,digits=2)=>x===null?"N/D":new Intl.NumberFormat("en-US",{maximumFractionDigits:digits}).format(x);
 const price=(value:number|null,currency:string)=>value===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(value);
-export function LiveUniverseExplorer(){
+export function LiveUniverseExplorer({onSelect,selectedTicker}:{onSelect:(ticker:string)=>void;selectedTicker:string}){
  const [query,setQuery]=useState("");
  const [onlyComplete,setOnlyComplete]=useState(false);
  const [page,setPage]=useState(0);
@@ -19,9 +19,9 @@ export function LiveUniverseExplorer(){
  <span>{filtered.length} / {records.length} assets</span>
  </div>
  <table><thead><tr><th>Ticker</th><th>Company</th><th>Sector</th><th>Price</th><th>EPS TTM</th><th>P/E</th><th>Beta</th><th>Dividend Yield</th></tr></thead>
- <tbody>{shown.map(r=><tr key={r.ticker}><td><strong>{r.ticker}</strong></td><td>{r.name}</td><td>{r.sector||"N/D"}</td><td>{price(r.price,r.currency)}</td><td>{number(r.eps)}</td><td>{number(r.pe)}</td><td>{number(r.beta)}</td><td>{r.dividendYield===null?"N/D":number(r.dividendYield)+"%"}</td></tr>)}</tbody></table>
+ <tbody>{shown.map(r=><tr key={r.ticker} style={{background:r.ticker===selectedTicker?"#e8f2fd":undefined}}><td><button type="button" onClick={()=>onSelect(r.ticker)} style={{fontWeight:700,color:"#1269ba",border:0,background:"transparent",cursor:"pointer",textDecoration:"underline"}} title={"Select "+r.ticker+" for Company Intelligence and Valuation"}>{r.ticker}</button></td><td>{r.name}</td><td>{r.sector||"N/D"}</td><td>{price(r.price,r.currency)}</td><td>{number(r.eps)}</td><td>{number(r.pe)}</td><td>{number(r.beta)}</td><td>{r.dividendYield===null?"N/D":number(r.dividendYield)+"%"}</td></tr>)}</tbody></table>
  {filtered.length===0&&<p>No matching securities.</p>}
  <div style={{display:"flex",alignItems:"center",gap:12,marginTop:16}}><button type="button" disabled={page===0} onClick={()=>setPage(p=>p-1)}>Previous</button><span>Page {page+1} / {Math.max(1,Math.ceil(filtered.length/30))}</span><button type="button" disabled={(page+1)*30>=filtered.length} onClick={()=>setPage(p=>p+1)}>Next</button></div>
- <p style={{fontSize:12,marginTop:12}}>Valuation Lab and Company Intelligence remain on labelled demo data until FCF, ROIC and provenance are validated. No API credentials included.</p>
+ <p style={{fontSize:12,marginTop:12}}>Select a ticker to carry it into Company Intelligence and Valuation Lab. Missing FCF and ROIC remain N/D; DCF requires your own FCF assumption. No API credentials included.</p>
  </section>
 }
