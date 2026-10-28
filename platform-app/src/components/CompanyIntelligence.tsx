@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
 import type {Security} from "../core/contracts";import type {RealAsset} from "./RealResearch";
-import "./company.css";import {FilingPeers} from "./FilingPeers";import {FinancialCharts} from "./FinancialCharts";import appleResearch from "../data/aaplResearch.json";
+import "./company.css";import {FinancialCharts} from "./FinancialCharts";import appleResearch from "../data/aaplResearch.json";
 const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
 export function CompanyIntelligence({company,asset}:{company:Security;asset?:RealAsset}){
  const apple=asset?.ticker==="AAPL";const appleFcf=apple?appleResearch.fcfPerShare:null; const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
