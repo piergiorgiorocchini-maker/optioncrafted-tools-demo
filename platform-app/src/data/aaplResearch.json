@@ -1,0 +1,59 @@
+{
+  "ticker": "AAPL",
+  "name": "Apple Inc.",
+  "currency": "USD",
+  "reportingPeriod": "TTM ended 2026-06-27",
+  "priceSnapshotDate": "2026-10-28",
+  "fundamentalsAsOf": "2026-06-27",
+  "source": "SEC 2025 10-K + 2026 Q3 10-Q",
+  "sourceUrls": [
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm"
+  ],
+  "annualData": [
+    {
+      "year": "2023",
+      "revenueB": 383.285,
+      "operatingIncomeB": 114.301,
+      "netIncomeB": 96.995,
+      "cfoB": 110.543,
+      "capexB": 10.959,
+      "fcfB": 99.584,
+      "eps": 6.13
+    },
+    {
+      "year": "2024",
+      "revenueB": 391.035,
+      "operatingIncomeB": 123.216,
+      "netIncomeB": 93.736,
+      "cfoB": 118.254,
+      "capexB": 9.447,
+      "fcfB": 108.807,
+      "eps": 6.08
+    },
+    {
+      "year": "2025",
+      "revenueB": 416.161,
+      "operatingIncomeB": 133.05,
+      "netIncomeB": 112.01,
+      "cfoB": 111.482,
+      "capexB": 12.715,
+      "fcfB": 98.767,
+      "eps": 7.46
+    },
+    {
+      "year": "TTM Jun26",
+      "revenueB": 466.823,
+      "operatingIncomeB": 154.859,
+      "netIncomeB": 128.93,
+      "cfoB": 146.724,
+      "capexB": 10.041,
+      "fcfB": 136.683,
+      "eps": 8.72
+    }
+  ],
+  "fcfPerShare": 9.3561055634,
+  "fcfPerShareMethod": "TTM FCF / outstanding shares as of 2026-06-27 (14.608963 billion); approximate, not weighted-average diluted FCF/share",
+  "roic": null,
+  "forecastGrowth": null
+}
