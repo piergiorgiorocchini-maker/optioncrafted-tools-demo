@@ -1,6 +1,6 @@
 import {useEffect,useState} from "react";
 import {NavLink} from "react-router-dom";
-import snapshot from "../data/assetsSnapshot.json";
+import snapshot from "../data/assetsSnapshot.json";import {ValuationFootballField} from "./ValuationFootballField";
 export type RealAsset=(typeof snapshot.records)[number];
 const fmt=(n:number|null,digits=2)=>n===null?"N/D":new Intl.NumberFormat("en-US",{maximumFractionDigits:digits}).format(n);
 const money=(n:number|null,currency:string)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(n);
@@ -34,6 +34,7 @@ export function RealValuation({asset}:{asset:RealAsset}){
  <h3>Cost of Equity · CAPM</h3><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:12,margin:"12px 0"}}>{input("Risk-free rate % (assumption)",riskFree,s=>setRiskFree(Number(s)))}{input("Equity risk premium % (assumption)",erp,s=>setErp(Number(s)))}{input("Levered beta",beta,setBeta)}</div>
  <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:14}}><label>Discount method <select value={rateMode} onChange={e=>setRateMode(e.target.value as "manual"|"capm")}><option value="manual">Manual return</option><option value="capm">CAPM</option></select></label>{rateMode==="manual"&&input("Required return %",discount,s=>setDiscount(Number(s)))}<strong>CAPM: {capm===null?"N/D":capm.toFixed(2)+"%"}</strong><strong>Applied: {usedRate===null?"N/D":usedRate.toFixed(2)+"%"}</strong></div>
  <div className="workflow-grid">{[["DCF intrinsic value / share",money(value,asset.currency)],["Buy-below after margin of safety",money(value===null?null:value*(1-mos/100),asset.currency)],["Price-to-value upside",value!==null&&asset.price!==null&&asset.price>0?((value/asset.price-1)*100).toFixed(1)+"%":"N/D"]].map(([k,v])=><div className="workflow-step" key={k}><span>{k}</span><h3>{v}</h3></div>)}</div>
+ <ValuationFootballField price={asset.price} currency={asset.currency} bear={value===null?null:dcf(cash,growth-3,usedRate!+2,Math.max(0,terminal-1),years)} base={value} bull={value===null?null:dcf(cash,growth+3,Math.max(1,usedRate!-1),Math.min(usedRate!-0.5,terminal+0.5),years)} mos={mos} source="REAL TICKER / USER ASSUMPTIONS"/>
  <p>{value===null?"Enter positive FCF per share and ensure the discount rate exceeds terminal growth to calculate a DCF.":"DCF values are scenario calculations using the user's assumptions, not verified analyst forecasts."} Rates are editable assumptions, not current market feeds. The per-share equity cash-flow model uses an equity discount rate, not WACC.</p>
  </section>;
 }
