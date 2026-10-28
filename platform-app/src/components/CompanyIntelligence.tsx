@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
 import type {Security} from "../core/contracts";import type {RealAsset} from "./RealResearch";
-import "./company.css";import {FilingPeers} from "./FilingPeers";
+import "./company.css";import {FilingPeers} from "./FilingPeers";import {FinancialCharts} from "./FinancialCharts";
 const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
 export function CompanyIntelligence({company,asset}:{company:Security;asset?:RealAsset}){
  const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
@@ -17,6 +17,7 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
    <article><span><ChartNoAxesCombined size={16}/> FREE CASH FLOW YIELD</span><strong>{real?"N/D":fcfYield.toFixed(2)+"%"}</strong><small>{real?"FCF data pending":"Derived from demo FCF/share ÷ price"}</small></article>
    <article><span><Target size={16}/> EARNINGS YIELD</span><strong>{real?(earnings!==null&&referencePrice!==null&&referencePrice>0?show(earnings/referencePrice*100,"%"):"N/D"):earningsYield.toFixed(2)+"%"}</strong><small>{real?"Computed from snapshot EPS / price":"Derived from demo EPS ÷ price"}</small></article>
   </section>
+  <FinancialCharts asset={asset} company={company}/>
   <div className="ci-main">
    <section className="ci-panel"><div className="ci-panel-head"><h3>Financial overview</h3><span>{real?"Real partial snapshot":"Sample snapshot"}</span></div><div className="ci-fundamentals">
     <div><span>Earnings per share</span><b>{showMoney(earnings)}</b></div>
