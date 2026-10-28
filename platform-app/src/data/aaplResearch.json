@@ -54,6 +54,16 @@
   ],
   "fcfPerShare": 9.3561055634,
   "fcfPerShareMethod": "TTM FCF / outstanding shares as of 2026-06-27 (14.608963 billion); approximate, not weighted-average diluted FCF/share",
-  "roic": null,
-  "forecastGrowth": null
+  "roic": 67.1721436140715,
+  "forecastGrowth": null,
+  "roicMethod": "Gross invested capital ROIC: TTM EBIT × (1 - 21% normalized tax) / average (shareholders equity + all interest-bearing debt) at Sep 2025 and Jun 2026. Cash-inclusive conservative measure, not standard operating net ROIC.",
+  "roicInputsUsdMillions": {
+    "operatingIncomeTTM": 154859,
+    "normalizedTaxRate": 0.21,
+    "nopatTTM": 122338.61,
+    "capital2025": 172390,
+    "capital2026": 191864,
+    "averageCapital": 182127
+  },
+  "roicCashAdjustedSensitivity": 286.7860098221925
 }
