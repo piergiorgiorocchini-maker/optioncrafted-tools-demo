@@ -26,7 +26,7 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
     <div><span>Return on invested capital</span><b>{real?"N/D":company.roic.toFixed(1)+"%"}</b></div>
     <div><span>Sector</span><b>{sector}</b></div>
     <div><span>Financial data status</span><b className="ci-warning">{real?"Partial snapshot":"Simulated"}</b></div>
-   </div><p className="ci-note">{real?"{apple?"Price and EPS from Sheets; FCF/share and financial history reconstructed from Apple SEC filings (TTM Jun 2026). ROIC pending.":"Snapshot fields from Google Sheets; other fundamental data pending."}":"Figures are constructed for UI testing, not extracted from company filings. ROIC has not been independently recalculated."}</p></section>
+   </div><p className="ci-note">{apple?"Price and EPS from Sheets; FCF/share and financial history reconstructed from Apple SEC filings (TTM Jun 2026). ROIC pending.":real?"Snapshot fields from Google Sheets; other fundamental data pending.":"Demo financials."}</p></section>
    <section className="ci-panel"><div className="ci-panel-head"><h3>Quality lens</h3><span>Interpretation framework</span></div>
     <div className="ci-quality"><div className="ci-quality-line"><span>Capital efficiency</span><strong>{real?"N/D":company.roic.toFixed(1)+"% ROIC*"}</strong></div><div className="ci-bar"><span style={{width:`${real?0:Math.min(100,Math.max(0,company.roic/25*100))}%`}}/></div>
     <div className="ci-quality-line"><span>Cash earnings conversion</span><strong>{apple&&earnings!==null?(appleFcf!/earnings*100).toFixed(1)+"%":real?"N/D":(company.fcfPerShare/company.eps*100).toFixed(1)+"%*"}</strong></div><div className="ci-bar"><span style={{width:`${real?0:Math.min(100,Math.max(0,company.fcfPerShare/company.eps*70))}%`}}/></div>
