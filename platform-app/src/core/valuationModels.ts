@@ -10,7 +10,7 @@ const valid=(n:number|null):n is number=>n!==null&&Number.isFinite(n);
 export const money=(n:number|null,currency="USD")=>!valid(n)?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(n);
 export const percent=(n:number|null)=>!valid(n)?"N/D":(n*100).toFixed(1)+"%";
 export function dcfModel(fcf:number|null,growth:number,discount:number,terminal:number,years:number):DcfResult|null{
- if(!valid(fcf)||fcf<=0||discount<=terminal||discount<=0||terminal<=-100||growth<=-100||years<1||years>30)return null;
+ if(!valid(fcf)||fcf<=0||![growth,discount,terminal,years].every(Number.isFinite)||discount<=terminal||discount<=0||terminal<=-100||growth<=-100||!Number.isInteger(years)||years<1||years>30)return null;
  let current=fcf,pvCashflows=0;const projection:DcfResult["projection"]=[];
  for(let year=1;year<=years;year++){current*=1+growth/100;const pv=current/Math.pow(1+discount/100,year);pvCashflows+=pv;projection.push({year,cashflow:current,pv})}
  const pvTerminal=(current*(1+terminal/100)/((discount-terminal)/100))/Math.pow(1+discount/100,years);
@@ -18,7 +18,7 @@ export function dcfModel(fcf:number|null,growth:number,discount:number,terminal:
 }
 /* Matches legacy Tools Hub: two five-year growth stages and compounded dividends. */
 export function requiredReturnModel(eps:number|null,dividend:number|null,a:ModelInputs){
- if(!valid(eps)||eps<=0||a.requiredReturn<=0||a.exitPe<=0)return null;
+ if(!valid(eps)||eps<=0||!valid(a.requiredReturn)||a.requiredReturn<=0||!valid(a.exitPe)||a.exitPe<=0||![a.growth,a.growth2,a.divGrowth,a.divGrowth2].every(v=>valid(v)&&v>-100))return null;
  let projectedEps=eps,projectedDividend=valid(dividend)?dividend:0;
  let futureDividends=0;const projection:{year:number;eps:number;dividend:number;futureDividend:number}[]=[];
  for(let year=1;year<=10;year++){
@@ -33,7 +33,7 @@ export function requiredReturnModel(eps:number|null,dividend:number|null,a:Model
  return Number.isFinite(entry)&&entry>=0?{entry,exitValue,futureDividends,projection}:null;
 }
 export function grahamModel(eps:number|null,growth:number,aaaYield:number|null,price:number|null,dividendYield:number|null){
- if(!valid(eps)||eps<=0||growth<=-4.25)return null;
+ if(!valid(eps)||eps<=0||!valid(growth)||growth<=-4.25)return null;
  const classic=eps*(8.5+2*growth);
  const adjusted=valid(aaaYield)&&aaaYield>0?classic*4.4/aaaYield:null;
  const pe=valid(price)&&price>0?price/eps:null;
@@ -43,7 +43,7 @@ export function grahamModel(eps:number|null,growth:number,aaaYield:number|null,p
 }
 /* Legacy Tools Hub: 30 years explicit dividends, growth 10y then perpetual. */
 export function dividendModel(dividend:number|null,growth:number,terminal:number,discount:number){
- if(!valid(dividend)||dividend<=0||growth<=-100||terminal<=-100||discount<=terminal||discount<=0)return null;
+ if(!valid(dividend)||dividend<=0||![growth,terminal,discount].every(Number.isFinite)||growth<=-100||terminal<=-100||discount<=terminal||discount<=0)return null;
  let d=dividend,pvDividends=0;const projection:{year:number;dividend:number;pv:number}[]=[];
  for(let year=1;year<=30;year++){d*=1+(year<=10?growth:terminal)/100;const pv=d/Math.pow(1+discount/100,year);pvDividends+=pv;projection.push({year,dividend:d,pv})}
  const pvTerminal=(d*(1+terminal/100)/((discount-terminal)/100))/Math.pow(1+discount/100,30);
