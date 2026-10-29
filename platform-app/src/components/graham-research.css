@@ -1,0 +1,63 @@
+/* Native Graham / Lynch research module, scoped to the Valuation Lab. */
+.nr-graham-panel{display:grid;gap:14px;min-width:0}
+.nr-graham-panel *{box-sizing:border-box}
+.nr-graham-summary{min-width:0;padding:17px 19px;background:#fff;border:1px solid #dbe6f1;border-radius:13px;box-shadow:0 3px 14px #17385909}
+.nr-graham-panel .nr-section-title{margin-bottom:10px}
+.nr-graham-panel .nr-section-title h3{font-size:16px}
+.nr-graham-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.nr-graham-metrics .nr-metric{min-height:104px;padding:13px 15px;gap:7px;background:#f8fbff;box-shadow:none}
+.nr-graham-metrics .nr-metric strong{font-size:clamp(18px,1.8vw,23px)}
+.nr-graham-metrics .nr-metric small{font-size:9px}
+.nr-graham-metrics .nr-graham-primary{background:linear-gradient(140deg,#0d233a,#154a78);border-color:#d4a84e;box-shadow:0 0 0 1px #d4a84e,0 7px 17px #143b5b20}
+.nr-graham-primary>span{color:#f4cc79;text-transform:uppercase;font-size:10px;letter-spacing:.45px}
+.nr-graham-metrics .nr-graham-primary strong{color:#fff;font-size:clamp(21px,2vw,28px)}
+.nr-graham-primary small{color:#b6d4ed}
+.nr-graham-metrics .nr-graham-down{color:#b94a4e}
+.nr-graham-metrics .nr-graham-up{color:#1a8363}
+.nr-graham-metrics .nr-graham-verdict{font-size:clamp(15px,1.5vw,21px)}
+.nr-graham-provenance{display:flex;gap:8px 15px;align-items:center;flex-wrap:wrap;border-top:1px solid #e5edf4;padding-top:11px;margin-top:13px;color:#647f97;font-size:10px}
+.nr-graham-provenance b{color:#1b4768}
+.nr-graham-provenance a{display:inline-flex;align-items:center;gap:5px;color:#176ca7;text-decoration:none;font-weight:800}
+.nr-graham-provenance a:hover{text-decoration:underline}
+.nr-graham-body{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);gap:14px;align-items:start;min-width:0;max-width:1350px;width:100%;margin:0 auto}
+.nr-graham-left{display:grid;gap:12px;min-width:0}
+.nr-graham-panel .nr-graham-method,.nr-graham-panel .nr-graham-sources{padding:18px;min-width:0}
+.nr-graham-method>p,.nr-graham-sources>p{font-size:11px;color:#647b90;line-height:1.65;margin:0 0 12px}
+.nr-graham-formulas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.nr-graham-formulas>div{min-width:0;display:grid;align-content:start;gap:8px;border:1px solid #dce7f2;border-radius:10px;background:#f8fbff;padding:13px}
+.nr-graham-formulas span{font-size:10px;color:#527391;font-weight:800}
+.nr-graham-formulas code{display:block;overflow-wrap:anywhere;color:#163e62;font-size:12px;font-weight:850;background:#eaf2f9;border-radius:5px;padding:8px 9px}
+.nr-graham-formulas small{font-size:10px;line-height:1.5;color:#8095a9}
+.nr-graham-formulas b{font-size:10px;line-height:1.5;color:#215f91;overflow-wrap:anywhere}
+.nr-graham-caveat{margin-top:11px;padding:11px 12px;background:#f7f9fc;border-left:3px solid #d1a345;border-radius:8px;display:grid;gap:5px}
+.nr-graham-caveat strong{font-size:10px;color:#173a5d}
+.nr-graham-caveat span{font-size:10px;color:#607b94;line-height:1.6}
+.nr-graham-interpretation{background:#fff;border:1px solid #dbe6f1;border-left:3px solid #d2a548;border-radius:11px;padding:15px 17px}
+.nr-graham-interpretation p{font-size:11.5px;color:#385b79;line-height:1.7;margin:8px 0}
+.nr-graham-interpretation p strong{color:#153c5e}
+.nr-graham-interpretation>small{display:block;font-size:10px;line-height:1.5;color:#8299ae}
+.nr-graham-source-links{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.nr-graham-source-links a{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:20px;border:1px solid #c9dcec;background:#f5faff;color:#176ca7;font-size:10px;font-weight:800;text-decoration:none}
+.nr-graham-source-links a:hover{background:#e7f4ff;border-color:#9ac8eb}
+.nr-graham-table-scroll{overflow-x:auto;border:1px solid #d8e3ef;border-radius:9px}
+.nr-graham-table{width:100%;min-width:460px;border-collapse:collapse}
+.nr-graham-table th{text-align:left;padding:10px 9px;background:#eaf2f9;color:#315575;font-size:9px;letter-spacing:.3px;text-transform:uppercase;border-bottom:1px solid #d2dfed}
+.nr-graham-table td{text-align:left;vertical-align:top;padding:11px 9px;border-bottom:1px solid #e4edf5;font-size:10px;line-height:1.5;color:#385873}
+.nr-graham-table td:first-child{font-weight:800;color:#1e405d}
+.nr-graham-table tr:nth-child(even){background:#f8fbfe}
+.nr-graham-table tr:last-child td{border-bottom:0}
+.nr-graham-table a{display:inline-flex;align-items:center;gap:4px;text-decoration:none;color:#176ca7;font-weight:800}
+.nr-graham-table a:hover{text-decoration:underline}
+.nr-graham-panel .nr-graham-sources-foot{margin:11px 0 0;color:#8299ae;font-size:10px;line-height:1.5}
+.nr-workspace--graham{gap:13px}
+.nr-workspace--graham .nr-model-inputs{padding:16px 18px}
+.nr-workspace--graham .nr-model-inputs .nr-field-grid{gap:9px;margin:10px 0 6px}
+.nr-workspace--graham .nr-model-inputs .nr-field-grid input{height:38px}
+.nr-graham-rate-note{display:flex;align-items:center;flex-wrap:wrap;gap:9px 14px;margin:2px 0 8px;font-size:10px;color:#627e97;line-height:1.5}
+.nr-graham-rate-note strong{color:#2b628e}
+.nr-graham-rate-note a{color:#176ca7;text-decoration:none;font-weight:800}
+.nr-graham-rate-note a:hover{text-decoration:underline}
+.nr-graham-rate-note button{padding:6px 9px;border:1px solid #c9dcec;background:#f6faff;border-radius:7px;color:#176ca7;font-size:10px;font-weight:800;cursor:pointer}
+@media(max-width:1180px){.nr-graham-body{grid-template-columns:1fr;max-width:820px}}
+@media(max-width:700px){.nr-graham-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.nr-graham-summary{padding:14px}.nr-graham-formulas{grid-template-columns:1fr}.nr-graham-panel .nr-graham-method,.nr-graham-panel .nr-graham-sources{padding:14px}}
+@media(max-width:450px){.nr-graham-metrics{grid-template-columns:1fr}.nr-graham-metrics .nr-metric{min-height:auto}.nr-graham-table th,.nr-graham-table td{padding:8px 9px}}
