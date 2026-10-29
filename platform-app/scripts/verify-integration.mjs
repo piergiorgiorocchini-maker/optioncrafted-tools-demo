@@ -19,6 +19,7 @@ const required={
  "platform-app/src/main.tsx":["ValuationWorkspace","OptionsWorkspace","nav-submenu","onSelect={openAsset}"],
  "platform-app/src/components/ValuationWorkspace.tsx":["ValuationFootballField","requiredReturnModel","grahamModel","dividendModel","ResponsiveContainer"],
  "platform-app/src/components/OptionsWorkspace.tsx":["cspModel","coveredCallModel","wheelModel","hedgeModel","lognormalProbability","ResponsiveContainer"],
+ "platform-app/src/components/ValuationFootballField.tsx":["ff-vertical-range","ff-single-estimate","ff-market-line","ff-scale-toggle","ff-entry-section","Purchase thresholds","No averaging of intrinsic estimates with entry thresholds"],
  "platform-app/src/core/valuationModels.ts":["function dcfModel","function requiredReturnModel","function grahamModel","function dividendModel"],
  "platform-app/src/core/optionsModels.ts":["function cspModel","function coveredCallModel","function wheelModel","function hedgeModel","function lognormalProbability"],
  "tools/assets/js/tools-hub.js":["initFairValueCalculator","initDividendValueCalculator","initGrahamLynchCalculator","initCashSecuredPutCalculator","initCoveredCallCalculator","initWheelStrategyCalculator","initPortfolioIncomePlanner"]
