@@ -1,10 +1,11 @@
 import {NavLink} from "react-router-dom";
 const modules=[
  ["discover","Market Explorer","218 real snapshot assets · search, filters, ticker selection","SNAPSHOT"],
+ ["tools","Tools & Calculators","Original engines · all inputs · charts · full numeric outputs","INTEGRATED"],
  ["company","Company Intelligence","Financials · Quality Lens · financial charts · SEC filings · peers","HYBRID"],
  ["valuation","Valuation Lab","DCF · sensitivity assumptions · CAPM/WACC · manual mode","HYBRID"],
- ["options","Options Lab & Wheel","CSP · covered call · wheel · entry planning","ROADMAP"],
- ["probability","Probability Station","Seasonality · strike probability · distribution research","LEGACY TOOL"],
+ ["options","Options Lab & Wheel","CSP · covered call · wheel · entry planning","INTEGRATED"],
+ ["probability","Probability Station","Seasonality · strike probability · distribution research","INTEGRATED"],
  ["portfolio","Portfolio Studio","Allocation · portfolio risk · sample portfolios","DESIGN"],
  ["research","Research Library","Research reports · filing analysis · fair-value coverage","DESIGN"],
  ["academy","Courses & Learning","Books · education · tier access concept","DESIGN"]
