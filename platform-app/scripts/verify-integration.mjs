@@ -1,4 +1,4 @@
-import {readFileSync,existsSync} from "node:fs";
+import {readFileSync} from "node:fs";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"../..");
@@ -28,10 +28,6 @@ for(const [path,markers] of Object.entries(required)){
  const content=read(path);
  for(const marker of markers){if(!content.includes(marker))throw new Error("Missing "+marker+" in "+path);checks++;}
 }
-for(const path of ["tools/index.html","tools/probability-station/index.html","tools/options-strategy-lab/index.html","tools/edge-station/index.html"]){
- const html=read(path);
- for(const asset of ["tools-embedded.css","tools-embed-bridge.js"]){if(!html.includes(asset))throw new Error("Missing "+asset+" in "+path);checks++;}
-}
-for(const path of ["tools/assets/css/tools-embedded.css","tools/assets/js/tools-embed-bridge.js"]){if(!existsSync(resolve(root,path)))throw new Error("Missing "+path);checks++;}
+for(const path of ["tools/index.html","tools/probability-station/index.html","tools/options-strategy-lab/index.html","tools/edge-station/index.html"]){if(read(path).includes("tools-embed-bridge.js"))throw new Error("Legacy page must remain standalone: "+path);checks++;}
 if(read("platform-app/src/main.tsx").includes("<LegacyToolsWorkspace"))throw new Error("Iframe-based tools must not be embedded in the native app");
 console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
