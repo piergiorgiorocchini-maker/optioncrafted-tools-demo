@@ -46,7 +46,8 @@ export function dividendModel(dividend:number|null,growth:number,terminal:number
  if(!valid(dividend)||dividend<=0||![growth,terminal,discount].every(Number.isFinite)||growth<=-100||terminal<=-100||discount<=terminal||discount<=0)return null;
  let d=dividend,pvDividends=0;const projection:{year:number;dividend:number;pv:number}[]=[];
  for(let year=1;year<=30;year++){d*=1+(year<=10?growth:terminal)/100;const pv=d/Math.pow(1+discount/100,year);pvDividends+=pv;projection.push({year,dividend:d,pv})}
- const pvTerminal=(d*(1+terminal/100)/((discount-terminal)/100))/Math.pow(1+discount/100,30);
+ const terminalValue=d*(1+terminal/100)/((discount-terminal)/100);
+ const pvTerminal=terminalValue/Math.pow(1+discount/100,30);
  const value=pvDividends+pvTerminal;
- return Number.isFinite(value)&&value>=0?{value,pvDividends,pvTerminal,projection}:null;
+ return Number.isFinite(value)&&value>=0?{value,pvDividends,pvTerminal,terminalValue,year30Dividend:d,projection}:null;
 }
