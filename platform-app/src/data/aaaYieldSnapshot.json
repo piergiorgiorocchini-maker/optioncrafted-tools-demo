@@ -1,0 +1,12 @@
+{
+  "series": "DAAA",
+  "name": "Moody's Seasoned Aaa Corporate Bond Yield",
+  "value": 5.98,
+  "observationDate": "2026-10-26",
+  "verifiedOn": "2026-10-29",
+  "source": "Moody's via FRED, Federal Reserve Bank of St. Louis",
+  "sourceUrl": "https://fred.stlouisfed.org/series/DAAA",
+  "frequency": "Daily",
+  "dataIsLive": false,
+  "note": "A dated public-source observation, not a real-time bond yield. Update from FRED and confirm before investment use."
+}
