@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Area,AreaChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
+import {Area,AreaChart,Bar,BarChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
 import appleResearch from "../data/aaplResearch.json";
@@ -16,7 +16,6 @@ const tabs:{id:ValuationMethod;label:string;sub:string}[]=[
 ];
 const num=(value:string)=>value.trim()===""?null:Number.isFinite(Number(value))?Number(value):null;
 const valueString=(v:number|null)=>v===null?"":String(v);
-const percent=(v:number|null)=>v===null||!Number.isFinite(v)?"N/D":v.toFixed(1)+"%";
 type Field=keyof Omit<Financials,"currency">;
 const inputFields:{key:Field;label:string;hint:string}[]=[
  {key:"price",label:"Reference price",hint:"Per share"},
@@ -41,6 +40,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const [overrides,setOverrides]=useState<Partial<Record<Field,string>>>({});
  const [a,setA]=useState<ModelInputs>(modelDefaults);
  const [rateMode,setRateMode]=useState<"manual"|"capm">("manual");
+ const [requiredBasis,setRequiredBasis]=useState<"eps"|"fcf">("eps");
  const [riskFree,setRiskFree]=useState(4);
  const [erp,setErp]=useState(5.5);
  const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield/100:null;
@@ -56,7 +56,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const bull=rate===null?null:dcfModel(financials.fcf,a.growth+3,Math.max(1,rate-1),Math.min(a.terminal+0.5,Math.max(0,rate-1.5)),a.years);
  const graham=grahamModel(financials.eps,a.growth,a.aaaYield,financials.price,financials.dividend!==null&&financials.price!==null&&financials.price>0?financials.dividend/financials.price*100:null);
  const ddm=dividendModel(financials.dividend,a.dividendGrowth,a.dividendTerminal,a.dividendDiscount);
- const required=requiredReturnModel(financials.eps,financials.dividend,a);
+ const required=requiredReturnModel(financials[requiredBasis],financials.dividend,a);
  const currency=financials.currency;
  const publishedFairValue=mode==="manual"?null:base?.value??null;
  const publishedBuyUnder=publishedFairValue===null?null:publishedFairValue*(1-a.mos/100);
@@ -65,6 +65,11 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const setField=(key:Field,value:string)=>{if(mode==="manual")setManual(prev=>({...prev,[key]:value}));else setOverrides(prev=>({...prev,[key]:value}))};
  const chartRows=useMemo(()=>base?.projection.map(x=>({year:"Y"+x.year,cashflow:x.cashflow,presentValue:x.pv}))||[],[base]);
  const selected=tabs.find(t=>t.id===active)!;
+ const lastRequiredYear=required?.projection[required.projection.length-1]??null;
+ const requiredTotal=required?required.exitValue+required.futureDividends:null;
+ const requiredSaleYield=lastRequiredYear&&required&&required.exitValue>0&&financials.dividend!==null?lastRequiredYear.dividend/required.exitValue*100:null;
+ const requiredMetricName=requiredBasis==="eps"?"EPS":"FCF / share";
+ const requiredMultipleName=requiredBasis==="eps"?"P/E":"P/FCF";
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
  return <div className="nr-workspace">
   <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><Database size={17}/><strong>{asset.ticker}</strong><span>{sourceLabel}</span></div></header>
@@ -79,31 +84,57 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    {mode==="hybrid"&&<button className="nr-text-button" type="button" onClick={()=>setOverrides({})}><RefreshCcw size={13}/> Clear overrides</button>}
    <p className="nr-source-note">AAPL FCF/share: SEC-based approximate TTM ending June 2026. Dividend/share is derived from price × snapshot dividend yield; confirm payment sustainability before using DDM. All quotes are historical snapshots, not live feeds.</p>
   </section>
-  <div className="nr-metric-grid">
-   {[["DCF intrinsic",base?.value??null,"CASH FLOW"],["Graham anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend DDM",ddm?.value??null,"INTRINSIC"],["Required-return entry",required?.entry??null,"ENTRY PRICE · NOT FAIR VALUE"]].map(([label,v,tag])=><div className="nr-metric" key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
-  </div>
-  <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} mos={a.mos} source={sourceLabel} extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
-  <section className="nr-model-layout">
-   <div className="nr-control-card"><div className="nr-section-title"><div><span className="nr-eyebrow">MODEL CONFIGURATION</span><h3>{selected.label}</h3></div><span className="nr-status"><FlaskConical size={14}/> ASSUMPTIONS</span></div>
+  <section className="nr-control-card nr-model-inputs"><div className="nr-section-title"><div><span className="nr-eyebrow">MODEL CONFIGURATION</span><h3>{selected.label}</h3></div><span className="nr-status"><FlaskConical size={14}/> ASSUMPTIONS</span></div>
     {active==="peers"?<p className="nr-source-note">Peer multiples need an audited comparable-company set, normalized EBITDA/earnings and consistent fiscal periods. No fabricated peer valuations are published.</p>:<>
-    <div className="nr-field-grid nr-assumptions">{assumptionsByTab[active].map(f=><label key={f.key}><span>{f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?null:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}))}} placeholder="Enter rate"/></label>)}</div>
+    {active==="required-return"&&<div className="nr-basis-toggle"><span>Projection basis</span><div className="nr-mode"><button type="button" className={requiredBasis==="eps"?"active":""} onClick={()=>setRequiredBasis("eps")}>EPS / P/E</button><button type="button" className={requiredBasis==="fcf"?"active":""} onClick={()=>setRequiredBasis("fcf")}>FCF / P/FCF</button></div><small>The same ten-year model can project earnings or free cash flow per share. The exit multiple follows the selected basis.</small></div>}
+    <div className="nr-field-grid nr-assumptions">{assumptionsByTab[active].map(f=><label key={f.key}><span>{active==="required-return"&&requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?null:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}))}} placeholder="Enter rate"/></label>)}</div>
     {active==="dcf"&&<div className="nr-capm"><span>Discount rate source</span><div className="nr-mode"><button type="button" className={rateMode==="manual"?"active":""} onClick={()=>setRateMode("manual")}>Manual</button><button type="button" className={rateMode==="capm"?"active":""} onClick={()=>setRateMode("capm")}>CAPM</button></div>{rateMode==="capm"&&<div className="nr-field-grid"><label><span>Risk-free % · assumption</span><input type="number" value={riskFree} step="0.1" onChange={e=>setRiskFree(Number(e.target.value))}/></label><label><span>Equity risk premium % · assumption</span><input type="number" value={erp} step="0.1" onChange={e=>setErp(Number(e.target.value))}/></label></div>}<small>Applied equity discount rate: {rate===null?"N/D":rate.toFixed(2)+"%"} · WACC is not used to discount equity FCF/share.</small></div>}
     <button type="button" className="nr-text-button" onClick={()=>setA(modelDefaults)}><RefreshCcw size={13}/> Reset assumptions</button>
     </>}
     {noValue&&<div className="nr-empty" role="status">Model awaiting valid financial inputs and assumptions. No value is published until the required fields are available.</div>}
+   </section>
+  {active==="required-return"?<section className="nr-required-summary" aria-label="Required return valuation outputs">
+    <div className="nr-section-title"><div><span className="nr-eyebrow">TEN-YEAR RETURN MODEL / OUTPUTS</span><h3>Projected exit & entry price</h3></div><span className="nr-status">SCENARIO · NOT A QUOTE</span></div>
+    <div className="nr-required-metrics">
+     <div className="nr-metric"><span>Sale price in year 10</span><strong>{money(required?.exitValue??null,currency)}</strong><small>Projected {requiredMetricName} × exit {requiredMultipleName}</small></div>
+     <div className="nr-metric"><span>Dividend yield at sale</span><strong>{requiredSaleYield===null?"N/D":requiredSaleYield.toFixed(2)+"%"}</strong><small>Year-10 dividend / sale price</small></div>
+     <div className="nr-metric"><span>FV of reinvested dividends</span><strong>{money(required&&financials.dividend!==null?required.futureDividends:null,currency)}</strong><small>Compounded at target return</small></div>
+     <div className="nr-metric"><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong><small>Sale + future-value dividends</small></div>
+     <div className="nr-metric nr-required-primary"><span>Primary output · Buy now below</span><strong>{money(required?.entry??null,currency)}</strong><small>Target return {a.requiredReturn.toFixed(2)}% / year</small></div>
+    </div>
+   </section>:<div className="nr-metric-grid">
+   {[["DCF intrinsic",base?.value??null,"CASH FLOW"],["Graham anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend DDM",ddm?.value??null,"INTRINSIC"],["Required-return entry",required?.entry??null,"ENTRY PRICE · NOT FAIR VALUE"]].map(([label,v,tag])=><div className="nr-metric" key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
+  </div>}
+  {active==="required-return"&&<section className="nr-required-details">
+   <div className="nr-control-card nr-required-schedule">
+    <div className="nr-section-title"><div><span className="nr-eyebrow">FORECAST TRANSPARENCY</span><h3>10-Year {requiredMetricName} / Dividend Schedule</h3></div><span className="nr-status">YEAR BY YEAR</span></div>
+    <p className="nr-source-note">Two growth stages project {requiredMetricName} and dividends independently. Each dividend is compounded to year 10 using the selected target return. These are model assumptions, not historical observations.</p>
+    {required?<div className="nr-schedule-scroll"><table className="nr-schedule-table"><thead><tr><th>Year</th><th>{requiredMetricName}</th><th>Dividend / share</th><th>Future value of dividend</th></tr></thead><tbody>{required.projection.map(row=><tr key={row.year}><td>{row.year}</td><td>{money(row.eps,currency)}</td><td>{financials.dividend===null?"N/D":money(row.dividend,currency)}</td><td>{financials.dividend===null?"N/D":money(row.futureDividend,currency)}</td></tr>)}</tbody></table></div>:<div className="nr-empty">Enter a positive {requiredMetricName} and valid model assumptions to see the complete ten-year schedule.</div>}
    </div>
+   <div className="nr-chart-card nr-required-chart">
+    <div className="nr-section-title"><div><span className="nr-eyebrow">EXPECTED FINANCIAL GROWTH</span><h3>{requiredMetricName} and dividend projection</h3></div><span className="nr-status">10-YEAR SCENARIO</span></div>
+    <p className="nr-chart-description">Blue bars show projected {requiredMetricName}; gold bars show annual dividend per share. The chart uses model outputs, not a simulated historical price series.</p>
+    {required?<><ResponsiveContainer width="100%" height={330}><BarChart data={required.projection} margin={{top:18,right:16,left:2,bottom:8}} barGap={4} barCategoryGap="19%"><CartesianGrid stroke="#2c4966" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" tickFormatter={v=>"Y"+v} stroke="#a3bad0" tickLine={false} axisLine={false}/><YAxis stroke="#a3bad0" tickLine={false} axisLine={false} width={53} tickFormatter={v=>Number(v).toFixed(1)}/><Tooltip contentStyle={{background:"#142d49",border:"1px solid #3d5b78",borderRadius:11,color:"#eaf4ff"}} formatter={v=>money(Number(v),currency)} labelFormatter={v=>"Year "+v}/><Bar dataKey="eps" name={requiredMetricName} fill="#61b5ff" radius={[4,4,0,0]} maxBarSize={32}/><Bar dataKey="dividend" name="Dividend / share" fill="#efc16e" radius={[4,4,0,0]} maxBarSize={32}/></BarChart></ResponsiveContainer><div className="nr-chart-legend"><span><i className="nr-legend-blue"/> {requiredMetricName}</span><span><i className="nr-legend-gold"/> Annual dividend</span></div></>:<div className="nr-chart-empty"><Database size={27}/><strong>Projection awaits financial inputs</strong><span>Enter a valid per-share starting value to display the chart.</span></div>}
+   </div>
+   <div className="nr-required-interpretation">
+    <span className="nr-eyebrow">MODEL INTERPRETATION</span>
+    {required&&lastRequiredYear?<p>Under these assumptions, year-10 {requiredMetricName} reaches <strong>{money(lastRequiredYear.eps,currency)}</strong>. Applying an exit {requiredMultipleName} of <strong>{a.exitPe.toFixed(1)}×</strong> gives a projected sale price of <strong>{money(required.exitValue,currency)}</strong>. {financials.dividend!==null?<>The final-year dividend is <strong>{money(lastRequiredYear.dividend,currency)}</strong> (a <strong>{requiredSaleYield?.toFixed(2)??"N/D"}%</strong> yield on the modeled exit price). Assuming reinvestment at the target return, dividends contribute <strong>{money(required.futureDividends,currency)}</strong> at year 10. </>:"Dividend/share is unavailable; the model assumes zero dividends. Supply a dividend input to include them. "}The combined terminal value is <strong>{money(requiredTotal,currency)}</strong>. To target <strong>{a.requiredReturn.toFixed(2)}% annually</strong> over ten years, the maximum buy-now price is <strong>{money(required.entry,currency)}</strong>.</p>:<p>Once financial inputs are valid, this section will explain the exit multiple, dividend contribution, total terminal value and discounted buy-now threshold.</p>}
+    <small>This is a required-return purchase threshold, not an intrinsic fair value estimate. Growth, terminal multiple and reinvestment returns are assumptions.</small>
+   </div>
+  </section>}
+  {active!=="required-return"&&<section className="nr-model-output">
    <div className="nr-chart-card">
     <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":active==="required-return"?"Ten-year EPS & dividend path":active==="dividend"?"Dividend cash-flow projection":active==="graham"?"Graham valuation bridge":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
     {active==="dcf"&&base?<ResponsiveContainer width="100%" height={290}><ComposedChart data={chartRows} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="cashflow" name="FCF / share" stroke="#4ba7ff" fill="#2279c1" fillOpacity={0.28} strokeWidth={3}/><Line type="monotone" dataKey="presentValue" name="PV / share" stroke="#e9bc69" strokeWidth={2} dot={false}/></ComposedChart></ResponsiveContainer>:null}
-    {active==="required-return"&&required?<ResponsiveContainer width="100%" height={290}><AreaChart data={required.projection} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="eps" name="EPS" stroke="#53aaff" fill="#2479bd" fillOpacity={0.26} strokeWidth={3}/><Area type="monotone" dataKey="dividend" name="Dividend" stroke="#efbe69" fill="#efbe69" fillOpacity={0.12} strokeWidth={2}/></AreaChart></ResponsiveContainer>:null}
+
     {active==="dividend"&&ddm?<ResponsiveContainer width="100%" height={290}><AreaChart data={ddm.projection.filter(x=>x.year===1||x.year%2===0)} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="dividend" name="Dividend" stroke="#53aaff" fill="#2479bd" fillOpacity={0.26} strokeWidth={3}/><Area type="monotone" dataKey="pv" name="PV dividend" stroke="#efbe69" fill="#efbe69" fillOpacity={0.12} strokeWidth={2}/></AreaChart></ResponsiveContainer>:null}
     {active==="graham"&&graham?<div className="nr-bridge"><div><span>Classic Graham</span><b>{money(graham.classic,currency)}</b></div><div><span>Bond-adjusted Graham</span><b>{money(graham.adjusted,currency)}</b></div><div><span>PEG</span><b>{graham.peg===null?"N/D":fmt(graham.peg)}</b></div><div><span>Dividend-adjusted PEG</span><b>{graham.pegDividend===null?"N/D":fmt(graham.pegDividend)}</b></div></div>:null}
     {active==="peers"||noValue?<div className="nr-chart-empty"><Database size={27}/><strong>{active==="peers"?"Peer data not yet validated":"Waiting for valid model inputs"}</strong><span>No simulated historical series or peer estimates are displayed.</span></div>:null}
     {active==="dcf"&&base?<div className="nr-bridge"><div><span>PV explicit FCF</span><b>{money(base.pvCashflows,currency)}</b></div><div><span>PV terminal</span><b>{money(base.pvTerminal,currency)}</b></div><div><span>Buy-under at {a.mos}% MOS</span><b>{money(base.value*(1-a.mos/100),currency)}</b></div></div>:null}
     {active==="dividend"&&ddm?<div className="nr-bridge"><div><span>PV dividends</span><b>{money(ddm.pvDividends,currency)}</b></div><div><span>PV terminal</span><b>{money(ddm.pvTerminal,currency)}</b></div></div>:null}
-    {active==="required-return"&&required?<div className="nr-bridge"><div><span>Year-10 exit value</span><b>{money(required.exitValue,currency)}</b></div><div><span>Future value dividends</span><b>{money(required.futureDividends,currency)}</b></div><div><span>Buy-now-below</span><b>{money(required.entry,currency)}</b></div></div>:null}
    </div>
-  </section>
+  </section>}
+  <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} mos={a.mos} source={sourceLabel} extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
   <div className="nr-footnote"><strong>Research boundary.</strong> Snapshot financial inputs are not live quotes. Growth, discount, multiples and exit prices are user-editable scenarios, not verified forecasts. Required-return entry price is not averaged into intrinsic fair value. <NavLink to="/options/csp">Continue to Options Execution <ArrowRight size={13}/></NavLink></div>
  </div>;
 }
