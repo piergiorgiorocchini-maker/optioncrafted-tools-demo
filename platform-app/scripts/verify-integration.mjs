@@ -16,8 +16,11 @@ const required={
  "tools/probability-station/index.html":["id=\"seasonalityEquityChart\"","id=\"probabilityBellChart\"","id=\"probabilityReading\""],
  "tools/options-strategy-lab/index.html":["id=\"payoffChart\"","id=\"scenarioTableBody\""],
  "tools/edge-station/index.html":["id=\"edgePayoffChart\"","id=\"metricRiskProfile\""],
- "platform-app/src/main.tsx":["LegacyToolsWorkspace","Tools & Calculators","onSelect={openAsset}"],
- "platform-app/src/components/LegacyToolsWorkspace.tsx":["oc:embedded-height","tools/probability-station","tools/options-strategy-lab","tools/edge-station"],
+ "platform-app/src/main.tsx":["ValuationWorkspace","OptionsWorkspace","nav-submenu","onSelect={openAsset}"],
+ "platform-app/src/components/ValuationWorkspace.tsx":["ValuationFootballField","requiredReturnModel","grahamModel","dividendModel","ResponsiveContainer"],
+ "platform-app/src/components/OptionsWorkspace.tsx":["cspModel","coveredCallModel","wheelModel","hedgeModel","lognormalProbability","ResponsiveContainer"],
+ "platform-app/src/core/valuationModels.ts":["function dcfModel","function requiredReturnModel","function grahamModel","function dividendModel"],
+ "platform-app/src/core/optionsModels.ts":["function cspModel","function coveredCallModel","function wheelModel","function hedgeModel","function lognormalProbability"],
  "tools/assets/js/tools-hub.js":["initFairValueCalculator","initDividendValueCalculator","initGrahamLynchCalculator","initCashSecuredPutCalculator","initCoveredCallCalculator","initWheelStrategyCalculator","initPortfolioIncomePlanner"]
 };
 let checks=0;
@@ -30,4 +33,5 @@ for(const path of ["tools/index.html","tools/probability-station/index.html","to
  for(const asset of ["tools-embedded.css","tools-embed-bridge.js"]){if(!html.includes(asset))throw new Error("Missing "+asset+" in "+path);checks++;}
 }
 for(const path of ["tools/assets/css/tools-embedded.css","tools/assets/js/tools-embed-bridge.js"]){if(!existsSync(resolve(root,path)))throw new Error("Missing "+path);checks++;}
-console.log("OptionsCrafted integration checks passed: "+checks+" assertions (7 core calculators + 3 analytical stations + output/embedding markers).");
+if(read("platform-app/src/main.tsx").includes("<LegacyToolsWorkspace"))throw new Error("Iframe-based tools must not be embedded in the native app");
+console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
