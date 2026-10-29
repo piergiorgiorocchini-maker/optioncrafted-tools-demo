@@ -46,5 +46,6 @@ jobs:
           find platform-preview -maxdepth 2 -type f | sort | head -30
           if ! git diff --cached --quiet; then
             git commit -m "chore: update OptionsCrafted app preview [skip ci]"
-            git push
+            git pull --rebase origin main
+            git push origin main
           fi
