@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Area,AreaChart,Bar,BarChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
+import {Area,Bar,BarChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
 import appleResearch from "../data/aaplResearch.json";
@@ -137,14 +137,12 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
   </section>}
   {active!=="required-return"&&active!=="dividend"&&<section className="nr-model-output">
    <div className="nr-chart-card">
-    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":active==="dividend"?"Dividend cash-flow projection":active==="graham"?"Graham valuation bridge":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
+    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":active==="graham"?"Graham valuation bridge":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
     {active==="dcf"&&base?<ResponsiveContainer width="100%" height={290}><ComposedChart data={chartRows} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="cashflow" name="FCF / share" stroke="#4ba7ff" fill="#2279c1" fillOpacity={0.28} strokeWidth={3}/><Line type="monotone" dataKey="presentValue" name="PV / share" stroke="#e9bc69" strokeWidth={2} dot={false}/></ComposedChart></ResponsiveContainer>:null}
 
-    {active==="dividend"&&ddm?<ResponsiveContainer width="100%" height={290}><AreaChart data={ddm.projection.filter(x=>x.year===1||x.year%2===0)} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="dividend" name="Dividend" stroke="#53aaff" fill="#2479bd" fillOpacity={0.26} strokeWidth={3}/><Area type="monotone" dataKey="pv" name="PV dividend" stroke="#efbe69" fill="#efbe69" fillOpacity={0.12} strokeWidth={2}/></AreaChart></ResponsiveContainer>:null}
     {active==="graham"&&graham?<div className="nr-bridge"><div><span>Classic Graham</span><b>{money(graham.classic,currency)}</b></div><div><span>Bond-adjusted Graham</span><b>{money(graham.adjusted,currency)}</b></div><div><span>PEG</span><b>{graham.peg===null?"N/D":fmt(graham.peg)}</b></div><div><span>Dividend-adjusted PEG</span><b>{graham.pegDividend===null?"N/D":fmt(graham.pegDividend)}</b></div></div>:null}
     {active==="peers"||noValue?<div className="nr-chart-empty"><Database size={27}/><strong>{active==="peers"?"Peer data not yet validated":"Waiting for valid model inputs"}</strong><span>No simulated historical series or peer estimates are displayed.</span></div>:null}
     {active==="dcf"&&base?<div className="nr-bridge"><div><span>PV explicit FCF</span><b>{money(base.pvCashflows,currency)}</b></div><div><span>PV terminal</span><b>{money(base.pvTerminal,currency)}</b></div><div><span>Buy-under at {a.mos}% MOS</span><b>{money(base.value*(1-a.mos/100),currency)}</b></div></div>:null}
-    {active==="dividend"&&ddm?<div className="nr-bridge"><div><span>PV dividends</span><b>{money(ddm.pvDividends,currency)}</b></div><div><span>PV terminal</span><b>{money(ddm.pvTerminal,currency)}</b></div></div>:null}
    </div>
   </section>}
   <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} mos={a.mos} source={sourceLabel} extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
