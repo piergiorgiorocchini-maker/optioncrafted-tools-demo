@@ -5,6 +5,7 @@ import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-re
 import type {RealAsset} from "./RealResearch";
 import appleResearch from "../data/aaplResearch.json";
 import {ValuationFootballField} from "./ValuationFootballField";
+import {DividendResearchPanel} from "./DividendResearchPanel";
 import {dcfModel,dividendModel,grahamModel,modelDefaults,money,requiredReturnModel,type Financials,type ModelInputs,type ValuationMethod,type ValuationMode} from "../core/valuationModels";
 import "./native-research.css";
 const tabs:{id:ValuationMethod;label:string;sub:string}[]=[
@@ -28,7 +29,7 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  dcf:[{key:"growth",label:"FCF growth %",step:0.5},{key:"discount",label:"Equity discount %",step:0.5},{key:"terminal",label:"Terminal growth %",step:0.25},{key:"years",label:"Forecast years",step:1},{key:"mos",label:"Margin of safety %",step:1}],
  "required-return":[{key:"growth",label:"EPS growth Y1–5 %",step:0.5},{key:"growth2",label:"EPS growth Y6–10 %",step:0.5},{key:"divGrowth",label:"Dividend growth Y1–5 %",step:0.5},{key:"divGrowth2",label:"Dividend growth Y6–10 %",step:0.5},{key:"requiredReturn",label:"Target return %",step:0.5},{key:"exitPe",label:"Exit P/E",step:0.5}],
  graham:[{key:"growth",label:"Expected EPS growth %",step:0.5},{key:"aaaYield",label:"AAA corporate bond yield %",step:0.1}],
- dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Terminal growth %",step:0.25},{key:"dividendDiscount",label:"Equity discount %",step:0.5}],
+ dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Perpetual growth Y11+ %",step:0.25},{key:"dividendDiscount",label:"Target rate of return %",step:0.5}],
  peers:[]
 };
 const fmt=(value:number)=>Number.isFinite(value)?value.toFixed(2):"N/D";
@@ -72,7 +73,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const requiredMultipleName=requiredBasis==="eps"?"P/E":"P/FCF";
  const requiredReturnText=Number.isFinite(a.requiredReturn)?a.requiredReturn.toFixed(2)+"%":"N/D";
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
- return <div className={"nr-workspace"+(active==="required-return"?" nr-workspace--required":"")}>
+ return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><Database size={17}/><strong>{asset.ticker}</strong><span>{sourceLabel}</span></div></header>
   <nav className="nr-tabbar" aria-label="Valuation methods">{tabs.map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>
   <section className="nr-control-card">
@@ -103,7 +104,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
      <div className="nr-metric"><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong><small>Sale + future-value dividends</small></div>
      <div className="nr-metric nr-required-primary"><span>Primary output · Buy now below</span><strong>{money(required?.entry??null,currency)}</strong><small>Target return {requiredReturnText} / year</small></div>
     </div>
-   </section>:<div className="nr-metric-grid">
+   </section>:active==="dividend"?<DividendResearchPanel result={ddm} currentDividend={financials.dividend} currency={currency} growth={a.dividendGrowth} terminalGrowth={a.dividendTerminal} discount={a.dividendDiscount}/>:<div className="nr-metric-grid">
    {[["DCF intrinsic",base?.value??null,"CASH FLOW"],["Graham anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend DDM",ddm?.value??null,"INTRINSIC"],["Required-return entry",required?.entry??null,"ENTRY PRICE · NOT FAIR VALUE"]].map(([label,v,tag])=><div className="nr-metric" key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
   </div>}
   {active==="required-return"&&<section className="nr-required-details" aria-label="Ten-year projection and interpretation">
@@ -134,7 +135,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    </div>
    </div>
   </section>}
-  {active!=="required-return"&&<section className="nr-model-output">
+  {active!=="required-return"&&active!=="dividend"&&<section className="nr-model-output">
    <div className="nr-chart-card">
     <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":active==="dividend"?"Dividend cash-flow projection":active==="graham"?"Graham valuation bridge":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
     {active==="dcf"&&base?<ResponsiveContainer width="100%" height={290}><ComposedChart data={chartRows} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="cashflow" name="FCF / share" stroke="#4ba7ff" fill="#2279c1" fillOpacity={0.28} strokeWidth={3}/><Line type="monotone" dataKey="presentValue" name="PV / share" stroke="#e9bc69" strokeWidth={2} dot={false}/></ComposedChart></ResponsiveContainer>:null}
