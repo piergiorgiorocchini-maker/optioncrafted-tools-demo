@@ -1,6 +1,6 @@
 import {useEffect,useState} from "react";
 import {NavLink} from "react-router-dom";
-import snapshot from "../data/assetsSnapshot.json";import {ValuationFootballField} from "./ValuationFootballField";import appleResearch from "../data/aaplResearch.json";import {ValuationDecisionTools} from "./ValuationDecisionTools";import {ValuationFootballField} from "./ValuationFootballField";
+import snapshot from "../data/assetsSnapshot.json";import appleResearch from "../data/aaplResearch.json";import {ValuationDecisionTools} from "./ValuationDecisionTools";import {ValuationFootballField} from "./ValuationFootballField";
 export type RealAsset=(typeof snapshot.records)[number];
 const fmt=(n:number|null,digits=2)=>n===null?"N/D":new Intl.NumberFormat("en-US",{maximumFractionDigits:digits}).format(n);
 const money=(n:number|null,currency:string)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(n);
@@ -28,8 +28,6 @@ export function RealValuation({asset}:{asset:RealAsset}){
  const usedRate=rateMode==="capm"?capm:discount;
  const cash=fcf.trim()?Number(fcf):NaN;
  const value=usedRate!==null&&Number.isFinite(cash)&&Number.isFinite(usedRate)?dcf(cash,growth,usedRate,terminal,years):null;
- const bear=value!==null&&usedRate!==null?dcf(cash,growth-3,usedRate+2,Math.max(0,terminal-1),years):null;
- const bull=value!==null&&usedRate!==null?dcf(cash,growth+3,Math.max(1,usedRate-1),Math.min(terminal+0.5,Math.max(0,usedRate-1.5)),years):null;
  const sensitivityRates=usedRate===null?[]:[usedRate-2,usedRate-1,usedRate,usedRate+1,usedRate+2].filter(r=>r>0);
  const sensitivityGrowth=[growth-4,growth-2,growth,growth+2,growth+4];
  const input=(label:string,value:string|number,onChange:(s:string)=>void,step="any")=><label style={{display:"grid",gap:5}}><span>{label}</span><input style={{padding:10,border:"1px solid #cbd8e6",borderRadius:6,width:"100%"}} type="number" step={step} value={value} onChange={e=>onChange(e.target.value)}/></label>;
@@ -40,7 +38,6 @@ export function RealValuation({asset}:{asset:RealAsset}){
  <div className="workflow-grid">{[["DCF intrinsic value / share",money(value,asset.currency)],["Buy-below after margin of safety",money(value===null?null:value*(1-mos/100),asset.currency)],["Price-to-value upside",value!==null&&asset.price!==null&&asset.price>0?((value/asset.price-1)*100).toFixed(1)+"%":"N/D"]].map(([k,v])=><div className="workflow-step" key={k}><span>{k}</span><h3>{v}</h3></div>)}</div>
  <ValuationFootballField price={asset.price} currency={asset.currency} bear={value===null?null:dcf(cash,growth-3,usedRate!+2,Math.max(0,terminal-1),years)} base={value} bull={value===null?null:dcf(cash,growth+3,Math.max(1,usedRate!-1),Math.min(usedRate!-0.5,terminal+0.5),years)} mos={mos} source="REAL TICKER / USER ASSUMPTIONS"/>
  <ValuationDecisionTools fcf={Number.isFinite(cash)&&cash>0?cash:null} eps={asset.eps} price={asset.price} currency={asset.currency} horizon={years} growth={growth} terminal={terminal}/>
- <div style={{marginTop:20}}><ValuationFootballField price={asset.price} currency={asset.currency} bear={bear} base={value} bull={bull} mos={mos} source="REAL TICKER · USER FCF ASSUMPTIONS"/></div>
  <div style={{marginTop:22,border:"1px solid #dce6f1",borderRadius:12,padding:18,background:"#fff"}}><h3 style={{margin:"0 0 7px"}}>DCF sensitivity matrix</h3><p>Intrinsic value per share as growth and required equity return change. All cells use the manually entered starting FCF; no analyst forecasts are implied.</p><div style={{overflowX:"auto"}}><table><thead><tr><th>Growth / Return</th>{sensitivityRates.map(rate=><th key={rate}>{rate.toFixed(1)}%</th>)}</tr></thead><tbody>{sensitivityGrowth.map(g=><tr key={g}><th>{g.toFixed(1)}%</th>{sensitivityRates.map(rate=>{const v=Number.isFinite(cash)?dcf(cash,g,rate,terminal,years):null;return <td key={rate} style={{fontWeight:g===growth&&rate===usedRate?800:400,background:v!==null&&asset.price!==null&&v>=asset.price?"#eef8f2":undefined}}>{money(v,asset.currency)}</td>})}</tr>)}</tbody></table></div><p>Green cells exceed the reference price, not a recommendation. A discount rate below or equal to terminal growth produces N/D.</p></div>
  <p><NavLink className="textlink" to="/tools">Open original Fair Value, Dividend Value and Graham–Lynch calculators →</NavLink></p>
  <p>{value===null?"Enter positive FCF per share and ensure the discount rate exceeds terminal growth to calculate a DCF.":"DCF values are scenario calculations using the user's assumptions, not verified analyst forecasts."} Rates are editable assumptions, not current market feeds. The per-share equity cash-flow model uses an equity discount rate, not WACC.</p>
