@@ -85,3 +85,19 @@ html,body,#root{min-width:320px;max-width:100%}body{overflow-x:hidden}main,.dash
  .tickerbar{padding:12px!important}
  .mock-dashboard,.mock-panel,.mock-summary,.mock-feature-grid,.mock-lower-grid{min-width:0}
 }
+
+/* Operational terminal search and Market Explorer market-history placeholders */
+.terminal-search-wrap{position:relative;width:min(680px,55%);min-width:190px;z-index:10}
+.terminal-search-wrap .terminal-search{width:100%;max-width:none}
+.terminal-search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#163b5f;font:inherit;font-size:13px}
+.terminal-search input::placeholder{color:#7b8da2}
+.terminal-search-results{position:absolute;top:calc(100% + 7px);left:0;right:0;background:#fff;border:1px solid #d9e5f1;border-radius:11px;box-shadow:0 16px 40px #173b5b24;overflow:hidden;max-height:350px;overflow-y:auto}
+.terminal-search-results button{width:100%;display:grid;grid-template-columns:62px 1fr;gap:3px 12px;text-align:left;padding:12px 15px;background:#fff;border:0;border-bottom:1px solid #edf2f7;cursor:pointer;color:#173452}
+.terminal-search-results button:hover,.terminal-search-results button:focus-visible{background:#ecf5ff}
+.terminal-search-results button strong{grid-row:span 2;color:#1379c4;align-self:center}
+.terminal-search-results button span{font-size:12px;font-weight:650}
+.terminal-search-results button small{font-size:10px;color:#7992a5}
+.terminal-search-results p{padding:11px 14px;font-size:12px}
+.explorer-sparkline-empty{display:flex;align-items:center;gap:6px;color:#9aaabd;font-size:9px}
+.explorer-sparkline-empty svg{width:78px;height:25px}
+@media(max-width:700px){.terminal-search-wrap{width:100%;flex:1}.terminal-search-wrap .terminal-search{width:100%}.terminal-search input{font-size:12px}}
