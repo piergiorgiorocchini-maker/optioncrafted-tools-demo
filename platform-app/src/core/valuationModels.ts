@@ -41,6 +41,19 @@ export function grahamModel(eps:number|null,growth:number,aaaYield:number|null,p
  const pegDividend=valid(pe)&&valid(dividendYield)&&growth+dividendYield>0?pe/(growth+dividendYield):null;
  return {classic,adjusted,peg,pegDividend};
 }
+/* Shared screening thresholds preserved from the legacy Graham–Lynch calculator.
+   This is a qualitative screen, not an independently validated investment rating. */
+export function grahamLynchVerdict(upside:number|null,pegDividend:number|null):string{
+ const up=upside!==null&&Number.isFinite(upside);
+ const peg=pegDividend!==null&&Number.isFinite(pegDividend);
+ if(!up&&!peg)return "Insufficient data";
+ if(up&&upside!==null&&upside>=.25&&peg&&pegDividend!==null&&pegDividend<=1.5)return "Attractive";
+ if(up&&upside!==null&&upside>=.1&&(!peg||pegDividend!==null&&pegDividend<=2))return "Reasonable";
+ if(up&&upside!==null&&upside<-.1&&peg&&pegDividend!==null&&pegDividend>2)return "Expensive";
+ if(peg&&pegDividend!==null&&pegDividend<=1.2)return "PEG attractive";
+ if(peg&&pegDividend!==null&&pegDividend>2.2)return "PEG stretched";
+ return "Fair / neutral";
+}
 /* Legacy Tools Hub: 30 years explicit dividends, growth 10y then perpetual. */
 export function dividendModel(dividend:number|null,growth:number,terminal:number,discount:number){
  if(!valid(dividend)||dividend<=0||![growth,terminal,discount].every(Number.isFinite)||growth<=-100||terminal<=-100||discount<=terminal||discount<=0)return null;
