@@ -72,7 +72,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const requiredMultipleName=requiredBasis==="eps"?"P/E":"P/FCF";
  const requiredReturnText=Number.isFinite(a.requiredReturn)?a.requiredReturn.toFixed(2)+"%":"N/D";
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
- return <div className="nr-workspace">
+ return <div className={"nr-workspace"+(active==="required-return"?" nr-workspace--required":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><Database size={17}/><strong>{asset.ticker}</strong><span>{sourceLabel}</span></div></header>
   <nav className="nr-tabbar" aria-label="Valuation methods">{tabs.map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>
   <section className="nr-control-card">
@@ -106,21 +106,32 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    </section>:<div className="nr-metric-grid">
    {[["DCF intrinsic",base?.value??null,"CASH FLOW"],["Graham anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend DDM",ddm?.value??null,"INTRINSIC"],["Required-return entry",required?.entry??null,"ENTRY PRICE · NOT FAIR VALUE"]].map(([label,v,tag])=><div className="nr-metric" key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
   </div>}
-  {active==="required-return"&&<section className="nr-required-details">
+  {active==="required-return"&&<section className="nr-required-details" aria-label="Ten-year projection and interpretation">
    <div className="nr-control-card nr-required-schedule">
     <div className="nr-section-title"><div><span className="nr-eyebrow">FORECAST TRANSPARENCY</span><h3>10-Year {requiredMetricName} / Dividend Schedule</h3></div><span className="nr-status">YEAR BY YEAR</span></div>
     <p className="nr-source-note">Two growth stages project {requiredMetricName} and dividends independently. Each dividend is compounded to year 10 using the selected target return. These are model assumptions, not historical observations.</p>
     {required?<div className="nr-schedule-scroll"><table className="nr-schedule-table"><thead><tr><th>Year</th><th>{requiredMetricName}</th><th>Dividend / share</th><th>Future value of dividend</th></tr></thead><tbody>{required.projection.map(row=><tr key={row.year}><td>{row.year}</td><td>{money(row.eps,currency)}</td><td>{financials.dividend===null?"N/D":money(row.dividend,currency)}</td><td>{financials.dividend===null?"N/D":money(row.futureDividend,currency)}</td></tr>)}</tbody></table></div>:<div className="nr-empty">Enter a positive {requiredMetricName} and valid model assumptions to see the complete ten-year schedule.</div>}
    </div>
+   <div className="nr-required-visual-column">
    <div className="nr-chart-card nr-required-chart">
-    <div className="nr-section-title"><div><span className="nr-eyebrow">EXPECTED FINANCIAL GROWTH</span><h3>{requiredMetricName} and dividend projection</h3></div><span className="nr-status">10-YEAR SCENARIO</span></div>
-    <p className="nr-chart-description">Blue bars show projected {requiredMetricName}; gold bars show annual dividend per share. The chart uses model outputs, not a simulated historical price series.</p>
-    {required?<><ResponsiveContainer width="100%" height={330}><BarChart data={required.projection} margin={{top:18,right:16,left:2,bottom:8}} barGap={4} barCategoryGap="19%"><CartesianGrid stroke="#2c4966" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" tickFormatter={v=>"Y"+v} stroke="#a3bad0" tickLine={false} axisLine={false}/><YAxis stroke="#a3bad0" tickLine={false} axisLine={false} width={53} tickFormatter={v=>Number(v).toFixed(1)}/><Tooltip contentStyle={{background:"#142d49",border:"1px solid #3d5b78",borderRadius:11,color:"#eaf4ff"}} formatter={v=>money(Number(v),currency)} labelFormatter={v=>"Year "+v}/><Bar dataKey="eps" name={requiredMetricName} fill="#61b5ff" radius={[4,4,0,0]} maxBarSize={32}/><Bar dataKey="dividend" name="Dividend / share" fill="#efc16e" radius={[4,4,0,0]} maxBarSize={32}/></BarChart></ResponsiveContainer><div className="nr-chart-legend"><span><i className="nr-legend-blue"/> {requiredMetricName}</span><span><i className="nr-legend-gold"/> Annual dividend</span></div></>:<div className="nr-chart-empty"><Database size={27}/><strong>Projection awaits financial inputs</strong><span>Enter a valid per-share starting value to display the chart.</span></div>}
+    <div className="nr-section-title"><div><span className="nr-eyebrow">EXPECTED FINANCIAL GROWTH</span><h3>Expected {requiredMetricName} & Dividend Growth</h3></div><span className="nr-status">10-YEAR SCENARIO</span></div>
+    <p className="nr-chart-description">Navy bars: projected {requiredMetricName}. Gold bars: annual dividends per share. All values are scenario projections.</p>
+    {required?<><ResponsiveContainer width="100%" height={278}>
+     <BarChart data={required.projection} margin={{top:14,right:8,left:0,bottom:0}} barGap={3} barCategoryGap="15%">
+      <CartesianGrid stroke="#e3eaf2" strokeDasharray="3 4" vertical={false}/>
+      <XAxis dataKey="year" tickFormatter={v=>"Y"+v} stroke="#8193a7" tickLine={false} axisLine={false} tick={{fontSize:10}} dy={6}/>
+      <YAxis stroke="#8193a7" tickLine={false} axisLine={false} width={64} tick={{fontSize:10}} tickFormatter={v=>money(Number(v),currency)}/>
+      <Tooltip contentStyle={{background:"#fff",border:"1px solid #d1ddea",borderRadius:9,color:"#16334e",boxShadow:"0 6px 18px #1939591a"}} itemStyle={{color:"#16334e"}} formatter={v=>money(Number(v),currency)} labelFormatter={v=>"Year "+v}/>
+      <Bar dataKey="eps" name={requiredMetricName} fill="#142744" radius={[3,3,0,0]} maxBarSize={32}/>
+      <Bar dataKey="dividend" name="Dividend / share" fill="#d2a126" radius={[3,3,0,0]} maxBarSize={32}/>
+     </BarChart>
+    </ResponsiveContainer><div className="nr-chart-legend"><span><i className="nr-legend-blue"/> {requiredMetricName}</span><span><i className="nr-legend-gold"/> Annual dividend</span></div></>:<div className="nr-chart-empty"><Database size={27}/><strong>Projection awaits financial inputs</strong><span>Enter a valid per-share starting value to display the chart.</span></div>}
    </div>
    <div className="nr-required-interpretation">
     <span className="nr-eyebrow">MODEL INTERPRETATION</span>
     {required&&lastRequiredYear?<p>Under these assumptions, year-10 {requiredMetricName} reaches <strong>{money(lastRequiredYear.eps,currency)}</strong>. Applying an exit {requiredMultipleName} of <strong>{a.exitPe.toFixed(1)}×</strong> gives a projected sale price of <strong>{money(required.exitValue,currency)}</strong>. {financials.dividend!==null?<>The final-year dividend is <strong>{money(lastRequiredYear.dividend,currency)}</strong> (a <strong>{requiredSaleYield?.toFixed(2)??"N/D"}%</strong> yield on the modeled exit price). Assuming reinvestment at the target return, dividends contribute <strong>{money(required.futureDividends,currency)}</strong> at year 10. </>:"Dividend/share is unavailable; the model assumes zero dividends. Supply a dividend input to include them. "}The combined terminal value is <strong>{money(requiredTotal,currency)}</strong>. To target <strong>{requiredReturnText} annually</strong> over ten years, the maximum buy-now price is <strong>{money(required.entry,currency)}</strong>.</p>:<p>Once financial inputs are valid, this section will explain the exit multiple, dividend contribution, total terminal value and discounted buy-now threshold.</p>}
     <small>This is a required-return purchase threshold, not an intrinsic fair value estimate. Growth, terminal multiple and reinvestment returns are assumptions.</small>
+   </div>
    </div>
   </section>}
   {active!=="required-return"&&<section className="nr-model-output">
