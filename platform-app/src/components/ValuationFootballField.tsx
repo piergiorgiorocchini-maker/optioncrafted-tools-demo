@@ -77,7 +77,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
   <div className="ff-chart-scroll" tabIndex={0} aria-label="Scroll to inspect the full valuation chart on smaller screens">
    <svg className="ff-svg" viewBox="0 0 1100 393" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={"Vertical valuation football field. DCF base "+money(base)+", Graham "+money(graham)+", dividend "+money(dividend)+", market price "+money(reference)}>
     <title>Valuation Football Field</title>
-    <desc>Each column represents a valuation method. The DCF column shows a bear-to-bull range with a base marker; Graham and dividend methods show single-point estimates. The orange dashed line shows the market reference when within the selected scale. A separate orange dashed line shows the average of valid intrinsic point estimates excluding dividend discount models. Entry-price thresholds are shown separately.</desc>
+    <desc>Each column represents a valuation method. The DCF column shows a bear-to-bull range with a base marker; Graham and dividend methods show single-point estimates. The orange dashed line shows the market reference when within the selected scale. A separate orange dashed line, labeled above its left-center segment like a CFI football field, shows the average of valid intrinsic point estimates excluding dividend discount models. Entry-price thresholds are shown separately.</desc>
     <defs><linearGradient id="ff-range-gradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#235d94"/><stop offset="100%" stopColor="#102f50"/></linearGradient></defs>
     <text className="ff-axis-title" x="14" y="22">VALUE / SHARE</text>
     {[0,.25,.5,.75,1].map((fraction)=>{
@@ -112,7 +112,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
       <text className="ff-method-value" x={x} y="366" textAnchor="middle">{available?(range?"Base ":"Value ")+money(m.mid):"N/D · pending"}</text>
      </g>;
     })}
-    {averageValuation!==null?<g><line className="ff-average-line" x1={left} x2={right} y1={y(averageValuation)} y2={y(averageValuation)}/><rect className="ff-average-tag-bg" x="755" y={Math.max(27,y(averageValuation)-29)} width="310" height="22" rx="5"/><text className="ff-average-tag" x="1055" y={Math.max(43,y(averageValuation)-14)} textAnchor="end">AVERAGE VALUATION · {money(averageValuation)}</text></g>:null}
+    {averageValuation!==null?<g><line className="ff-average-line" x1={left} x2={right} y1={y(averageValuation)} y2={y(averageValuation)}/><rect className="ff-average-tag-bg" x="342" y={Math.max(27,y(averageValuation)-33)} width="280" height="24" rx="5"/><text className="ff-average-tag" x="352" y={Math.max(44,y(averageValuation)-16)} textAnchor="start">AVERAGE VALUATION · {money(averageValuation)}</text></g>:null}
     {marketInRange&&reference!==null?<g><line className="ff-market-line" x1={left} x2={right} y1={y(reference)} y2={y(reference)}/><rect className="ff-market-tag-bg" x="826" y={Math.max(27,y(reference)-29)} width="239" height="22" rx="5"/><text className="ff-market-tag" x="1055" y={Math.max(43,y(reference)-14)} textAnchor="end">MARKET REFERENCE · {money(reference)}</text></g>:null}
    </svg>
   </div>
