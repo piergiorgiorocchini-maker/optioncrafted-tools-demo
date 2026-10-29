@@ -1,4 +1,4 @@
-import {useMemo,useState} from "react";
+import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
 import {Area,AreaChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
@@ -33,7 +33,8 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  peers:[]
 };
 const fmt=(value:number)=>Number.isFinite(value)?value.toFixed(2):"N/D";
-export function ValuationWorkspace({asset,tab="dcf"}:{asset:RealAsset;tab?:string}){
+export type ValuationBridge={fairValue:number|null;buyUnder:number|null;source:string};
+export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void}){
  const active=(tabs.find(x=>x.id===tab)?.id||"dcf") as ValuationMethod;
  const [mode,setMode]=useState<ValuationMode>("automatic");
  const [manual,setManual]=useState<Record<Field,string>>({price:"",eps:"",fcf:"",dividend:"",beta:""});
@@ -57,6 +58,9 @@ export function ValuationWorkspace({asset,tab="dcf"}:{asset:RealAsset;tab?:strin
  const ddm=dividendModel(financials.dividend,a.dividendGrowth,a.dividendTerminal,a.dividendDiscount);
  const required=requiredReturnModel(financials.eps,financials.dividend,a);
  const currency=financials.currency;
+ const publishedFairValue=mode==="manual"?null:base?.value??null;
+ const publishedBuyUnder=publishedFairValue===null?null:publishedFairValue*(1-a.mos/100);
+ useEffect(()=>{onUpdate?.(asset.ticker,{fairValue:publishedFairValue,buyUnder:publishedBuyUnder,source:mode==="hybrid"?"HYBRID · USER OVERRIDES":"SNAPSHOT + MODEL ASSUMPTIONS"});},[asset.ticker,publishedFairValue,publishedBuyUnder,mode,onUpdate]);
  const sourceLabel=mode==="manual"?"USER INPUT ONLY":mode==="hybrid"?"SNAPSHOT + USER OVERRIDES":"SHEET SNAPSHOT · NOT LIVE";
  const setField=(key:Field,value:string)=>{if(mode==="manual")setManual(prev=>({...prev,[key]:value}));else setOverrides(prev=>({...prev,[key]:value}))};
  const chartRows=useMemo(()=>base?.projection.map(x=>({year:"Y"+x.year,cashflow:x.cashflow,presentValue:x.pv}))||[],[base]);
