@@ -1,13 +1,13 @@
 import "./football-field.css";
 type Method={label:string;low:number|null;mid:number|null;high:number|null;kind:"intrinsic"|"entry"|"pending";detail:string};
-export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,source="USER ASSUMPTIONS",extra=[]}:{price:number|null;currency?:string;bear:number|null;base:number|null;bull:number|null;mos?:number;source?:string;extra?:Method[]}){
+export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,source="USER ASSUMPTIONS",extra=[],graham=null,dividend=null}:{price:number|null;currency?:string;bear:number|null;base:number|null;bull:number|null;mos?:number;source?:string;extra?:Method[];graham?:number|null;dividend?:number|null}){
  const money=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(n);
  const dcf:[number|null,number|null,number|null]=bear!==null&&base!==null&&bull!==null?[Math.min(bear,base,bull),base,Math.max(bear,base,bull)]:[null,null,null];
  const methods:Method[]=[
  {label:"DCF scenarios",low:dcf[0],mid:dcf[1],high:dcf[2],kind:"intrinsic",detail:"Bear / base / bull from editable assumptions"},
  {label:"DCF buy-under (MOS)",low:base===null?null:base*(1-mos/100),mid:base===null?null:base*(1-mos/100),high:base===null?null:base*(1-mos/100),kind:"entry",detail:mos+"% margin of safety from DCF base"},
- {label:"Graham / earnings power",low:null,mid:null,high:null,kind:"pending",detail:"Pending normalized earnings and model validation"},
- {label:"DDM / dividend value",low:null,mid:null,high:null,kind:"pending",detail:"Pending sustainable dividends and assumptions"},
+ {label:"Graham / earnings power",low:graham,mid:graham,high:graham,kind:graham===null?"pending":"intrinsic",detail:graham===null?"Requires valid EPS and model inputs":"Earnings-based heuristic; compare against normalized EPS"},
+ {label:"DDM / dividend value",low:dividend,mid:dividend,high:dividend,kind:dividend===null?"pending":"intrinsic",detail:dividend===null?"Requires a positive sustainable dividend":"Thirty-year dividend-discount model"},
  {label:"Peer comparables",low:null,mid:null,high:null,kind:"pending",detail:"Pending verified sector peers and accounting adjustments"},
  ...extra
  ];
