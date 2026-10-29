@@ -35,17 +35,31 @@ jobs:
           if-no-files-found: error
       - name: Publish static preview within repository
         run: |
-          mkdir -p platform-preview
-          find platform-preview -mindepth 1 -maxdepth 1 -exec rm -rf {} +
-          cp -R platform-app/dist/. platform-preview/
-          touch platform-preview/.nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A platform-preview
-          echo 'Built preview files:'
-          find platform-preview -maxdepth 2 -type f | sort | head -30
-          if ! git diff --cached --quiet; then
+          # Preview files are generated. Never rebase a generated preview
+          # commit over another generated preview commit: asset hashes conflict.
+          # Keep the compiled dist (ignored by git) and commit it on top of
+          # the newest main. Retry if another push lands during publication.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf platform-preview
+            mkdir -p platform-preview
+            cp -R platform-app/dist/. platform-preview/
+            touch platform-preview/.nojekyll
+            git add -A platform-preview
+            if git diff --cached --quiet; then
+              echo "Preview is already current."
+              exit 0
+            fi
             git commit -m "chore: update OptionsCrafted app preview [skip ci]"
-            git pull --rebase origin main
-            git push origin main
-          fi
+            if git push origin HEAD:main; then
+              echo "Published compiled preview."
+              exit 0
+            fi
+            echo "Preview push raced with another commit; retrying."
+            sleep 2
+          done
+          echo "Failed to publish preview after three attempts." >&2
+          exit 1
