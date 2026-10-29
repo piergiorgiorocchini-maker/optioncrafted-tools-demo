@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import {Area,AreaChart,CartesianGrid,ComposedChart,Line,ReferenceLine,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {BarChart3,Info,Plus,Trash2} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
+import type {ValuationBridge} from "./ValuationWorkspace";
 import {money} from "../core/valuationModels";
 import {coveredCallModel,cspModel,hedgeModel,legProfit,lognormalProbability,scenarioPoints,strategyProfit,wheelModel,type OptionLeg} from "../core/optionsModels";
 import "./native-research.css";
@@ -27,7 +28,7 @@ function Payoff({rows,strike,currency,comparison="Buy & hold"}:{rows:Row[];strik
  <ResponsiveContainer width="100%" height={335}><ComposedChart data={rows} margin={{top:16,right:14,left:5,bottom:10}}><defs><linearGradient id="ocPayoffFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#389cf1" stopOpacity={0.36}/><stop offset="100%" stopColor="#389cf1" stopOpacity={0.02}/></linearGradient></defs><CartesianGrid stroke="#294765" strokeDasharray="3 5" vertical={false}/><XAxis type="number" dataKey="price" domain={["dataMin","dataMax"]} tickCount={6} stroke="#a3bad0" tickLine={false} axisLine={false} tickFormatter={v=>Number(v).toFixed(0)}/><YAxis stroke="#a3bad0" tickLine={false} axisLine={false} tickFormatter={v=>new Intl.NumberFormat("en-US",{notation:"compact",maximumFractionDigits:1}).format(Number(v))} width={58}/><Tooltip contentStyle={{background:"#142d49",border:"1px solid #3d5b78",borderRadius:11,color:"#eaf4ff"}} formatter={v=>money(Number(v),currency)} labelFormatter={v=>"Underlying: "+money(Number(v),currency)}/><ReferenceLine y={0} stroke="#a8bacd" strokeDasharray="4 5"/>{strike!==null&&strike!==undefined&&<ReferenceLine x={strike} stroke="#f0bd68" strokeDasharray="4 5"/>}<Area type="monotone" dataKey="payoff" name="Strategy P/L" stroke="#51adff" strokeWidth={3} fill="url(#ocPayoffFill)" dot={false}/>{rows[0].comparison!==null&&<Line type="monotone" dataKey="comparison" name={comparison} stroke="#efbd6a" strokeWidth={2} strokeDasharray="6 4" dot={false}/>}</ComposedChart></ResponsiveContainer>
  <div className="nr-chart-table"><table><thead><tr><th>Underlying at expiry</th><th>Strategy P/L</th>{rows[0].comparison!==null&&<th>{comparison} P/L</th>}</tr></thead><tbody>{[0,18,36,54,72,90].map(i=>rows[i]).filter(Boolean).map(r=><tr key={r.price}><td>{money(r.price,currency)}</td><td className={r.payoff>=0?"nr-positive":"nr-negative"}>{money(r.payoff,currency)}</td>{r.comparison!==null&&<td>{money(r.comparison,currency)}</td>}</tr>)}</tbody></table></div></>:<div className="nr-chart-empty"><BarChart3 size={31}/><strong>Model awaiting inputs</strong><span>Enter strike, premium and other required fields. We do not fabricate option-chain prices.</span></div>}</div>;
 }
-export function OptionsWorkspace({asset,tab="csp"}:{asset:RealAsset;tab?:string}){
+export function OptionsWorkspace({asset,tab="csp",valuation}:{asset:RealAsset;tab?:string;valuation?:ValuationBridge}){
  const active=(pages.find(p=>p.id===tab)?.id||"csp") as Tab;
  const [manualSpot,setManualSpot]=useState<string|null>(null);
  const [strike,setStrike]=useState(""),[premium,setPremium]=useState(""),[dte,setDte]=useState("30"),[contracts,setContracts]=useState("1");
@@ -35,6 +36,7 @@ export function OptionsWorkspace({asset,tab="csp"}:{asset:RealAsset;tab?:string}
  const [iv,setIv]=useState(""),[riskFree,setRiskFree]=useState("0");
  const [capital,setCapital]=useState(""),[cyclePremium,setCyclePremium]=useState(""),[cycles,setCycles]=useState("12"),[fees,setFees]=useState("0");
  const [legs,setLegs]=useState<OptionLeg[]>([]),[legId,setLegId]=useState(1);
+ const [illustrative,setIllustrative]=useState(false);
  const spot=manualSpot===null?asset.price:parse(manualSpot),currency=asset.currency||"USD";
  const s=parse(strike),p=parse(premium),b=parse(basis),days=parse(dte)||0,count=parse(contracts)||0;
  const csp=cspModel(spot,s,p,count,days),cc=coveredCallModel(spot,b,s,p,count,days,parse(dividend)||0);
@@ -55,6 +57,20 @@ export function OptionsWorkspace({asset,tab="csp"}:{asset:RealAsset;tab?:string}
  const cap=parse(capital),perCycle=parse(cyclePremium),cyclesNum=parse(cycles),cost=parse(fees);
  const annual=cap!==null&&cap>0&&perCycle!==null&&perCycle>=0&&cyclesNum!==null&&cyclesNum>0&&cost!==null&&cost>=0?(perCycle-cost)*cyclesNum:null;
  const selected=pages.find(x=>x.id===active)!;
+ const loadIllustrative=()=>{
+  const ref=spot!==null&&spot>0?spot:100;
+  if(spot===null||spot<=0)setManualSpot(String(ref));
+  const n=(v:number)=>String(Number(v.toFixed(2)));
+  setContracts("1");setDte("45");setBasis(n(ref));setDividend("0");
+  setStrike(n(ref*(active==="covered-call"?1.08:0.95)));
+  setPremium(n(ref*(active==="covered-call"?0.02:0.025)));
+  setPutStrike(n(ref*0.95));setPutPremium(n(ref*0.025));
+  setCallStrike(n(ref*1.08));setCallPremium(n(ref*0.018));
+  setIv("30");setRiskFree("3");
+  setCapital("100000");setCyclePremium("500");setCycles("12");setFees("20");
+  if(active==="strategy")setLegs([{id:101,kind:"put",side:"short",strike:Number((ref*0.95).toFixed(2)),premium:Number((ref*0.025).toFixed(2)),contracts:1},{id:102,kind:"put",side:"long",strike:Number((ref*0.90).toFixed(2)),premium:Number((ref*0.012).toFixed(2)),contracts:1}]);
+  setIllustrative(true);
+ };
  const metrics:{label:string;value:string;detail:string}[]=active==="csp"?[
   {label:"Secured capital",value:money(csp?.capital??null,currency),detail:"Strike × 100 × contracts"},{label:"Premium collected",value:money(csp?.totalPremium??null,currency),detail:"Before fees"},{label:"Effective entry",value:money(csp?.breakeven??null,currency),detail:"Strike less premium"},{label:"Return on collateral",value:pct(csp?.returnOnCash??null),detail:"Annualized: "+pct(csp?.annualized??null)}
  ]:active==="covered-call"?[
@@ -74,7 +90,8 @@ export function OptionsWorkspace({asset,tab="csp"}:{asset:RealAsset;tab?:string}
   <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / EXECUTION INTELLIGENCE</span><h2>Options <span>Strategy Lab</span></h2><p>Native models, institutional-style charts and a continuous path from valuation to execution.</p></div><div className="nr-hero-meta"><BarChart3 size={18}/><strong>{asset.ticker}</strong><span>NO LIVE OPTION CHAIN</span></div></header>
   <nav className="nr-tabbar nr-options-tabs" aria-label="Option strategy pages">{pages.map(t=><NavLink key={t.id} to={"/options/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.description}</small></NavLink>)}</nav>
   <section className="nr-control-card nr-market-bar"><div><span className="nr-eyebrow">UNDERLYING / MARKET SNAPSHOT</span><h3>{asset.ticker} <span>{asset.name}</span></h3></div><div className="nr-market-price"><small>REFERENCE PRICE · NOT LIVE</small><strong>{money(spot,currency)}</strong></div><div className="nr-mode"><button className={manualSpot===null?"active":""} onClick={()=>setManualSpot(null)}>Snapshot</button><button className={manualSpot!==null?"active":""} onClick={()=>setManualSpot("")}>Manual</button></div>{manualSpot!==null&&<Input label="Underlying price" value={manualSpot} onChange={setManualSpot}/>}</section>
-  <div className="nr-section-title nr-options-heading"><div><span className="nr-eyebrow">STRATEGY CONFIGURATION</span><h3>{selected.label}</h3><p>{selected.description}. Inputs are scenarios, never implied live option quotes.</p></div><span className="nr-status">USER ASSUMPTIONS</span></div>
+  <section className="nr-research-bridge"><div><span className="nr-eyebrow">RESEARCH → EXECUTION BRIDGE</span><strong>DCF intrinsic: {money(valuation?.fairValue??null,currency)}</strong><small>Buy-under: {money(valuation?.buyUnder??null,currency)} · {valuation?.source||"Run Valuation Lab to establish a reference"}</small></div><div>{active==="csp"&&csp&&valuation?.fairValue&&valuation.fairValue>0?<span className="nr-bridge-gap">CSP effective entry vs. DCF: {pct(1-csp.breakeven/valuation.fairValue)}</span>:null}<NavLink to="/valuation/dcf">Open Valuation Lab ↗</NavLink></div></section>
+  <div className="nr-section-title nr-options-heading"><div><span className="nr-eyebrow">STRATEGY CONFIGURATION</span><h3>{selected.label}</h3><p>{selected.description}. Inputs are scenarios, never implied live option quotes.</p></div><div className="nr-heading-actions">{illustrative&&<span className="nr-status">ILLUSTRATIVE · NOT QUOTES</span>}<button type="button" className="nr-primary" onClick={loadIllustrative}>Load illustrative scenario</button></div></div>
   {active==="csp"&&<section className="nr-control-card"><div className="nr-field-grid"><Input label="Put strike" value={strike} onChange={setStrike}/><Input label="Premium / share" value={premium} onChange={setPremium}/><Input label="Days to expiry" value={dte} onChange={setDte}/><Input label="Contracts" value={contracts} onChange={setContracts}/></div></section>}
   {active==="covered-call"&&<section className="nr-control-card"><div className="nr-field-grid"><Input label="Share cost basis" value={basis} onChange={setBasis}/><Input label="Call strike" value={strike} onChange={setStrike}/><Input label="Premium / share" value={premium} onChange={setPremium}/><Input label="Days to expiry" value={dte} onChange={setDte}/><Input label="Contracts" value={contracts} onChange={setContracts}/><Input label="Dividend / share" value={dividend} onChange={setDividend} hint="Only if received"/></div><button className="nr-text-button" onClick={()=>setBasis(spot===null?"":String(spot))}>Use snapshot as assumed cost basis</button></section>}
   {active==="wheel"&&<section className="nr-control-card"><div className="nr-field-grid"><Input label="CSP strike" value={putStrike} onChange={setPutStrike}/><Input label="CSP premium / share" value={putPremium} onChange={setPutPremium}/><Input label="CC strike after assignment" value={callStrike} onChange={setCallStrike}/><Input label="CC premium / share" value={callPremium} onChange={setCallPremium}/><Input label="Contracts" value={contracts} onChange={setContracts}/></div></section>}
