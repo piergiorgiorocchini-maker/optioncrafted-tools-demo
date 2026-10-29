@@ -101,3 +101,19 @@ html,body,#root{min-width:320px;max-width:100%}body{overflow-x:hidden}main,.dash
 .explorer-sparkline-empty{display:flex;align-items:center;gap:6px;color:#9aaabd;font-size:9px}
 .explorer-sparkline-empty svg{width:78px;height:25px}
 @media(max-width:700px){.terminal-search-wrap{width:100%;flex:1}.terminal-search-wrap .terminal-search{width:100%}.terminal-search input{font-size:12px}}
+
+
+/* Single sidebar navigation: nested Valuation and Options modules. */
+.sidebar nav{display:grid;gap:4px}
+.nav-entry{min-width:0}
+.nav-parent{display:flex;align-items:center;min-width:0;gap:3px}
+.nav-parent>.navlink{flex:1;min-width:0}
+.nav-expand{width:29px;height:32px;flex:none;display:grid;place-items:center;border:1px solid #294866;background:#102940;border-radius:7px;color:#aac8e4;cursor:pointer}
+.nav-expand:hover{background:#174568;color:#fff}
+.nav-expand[aria-expanded="true"] svg{transform:rotate(180deg)}
+.nav-submenu{display:grid;gap:2px;margin:3px 0 10px 23px;padding-left:12px;border-left:1px solid #2c5071}
+.nav-sublink{display:block;padding:8px 9px;border-radius:7px;color:#a4bfd7;text-decoration:none;font-size:11px;line-height:1.4}
+.nav-sublink:hover{color:#fff;background:#183b59}
+.nav-sublink.active{color:#e7f5ff;background:#1b4a70;box-shadow:inset 2px 0 #4aabff;font-weight:800}
+@media(max-width:900px){.sidebar nav{display:grid}.sidebar nav .nav-parent>.navlink{white-space:normal}.sidebar .nav-submenu{display:grid}}
+@media(max-width:700px){.sidebar.mobile-open nav{display:grid!important}.sidebar.mobile-open .nav-entry{display:block!important}.sidebar.mobile-open .nav-submenu{display:grid!important}.sidebar.mobile-open .nav-parent{display:flex!important}}
