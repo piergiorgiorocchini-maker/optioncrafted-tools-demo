@@ -34,7 +34,6 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Perpetual growth Y11+ %",step:0.25},{key:"dividendDiscount",label:"Target rate of return %",step:0.5}],
  peers:[]
 };
-const fmt=(value:number)=>Number.isFinite(value)?value.toFixed(2):"N/D";
 export type ValuationBridge={fairValue:number|null;buyUnder:number|null;source:string};
 export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void}){
  const active=(tabs.find(x=>x.id===tab)?.id||"dcf") as ValuationMethod;
