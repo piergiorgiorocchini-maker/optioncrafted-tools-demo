@@ -1,0 +1,41 @@
+/* OptionsCrafted embedded tool presentation.
+   This stylesheet applies ONLY to ?embedded=1 and never changes standalone calculators. */
+.oc-embedded body.tools-app{min-height:0!important;background:transparent!important;color:#17314f;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+.oc-embedded .site-header,
+.oc-embedded .tools-hero,
+.oc-embedded .premium-navigation,
+.oc-embedded .station-topbar,
+.oc-embedded .station-header,
+.oc-embedded .lab-topbar,
+.oc-embedded .lab-hero,
+.oc-embedded .edge-topbar,
+.oc-embedded .edge-header,
+.oc-embedded .premium-nav,
+.oc-embedded .premium-nav-section,
+.oc-embedded .station-footer,
+.oc-embedded .lab-footer,
+.oc-embedded .edge-footer{display:none!important}
+.oc-embedded body.tools-hub-page .tools-shell,
+.oc-embedded .station-shell,
+.oc-embedded .strategy-lab-shell{max-width:none!important;width:100%!important;padding:0!important;margin:0!important}
+.oc-embedded body.tools-hub-page .tools-layout{grid-template-columns:minmax(175px,220px) minmax(0,1fr)!important;gap:16px!important}
+.oc-embedded body.tools-hub-page .tools-sidebar{top:0!important;padding:10px!important;border-radius:12px!important;box-shadow:none!important;border-color:#dfe8f2!important}
+.oc-embedded body.tools-hub-page .tool-tab{padding:11px!important;border-radius:8px!important;font-size:13px!important}
+.oc-embedded body.tools-hub-page .tool-tab.active{background:#0d467d!important;border-color:#0d467d!important}
+.oc-embedded body.tools-hub-page .tool-panel{padding:22px!important;border-radius:12px!important;box-shadow:none!important;border-color:#dfe8f2!important}
+.oc-embedded body.tools-hub-page .tool-panel-header h2{font-size:clamp(22px,2.3vw,30px)!important}
+.oc-embedded body.tools-hub-page .tool-result-card,
+.oc-embedded body.tools-hub-page .tool-chart-card,
+.oc-embedded body.tools-hub-page .tool-table-card{border-radius:12px!important}
+.oc-embedded .station-main,
+.oc-embedded .lab-main{max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+.oc-embedded .edge-shell{max-width:none!important;width:100%!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important}
+.oc-embedded body.edge-station-page main{padding-top:0!important}
+.oc-embedded body.strategy-lab-page .lab-panel{border-radius:12px!important}
+.oc-embedded body.probability-station-page .station-panel{border-radius:12px!important}
+@media(max-width:820px){
+ .oc-embedded body.tools-hub-page .tools-layout{grid-template-columns:1fr!important;gap:12px!important}
+ .oc-embedded body.tools-hub-page .tools-sidebar{position:static!important;display:flex!important;flex-direction:row!important;overflow-x:auto!important;gap:5px!important}
+ .oc-embedded body.tools-hub-page .tool-tab{min-width:max-content!important;white-space:nowrap!important}
+ .oc-embedded body.tools-hub-page .tool-panel{padding:15px!important}
+}
