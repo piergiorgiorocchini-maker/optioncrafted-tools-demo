@@ -1,5 +1,5 @@
 import {ExternalLink,BookOpen,Database} from "lucide-react";
-import {grahamModel,money} from "../core/valuationModels";
+import {grahamLynchVerdict,grahamModel,money} from "../core/valuationModels";
 import "./graham-research.css";
 
 type GrahamResult=ReturnType<typeof grahamModel>;
@@ -17,17 +17,6 @@ type Props={
  aaaIsManual:boolean;
 };
 
-function verdict(upside:number|null,pegDividend:number|null){
- const up=upside!==null&&Number.isFinite(upside);
- const peg=pegDividend!==null&&Number.isFinite(pegDividend);
- if(!up&&!peg)return "Insufficient data";
- if(up&&upside>=.25&&peg&&pegDividend<=1.5)return "Attractive";
- if(up&&upside>=.1&&(!peg||pegDividend<=2))return "Reasonable";
- if(up&&upside<-.1&&peg&&pegDividend>2)return "Expensive";
- if(peg&&pegDividend<=1.2)return "PEG attractive";
- if(peg&&pegDividend>2.2)return "PEG stretched";
- return "Fair / neutral";
-}
 const pct=(n:number|null)=>n!==null&&Number.isFinite(n)?n.toFixed(2)+"%":"N/D";
 const multiple=(n:number|null)=>n!==null&&Number.isFinite(n)?n.toFixed(2)+"×":"N/D";
 const signedPct=(n:number|null)=>n!==null&&Number.isFinite(n)?(n>=0?"+":"")+(n*100).toFixed(2)+"%":"N/D";
@@ -43,7 +32,7 @@ export function GrahamResearchPanel({ticker,price,eps,dividendYield,growth,aaaYi
  const upside=adjusted!==null&&price!==null&&price>0?adjusted/price-1:null;
  const peg=result?.peg??null;
  const pegDividend=result?.pegDividend??null;
- const reading=verdict(upside,pegDividend);
+ const reading=grahamLynchVerdict(upside,pegDividend);
  const bondDate=aaaIsManual?"USER OVERRIDE":"FRED SNAPSHOT · "+aaaObservationDate;
  const data=[
   {name:"Diluted EPS",preferred:"TTM diluted EPS; use normalized EPS if a cycle distorts earnings.",source:"Stock Analysis · "+symbol,url:stockAnalysis},
