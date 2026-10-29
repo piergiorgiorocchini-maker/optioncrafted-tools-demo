@@ -6,6 +6,8 @@ import type {RealAsset} from "./RealResearch";
 import appleResearch from "../data/aaplResearch.json";
 import {ValuationFootballField} from "./ValuationFootballField";
 import {DividendResearchPanel} from "./DividendResearchPanel";
+import {GrahamResearchPanel} from "./GrahamResearchPanel";
+import aaaYieldSnapshot from "../data/aaaYieldSnapshot.json";
 import {dcfModel,dividendModel,grahamModel,modelDefaults,money,requiredReturnModel,type Financials,type ModelInputs,type ValuationMethod,type ValuationMode} from "../core/valuationModels";
 import "./native-research.css";
 const tabs:{id:ValuationMethod;label:string;sub:string}[]=[
@@ -39,7 +41,8 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const [mode,setMode]=useState<ValuationMode>("automatic");
  const [manual,setManual]=useState<Record<Field,string>>({price:"",eps:"",fcf:"",dividend:"",beta:""});
  const [overrides,setOverrides]=useState<Partial<Record<Field,string>>>({});
- const [a,setA]=useState<ModelInputs>(modelDefaults);
+ const [a,setA]=useState<ModelInputs>({...modelDefaults,aaaYield:aaaYieldSnapshot.value});
+ const [aaaManual,setAaaManual]=useState(false);
  const [rateMode,setRateMode]=useState<"manual"|"capm">("manual");
  const [requiredBasis,setRequiredBasis]=useState<"eps"|"fcf">("eps");
  const [riskFree,setRiskFree]=useState(4);
@@ -55,7 +58,8 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const base=rate===null?null:dcfModel(financials.fcf,a.growth,rate,a.terminal,a.years);
  const bear=rate===null?null:dcfModel(financials.fcf,a.growth-3,rate+2,Math.max(0,a.terminal-1),a.years);
  const bull=rate===null?null:dcfModel(financials.fcf,a.growth+3,Math.max(1,rate-1),Math.min(a.terminal+0.5,Math.max(0,rate-1.5)),a.years);
- const graham=grahamModel(financials.eps,a.growth,a.aaaYield,financials.price,financials.dividend!==null&&financials.price!==null&&financials.price>0?financials.dividend/financials.price*100:null);
+ const currentDividendYield=financials.dividend!==null&&financials.price!==null&&financials.price>0?financials.dividend/financials.price*100:null;
+ const graham=grahamModel(financials.eps,a.growth,a.aaaYield,financials.price,currentDividendYield);
  const ddm=dividendModel(financials.dividend,a.dividendGrowth,a.dividendTerminal,a.dividendDiscount);
  const required=requiredReturnModel(financials[requiredBasis],financials.dividend,a);
  const currency=financials.currency;
@@ -73,7 +77,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const requiredMultipleName=requiredBasis==="eps"?"P/E":"P/FCF";
  const requiredReturnText=Number.isFinite(a.requiredReturn)?a.requiredReturn.toFixed(2)+"%":"N/D";
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
- return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")}>
+ return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"?" nr-workspace--graham":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><Database size={17}/><strong>{asset.ticker}</strong><span>{sourceLabel}</span></div></header>
   <nav className="nr-tabbar" aria-label="Valuation methods">{tabs.map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>
   <section className="nr-control-card">
@@ -89,9 +93,10 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
   <section className="nr-control-card nr-model-inputs"><div className="nr-section-title"><div><span className="nr-eyebrow">MODEL CONFIGURATION</span><h3>{selected.label}</h3></div><span className="nr-status"><FlaskConical size={14}/> ASSUMPTIONS</span></div>
     {active==="peers"?<p className="nr-source-note">Peer multiples need an audited comparable-company set, normalized EBITDA/earnings and consistent fiscal periods. No fabricated peer valuations are published.</p>:<>
     {active==="required-return"&&<div className="nr-basis-toggle"><span>Projection basis</span><div className="nr-mode"><button type="button" className={requiredBasis==="eps"?"active":""} onClick={()=>setRequiredBasis("eps")}>EPS / P/E</button><button type="button" className={requiredBasis==="fcf"?"active":""} onClick={()=>setRequiredBasis("fcf")}>FCF / P/FCF</button></div><small>The same ten-year model can project earnings or free cash flow per share. The exit multiple follows the selected basis.</small></div>}
-    <div className="nr-field-grid nr-assumptions">{assumptionsByTab[active].map(f=><label key={f.key}><span>{active==="required-return"&&requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?null:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}))}} placeholder="Enter rate"/></label>)}</div>
+    <div className="nr-field-grid nr-assumptions">{assumptionsByTab[active].map(f=><label key={f.key}><span>{active==="required-return"&&requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?null:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}));if(f.key==="aaaYield")setAaaManual(true)}} placeholder="Enter rate"/></label>)}</div>
+    {active==="graham"&&<div className="nr-graham-rate-note"><strong>Moody’s Aaa yield (DAAA): {aaaYieldSnapshot.value.toFixed(2)}% · {aaaYieldSnapshot.observationDate}</strong><span>{aaaManual?"USER OVERRIDE · the input above is manually set":"VERIFIED FRED SNAPSHOT · NOT LIVE"}</span><a href={aaaYieldSnapshot.sourceUrl} target="_blank" rel="noopener noreferrer">Verify current yield on FRED</a><button type="button" onClick={()=>{setA(prev=>({...prev,aaaYield:aaaYieldSnapshot.value}));setAaaManual(false)}}>Use dated FRED observation</button></div>}
     {active==="dcf"&&<div className="nr-capm"><span>Discount rate source</span><div className="nr-mode"><button type="button" className={rateMode==="manual"?"active":""} onClick={()=>setRateMode("manual")}>Manual</button><button type="button" className={rateMode==="capm"?"active":""} onClick={()=>setRateMode("capm")}>CAPM</button></div>{rateMode==="capm"&&<div className="nr-field-grid"><label><span>Risk-free % · assumption</span><input type="number" value={riskFree} step="0.1" onChange={e=>setRiskFree(Number(e.target.value))}/></label><label><span>Equity risk premium % · assumption</span><input type="number" value={erp} step="0.1" onChange={e=>setErp(Number(e.target.value))}/></label></div>}<small>Applied equity discount rate: {rate===null?"N/D":rate.toFixed(2)+"%"} · WACC is not used to discount equity FCF/share.</small></div>}
-    <button type="button" className="nr-text-button" onClick={()=>setA(modelDefaults)}><RefreshCcw size={13}/> Reset assumptions</button>
+    <button type="button" className="nr-text-button" onClick={()=>{setA({...modelDefaults,aaaYield:aaaYieldSnapshot.value});setAaaManual(false)}}><RefreshCcw size={13}/> Reset assumptions</button>
     </>}
     {noValue&&<div className="nr-empty" role="status">Model awaiting valid financial inputs and assumptions. No value is published until the required fields are available.</div>}
    </section>
@@ -104,7 +109,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
      <div className="nr-metric"><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong><small>Sale + future-value dividends</small></div>
      <div className="nr-metric nr-required-primary"><span>Primary output · Buy now below</span><strong>{money(required?.entry??null,currency)}</strong><small>Target return {requiredReturnText} / year</small></div>
     </div>
-   </section>:active==="dividend"?<DividendResearchPanel result={ddm} currentDividend={financials.dividend} currency={currency} growth={a.dividendGrowth} terminalGrowth={a.dividendTerminal} discount={a.dividendDiscount}/>:<div className="nr-metric-grid">
+   </section>:active==="dividend"?<DividendResearchPanel result={ddm} currentDividend={financials.dividend} currency={currency} growth={a.dividendGrowth} terminalGrowth={a.dividendTerminal} discount={a.dividendDiscount}/>:active==="graham"?<GrahamResearchPanel ticker={asset.ticker} price={financials.price} eps={financials.eps} dividendYield={currentDividendYield} growth={a.growth} aaaYield={a.aaaYield} currency={currency} result={graham} aaaObservationDate={aaaYieldSnapshot.observationDate} aaaSourceUrl={aaaYieldSnapshot.sourceUrl} aaaIsManual={aaaManual}/>:<div className="nr-metric-grid">
    {[["DCF intrinsic",base?.value??null,"CASH FLOW"],["Graham anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend DDM",ddm?.value??null,"INTRINSIC"],["Required-return entry",required?.entry??null,"ENTRY PRICE · NOT FAIR VALUE"]].map(([label,v,tag])=><div className="nr-metric" key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
   </div>}
   {active==="required-return"&&<section className="nr-required-details" aria-label="Ten-year projection and interpretation">
@@ -135,12 +140,11 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    </div>
    </div>
   </section>}
-  {active!=="required-return"&&active!=="dividend"&&<section className="nr-model-output">
+  {active!=="required-return"&&active!=="dividend"&&active!=="graham"&&<section className="nr-model-output">
    <div className="nr-chart-card">
-    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":active==="graham"?"Graham valuation bridge":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
+    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
     {active==="dcf"&&base?<ResponsiveContainer width="100%" height={290}><ComposedChart data={chartRows} margin={{top:16,right:14,left:4,bottom:5}}><CartesianGrid stroke="#203b58" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#9ab3ca" tickLine={false} axisLine={false}/><YAxis stroke="#9ab3ca" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#132c48",border:"1px solid #365775",borderRadius:10,color:"#e8f2ff"}} formatter={(v:number)=>money(v,currency)}/><Area type="monotone" dataKey="cashflow" name="FCF / share" stroke="#4ba7ff" fill="#2279c1" fillOpacity={0.28} strokeWidth={3}/><Line type="monotone" dataKey="presentValue" name="PV / share" stroke="#e9bc69" strokeWidth={2} dot={false}/></ComposedChart></ResponsiveContainer>:null}
 
-    {active==="graham"&&graham?<div className="nr-bridge"><div><span>Classic Graham</span><b>{money(graham.classic,currency)}</b></div><div><span>Bond-adjusted Graham</span><b>{money(graham.adjusted,currency)}</b></div><div><span>PEG</span><b>{graham.peg===null?"N/D":fmt(graham.peg)}</b></div><div><span>Dividend-adjusted PEG</span><b>{graham.pegDividend===null?"N/D":fmt(graham.pegDividend)}</b></div></div>:null}
     {active==="peers"||noValue?<div className="nr-chart-empty"><Database size={27}/><strong>{active==="peers"?"Peer data not yet validated":"Waiting for valid model inputs"}</strong><span>No simulated historical series or peer estimates are displayed.</span></div>:null}
     {active==="dcf"&&base?<div className="nr-bridge"><div><span>PV explicit FCF</span><b>{money(base.pvCashflows,currency)}</b></div><div><span>PV terminal</span><b>{money(base.pvTerminal,currency)}</b></div><div><span>Buy-under at {a.mos}% MOS</span><b>{money(base.value*(1-a.mos/100),currency)}</b></div></div>:null}
    </div>
