@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-30T15:50:38.421Z",
+  "generatedAt": "2026-10-30T15:51:14.544Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -20,6 +20,8 @@
     "differences": 0,
     "unresolved": 0,
     "coverage": 0.9545454545454546,
+    "expectedComparisons": 126,
+    "notCompared": 126,
     "reconciliationRate": null
   },
   "companies": [
