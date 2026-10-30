@@ -1,0 +1,21 @@
+name: FDVE Alpha Vantage access probe
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'platform-app/scripts/fdve-alpha-vantage-probe.mjs'
+      - '.github/workflows/fdve-alpha-vantage-probe.yml'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Probe Alpha Vantage endpoints without exposing credentials
+        env:
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+        run: node platform-app/scripts/fdve-alpha-vantage-probe.mjs
