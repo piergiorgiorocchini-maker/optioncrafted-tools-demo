@@ -18,7 +18,7 @@ jobs:
           node-version: '20'
       - name: Fetch SEC companyfacts
         env:
-          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
         run: node platform-app/scripts/update-sec-aapl.mjs
       - name: Commit verified snapshot
         run: |
