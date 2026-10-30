@@ -1,0 +1,31 @@
+name: SEC fundamentals pilot (AAPL)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 7 * * 1-5'
+permissions:
+  contents: write
+concurrency:
+  group: sec-fundamentals-pilot
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Fetch SEC companyfacts
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: node platform-app/scripts/update-sec-aapl.mjs
+      - name: Commit verified snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platform-app/src/data/sec/aapl.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: refresh AAPL SEC fundamentals"
+            git push
+          fi
