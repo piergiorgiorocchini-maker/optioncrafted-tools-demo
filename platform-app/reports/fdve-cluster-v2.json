@@ -1,0 +1,1816 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-30T15:48:57.246Z",
+  "periods": [
+    "FY2024",
+    "FY2025"
+  ],
+  "method": "SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation",
+  "notes": [
+    "Coverage excludes stale observations and NOT_APPLICABLE metrics",
+    "Bank-specific concepts are discovery-only until definitions validated",
+    "DERIVED liabilities are not source-reported and must be marked as such",
+    "FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success"
+  ],
+  "totals": {
+    "applicable": 132,
+    "available": 126,
+    "compared": 0,
+    "matched": 0,
+    "differences": 0,
+    "unresolved": 0,
+    "coverage": 0.9545454545454546,
+    "reconciliationRate": null
+  },
+  "companies": [
+    {
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "profile": "industrial",
+      "sec": {
+        "status": "OK",
+        "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "company": "Apple Inc."
+      },
+      "fmp": {
+        "status": "MISSING_CREDENTIAL"
+      },
+      "years": {
+        "2024": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2024,
+              "value": 391035000000,
+              "unit": "USD",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2024,
+              "value": 93736000000,
+              "unit": "USD",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "NetIncomeLoss",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2024,
+              "value": 123216000000,
+              "unit": "USD",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2024,
+              "value": 118254000000,
+              "unit": "USD",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2024,
+              "value": 9447000000,
+              "unit": "USD",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2024,
+              "value": 6.08,
+              "unit": "USD/shares",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2024,
+              "value": 29943000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2024,
+              "value": 152987000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "AssetsCurrent",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2024,
+              "value": 176392000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2024,
+              "value": 7286000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "InventoryNet",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2024,
+              "value": 364980000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "Assets",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2024,
+              "value": 308030000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "Liabilities",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2024,
+              "value": 56950000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "StockholdersEquity",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2024,
+              "value": 85750000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2024,
+              "value": 10912000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-09-28",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          }
+        },
+        "2025": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2025,
+              "value": 416161000000,
+              "unit": "USD",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2025,
+              "value": 112010000000,
+              "unit": "USD",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "NetIncomeLoss",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2025,
+              "value": 133050000000,
+              "unit": "USD",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2025,
+              "value": 111482000000,
+              "unit": "USD",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2025,
+              "value": 12715000000,
+              "unit": "USD",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2025,
+              "value": 7.46,
+              "unit": "USD/shares",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2025,
+              "value": 35934000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2025,
+              "value": 147957000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "AssetsCurrent",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2025,
+              "value": 165631000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2025,
+              "value": 5718000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "InventoryNet",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2025,
+              "value": 359241000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "Assets",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2025,
+              "value": 285508000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "Liabilities",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2025,
+              "value": 73733000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "StockholdersEquity",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2025,
+              "value": 78328000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2025,
+              "value": 12350000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-09-27",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          }
+        }
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "profile": "industrial",
+      "sec": {
+        "status": "OK",
+        "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+        "company": "MICROSOFT CORPORATION"
+      },
+      "fmp": {
+        "status": "MISSING_CREDENTIAL"
+      },
+      "years": {
+        "2024": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2024,
+              "value": 245122000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2024,
+              "value": 88136000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "NetIncomeLoss",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2024,
+              "value": 109433000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2024,
+              "value": 118548000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2024,
+              "value": 44477000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2024,
+              "value": 11.8,
+              "unit": "USD/shares",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2024,
+              "value": 18315000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2024,
+              "value": 159734000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "AssetsCurrent",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2024,
+              "value": 125286000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2024,
+              "value": 1246000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "InventoryNet",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2024,
+              "value": 512163000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "Assets",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2024,
+              "value": 243686000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "Liabilities",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2024,
+              "value": 268477000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "StockholdersEquity",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2024,
+              "value": 42688000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2024,
+              "value": 2249000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-06-30",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          }
+        },
+        "2025": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2025,
+              "value": 281724000000,
+              "unit": "USD",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2025,
+              "value": 101832000000,
+              "unit": "USD",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "tag": "NetIncomeLoss",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2025,
+              "value": 128528000000,
+              "unit": "USD",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2025,
+              "value": 136162000000,
+              "unit": "USD",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2025,
+              "value": 64551000000,
+              "unit": "USD",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2025,
+              "value": 13.64,
+              "unit": "USD/shares",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2025,
+              "value": 30242000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2025,
+              "value": 191131000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "AssetsCurrent",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2025,
+              "value": 141218000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2025,
+              "value": 938000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "InventoryNet",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2025,
+              "value": 619003000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "Assets",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2025,
+              "value": 275524000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "Liabilities",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2025,
+              "value": 343479000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "StockholdersEquity",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2025,
+              "value": 40152000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2025,
+              "value": 2999000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-06-30",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000950170-25-100235",
+              "filed": "2025-07-30"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          }
+        }
+      }
+    },
+    {
+      "ticker": "XOM",
+      "cik": "0000034088",
+      "profile": "industrial",
+      "sec": {
+        "status": "OK",
+        "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000034088.json",
+        "company": "Exxon Mobil Corporation"
+      },
+      "fmp": {
+        "status": "MISSING_CREDENTIAL"
+      },
+      "years": {
+        "2024": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2024,
+              "value": 349585000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "Revenues",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2024,
+              "value": 33680000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "NetIncomeLoss",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "operatingIncome": {
+              "status": "PERIOD_MISSING",
+              "metric": "operatingIncome",
+              "year": 2024
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2024,
+              "value": 55022000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2024,
+              "value": 24306000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2024,
+              "value": 7.84,
+              "unit": "USD/shares",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2024,
+              "value": 23029000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2024,
+              "value": 91990000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "AssetsCurrent",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2024,
+              "value": 70307000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "inventory": {
+              "status": "PERIOD_MISSING",
+              "metric": "inventory",
+              "year": 2024
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2024,
+              "value": 453475000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "Assets",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2024,
+              "value": 182869000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "Liabilities",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2024,
+              "value": 263705000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "StockholdersEquity",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "longTermDebt": {
+              "status": "PERIOD_MISSING",
+              "metric": "longTermDebt",
+              "year": 2024
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2024,
+              "value": 4892000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 12,
+            "rate": 0.8
+          }
+        },
+        "2025": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2025,
+              "value": 332238000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "Revenues",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2025,
+              "value": 28844000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "NetIncomeLoss",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "operatingIncome": {
+              "status": "PERIOD_MISSING",
+              "metric": "operatingIncome",
+              "year": 2025
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2025,
+              "value": 51970000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2025,
+              "value": 28358000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2025,
+              "value": 6.7,
+              "unit": "USD/shares",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2025,
+              "value": 10681000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2025,
+              "value": 83382000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "AssetsCurrent",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2025,
+              "value": 72330000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "inventory": {
+              "status": "PERIOD_MISSING",
+              "metric": "inventory",
+              "year": 2025
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2025,
+              "value": 448980000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "Assets",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2025,
+              "value": 182354000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "Liabilities",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2025,
+              "value": 259386000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "StockholdersEquity",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "longTermDebt": {
+              "status": "PERIOD_MISSING",
+              "metric": "longTermDebt",
+              "year": 2025
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2025,
+              "value": 6200000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 12,
+            "rate": 0.8
+          }
+        }
+      }
+    },
+    {
+      "ticker": "WMT",
+      "cik": "0000104169",
+      "profile": "industrial",
+      "sec": {
+        "status": "OK",
+        "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+        "company": "Walmart Inc."
+      },
+      "fmp": {
+        "status": "MISSING_CREDENTIAL"
+      },
+      "years": {
+        "2024": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2024,
+              "value": 642637000000,
+              "unit": "USD",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2024,
+              "value": 15511000000,
+              "unit": "USD",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "NetIncomeLoss",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2024,
+              "value": 27012000000,
+              "unit": "USD",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2024,
+              "value": 35726000000,
+              "unit": "USD",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2024,
+              "value": 20606000000,
+              "unit": "USD",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2024,
+              "value": 1.91,
+              "unit": "USD/shares",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2024,
+              "value": 9867000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2024,
+              "value": 76877000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "AssetsCurrent",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2024,
+              "value": 92415000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2024,
+              "value": 54892000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "InventoryNet",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2024,
+              "value": 252399000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "Assets",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "totalLiabilities": {
+              "status": "DERIVED",
+              "metric": "totalLiabilities",
+              "year": 2024,
+              "value": 162050000000,
+              "unit": "USD",
+              "periodEnd": "2024-01-31",
+              "method": "ASSETS_MINUS_TOTAL_EQUITY_INCL_NCI",
+              "inputs": [
+                "Assets",
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+              ]
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2024,
+              "value": 83861000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "StockholdersEquity",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2024,
+              "value": 36132000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2024,
+              "value": 3447000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-01-31",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          }
+        },
+        "2025": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2025,
+              "value": 674538000000,
+              "unit": "USD",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2025,
+              "value": 19436000000,
+              "unit": "USD",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "NetIncomeLoss",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2025,
+              "value": 29348000000,
+              "unit": "USD",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2025,
+              "value": 36443000000,
+              "unit": "USD",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2025,
+              "value": 23783000000,
+              "unit": "USD",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2025,
+              "value": 2.41,
+              "unit": "USD/shares",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2025,
+              "value": 9037000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2025,
+              "value": 79458000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "AssetsCurrent",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2025,
+              "value": 96584000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2025,
+              "value": 56435000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "InventoryNet",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2025,
+              "value": 260823000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "Assets",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "totalLiabilities": {
+              "status": "DERIVED",
+              "metric": "totalLiabilities",
+              "year": 2025,
+              "value": 163402000000,
+              "unit": "USD",
+              "periodEnd": "2025-01-31",
+              "method": "ASSETS_MINUS_TOTAL_EQUITY_INCL_NCI",
+              "inputs": [
+                "Assets",
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+              ]
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2025,
+              "value": 91013000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "StockholdersEquity",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2025,
+              "value": 33401000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2025,
+              "value": 2598000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-01-31",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          }
+        }
+      }
+    },
+    {
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "profile": "bank",
+      "sec": {
+        "status": "OK",
+        "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+        "company": "JPMORGAN CHASE & CO"
+      },
+      "fmp": {
+        "status": "MISSING_CREDENTIAL"
+      },
+      "years": {
+        "2024": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2024,
+              "value": 177556000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "Revenues",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2024,
+              "value": 58471000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "NetIncomeLoss",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2024,
+              "value": 19.75,
+              "unit": "USD/shares",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2024,
+              "value": 4002814000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "Assets",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2024,
+              "value": 3658056000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "Liabilities",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2024,
+              "value": 344758000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "StockholdersEquity",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14"
+            }
+          },
+          "bank": {
+            "netInterestIncome": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "InterestIncomeExpenseNet"
+              ],
+              "validatedValue": null
+            },
+            "provisionCreditLosses": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "ProvisionForLoanLeaseAndOtherLosses",
+                "ProvisionForLoanAndLeaseLosses"
+              ],
+              "validatedValue": null
+            },
+            "deposits": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "Deposits"
+              ],
+              "validatedValue": null
+            },
+            "loansNet": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "LoansAndLeasesReceivableNetReportedAmount"
+              ],
+              "validatedValue": null
+            },
+            "cet1Ratio": {
+              "status": "NOT_MAPPED",
+              "tags": [],
+              "validatedValue": null
+            }
+          },
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          }
+        },
+        "2025": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2025,
+              "value": 182447000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "Revenues",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2025,
+              "value": 57048000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "NetIncomeLoss",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2025,
+              "value": 20.02,
+              "unit": "USD/shares",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2025,
+              "value": 4424900000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "Assets",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2025,
+              "value": 4062462000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "Liabilities",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2025,
+              "value": 362438000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "StockholdersEquity",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13"
+            }
+          },
+          "bank": {
+            "netInterestIncome": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "InterestIncomeExpenseNet"
+              ],
+              "validatedValue": null
+            },
+            "provisionCreditLosses": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "ProvisionForLoanLeaseAndOtherLosses",
+                "ProvisionForLoanAndLeaseLosses"
+              ],
+              "validatedValue": null
+            },
+            "deposits": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "Deposits"
+              ],
+              "validatedValue": null
+            },
+            "loansNet": {
+              "status": "TAXONOMY_PRESENT",
+              "tags": [
+                "LoansAndLeasesReceivableNetReportedAmount"
+              ],
+              "validatedValue": null
+            },
+            "cet1Ratio": {
+              "status": "NOT_MAPPED",
+              "tags": [],
+              "validatedValue": null
+            }
+          },
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          }
+        }
+      }
+    }
+  ]
+}
