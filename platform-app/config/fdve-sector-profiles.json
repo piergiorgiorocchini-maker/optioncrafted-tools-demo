@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "principle": "Applicability is separate from data availability. No inferred accounting equivalence.",
+  "schemaVersion": 2,
+  "principle": "Applicability, taxonomy availability, period coverage, and numerical reconciliation are separate checks.",
   "profiles": {
     "industrial": {
       "companies": [
@@ -39,8 +39,6 @@
         "revenue",
         "netIncome",
         "epsDiluted",
-        "cashFromOperations",
-        "cash",
         "totalAssets",
         "totalLiabilities",
         "equity"
@@ -54,7 +52,11 @@
         "longTermDebt",
         "shortTermDebt"
       ],
-      "note": "Bank metrics require dedicated mapping: NII, provisions, deposits, CET1, NIM, loan quality. CapEx and debt may exist but are excluded from industrial comparability, not declared nonexistent."
+      "note": "Industrial ratios and FCF are not a bank quality proxy. Use bank-specific NII, provisions, deposits, loans, CET1 when verified; cash/cash flow may be reported but not mandatory for banking core.",
+      "optional": [
+        "cash",
+        "cashFromOperations"
+      ]
     }
   },
   "exceptions": {
@@ -72,5 +74,6 @@
     "NOT_APPLICABLE",
     "REVIEW_REQUIRED",
     "REJECTED"
-  ]
+  ],
+  "periodRule": "Count only SEC observations matching requested fiscal year and comparable filing period; stale historical facts are not coverage."
 }
