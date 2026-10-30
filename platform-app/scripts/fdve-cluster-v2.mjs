@@ -3,7 +3,7 @@
 // Read-only for production data. Never commits raw provider payloads or credentials.
 import fs from 'node:fs/promises';
 import {METRICS} from './fdve-model.mjs';
-import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue} from './fdve-cluster-mapping.mjs';
+import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags} from './fdve-cluster-mapping.mjs';
 const cfg=JSON.parse(await fs.readFile('platform-app/config/fdve-cluster-pilot.json','utf8'));
 const profiles=JSON.parse(await fs.readFile('platform-app/config/fdve-sector-profiles.json','utf8'));
 const asOf=new Date().toISOString().slice(0,10);
@@ -41,13 +41,14 @@ for(const company of cfg.companies){
     if(metric==='totalLiabilities'&&found.status==='PERIOD_MISSING'&&company.ticker==='WMT'){
      found=deriveTotalLiabilities(concepts,year,asOf);
     }
+    if(found.status==='PERIOD_MISSING')found.taxonomyCandidates=findRelatedTags(concepts,metric);
     metrics[metric]=found;
    }
    const bank={};
    if(profileName==='bank'){
     for(const [metric,tags] of Object.entries(BANK_SEC_CANDIDATES)){
      const present=tags.filter(tag=>!!concepts[tag]);
-     bank[metric]={status:present.length?'TAXONOMY_PRESENT':'NOT_MAPPED',tags:present,validatedValue:null};
+     bank[metric]={...selectBankFiscalSec(concepts,metric,year,asOf),tagsPresent:present};
     }
    }
    item.years[year]={metrics,bank,coverage:{applicable:definition.applicable.length,available:Object.values(metrics).filter(x=>['AVAILABLE','DERIVED'].includes(x.status)).length}};
