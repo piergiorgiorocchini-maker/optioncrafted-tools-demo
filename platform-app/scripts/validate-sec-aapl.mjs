@@ -3,6 +3,7 @@
 // Fails closed: never publishes unvalidated data.
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {normalizeSecFact,validateFact,validateBalance} from './fdve-model.mjs';
 const path=process.argv.slice(2).find(arg=>!arg.startsWith('--'))||'platform-app/src/data/sec/aapl.json';
 const doc=JSON.parse(await fs.readFile(path,'utf8'));
 const issues=[], warnings=[], results={};
@@ -45,6 +46,18 @@ if(m.totalAssets&&m.totalLiabilities&&m.equity){
 }
 const annualEnds=[...flow].map(k=>m[k]?.periodEnd).filter(Boolean);
 if(new Set(annualEnds).size>1) warn('annualFlows','Annual periods differ; cross-metric ratios disabled');
+// Independent canonical-model validation: reject unsafe units, dates and provenance.
+const canonical={};
+for(const [metric,raw] of Object.entries(m)){
+ if(!raw) continue;
+ try{
+  const fact=normalizeSecFact({ticker:doc.ticker,cik:doc.cik,metric,sourceUrl:raw.source,tag:raw.tag,unit:raw.unit,observation:{val:raw.value,start:raw.periodStart,end:raw.periodEnd,filed:raw.filed,form:raw.form,accn:raw.accession}});
+  canonical[metric]=fact;
+  const checked=validateFact(fact);
+  for(const issue of checked.issues) fail(metric,'FDVE '+issue.code+': '+issue.detail);
+ }catch(e){fail(metric,'FDVE normalization: '+e.message);}
+}
+for(const issue of validateBalance(canonical).issues) fail('accounting','FDVE '+issue.code+': '+issue.detail);
 const result={schemaVersion:1,ticker:doc.ticker,validatedAt:new Date().toISOString(),status:issues.length?'REJECTED':'VALIDATED',metricCount:Object.keys(results).length,issues,warnings,metrics:results};
 if(process.argv.includes('--report')){await fs.mkdir('platform-app/src/data/sec',{recursive:true});await fs.writeFile('platform-app/src/data/sec/aapl-validation.json',JSON.stringify(result,null,2)+'\n');}
 console.log(JSON.stringify(result,null,2));
