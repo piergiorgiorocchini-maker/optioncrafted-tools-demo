@@ -18,16 +18,18 @@ test('unknown and missing fiscal periods cannot be treated as zero',()=>{
  assert.equal(normalizeAlphaVantageAnnual({ticker:'AAPL',metric:'revenue',year:2024,statements}).status,'PERIOD_MISSING');
  assert.equal(normalizeAlphaVantageAnnual({ticker:'AAPL',metric:'inventory',year:2025,statements}).status,'FIELD_MISSING');
 });
-test('foreign currency and unexpected positive capex require review',()=>{
+test('foreign currency review and positive provider capex normalized as spending',()=>{
  const foreign={income:{annualReports:[{...income.annualReports[0],reportedCurrency:'EUR'}]}};
  assert.equal(normalizeAlphaVantageAnnual({ticker:'AAPL',metric:'revenue',year:2025,statements:foreign}).status,'CURRENCY_REVIEW');
  const positive={cashflow:{annualReports:[{...cashflow.annualReports[0],capitalExpenditures:'12715000000'}]}};
- assert.equal(normalizeAlphaVantageAnnual({ticker:'AAPL',metric:'capex',year:2025,statements:positive}).status,'SIGN_REVIEW');
+ const capex=normalizeAlphaVantageAnnual({ticker:'AAPL',metric:'capex',year:2025,statements:positive});
+ assert.equal(capex.status,'AVAILABLE');assert.equal(capex.value,12715000000);assert.equal(capex.capexSignConvention,'SPENDING_POSITIVE');
 });
 test('reconciliation requires same fiscal end and unit',()=>{
  const av=normalizeAlphaVantageAnnual({ticker:'AAPL',metric:'revenue',year:2025,statements});
  assert.equal(compareAnnualFacts({status:'AVAILABLE',value:416161000000,periodEnd:'2025-09-27',unit:'USD'},av,'revenue').status,'MATCH');
- assert.equal(compareAnnualFacts({status:'AVAILABLE',value:416161000000,periodEnd:'2025-09-28',unit:'USD'},av,'revenue').status,'PERIOD_MISMATCH');
+ assert.equal(compareAnnualFacts({status:'AVAILABLE',value:416161000000,periodEnd:'2025-09-28',unit:'USD'},av,'revenue').status,'MATCH_DATE_NORMALIZED');
+ assert.equal(compareAnnualFacts({status:'AVAILABLE',value:416161000000,periodEnd:'2025-08-28',unit:'USD'},av,'revenue').status,'PERIOD_MISMATCH');
  assert.equal(compareAnnualFacts({status:'AVAILABLE',value:416161000000,periodEnd:'2025-09-27',unit:'EUR'},av,'revenue').status,'UNIT_MISMATCH');
  assert.equal(compareAnnualFacts({status:'AVAILABLE',value:400000000000,periodEnd:'2025-09-27',unit:'USD'},av,'revenue').status,'REVIEW_REQUIRED');
 });
