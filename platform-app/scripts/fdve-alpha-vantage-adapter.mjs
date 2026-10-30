@@ -35,23 +35,27 @@ export function normalizeAlphaVantageAnnual({ticker,metric,year,statements}){
  const currency=report.reportedCurrency;
  if(currency!=='USD')return {status:'CURRENCY_REVIEW',metric,year,currency:currency||null};
  // Capital expenditures are cash outflows in AV; canonical capex is positive spending.
- if(metric==='capex'&&value>0)return {status:'SIGN_REVIEW',metric,year,value};
- const normalized=metric==='capex'?-value:value;
+ const capexSignConvention=metric==='capex'?(value<0?'OUTFLOW_NEGATIVE':'SPENDING_POSITIVE'):null;
+ const normalized=metric==='capex'?Math.abs(value):value;
  if(definition.sign==='nonnegative'&&normalized<0)return {status:'SIGN_REVIEW',metric,year,value};
  return {status:'AVAILABLE',provider:'ALPHA_VANTAGE',ticker,metric,year,
   value:normalized,unit:definition.unit,periodEnd:report.fiscalDateEnding,
-  field:key,statement,sourceEndpoint:AV_ENDPOINTS[statement],
+  field:key,statement,sourceEndpoint:AV_ENDPOINTS[statement],capexSignConvention,
   provenance:{provider:'ALPHA_VANTAGE',field:key,endpoint:AV_ENDPOINTS[statement]}};
 }
 export function compareAnnualFacts(sec,av,metric){
  if(!sec||!['AVAILABLE','DERIVED'].includes(sec.status))return {status:'SEC_UNAVAILABLE'};
  if(!av||av.status!=='AVAILABLE')return {status:'ALTERNATIVE_UNAVAILABLE',reason:av?.status||'MISSING'};
- if(sec.periodEnd!==av.periodEnd)return {status:'PERIOD_MISMATCH',secEnd:sec.periodEnd,alternativeEnd:av.periodEnd};
+ const fiscalDayGap=Math.abs((Date.parse(sec.periodEnd)-Date.parse(av.periodEnd))/86400000);
+ const aligned=sec.periodEnd===av.periodEnd;
+ // Some providers normalize 52/53-week fiscal year ends to calendar month-end.
+ // A <= 7-day gap is eligible for numerical comparison but is flagged as date-normalized.
+ if(!aligned&&(sec.periodEnd.slice(0,7)!==av.periodEnd.slice(0,7)||fiscalDayGap>7))return {status:'PERIOD_MISMATCH',secEnd:sec.periodEnd,alternativeEnd:av.periodEnd};
  if(sec.unit!==av.unit)return {status:'UNIT_MISMATCH',secUnit:sec.unit,alternativeUnit:av.unit};
  const delta=av.value-sec.value;
  const base=Math.max(Math.abs(sec.value),1);
  const tolerance=metric==='epsDiluted'?0.005:Math.max(1,base*0.00001);
  const status=Math.abs(delta)<=tolerance?'MATCH':Math.abs(delta)/base<=0.001?'ROUNDING':'REVIEW_REQUIRED';
- return {status,secValue:sec.value,alternativeValue:av.value,delta,deltaPct:delta/base*100,
+ return {status:!aligned&&status==='MATCH'?'MATCH_DATE_NORMALIZED':!aligned&&status==='ROUNDING'?'ROUNDING_DATE_NORMALIZED':status,secValue:sec.value,alternativeValue:av.value,delta,deltaPct:delta/base*100,secEnd:sec.periodEnd,alternativeEnd:av.periodEnd,dateNormalized:!aligned,
   primary:'SEC',alternative:'ALPHA_VANTAGE',periodEnd:sec.periodEnd};
 }
