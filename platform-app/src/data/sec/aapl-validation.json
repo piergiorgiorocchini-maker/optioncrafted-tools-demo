@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "ticker": "AAPL",
+  "validatedAt": "2026-10-30T12:47:13.503Z",
+  "status": "VALIDATED",
+  "metricCount": 15,
+  "issues": [],
+  "warnings": [],
+  "metrics": {
+    "revenue": {
+      "status": "valid",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "unit": "USD"
+    },
+    "netIncome": {
+      "status": "valid",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "unit": "USD"
+    },
+    "operatingIncome": {
+      "status": "valid",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "unit": "USD"
+    },
+    "cashFromOperations": {
+      "status": "valid",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "unit": "USD"
+    },
+    "capex": {
+      "status": "valid",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "unit": "USD"
+    },
+    "epsDiluted": {
+      "status": "valid",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "unit": "USD/shares"
+    },
+    "cash": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "currentAssets": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "currentLiabilities": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "inventory": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "totalAssets": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "totalLiabilities": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "equity": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "longTermDebt": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    },
+    "shortTermDebt": {
+      "status": "valid",
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "unit": "USD"
+    }
+  }
+}
