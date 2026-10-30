@@ -35,5 +35,12 @@ jobs:
           git add platform-app/reports/fdve-cluster-v2.json
           if ! git diff --cached --quiet; then
             git commit -m "data: five-company FDVE fiscal coverage and reconciliation"
-            git push
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase -X theirs origin/main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep 2
+            done
+            echo "Could not push audit report after 3 attempts" >&2
+            exit 1
           fi
