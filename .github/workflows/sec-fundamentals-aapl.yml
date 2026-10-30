@@ -21,7 +21,9 @@ jobs:
         env:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
         run: node platform-app/scripts/update-sec-aapl.mjs
-      - name: Validate SEC data integrity\n        run: node platform-app/scripts/validate-sec-aapl.mjs --report\n      - name: Import into Google Sheets
+      - name: Validate SEC data integrity
+        run: node platform-app/scripts/validate-sec-aapl.mjs --report
+      - name: Import into Google Sheets
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           OPTIONSCRAFTED_SHEET_ID: 1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw
