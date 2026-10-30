@@ -70,3 +70,30 @@ export function reconcileValue(sec,fmp,metric){
  const relative=metric==='epsDiluted'?0.02:0.001;
  return {status:Math.abs(diff)<=absolute?'MATCH':Math.abs(diff)/scale<=relative?'ROUNDING':'DIFFERENCE',sec:sec.value,fmp:fmp.value,delta:diff,deltaPct:100*diff/scale};
 }
+
+export const BANK_METRIC_TYPES={
+ netInterestIncome:'flow',provisionCreditLosses:'flow',
+ deposits:'instant',loansNet:'instant',cet1Ratio:'instant'
+};
+export function selectBankFiscalSec(concepts,metric,year,asOf){
+ const kind=BANK_METRIC_TYPES[metric],tags=BANK_SEC_CANDIDATES[metric];
+ if(!kind||!tags)return {status:'UNKNOWN_BANK_METRIC'};
+ const unit=metric==='cet1Ratio'?'pure':'USD';
+ const candidates=tags.flatMap((tag,priority)=>(concepts[tag]?.units?.[unit]||[])
+  .filter(x=>validSecObservation(x,kind,year,asOf))
+  .map(x=>({...x,tag,priority})));
+ candidates.sort((a,b)=>a.priority-b.priority||b.filed.localeCompare(a.filed));
+ if(!candidates.length)return {status:'PERIOD_MISSING',metric,year,tagsChecked:tags};
+ const chosen=candidates[0];
+ return {status:'AVAILABLE',metric,year,value:chosen.val,unit,periodStart:chosen.start||null,periodEnd:chosen.end,tag:chosen.tag,accession:chosen.accn,filed:chosen.filed};
+}
+export function findRelatedTags(concepts,metric){
+ const patterns={
+  operatingIncome:/operatingincome|incomelossfromcontinuingoperationsbeforeincometaxes|incomeoperations/i,
+  inventory:/inventor|inventories/i,
+  longTermDebt:/longtermdebt|longtermborrow|debtnoncurrent|longtermnotes/i,
+  totalLiabilities:/liabilit/i
+ };
+ const pattern=patterns[metric];
+ return pattern?Object.keys(concepts).filter(tag=>pattern.test(tag)).slice(0,40):[];
+}
