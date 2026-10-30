@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-30T17:31:12.300Z",
+  "ticker": "AAPL",
+  "periods": [
+    "FY2024",
+    "FY2025"
+  ],
+  "primary": "SEC",
+  "alternative": "ALPHA_VANTAGE",
+  "sourceStatuses": {
+    "income": "AVAILABLE",
+    "balance": "AVAILABLE",
+    "cashflow": "AVAILABLE"
+  },
+  "totals": {
+    "matched": 0,
+    "rounding": 0,
+    "review": 0,
+    "unavailable": 30
+  },
+  "years": {
+    "2024": {
+      "comparisons": {
+        "revenue": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "alternativeField": "totalRevenue"
+        },
+        "netIncome": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "NetIncomeLoss",
+          "alternativeField": "netIncome"
+        },
+        "operatingIncome": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "OperatingIncomeLoss",
+          "alternativeField": "operatingIncome"
+        },
+        "cashFromOperations": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "NetCashProvidedByUsedInOperatingActivities",
+          "alternativeField": "operatingCashflow"
+        },
+        "capex": {
+          "status": "ALTERNATIVE_UNAVAILABLE",
+          "reason": "SIGN_REVIEW",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "SIGN_REVIEW",
+          "secTag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "alternativeField": null
+        },
+        "epsDiluted": {
+          "status": "ALTERNATIVE_UNAVAILABLE",
+          "reason": "FIELD_MISSING",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "FIELD_MISSING",
+          "secTag": "EarningsPerShareDiluted",
+          "alternativeField": "reportedEPS"
+        },
+        "cash": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "CashAndCashEquivalentsAtCarryingValue",
+          "alternativeField": "cashAndCashEquivalentsAtCarryingValue"
+        },
+        "currentAssets": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "AssetsCurrent",
+          "alternativeField": "totalCurrentAssets"
+        },
+        "currentLiabilities": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "LiabilitiesCurrent",
+          "alternativeField": "totalCurrentLiabilities"
+        },
+        "inventory": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "InventoryNet",
+          "alternativeField": "inventory"
+        },
+        "totalAssets": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "Assets",
+          "alternativeField": "totalAssets"
+        },
+        "totalLiabilities": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "Liabilities",
+          "alternativeField": "totalLiabilities"
+        },
+        "equity": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "StockholdersEquity",
+          "alternativeField": "totalShareholderEquity"
+        },
+        "longTermDebt": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "LongTermDebtNoncurrent",
+          "alternativeField": "longTermDebt"
+        },
+        "shortTermDebt": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2024-09-28",
+          "alternativeEnd": "2024-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "LongTermDebtCurrent",
+          "alternativeField": "shortTermDebt"
+        }
+      }
+    },
+    "2025": {
+      "comparisons": {
+        "revenue": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "alternativeField": "totalRevenue"
+        },
+        "netIncome": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "NetIncomeLoss",
+          "alternativeField": "netIncome"
+        },
+        "operatingIncome": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "OperatingIncomeLoss",
+          "alternativeField": "operatingIncome"
+        },
+        "cashFromOperations": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "NetCashProvidedByUsedInOperatingActivities",
+          "alternativeField": "operatingCashflow"
+        },
+        "capex": {
+          "status": "ALTERNATIVE_UNAVAILABLE",
+          "reason": "SIGN_REVIEW",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "SIGN_REVIEW",
+          "secTag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "alternativeField": null
+        },
+        "epsDiluted": {
+          "status": "ALTERNATIVE_UNAVAILABLE",
+          "reason": "FIELD_MISSING",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "FIELD_MISSING",
+          "secTag": "EarningsPerShareDiluted",
+          "alternativeField": "reportedEPS"
+        },
+        "cash": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "CashAndCashEquivalentsAtCarryingValue",
+          "alternativeField": "cashAndCashEquivalentsAtCarryingValue"
+        },
+        "currentAssets": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "AssetsCurrent",
+          "alternativeField": "totalCurrentAssets"
+        },
+        "currentLiabilities": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "LiabilitiesCurrent",
+          "alternativeField": "totalCurrentLiabilities"
+        },
+        "inventory": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "InventoryNet",
+          "alternativeField": "inventory"
+        },
+        "totalAssets": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "Assets",
+          "alternativeField": "totalAssets"
+        },
+        "totalLiabilities": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "Liabilities",
+          "alternativeField": "totalLiabilities"
+        },
+        "equity": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "StockholdersEquity",
+          "alternativeField": "totalShareholderEquity"
+        },
+        "longTermDebt": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "LongTermDebtNoncurrent",
+          "alternativeField": "longTermDebt"
+        },
+        "shortTermDebt": {
+          "status": "PERIOD_MISMATCH",
+          "secEnd": "2025-09-27",
+          "alternativeEnd": "2025-09-30",
+          "secStatus": "AVAILABLE",
+          "alternativeStatus": "AVAILABLE",
+          "secTag": "LongTermDebtCurrent",
+          "alternativeField": "shortTermDebt"
+        }
+      }
+    }
+  },
+  "notes": [
+    "Exact fiscal-end and unit matching required",
+    "Differences require semantic review; never overwrite SEC",
+    "Only AAPL included in this initial live reconciliation"
+  ]
+}
