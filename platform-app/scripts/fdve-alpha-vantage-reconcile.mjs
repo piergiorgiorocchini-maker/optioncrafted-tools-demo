@@ -27,14 +27,14 @@ for(const year of [2024,2025]){
   const av=normalizeAlphaVantageAnnual({ticker:'AAPL',metric,year,statements});
   const cmp=compareAnnualFacts(sec,av,metric);
   comparisons[metric]={...cmp,secStatus:sec.status,alternativeStatus:av.status,secTag:sec.tag||sec.method||null,alternativeField:av.field||null};
-  if(cmp.status==='MATCH')totals.matched++;
-  else if(cmp.status==='ROUNDING')totals.rounding++;
+  if(['MATCH','MATCH_DATE_NORMALIZED'].includes(cmp.status))totals.matched++;
+  else if(['ROUNDING','ROUNDING_DATE_NORMALIZED'].includes(cmp.status))totals.rounding++;
   else if(cmp.status==='REVIEW_REQUIRED')totals.review++;
   else totals.unavailable++;
  }
  years[year]={comparisons};
 }
-const output={schemaVersion:1,generatedAt:new Date().toISOString(),ticker:'AAPL',periods:['FY2024','FY2025'],primary:'SEC',alternative:'ALPHA_VANTAGE',sourceStatuses,totals,years,notes:['Exact fiscal-end and unit matching required','Differences require semantic review; never overwrite SEC','Only AAPL included in this initial live reconciliation']};
+const output={schemaVersion:1,generatedAt:new Date().toISOString(),ticker:'AAPL',periods:['FY2024','FY2025'],primary:'SEC',alternative:'ALPHA_VANTAGE',sourceStatuses,totals,years,notes:['Same fiscal end or explicitly flagged month-end normalization (maximum seven days) and matching unit required','Differences require semantic review; never overwrite SEC','Only AAPL included in this initial live reconciliation']};
 await fs.writeFile('platform-app/reports/fdve-alpha-vantage-aapl.json',JSON.stringify(output,null,2)+'\n');
 console.log(JSON.stringify({sourceStatuses,totals}));
 if(Object.values(sourceStatuses).some(x=>x!=='AVAILABLE'))process.exitCode=1;
