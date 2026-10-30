@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "ticker": "AAPL",
+  "cik": "0000320193",
+  "company": "Apple Inc.",
+  "source": "SEC EDGAR companyfacts",
+  "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+  "generatedAt": "2026-10-30T12:24:33.468Z",
+  "units": "USD (raw, not millions)",
+  "metrics": {
+    "revenue": {
+      "value": 416161000000,
+      "periodStart": "2024-09-29",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "netIncome": {
+      "value": 112010000000,
+      "periodStart": "2024-09-29",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "tag": "NetIncomeLoss",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "operatingIncome": {
+      "value": 133050000000,
+      "periodStart": "2024-09-29",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "tag": "OperatingIncomeLoss",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "cashFromOperations": {
+      "value": 111482000000,
+      "periodStart": "2024-09-29",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "tag": "NetCashProvidedByUsedInOperatingActivities",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "capex": {
+      "value": 12715000000,
+      "periodStart": "2024-09-29",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "cash": {
+      "value": 39544000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "CashAndCashEquivalentsAtCarryingValue",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "currentAssets": {
+      "value": 149818000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "AssetsCurrent",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "currentLiabilities": {
+      "value": 149326000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "LiabilitiesCurrent",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "inventory": {
+      "value": 11092000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "InventoryNet",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "totalAssets": {
+      "value": 383266000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "Assets",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "totalLiabilities": {
+      "value": 275746000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "Liabilities",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "equity": {
+      "value": 107520000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "StockholdersEquity",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "longTermDebt": {
+      "value": 71340000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "LongTermDebtNoncurrent",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "shortTermDebt": {
+      "value": 11007000000,
+      "periodStart": null,
+      "periodEnd": "2026-06-27",
+      "filed": "2026-07-31",
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "tag": "LongTermDebtCurrent",
+      "unit": "USD",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "epsDiluted": {
+      "value": 7.46,
+      "periodStart": "2024-09-29",
+      "periodEnd": "2025-09-27",
+      "filed": "2025-10-31",
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "tag": "EarningsPerShareDiluted",
+      "unit": "USD/shares",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    }
+  },
+  "missing": [],
+  "notes": "Annual flow metrics and latest balance-sheet instants. Do not interpret as TTM or sum debt fields without taxonomy reconciliation."
+}
