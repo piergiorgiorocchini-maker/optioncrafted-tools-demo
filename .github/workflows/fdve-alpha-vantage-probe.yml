@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'platform-app/scripts/fdve-alpha-vantage-probe.mjs'
+      - 'platform-app/scripts/fdve-alpha-vantage-adapter*.mjs'
       - '.github/workflows/fdve-alpha-vantage-probe.yml'
 permissions:
   contents: read
@@ -15,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Validate Alpha Vantage normalization and reconciliation
+        run: node --test platform-app/scripts/fdve-alpha-vantage-adapter.test.mjs
       - name: Probe Alpha Vantage endpoints without exposing credentials
         env:
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
