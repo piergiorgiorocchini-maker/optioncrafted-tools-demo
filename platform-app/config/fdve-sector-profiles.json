@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "principle": "Applicability is separate from data availability. No inferred accounting equivalence.",
+  "profiles": {
+    "industrial": {
+      "companies": [
+        "AAPL",
+        "MSFT",
+        "XOM",
+        "WMT"
+      ],
+      "applicable": [
+        "revenue",
+        "netIncome",
+        "operatingIncome",
+        "cashFromOperations",
+        "capex",
+        "epsDiluted",
+        "cash",
+        "currentAssets",
+        "currentLiabilities",
+        "inventory",
+        "totalAssets",
+        "totalLiabilities",
+        "equity",
+        "longTermDebt",
+        "shortTermDebt"
+      ],
+      "optional": [
+        "inventory",
+        "shortTermDebt"
+      ]
+    },
+    "bank": {
+      "companies": [
+        "JPM"
+      ],
+      "applicable": [
+        "revenue",
+        "netIncome",
+        "epsDiluted",
+        "cashFromOperations",
+        "cash",
+        "totalAssets",
+        "totalLiabilities",
+        "equity"
+      ],
+      "notApplicable": [
+        "operatingIncome",
+        "capex",
+        "currentAssets",
+        "currentLiabilities",
+        "inventory",
+        "longTermDebt",
+        "shortTermDebt"
+      ],
+      "note": "Bank metrics require dedicated mapping: NII, provisions, deposits, CET1, NIM, loan quality. CapEx and debt may exist but are excluded from industrial comparability, not declared nonexistent."
+    }
+  },
+  "exceptions": {
+    "XOM": {
+      "operatingIncome": "REVIEW_TAXONOMY"
+    },
+    "WMT": {
+      "totalLiabilities": "REVIEW_TAXONOMY_OR_DERIVATION"
+    }
+  },
+  "statuses": [
+    "VALID",
+    "MISSING",
+    "UNMAPPED",
+    "NOT_APPLICABLE",
+    "REVIEW_REQUIRED",
+    "REJECTED"
+  ]
+}
