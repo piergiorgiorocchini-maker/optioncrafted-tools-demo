@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: FDVE normalized model regression tests
+        run: node --test platform-app/scripts/fdve-model.test.mjs
       - name: Fetch SEC companyfacts
         env:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
