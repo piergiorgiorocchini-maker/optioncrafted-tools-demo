@@ -2,9 +2,12 @@ import {NavLink} from "react-router-dom";
 import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
 import type {Security} from "../core/contracts";import type {RealAsset} from "./RealResearch";
 import "./company.css";import {FinancialCharts} from "./FinancialCharts";import appleResearch from "../data/aaplResearch.json";
+import {fundamentalMetrics,missingFundamentals} from "../core/fundamentalMetrics";
 const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
 export function CompanyIntelligence({company,asset}:{company:Security;asset?:RealAsset}){
  const apple=asset?.ticker==="AAPL";const appleFcf=apple?appleResearch.fcfPerShare:null; const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
+ const balanceMetrics=fundamentalMetrics(missingFundamentals);
+ const balanceRows=[["Current ratio",balanceMetrics.currentRatio],["Quick ratio",balanceMetrics.quickRatio],["Cash ratio",balanceMetrics.cashRatio],["Net debt",balanceMetrics.netDebt],["Net debt / EBITDA",balanceMetrics.netDebtEbitda],["Debt / Equity",balanceMetrics.debtEquity],["Interest coverage",balanceMetrics.interestCoverage],["FCF / Debt",balanceMetrics.fcfDebt],["Enterprise value",balanceMetrics.enterpriseValue],["EV / EBITDA",balanceMetrics.evEbitda]] as const;
  const earningsYield=company.eps/company.price*100;
  const fcfYield=company.fcfPerShare/company.price*100;
  const gap=(company.buyBelow/company.price-1)*100;
@@ -18,6 +21,7 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
    <article><span><Target size={16}/> EARNINGS YIELD</span><strong>{real?(earnings!==null&&referencePrice!==null&&referencePrice>0?show(earnings/referencePrice*100,"%"):"N/D"):earningsYield.toFixed(2)+"%"}</strong><small>{real?"Computed from snapshot EPS / price":"Derived from demo EPS ÷ price"}</small></article>
   </section>
   <FinancialCharts asset={asset} company={company}/>
+  <section className="ci-panel ci-wide"><div className="ci-panel-head"><h3>Liquidity, leverage & enterprise value</h3><span>SHARED METRIC ENGINE · SOURCE DATA PENDING</span></div><div className="ci-fundamentals">{balanceRows.map(([label,metric])=><div key={label}><span>{label}</span><b title={"Requires: "+metric.required.join(", ")}>{metric.value===null?"N/D · awaiting verified inputs":metric.unit==="money"?showMoney(metric.value):metric.value.toFixed(2)+(metric.unit==="percent"?"%":"x")}</b></div>)}</div><p className="ci-note">Balance-sheet fields are not yet available in the validated asset snapshot. These ratios remain N/D rather than being calculated from sample or mismatched reporting periods. Financial, insurance and REIT companies require sector-specific leverage and liquidity definitions before scoring.</p></section>
   <div className="ci-main">
    <section className="ci-panel"><div className="ci-panel-head"><h3>Financial overview</h3><span>{real?"Real partial snapshot":"Sample snapshot"}</span></div><div className="ci-fundamentals">
     <div><span>Earnings per share</span><b>{showMoney(earnings)}</b></div>
