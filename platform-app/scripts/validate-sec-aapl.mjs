@@ -3,7 +3,7 @@
 // Fails closed: never publishes unvalidated data.
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-const path=process.argv[2]||'platform-app/src/data/sec/aapl.json';
+const path=process.argv.slice(2).find(arg=>!arg.startsWith('--'))||'platform-app/src/data/sec/aapl.json';
 const doc=JSON.parse(await fs.readFile(path,'utf8'));
 const issues=[], warnings=[], results={};
 const fail=(metric,reason)=>issues.push({metric,reason});
