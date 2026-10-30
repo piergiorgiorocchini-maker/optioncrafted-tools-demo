@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FDVE five-company cross-sector pilot, not production",
+  "companies": [
+    {
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "profile": "hardware"
+    },
+    {
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "profile": "software-cloud"
+    },
+    {
+      "ticker": "XOM",
+      "cik": "0000034088",
+      "profile": "energy"
+    },
+    {
+      "ticker": "WMT",
+      "cik": "0000104169",
+      "profile": "retail"
+    },
+    {
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "profile": "bank"
+    }
+  ],
+  "providers": [
+    "SEC companyfacts",
+    "FMP financial statements"
+  ],
+  "periods": [
+    "FY2024",
+    "FY2025",
+    "latest comparable quarter"
+  ],
+  "statuses": [
+    "MATCH",
+    "ROUNDING",
+    "PERIOD_MISMATCH",
+    "DEFINITION_MISMATCH",
+    "UNMAPPED",
+    "NOT_APPLICABLE",
+    "MISSING_SOURCE",
+    "REJECTED"
+  ],
+  "rules": [
+    "Preserve raw payloads",
+    "Match periods and currency before comparing",
+    "Never treat missing as zero",
+    "Bank uses sector-specific schema",
+    "CapEx sign is explicit",
+    "No publishing until validated"
+  ],
+  "targetCoreCoverage": 0.95
+}
