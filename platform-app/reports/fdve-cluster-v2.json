@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-30T15:48:57.246Z",
+  "generatedAt": "2026-10-30T15:50:38.421Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -855,7 +855,14 @@
             "operatingIncome": {
               "status": "PERIOD_MISSING",
               "metric": "operatingIncome",
-              "year": 2024
+              "year": 2024,
+              "taxonomyCandidates": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ]
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -932,7 +939,21 @@
             "inventory": {
               "status": "PERIOD_MISSING",
               "metric": "inventory",
-              "year": 2024
+              "year": 2024,
+              "taxonomyCandidates": [
+                "EffectOfLIFOInventoryLiquidationOnIncome",
+                "EnergyRelatedInventory",
+                "EnergyRelatedInventoryChemicals",
+                "EnergyRelatedInventoryNaturalGasInStorage",
+                "EnergyRelatedInventoryPetroleum",
+                "IncreaseDecreaseInInventories",
+                "InventoryCrudeOilProductsAndMerchandise",
+                "InventoryFinishedGoodsAndWorkInProcess",
+                "InventoryNet",
+                "InventoryPartsAndComponents",
+                "InventoryPartsAndComponentsNetOfReserves",
+                "InventoryWriteDown"
+              ]
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -973,7 +994,20 @@
             "longTermDebt": {
               "status": "PERIOD_MISSING",
               "metric": "longTermDebt",
-              "year": 2024
+              "year": 2024,
+              "taxonomyCandidates": [
+                "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtCurrent",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "RepaymentsOfLongTermDebt"
+              ]
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -1024,7 +1058,14 @@
             "operatingIncome": {
               "status": "PERIOD_MISSING",
               "metric": "operatingIncome",
-              "year": 2025
+              "year": 2025,
+              "taxonomyCandidates": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ]
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -1101,7 +1142,21 @@
             "inventory": {
               "status": "PERIOD_MISSING",
               "metric": "inventory",
-              "year": 2025
+              "year": 2025,
+              "taxonomyCandidates": [
+                "EffectOfLIFOInventoryLiquidationOnIncome",
+                "EnergyRelatedInventory",
+                "EnergyRelatedInventoryChemicals",
+                "EnergyRelatedInventoryNaturalGasInStorage",
+                "EnergyRelatedInventoryPetroleum",
+                "IncreaseDecreaseInInventories",
+                "InventoryCrudeOilProductsAndMerchandise",
+                "InventoryFinishedGoodsAndWorkInProcess",
+                "InventoryNet",
+                "InventoryPartsAndComponents",
+                "InventoryPartsAndComponentsNetOfReserves",
+                "InventoryWriteDown"
+              ]
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -1142,7 +1197,20 @@
             "longTermDebt": {
               "status": "PERIOD_MISSING",
               "metric": "longTermDebt",
-              "year": 2025
+              "year": 2025,
+              "taxonomyCandidates": [
+                "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtCurrent",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "RepaymentsOfLongTermDebt"
+              ]
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -1653,38 +1721,70 @@
           },
           "bank": {
             "netInterestIncome": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "AVAILABLE",
+              "metric": "netInterestIncome",
+              "year": 2024,
+              "value": 92583000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "InterestIncomeExpenseNet",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14",
+              "tagsPresent": [
                 "InterestIncomeExpenseNet"
-              ],
-              "validatedValue": null
+              ]
             },
             "provisionCreditLosses": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "AVAILABLE",
+              "metric": "provisionCreditLosses",
+              "year": 2024,
+              "value": 10678000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "ProvisionForLoanLeaseAndOtherLosses",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14",
+              "tagsPresent": [
                 "ProvisionForLoanLeaseAndOtherLosses",
                 "ProvisionForLoanAndLeaseLosses"
-              ],
-              "validatedValue": null
+              ]
             },
             "deposits": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "AVAILABLE",
+              "metric": "deposits",
+              "year": 2024,
+              "value": 2406032000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "Deposits",
+              "accession": "0000019617-25-000270",
+              "filed": "2025-02-14",
+              "tagsPresent": [
                 "Deposits"
-              ],
-              "validatedValue": null
+              ]
             },
             "loansNet": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "PERIOD_MISSING",
+              "metric": "loansNet",
+              "year": 2024,
+              "tagsChecked": [
                 "LoansAndLeasesReceivableNetReportedAmount"
               ],
-              "validatedValue": null
+              "tagsPresent": [
+                "LoansAndLeasesReceivableNetReportedAmount"
+              ]
             },
             "cet1Ratio": {
-              "status": "NOT_MAPPED",
-              "tags": [],
-              "validatedValue": null
+              "status": "PERIOD_MISSING",
+              "metric": "cet1Ratio",
+              "year": 2024,
+              "tagsChecked": [
+                "CommonEquityTierOneCapitalRatio"
+              ],
+              "tagsPresent": []
             }
           },
           "coverage": {
@@ -1770,38 +1870,70 @@
           },
           "bank": {
             "netInterestIncome": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "AVAILABLE",
+              "metric": "netInterestIncome",
+              "year": 2025,
+              "value": 95443000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "InterestIncomeExpenseNet",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13",
+              "tagsPresent": [
                 "InterestIncomeExpenseNet"
-              ],
-              "validatedValue": null
+              ]
             },
             "provisionCreditLosses": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "AVAILABLE",
+              "metric": "provisionCreditLosses",
+              "year": 2025,
+              "value": 14212000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "ProvisionForLoanLeaseAndOtherLosses",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13",
+              "tagsPresent": [
                 "ProvisionForLoanLeaseAndOtherLosses",
                 "ProvisionForLoanAndLeaseLosses"
-              ],
-              "validatedValue": null
+              ]
             },
             "deposits": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "AVAILABLE",
+              "metric": "deposits",
+              "year": 2025,
+              "value": 2559320000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "Deposits",
+              "accession": "0001628280-26-008131",
+              "filed": "2026-02-13",
+              "tagsPresent": [
                 "Deposits"
-              ],
-              "validatedValue": null
+              ]
             },
             "loansNet": {
-              "status": "TAXONOMY_PRESENT",
-              "tags": [
+              "status": "PERIOD_MISSING",
+              "metric": "loansNet",
+              "year": 2025,
+              "tagsChecked": [
                 "LoansAndLeasesReceivableNetReportedAmount"
               ],
-              "validatedValue": null
+              "tagsPresent": [
+                "LoansAndLeasesReceivableNetReportedAmount"
+              ]
             },
             "cet1Ratio": {
-              "status": "NOT_MAPPED",
-              "tags": [],
-              "validatedValue": null
+              "status": "PERIOD_MISSING",
+              "metric": "cet1Ratio",
+              "year": 2025,
+              "tagsChecked": [
+                "CommonEquityTierOneCapitalRatio"
+              ],
+              "tagsPresent": []
             }
           },
           "coverage": {
