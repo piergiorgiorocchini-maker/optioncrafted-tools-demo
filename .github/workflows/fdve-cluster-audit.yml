@@ -1,8 +1,16 @@
-name: FDVE five-company SEC mapping audit
+name: FDVE five-company cross-sector audit
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'platform-app/scripts/fdve-cluster-*.mjs'
+      - 'platform-app/config/fdve-sector-profiles.json'
+      - '.github/workflows/fdve-cluster-audit.yml'
 permissions:
   contents: write
+concurrency:
+  group: fdve-cluster-audit
+  cancel-in-progress: false
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -11,18 +19,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Check normalized model
-        run: node --test platform-app/scripts/fdve-model.test.mjs
-      - name: Audit five SEC sources
+      - name: FDVE regression tests
+        run: |
+          node --test platform-app/scripts/fdve-model.test.mjs
+          node --test platform-app/scripts/fdve-cluster-mapping.test.mjs
+      - name: Period-aligned SEC and FMP audit
         env:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
-        run: node platform-app/scripts/audit-fdve-cluster.mjs
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+        run: node platform-app/scripts/fdve-cluster-v2.mjs
       - name: Commit audit report only
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add platform-app/reports/fdve-cluster-sec-coverage.json
+          git add platform-app/reports/fdve-cluster-v2.json
           if ! git diff --cached --quiet; then
-            git commit -m "data: five-company SEC taxonomy audit"
+            git commit -m "data: five-company FDVE fiscal coverage and reconciliation"
             git push
           fi
