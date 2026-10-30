@@ -16,7 +16,7 @@ export function FinancialCharts({asset,company}:{asset?:RealAsset;company:Securi
  const [metric,setMetric]=useState<View>("combined");
  const [showOnlySector,setShowOnlySector]=useState(true);
  const [sort,setSort]=useState<"pe"|"yield">("pe");
- const sector=asset?.sector||company.sector;const apple=asset?.ticker==="AAPL";const annual=appleResearch.annualData;const values=apple?annual.map(y=>metric==="revenue"?y.revenueB:metric==="fcf"?y.fcfB:y.eps):sample[metric];const periodsShown=apple?annual.map(y=>y.year):periods;const maxValue=Math.max(1,...values);
+ const sector=asset?.sector||company.sector;const apple=asset?.ticker==="AAPL";const annual=appleResearch.annualData;const values=apple?annual.map(y=>metric==="revenue"?y.revenueB:metric==="fcf"?y.fcfB:y.eps):sample[metric==="combined"?"revenue":metric];const periodsShown=apple?annual.map(y=>y.year):periods;const maxValue=Math.max(1,...values);
  const peers=useMemo(()=>snapshot.records.filter(x=>x.ticker!==asset?.ticker&&x.price!==null&&x.pe!==null&&x.pe>0&&x.pe<150&&x.beta!==null&&x.beta>=0&&x.beta<5&&(showOnlySector?x.sector===sector:true)).sort((a,b)=>sort==="pe"?(a.pe!-b.pe!):((b.dividendYield??-1)-(a.dividendYield??-1))).slice(0,12),[asset?.ticker,sector,showOnlySector,sort]);
  const scatter=[...(asset&&asset.pe!==null&&asset.pe>0&&asset.beta!==null?[asset]:[]),...peers];
  const xMax=Math.max(2,Math.ceil(Math.max(...scatter.map(s=>s.beta||0),0)/0.5)*0.5);
