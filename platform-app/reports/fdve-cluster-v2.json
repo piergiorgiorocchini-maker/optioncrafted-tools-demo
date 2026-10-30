@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-30T15:51:14.544Z",
+  "generatedAt": "2026-10-30T16:37:07.877Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -18,7 +18,7 @@
     "compared": 0,
     "matched": 0,
     "differences": 0,
-    "unresolved": 0,
+    "unresolved": 132,
     "coverage": 0.9545454545454546,
     "expectedComparisons": 126,
     "notCompared": 126,
@@ -35,7 +35,8 @@
         "company": "Apple Inc."
       },
       "fmp": {
-        "status": "MISSING_CREDENTIAL"
+        "status": "PARTIAL",
+        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -226,6 +227,53 @@
             "applicable": 15,
             "available": 15,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         },
         "2025": {
@@ -416,6 +464,53 @@
             "applicable": 15,
             "available": 15,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         }
       }
@@ -430,7 +525,8 @@
         "company": "MICROSOFT CORPORATION"
       },
       "fmp": {
-        "status": "MISSING_CREDENTIAL"
+        "status": "PARTIAL",
+        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -621,6 +717,53 @@
             "applicable": 15,
             "available": 15,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         },
         "2025": {
@@ -811,6 +954,53 @@
             "applicable": 15,
             "available": 15,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         }
       }
@@ -825,7 +1015,8 @@
         "company": "Exxon Mobil Corporation"
       },
       "fmp": {
-        "status": "MISSING_CREDENTIAL"
+        "status": "PARTIAL",
+        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -1029,6 +1220,53 @@
             "applicable": 15,
             "available": 12,
             "rate": 0.8
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         },
         "2025": {
@@ -1232,6 +1470,53 @@
             "applicable": 15,
             "available": 12,
             "rate": 0.8
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         }
       }
@@ -1246,7 +1531,8 @@
         "company": "Walmart Inc."
       },
       "fmp": {
-        "status": "MISSING_CREDENTIAL"
+        "status": "PARTIAL",
+        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -1438,6 +1724,53 @@
             "applicable": 15,
             "available": 15,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         },
         "2025": {
@@ -1629,6 +1962,53 @@
             "applicable": 15,
             "available": 15,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         }
       }
@@ -1643,7 +2023,8 @@
         "company": "JPMORGAN CHASE & CO"
       },
       "fmp": {
-        "status": "MISSING_CREDENTIAL"
+        "status": "PARTIAL",
+        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -1793,6 +2174,26 @@
             "applicable": 6,
             "available": 6,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         },
         "2025": {
@@ -1942,6 +2343,26 @@
             "applicable": 6,
             "available": 6,
             "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            }
           }
         }
       }
