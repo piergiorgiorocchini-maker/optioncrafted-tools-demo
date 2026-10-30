@@ -20,7 +20,7 @@ jobs:
         env:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
         run: node platform-app/scripts/update-sec-aapl.mjs
-      - name: Import into Google Sheets
+      - name: Validate SEC data integrity\n        run: node platform-app/scripts/validate-sec-aapl.mjs --report\n      - name: Import into Google Sheets
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           OPTIONSCRAFTED_SHEET_ID: 1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw
@@ -29,7 +29,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add platform-app/src/data/sec/aapl.json
+          git add platform-app/src/data/sec/aapl.json platform-app/src/data/sec/aapl-validation.json
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh AAPL SEC fundamentals"
             git push
