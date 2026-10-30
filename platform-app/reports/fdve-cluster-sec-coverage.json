@@ -1,0 +1,1499 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-30T15:25:56.783Z",
+  "purpose": "Source mapping coverage only; not SEC/FMP value reconciliation",
+  "companies": [
+    {
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "profile": "hardware",
+      "companyName": "Apple Inc.",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+      "status": "FETCHED",
+      "mapped": 15,
+      "metricCount": 15,
+      "coverage": 1,
+      "metrics": {
+        "revenue": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "Revenues",
+            "SalesRevenueNet"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "value": 416161000000,
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "filed": "2025-10-31",
+            "form": "10-K",
+            "accn": "0000320193-25-000079"
+          }
+        },
+        "netIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetIncomeLoss"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "NetIncomeLoss",
+            "value": 112010000000,
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "filed": "2025-10-31",
+            "form": "10-K",
+            "accn": "0000320193-25-000079"
+          }
+        },
+        "operatingIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "OperatingIncomeLoss"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "OperatingIncomeLoss",
+            "value": 133050000000,
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "filed": "2025-10-31",
+            "form": "10-K",
+            "accn": "0000320193-25-000079"
+          }
+        },
+        "cashFromOperations": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetCashProvidedByUsedInOperatingActivities"
+          ],
+          "annualOrInstantCount": 42,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "NetCashProvidedByUsedInOperatingActivities",
+            "value": 111482000000,
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "filed": "2025-10-31",
+            "form": "10-K",
+            "accn": "0000320193-25-000079"
+          }
+        },
+        "capex": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "PaymentsToAcquirePropertyPlantAndEquipment"
+          ],
+          "annualOrInstantCount": 33,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+            "value": 12715000000,
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "filed": "2025-10-31",
+            "form": "10-K",
+            "accn": "0000320193-25-000079"
+          }
+        },
+        "epsDiluted": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "EarningsPerShareDiluted"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "EarningsPerShareDiluted",
+            "value": 7.46,
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "filed": "2025-10-31",
+            "form": "10-K",
+            "accn": "0000320193-25-000079"
+          }
+        },
+        "cash": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "CashAndCashEquivalentsAtCarryingValue"
+          ],
+          "annualOrInstantCount": 216,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "CashAndCashEquivalentsAtCarryingValue",
+            "value": 39544000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "currentAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "AssetsCurrent"
+          ],
+          "annualOrInstantCount": 138,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "AssetsCurrent",
+            "value": 149818000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "currentLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LiabilitiesCurrent"
+          ],
+          "annualOrInstantCount": 138,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "LiabilitiesCurrent",
+            "value": 149326000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "inventory": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "InventoryNet"
+          ],
+          "annualOrInstantCount": 138,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "InventoryNet",
+            "value": 11092000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "totalAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Assets"
+          ],
+          "annualOrInstantCount": 140,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "Assets",
+            "value": 383266000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "totalLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Liabilities"
+          ],
+          "annualOrInstantCount": 138,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "Liabilities",
+            "value": 275746000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "equity": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "StockholdersEquity"
+          ],
+          "annualOrInstantCount": 252,
+          "byCalendarEndYear": {
+            "2024": 18,
+            "2025": 12
+          },
+          "latest": {
+            "tag": "StockholdersEquity",
+            "value": 107520000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "longTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtNoncurrent"
+          ],
+          "annualOrInstantCount": 90,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "LongTermDebtNoncurrent",
+            "value": 71340000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        },
+        "shortTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtCurrent"
+          ],
+          "annualOrInstantCount": 90,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 7
+          },
+          "latest": {
+            "tag": "LongTermDebtCurrent",
+            "value": 11007000000,
+            "start": null,
+            "end": "2026-06-27",
+            "filed": "2026-07-31",
+            "form": "10-Q",
+            "accn": "0000320193-26-000020"
+          }
+        }
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "profile": "software-cloud",
+      "companyName": "MICROSOFT CORPORATION",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+      "status": "FETCHED",
+      "mapped": 15,
+      "metricCount": 15,
+      "coverage": 1,
+      "metrics": {
+        "revenue": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "Revenues",
+            "SalesRevenueNet",
+            "SalesRevenueGoodsNet"
+          ],
+          "annualOrInstantCount": 57,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "value": 331839000000,
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "filed": "2026-07-29",
+            "form": "10-K",
+            "accn": "0001193125-26-323660"
+          }
+        },
+        "netIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetIncomeLoss"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "NetIncomeLoss",
+            "value": 133749000000,
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "filed": "2026-07-29",
+            "form": "10-K",
+            "accn": "0001193125-26-323660"
+          }
+        },
+        "operatingIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "OperatingIncomeLoss"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "OperatingIncomeLoss",
+            "value": 155237000000,
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "filed": "2026-07-29",
+            "form": "10-K",
+            "accn": "0001193125-26-323660"
+          }
+        },
+        "cashFromOperations": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetCashProvidedByUsedInOperatingActivities"
+          ],
+          "annualOrInstantCount": 39,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "NetCashProvidedByUsedInOperatingActivities",
+            "value": 182935000000,
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "filed": "2026-07-29",
+            "form": "10-K",
+            "accn": "0001193125-26-323660"
+          }
+        },
+        "capex": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "PaymentsToAcquirePropertyPlantAndEquipment"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+            "value": 115948000000,
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "filed": "2026-07-29",
+            "form": "10-K",
+            "accn": "0001193125-26-323660"
+          }
+        },
+        "epsDiluted": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "EarningsPerShareDiluted"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "EarningsPerShareDiluted",
+            "value": 17.95,
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "filed": "2026-07-29",
+            "form": "10-K",
+            "accn": "0001193125-26-323660"
+          }
+        },
+        "cash": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "CashAndCashEquivalentsAtCarryingValue"
+          ],
+          "annualOrInstantCount": 252,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "CashAndCashEquivalentsAtCarryingValue",
+            "value": 20281000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "currentAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "AssetsCurrent"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "AssetsCurrent",
+            "value": 186137000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "currentLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LiabilitiesCurrent"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "LiabilitiesCurrent",
+            "value": 151968000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "inventory": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "InventoryNet"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "InventoryNet",
+            "value": 1835000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "totalAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Assets"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "Assets",
+            "value": 779403000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "totalLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Liabilities"
+          ],
+          "annualOrInstantCount": 128,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "Liabilities",
+            "value": 308894000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "equity": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "StockholdersEquity"
+          ],
+          "annualOrInstantCount": 204,
+          "byCalendarEndYear": {
+            "2024": 12,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "StockholdersEquity",
+            "value": 470509000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "longTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtNoncurrent"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "LongTermDebtNoncurrent",
+            "value": 31090000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        },
+        "shortTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtCurrent"
+          ],
+          "annualOrInstantCount": 112,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "LongTermDebtCurrent",
+            "value": 4391000000,
+            "start": null,
+            "end": "2026-09-30",
+            "filed": "2026-10-28",
+            "form": "10-Q",
+            "accn": "0001193125-26-436133"
+          }
+        }
+      }
+    },
+    {
+      "ticker": "XOM",
+      "cik": "0000034088",
+      "profile": "energy",
+      "companyName": "Exxon Mobil Corporation",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000034088.json",
+      "status": "FETCHED",
+      "mapped": 14,
+      "metricCount": 15,
+      "coverage": 0.9333333333333333,
+      "metrics": {
+        "revenue": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "Revenues"
+          ],
+          "annualOrInstantCount": 54,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "Revenues",
+            "value": 332238000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-18",
+            "form": "10-K",
+            "accn": "0000034088-26-000045"
+          }
+        },
+        "netIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetIncomeLoss",
+            "ProfitLoss"
+          ],
+          "annualOrInstantCount": 102,
+          "byCalendarEndYear": {
+            "2024": 4,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "NetIncomeLoss",
+            "value": 28844000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-18",
+            "form": "10-K",
+            "accn": "0000034088-26-000045"
+          }
+        },
+        "operatingIncome": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "cashFromOperations": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetCashProvidedByUsedInOperatingActivities"
+          ],
+          "annualOrInstantCount": 39,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "NetCashProvidedByUsedInOperatingActivities",
+            "value": 51970000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-18",
+            "form": "10-K",
+            "accn": "0000034088-26-000045"
+          }
+        },
+        "capex": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "PaymentsToAcquirePropertyPlantAndEquipment"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+            "value": 28358000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-18",
+            "form": "10-K",
+            "accn": "0000034088-26-000045"
+          }
+        },
+        "epsDiluted": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "EarningsPerShareDiluted"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "EarningsPerShareDiluted",
+            "value": 6.7,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-18",
+            "form": "10-K",
+            "accn": "0000034088-26-000045"
+          }
+        },
+        "cash": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "CashAndCashEquivalentsAtCarryingValue"
+          ],
+          "annualOrInstantCount": 218,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 5
+          },
+          "latest": {
+            "tag": "CashAndCashEquivalentsAtCarryingValue",
+            "value": 8435000000,
+            "start": null,
+            "end": "2026-03-31",
+            "filed": "2026-05-04",
+            "form": "10-Q",
+            "accn": "0000034088-26-000067"
+          }
+        },
+        "currentAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "AssetsCurrent"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 5
+          },
+          "latest": {
+            "tag": "AssetsCurrent",
+            "value": 97787000000,
+            "start": null,
+            "end": "2026-03-31",
+            "filed": "2026-05-04",
+            "form": "10-Q",
+            "accn": "0000034088-26-000067"
+          }
+        },
+        "currentLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LiabilitiesCurrent"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 5
+          },
+          "latest": {
+            "tag": "LiabilitiesCurrent",
+            "value": 94378000000,
+            "start": null,
+            "end": "2026-03-31",
+            "filed": "2026-05-04",
+            "form": "10-Q",
+            "accn": "0000034088-26-000067"
+          }
+        },
+        "inventory": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "InventoryNet"
+          ],
+          "annualOrInstantCount": 12,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": {
+            "tag": "InventoryNet",
+            "value": 15158000000,
+            "start": null,
+            "end": "2012-06-30",
+            "filed": "2012-08-02",
+            "form": "10-Q",
+            "accn": "0000034088-12-000036"
+          }
+        },
+        "totalAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Assets"
+          ],
+          "annualOrInstantCount": 150,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 5
+          },
+          "latest": {
+            "tag": "Assets",
+            "value": 464410000000,
+            "start": null,
+            "end": "2026-03-31",
+            "filed": "2026-05-04",
+            "form": "10-Q",
+            "accn": "0000034088-26-000067"
+          }
+        },
+        "totalLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Liabilities"
+          ],
+          "annualOrInstantCount": 136,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 5
+          },
+          "latest": {
+            "tag": "Liabilities",
+            "value": 203414000000,
+            "start": null,
+            "end": "2026-03-31",
+            "filed": "2026-05-04",
+            "form": "10-Q",
+            "accn": "0000034088-26-000067"
+          }
+        },
+        "equity": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "StockholdersEquity",
+            "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+          ],
+          "annualOrInstantCount": 430,
+          "byCalendarEndYear": {
+            "2024": 24,
+            "2025": 13
+          },
+          "latest": {
+            "tag": "StockholdersEquity",
+            "value": 254381000000,
+            "start": null,
+            "end": "2026-03-31",
+            "filed": "2026-05-04",
+            "form": "10-Q",
+            "accn": "0000034088-26-000067"
+          }
+        },
+        "longTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtNoncurrent"
+          ],
+          "annualOrInstantCount": 41,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": {
+            "tag": "LongTermDebtNoncurrent",
+            "value": 23100000000,
+            "start": null,
+            "end": "2017-12-31",
+            "filed": "2019-02-27",
+            "form": "10-K",
+            "accn": "0000034088-19-000010"
+          }
+        },
+        "shortTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtCurrent"
+          ],
+          "annualOrInstantCount": 25,
+          "byCalendarEndYear": {
+            "2024": 1,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "LongTermDebtCurrent",
+            "value": 6200000000,
+            "start": null,
+            "end": "2025-12-31",
+            "filed": "2026-02-18",
+            "form": "10-K",
+            "accn": "0000034088-26-000045"
+          }
+        }
+      }
+    },
+    {
+      "ticker": "WMT",
+      "cik": "0000104169",
+      "profile": "retail",
+      "companyName": "Walmart Inc.",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+      "status": "FETCHED",
+      "mapped": 14,
+      "metricCount": 15,
+      "coverage": 0.9333333333333333,
+      "metrics": {
+        "revenue": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "Revenues",
+            "SalesRevenueNet"
+          ],
+          "annualOrInstantCount": 102,
+          "byCalendarEndYear": {
+            "2024": 6,
+            "2025": 4
+          },
+          "latest": {
+            "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "value": 706413000000,
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "filed": "2026-03-13",
+            "form": "10-K",
+            "accn": "0000104169-26-000055"
+          }
+        },
+        "netIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetIncomeLoss",
+            "ProfitLoss"
+          ],
+          "annualOrInstantCount": 102,
+          "byCalendarEndYear": {
+            "2024": 6,
+            "2025": 4
+          },
+          "latest": {
+            "tag": "NetIncomeLoss",
+            "value": 21893000000,
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "filed": "2026-03-13",
+            "form": "10-K",
+            "accn": "0000104169-26-000055"
+          }
+        },
+        "operatingIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "OperatingIncomeLoss"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "OperatingIncomeLoss",
+            "value": 29825000000,
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "filed": "2026-03-13",
+            "form": "10-K",
+            "accn": "0000104169-26-000055"
+          }
+        },
+        "cashFromOperations": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetCashProvidedByUsedInOperatingActivities"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "NetCashProvidedByUsedInOperatingActivities",
+            "value": 41565000000,
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "filed": "2026-03-13",
+            "form": "10-K",
+            "accn": "0000104169-26-000055"
+          }
+        },
+        "capex": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "PaymentsToAcquirePropertyPlantAndEquipment"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+            "value": 26642000000,
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "filed": "2026-03-13",
+            "form": "10-K",
+            "accn": "0000104169-26-000055"
+          }
+        },
+        "epsDiluted": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "EarningsPerShareDiluted"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 3,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "EarningsPerShareDiluted",
+            "value": 2.73,
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "filed": "2026-03-13",
+            "form": "10-K",
+            "accn": "0000104169-26-000055"
+          }
+        },
+        "cash": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "CashAndCashEquivalentsAtCarryingValue"
+          ],
+          "annualOrInstantCount": 225,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "CashAndCashEquivalentsAtCarryingValue",
+            "value": 11529000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "currentAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "AssetsCurrent"
+          ],
+          "annualOrInstantCount": 190,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "AssetsCurrent",
+            "value": 88703000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "currentLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LiabilitiesCurrent"
+          ],
+          "annualOrInstantCount": 190,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "LiabilitiesCurrent",
+            "value": 115630000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "inventory": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "InventoryNet"
+          ],
+          "annualOrInstantCount": 190,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "InventoryNet",
+            "value": 61600000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "totalAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Assets"
+          ],
+          "annualOrInstantCount": 204,
+          "byCalendarEndYear": {
+            "2024": 12,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "Assets",
+            "value": 293914000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "totalLiabilities": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "equity": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "StockholdersEquity",
+            "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+          ],
+          "annualOrInstantCount": 481,
+          "byCalendarEndYear": {
+            "2024": 32,
+            "2025": 26
+          },
+          "latest": {
+            "tag": "StockholdersEquity",
+            "value": 98238000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "longTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtNoncurrent"
+          ],
+          "annualOrInstantCount": 190,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "LongTermDebtNoncurrent",
+            "value": 36462000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        },
+        "shortTermDebt": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "LongTermDebtCurrent"
+          ],
+          "annualOrInstantCount": 190,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 10
+          },
+          "latest": {
+            "tag": "LongTermDebtCurrent",
+            "value": 3470000000,
+            "start": null,
+            "end": "2026-07-31",
+            "filed": "2026-08-28",
+            "form": "10-Q",
+            "accn": "0000104169-26-000154"
+          }
+        }
+      }
+    },
+    {
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "profile": "bank",
+      "companyName": "JPMORGAN CHASE & CO",
+      "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+      "status": "FETCHED",
+      "mapped": 8,
+      "metricCount": 15,
+      "coverage": 0.5333333333333333,
+      "metrics": {
+        "revenue": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Revenues",
+            "InterestAndDividendIncomeOperating",
+            "InterestIncomeExpenseAfterProvisionForLoanLoss"
+          ],
+          "annualOrInstantCount": 108,
+          "byCalendarEndYear": {
+            "2024": 4,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "Revenues",
+            "value": 182447000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-13",
+            "form": "10-K",
+            "accn": "0001628280-26-008131"
+          }
+        },
+        "netIncome": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetIncomeLoss",
+            "ProfitLoss",
+            "NetIncomeLossAvailableToCommonStockholdersBasic"
+          ],
+          "annualOrInstantCount": 110,
+          "byCalendarEndYear": {
+            "2024": 4,
+            "2025": 2
+          },
+          "latest": {
+            "tag": "NetIncomeLoss",
+            "value": 57048000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-13",
+            "form": "10-K",
+            "accn": "0001628280-26-008131"
+          }
+        },
+        "operatingIncome": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "cashFromOperations": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "NetCashProvidedByUsedInOperatingActivities"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "NetCashProvidedByUsedInOperatingActivities",
+            "value": -147782000000,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-13",
+            "form": "10-K",
+            "accn": "0001628280-26-008131"
+          }
+        },
+        "capex": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "epsDiluted": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "EarningsPerShareDiluted"
+          ],
+          "annualOrInstantCount": 51,
+          "byCalendarEndYear": {
+            "2024": 2,
+            "2025": 1
+          },
+          "latest": {
+            "tag": "EarningsPerShareDiluted",
+            "value": 20.02,
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "filed": "2026-02-13",
+            "form": "10-K",
+            "accn": "0001628280-26-008131"
+          }
+        },
+        "cash": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "CashAndCashEquivalentsAtCarryingValue"
+          ],
+          "annualOrInstantCount": 16,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": {
+            "tag": "CashAndCashEquivalentsAtCarryingValue",
+            "value": 278793000000,
+            "start": null,
+            "end": "2018-12-31",
+            "filed": "2019-02-26",
+            "form": "10-K",
+            "accn": "0000019617-19-000054"
+          }
+        },
+        "currentAssets": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "currentLiabilities": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "inventory": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "totalAssets": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Assets"
+          ],
+          "annualOrInstantCount": 197,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "Assets",
+            "value": 5015069000000,
+            "start": null,
+            "end": "2026-06-30",
+            "filed": "2026-08-06",
+            "form": "10-Q",
+            "accn": "0001628280-26-054343"
+          }
+        },
+        "totalLiabilities": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "Liabilities"
+          ],
+          "annualOrInstantCount": 139,
+          "byCalendarEndYear": {
+            "2024": 8,
+            "2025": 6
+          },
+          "latest": {
+            "tag": "Liabilities",
+            "value": 4640471000000,
+            "start": null,
+            "end": "2026-06-30",
+            "filed": "2026-08-06",
+            "form": "10-Q",
+            "accn": "0001628280-26-054343"
+          }
+        },
+        "equity": {
+          "status": "MAPPED",
+          "tagsFound": [
+            "StockholdersEquity",
+            "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+          ],
+          "annualOrInstantCount": 241,
+          "byCalendarEndYear": {
+            "2024": 11,
+            "2025": 8
+          },
+          "latest": {
+            "tag": "StockholdersEquity",
+            "value": 374598000000,
+            "start": null,
+            "end": "2026-06-30",
+            "filed": "2026-08-06",
+            "form": "10-Q",
+            "accn": "0001628280-26-054343"
+          }
+        },
+        "longTermDebt": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        },
+        "shortTermDebt": {
+          "status": "UNMAPPED",
+          "tagsFound": [],
+          "annualOrInstantCount": 0,
+          "byCalendarEndYear": {
+            "2024": 0,
+            "2025": 0
+          },
+          "latest": null
+        }
+      }
+    }
+  ]
+}
