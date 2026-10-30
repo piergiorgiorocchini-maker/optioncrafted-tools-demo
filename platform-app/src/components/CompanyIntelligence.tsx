@@ -1,3 +1,4 @@
+import {VerifiedFundamentals} from "./VerifiedFundamentals";
 import {NavLink} from "react-router-dom";
 import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
 import type {Security} from "../core/contracts";import type {RealAsset} from "./RealResearch";
@@ -21,6 +22,7 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
    <article><span><ChartNoAxesCombined size={16}/> FREE CASH FLOW YIELD</span><strong>{apple&&referencePrice!==null?(appleFcf!/referencePrice*100).toFixed(2)+"%":real?"N/D":fcfYield.toFixed(2)+"%"}</strong><small>{real?"FCF data pending":"Derived from demo FCF/share ÷ price"}</small></article>
    <article><span><Target size={16}/> EARNINGS YIELD</span><strong>{real?(earnings!==null&&referencePrice!==null&&referencePrice>0?show(earnings/referencePrice*100,"%"):"N/D"):earningsYield.toFixed(2)+"%"}</strong><small>{real?"Computed from snapshot EPS / price":"Derived from demo EPS ÷ price"}</small></article>
   </section>
+  <VerifiedFundamentals ticker={symbol}/>
   <FinancialCharts asset={asset} company={company}/>
   <section className="ci-panel ci-wide"><div className="ci-panel-head"><h3>Liquidity, leverage & enterprise value</h3><span>{apple?"SEC 10-Q · 27 JUN 2026":"SHARED METRIC ENGINE · SOURCE DATA PENDING"}</span></div><div className="ci-balance-grid">{balanceRows.map(([label,metric])=><div key={label}><span>{label}</span><b title={"Requires: "+metric.required.join(", ")}>{metric.value===null?"N/D":metric.unit==="money"?showMoney(metric.value):metric.value.toFixed(2)+(metric.unit==="percent"?"%":"x")}</b></div>)}</div><p className="ci-note">{apple?"Balance sheet: USD millions, 27 Jun 2026. Debt includes commercial paper and current/non-current term debt. Cash ratio uses cash equivalents only; marketable securities are excluded. FCF/Debt uses trailing twelve-month FCF. EBITDA, interest coverage and enterprise value remain unavailable until their required inputs are validated.":"Balance-sheet fields are not yet available in the validated asset snapshot. Missing metrics remain N/D; sector-specific definitions are required before scoring."}</p></section>
   <div className="ci-main">
