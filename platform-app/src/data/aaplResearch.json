@@ -65,5 +65,23 @@
     "capital2026": 191864,
     "averageCapital": 182127
   },
-  "roicCashAdjustedSensitivity": 286.7860098221925
+  "roicCashAdjustedSensitivity": 286.7860098221925,
+  "balanceSheet": {
+    "period": "2026-06-27",
+    "unit": "USD millions",
+    "cash": 39544,
+    "currentMarketableSecurities": 22855,
+    "noncurrentMarketableSecurities": 84118,
+    "currentAssets": 149818,
+    "currentLiabilities": 149326,
+    "inventory": 11092,
+    "totalDebt": 84344,
+    "debtComponents": {
+      "commercialPaper": 1997,
+      "currentTermDebt": 11007,
+      "noncurrentTermDebt": 71340
+    },
+    "shareholdersEquity": 107520,
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm"
+  }
 }
