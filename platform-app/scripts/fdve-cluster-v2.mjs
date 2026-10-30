@@ -80,9 +80,14 @@ for(const company of cfg.companies){
     const vals=new Set(candidates.map(x=>x[field]));
     if(vals.size>1){comparisons[metric]={status:'AMBIGUOUS_FMP_REVISION'};continue;}
     const x=candidates[0];
+    if(metric==='capex'&&x[field]>0){
+     comparisons[metric]={status:'SIGN_CONVENTION_REVIEW',fmpField:field,rawValue:x[field]};
+     continue;
+    }
     const currency=x.reportedCurrency||x.currency||null;
     comparisons[metric]=reconcileValue(sec,{value:x[field]*sign,periodEnd:x.date,currency},metric);
     comparisons[metric].fmpField=field;
+    comparisons[metric].secOrigin=sec.status==='DERIVED'?'DERIVED':'REPORTED';
    }
    item.years[year].comparisons=comparisons;
   }
@@ -101,6 +106,8 @@ for(const item of out)for(const year of [2024,2025]){
  }
 }
 totals.coverage=totals.applicable?totals.available/totals.applicable:null;
+totals.expectedComparisons=totals.available;
+totals.notCompared=totals.expectedComparisons-totals.compared;
 totals.reconciliationRate=totals.compared?totals.matched/totals.compared:null;
 const report={schemaVersion:2,generatedAt:new Date().toISOString(),periods:['FY2024','FY2025'],method:'SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation',notes:['Coverage excludes stale observations and NOT_APPLICABLE metrics','Bank-specific concepts are discovery-only until definitions validated','DERIVED liabilities are not source-reported and must be marked as such','FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success'],totals,companies:out};
 await fs.writeFile('platform-app/reports/fdve-cluster-v2.json',JSON.stringify(report,null,2)+'\n');
