@@ -4,7 +4,7 @@ import type {RealAsset} from "./RealResearch";
 import type {Security} from "../core/contracts";
 import "./financial-charts.css";
 
-type View="revenue"|"fcf"|"eps";
+type View="combined"|"revenue"|"fcf"|"eps";
 const sample={
  revenue:[69,75,81,88,100],
  fcf:[72,78,87,96,110],
@@ -13,7 +13,7 @@ const sample={
 const periods=["2022","2023","2024","2025","2026"];
 const fmt=(n:number)=>new Intl.NumberFormat("en-US",{maximumFractionDigits:1}).format(n);
 export function FinancialCharts({asset,company}:{asset?:RealAsset;company:Security}){
- const [metric,setMetric]=useState<View>("revenue");
+ const [metric,setMetric]=useState<View>("combined");
  const [showOnlySector,setShowOnlySector]=useState(true);
  const [sort,setSort]=useState<"pe"|"yield">("pe");
  const sector=asset?.sector||company.sector;const apple=asset?.ticker==="AAPL";const annual=appleResearch.annualData;const values=apple?annual.map(y=>metric==="revenue"?y.revenueB:metric==="fcf"?y.fcfB:y.eps):sample[metric];const periodsShown=apple?annual.map(y=>y.year):periods;const maxValue=Math.max(1,...values);
@@ -24,8 +24,15 @@ export function FinancialCharts({asset,company}:{asset?:RealAsset;company:Securi
  return <div className="fc-grid">
   <section className="ci-panel fc-block">
    <div className="ci-panel-head"><h3>Financial Performance</h3><span>{apple?"REAL SEC HISTORY · FY2023–TTM JUN 2026":"INDEXED DESIGN PREVIEW"}</span></div>
-   <div className="fc-controls" role="group" aria-label="Choose financial performance metric">{(["revenue","fcf","eps"] as View[]).map(m=><button key={m} type="button" className={metric===m?"fc-active":""} onClick={()=>setMetric(m)}>{m==="revenue"?"Revenue":m==="fcf"?"Free Cash Flow":"EPS"}</button>)}</div>
-   <div className="fc-bars" role="img" aria-label={metric+(apple?" Apple SEC historical values":" sample design values")}>{values.map((v,i)=><div className="fc-column" key={periodsShown[i]}><span className="fc-number">{fmt(v)}</span><div className="fc-bar-area"><div style={{height:(v/maxValue*100)+"%"}}/></div><b>{periodsShown[i]}</b></div>)}</div>
+   <div className="fc-controls" role="group" aria-label="Choose financial performance metric">{(["combined","revenue","fcf","eps"] as View[]).map(m=><button key={m} type="button" className={metric===m?"fc-active":""} onClick={()=>setMetric(m)}>{m==="combined"?"Combined":m==="revenue"?"Revenue":m==="fcf"?"Free Cash Flow":"EPS"}</button>)}</div>
+   {metric==="combined"&&apple?<svg className="fc-combined" viewBox="0 0 520 275" role="img" aria-label="Apple annual revenue and free cash flow in USD billions, EPS in USD per share, including trailing twelve months ending June 2026">
+    {[0,1,2,3,4].map(t=><g key={t}><line x1="53" y1={222-t*47} x2="460" y2={222-t*47} stroke="#e6edf5"/><text x="45" y={226-t*47} textAnchor="end" fill="#7890a7" fontSize="10">{t*125}</text><text x="468" y={226-t*47} fill="#7890a7" fontSize="10">{t*3}</text></g>)}
+    {annual.map((d,i)=>{const x=90+i*98;return <g key={d.year}><rect x={x-17} y={222-d.revenueB/500*188} width="23" height={d.revenueB/500*188} rx="2" fill="#347fca"><title>{d.year}: Revenue ${d.revenueB.toFixed(1)}B</title></rect><rect x={x+8} y={222-d.fcfB/500*188} width="19" height={d.fcfB/500*188} rx="2" fill="#69b5aa"><title>{d.year}: FCF ${d.fcfB.toFixed(1)}B</title></rect><text x={x+3} y="240" textAnchor="middle" fontSize="10" fill="#58728e">{d.year}</text></g>})}
+    <polyline points={annual.map((d,i)=>`${93+i*98},${222-d.eps/12*188}`).join(" ")} fill="none" stroke="#e39729" strokeWidth="3"/>
+    {annual.map((d,i)=><circle key={d.year} cx={93+i*98} cy={222-d.eps/12*188} r="4" fill="#e39729"><title>{d.year}: EPS ${d.eps.toFixed(2)}</title></circle>)}
+    <text x="53" y="13" fontSize="10" fill="#7890a7">USD billions</text><text x="460" y="13" textAnchor="end" fontSize="10" fill="#7890a7">EPS USD/share</text>
+    <rect x="102" y="256" width="10" height="9" fill="#347fca"/><text x="116" y="264" fontSize="10" fill="#58728e">Revenue</text><rect x="199" y="256" width="10" height="9" fill="#69b5aa"/><text x="213" y="264" fontSize="10" fill="#58728e">FCF</text><line x1="278" x2="294" y1="261" y2="261" stroke="#e39729" strokeWidth="3"/><text x="300" y="264" fontSize="10" fill="#58728e">EPS</text>
+   </svg>:metric==="combined"?<p className="ci-note">Combined financial history is available only for securities with verified revenue, FCF and EPS series. No simulated fundamentals are displayed here.</p>:<div className="fc-bars" role="img" aria-label={metric+(apple?" Apple SEC historical values":" sample design values")}>{values.map((v,i)=><div className="fc-column" key={periodsShown[i]}><span className="fc-number">{fmt(v)}</span><div className="fc-bar-area"><div style={{height:(v/maxValue*100)+"%"}}/></div><b>{periodsShown[i]}</b></div>)}</div>}
    <p className="ci-note">{apple?"Apple SEC filings: revenue and FCF in USD billions; EPS in USD/share. TTM built from FY2025 + nine months FY2026 − nine months FY2025. FY2026 is not a completed fiscal year.":"Preview series only; verified histories pending for this ticker."}</p>
   </section>
   <section className="ci-panel fc-block">
