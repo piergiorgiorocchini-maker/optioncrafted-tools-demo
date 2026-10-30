@@ -18,7 +18,7 @@ export const METRICS=Object.freeze({
  shortTermDebt:{kind:'instant',unit:'USD',sign:'nonnegative'}
 });
 const DAY=86400000;
-const dateOK=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&new Date(x).toISOString?.()===x+'T00:00:00.000Z';
+const dateOK=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&Number.isFinite(Date.parse(x))&&new Date(x).toISOString()===x+'T00:00:00.000Z';
 const days=(a,b)=>(Date.parse(b)-Date.parse(a))/DAY;
 const err=(code,detail)=>({code,detail});
 export function normalizeSecFact({ticker,cik,metric,observation,sourceUrl,tag,unit}){
