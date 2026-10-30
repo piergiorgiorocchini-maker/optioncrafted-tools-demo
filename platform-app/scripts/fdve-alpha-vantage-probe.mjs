@@ -4,7 +4,8 @@ const key=process.env.ALPHAVANTAGE_API_KEY;
 if(!key){console.error('ALPHAVANTAGE_API_KEY secret missing');process.exit(2);}
 const endpoints=['OVERVIEW','INCOME_STATEMENT','BALANCE_SHEET','CASH_FLOW'];
 const results=[];
-for(const fn of endpoints){
+for(const [index,fn] of endpoints.entries()){
+ if(index>0)await new Promise(resolve=>setTimeout(resolve,1800)); // Respect free-tier request pacing.
  const url=new URL('https://www.alphavantage.co/query');
  url.searchParams.set('function',fn);
  url.searchParams.set('symbol','AAPL');
@@ -16,7 +17,11 @@ for(const fn of endpoints){
   else {
    const body=await response.json();
    if(body['Error Message'])status='API_ERROR';
-   else if(body.Information||body.Note){status='API_LIMIT_OR_PLAN';detail=String(body.Information||body.Note).slice(0,180).replaceAll(key,'[REDACTED]');}
+   else if(body.Information||body.Note){
+    const message=String(body.Information||body.Note);
+    status=/premium endpoint|premium plan required/i.test(message)?'PREMIUM_REQUIRED':/requests more sparingly|rate limit|calls per day|requests per day/i.test(message)?'RATE_LIMITED':'API_NOTICE';
+    detail=message.slice(0,180).replaceAll(key,'[REDACTED]');
+   }
    else if(fn==='OVERVIEW'){
     status=body.Symbol==='AAPL'?'AVAILABLE':'UNEXPECTED_RESPONSE';
     detail='fields='+Object.keys(body).length;
@@ -29,7 +34,7 @@ for(const fn of endpoints){
  }catch(e){status='REQUEST_ERROR';detail=e.name==='TimeoutError'?'timeout':e.name;}
  results.push({endpoint:fn,status,detail});
  console.log(JSON.stringify(results.at(-1)));
- if(status==='API_LIMIT_OR_PLAN'&&/rate limit|calls per day|requests per day/i.test(detail)){console.log('Stopping to respect rate limit');break;}
+ if(status==='RATE_LIMITED'&&/calls per day|requests per day/i.test(detail)){console.log('Stopping to respect daily rate limit');break;}
 }
 console.log('PROBE_SUMMARY '+JSON.stringify({symbol:'AAPL',results}));
 if(results.some(r=>r.status==='REQUEST_ERROR'||r.status==='HTTP_ERROR'))process.exitCode=1;
