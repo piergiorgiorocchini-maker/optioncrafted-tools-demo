@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-31T20:04:18.375Z",
+  "generatedAt": "2026-10-31T20:11:07.378Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -16,15 +16,15 @@
     "FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success"
   ],
   "totals": {
-    "applicable": 177,
-    "available": 171,
+    "applicable": 199,
+    "available": 184,
     "compared": 0,
     "matched": 0,
     "differences": 0,
-    "unresolved": 177,
-    "coverage": 0.9661016949152542,
-    "expectedComparisons": 171,
-    "notCompared": 171,
+    "unresolved": 199,
+    "coverage": 0.9246231155778895,
+    "expectedComparisons": 184,
+    "notCompared": 184,
     "reconciliationRate": null
   },
   "companies": [
@@ -77,6 +77,30 @@
               "periodStart": "2020-09-27",
               "periodEnd": "2021-09-25",
               "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2021,
+              "value": 11284000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "interestExpense": {
+              "status": "AVAILABLE",
+              "metric": "interestExpense",
+              "year": 2021,
+              "value": 2645000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "InterestExpense",
               "accession": "0000320193-21-000105",
               "filed": "2021-10-29"
             },
@@ -227,8 +251,8 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 15,
+            "applicable": 17,
+            "available": 17,
             "rate": 1
           },
           "comparisons": {
@@ -240,6 +264,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "FMP_MAPPING_PENDING"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -314,6 +344,30 @@
               "periodStart": "2021-09-26",
               "periodEnd": "2022-09-24",
               "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2022,
+              "value": 11104000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "interestExpense": {
+              "status": "AVAILABLE",
+              "metric": "interestExpense",
+              "year": 2022,
+              "value": 2931000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "InterestExpense",
               "accession": "0000320193-22-000108",
               "filed": "2022-10-28"
             },
@@ -464,8 +518,8 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 15,
+            "applicable": 17,
+            "available": 17,
             "rate": 1
           },
           "comparisons": {
@@ -477,6 +531,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "FMP_MAPPING_PENDING"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -551,6 +611,30 @@
               "periodStart": "2022-09-25",
               "periodEnd": "2023-09-30",
               "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2023,
+              "value": 11519000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "interestExpense": {
+              "status": "AVAILABLE",
+              "metric": "interestExpense",
+              "year": 2023,
+              "value": 3933000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "InterestExpense",
               "accession": "0000320193-23-000106",
               "filed": "2023-11-03"
             },
@@ -701,8 +785,8 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 15,
+            "applicable": 17,
+            "available": 17,
             "rate": 1
           },
           "comparisons": {
@@ -714,6 +798,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "FMP_MAPPING_PENDING"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -790,6 +880,24 @@
               "tag": "OperatingIncomeLoss",
               "accession": "0000320193-24-000123",
               "filed": "2024-11-01"
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2024,
+              "value": 11445000000,
+              "unit": "USD",
+              "periodStart": "2023-10-01",
+              "periodEnd": "2024-09-28",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000320193-24-000123",
+              "filed": "2024-11-01"
+            },
+            "interestExpense": {
+              "status": "PERIOD_MISSING",
+              "metric": "interestExpense",
+              "year": 2024,
+              "taxonomyCandidates": []
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -938,9 +1046,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 15,
-            "rate": 1
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "comparisons": {
             "revenue": {
@@ -951,6 +1059,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -1027,6 +1141,24 @@
               "tag": "OperatingIncomeLoss",
               "accession": "0000320193-25-000079",
               "filed": "2025-10-31"
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2025,
+              "value": 11698000000,
+              "unit": "USD",
+              "periodStart": "2024-09-29",
+              "periodEnd": "2025-09-27",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000320193-25-000079",
+              "filed": "2025-10-31"
+            },
+            "interestExpense": {
+              "status": "PERIOD_MISSING",
+              "metric": "interestExpense",
+              "year": 2025,
+              "taxonomyCandidates": []
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -1175,9 +1307,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 15,
-            "rate": 1
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "comparisons": {
             "revenue": {
@@ -1188,6 +1320,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -1278,6 +1416,24 @@
               "periodStart": "2023-07-01",
               "periodEnd": "2024-06-30",
               "tag": "OperatingIncomeLoss",
+              "accession": "0000950170-24-087843",
+              "filed": "2024-07-30"
+            },
+            "depreciationAmortization": {
+              "status": "PERIOD_MISSING",
+              "metric": "depreciationAmortization",
+              "year": 2024,
+              "taxonomyCandidates": []
+            },
+            "interestExpense": {
+              "status": "AVAILABLE",
+              "metric": "interestExpense",
+              "year": 2024,
+              "value": 2935000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "tag": "InterestExpense",
               "accession": "0000950170-24-087843",
               "filed": "2024-07-30"
             },
@@ -1428,9 +1584,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 15,
-            "rate": 1
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "comparisons": {
             "revenue": {
@@ -1441,6 +1597,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "SEC_UNAVAILABLE"
+            },
+            "interestExpense": {
+              "status": "FMP_MAPPING_PENDING"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -1517,6 +1679,18 @@
               "tag": "OperatingIncomeLoss",
               "accession": "0000950170-25-100235",
               "filed": "2025-07-30"
+            },
+            "depreciationAmortization": {
+              "status": "PERIOD_MISSING",
+              "metric": "depreciationAmortization",
+              "year": 2025,
+              "taxonomyCandidates": []
+            },
+            "interestExpense": {
+              "status": "PERIOD_MISSING",
+              "metric": "interestExpense",
+              "year": 2025,
+              "taxonomyCandidates": []
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -1665,9 +1839,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
+            "applicable": 17,
             "available": 15,
-            "rate": 1
+            "rate": 0.8823529411764706
           },
           "comparisons": {
             "revenue": {
@@ -1678,6 +1852,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "SEC_UNAVAILABLE"
+            },
+            "interestExpense": {
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -1770,6 +1950,30 @@
                 "OtherNonoperatingIncomeExpense",
                 "OtherOperatingIncomeExpenseNet"
               ]
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2024,
+              "value": 23442000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
+            },
+            "interestExpense": {
+              "status": "AVAILABLE",
+              "metric": "interestExpense",
+              "year": 2024,
+              "value": 996000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "tag": "InterestExpense",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19"
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -1931,9 +2135,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 12,
-            "rate": 0.8
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
           },
           "comparisons": {
             "revenue": {
@@ -1944,6 +2148,12 @@
             },
             "operatingIncome": {
               "status": "SEC_UNAVAILABLE"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "FMP_MAPPING_PENDING"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -2020,6 +2230,30 @@
                 "OtherNonoperatingIncomeExpense",
                 "OtherOperatingIncomeExpenseNet"
               ]
+            },
+            "depreciationAmortization": {
+              "status": "AVAILABLE",
+              "metric": "depreciationAmortization",
+              "year": 2025,
+              "value": 25993000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "DepreciationDepletionAndAmortization",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
+            },
+            "interestExpense": {
+              "status": "AVAILABLE",
+              "metric": "interestExpense",
+              "year": 2025,
+              "value": 603000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "tag": "InterestExpense",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18"
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -2181,9 +2415,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
-            "available": 12,
-            "rate": 0.8
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
           },
           "comparisons": {
             "revenue": {
@@ -2194,6 +2428,12 @@
             },
             "operatingIncome": {
               "status": "SEC_UNAVAILABLE"
+            },
+            "depreciationAmortization": {
+              "status": "FMP_MAPPING_PENDING"
+            },
+            "interestExpense": {
+              "status": "FMP_MAPPING_PENDING"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -2286,6 +2526,18 @@
               "tag": "OperatingIncomeLoss",
               "accession": "0000104169-24-000056",
               "filed": "2024-03-15"
+            },
+            "depreciationAmortization": {
+              "status": "PERIOD_MISSING",
+              "metric": "depreciationAmortization",
+              "year": 2024,
+              "taxonomyCandidates": []
+            },
+            "interestExpense": {
+              "status": "PERIOD_MISSING",
+              "metric": "interestExpense",
+              "year": 2024,
+              "taxonomyCandidates": []
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -2435,9 +2687,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
+            "applicable": 17,
             "available": 15,
-            "rate": 1
+            "rate": 0.8823529411764706
           },
           "comparisons": {
             "revenue": {
@@ -2448,6 +2700,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "SEC_UNAVAILABLE"
+            },
+            "interestExpense": {
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -2524,6 +2782,18 @@
               "tag": "OperatingIncomeLoss",
               "accession": "0000104169-25-000021",
               "filed": "2025-03-14"
+            },
+            "depreciationAmortization": {
+              "status": "PERIOD_MISSING",
+              "metric": "depreciationAmortization",
+              "year": 2025,
+              "taxonomyCandidates": []
+            },
+            "interestExpense": {
+              "status": "PERIOD_MISSING",
+              "metric": "interestExpense",
+              "year": 2025,
+              "taxonomyCandidates": []
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -2673,9 +2943,9 @@
           },
           "bank": {},
           "coverage": {
-            "applicable": 15,
+            "applicable": 17,
             "available": 15,
-            "rate": 1
+            "rate": 0.8823529411764706
           },
           "comparisons": {
             "revenue": {
@@ -2686,6 +2956,12 @@
             },
             "operatingIncome": {
               "status": "FMP_SOURCE_MISSING"
+            },
+            "depreciationAmortization": {
+              "status": "SEC_UNAVAILABLE"
+            },
+            "interestExpense": {
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
