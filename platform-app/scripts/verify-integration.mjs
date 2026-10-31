@@ -31,4 +31,13 @@ for(const [path,markers] of Object.entries(required)){
 }
 for(const path of ["tools/index.html","tools/probability-station/index.html","tools/options-strategy-lab/index.html","tools/edge-station/index.html"]){if(read(path).includes("tools-embed-bridge.js"))throw new Error("Legacy page must remain standalone: "+path);checks++;}
 if(read("platform-app/src/main.tsx").includes("<LegacyToolsWorkspace"))throw new Error("Iframe-based tools must not be embedded in the native app");
+// Prevent reintroduction of simulated financial histories for live securities.
+const financialCharts=read("platform-app/src/components/FinancialCharts.tsx");
+if(!financialCharts.includes("verifiedAnnualHistory(symbol)"))throw new Error("Financial charts must use verified annual SEC history");
+if(financialCharts.includes("const sample=")||financialCharts.includes("INDEXED DESIGN PREVIEW"))throw new Error("Simulated financial chart data detected");
+const financialBridge=read("platform-app/src/data/verifiedFinancials.ts");
+if(!financialBridge.includes("cfo-capex"))throw new Error("Annual FCF must derive from SEC CFO less capex");
+const football=read("platform-app/src/components/ValuationFootballField.tsx");
+if(!football.includes("averageCandidates.length>=2"))throw new Error("A single model must not be displayed as an average valuation");
+checks+=4;
 console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
