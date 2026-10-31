@@ -34,3 +34,13 @@ test('taxonomy suggestions are not automatically mapped',()=>{
  assert.ok(findRelatedTags(concepts,'longTermDebt').length>0);
  assert.equal(selectFiscalSec(concepts,'longTermDebt','instant',2025,'2026-10-30').status,'PERIOD_MISSING');
 });
+
+test('SEC D&A and interest expense map only to same-year annual 10-K facts',()=>{
+ const concepts={
+  DepreciationDepletionAndAmortization:{units:{USD:[fact(11500000000,'2025-09-27',2025,{start:'2024-09-29'})]}},
+  InterestExpenseNonOperating:{units:{USD:[fact(400000000,'2025-09-27',2025,{start:'2024-09-29'})]}}
+ };
+ assert.equal(selectFiscalSec(concepts,'depreciationAmortization','flow',2025,'2026-10-31').value,11500000000);
+ assert.equal(selectFiscalSec(concepts,'interestExpense','flow',2025,'2026-10-31').value,400000000);
+ assert.equal(selectFiscalSec(concepts,'depreciationAmortization','flow',2024,'2026-10-31').status,'PERIOD_MISSING');
+});
