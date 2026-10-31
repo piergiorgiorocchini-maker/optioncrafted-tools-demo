@@ -4,6 +4,8 @@ export const METRICS=Object.freeze({
  revenue:{kind:'flow',unit:'USD',sign:'nonnegative'},
  netIncome:{kind:'flow',unit:'USD',sign:'signed'},
  operatingIncome:{kind:'flow',unit:'USD',sign:'signed'},
+ depreciationAmortization:{kind:'flow',unit:'USD',sign:'nonnegative'},
+ interestExpense:{kind:'flow',unit:'USD',sign:'nonnegative'},
  cashFromOperations:{kind:'flow',unit:'USD',sign:'signed'},
  capex:{kind:'flow',unit:'USD',sign:'nonnegative'},
  epsDiluted:{kind:'flow',unit:'USD/shares',sign:'signed'},
