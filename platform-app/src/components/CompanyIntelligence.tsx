@@ -15,6 +15,8 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
  const secHistory=verifiedAnnualHistory(symbol);
  const secLatest=secHistory.at(-1);
  const secOperatingIncome=secLatest?.operatingIncome??null;
+ const secOperatingMargin=secLatest?.operatingIncome!==null&&secLatest?.operatingIncome!==undefined&&secLatest.revenue!==null&&secLatest.revenue>0?secLatest.operatingIncome/secLatest.revenue*100:null;
+ const secCashConversion=secLatest?.fcf!==null&&secLatest?.fcf!==undefined&&secLatest.netIncome!==null&&secLatest.netIncome>0?secLatest.fcf/secLatest.netIncome*100:null;
  const snapshotPE=asset?.pe??null;
  const fcfYieldVerified=secFcf.annualUsd!==null&&asset?.marketCap!==null&&asset?.marketCap!==undefined&&asset.marketCap>0?secFcf.annualUsd/asset.marketCap*100:null;
  const isBank=secInputs.profile==="bank";
@@ -42,13 +44,15 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
     <div><span>P/E · snapshot</span><b>{snapshotPE!==null&&snapshotPE>0?snapshotPE.toFixed(2)+"x":real?"N/D":(company.price/company.eps).toFixed(2)+"x"}</b></div>
     <div><span>Industry P/E · median</span><b>N/D · peer set pending</b></div>
     <div><span>Operating income · SEC FY {secLatest?.year??"—"}</span><b>{secOperatingIncome!==null?compactMoney(secOperatingIncome,currency):"N/D"}</b></div>
+    <div><span>Operating margin · SEC FY {secLatest?.year??"—"}</span><b>{secOperatingMargin===null?"N/D":secOperatingMargin.toFixed(1)+"%"}</b></div>
+    <div><span>FCF / net income · SEC FY {secLatest?.year??"—"}</span><b>{secCashConversion===null?"N/D":secCashConversion.toFixed(1)+"%"}</b></div>
     <div><span>EBITDA · verified</span><b>N/D · D&A pending</b></div>
     <div><span>Free cash flow per share</span><b>{secFcf.perShare!==null?showMoney(secFcf.perShare):real?"N/D":fmt(company.fcfPerShare)}</b></div>
     <div><span>FCF / EPS conversion</span><b>{apple&&earnings!==null?(appleFcf!/earnings*100).toFixed(1)+"%":real?"N/D":(company.fcfPerShare/company.eps*100).toFixed(1)+"%"}</b></div>
     <div><span>Return on invested capital</span><b>{apple?appleResearch.roic.toFixed(1)+"%":real?"N/D":company.roic.toFixed(1)+"%"}</b></div>
     <div><span>Sector</span><b>{sector}</b></div>
     <div><span>Financial data status</span><b className="ci-warning">{real?"Partial snapshot":"Simulated"}</b></div>
-   </div><p className="ci-note">Operating income is a SEC-reported FY metric, shown separately from EBIT until reconciliation of non-operating items. EBITDA requires validated depreciation/amortization. P/E is from the Sheets snapshot; industry median requires a dated, audited peer universe.</p><p className="ci-note">{apple?"Price and EPS from Sheets; FCF/share and financial history reconstructed from Apple SEC filings (TTM Jun 2026). ROIC calculated on gross invested capital, cash-inclusive; see SEC methodology.":real?"Snapshot price and EPS from Google Sheets; SEC annual FCF and balance-sheet metrics are separate fiscal-period observations. FCF/share remains N/D without matched diluted share counts.":"Demo financials."}</p></section>
+   </div><p className="ci-note">Operating margin and FCF/net income use matched SEC fiscal-year observations, not snapshot EPS. Operating income is a SEC-reported FY metric, shown separately from EBIT until reconciliation of non-operating items. EBITDA requires validated depreciation/amortization. P/E is from the Sheets snapshot; industry median requires a dated, audited peer universe.</p><p className="ci-note">{apple?"Price and EPS from Sheets; FCF/share and financial history reconstructed from Apple SEC filings (TTM Jun 2026). ROIC calculated on gross invested capital, cash-inclusive; see SEC methodology.":real?"Snapshot price and EPS from Google Sheets; SEC annual FCF and balance-sheet metrics are separate fiscal-period observations. FCF/share remains N/D without matched diluted share counts.":"Demo financials."}</p></section>
    <section className="ci-panel"><div className="ci-panel-head"><h3>Quality lens</h3><span>Interpretation framework</span></div>
     <div className="ci-quality"><div className="ci-quality-line"><span>Capital efficiency</span><strong>{apple?appleResearch.roic.toFixed(1)+"% ROIC (gross)":real?"N/D":company.roic.toFixed(1)+"% ROIC*"}</strong></div><div className="ci-bar"><span style={{width:`${apple?Math.min(100,appleResearch.roic):real?0:Math.min(100,Math.max(0,company.roic/25*100))}%`}}/></div>
     <div className="ci-quality-line"><span>Cash earnings conversion</span><strong>{apple&&earnings!==null?(appleFcf!/earnings*100).toFixed(1)+"%":real?"N/D":(company.fcfPerShare/company.eps*100).toFixed(1)+"%*"}</strong></div><div className="ci-bar"><span style={{width:`${apple&&earnings!==null&&earnings>0?Math.min(100,appleFcf!/earnings*100):real?0:Math.min(100,Math.max(0,company.fcfPerShare/company.eps*70))}%`}}/></div>
