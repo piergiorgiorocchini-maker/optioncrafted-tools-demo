@@ -1,7 +1,10 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-30T16:37:07.877Z",
+  "generatedAt": "2026-10-31T19:27:33.845Z",
   "periods": [
+    "FY2021",
+    "FY2022",
+    "FY2023",
     "FY2024",
     "FY2025"
   ],
@@ -13,15 +16,15 @@
     "FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success"
   ],
   "totals": {
-    "applicable": 132,
-    "available": 126,
+    "applicable": 177,
+    "available": 171,
     "compared": 0,
     "matched": 0,
     "differences": 0,
-    "unresolved": 132,
-    "coverage": 0.9545454545454546,
-    "expectedComparisons": 126,
-    "notCompared": 126,
+    "unresolved": 177,
+    "coverage": 0.9661016949152542,
+    "expectedComparisons": 171,
+    "notCompared": 171,
     "reconciliationRate": null
   },
   "companies": [
@@ -39,6 +42,717 @@
         "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
       },
       "years": {
+        "2021": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2021,
+              "value": 365817000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2021,
+              "value": 94680000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "NetIncomeLoss",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2021,
+              "value": 108949000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2021,
+              "value": 104038000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2021,
+              "value": 11085000000,
+              "unit": "USD",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2021,
+              "value": 5.61,
+              "unit": "USD/shares",
+              "periodStart": "2020-09-27",
+              "periodEnd": "2021-09-25",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2021,
+              "value": 34940000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2021,
+              "value": 134836000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "AssetsCurrent",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2021,
+              "value": 125481000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2021,
+              "value": 6580000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "InventoryNet",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2021,
+              "value": 351002000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "Assets",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2021,
+              "value": 287912000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "Liabilities",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2021,
+              "value": 63090000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "StockholdersEquity",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2021,
+              "value": 109106000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2021,
+              "value": 9613000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2021-09-25",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000320193-21-000105",
+              "filed": "2021-10-29"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
+          }
+        },
+        "2022": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2022,
+              "value": 394328000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2022,
+              "value": 99803000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "NetIncomeLoss",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2022,
+              "value": 119437000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2022,
+              "value": 122151000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2022,
+              "value": 10708000000,
+              "unit": "USD",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2022,
+              "value": 6.11,
+              "unit": "USD/shares",
+              "periodStart": "2021-09-26",
+              "periodEnd": "2022-09-24",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2022,
+              "value": 23646000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2022,
+              "value": 135405000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "AssetsCurrent",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2022,
+              "value": 153982000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2022,
+              "value": 4946000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "InventoryNet",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2022,
+              "value": 352755000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "Assets",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2022,
+              "value": 302083000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "Liabilities",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2022,
+              "value": 50672000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "StockholdersEquity",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2022,
+              "value": 98959000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2022,
+              "value": 11128000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2022-09-24",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000320193-22-000108",
+              "filed": "2022-10-28"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
+          }
+        },
+        "2023": {
+          "metrics": {
+            "revenue": {
+              "status": "AVAILABLE",
+              "metric": "revenue",
+              "year": 2023,
+              "value": 383285000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "netIncome": {
+              "status": "AVAILABLE",
+              "metric": "netIncome",
+              "year": 2023,
+              "value": 96995000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "NetIncomeLoss",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "operatingIncome": {
+              "status": "AVAILABLE",
+              "metric": "operatingIncome",
+              "year": 2023,
+              "value": 114301000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "OperatingIncomeLoss",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "cashFromOperations": {
+              "status": "AVAILABLE",
+              "metric": "cashFromOperations",
+              "year": 2023,
+              "value": 110543000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "NetCashProvidedByUsedInOperatingActivities",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "capex": {
+              "status": "AVAILABLE",
+              "metric": "capex",
+              "year": 2023,
+              "value": 10959000000,
+              "unit": "USD",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "epsDiluted": {
+              "status": "AVAILABLE",
+              "metric": "epsDiluted",
+              "year": 2023,
+              "value": 6.13,
+              "unit": "USD/shares",
+              "periodStart": "2022-09-25",
+              "periodEnd": "2023-09-30",
+              "tag": "EarningsPerShareDiluted",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "cash": {
+              "status": "AVAILABLE",
+              "metric": "cash",
+              "year": 2023,
+              "value": 29965000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "CashAndCashEquivalentsAtCarryingValue",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "currentAssets": {
+              "status": "AVAILABLE",
+              "metric": "currentAssets",
+              "year": 2023,
+              "value": 143566000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "AssetsCurrent",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "currentLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "currentLiabilities",
+              "year": 2023,
+              "value": 145308000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "LiabilitiesCurrent",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "inventory": {
+              "status": "AVAILABLE",
+              "metric": "inventory",
+              "year": 2023,
+              "value": 6331000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "InventoryNet",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "totalAssets": {
+              "status": "AVAILABLE",
+              "metric": "totalAssets",
+              "year": 2023,
+              "value": 352583000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "Assets",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "totalLiabilities": {
+              "status": "AVAILABLE",
+              "metric": "totalLiabilities",
+              "year": 2023,
+              "value": 290437000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "Liabilities",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "equity": {
+              "status": "AVAILABLE",
+              "metric": "equity",
+              "year": 2023,
+              "value": 62146000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "StockholdersEquity",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "longTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "longTermDebt",
+              "year": 2023,
+              "value": 95281000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "LongTermDebtNoncurrent",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            },
+            "shortTermDebt": {
+              "status": "AVAILABLE",
+              "metric": "shortTermDebt",
+              "year": 2023,
+              "value": 9822000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2023-09-30",
+              "tag": "LongTermDebtCurrent",
+              "accession": "0000320193-23-000106",
+              "filed": "2023-11-03"
+            }
+          },
+          "bank": {},
+          "coverage": {
+            "applicable": 15,
+            "available": 15,
+            "rate": 1
+          },
+          "comparisons": {
+            "revenue": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "netIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "operatingIncome": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cashFromOperations": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "capex": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "epsDiluted": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "cash": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "currentLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "inventory": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalAssets": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "totalLiabilities": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "equity": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "longTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            },
+            "shortTermDebt": {
+              "status": "FMP_SOURCE_MISSING"
+            }
+          }
+        },
         "2024": {
           "metrics": {
             "revenue": {
@@ -1229,7 +1943,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "operatingIncome": {
-              "status": "FMP_SOURCE_MISSING"
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -1250,7 +1964,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "inventory": {
-              "status": "FMP_SOURCE_MISSING"
+              "status": "SEC_UNAVAILABLE"
             },
             "totalAssets": {
               "status": "FMP_SOURCE_MISSING"
@@ -1262,7 +1976,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "longTermDebt": {
-              "status": "FMP_SOURCE_MISSING"
+              "status": "SEC_UNAVAILABLE"
             },
             "shortTermDebt": {
               "status": "FMP_SOURCE_MISSING"
@@ -1479,7 +2193,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "operatingIncome": {
-              "status": "FMP_SOURCE_MISSING"
+              "status": "SEC_UNAVAILABLE"
             },
             "cashFromOperations": {
               "status": "FMP_SOURCE_MISSING"
@@ -1500,7 +2214,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "inventory": {
-              "status": "FMP_SOURCE_MISSING"
+              "status": "SEC_UNAVAILABLE"
             },
             "totalAssets": {
               "status": "FMP_SOURCE_MISSING"
@@ -1512,7 +2226,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "longTermDebt": {
-              "status": "FMP_SOURCE_MISSING"
+              "status": "SEC_UNAVAILABLE"
             },
             "shortTermDebt": {
               "status": "FMP_SOURCE_MISSING"
