@@ -1,31 +1,54 @@
 {
   "schemaVersion": 1,
-  "purpose": "FDVE five-company cross-sector pilot, not production",
+  "purpose": "FDVE cross-sector pilot: five fiscal years for AAPL, two years for control companies",
   "companies": [
     {
       "ticker": "AAPL",
       "cik": "0000320193",
-      "profile": "hardware"
+      "profile": "hardware",
+      "fiscalYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
     },
     {
       "ticker": "MSFT",
       "cik": "0000789019",
-      "profile": "software-cloud"
+      "profile": "software-cloud",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
     },
     {
       "ticker": "XOM",
       "cik": "0000034088",
-      "profile": "energy"
+      "profile": "energy",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
     },
     {
       "ticker": "WMT",
       "cik": "0000104169",
-      "profile": "retail"
+      "profile": "retail",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
     },
     {
       "ticker": "JPM",
       "cik": "0000019617",
-      "profile": "bank"
+      "profile": "bank",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
     }
   ],
   "providers": [
@@ -33,9 +56,8 @@
     "FMP financial statements"
   ],
   "periods": [
-    "FY2024",
-    "FY2025",
-    "latest comparable quarter"
+    "AAPL FY2021–FY2025",
+    "MSFT/XOM/WMT/JPM FY2024–FY2025"
   ],
   "statuses": [
     "MATCH",
