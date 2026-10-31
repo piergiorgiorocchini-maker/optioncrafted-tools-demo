@@ -71,7 +71,9 @@ for(const company of cfg.companies){
    const comparisons={};
    for(const [metric,sec] of Object.entries(item.years[year].metrics)){
     if(!['AVAILABLE','DERIVED'].includes(sec.status)){comparisons[metric]={status:'SEC_UNAVAILABLE'};continue;}
-    const [dataset,field,sign]=FMP_FIELDS[metric];
+    const mapping=FMP_FIELDS[metric];
+    if(!mapping){comparisons[metric]={status:'FMP_MAPPING_PENDING'};continue;}
+    const [dataset,field,sign]=mapping;
     const records=datasets[dataset]||[];
     const candidates=records.filter(x=>Number(x.fiscalYear)===year&&x.period==='FY'&&x.date===sec.periodEnd&&Number.isFinite(x[field]));
     if(!candidates.length){
