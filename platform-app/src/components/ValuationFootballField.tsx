@@ -51,7 +51,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  ];
  // Average only valid intrinsic point estimates; DDM is deliberately excluded.
  const averageCandidates=methods.filter(m=>m.kind==="intrinsic"&&!/DDM|dividend/i.test(m.label)).map(m=>m.mid).filter(valid);
- const averageValuation=averageCandidates.length?averageCandidates.reduce((sum,value)=>sum+value,0)/averageCandidates.length:null;
+ const averageValuation=averageCandidates.length>=2?averageCandidates.reduce((sum,value)=>sum+value,0)/averageCandidates.length:null;
  const intrinsicValues=methods.flatMap(m=>[m.low,m.mid,m.high]).filter(valid);
  const reference=valid(price)?price:null;
  const focusCeiling=niceCeiling((intrinsicValues.length?Math.max(...intrinsicValues):reference??1)*1.15);
@@ -70,7 +70,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
    <div className="ff-header-right"><span className="ff-source">{source}</span><div className="ff-market-reference"><small>REFERENCE MARKET PRICE</small><strong>{money(reference)}</strong><span>{marketOffScale?"Above valuation-focused scale":"Historical snapshot · not live"}</span></div></div>
   </header>
   <div className="ff-toolbar">
-   <div className="ff-legend"><span><i className="ff-legend-range"/> Scenario range</span><span><i className="ff-legend-point"/> Point estimate</span><span><i className="ff-legend-market"/> Market reference</span><span><i className="ff-legend-average"/> Average valuation (excl. DDM)</span></div>
+   <div className="ff-legend"><span><i className="ff-legend-range"/> Scenario range</span><span><i className="ff-legend-point"/> Point estimate</span><span><i className="ff-legend-market"/> Market reference</span><span><i className="ff-legend-average"/> Multi-model average (excl. DDM)</span></div>
    <div className="ff-scale-toggle" role="group" aria-label="Football Field vertical axis scale"><button type="button" className={scale==="focus"?"active":""} aria-pressed={scale==="focus"} onClick={()=>setScale("focus")}>Valuation focus</button><button type="button" className={scale==="market"?"active":""} aria-pressed={scale==="market"} onClick={()=>setScale("market")}>Include market price</button></div>
   </div>
   {marketOffScale&&<div className="ff-offscale"><strong>Market reference {money(reference)} is above the plotted valuation range.</strong> Select “Include market price” to display the full distance without compressing the valuation methods.</div>}
