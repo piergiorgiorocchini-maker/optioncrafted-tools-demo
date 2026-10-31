@@ -13,6 +13,8 @@
         "revenue",
         "netIncome",
         "operatingIncome",
+        "depreciationAmortization",
+        "interestExpense",
         "cashFromOperations",
         "capex",
         "epsDiluted",
