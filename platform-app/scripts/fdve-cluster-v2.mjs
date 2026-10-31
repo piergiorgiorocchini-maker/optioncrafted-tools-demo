@@ -33,7 +33,7 @@ for(const company of cfg.companies){
   await fs.writeFile('platform-app/reports/fdve-cluster-raw/'+company.ticker+'-sec.json',JSON.stringify(doc));
   const concepts=doc.facts?.['us-gaap']||{};
   item.sec={status:'OK',source:url,company:doc.entityName};
-  for(const year of [2024,2025]){
+  for(const year of company.fiscalYears||[2024,2025]){
    const metrics={};
    for(const metric of definition.applicable){
     const kind=METRICS[metric].kind;
@@ -67,9 +67,10 @@ for(const company of cfg.companies){
    }catch(e){error=(error?error+'; ':'')+name+': '+e.message;}
   }
   item.fmp={status:error?'PARTIAL':'OK',error:error||null};
-  for(const year of [2024,2025]){
+  for(const year of company.fiscalYears||[2024,2025]){
    const comparisons={};
    for(const [metric,sec] of Object.entries(item.years[year].metrics)){
+    if(!['AVAILABLE','DERIVED'].includes(sec.status)){comparisons[metric]={status:'SEC_UNAVAILABLE'};continue;}
     const [dataset,field,sign]=FMP_FIELDS[metric];
     const records=datasets[dataset]||[];
     const candidates=records.filter(x=>Number(x.fiscalYear)===year&&x.period==='FY'&&x.date===sec.periodEnd&&Number.isFinite(x[field]));
@@ -96,7 +97,7 @@ for(const company of cfg.companies){
  await sleep(250);
 }
 const totals={applicable:0,available:0,compared:0,matched:0,differences:0,unresolved:0};
-for(const item of out)for(const year of [2024,2025]){
+for(const item of out)for(const year of Object.keys(item.years)){
  const row=item.years[year];
  if(!row)continue;
  totals.applicable+=row.coverage.applicable;totals.available+=row.coverage.available;
@@ -109,7 +110,7 @@ totals.coverage=totals.applicable?totals.available/totals.applicable:null;
 totals.expectedComparisons=totals.available;
 totals.notCompared=totals.expectedComparisons-totals.compared;
 totals.reconciliationRate=totals.compared?totals.matched/totals.compared:null;
-const report={schemaVersion:2,generatedAt:new Date().toISOString(),periods:['FY2024','FY2025'],method:'SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation',notes:['Coverage excludes stale observations and NOT_APPLICABLE metrics','Bank-specific concepts are discovery-only until definitions validated','DERIVED liabilities are not source-reported and must be marked as such','FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success'],totals,companies:out};
+const report={schemaVersion:2,generatedAt:new Date().toISOString(),periods:[...new Set(cfg.companies.flatMap(c=>c.fiscalYears||[2024,2025]))].sort().map(y=>'FY'+y),method:'SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation',notes:['Coverage excludes stale observations and NOT_APPLICABLE metrics','Bank-specific concepts are discovery-only until definitions validated','DERIVED liabilities are not source-reported and must be marked as such','FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success'],totals,companies:out};
 await fs.writeFile('platform-app/reports/fdve-cluster-v2.json',JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({totals,companies:out.map(x=>({ticker:x.ticker,sec:x.sec.status,fmp:x.fmp.status,coverage2024:x.years[2024]?.coverage,coverage2025:x.years[2025]?.coverage}))},null,2));
+console.log(JSON.stringify({totals,companies:out.map(x=>({ticker:x.ticker,sec:x.sec.status,fmp:x.fmp.status,coverageByYear:Object.fromEntries(Object.entries(x.years).map(([y,row])=>[y,row.coverage]))}))},null,2));
 if(out.some(x=>x.sec.status!=='OK'))process.exitCode=1;
