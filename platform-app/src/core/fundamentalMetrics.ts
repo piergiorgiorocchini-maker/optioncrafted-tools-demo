@@ -26,8 +26,9 @@ export function fundamentalMetrics(i:FundamentalInputs){
   netDebtEbitda:calc(["totalDebt","cash","ebitda"],i,([a,b,c])=>divide(a-b,c)),
   interestCoverage:calc(["ebit","interestExpense"],i,([a,b])=>divide(a,b)),
   fcfDebt:calc(["freeCashFlow","totalDebt"],i,([a,b])=>divide(a,b),"ratio"),
-  enterpriseValue:calc(["marketCap","totalDebt","cash","minorityInterest","preferredEquity"],i,([a,b,c,d,e])=>a+b-c+d+e,"money"),
-  evEbitda:calc(["marketCap","totalDebt","cash","minorityInterest","preferredEquity","ebitda"],i,([a,b,c,d,e,f])=>divide(a+b-c+d+e,f))
+  // Basic EV: excludes unverified minority interest/preferred equity; UI must label this explicitly.
+  enterpriseValue:calc(["marketCap","totalDebt","cash"],i,([a,b,c])=>a+b-c,"money"),
+  evEbitda:calc(["marketCap","totalDebt","cash","ebitda"],i,([a,b,c,d])=>divide(a+b-c,d))
  };
 }
 export const missingFundamentals:FundamentalInputs={marketCap:null,cash:null,shortTermInvestments:null,currentAssets:null,currentLiabilities:null,inventory:null,receivables:null,totalDebt:null,minorityInterest:null,preferredEquity:null,ebitda:null,ebit:null,interestExpense:null,freeCashFlow:null,equity:null};
