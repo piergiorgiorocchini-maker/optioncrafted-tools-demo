@@ -15,7 +15,11 @@ export function getSecFinancialInputs(ticker:string,year="2025"):Partial<Fundame
  const totalDebt=debtLong!==null&&debtShort!==null?debtLong+debtShort:null;
  const cfo=val(m,"cashFromOperations"),capex=val(m,"capex");
  const fcfAnnual=cfo!==null&&capex!==null?cfo-capex:null;
+ const operatingIncome=val(m,'operatingIncome'),da=val(m,'depreciationAmortization');
+ // Operating income is an explicitly labelled operating-EBIT proxy, not reconciled GAAP EBIT.
+ const ebitda=operatingIncome!==null&&da!==null?operatingIncome+da:null;
  return {profile:c.profile,periodEnd:revenue,source:"SEC 10-K",cash:val(m,"cash"),
  currentAssets:val(m,"currentAssets"),currentLiabilities:val(m,"currentLiabilities"),
- inventory:val(m,"inventory"),equity:val(m,"equity"),totalDebt,freeCashFlow:fcfAnnual,fcfAnnual};
+ inventory:val(m,"inventory"),equity:val(m,"equity"),totalDebt,freeCashFlow:fcfAnnual,fcfAnnual,
+ ebit:operatingIncome,ebitda,interestExpense:val(m,'interestExpense')};
 }
