@@ -120,3 +120,16 @@ test('dependency summary never counts banks as industrial readiness',()=>{
  assert.equal(result.summary.possible,10);
  assert.equal(result.rows[0].indexes.currentRatio.status,'READY_DIRECT');
 });
+
+import {validateFiscalRow} from './fdve-quality-gate.mjs';
+test('quality gate rejects missing provenance and misaligned fiscal years',()=>{
+ const row=validateFiscalRow('TEST',2025,{cash:{status:'AVAILABLE',value:100,periodEnd:'2024-12-31'}});
+ assert.equal(row.status,'REVIEW_REQUIRED');
+ assert.ok(row.issues.some(x=>x.code==='PERIOD_MISMATCH'));
+ assert.ok(row.issues.some(x=>x.code==='MISSING_PROVENANCE'));
+});
+test('quality gate rejects inventory exceeding current assets',()=>{
+ const f=(value,tag)=>({status:'AVAILABLE',value,periodEnd:'2025-12-31',tag,accession:'000001-25-000001'});
+ const row=validateFiscalRow('TEST',2025,{currentAssets:f(50,'AssetsCurrent'),inventory:f(90,'InventoryNet')});
+ assert.ok(row.issues.some(x=>x.code==='INVENTORY_EXCEEDS_CURRENT_ASSETS'));
+});
