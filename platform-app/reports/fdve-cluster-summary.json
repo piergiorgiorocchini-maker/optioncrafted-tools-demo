@@ -1,251 +1,252 @@
 {
-  "generatedAt": "2026-11-01T15:02:14.984Z",
+  "generatedAt": "2026-11-01T20:47:41.478Z",
   "totals": {
-    "applicable": 658,
-    "available": 602,
+    "applicable": 1645,
+    "available": 1491,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.9148936170212766,
-    "expectedComparisons": 602,
-    "notCompared": 602,
+    "coverage": 0.9063829787234042,
+    "expectedComparisons": 1491,
+    "notCompared": 1491,
     "reconciliationRate": null
   },
   "statisticalBreakdown": {
-    "direct": 578,
-    "derived": 24,
-    "missing": 56,
+    "direct": 1444,
+    "derived": 47,
+    "missing": 154,
     "byMetric": {
       "revenue": {
-        "direct": 40,
+        "direct": 100,
         "derived": 0,
         "missing": 0
       },
       "netIncome": {
-        "direct": 37,
-        "derived": 2,
-        "missing": 1
+        "direct": 92,
+        "derived": 5,
+        "missing": 3
       },
       "operatingIncome": {
-        "direct": 29,
+        "direct": 74,
         "derived": 0,
-        "missing": 9
+        "missing": 21
       },
       "depreciationAmortization": {
-        "direct": 28,
-        "derived": 8,
-        "missing": 2
+        "direct": 67,
+        "derived": 12,
+        "missing": 16
       },
       "interestExpense": {
-        "direct": 34,
+        "direct": 88,
         "derived": 0,
-        "missing": 4
+        "missing": 7
       },
       "cashFromOperations": {
-        "direct": 38,
+        "direct": 93,
         "derived": 0,
-        "missing": 0
+        "missing": 2
       },
       "capex": {
-        "direct": 32,
+        "direct": 79,
         "derived": 0,
-        "missing": 6
+        "missing": 16
       },
       "epsDiluted": {
-        "direct": 40,
+        "direct": 100,
         "derived": 0,
         "missing": 0
       },
       "cash": {
-        "direct": 34,
+        "direct": 88,
         "derived": 0,
-        "missing": 4
+        "missing": 7
       },
       "currentAssets": {
-        "direct": 36,
+        "direct": 90,
         "derived": 0,
-        "missing": 2
+        "missing": 5
       },
       "currentLiabilities": {
-        "direct": 36,
+        "direct": 90,
         "derived": 0,
-        "missing": 2
+        "missing": 5
       },
       "inventory": {
-        "direct": 30,
+        "direct": 77,
         "derived": 2,
-        "missing": 6
+        "missing": 16
       },
       "totalAssets": {
-        "direct": 40,
+        "direct": 100,
         "derived": 0,
         "missing": 0
       },
       "totalLiabilities": {
-        "direct": 32,
-        "derived": 4,
-        "missing": 4
+        "direct": 80,
+        "derived": 10,
+        "missing": 10
       },
       "equity": {
-        "direct": 30,
-        "derived": 6,
-        "missing": 4
+        "direct": 75,
+        "derived": 15,
+        "missing": 10
       },
       "longTermDebt": {
-        "direct": 30,
-        "derived": 2,
-        "missing": 6
+        "direct": 75,
+        "derived": 3,
+        "missing": 17
       },
       "shortTermDebt": {
-        "direct": 32,
+        "direct": 76,
         "derived": 0,
-        "missing": 6
+        "missing": 19
       }
     },
     "byTicker": {
       "AAPL": {
-        "direct": 32,
+        "direct": 83,
         "derived": 0,
         "missing": 2
       },
       "MSFT": {
-        "direct": 32,
+        "direct": 80,
         "derived": 2,
-        "missing": 0
+        "missing": 3
       },
       "XOM": {
-        "direct": 30,
+        "direct": 75,
         "derived": 2,
-        "missing": 2
+        "missing": 8
       },
       "WMT": {
-        "direct": 32,
-        "derived": 2,
-        "missing": 0
+        "direct": 77,
+        "derived": 5,
+        "missing": 3
       },
       "JPM": {
-        "direct": 12,
+        "direct": 30,
         "derived": 0,
         "missing": 0
       },
       "ADBE": {
-        "direct": 30,
+        "direct": 72,
         "derived": 2,
-        "missing": 2
+        "missing": 11
       },
       "CRM": {
-        "direct": 32,
+        "direct": 80,
         "derived": 0,
-        "missing": 2
-      },
-      "NVDA": {
-        "direct": 32,
-        "derived": 0,
-        "missing": 2
-      },
-      "AVGO": {
-        "direct": 27,
-        "derived": 2,
         "missing": 5
       },
-      "AMD": {
-        "direct": 30,
+      "NVDA": {
+        "direct": 80,
+        "derived": 0,
+        "missing": 5
+      },
+      "AVGO": {
+        "direct": 68,
         "derived": 2,
-        "missing": 2
+        "missing": 15
+      },
+      "AMD": {
+        "direct": 73,
+        "derived": 3,
+        "missing": 9
       },
       "GOOGL": {
-        "direct": 30,
-        "derived": 0,
-        "missing": 4
+        "direct": 75,
+        "derived": 1,
+        "missing": 9
       },
       "AMZN": {
-        "direct": 30,
+        "direct": 75,
         "derived": 0,
-        "missing": 4
+        "missing": 10
       },
       "COST": {
-        "direct": 34,
+        "direct": 85,
         "derived": 0,
         "missing": 0
       },
       "PG": {
-        "direct": 30,
-        "derived": 2,
-        "missing": 2
+        "direct": 75,
+        "derived": 5,
+        "missing": 5
       },
       "CAT": {
-        "direct": 26,
-        "derived": 4,
-        "missing": 4
+        "direct": 65,
+        "derived": 10,
+        "missing": 10
       },
       "DE": {
-        "direct": 25,
+        "direct": 65,
         "derived": 0,
-        "missing": 9
+        "missing": 20
       },
       "CVX": {
-        "direct": 26,
+        "direct": 68,
         "derived": 0,
-        "missing": 8
+        "missing": 17
       },
       "JNJ": {
-        "direct": 30,
+        "direct": 75,
         "derived": 0,
-        "missing": 4
+        "missing": 10
       },
       "MRK": {
-        "direct": 28,
-        "derived": 4,
-        "missing": 2
+        "direct": 67,
+        "derived": 10,
+        "missing": 8
       },
       "UNH": {
-        "direct": 30,
-        "derived": 2,
-        "missing": 2
+        "direct": 76,
+        "derived": 5,
+        "missing": 4
       }
     },
-    "directCoveragePct": 87.84,
-    "assistedCoveragePct": 91.49
+    "directCoveragePct": 87.78,
+    "assistedCoveragePct": 90.64
   },
   "qualityGate": {
-    "status": "PASS",
+    "status": "REVIEW_REQUIRED",
     "summary": null
   },
   "dependencyAudit": {
     "summary": {
-      "rows": 38,
-      "possible": 380,
-      "readyDirect": 201,
-      "readyDerived": 16,
-      "blocked": 163,
+      "rows": 95,
+      "possible": 950,
+      "readyDirect": 500,
+      "readyDerived": 24,
+      "blocked": 426,
       "blockers": {
-        "interestExpense": 4,
-        "marketCap": 76,
-        "operatingIncome": 27,
-        "inventory": 6,
-        "capex": 6,
-        "longTermDebt": 36,
-        "equity": 4,
-        "depreciationAmortization": 4,
-        "cash": 20,
-        "shortTermDebt": 36,
-        "currentAssets": 4,
-        "currentLiabilities": 6
+        "marketCap": 190,
+        "interestExpense": 7,
+        "depreciationAmortization": 32,
+        "inventory": 16,
+        "operatingIncome": 63,
+        "longTermDebt": 102,
+        "shortTermDebt": 114,
+        "capex": 16,
+        "equity": 10,
+        "cash": 35,
+        "currentAssets": 10,
+        "currentLiabilities": 15,
+        "cashFromOperations": 2
       },
       "accountingOnly": {
-        "possible": 304,
-        "ready": 217,
-        "blocked": 87,
-        "readinessPct": 71.38
+        "possible": 760,
+        "ready": 524,
+        "blocked": 236,
+        "readinessPct": 68.95
       },
       "marketDependent": {
-        "possible": 76,
+        "possible": 190,
         "ready": 0,
-        "blocked": 76,
+        "blocked": 190,
         "readinessPct": 0
       },
-      "readinessPct": 57.11
+      "readinessPct": 55.16
     }
   },
   "companies": [
@@ -255,6 +256,30 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -331,6 +356,93 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -355,6 +467,247 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "EnergyRelatedInventory",
+                  "observations": 2
+                },
+                {
+                  "tag": "EnergyRelatedInventoryChemicals",
+                  "observations": 2
+                },
+                {
+                  "tag": "EnergyRelatedInventoryPetroleum",
+                  "observations": 2
+                },
+                {
+                  "tag": "InventoryCrudeOilProductsAndMerchandise",
+                  "observations": 2
+                },
+                {
+                  "tag": "InventoryPartsAndComponentsNetOfReserves",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "EffectOfLIFOInventoryLiquidationOnIncome",
+                "EnergyRelatedInventory",
+                "EnergyRelatedInventoryChemicals",
+                "EnergyRelatedInventoryNaturalGasInStorage",
+                "EnergyRelatedInventoryPetroleum",
+                "IncreaseDecreaseInInventories",
+                "InventoryCrudeOilProductsAndMerchandise",
+                "InventoryFinishedGoodsAndWorkInProcess"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "InventoryNet",
+                  "present": true,
+                  "unitCount": 12,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "EnergyRelatedInventory",
+                  "observations": 2
+                },
+                {
+                  "tag": "EnergyRelatedInventoryChemicals",
+                  "observations": 2
+                },
+                {
+                  "tag": "EnergyRelatedInventoryPetroleum",
+                  "observations": 2
+                },
+                {
+                  "tag": "InventoryCrudeOilProductsAndMerchandise",
+                  "observations": 2
+                },
+                {
+                  "tag": "InventoryPartsAndComponentsNetOfReserves",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "EffectOfLIFOInventoryLiquidationOnIncome",
+                "EnergyRelatedInventory",
+                "EnergyRelatedInventoryChemicals",
+                "EnergyRelatedInventoryNaturalGasInStorage",
+                "EnergyRelatedInventoryPetroleum",
+                "IncreaseDecreaseInInventories",
+                "InventoryCrudeOilProductsAndMerchandise",
+                "InventoryFinishedGoodsAndWorkInProcess"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "InventoryNet",
+                  "present": true,
+                  "unitCount": 12,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "EnergyRelatedInventory",
+                  "observations": 2
+                },
+                {
+                  "tag": "EnergyRelatedInventoryChemicals",
+                  "observations": 2
+                },
+                {
+                  "tag": "EnergyRelatedInventoryPetroleum",
+                  "observations": 2
+                },
+                {
+                  "tag": "InventoryCrudeOilProductsAndMerchandise",
+                  "observations": 2
+                },
+                {
+                  "tag": "InventoryPartsAndComponentsNetOfReserves",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "EffectOfLIFOInventoryLiquidationOnIncome",
+                "EnergyRelatedInventory",
+                "EnergyRelatedInventoryChemicals",
+                "EnergyRelatedInventoryNaturalGasInStorage",
+                "EnergyRelatedInventoryPetroleum",
+                "IncreaseDecreaseInInventories",
+                "InventoryCrudeOilProductsAndMerchandise",
+                "InventoryFinishedGoodsAndWorkInProcess"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "InventoryNet",
+                  "present": true,
+                  "unitCount": 12,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -433,6 +786,120 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DepreciationAmortizationAndAccretionNet",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 21,
+                  "nearby": []
+                },
+                {
+                  "tag": "DepreciationAndAmortization",
+                  "present": true,
+                  "unitCount": 96,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DepreciationAmortizationAndAccretionNet",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 21,
+                  "nearby": []
+                },
+                {
+                  "tag": "DepreciationAndAmortization",
+                  "present": true,
+                  "unitCount": 96,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DepreciationAmortizationAndAccretionNet",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 21,
+                  "nearby": []
+                },
+                {
+                  "tag": "DepreciationAndAmortization",
+                  "present": true,
+                  "unitCount": 96,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -457,6 +924,30 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          },
+          "missing": []
+        },
         "2024": {
           "coverage": {
             "applicable": 6,
@@ -481,6 +972,205 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "ProceedsFromIssuanceOfSeniorLongTermDebt",
+                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+                "RepaymentsOfLongTermDebt"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 15,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 8,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "ProceedsFromIssuanceOfSeniorLongTermDebt",
+                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+                "RepaymentsOfLongTermDebt"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 15,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 8,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "ProceedsFromIssuanceOfSeniorLongTermDebt",
+                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+                "RepaymentsOfLongTermDebt"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 15,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 8,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -535,6 +1225,54 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -575,6 +1313,75 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 55,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 55,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 55,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -629,6 +1436,310 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "netIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "NetIncomeLoss",
+                  "present": true,
+                  "unitCount": 32,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 2,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "StockholdersEquity",
+                  "present": true,
+                  "unitCount": 16,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "netIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "NetIncomeLoss",
+                  "present": true,
+                  "unitCount": 32,
+                  "nearby": [
+                    {
+                      "end": "2022-10-30",
+                      "start": "2021-11-01",
+                      "fy": 2024,
+                      "fp": "FY",
+                      "form": "10-K",
+                      "filed": "2024-12-20",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 2,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "StockholdersEquity",
+                  "present": true,
+                  "unitCount": 16,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtCurrent",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextRollingTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 44,
+                  "nearby": [
+                    {
+                      "end": "2022-07-31",
+                      "start": null,
+                      "fy": 2022,
+                      "fp": "Q3",
+                      "form": "10-Q",
+                      "filed": "2022-09-08",
+                      "valid": false
+                    },
+                    {
+                      "end": "2022-05-01",
+                      "start": null,
+                      "fy": 2022,
+                      "fp": "Q2",
+                      "form": "10-Q",
+                      "filed": "2022-06-09",
+                      "valid": false
+                    },
+                    {
+                      "end": "2022-01-30",
+                      "start": null,
+                      "fy": 2022,
+                      "fp": "Q1",
+                      "form": "10-Q",
+                      "filed": "2022-03-10",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 2,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "StockholdersEquity",
+                  "present": true,
+                  "unitCount": 16,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtCurrent",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextRollingTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 44,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -813,6 +1924,193 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 2
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "OperatingLeaseRightOfUseAssetAmortizationExpense",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherDepreciationAndAmortization",
+                  "observations": 2
+                },
+                {
+                  "tag": "CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 47,
+                  "nearby": []
+                },
+                {
+                  "tag": "DepreciationAndAmortization",
+                  "present": true,
+                  "unitCount": 47,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 20,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "OperatingLeaseRightOfUseAssetAmortizationExpense",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherDepreciationAndAmortization",
+                  "observations": 2
+                },
+                {
+                  "tag": "CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "DepreciationDepletionAndAmortization",
+                  "present": true,
+                  "unitCount": 47,
+                  "nearby": [
+                    {
+                      "end": "2022-09-24",
+                      "start": "2021-12-26",
+                      "fy": 2023,
+                      "fp": "Q3",
+                      "form": "10-Q",
+                      "filed": "2023-11-01",
+                      "valid": false
+                    }
+                  ]
+                },
+                {
+                  "tag": "DepreciationAndAmortization",
+                  "present": true,
+                  "unitCount": 47,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 20,
+                  "nearby": [
+                    {
+                      "end": "2022-12-31",
+                      "start": null,
+                      "fy": 2023,
+                      "fp": "Q3",
+                      "form": "10-Q",
+                      "filed": "2023-11-01",
+                      "valid": false
+                    },
+                    {
+                      "end": "2022-12-31",
+                      "start": null,
+                      "fy": 2023,
+                      "fp": "Q2",
+                      "form": "10-Q",
+                      "filed": "2023-08-02",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "totalLiabilities",
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -853,6 +2151,157 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtFairValue",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                "LongTermDebtCurrent",
+                "LongTermDebtFairValue",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 58,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "Depreciation",
+                  "observations": 2
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [
+                "InventoryNet",
+                "IncreaseDecreaseInInventories"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "InventoryNet",
+                  "present": true,
+                  "unitCount": 62,
+                  "nearby": [
+                    {
+                      "end": "2023-09-30",
+                      "start": null,
+                      "fy": 2023,
+                      "fp": "Q3",
+                      "form": "10-Q",
+                      "filed": "2023-10-25",
+                      "valid": false
+                    },
+                    {
+                      "end": "2023-06-30",
+                      "start": null,
+                      "fy": 2023,
+                      "fp": "Q2",
+                      "form": "10-Q",
+                      "filed": "2023-07-26",
+                      "valid": false
+                    },
+                    {
+                      "end": "2023-03-31",
+                      "start": null,
+                      "fy": 2023,
+                      "fp": "Q1",
+                      "form": "10-Q",
+                      "filed": "2023-04-26",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -964,6 +2413,96 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 152,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 152,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 152,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1032,6 +2571,30 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1056,6 +2619,75 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "CashAndCashEquivalentsAtCarryingValue",
+                  "present": true,
+                  "unitCount": 184,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "CashAndCashEquivalentsAtCarryingValue",
+                  "present": true,
+                  "unitCount": 184,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "CashAndCashEquivalentsAtCarryingValue",
+                  "present": true,
+                  "unitCount": 184,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1110,6 +2742,138 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeTaxExaminationPenaltiesAndInterestExpense",
+                  "observations": 2
+                },
+                {
+                  "tag": "InterestPaidNet",
+                  "observations": 2
+                },
+                {
+                  "tag": "MinorityInterestDecreaseFromDistributionsToNoncontrollingInterestHolders",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeTaxExaminationPenaltiesAndInterestExpense",
+                  "observations": 2
+                },
+                {
+                  "tag": "InterestPaidNet",
+                  "observations": 2
+                },
+                {
+                  "tag": "MinorityInterestDecreaseFromDistributionsToNoncontrollingInterestHolders",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeTaxExaminationPenaltiesAndInterestExpense",
+                  "observations": 2
+                },
+                {
+                  "tag": "InterestPaidNet",
+                  "observations": 2
+                },
+                {
+                  "tag": "NetIncomeLossAttributableToNoncontrollingInterest",
+                  "observations": 2
+                }
+              ],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1206,6 +2970,203 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "currentAssets",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "currentLiabilities",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "currentAssets",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "currentLiabilities",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "RepaymentsOfLongTermDebt",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 145,
+                  "nearby": [
+                    {
+                      "end": "2022-05-01",
+                      "start": null,
+                      "fy": 2022,
+                      "fp": "Q2",
+                      "form": "10-Q",
+                      "filed": "2022-05-26",
+                      "valid": false
+                    },
+                    {
+                      "end": "2022-01-30",
+                      "start": null,
+                      "fy": 2022,
+                      "fp": "Q1",
+                      "form": "10-Q",
+                      "filed": "2022-02-24",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "currentAssets",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "currentLiabilities",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "RepaymentsOfLongTermDebt",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 145,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1395,6 +3356,264 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OtherNonoperatingIncome",
+                "OtherNonoperatingIncomeExpense"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtFairValue",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                "LongTermDebtCurrent",
+                "LongTermDebtFairValue",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 80,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OtherNonoperatingIncome",
+                "OtherNonoperatingIncomeExpense"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtFairValue",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                "LongTermDebtCurrent",
+                "LongTermDebtFairValue",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 80,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OtherNonoperatingIncome",
+                "OtherNonoperatingIncomeExpense"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtFairValue",
+                  "observations": 2
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                "LongTermDebtCurrent",
+                "LongTermDebtFairValue",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtNoncurrent",
+                  "present": true,
+                  "unitCount": 80,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1622,6 +3841,220 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OperatingIncomeLoss",
+                "OtherNonoperatingIncomeExpense",
+                "SegmentReportingInformationOperatingIncomeLoss"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "OperatingIncomeLoss",
+                  "present": true,
+                  "unitCount": 52,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "StockholdersEquity",
+                  "present": true,
+                  "unitCount": 22,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OperatingIncomeLoss",
+                "OtherNonoperatingIncomeExpense",
+                "SegmentReportingInformationOperatingIncomeLoss"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "OperatingIncomeLoss",
+                  "present": true,
+                  "unitCount": 52,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "StockholdersEquity",
+                  "present": true,
+                  "unitCount": 22,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 4
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 4
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 4
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 4
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OperatingIncomeLoss",
+                "OtherNonoperatingIncomeExpense",
+                "SegmentReportingInformationOperatingIncomeLoss"
+              ],
+              "fiscalCandidates": [
+                {
+                  "tag": "OperatingIncomeLoss",
+                  "present": true,
+                  "unitCount": 52,
+                  "nearby": []
+                }
+              ]
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "StockholdersEquity",
+                  "present": true,
+                  "unitCount": 22,
+                  "nearby": [
+                    {
+                      "end": "2023-12-31",
+                      "start": null,
+                      "fy": 2024,
+                      "fp": "Q3",
+                      "form": "10-Q",
+                      "filed": "2024-10-23",
+                      "valid": false
+                    },
+                    {
+                      "end": "2023-12-31",
+                      "start": null,
+                      "fy": 2024,
+                      "fp": "Q2",
+                      "form": "10-Q",
+                      "filed": "2024-07-25",
+                      "valid": false
+                    },
+                    {
+                      "end": "2023-12-31",
+                      "start": null,
+                      "fy": 2024,
+                      "fp": "Q1",
+                      "form": "10-Q",
+                      "filed": "2024-05-01",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1810,6 +4243,210 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "cashFromOperations",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "NetCashProvidedByUsedInOperatingActivities",
+                  "present": true,
+                  "unitCount": 136,
+                  "nearby": [
+                    {
+                      "end": "2021-03-31",
+                      "start": "2021-01-01",
+                      "fy": 2021,
+                      "fp": "Q1",
+                      "form": "10-Q",
+                      "filed": "2021-05-05",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+                  "present": true,
+                  "unitCount": 27,
+                  "nearby": [
+                    {
+                      "end": "2021-12-31",
+                      "start": "2021-01-01",
+                      "fy": 2023,
+                      "fp": "FY",
+                      "form": "10-K",
+                      "filed": "2024-02-26",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense"
+              ],
+              "fiscalCandidates": []
+            },
+            {
+              "metric": "cashFromOperations",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "NetCashProvidedByUsedInOperatingActivities",
+                  "present": true,
+                  "unitCount": 136,
+                  "nearby": [
+                    {
+                      "end": "2022-12-31",
+                      "start": "2022-01-01",
+                      "fy": 2024,
+                      "fp": "FY",
+                      "form": "10-K",
+                      "filed": "2025-02-25",
+                      "valid": false
+                    },
+                    {
+                      "end": "2022-09-30",
+                      "start": "2022-01-01",
+                      "fy": 2023,
+                      "fp": "Q3",
+                      "form": "10-Q",
+                      "filed": "2023-11-03",
+                      "valid": false
+                    },
+                    {
+                      "end": "2022-06-30",
+                      "start": "2022-01-01",
+                      "fy": 2023,
+                      "fp": "Q2",
+                      "form": "10-Q",
+                      "filed": "2023-08-07",
+                      "valid": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 2
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 2
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 2
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense"
+              ],
+              "fiscalCandidates": []
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
@@ -1894,6 +4531,60 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 74,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [],
+              "fiscalCandidates": [
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "present": true,
+                  "unitCount": 74,
+                  "nearby": []
+                }
+              ]
+            }
+          ]
+        },
         "2024": {
           "coverage": {
             "applicable": 17,
