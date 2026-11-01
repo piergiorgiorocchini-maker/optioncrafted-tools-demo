@@ -2,7 +2,7 @@
 // Conservative incremental provider ingestion. No credentials or raw payloads committed.
 // A durable per-day ledger prevents accidental repeat calls after reruns.
 import fs from 'node:fs/promises';
-import {AV_ENDPOINTS,normalizeAlphaVantageAnnual} from './fdve-alpha-vantage-adapter.mjs';
+import {AV_ENDPOINTS,AV_FIELDS} from './fdve-alpha-vantage-adapter.mjs';
 import {FMP_FIELDS} from './fdve-cluster-mapping.mjs';
 const dir='platform-app/reports/provider-cache',statePath=dir+'/daily-state.json';
 const today=new Date().toISOString().slice(0,10);
@@ -63,9 +63,7 @@ for(const provider of ['FMP','ALPHA_VANTAGE']){
       values:Object.fromEntries(fields.filter(([,spec])=>Number.isFinite(x[spec[1]])).map(([metric,spec])=>[metric,x[spec[1]]*spec[2]]))
      }));
     }else{
-     const fields=Object.keys((await import('./fdve-alpha-vantage-adapter.mjs')).AV_FIELDS).filter(k=>(awaitableField(k))===statement);
-     function awaitableField(k){return ({revenue:'income',netIncome:'income',operatingIncome:'income',epsDiluted:'income',cashFromOperations:'cashflow',capex:'cashflow',cash:'balance',currentAssets:'balance',currentLiabilities:'balance',inventory:'balance',totalAssets:'balance',totalLiabilities:'balance',equity:'balance',longTermDebt:'balance',shortTermDebt:'balance'})[k];}
-     const {AV_FIELDS}=await import('./fdve-alpha-vantage-adapter.mjs');
+     const fields=Object.keys(AV_FIELDS).filter(k=>AV_FIELDS[k][0]===statement);
      cached.statements[statement]=outcome.data.annualReports.filter(x=>/^20\d\d-\d\d-\d\d$/.test(x.fiscalDateEnding||'')).map(x=>({
       date:x.fiscalDateEnding,currency:x.reportedCurrency||null,
       values:Object.fromEntries(fields.filter(k=>Number.isFinite(Number(x[AV_FIELDS[k][1]]))&&x[AV_FIELDS[k][1]]!==null&&x[AV_FIELDS[k][1]]!=='None').map(k=>[k,k==='capex'?Math.abs(Number(x[AV_FIELDS[k][1]])):Number(x[AV_FIELDS[k][1]])]))
