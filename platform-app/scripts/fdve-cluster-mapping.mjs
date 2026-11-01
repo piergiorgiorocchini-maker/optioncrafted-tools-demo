@@ -209,6 +209,18 @@ export function selectBankFiscalSec(concepts,metric,year,asOf){
  const chosen=candidates[0];
  return {status:'AVAILABLE',metric,year,value:chosen.val,unit,periodStart:chosen.start||null,periodEnd:chosen.end,tag:chosen.tag,accession:chosen.accn,filed:chosen.filed};
 }
+// Explain why a source tag is present yet excluded by strict FY selection.
+export function diagnoseFiscalCandidates(concepts,metric,year,asOf){
+ const kind=['cash','currentAssets','currentLiabilities','inventory','totalAssets','totalLiabilities','equity','longTermDebt','shortTermDebt'].includes(metric)?'instant':'flow';
+ const unit=metric==='epsDiluted'?'USD/shares':'USD';
+ return (SEC_ALIASES[metric]||[]).map(tag=>{
+  const all=concepts[tag]?.units?.[unit]||[];
+  const nearby=all.filter(x=>x.end?.slice(0,4)===String(year)&&x.filed<=asOf)
+   .sort((a,b)=>b.filed.localeCompare(a.filed)).slice(0,3)
+   .map(x=>({end:x.end,start:x.start||null,fy:x.fy,fp:x.fp,form:x.form,filed:x.filed,valid:validSecObservation(x,kind,year,asOf)}));
+  return {tag,present:!!concepts[tag],unitCount:all.length,nearby};
+ }).filter(x=>x.present);
+}
 export function findRelatedTags(concepts,metric){
  const patterns={
   operatingIncome:/operatingincome|incomelossfromcontinuingoperationsbeforeincometaxes|incomeoperations/i,
