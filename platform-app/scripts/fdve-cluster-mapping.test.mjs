@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags} from './fdve-cluster-mapping.mjs';
+import {selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags} from './fdve-cluster-mapping.mjs';
 const fact=(val,end,fy,extra={})=>({val,end,fy,fp:'FY',form:'10-K',filed:fy+'-03-01',accn:'0000104169-25-000001',...extra});
 test('a historical tag is not coverage for FY2025',()=>{
  const concepts={InventoryNet:{units:{USD:[fact(100,'2012-01-31',2012)]}}};
@@ -43,4 +43,13 @@ test('SEC D&A and interest expense map only to same-year annual 10-K facts',()=>
  assert.equal(selectFiscalSec(concepts,'depreciationAmortization','flow',2025,'2026-10-31').value,11500000000);
  assert.equal(selectFiscalSec(concepts,'interestExpense','flow',2025,'2026-10-31').value,400000000);
  assert.equal(selectFiscalSec(concepts,'depreciationAmortization','flow',2024,'2026-10-31').status,'PERIOD_MISSING');
+});
+
+test('interest tag diagnostics never promote cash interest paid to interest expense',()=>{
+ const concepts={InterestPaidNet:{label:'Cash interest paid',units:{USD:[fact(50,'2025-12-31',2025,{start:'2025-01-01'})]}}};
+ assert.equal(selectFiscalSec(concepts,'interestExpense','flow',2025,'2026-10-31').status,'PERIOD_MISSING');
+ const diagnostic=diagnoseInterestTags(concepts,2025,'2026-10-31');
+ assert.equal(diagnostic.status,'DIAGNOSTIC_ONLY');
+ assert.equal(diagnostic.availableTags[0].tag,'InterestPaidNet');
+ assert.equal(diagnostic.availableTags[0].values[0].value,50);
 });
