@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import {METRICS} from './fdve-model.mjs';
 import {qualityGate} from './fdve-quality-gate.mjs';
 import {auditDependencyReport} from './fdve-dependency-audit.mjs';
-import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,diagnoseMissingMetric,resolveValidatedIndustrialMetric,deriveDepreciationAmortization,deriveShareholderEquity,diagnoseFiscalCandidates} from './fdve-cluster-mapping.mjs';
+import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,diagnoseMissingMetric,resolveValidatedIndustrialMetric,deriveDepreciationAmortization,deriveShareholderEquity,diagnoseFiscalCandidates,deriveNetIncomeAttributable,deriveLongTermDebtNoncurrent} from './fdve-cluster-mapping.mjs';
 const cfg=JSON.parse(await fs.readFile('platform-app/config/fdve-cluster-pilot.json','utf8'));
 const profiles=JSON.parse(await fs.readFile('platform-app/config/fdve-sector-profiles.json','utf8'));
 const asOf=new Date().toISOString().slice(0,10);
@@ -43,6 +43,8 @@ for(const company of cfg.companies){
     if(found.status==='PERIOD_MISSING')found=resolveValidatedIndustrialMetric(concepts,company.ticker,metric,kind,year,asOf)||found;
     if(metric==='depreciationAmortization'&&found.status==='PERIOD_MISSING')found=deriveDepreciationAmortization(concepts,company.ticker,year,asOf)||found;
     if(metric==='equity'&&found.status==='PERIOD_MISSING')found=deriveShareholderEquity(concepts,year,asOf)||found;
+    if(metric==='netIncome'&&found.status==='PERIOD_MISSING')found=deriveNetIncomeAttributable(concepts,year,asOf)||found;
+    if(metric==='longTermDebt'&&found.status==='PERIOD_MISSING')found=deriveLongTermDebtNoncurrent(concepts,year,asOf)||found;
     if(metric==='totalLiabilities'&&found.status==='PERIOD_MISSING'){
      found=deriveTotalLiabilities(concepts,year,asOf);
     }
