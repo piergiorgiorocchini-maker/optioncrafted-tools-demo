@@ -1,4 +1,4 @@
-name: FDVE five-company cross-sector audit
+name: FDVE 20-company cross-sector SEC audit
 on:
   workflow_dispatch:
   push:
@@ -8,6 +8,7 @@ on:
       - 'platform-app/scripts/fdve-quality-gate.mjs'
       - 'platform-app/scripts/fdve-model.mjs'
       - 'platform-app/config/fdve-sector-profiles.json'
+      - 'platform-app/config/fdve-cluster-pilot.json'
       - '.github/workflows/fdve-cluster-audit.yml'
 permissions:
   contents: write
@@ -26,10 +27,10 @@ jobs:
         run: |
           node --test platform-app/scripts/fdve-model.test.mjs
           node --test platform-app/scripts/fdve-cluster-mapping.test.mjs
-      - name: Period-aligned SEC and FMP audit
+      - name: Period-aligned SEC stress test (FMP collected separately within daily budget)
         env:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
-          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          FMP_API_KEY: ''
         run: node platform-app/scripts/fdve-cluster-v2.mjs
       - name: Industrial coverage gate (report only until 95% direct verified)
         run: node platform-app/scripts/check-industrial-coverage.mjs
@@ -39,7 +40,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add platform-app/reports/fdve-cluster-v2.json
           if ! git diff --cached --quiet; then
-            git commit -m "data: five-company FDVE fiscal coverage and reconciliation"
+            git commit -m "data: 20-company FDVE SEC fiscal stress test"
             for attempt in 1 2 3; do
               git fetch origin main
               git rebase -X theirs origin/main
