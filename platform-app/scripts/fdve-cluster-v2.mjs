@@ -49,6 +49,17 @@ for(const company of cfg.companies){
      if(metric==='interestExpense')found.interestTagDiagnostics=diagnoseInterestTags(concepts,year,asOf);
      else found.metricDiagnostics=diagnoseMissingMetric(concepts,metric,year,asOf);
     }
+    if(found.status==='PERIOD_MISSING'&&company.ticker==='XOM'&&metric==='operatingIncome'&&[2024,2025].includes(year)){
+     found.review={status:'DEFINITION_REVIEW_REQUIRED',
+      reason:'XOM 10-K presents income before tax, interest expense, non-service pension, equity-affiliate income and other income. EBIT and operating profit definitions differ; no unverified proxy may be promoted.',
+      source:'https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm',
+      alternative:'A separately labeled pre-tax-plus-interest EBIT proxy may be researched, but must not overwrite operatingIncome.'};
+    }
+    if(found.status==='PERIOD_MISSING'&&company.ticker==='AAPL'&&metric==='interestExpense'&&[2024,2025].includes(year)){
+     found.review={status:'GROSS_INTEREST_NOT_DISCLOSED_AS_SEPARATE_10K_LINE',
+      reason:'Other income/(expense), net is not gross interest expense; 100bp interest-rate sensitivity is not historical interest expense. Keep missing.',
+      source:'https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm'};
+    }
     metrics[metric]=found;
    }
    const bank={};
@@ -122,6 +133,7 @@ totals.reconciliationRate=totals.compared?totals.matched/totals.compared:null;
 const report={schemaVersion:2,generatedAt:new Date().toISOString(),periods:[...new Set(cfg.companies.flatMap(c=>c.fiscalYears||[2024,2025]))].sort().map(y=>'FY'+y),method:'SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation',notes:['Coverage excludes stale observations and NOT_APPLICABLE metrics','Bank-specific concepts are discovery-only until definitions validated','DERIVED liabilities are not source-reported and must be marked as such','FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success'],totals,companies:out};
 report.qualityGate=qualityGate(report);
 report.dependencyAudit=auditDependencyReport(report);
+report.recoveryReview={scope:'WMT_XOM_AAPL_FY2024_FY2025',policy:'NO_UNVERIFIED_PROMOTION',reviewedAt:asOf,notes:['WMT D&A approved only with exact issuer-scoped 10-K validation','XOM operatingIncome remains missing until definition reconciled','AAPL gross interest expense remains missing rather than using net other income']};
 await fs.writeFile('platform-app/reports/fdve-cluster-v2.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({totals,companies:out.map(x=>({ticker:x.ticker,sec:x.sec.status,fmp:x.fmp.status,coverageByYear:Object.fromEntries(Object.entries(x.years).map(([y,row])=>[y,row.coverage]))}))},null,2));
 if(out.some(x=>x.sec.status!=='OK')||report.qualityGate.status!=='PASS')process.exitCode=1;
