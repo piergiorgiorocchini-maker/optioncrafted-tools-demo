@@ -93,3 +93,30 @@ test('MSFT D&A is explicitly derived from two matched annual components, never t
  mismatch.AmortizationOfIntangibleAssets.units.USD[0].start='2024-08-01';
  assert.equal(resolveValidatedIndustrialMetric(mismatch,'MSFT','depreciationAmortization','flow',year,'2026-11-01'),null);
 });
+
+import {auditIndexDependencies,auditDependencyReport} from './fdve-dependency-audit.mjs';
+test('dependency audit distinguishes direct, derived and unavailable inputs',()=>{
+ const f=(value,status='AVAILABLE')=>({value,status});
+ const metrics={currentAssets:f(100),currentLiabilities:f(50),inventory:f(10,'DERIVED'),
+  cash:f(20),interestExpense:{status:'PERIOD_MISSING'}};
+ const result=auditIndexDependencies(metrics);
+ assert.equal(result.currentRatio.status,'READY_DIRECT');
+ assert.equal(result.quickRatio.status,'READY_DERIVED');
+ assert.equal(result.interestCoverage.status,'BLOCKED');
+ assert.equal(result.enterpriseValue.status,'BLOCKED');
+});
+test('zero interest expense is not a valid coverage denominator',()=>{
+ const f=value=>({value,status:'AVAILABLE'});
+ const result=auditIndexDependencies({operatingIncome:f(100),interestExpense:f(0)});
+ assert.equal(result.interestCoverage.status,'BLOCKED');
+ assert.ok(result.interestCoverage.missing.some(x=>x.reason==='INVALID_DENOMINATOR'));
+});
+test('dependency summary never counts banks as industrial readiness',()=>{
+ const f=value=>({value,status:'AVAILABLE'});
+ const report={companies:[{ticker:'JPM',profile:'bank',years:{2025:{metrics:{}}}},
+  {ticker:'AAPL',profile:'industrial',years:{2025:{metrics:{currentAssets:f(100),currentLiabilities:f(50)}}}}]};
+ const result=auditDependencyReport(report);
+ assert.equal(result.summary.rows,1);
+ assert.equal(result.summary.possible,10);
+ assert.equal(result.rows[0].indexes.currentRatio.status,'READY_DIRECT');
+});
