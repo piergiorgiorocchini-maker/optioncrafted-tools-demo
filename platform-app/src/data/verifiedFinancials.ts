@@ -22,6 +22,13 @@ export function verifiedFcf(ticker:string):VerifiedFcf{
  if(ticker==="AAPL")return {perShare:appleResearch.fcfPerShare,annualUsd:null,periodEnd:appleResearch.fundamentalsAsOf,basis:"SEC reconstructed TTM",warning:"Approximate TTM FCF per outstanding share; not diluted weighted-average FCF/share."};
  const rows=verifiedAnnualHistory(ticker),latest=rows.at(-1);
  if(!latest||latest.fcf===null)return {perShare:null,annualUsd:null,periodEnd:latest?.periodEnd??null,basis:"SEC annual",warning:"Annual FCF unavailable."};
- // Never infer a diluted share count from a market snapshot or EPS from a different fiscal period.
- return {perShare:null,annualUsd:latest.fcf,periodEnd:latest.periodEnd,basis:"SEC annual",warning:"FCF/share requires fiscal-period-matched diluted shares; market snapshot EPS is not a substitute."};
+ // Use same-fiscal-year SEC net income and diluted EPS to infer a proxy share count.
+ // Keep the bridge explicit: net income / diluted EPS is an implied denominator, not a separately reported share-count fact.
+ const annualUsd=latest.fcf,periodEnd=latest.periodEnd||null;
+ if(latest.netIncome===null||latest.netIncome<=0||latest.eps===null||latest.eps<=0){
+  return {perShare:null,annualUsd,periodEnd,basis:"SEC annual FY"+latest.year,warning:"FCF/share estimate unavailable: same-year positive net income and diluted EPS are both required to infer shares."};
+ }
+ const perShare=annualUsd*latest.eps/latest.netIncome;
+ if(!Number.isFinite(perShare))return {perShare:null,annualUsd,periodEnd,basis:"SEC annual FY"+latest.year,warning:"FCF/share estimate unavailable: derived value is not finite."};
+ return {perShare,annualUsd,periodEnd,basis:"SEC annual FY"+latest.year+" · derived estimate",warning:"Estimated FCF/share = annual SEC FCF × same-year diluted EPS ÷ net income. Shares are implied from GAAP net income/EPS, not separately reported; use as a screening input, not a precise diluted-share calculation."};
 }
