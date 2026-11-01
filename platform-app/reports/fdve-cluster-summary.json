@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-11-01T15:00:51.439Z",
+  "generatedAt": "2026-11-01T15:01:22.828Z",
   "totals": {
     "applicable": 658,
-    "available": 598,
+    "available": 602,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.9088145896656535,
-    "expectedComparisons": 598,
-    "notCompared": 598,
+    "coverage": 0.9148936170212766,
+    "expectedComparisons": 602,
+    "notCompared": 602,
     "reconciliationRate": null
   },
   "statisticalBreakdown": {
-    "direct": 576,
-    "derived": 22,
-    "missing": 60,
+    "direct": 578,
+    "derived": 24,
+    "missing": 56,
     "byMetric": {
       "revenue": {
         "direct": 40,
@@ -34,13 +34,13 @@
       },
       "depreciationAmortization": {
         "direct": 28,
-        "derived": 7,
-        "missing": 3
+        "derived": 8,
+        "missing": 2
       },
       "interestExpense": {
-        "direct": 33,
+        "direct": 34,
         "derived": 0,
-        "missing": 5
+        "missing": 4
       },
       "cashFromOperations": {
         "direct": 38,
@@ -94,13 +94,13 @@
       },
       "longTermDebt": {
         "direct": 30,
-        "derived": 1,
-        "missing": 7
+        "derived": 2,
+        "missing": 6
       },
       "shortTermDebt": {
-        "direct": 31,
+        "direct": 32,
         "derived": 0,
-        "missing": 7
+        "missing": 6
       }
     },
     "byTicker": {
@@ -130,14 +130,14 @@
         "missing": 0
       },
       "ADBE": {
-        "direct": 29,
-        "derived": 1,
-        "missing": 4
+        "direct": 30,
+        "derived": 2,
+        "missing": 2
       },
       "CRM": {
-        "direct": 31,
+        "direct": 32,
         "derived": 0,
-        "missing": 3
+        "missing": 2
       },
       "NVDA": {
         "direct": 32,
@@ -146,8 +146,8 @@
       },
       "AVGO": {
         "direct": 27,
-        "derived": 1,
-        "missing": 6
+        "derived": 2,
+        "missing": 5
       },
       "AMD": {
         "direct": 30,
@@ -205,8 +205,8 @@
         "missing": 2
       }
     },
-    "directCoveragePct": 87.54,
-    "assistedCoveragePct": 90.88
+    "directCoveragePct": 87.84,
+    "assistedCoveragePct": 91.49
   },
   "qualityGate": {
     "status": "PASS",
@@ -216,28 +216,28 @@
     "summary": {
       "rows": 38,
       "possible": 380,
-      "readyDirect": 200,
-      "readyDerived": 12,
-      "blocked": 168,
+      "readyDirect": 201,
+      "readyDerived": 16,
+      "blocked": 163,
       "blockers": {
-        "interestExpense": 5,
+        "interestExpense": 4,
         "marketCap": 76,
         "operatingIncome": 27,
         "inventory": 6,
-        "longTermDebt": 42,
-        "shortTermDebt": 42,
         "capex": 6,
+        "longTermDebt": 36,
         "equity": 4,
-        "depreciationAmortization": 6,
+        "depreciationAmortization": 4,
         "cash": 20,
+        "shortTermDebt": 36,
         "currentAssets": 4,
         "currentLiabilities": 6
       },
       "accountingOnly": {
         "possible": 304,
-        "ready": 212,
-        "blocked": 92,
-        "readinessPct": 69.74
+        "ready": 217,
+        "blocked": 87,
+        "readinessPct": 71.38
       },
       "marketDependent": {
         "possible": 76,
@@ -245,7 +245,7 @@
         "blocked": 76,
         "readinessPct": 0
       },
-      "readinessPct": 55.79
+      "readinessPct": 57.11
     }
   },
   "companies": [
@@ -268,7 +268,7 @@
               "candidates": [
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [],
@@ -368,15 +368,15 @@
               "candidates": [
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [
@@ -484,8 +484,8 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
             {
@@ -494,83 +494,13 @@
               "candidates": [
                 {
                   "tag": "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [
                 "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
               ],
               "fiscalCandidates": []
-            },
-            {
-              "metric": "longTermDebt",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "LongTermDebt",
-                  "observations": 1
-                }
-              ],
-              "related": [
-                "LongTermDebt",
-                "LongTermDebtAndCapitalLeaseObligations",
-                "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                "LongTermDebtNoncurrent",
-                "ProceedsFromIssuanceOfLongTermDebt",
-                "ProceedsFromIssuanceOfSeniorLongTermDebt",
-                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
-                "RepaymentsOfLongTermDebt"
-              ],
-              "fiscalCandidates": [
-                {
-                  "tag": "LongTermDebtNoncurrent",
-                  "present": true,
-                  "unitCount": 15,
-                  "nearby": []
-                }
-              ]
-            },
-            {
-              "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "LongTermDebtCurrent",
-                  "present": true,
-                  "unitCount": 8,
-                  "nearby": [
-                    {
-                      "end": "2024-11-29",
-                      "start": null,
-                      "fy": 2025,
-                      "fp": "FY",
-                      "form": "10-K",
-                      "filed": "2026-01-15",
-                      "valid": false
-                    },
-                    {
-                      "end": "2024-11-29",
-                      "start": null,
-                      "fy": 2025,
-                      "fp": "Q3",
-                      "form": "10-Q",
-                      "filed": "2025-09-24",
-                      "valid": false
-                    },
-                    {
-                      "end": "2024-11-29",
-                      "start": null,
-                      "fy": 2025,
-                      "fp": "Q2",
-                      "form": "10-Q",
-                      "filed": "2025-06-25",
-                      "valid": false
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -608,85 +538,10 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
-            {
-              "metric": "interestExpense",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "FinanceLeaseInterestExpense",
-                  "observations": 1
-                },
-                {
-                  "tag": "FinanceLeaseInterestPaymentOnLiability",
-                  "observations": 1
-                },
-                {
-                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-                  "observations": 1
-                },
-                {
-                  "tag": "InterestPaidNet",
-                  "observations": 1
-                },
-                {
-                  "tag": "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense",
-                  "observations": 1
-                }
-              ],
-              "related": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "InterestExpenseNonoperating",
-                  "present": true,
-                  "unitCount": 6,
-                  "nearby": []
-                },
-                {
-                  "tag": "InterestExpense",
-                  "present": true,
-                  "unitCount": 131,
-                  "nearby": []
-                },
-                {
-                  "tag": "InterestExpenseDebt",
-                  "present": true,
-                  "unitCount": 140,
-                  "nearby": [
-                    {
-                      "end": "2024-01-31",
-                      "start": "2023-02-01",
-                      "fy": 2025,
-                      "fp": "FY",
-                      "form": "10-K",
-                      "filed": "2026-03-02",
-                      "valid": false
-                    },
-                    {
-                      "end": "2024-10-31",
-                      "start": "2024-02-01",
-                      "fy": 2026,
-                      "fp": "Q3",
-                      "form": "10-Q",
-                      "filed": "2025-12-04",
-                      "valid": false
-                    },
-                    {
-                      "end": "2024-10-31",
-                      "start": "2024-08-01",
-                      "fy": 2026,
-                      "fp": "Q3",
-                      "form": "10-Q",
-                      "filed": "2025-12-04",
-                      "valid": false
-                    }
-                  ]
-                }
-              ]
-            },
             {
               "metric": "inventory",
               "status": "PERIOD_MISSING",
@@ -777,37 +632,10 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 15,
+            "rate": 0.8823529411764706
           },
           "missing": [
-            {
-              "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
-                  "observations": 1
-                },
-                {
-                  "tag": "Depreciation",
-                  "observations": 1
-                },
-                {
-                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
-                  "observations": 1
-                }
-              ],
-              "related": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "DepreciationDepletionAndAmortization",
-                  "present": true,
-                  "unitCount": 2,
-                  "nearby": []
-                }
-              ]
-            },
             {
               "metric": "equity",
               "status": "PERIOD_MISSING",
@@ -828,11 +656,11 @@
               "candidates": [
                 {
                   "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "LongTermDebtCurrent",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
@@ -1038,11 +866,11 @@
               "candidates": [
                 {
                   "tag": "Depreciation",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "FinanceLeaseRightOfUseAssetAmortization",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [],
@@ -1295,23 +1123,23 @@
               "candidates": [
                 {
                   "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeTaxExaminationPenaltiesAndInterestExpense",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "InterestPaidNet",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "NetIncomeLossAttributableToNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [],
@@ -1580,15 +1408,15 @@
               "candidates": [
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [
@@ -1646,19 +1474,19 @@
               "candidates": [
                 {
                   "tag": "LongTermDebtAndCapitalLeaseObligations",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "LongTermDebtCurrent",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "LongTermDebtFairValue",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
@@ -1807,19 +1635,19 @@
               "candidates": [
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "OtherNonoperatingIncomeExpense",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [
@@ -1995,19 +1823,19 @@
               "candidates": [
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
-                  "observations": 1
+                  "observations": 2
                 },
                 {
                   "tag": "OtherNonoperatingIncomeExpense",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [
