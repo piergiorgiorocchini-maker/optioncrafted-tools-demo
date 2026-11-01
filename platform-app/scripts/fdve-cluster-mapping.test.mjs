@@ -133,3 +133,16 @@ test('quality gate rejects inventory exceeding current assets',()=>{
  const row=validateFiscalRow('TEST',2025,{currentAssets:f(50,'AssetsCurrent'),inventory:f(90,'InventoryNet')});
  assert.ok(row.issues.some(x=>x.code==='INVENTORY_EXCEEDS_CURRENT_ASSETS'));
 });
+
+import {validateMarketSnapshot} from './fdve-dependency-audit.mjs';
+test('market capitalization must be sourced and aligned with fiscal year end',()=>{
+ const good={marketCap:3e12,currency:'USD',asOf:'2025-09-30',source:'EXCHANGE'};
+ assert.equal(validateMarketSnapshot(good,'2025-09-27').status,'VALID');
+ assert.equal(validateMarketSnapshot({...good,asOf:'2026-11-01'},'2025-09-27').status,'REJECTED');
+ assert.equal(validateMarketSnapshot({...good,source:''},'2025-09-27').status,'REJECTED');
+ assert.equal(validateMarketSnapshot({...good,currency:'EUR'},'2025-09-27').status,'REJECTED');
+ const f=value=>({value,status:'AVAILABLE'});
+ const metrics={longTermDebt:f(100),shortTermDebt:f(20),cash:f(30),operatingIncome:f(60),depreciationAmortization:f(10)};
+ assert.equal(auditIndexDependencies(metrics).evEbitda.status,'BLOCKED');
+ assert.equal(auditIndexDependencies(metrics,{marketSnapshot:good,periodEnd:'2025-09-27'}).evEbitda.status,'READY_DIRECT');
+});
