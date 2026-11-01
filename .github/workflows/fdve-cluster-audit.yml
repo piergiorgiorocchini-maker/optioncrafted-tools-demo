@@ -28,7 +28,7 @@ jobs:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: node platform-app/scripts/fdve-cluster-v2.mjs
-      - name: Commit audit report only
+      - name: Industrial coverage gate (report only until 95% direct verified)\n        run: node platform-app/scripts/check-industrial-coverage.mjs\n      - name: Commit audit report only
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
