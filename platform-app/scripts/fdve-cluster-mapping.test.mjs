@@ -171,3 +171,29 @@ test('WMT FY2024/2025 D&A is approved only when matching issuer 10-K line and fi
   assert.equal(resolveValidatedIndustrialMetric(concepts,'WMT','depreciationAmortization','flow',year,'2026-11-01'),null);
  }
 });
+
+import {buildMarketSnapshot} from './fdve-dependency-audit.mjs';
+test('price times shares creates a dated, source-labelled market cap without lookahead',()=>{
+ const snapshot=buildMarketSnapshot({price:150,sharesOutstanding:1000000,asOf:'2025-09-30',source:'GOOGLE'});
+ assert.equal(snapshot.marketCap,150000000);
+ assert.equal(validateMarketSnapshot(snapshot,'2025-09-27').status,'VALID');
+ assert.equal(validateMarketSnapshot(snapshot,'2024-09-28').status,'REJECTED');
+ assert.equal(buildMarketSnapshot({price:150,sharesOutstanding:0,asOf:'2025-09-30',source:'GOOGLE'}).status,'REJECTED');
+});
+test('historical market cap gaps do not contaminate SEC-only readiness',()=>{
+ const f=value=>({value,status:'AVAILABLE'});
+ const metrics={currentAssets:f(100),currentLiabilities:f(50),inventory:f(10),cash:f(20),equity:f(100),interestExpense:f(2),longTermDebt:f(40),shortTermDebt:f(10),cashFromOperations:f(50),capex:f(20),operatingIncome:f(60),depreciationAmortization:f(10)};
+ const report={companies:[{ticker:'AAPL',profile:'industrial',years:{2025:{metrics}}}]};
+ const summary=auditDependencyReport(report).summary;
+ assert.equal(summary.accountingOnly.possible,8);
+ assert.equal(summary.accountingOnly.ready,8);
+ assert.equal(summary.marketDependent.possible,2);
+ assert.equal(summary.marketDependent.blocked,2);
+});
+test('liabilities can be derived only from consolidated equity including NCI',()=>{
+ const assets=fact(300,'2025-12-31',2025);
+ const equity=fact(110,'2025-12-31',2025);
+ const c={Assets:{units:{USD:[assets]}},StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest:{units:{USD:[equity]}}};
+ assert.equal(deriveTotalLiabilities(c,2025,'2026-11-01').value,190);
+ assert.equal(deriveTotalLiabilities({Assets:c.Assets},2025,'2026-11-01').status,'DERIVATION_UNAVAILABLE');
+});
