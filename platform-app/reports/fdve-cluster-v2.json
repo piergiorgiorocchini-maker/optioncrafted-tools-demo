@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T15:00:25.880Z",
+  "generatedAt": "2026-11-01T15:00:51.439Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -1796,7 +1796,12 @@
               "inputs": [
                 "Assets",
                 "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
-              ]
+              ],
+              "accessions": [
+                "0000104169-24-000056",
+                "0000104169-24-000056"
+              ],
+              "mappingScope": "GAAP_ACCOUNTING_IDENTITY"
             },
             "equity": {
               "status": "AVAILABLE",
@@ -2015,7 +2020,12 @@
               "inputs": [
                 "Assets",
                 "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
-              ]
+              ],
+              "accessions": [
+                "0000104169-25-000021",
+                "0000104169-25-000021"
+              ],
+              "mappingScope": "GAAP_ACCOUNTING_IDENTITY"
             },
             "equity": {
               "status": "AVAILABLE",
@@ -10521,7 +10531,12 @@
               "inputs": [
                 "Assets",
                 "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
-              ]
+              ],
+              "accessions": [
+                "0001628280-25-007732",
+                "0001628280-25-007732"
+              ],
+              "mappingScope": "GAAP_ACCOUNTING_IDENTITY"
             },
             "equity": {
               "status": "AVAILABLE",
@@ -10809,7 +10824,12 @@
               "inputs": [
                 "Assets",
                 "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
-              ]
+              ],
+              "accessions": [
+                "0000310158-26-000063",
+                "0000310158-26-000063"
+              ],
+              "mappingScope": "GAAP_ACCOUNTING_IDENTITY"
             },
             "equity": {
               "status": "AVAILABLE",
