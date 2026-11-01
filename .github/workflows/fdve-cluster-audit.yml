@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add platform-app/reports/fdve-cluster-v2.json
+          git add platform-app/reports/fdve-cluster-v2.json platform-app/reports/fdve-cluster-summary.json
           if ! git diff --cached --quiet; then
             git commit -m "data: 20-company FDVE SEC fiscal stress test"
             for attempt in 1 2 3; do
