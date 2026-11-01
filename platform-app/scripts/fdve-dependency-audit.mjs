@@ -22,6 +22,10 @@ export const INPUT_DEPS=Object.freeze({
  ebit:['operatingIncome'],
  marketCap:null
 });
+export function buildMarketSnapshot({price,sharesOutstanding,currency='USD',asOf,source}){
+ if(!Number.isFinite(price)||price<=0||!Number.isFinite(sharesOutstanding)||sharesOutstanding<=0||currency!=='USD'||!source||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(asOf||''))return {status:'REJECTED',reason:'INVALID_PRICE_OR_SHARES'};
+ return {status:'READY',marketCap:price*sharesOutstanding,currency,asOf,source:source+':PRICE_X_SHARES',inputs:{price,sharesOutstanding}};
+}
 export function validateMarketSnapshot(snapshot,periodEnd,{maxAgeDays=7}={}){
  if(!snapshot)return {status:'MISSING',reason:'EXTERNAL_MARKET_DATA'};
  const {marketCap,currency,asOf,source}=snapshot;
