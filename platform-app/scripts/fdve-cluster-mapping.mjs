@@ -9,7 +9,7 @@ export const SEC_ALIASES={
  totalAssets:['Assets'],totalLiabilities:['Liabilities'],equity:['StockholdersEquity'],
  longTermDebt:['LongTermDebtNoncurrent'],shortTermDebt:['LongTermDebtCurrent'],
  depreciationAmortization:['DepreciationDepletionAndAmortization','DepreciationDepletionAndAmortizationPropertyPlantAndEquipment','DepreciationAndAmortization'],
- interestExpense:['InterestExpenseNonOperating','InterestExpense']
+ interestExpense:['InterestExpenseNonOperating','InterestExpenseNonoperating','InterestExpense','InterestExpenseDebt']
 };
 export const FMP_FIELDS={
  revenue:['income','revenue',1],netIncome:['income','netIncome',1],
