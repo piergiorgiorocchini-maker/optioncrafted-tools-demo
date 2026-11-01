@@ -1,6 +1,9 @@
 name: FDVE daily provider budgeted ingestion
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fdve-daily-providers.yml'
   schedule:
     - cron: '17 8 * * 1-5'
 permissions:
