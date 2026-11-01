@@ -1,12 +1,15 @@
 {
   "schemaVersion": 1,
-  "purpose": "FDVE 20-company SEC FY2024-FY2025 stress test",
+  "purpose": "FDVE 20-company SEC FY2021-FY2025 five-year coverage baseline",
   "companies": [
     {
       "ticker": "AAPL",
       "cik": "0000320193",
       "profile": "hardware",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -16,6 +19,9 @@
       "cik": "0000789019",
       "profile": "software-cloud",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -25,6 +31,9 @@
       "cik": "0000034088",
       "profile": "energy",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -34,6 +43,9 @@
       "cik": "0000104169",
       "profile": "retail",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -43,6 +55,9 @@
       "cik": "0000019617",
       "profile": "bank",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -52,6 +67,9 @@
       "cik": "0000796343",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -61,6 +79,9 @@
       "cik": "0001108524",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -70,6 +91,9 @@
       "cik": "0001045810",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -79,6 +103,9 @@
       "cik": "0001730168",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -88,6 +115,9 @@
       "cik": "0000002488",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -97,6 +127,9 @@
       "cik": "0001652044",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -106,6 +139,9 @@
       "cik": "0001018724",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -115,6 +151,9 @@
       "cik": "0000909832",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -124,6 +163,9 @@
       "cik": "0000080424",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -133,6 +175,9 @@
       "cik": "0000018230",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -142,6 +187,9 @@
       "cik": "0000315189",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -151,6 +199,9 @@
       "cik": "0000093410",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -160,6 +211,9 @@
       "cik": "0000200406",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -169,6 +223,9 @@
       "cik": "0000310158",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -178,6 +235,9 @@
       "cik": "0000731766",
       "profile": "industrial",
       "fiscalYears": [
+        2021,
+        2022,
+        2023,
         2024,
         2025
       ]
@@ -188,7 +248,7 @@
     "FMP via separate daily budgeted collector"
   ],
   "periods": [
-    "All 20 companies FY2024-FY2025 (40 company-years)"
+    "All 20 companies FY2021-FY2025 (100 company-years)"
   ],
   "statuses": [
     "MATCH",
