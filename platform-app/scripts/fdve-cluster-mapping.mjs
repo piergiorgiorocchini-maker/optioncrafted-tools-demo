@@ -159,6 +159,31 @@ export function deriveDepreciationAmortization(concepts,ticker,year,asOf){
   accessions:[depreciation.accn,amortization.accn],mappingScope:'ISSUER_SCOPED',
   caveat:'Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion.'};
 }
+// GAAP ProfitLoss includes noncontrolling interests; subtract only a separately
+// reported matching noncontrolling interest, never assume it is zero.
+export function deriveNetIncomeAttributable(concepts,year,asOf){
+ const pick=tag=>(concepts[tag]?.units?.USD||[]).filter(x=>validSecObservation(x,'flow',year,asOf))
+  .sort((a,b)=>b.filed.localeCompare(a.filed)||b.accn.localeCompare(a.accn))[0];
+ const consolidated=pick('ProfitLoss');
+ const nci=pick('NetIncomeLossAttributableToNoncontrollingInterest');
+ if(!consolidated||!nci||consolidated.start!==nci.start||consolidated.end!==nci.end||consolidated.accn!==nci.accn)return null;
+ return {status:'DERIVED',metric:'netIncome',year,value:consolidated.val-nci.val,unit:'USD',
+  periodStart:consolidated.start,periodEnd:consolidated.end,
+  method:'CONSOLIDATED_NET_INCOME_MINUS_NCI',inputs:['ProfitLoss','NetIncomeLossAttributableToNoncontrollingInterest'],
+  accessions:[consolidated.accn,nci.accn]};
+}
+// us-gaap:LongTermDebt includes current maturities; subtract the same-date
+// reported current maturities, never assume missing current debt is zero.
+export function deriveLongTermDebtNoncurrent(concepts,year,asOf){
+ const pick=tag=>(concepts[tag]?.units?.USD||[]).filter(x=>validSecObservation(x,'instant',year,asOf))
+  .sort((a,b)=>b.filed.localeCompare(a.filed)||b.accn.localeCompare(a.accn))[0];
+ const total=pick('LongTermDebt');
+ const current=pick('LongTermDebtCurrent');
+ if(!total||!current||total.end!==current.end||total.accn!==current.accn||total.val<current.val||current.val<0)return null;
+ return {status:'DERIVED',metric:'longTermDebt',year,value:total.val-current.val,unit:'USD',periodEnd:total.end,
+  method:'LONG_TERM_DEBT_INCLUDING_CURRENT_MINUS_CURRENT',inputs:['LongTermDebt','LongTermDebtCurrent'],
+  accessions:[total.accn,current.accn]};
+}
 // Full consolidated equity is not interchangeable with equity attributable to shareholders.
 export function deriveShareholderEquity(concepts,year,asOf){
  const pick=tag=>(concepts[tag]?.units?.USD||[]).filter(x=>validSecObservation(x,'instant',year,asOf))
