@@ -7,7 +7,22 @@
         "AAPL",
         "MSFT",
         "XOM",
-        "WMT"
+        "WMT",
+        "ADBE",
+        "CRM",
+        "NVDA",
+        "AVGO",
+        "AMD",
+        "GOOGL",
+        "AMZN",
+        "COST",
+        "PG",
+        "CAT",
+        "DE",
+        "CVX",
+        "JNJ",
+        "MRK",
+        "UNH"
       ],
       "applicable": [
         "revenue",
