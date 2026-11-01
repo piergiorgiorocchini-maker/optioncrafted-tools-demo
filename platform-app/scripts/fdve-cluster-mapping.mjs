@@ -143,6 +143,33 @@ export function resolveValidatedIndustrialMetric(concepts,ticker,metric,kind,yea
  }
  return null;
 }
+// Only issuer-scoped component sums: each component must cover the identical full FY.
+// These are labeled DERIVED, not a reported consolidated D&A total.
+export function deriveDepreciationAmortization(concepts,ticker,year,asOf){
+ if(!['AVGO','AMD','GOOGL','MRK'].includes(ticker))return null;
+ const pick=tag=>(concepts[tag]?.units?.USD||[]).filter(x=>validSecObservation(x,'flow',year,asOf))
+  .sort((a,b)=>b.filed.localeCompare(a.filed)||b.accn.localeCompare(a.accn))[0];
+ const depreciation=pick('Depreciation');
+ const amortization=pick('AmortizationOfIntangibleAssets');
+ if(!depreciation||!amortization||depreciation.start!==amortization.start||depreciation.end!==amortization.end||
+  depreciation.val<0||amortization.val<0||depreciation.accn!==amortization.accn)return null;
+ return {status:'DERIVED',metric:'depreciationAmortization',year,value:depreciation.val+amortization.val,
+  unit:'USD',periodStart:depreciation.start,periodEnd:depreciation.end,
+  method:'DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION',inputs:['Depreciation','AmortizationOfIntangibleAssets'],
+  accessions:[depreciation.accn,amortization.accn],mappingScope:'ISSUER_SCOPED',
+  caveat:'Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion.'};
+}
+// Full consolidated equity is not interchangeable with equity attributable to shareholders.
+export function deriveShareholderEquity(concepts,year,asOf){
+ const pick=tag=>(concepts[tag]?.units?.USD||[]).filter(x=>validSecObservation(x,'instant',year,asOf))
+  .sort((a,b)=>b.filed.localeCompare(a.filed)||b.accn.localeCompare(a.accn))[0];
+ const total=pick('StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest');
+ const nci=pick('MinorityInterest');
+ if(!total||!nci||total.end!==nci.end||total.accn!==nci.accn||nci.val<0)return null;
+ return {status:'DERIVED',metric:'equity',year,value:total.val-nci.val,unit:'USD',periodEnd:total.end,
+  method:'CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST',inputs:['StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest','MinorityInterest'],
+  accessions:[total.accn,nci.accn]};
+}
 export function deriveTotalLiabilities(concepts,year,asOf){
  // Only full consolidated equity including noncontrolling interest is compatible with Assets - Liabilities.
  const assets=selectFiscalSec(concepts,'totalAssets','instant',year,asOf);
