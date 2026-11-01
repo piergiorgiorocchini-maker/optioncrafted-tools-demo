@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T07:36:19.467Z",
+  "generatedAt": "2026-11-01T07:36:33.489Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -897,7 +897,43 @@
               "status": "PERIOD_MISSING",
               "metric": "interestExpense",
               "year": 2024,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "interestTagDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "description": "Amount of income (loss) from continuing operations, including income (loss) from equity method investments, before deduction of income tax expense (benefit), and income (loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 123485000000,
+                        "start": "2023-10-01",
+                        "end": "2024-09-28",
+                        "filed": "2024-11-01",
+                        "accession": "0000320193-24-000123"
+                      }
+                    ]
+                  }
+                ],
+                "otherTags": [
+                  "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "IncomeTaxExaminationInterestExpense",
+                  "InterestCostsIncurred",
+                  "InterestExpense",
+                  "InterestExpenseDebt",
+                  "InterestPaid",
+                  "InterestPaidNet",
+                  "InvestmentIncomeInterestAndDividend",
+                  "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRate",
+                  "ShortTermDebtWeightedAverageInterestRate",
+                  "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestAccrued",
+                  "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense"
+                ],
+                "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              }
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -1158,7 +1194,43 @@
               "status": "PERIOD_MISSING",
               "metric": "interestExpense",
               "year": 2025,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "interestTagDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "description": "Amount of income (loss) from continuing operations, including income (loss) from equity method investments, before deduction of income tax expense (benefit), and income (loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 132729000000,
+                        "start": "2024-09-29",
+                        "end": "2025-09-27",
+                        "filed": "2025-10-31",
+                        "accession": "0000320193-25-000079"
+                      }
+                    ]
+                  }
+                ],
+                "otherTags": [
+                  "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "IncomeTaxExaminationInterestExpense",
+                  "InterestCostsIncurred",
+                  "InterestExpense",
+                  "InterestExpenseDebt",
+                  "InterestPaid",
+                  "InterestPaidNet",
+                  "InvestmentIncomeInterestAndDividend",
+                  "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRate",
+                  "ShortTermDebtWeightedAverageInterestRate",
+                  "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestAccrued",
+                  "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense"
+                ],
+                "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              }
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -1690,7 +1762,114 @@
               "status": "PERIOD_MISSING",
               "metric": "interestExpense",
               "year": 2025,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "interestTagDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "FinanceLeaseInterestExpense",
+                    "label": "Finance Lease, Interest Expense",
+                    "description": "Amount of interest expense on finance lease liability.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 1417000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseInterestPaymentOnLiability",
+                    "label": "Finance Lease, Interest Payment on Liability",
+                    "description": "Amount of interest paid on finance lease liability.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 1372000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestPaid",
+                    "label": "Interest Paid, Including Capitalized Interest, Operating and Investing Activities",
+                    "description": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 1600000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense",
+                    "label": "Unrecognized Tax Benefits, Income Tax Penalties and Interest Expense",
+                    "description": "Amount of expense for interest on an underpayment of income taxes and penalties related to a tax position claimed or expected to be claimed in the tax return.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 1300000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "description": "Amount of income (loss) from continuing operations, including income (loss) from equity method investments, before deduction of income tax expense (benefit), and income (loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 123627000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestExpenseNonoperating",
+                    "label": null,
+                    "description": null,
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 2385000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  }
+                ],
+                "otherTags": [
+                  "CapitalLeasesFutureMinimumPaymentsInterestIncludedInPayments",
+                  "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "InterestExpense",
+                  "InvestmentIncomeInterestAndDividend",
+                  "MinorityInterestOwnershipPercentageByParent",
+                  "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRateMaximum",
+                  "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRateMinimum",
+                  "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestAccrued"
+                ],
+                "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              }
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -2537,7 +2716,279 @@
               "status": "PERIOD_MISSING",
               "metric": "interestExpense",
               "year": 2024,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "interestTagDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest",
+                    "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Noncontrolling Interest",
+                    "description": "Amount after tax of increase (decrease) in equity from transactions and other events and circumstances from net income (loss) and other comprehensive income (loss), attributable to noncontrolling interests. Excludes changes in equity resulting from investments by owners and distributions to owners.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 1325000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                    "label": "Comprehensive Income (Loss), Net of Tax, Including Portion Attributable to Noncontrolling Interest",
+                    "description": "Amount after tax of increase (decrease) in equity from transactions and other events and circumstances from net income and other comprehensive income. Excludes changes in equity resulting from investments by owners and distributions to owners.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 17214000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseInterestExpense",
+                    "label": "Finance Lease, Interest Expense",
+                    "description": "Amount of interest expense on finance lease liability.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 326000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseInterestPaymentOnLiability",
+                    "label": "Finance Lease, Interest Payment on Liability",
+                    "description": "Amount of interest paid on finance lease liability.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 315000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "description": "Amount of income (loss) from continuing operations, including income (loss) from equity method investments, before deduction of income tax expense (benefit), and income (loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 21848000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestExpenseDebt",
+                    "label": "Interest Expense, Debt",
+                    "description": "Amount of the cost of borrowed funds accounted for as interest expense for debt.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 2259000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestIncomeExpenseNet",
+                    "label": "Interest Income (Expense), Net",
+                    "description": "The net amount of operating interest income (expense).",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": -2137000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestPaidNet",
+                    "label": "Interest Paid, Excluding Capitalized Interest, Operating Activities",
+                    "description": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 2519000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InvestmentIncomeInterest",
+                    "label": "Investment Income, Interest",
+                    "description": "Amount before accretion (amortization) of purchase discount (premium) of interest income on nonoperating securities.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 546000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "MinorityInterestDecreaseFromDistributionsToNoncontrollingInterestHolders",
+                    "label": "Noncontrolling Interest, Decrease from Distributions to Noncontrolling Interest Holders",
+                    "description": "Decrease in noncontrolling interest balance from payment of dividends or other distributions by the non-wholly owned subsidiary or partially owned entity, included in the consolidation of the parent entity, to the noncontrolling interest holders.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 776000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "MinorityInterestDecreaseFromRedemptions",
+                    "label": "Noncontrolling Interest, Decrease from Redemptions or Purchase of Interests",
+                    "description": "Decrease in noncontrolling interest (for example, but not limited to, redeeming or purchasing the interests of noncontrolling shareholders, issuance of shares (interests) by the non-wholly owned subsidiary to the parent entity for other than cash, and a buyback of shares (interest) by the non-wholly owned subsidiary from the noncontrolling interests).",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 2443000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "NetIncomeLossAttributableToNoncontrollingInterest",
+                    "label": "Net Income (Loss) Attributable to Noncontrolling Interest",
+                    "description": "Amount of Net Income (Loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 759000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "NoncontrollingInterestIncreaseFromSubsidiaryEquityIssuance",
+                    "label": "Noncontrolling Interest, Increase from Subsidiary Equity Issuance",
+                    "description": "Amount of increase in noncontrolling interest from subsidiary issuance of equity interests to noncontrolling interest holders.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 716000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToNoncontrollingInterest",
+                    "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Noncontrolling Interest",
+                    "description": "Amount after tax of other comprehensive income (loss) attributable to noncontrolling interests.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 566000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "PaymentsOfDividendsMinorityInterest",
+                    "label": "Payments of Ordinary Dividends, Noncontrolling Interest",
+                    "description": "Amount of cash outflow in the form of ordinary dividends provided by the non-wholly owned subsidiary to noncontrolling interests.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 763000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "NetIncomeLossIncludingPortionAttributableToNonredeemableNoncontrollingInterest",
+                    "label": "Net Income (Loss), Including Portion Attributable to Nonredeemable Noncontrolling Interest",
+                    "description": "Amount after income tax of income (loss) including the portion attributable to nonredeemable noncontrolling interest. Excludes the portion attributable to redeemable noncontrolling interest recognized as temporary equity.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 16285000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  }
+                ],
+                "otherTags": [
+                  "CapitalLeasesFutureMinimumPaymentsInterestIncludedInPayments",
+                  "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "IncomeLossFromContinuingOperationsIncludingPortionAttributableToNoncontrollingInterest",
+                  "InterestCostsCapitalized",
+                  "InterestExpenseLesseeAssetsUnderCapitalLease",
+                  "InterestPaid",
+                  "InterestRateDerivativesAtFairValueNet",
+                  "MinorityInterest",
+                  "MinorityInterestChangeInRedemptionValue",
+                  "NetIncomeLossAttributableToNonredeemableNoncontrollingInterest",
+                  "NetIncomeLossAttributableToRedeemableNoncontrollingInterest",
+                  "NoncontrollingInterestIncreaseFromBusinessCombination",
+                  "OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPortionAttributableToNoncontrollingInterest",
+                  "OtherMinorityInterests",
+                  "PaymentsForProceedsFromBusinessesAndInterestInAffiliates",
+                  "PaymentsToAcquireInterestInJointVenture",
+                  "RedeemableNoncontrollingInterestEquityCarryingAmount",
+                  "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRate",
+                  "ShortTermDebtWeightedAverageInterestRate",
+                  "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                  "UnrecognizedTaxBenefitsInterestOnIncomeTaxesAccrued",
+                  "UnrecognizedTaxBenefitsInterestOnIncomeTaxesExpense",
+                  "InterestIncomeExpenseNonoperatingNet"
+                ],
+                "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              }
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
@@ -2793,7 +3244,265 @@
               "status": "PERIOD_MISSING",
               "metric": "interestExpense",
               "year": 2025,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "interestTagDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest",
+                    "label": "Comprehensive Income (Loss), Net of Tax, Attributable to Noncontrolling Interest",
+                    "description": "Amount after tax of increase (decrease) in equity from transactions and other events and circumstances from net income (loss) and other comprehensive income (loss), attributable to noncontrolling interests. Excludes changes in equity resulting from investments by owners and distributions to owners.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 165000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                    "label": "Comprehensive Income (Loss), Net of Tax, Including Portion Attributable to Noncontrolling Interest",
+                    "description": "Amount after tax of increase (decrease) in equity from transactions and other events and circumstances from net income and other comprehensive income. Excludes changes in equity resulting from investments by owners and distributions to owners.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 17298000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseInterestExpense",
+                    "label": "Finance Lease, Interest Expense",
+                    "description": "Amount of interest expense on finance lease liability.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 381000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseInterestPaymentOnLiability",
+                    "label": "Finance Lease, Interest Payment on Liability",
+                    "description": "Amount of interest paid on finance lease liability.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 375000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "description": "Amount of income (loss) from continuing operations, including income (loss) from equity method investments, before deduction of income tax expense (benefit), and income (loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 26309000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestExpenseDebt",
+                    "label": "Interest Expense, Debt",
+                    "description": "Amount of the cost of borrowed funds accounted for as interest expense for debt.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 2249000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestPaidNet",
+                    "label": "Interest Paid, Excluding Capitalized Interest, Operating Activities",
+                    "description": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 2739000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InvestmentIncomeInterest",
+                    "label": "Investment Income, Interest",
+                    "description": "Amount before accretion (amortization) of purchase discount (premium) of interest income on nonoperating securities.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 483000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "MinorityInterestDecreaseFromDistributionsToNoncontrollingInterestHolders",
+                    "label": "Noncontrolling Interest, Decrease from Distributions to Noncontrolling Interest Holders",
+                    "description": "Decrease in noncontrolling interest balance from payment of dividends or other distributions by the non-wholly owned subsidiary or partially owned entity, included in the consolidation of the parent entity, to the noncontrolling interest holders.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 648000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "NetIncomeLossAttributableToNoncontrollingInterest",
+                    "label": "Net Income (Loss) Attributable to Noncontrolling Interest",
+                    "description": "Amount of Net Income (Loss) attributable to noncontrolling interest.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 721000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "NoncontrollingInterestIncreaseFromSubsidiaryEquityIssuance",
+                    "label": "Noncontrolling Interest, Increase from Subsidiary Equity Issuance",
+                    "description": "Amount of increase in noncontrolling interest from subsidiary issuance of equity interests to noncontrolling interest holders.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 362000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToNoncontrollingInterest",
+                    "label": "Other Comprehensive Income (Loss), Net of Tax, Portion Attributable to Noncontrolling Interest",
+                    "description": "Amount after tax of other comprehensive income (loss) attributable to noncontrolling interests.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": -556000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "PaymentsOfDividendsMinorityInterest",
+                    "label": "Payments of Ordinary Dividends, Noncontrolling Interest",
+                    "description": "Amount of cash outflow in the form of ordinary dividends provided by the non-wholly owned subsidiary to noncontrolling interests.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 576000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "NetIncomeLossIncludingPortionAttributableToNonredeemableNoncontrollingInterest",
+                    "label": "Net Income (Loss), Including Portion Attributable to Nonredeemable Noncontrolling Interest",
+                    "description": "Amount after income tax of income (loss) including the portion attributable to nonredeemable noncontrolling interest. Excludes the portion attributable to redeemable noncontrolling interest recognized as temporary equity.",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": 20202000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InterestIncomeExpenseNonoperatingNet",
+                    "label": "Interest Income (Expense), Nonoperating, Net",
+                    "description": "The net amount of nonoperating interest income (expense).",
+                    "annualObservations": 1,
+                    "values": [
+                      {
+                        "value": -2245000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  }
+                ],
+                "otherTags": [
+                  "CapitalLeasesFutureMinimumPaymentsInterestIncludedInPayments",
+                  "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "IncomeLossFromContinuingOperationsIncludingPortionAttributableToNoncontrollingInterest",
+                  "InterestCostsCapitalized",
+                  "InterestExpenseLesseeAssetsUnderCapitalLease",
+                  "InterestIncomeExpenseNet",
+                  "InterestPaid",
+                  "InterestRateDerivativesAtFairValueNet",
+                  "MinorityInterest",
+                  "MinorityInterestChangeInRedemptionValue",
+                  "MinorityInterestDecreaseFromRedemptions",
+                  "NetIncomeLossAttributableToNonredeemableNoncontrollingInterest",
+                  "NetIncomeLossAttributableToRedeemableNoncontrollingInterest",
+                  "NoncontrollingInterestIncreaseFromBusinessCombination",
+                  "OtherComprehensiveIncomeForeignCurrencyTransactionAndTranslationAdjustmentNetOfTaxPortionAttributableToNoncontrollingInterest",
+                  "OtherMinorityInterests",
+                  "PaymentsForProceedsFromBusinessesAndInterestInAffiliates",
+                  "PaymentsToAcquireInterestInJointVenture",
+                  "RedeemableNoncontrollingInterestEquityCarryingAmount",
+                  "ShareBasedCompensationArrangementByShareBasedPaymentAwardFairValueAssumptionsRiskFreeInterestRate",
+                  "ShortTermDebtWeightedAverageInterestRate",
+                  "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                  "UnrecognizedTaxBenefitsInterestOnIncomeTaxesAccrued",
+                  "UnrecognizedTaxBenefitsInterestOnIncomeTaxesExpense"
+                ],
+                "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              }
             },
             "cashFromOperations": {
               "status": "AVAILABLE",
