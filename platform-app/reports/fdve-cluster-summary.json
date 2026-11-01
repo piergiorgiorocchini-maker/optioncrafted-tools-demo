@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T13:01:34.289Z",
+  "generatedAt": "2026-11-01T13:02:06.092Z",
   "totals": {
     "applicable": 658,
     "available": 598,
@@ -11,6 +11,202 @@
     "expectedComparisons": 598,
     "notCompared": 598,
     "reconciliationRate": null
+  },
+  "statisticalBreakdown": {
+    "direct": 576,
+    "derived": 22,
+    "missing": 60,
+    "byMetric": {
+      "revenue": {
+        "direct": 40,
+        "derived": 0,
+        "missing": 0
+      },
+      "netIncome": {
+        "direct": 37,
+        "derived": 2,
+        "missing": 1
+      },
+      "operatingIncome": {
+        "direct": 29,
+        "derived": 0,
+        "missing": 9
+      },
+      "depreciationAmortization": {
+        "direct": 28,
+        "derived": 7,
+        "missing": 3
+      },
+      "interestExpense": {
+        "direct": 33,
+        "derived": 0,
+        "missing": 5
+      },
+      "cashFromOperations": {
+        "direct": 38,
+        "derived": 0,
+        "missing": 0
+      },
+      "capex": {
+        "direct": 32,
+        "derived": 0,
+        "missing": 6
+      },
+      "epsDiluted": {
+        "direct": 40,
+        "derived": 0,
+        "missing": 0
+      },
+      "cash": {
+        "direct": 34,
+        "derived": 0,
+        "missing": 4
+      },
+      "currentAssets": {
+        "direct": 36,
+        "derived": 0,
+        "missing": 2
+      },
+      "currentLiabilities": {
+        "direct": 36,
+        "derived": 0,
+        "missing": 2
+      },
+      "inventory": {
+        "direct": 30,
+        "derived": 2,
+        "missing": 6
+      },
+      "totalAssets": {
+        "direct": 40,
+        "derived": 0,
+        "missing": 0
+      },
+      "totalLiabilities": {
+        "direct": 32,
+        "derived": 4,
+        "missing": 4
+      },
+      "equity": {
+        "direct": 30,
+        "derived": 6,
+        "missing": 4
+      },
+      "longTermDebt": {
+        "direct": 30,
+        "derived": 1,
+        "missing": 7
+      },
+      "shortTermDebt": {
+        "direct": 31,
+        "derived": 0,
+        "missing": 7
+      }
+    },
+    "byTicker": {
+      "AAPL": {
+        "direct": 32,
+        "derived": 0,
+        "missing": 2
+      },
+      "MSFT": {
+        "direct": 32,
+        "derived": 2,
+        "missing": 0
+      },
+      "XOM": {
+        "direct": 30,
+        "derived": 2,
+        "missing": 2
+      },
+      "WMT": {
+        "direct": 32,
+        "derived": 2,
+        "missing": 0
+      },
+      "JPM": {
+        "direct": 12,
+        "derived": 0,
+        "missing": 0
+      },
+      "ADBE": {
+        "direct": 29,
+        "derived": 1,
+        "missing": 4
+      },
+      "CRM": {
+        "direct": 31,
+        "derived": 0,
+        "missing": 3
+      },
+      "NVDA": {
+        "direct": 32,
+        "derived": 0,
+        "missing": 2
+      },
+      "AVGO": {
+        "direct": 27,
+        "derived": 1,
+        "missing": 6
+      },
+      "AMD": {
+        "direct": 30,
+        "derived": 2,
+        "missing": 2
+      },
+      "GOOGL": {
+        "direct": 30,
+        "derived": 0,
+        "missing": 4
+      },
+      "AMZN": {
+        "direct": 30,
+        "derived": 0,
+        "missing": 4
+      },
+      "COST": {
+        "direct": 34,
+        "derived": 0,
+        "missing": 0
+      },
+      "PG": {
+        "direct": 30,
+        "derived": 2,
+        "missing": 2
+      },
+      "CAT": {
+        "direct": 26,
+        "derived": 4,
+        "missing": 4
+      },
+      "DE": {
+        "direct": 25,
+        "derived": 0,
+        "missing": 9
+      },
+      "CVX": {
+        "direct": 26,
+        "derived": 0,
+        "missing": 8
+      },
+      "JNJ": {
+        "direct": 30,
+        "derived": 0,
+        "missing": 4
+      },
+      "MRK": {
+        "direct": 28,
+        "derived": 4,
+        "missing": 2
+      },
+      "UNH": {
+        "direct": 30,
+        "derived": 2,
+        "missing": 2
+      }
+    },
+    "directCoveragePct": 87.54,
+    "assistedCoveragePct": 90.88
   },
   "qualityGate": {
     "status": "PASS",
