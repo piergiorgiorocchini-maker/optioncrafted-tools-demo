@@ -225,11 +225,11 @@ export function deriveTotalLiabilities(concepts,year,asOf){
  const equities=(concepts.StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest?.units?.USD||[])
   .filter(x=>validSecObservation(x,'instant',year,asOf)).sort((a,b)=>b.filed.localeCompare(a.filed));
  if(assets.status!=='AVAILABLE'||!equities.length)return {status:'DERIVATION_UNAVAILABLE',year};
- const e=equities.find(x=>x.end===assets.periodEnd);
+ const e=equities.find(x=>x.end===assets.periodEnd&&x.accn===assets.accession);
  if(!e)return {status:'DERIVATION_UNAVAILABLE',year,reason:'PERIOD_MISMATCH'};
  const value=assets.value-e.val;
  if(value<0)return {status:'DERIVATION_UNAVAILABLE',year,reason:'NEGATIVE_LIABILITIES'};
- return {status:'DERIVED',metric:'totalLiabilities',year,value,unit:'USD',periodEnd:assets.periodEnd,method:'ASSETS_MINUS_TOTAL_EQUITY_INCL_NCI',inputs:[assets.tag,'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest']};
+ return {status:'DERIVED',metric:'totalLiabilities',year,value,unit:'USD',periodEnd:assets.periodEnd,method:'ASSETS_MINUS_TOTAL_EQUITY_INCL_NCI',inputs:[assets.tag,'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'],accessions:[assets.accession,e.accn],mappingScope:'GAAP_ACCOUNTING_IDENTITY'};
 }
 export function reconcileValue(sec,fmp,metric){
  if(!sec||sec.status!=='AVAILABLE'&&sec.status!=='DERIVED')return {status:'SEC_UNAVAILABLE'};
