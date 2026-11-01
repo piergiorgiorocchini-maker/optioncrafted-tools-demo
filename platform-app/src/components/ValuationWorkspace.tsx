@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import {Area,Bar,BarChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
-import appleResearch from "../data/aaplResearch.json";
+import {verifiedFcf} from "../data/verifiedFinancials";
 import {ValuationFootballField} from "./ValuationFootballField";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamResearchPanel} from "./GrahamResearchPanel";
@@ -47,7 +47,8 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const [riskFree,setRiskFree]=useState(4);
  const [erp,setErp]=useState(5.5);
  const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield/100:null;
- const source:Financials={price:asset.price,eps:asset.eps,fcf:asset.ticker==="AAPL"?appleResearch.fcfPerShare:null,dividend:snapshotDividend,beta:asset.beta,currency:asset.currency||"USD"};
+ const fcfEvidence=verifiedFcf(asset.ticker);
+  const source:Financials={price:asset.price,eps:asset.eps,fcf:fcfEvidence.perShare,dividend:snapshotDividend,beta:asset.beta,currency:asset.currency||"USD"};
  const financials:Financials={...source};
  for(const {key} of inputFields){
   if(mode==="manual")financials[key]=num(manual[key]);
@@ -64,8 +65,8 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const currency=financials.currency;
  const publishedFairValue=mode==="manual"?null:base?.value??null;
  const publishedBuyUnder=publishedFairValue===null?null:publishedFairValue*(1-a.mos/100);
- useEffect(()=>{onUpdate?.(asset.ticker,{fairValue:publishedFairValue,buyUnder:publishedBuyUnder,source:mode==="hybrid"?"HYBRID · USER OVERRIDES":"SNAPSHOT + MODEL ASSUMPTIONS"});},[asset.ticker,publishedFairValue,publishedBuyUnder,mode,onUpdate]);
- const sourceLabel=mode==="manual"?"USER INPUT ONLY":mode==="hybrid"?"SNAPSHOT + USER OVERRIDES":"SHEET SNAPSHOT · NOT LIVE";
+ useEffect(()=>{onUpdate?.(asset.ticker,{fairValue:publishedFairValue,buyUnder:publishedBuyUnder,source:mode==="hybrid"?"HYBRID · SEC FCF + USER OVERRIDES":fcfEvidence.perShare!==null?"SEC FY FCF ESTIMATE + SNAPSHOT PRICE + MODEL ASSUMPTIONS":"SNAPSHOT + MODEL ASSUMPTIONS"});},[asset.ticker,publishedFairValue,publishedBuyUnder,mode,onUpdate]);
+ const sourceLabel=mode==="manual"?"USER INPUT ONLY":mode==="hybrid"?"SHEETS SNAPSHOT + SEC FY DATA + USER OVERRIDES":"SHEETS MARKET SNAPSHOT + SEC FY DATA";
  const setField=(key:Field,value:string)=>{if(mode==="manual")setManual(prev=>({...prev,[key]:value}));else setOverrides(prev=>({...prev,[key]:value}))};
  const chartRows=useMemo(()=>base?.projection.map(x=>({year:"Y"+x.year,cashflow:x.cashflow,presentValue:x.pv}))||[],[base]);
  const selected=tabs.find(t=>t.id===active)!;
@@ -84,10 +85,10 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    <div className="nr-mode" role="group" aria-label="Valuation data mode">
     {(["automatic","hybrid","manual"] as ValuationMode[]).map(m=><button type="button" key={m} className={mode===m?"active":""} onClick={()=>setMode(m)}>{m==="automatic"?"Automatic snapshot":m==="hybrid"?"Hybrid · overrides":"Manual · free-hand"}</button>)}
    </div>
-   <p className="nr-source-note">{mode==="automatic"?"Only available financial snapshot values are used. Missing FCF remains N/D, except Apple's separately sourced SEC research snapshot. Forecast assumptions remain editable.":mode==="hybrid"?"Snapshot values are prefilled; replace individual fields without modifying the underlying source. An override is labeled user input.":"All company financial inputs start blank. Enter only what you know; no fabricated defaults."}</p>
-   <div className="nr-field-grid">{inputFields.map(f=><label key={f.key}><span>{f.label}<small>{mode==="hybrid"&&overrides[f.key]!==undefined?"USER OVERRIDE":mode==="manual"?"MANUAL":f.key==="fcf"&&source.fcf!==null?"SEC SNAPSHOT":"SHEET SNAPSHOT"}</small></span><input type="number" step="any" value={mode==="manual"?manual[f.key]:mode==="hybrid"?(overrides[f.key]??valueString(source[f.key])):valueString(source[f.key])} disabled={mode==="automatic"} onChange={e=>setField(f.key,e.target.value)} placeholder="N/D"/></label>)}</div>
+   <p className="nr-source-note">{mode==="automatic"?"Price, EPS, dividend and beta use the dated market snapshot. FCF/share uses the latest SEC fiscal year when matched cash-flow and earnings data support a disclosed estimate; otherwise it remains N/D. Forecast assumptions remain editable.":mode==="hybrid"?"Snapshot values are prefilled; replace individual fields without modifying the underlying source. An override is labeled user input.":"All company financial inputs start blank. Enter only what you know; no fabricated defaults."}</p>
+   <div className="nr-field-grid">{inputFields.map(f=><label key={f.key}><span>{f.label}<small>{mode==="hybrid"&&overrides[f.key]!==undefined?"USER OVERRIDE":mode==="manual"?"MANUAL":f.key==="fcf"?(source.fcf===null?"N/D":fcfEvidence.basis.includes("derived estimate")?"SEC FY ESTIMATE":"SEC RESEARCH"): "SHEETS SNAPSHOT"}</small></span><input type="number" step="any" value={mode==="manual"?manual[f.key]:mode==="hybrid"?(overrides[f.key]??valueString(source[f.key])):valueString(source[f.key])} disabled={mode==="automatic"} onChange={e=>setField(f.key,e.target.value)} placeholder="N/D"/></label>)}</div>
    {mode==="hybrid"&&<button className="nr-text-button" type="button" onClick={()=>setOverrides({})}><RefreshCcw size={13}/> Clear overrides</button>}
-   <p className="nr-source-note">AAPL FCF/share: SEC-based approximate TTM ending June 2026. Dividend/share is derived from price × snapshot dividend yield; confirm payment sustainability before using DDM. All quotes are historical snapshots, not live feeds.</p>
+   <p className="nr-source-note">FCF/share: {fcfEvidence.basis}. {fcfEvidence.warning} Dividend/share is derived from price × snapshot dividend yield. Market quotes are dated snapshots, not live feeds.</p>
   </section>
   <section className="nr-control-card nr-model-inputs"><div className="nr-section-title"><div><span className="nr-eyebrow">MODEL CONFIGURATION</span><h3>{selected.label}</h3></div><span className="nr-status"><FlaskConical size={14}/> ASSUMPTIONS</span></div>
     {active==="peers"?<p className="nr-source-note">Peer multiples need an audited comparable-company set, normalized EBITDA/earnings and consistent fiscal periods. No fabricated peer valuations are published.</p>:<>
