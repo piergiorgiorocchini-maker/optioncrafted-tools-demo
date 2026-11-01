@@ -64,6 +64,27 @@ export function diagnoseInterestTags(concepts,year,asOf){
   otherTags:tags.filter(x=>!x.annualObservations).map(x=>x.tag),
   note:'Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping.'};
 }
+// Diagnostic-only search for unmapped annual tags, with the exact FY period preserved.
+export function diagnoseMissingMetric(concepts,metric,year,asOf){
+ const patterns={
+  depreciationAmortization:/depreciat|amortiz|deplet/i,
+  operatingIncome:/operatingincome|incomeoperations|incomelossfromcontinuingoperationsbeforeincometaxes/i,
+  longTermDebt:/longtermdebt|longtermborrow|debtnoncurrent|longtermnotes|seniornotes/i,
+  inventory:/inventor|inventories/i,
+  totalLiabilities:/liabilit/i
+ };
+ const pattern=patterns[metric];
+ if(!pattern)return {status:'NO_DIAGNOSTIC_PATTERN',metric,year};
+ const tags=Object.entries(concepts).filter(([tag])=>pattern.test(tag)).map(([tag,concept])=>{
+  const annual=(concept.units?.USD||[]).filter(x=>validSecObservation(x,metric==='depreciationAmortization'||metric==='operatingIncome'?'flow':'instant',year,asOf));
+  return {tag,label:concept.label||null,annualObservations:annual.length,
+   observations:annual.slice().sort((a,b)=>b.filed.localeCompare(a.filed)).slice(0,2)
+    .map(x=>({value:x.val,start:x.start||null,end:x.end,filed:x.filed,accession:x.accn}))};
+ });
+ return {status:'DIAGNOSTIC_ONLY',metric,year,availableTags:tags.filter(x=>x.annualObservations>0),
+  historicalOrOtherTags:tags.filter(x=>!x.annualObservations).map(x=>x.tag),
+  note:'Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias.'};
+}
 export function deriveTotalLiabilities(concepts,year,asOf){
  // Only full consolidated equity including noncontrolling interest is compatible with Assets - Liabilities.
  const assets=selectFiscalSec(concepts,'totalAssets','instant',year,asOf);
