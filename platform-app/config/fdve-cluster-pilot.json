@@ -7,9 +7,6 @@
       "cik": "0000320193",
       "profile": "hardware",
       "fiscalYears": [
-        2021,
-        2022,
-        2023,
         2024,
         2025
       ]
@@ -191,8 +188,7 @@
     "FMP via separate daily budgeted collector"
   ],
   "periods": [
-    "AAPL FY2021–FY2025",
-    "MSFT/XOM/WMT/JPM FY2024–FY2025"
+    "All 20 companies FY2024-FY2025 (40 company-years)"
   ],
   "statuses": [
     "MATCH",
