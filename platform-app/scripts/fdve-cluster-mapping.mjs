@@ -195,6 +195,30 @@ export function deriveShareholderEquity(concepts,year,asOf){
   method:'CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST',inputs:['StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest','MinorityInterest'],
   accessions:[total.accn,nci.accn]};
 }
+// Explicit GAAP balance identities only; no assumption that an absent item equals zero.
+export function deriveBalanceMetric(concepts,metric,year,asOf){
+ const formulas={
+  currentAssets:['Assets','AssetsNoncurrent','TOTAL_MINUS_NONCURRENT_ASSETS'],
+  currentLiabilities:['Liabilities','LiabilitiesNoncurrent','TOTAL_MINUS_NONCURRENT_LIABILITIES'],
+  inventory:['InventoryGross','InventoryValuationReserves','GROSS_INVENTORY_MINUS_RESERVES'],
+  cash:['CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents','RestrictedCashAndCashEquivalents','CASH_INCL_RESTRICTED_MINUS_RESTRICTED'],
+  equity:['Assets','Liabilities','ASSETS_MINUS_LIABILITIES_MINUS_NCI']
+ };
+ const spec=formulas[metric];if(!spec)return null;
+ const pick=tag=>(concepts[tag]?.units?.USD||[]).filter(x=>validSecObservation(x,'instant',year,asOf))
+  .sort((a,b)=>b.filed.localeCompare(a.filed)||b.accn.localeCompare(a.accn))[0];
+ const a=pick(spec[0]),b=pick(spec[1]);
+ if(!a||!b||a.end!==b.end||a.accn!==b.accn||a.val<b.val||b.val<0)return null;
+ let value=a.val-b.val,inputs=[spec[0],spec[1]],accessions=[a.accn,b.accn];
+ if(metric==='equity'){
+  const nci=pick('MinorityInterest');
+  // Parent equity cannot be computed without an explicit NCI disclosure.
+  if(!nci||nci.end!==a.end||nci.accn!==a.accn||value<nci.val||nci.val<0)return null;
+  value-=nci.val;inputs.push('MinorityInterest');accessions.push(nci.accn);
+ }
+ return {status:'DERIVED',metric,year,value,unit:'USD',periodEnd:a.end,method:spec[2],inputs,accessions,
+  mappingScope:'GAAP_ACCOUNTING_IDENTITY',caveat:'Same-period same-filing consolidated GAAP components; verify classification before cross-issuer comparison.'};
+}
 export function deriveTotalLiabilities(concepts,year,asOf){
  // Only full consolidated equity including noncontrolling interest is compatible with Assets - Liabilities.
  const assets=selectFiscalSec(concepts,'totalAssets','instant',year,asOf);
