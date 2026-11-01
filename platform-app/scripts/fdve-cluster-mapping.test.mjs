@@ -197,3 +197,22 @@ test('liabilities can be derived only from consolidated equity including NCI',()
  assert.equal(deriveTotalLiabilities(c,2025,'2026-11-01').value,190);
  assert.equal(deriveTotalLiabilities({Assets:c.Assets},2025,'2026-11-01').status,'DERIVATION_UNAVAILABLE');
 });
+
+import {deriveDepreciationAmortization,deriveShareholderEquity} from './fdve-cluster-mapping.mjs';
+test('D&A component sum is scoped, period-aligned and explicitly derived',()=>{
+ const a=fact(20,'2025-12-31',2025,{start:'2025-01-01'});
+ const b=fact(5,'2025-12-31',2025,{start:'2025-01-01'});
+ const c={Depreciation:{units:{USD:[a]}},AmortizationOfIntangibleAssets:{units:{USD:[b]}}};
+ assert.equal(deriveDepreciationAmortization(c,'AMD',2025,'2026-11-01').value,25);
+ assert.equal(deriveDepreciationAmortization(c,'CAT',2025,'2026-11-01'),null);
+ c.AmortizationOfIntangibleAssets.units.USD[0].start='2025-02-01';
+ assert.equal(deriveDepreciationAmortization(c,'AMD',2025,'2026-11-01'),null);
+});
+test('shareholder equity excludes NCI and requires same accession',()=>{
+ const a=fact(100,'2025-12-31',2025);
+ const b=fact(4,'2025-12-31',2025);
+ const c={StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest:{units:{USD:[a]}},MinorityInterest:{units:{USD:[b]}}};
+ assert.equal(deriveShareholderEquity(c,2025,'2026-11-01').value,96);
+ c.MinorityInterest.units.USD[0].accn='different';
+ assert.equal(deriveShareholderEquity(c,2025,'2026-11-01'),null);
+});
