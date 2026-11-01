@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T10:24:38.057Z",
+  "generatedAt": "2026-11-01T10:25:54.755Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -2018,7 +2018,7 @@
       },
       "fmp": {
         "status": "PARTIAL",
-        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
+        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -2694,7 +2694,7 @@
       },
       "fmp": {
         "status": "PARTIAL",
-        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
+        "error": "income: HTTP 429 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -3320,7 +3320,7 @@
       },
       "fmp": {
         "status": "PARTIAL",
-        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
+        "error": "income: HTTP 429 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
