@@ -15,11 +15,11 @@ const labels:Record<string,string>={
 };
 const fmt=(f?:Fact)=>!f||!["AVAILABLE","DERIVED"].includes(f.status)||!Number.isFinite(f.value)? "N/D":f.unit==="USD/shares"?"$"+f.value!.toFixed(2):new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(f.value!/1e9);
 export function VerifiedFundamentals({ticker}:{ticker:string}){
- const [year,setYear]=useState("2025");
+ const [year,setYear]=useState<string|null>(null);
  const item=companies.find(c=>c.ticker===ticker);
  if(!item)return null;
  const availableYears=Object.keys(item.years).sort((a,b)=>Number(b)-Number(a));
- const activeYear=availableYears.includes(year)?year:availableYears[0];
+ const activeYear=availableYears.includes(year??"")?year!:availableYears[0];
  const row=item.years[activeYear];
  if(!row)return null;
  const secLink=item.sec.source;
