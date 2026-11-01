@@ -1,6 +1,6 @@
 import {verifiedFcf,verifiedAnnualHistory} from "../data/verifiedFinancials";
 import {getSecFinancialInputs} from "../data/secFinancialBridge";
-import {secCashConversion,secRoicEstimate} from "../data/secQualityMetrics";
+import {secCashConversion as calculateSecCashConversion,secRoicEstimate} from "../data/secQualityMetrics";
 import {VerifiedFundamentals} from "./VerifiedFundamentals";
 import {NavLink} from "react-router-dom";
 import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
@@ -13,7 +13,7 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
  const apple=asset?.ticker==="AAPL";const appleFcf=apple?appleResearch.fcfPerShare:null; const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
  const secInputs=getSecFinancialInputs(symbol);
  const secFcf=verifiedFcf(symbol);
- const secConversion=secCashConversion(symbol);
+ const secConversion=calculateSecCashConversion(symbol);
  const secRoic=secRoicEstimate(symbol);
  const roicDisplay=secRoic.value!==null?secRoic.value.toFixed(1)+"% (est.)":apple?appleResearch.roic.toFixed(1)+"%":"N/D";
  const conversionDisplay=secConversion.value!==null?secConversion.value.toFixed(1)+"%":"N/D";
