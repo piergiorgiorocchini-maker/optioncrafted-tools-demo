@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T12:59:16.293Z",
+  "generatedAt": "2026-11-01T12:59:40.749Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -14,14 +14,14 @@
   ],
   "totals": {
     "applicable": 658,
-    "available": 584,
+    "available": 595,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.8875379939209727,
-    "expectedComparisons": 584,
-    "notCompared": 584,
+    "coverage": 0.9042553191489362,
+    "expectedComparisons": 595,
+    "notCompared": 595,
     "reconciliationRate": null
   },
   "companies": [
@@ -4386,75 +4386,24 @@
               "filed": "2025-12-18"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "AmortizationOfFinancingCostsAndDiscounts",
-                    "label": "Amortization of Debt Issuance Costs and Discounts",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 344000000,
-                        "start": "2024-11-04",
-                        "end": "2025-11-02",
-                        "filed": "2025-12-18",
-                        "accession": "0001730168-25-000121"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 8062000000,
-                        "start": "2024-11-04",
-                        "end": "2025-11-02",
-                        "filed": "2025-12-18",
-                        "accession": "0001730168-25-000121"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 574000000,
-                        "start": "2024-11-04",
-                        "end": "2025-11-02",
-                        "filed": "2025-12-18",
-                        "accession": "0001730168-25-000121"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "CostOfGoodsSoldAmortization",
-                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
-                  "DepreciationDepletionAndAmortization",
-                  "FinanceLeaseRightOfUseAssetAmortization",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 8636000000,
+              "unit": "USD",
+              "periodStart": "2024-11-04",
+              "periodEnd": "2025-11-02",
+              "method": "DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0001730168-25-000121",
+                "0001730168-25-000121"
+              ],
+              "mappingScope": "ISSUER_SCOPED",
+              "caveat": "Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -4765,8 +4714,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 13,
-            "rate": 0.7647058823529411
+            "available": 14,
+            "rate": 0.8235294117647058
           }
         }
       }
@@ -4823,143 +4772,24 @@
               "filed": "2025-02-05"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2024,
-                "availableTags": [
-                  {
-                    "tag": "AdjustmentForAmortization",
-                    "label": "Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2393000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2400000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 454000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "OperatingLeaseRightOfUseAssetAmortizationExpense",
-                    "label": "Operating Lease, Right-of-Use Asset, Amortization Expense",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 113000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "OtherDepreciationAndAmortization",
-                    "label": "Other Depreciation and Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 671000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization",
-                    "label": "Cost of Goods and Service, Excluding Depreciation, Depletion, and Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 12114000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "CostDepreciationAmortizationAndDepletion",
-                    "label": "Cost, Depreciation, Amortization and Depletion",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 946000000,
-                        "start": "2023-12-31",
-                        "end": "2024-12-28",
-                        "filed": "2025-02-05",
-                        "accession": "0000002488-25-000012"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AmortizationOfAcquiredIntangibleAssets",
-                  "AmortizationOfFinancingCostsAndDiscounts",
-                  "DebtInstrumentUnamortizedDiscount",
-                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
-                  "DepreciationAndAmortization",
-                  "DepreciationDepletionAndAmortization",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpense",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
-                  "FutureAmortizationExpenseYearOne",
-                  "FutureAmortizationExpenseYearTwo",
-                  "OtherAmortizationOfDeferredCharges",
-                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesNextRollingTwelveMonthsAmortizedCostBasis",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearTwoThroughFiveAmortizedCostBasis",
-                  "DebtInstrumentUnamortizedPremiumCurrent",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 2854000000,
+              "unit": "USD",
+              "periodStart": "2023-12-31",
+              "periodEnd": "2024-12-28",
+              "method": "DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0000002488-25-000012",
+                "0000002488-25-000012"
+              ],
+              "mappingScope": "ISSUER_SCOPED",
+              "caveat": "Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -5113,8 +4943,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         },
         "2025": {
@@ -5156,117 +4986,24 @@
               "filed": "2026-02-04"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "AdjustmentForAmortization",
-                    "label": "Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2254000000,
-                        "start": "2024-12-29",
-                        "end": "2025-12-27",
-                        "filed": "2026-02-04",
-                        "accession": "0000002488-26-000018"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2300000000,
-                        "start": "2024-12-29",
-                        "end": "2025-12-27",
-                        "filed": "2026-02-04",
-                        "accession": "0000002488-26-000018"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 521000000,
-                        "start": "2024-12-29",
-                        "end": "2025-12-27",
-                        "filed": "2026-02-04",
-                        "accession": "0000002488-26-000018"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "OtherDepreciationAndAmortization",
-                    "label": "Other Depreciation and Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 750000000,
-                        "start": "2024-12-29",
-                        "end": "2025-12-27",
-                        "filed": "2026-02-04",
-                        "accession": "0000002488-26-000018"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization",
-                    "label": "Cost of Goods and Service, Excluding Depreciation, Depletion, and Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 16456000000,
-                        "start": "2024-12-29",
-                        "end": "2025-12-27",
-                        "filed": "2026-02-04",
-                        "accession": "0000002488-26-000018"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AmortizationOfAcquiredIntangibleAssets",
-                  "AmortizationOfFinancingCostsAndDiscounts",
-                  "DebtInstrumentUnamortizedDiscount",
-                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
-                  "DepreciationAndAmortization",
-                  "DepreciationDepletionAndAmortization",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpense",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
-                  "FutureAmortizationExpenseYearOne",
-                  "FutureAmortizationExpenseYearTwo",
-                  "OperatingLeaseRightOfUseAssetAmortizationExpense",
-                  "OtherAmortizationOfDeferredCharges",
-                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesNextRollingTwelveMonthsAmortizedCostBasis",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearTwoThroughFiveAmortizedCostBasis",
-                  "DebtInstrumentUnamortizedPremiumCurrent",
-                  "CostDepreciationAmortizationAndDepletion",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 2821000000,
+              "unit": "USD",
+              "periodStart": "2024-12-29",
+              "periodEnd": "2025-12-27",
+              "method": "DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0000002488-26-000018",
+                "0000002488-26-000018"
+              ],
+              "mappingScope": "ISSUER_SCOPED",
+              "caveat": "Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -5420,8 +5157,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         }
       }
@@ -7036,15 +6773,21 @@
               "filed": "2024-08-05"
             },
             "equity": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "equity",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "equity",
-                "year": 2024
-              }
+              "value": 50287000000,
+              "unit": "USD",
+              "periodEnd": "2024-06-30",
+              "method": "CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST",
+              "inputs": [
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                "MinorityInterest"
+              ],
+              "accessions": [
+                "0000080424-24-000083",
+                "0000080424-24-000083"
+              ]
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -7074,8 +6817,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         },
         "2025": {
@@ -7248,15 +6991,21 @@
               "filed": "2025-08-04"
             },
             "equity": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "equity",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "equity",
-                "year": 2025
-              }
+              "value": 52012000000,
+              "unit": "USD",
+              "periodEnd": "2025-06-30",
+              "method": "CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST",
+              "inputs": [
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                "MinorityInterest"
+              ],
+              "accessions": [
+                "0000080424-25-000076",
+                "0000080424-25-000076"
+              ]
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -7286,8 +7035,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         }
       }
@@ -7585,15 +7334,21 @@
               "filed": "2025-02-14"
             },
             "equity": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "equity",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "equity",
-                "year": 2024
-              }
+              "value": 19491000000,
+              "unit": "USD",
+              "periodEnd": "2024-12-31",
+              "method": "CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST",
+              "inputs": [
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                "MinorityInterest"
+              ],
+              "accessions": [
+                "0000018230-25-000008",
+                "0000018230-25-000008"
+              ]
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -7622,8 +7377,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 13,
-            "rate": 0.7647058823529411
+            "available": 14,
+            "rate": 0.8235294117647058
           }
         },
         "2025": {
@@ -7906,15 +7661,21 @@
               "filed": "2026-02-13"
             },
             "equity": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "equity",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "equity",
-                "year": 2025
-              }
+              "value": 21318000000,
+              "unit": "USD",
+              "periodEnd": "2025-12-31",
+              "method": "CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST",
+              "inputs": [
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                "MinorityInterest"
+              ],
+              "accessions": [
+                "0000018230-26-000008",
+                "0000018230-26-000008"
+              ]
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -7943,8 +7704,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 13,
-            "rate": 0.7647058823529411
+            "available": 14,
+            "rate": 0.8235294117647058
           }
         }
       }
@@ -10192,80 +9953,24 @@
               }
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2024,
-                "availableTags": [
-                  {
-                    "tag": "AdjustmentForAmortization",
-                    "label": "Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2395000000,
-                        "start": "2024-01-01",
-                        "end": "2024-12-31",
-                        "filed": "2025-02-25",
-                        "accession": "0001628280-25-007732"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2400000000,
-                        "start": "2024-01-01",
-                        "end": "2024-12-31",
-                        "filed": "2025-02-25",
-                        "accession": "0001628280-25-007732"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2104000000,
-                        "start": "2024-01-01",
-                        "end": "2024-12-31",
-                        "filed": "2025-02-25",
-                        "accession": "0001628280-25-007732"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
-                  "AvailableForSaleEquitySecuritiesAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesAmortizedCost",
-                  "DepreciationDepletionAndAmortization",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpense",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
-                  "FutureAmortizationExpenseYearFive",
-                  "FutureAmortizationExpenseYearFour",
-                  "FutureAmortizationExpenseYearOne",
-                  "FutureAmortizationExpenseYearThree",
-                  "FutureAmortizationExpenseYearTwo",
-                  "UnamortizedDebtIssuanceExpense"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 4504000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "method": "DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0001628280-25-007732",
+                "0001628280-25-007732"
+              ],
+              "mappingScope": "ISSUER_SCOPED",
+              "caveat": "Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -10428,8 +10133,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         },
         "2025": {
@@ -10535,80 +10240,24 @@
               }
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "AdjustmentForAmortization",
-                    "label": "Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2793000000,
-                        "start": "2025-01-01",
-                        "end": "2025-12-31",
-                        "filed": "2026-02-24",
-                        "accession": "0000310158-26-000063"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2800000000,
-                        "start": "2025-01-01",
-                        "end": "2025-12-31",
-                        "filed": "2026-02-24",
-                        "accession": "0000310158-26-000063"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 3045000000,
-                        "start": "2025-01-01",
-                        "end": "2025-12-31",
-                        "filed": "2026-02-24",
-                        "accession": "0000310158-26-000063"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
-                  "AvailableForSaleEquitySecuritiesAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesAmortizedCost",
-                  "DepreciationDepletionAndAmortization",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpense",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
-                  "FutureAmortizationExpenseYearFive",
-                  "FutureAmortizationExpenseYearFour",
-                  "FutureAmortizationExpenseYearOne",
-                  "FutureAmortizationExpenseYearThree",
-                  "FutureAmortizationExpenseYearTwo",
-                  "UnamortizedDebtIssuanceExpense"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 5845000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "method": "DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0000310158-26-000063",
+                "0000310158-26-000063"
+              ],
+              "mappingScope": "ISSUER_SCOPED",
+              "caveat": "Component-based D&A; not independently reconciled to cash flow statement total. Excludes other amortization and depletion."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -10771,8 +10420,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         }
       }
@@ -10961,15 +10610,21 @@
               "filed": "2025-02-27"
             },
             "equity": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "equity",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "equity",
-                "year": 2024
-              }
+              "value": 92658000000,
+              "unit": "USD",
+              "periodEnd": "2024-12-31",
+              "method": "CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST",
+              "inputs": [
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                "MinorityInterest"
+              ],
+              "accessions": [
+                "0000731766-25-000063",
+                "0000731766-25-000063"
+              ]
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -10998,8 +10653,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         },
         "2025": {
@@ -11173,15 +10828,21 @@
               "filed": "2026-03-02"
             },
             "equity": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "equity",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "equity",
-                "year": 2025
-              }
+              "value": 94110000000,
+              "unit": "USD",
+              "periodEnd": "2025-12-31",
+              "method": "CONSOLIDATED_EQUITY_MINUS_NONCONTROLLING_INTEREST",
+              "inputs": [
+                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+                "MinorityInterest"
+              ],
+              "accessions": [
+                "0000731766-26-000062",
+                "0000731766-26-000062"
+              ]
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -11210,8 +10871,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         }
       }
@@ -11460,8 +11121,8 @@
       "rows": 38,
       "possible": 380,
       "readyDirect": 200,
-      "readyDerived": 4,
-      "blocked": 176,
+      "readyDerived": 8,
+      "blocked": 172,
       "blockers": {
         "interestExpense": 5,
         "marketCap": 76,
@@ -11470,17 +11131,17 @@
         "longTermDebt": 48,
         "shortTermDebt": 42,
         "capex": 6,
-        "equity": 10,
-        "depreciationAmortization": 16,
+        "equity": 4,
+        "depreciationAmortization": 6,
         "cash": 20,
         "currentAssets": 4,
         "currentLiabilities": 6
       },
       "accountingOnly": {
         "possible": 304,
-        "ready": 204,
-        "blocked": 100,
-        "readinessPct": 67.11
+        "ready": 208,
+        "blocked": 96,
+        "readinessPct": 68.42
       },
       "marketDependent": {
         "possible": 76,
@@ -11488,7 +11149,7 @@
         "blocked": 76,
         "readinessPct": 0
       },
-      "readinessPct": 53.68
+      "readinessPct": 54.74
     },
     "rows": [
       {
@@ -14234,16 +13895,13 @@
               "cash",
               "operatingIncome"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "totalDebt",
                 "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -14318,7 +13976,9 @@
               "cash",
               "operatingIncome"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "marketCap",
@@ -14327,11 +13987,6 @@
               {
                 "input": "totalDebt",
                 "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -14412,7 +14067,7 @@
             "missing": []
           },
           "netDebtEbitda": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "cash",
@@ -14424,14 +14079,10 @@
               "cash",
               "operatingIncome"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "depreciationAmortization"
+            ],
+            "missing": []
           },
           "interestCoverage": {
             "status": "READY_DIRECT",
@@ -14495,16 +14146,13 @@
               "cash",
               "operatingIncome"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "marketCap",
                 "reason": "EXTERNAL_MARKET_DATA"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
               }
             ]
           }
@@ -14584,7 +14232,7 @@
             "missing": []
           },
           "netDebtEbitda": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "cash",
@@ -14596,14 +14244,10 @@
               "cash",
               "operatingIncome"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "depreciationAmortization"
+            ],
+            "missing": []
           },
           "interestCoverage": {
             "status": "READY_DIRECT",
@@ -14667,16 +14311,13 @@
               "cash",
               "operatingIncome"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "marketCap",
                 "reason": "EXTERNAL_MARKET_DATA"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
               }
             ]
           }
@@ -15768,7 +15409,7 @@
             ]
           },
           "debtEquity": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "equity"
@@ -15777,14 +15418,10 @@
               "longTermDebt",
               "shortTermDebt"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "equity",
-                "metric": "equity",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "equity"
+            ],
+            "missing": []
           },
           "netDebtEbitda": {
             "status": "BLOCKED",
@@ -15959,7 +15596,7 @@
             ]
           },
           "debtEquity": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "equity"
@@ -15968,14 +15605,10 @@
               "longTermDebt",
               "shortTermDebt"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "equity",
-                "metric": "equity",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "equity"
+            ],
+            "missing": []
           },
           "netDebtEbitda": {
             "status": "BLOCKED",
@@ -16153,16 +15786,13 @@
             "available": [
               "longTermDebt"
             ],
-            "derived": [],
+            "derived": [
+              "equity"
+            ],
             "missing": [
               {
                 "input": "totalDebt",
                 "metric": "shortTermDebt",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "equity",
-                "metric": "equity",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -16353,16 +15983,13 @@
             "available": [
               "longTermDebt"
             ],
-            "derived": [],
+            "derived": [
+              "equity"
+            ],
             "missing": [
               {
                 "input": "totalDebt",
                 "metric": "shortTermDebt",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "equity",
-                "metric": "equity",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -17874,16 +17501,13 @@
               "shortTermDebt",
               "cash"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "ebitda",
                 "metric": "operatingIncome",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -17954,7 +17578,9 @@
               "shortTermDebt",
               "cash"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "marketCap",
@@ -17963,11 +17589,6 @@
               {
                 "input": "ebitda",
                 "metric": "operatingIncome",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -18059,16 +17680,13 @@
               "shortTermDebt",
               "cash"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "ebitda",
                 "metric": "operatingIncome",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -18139,7 +17757,9 @@
               "shortTermDebt",
               "cash"
             ],
-            "derived": [],
+            "derived": [
+              "depreciationAmortization"
+            ],
             "missing": [
               {
                 "input": "marketCap",
@@ -18148,11 +17768,6 @@
               {
                 "input": "ebitda",
                 "metric": "operatingIncome",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -18232,16 +17847,13 @@
             "available": [
               "longTermDebt"
             ],
-            "derived": [],
+            "derived": [
+              "equity"
+            ],
             "missing": [
               {
                 "input": "totalDebt",
                 "metric": "shortTermDebt",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "equity",
-                "metric": "equity",
                 "reason": "PERIOD_MISSING"
               }
             ]
@@ -18427,16 +18039,13 @@
             "available": [
               "longTermDebt"
             ],
-            "derived": [],
+            "derived": [
+              "equity"
+            ],
             "missing": [
               {
                 "input": "totalDebt",
                 "metric": "shortTermDebt",
-                "reason": "PERIOD_MISSING"
-              },
-              {
-                "input": "equity",
-                "metric": "equity",
                 "reason": "PERIOD_MISSING"
               }
             ]

@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-01T12:59:16.293Z",
+  "generatedAt": "2026-11-01T12:59:40.749Z",
   "totals": {
     "applicable": 658,
-    "available": 584,
+    "available": 595,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.8875379939209727,
-    "expectedComparisons": 584,
-    "notCompared": 584,
+    "coverage": 0.9042553191489362,
+    "expectedComparisons": 595,
+    "notCompared": 595,
     "reconciliationRate": null
   },
   "qualityGate": {
@@ -21,8 +21,8 @@
       "rows": 38,
       "possible": 380,
       "readyDirect": 200,
-      "readyDerived": 4,
-      "blocked": 176,
+      "readyDerived": 8,
+      "blocked": 172,
       "blockers": {
         "interestExpense": 5,
         "marketCap": 76,
@@ -31,17 +31,17 @@
         "longTermDebt": 48,
         "shortTermDebt": 42,
         "capex": 6,
-        "equity": 10,
-        "depreciationAmortization": 16,
+        "equity": 4,
+        "depreciationAmortization": 6,
         "cash": 20,
         "currentAssets": 4,
         "currentLiabilities": 6
       },
       "accountingOnly": {
         "possible": 304,
-        "ready": 204,
-        "blocked": 100,
-        "readinessPct": 67.11
+        "ready": 208,
+        "blocked": 96,
+        "readinessPct": 68.42
       },
       "marketDependent": {
         "possible": 76,
@@ -49,7 +49,7 @@
         "blocked": 76,
         "readinessPct": 0
       },
-      "readinessPct": 53.68
+      "readinessPct": 54.74
     }
   },
   "companies": [
@@ -533,33 +533,14 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 13,
-            "rate": 0.7647058823529411
+            "available": 14,
+            "rate": 0.8235294117647058
           },
           "missing": [
             {
               "metric": "netIncome",
               "status": "PERIOD_MISSING",
               "candidates": [],
-              "related": []
-            },
-            {
-              "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
-                  "observations": 1
-                },
-                {
-                  "tag": "AmortizationOfIntangibleAssets",
-                  "observations": 1
-                },
-                {
-                  "tag": "Depreciation",
-                  "observations": 1
-                }
-              ],
               "related": []
             },
             {
@@ -617,37 +598,10 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
-            {
-              "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "AdjustmentForAmortization",
-                  "observations": 1
-                },
-                {
-                  "tag": "AmortizationOfIntangibleAssets",
-                  "observations": 1
-                },
-                {
-                  "tag": "Depreciation",
-                  "observations": 1
-                },
-                {
-                  "tag": "OperatingLeaseRightOfUseAssetAmortizationExpense",
-                  "observations": 1
-                },
-                {
-                  "tag": "OtherDepreciationAndAmortization",
-                  "observations": 1
-                }
-              ],
-              "related": []
-            },
             {
               "metric": "totalLiabilities",
               "status": "DERIVATION_UNAVAILABLE",
@@ -659,37 +613,10 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
-            {
-              "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "AdjustmentForAmortization",
-                  "observations": 1
-                },
-                {
-                  "tag": "AmortizationOfIntangibleAssets",
-                  "observations": 1
-                },
-                {
-                  "tag": "Depreciation",
-                  "observations": 1
-                },
-                {
-                  "tag": "OtherDepreciationAndAmortization",
-                  "observations": 1
-                },
-                {
-                  "tag": "CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization",
-                  "observations": 1
-                }
-              ],
-              "related": []
-            },
             {
               "metric": "totalLiabilities",
               "status": "DERIVATION_UNAVAILABLE",
@@ -857,18 +784,12 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
             {
               "metric": "cash",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": []
-            },
-            {
-              "metric": "equity",
               "status": "PERIOD_MISSING",
               "candidates": [],
               "related": []
@@ -878,18 +799,12 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
             {
               "metric": "cash",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": []
-            },
-            {
-              "metric": "equity",
               "status": "PERIOD_MISSING",
               "candidates": [],
               "related": []
@@ -907,8 +822,8 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 13,
-            "rate": 0.7647058823529411
+            "available": 14,
+            "rate": 0.8235294117647058
           },
           "missing": [
             {
@@ -942,12 +857,6 @@
                   "observations": 1
                 }
               ],
-              "related": []
-            },
-            {
-              "metric": "equity",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
               "related": []
             },
             {
@@ -961,8 +870,8 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 13,
-            "rate": 0.7647058823529411
+            "available": 14,
+            "rate": 0.8235294117647058
           },
           "missing": [
             {
@@ -996,12 +905,6 @@
                   "observations": 1
                 }
               ],
-              "related": []
-            },
-            {
-              "metric": "equity",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
               "related": []
             },
             {
@@ -1454,8 +1357,8 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
             {
@@ -1485,33 +1388,14 @@
                 "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
                 "OtherNonoperatingIncomeExpense"
               ]
-            },
-            {
-              "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "AdjustmentForAmortization",
-                  "observations": 1
-                },
-                {
-                  "tag": "AmortizationOfIntangibleAssets",
-                  "observations": 1
-                },
-                {
-                  "tag": "Depreciation",
-                  "observations": 1
-                }
-              ],
-              "related": []
             }
           ]
         },
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
             {
@@ -1541,25 +1425,6 @@
                 "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
                 "OtherNonoperatingIncomeExpense"
               ]
-            },
-            {
-              "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "AdjustmentForAmortization",
-                  "observations": 1
-                },
-                {
-                  "tag": "AmortizationOfIntangibleAssets",
-                  "observations": 1
-                },
-                {
-                  "tag": "Depreciation",
-                  "observations": 1
-                }
-              ],
-              "related": []
             }
           ]
         }
@@ -1574,16 +1439,10 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
-            {
-              "metric": "equity",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": []
-            },
             {
               "metric": "shortTermDebt",
               "status": "PERIOD_MISSING",
@@ -1595,16 +1454,10 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
-            {
-              "metric": "equity",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": []
-            },
             {
               "metric": "shortTermDebt",
               "status": "PERIOD_MISSING",
