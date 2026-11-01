@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T09:14:36.547Z",
+  "generatedAt": "2026-11-01T09:48:09.873Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -3663,5 +3663,78 @@
         }
       }
     }
-  ]
+  ],
+  "qualityGate": {
+    "status": "PASS",
+    "checked": 11,
+    "failed": 0,
+    "rows": [
+      {
+        "ticker": "AAPL",
+        "year": "2021",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2022",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2023",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2024",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2025",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "MSFT",
+        "year": "2024",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "MSFT",
+        "year": "2025",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "XOM",
+        "year": "2024",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "XOM",
+        "year": "2025",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "WMT",
+        "year": "2024",
+        "status": "PASS",
+        "issues": []
+      },
+      {
+        "ticker": "WMT",
+        "year": "2025",
+        "status": "PASS",
+        "issues": []
+      }
+    ]
+  }
 }
