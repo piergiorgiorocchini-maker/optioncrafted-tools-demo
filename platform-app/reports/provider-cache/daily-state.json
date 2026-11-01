@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "days": {
+    "2026-11-01": {
+      "FMP": {
+        "attempts": [
+          {
+            "id": "AAPL:income",
+            "at": "2026-11-01T13:02:51.144Z",
+            "status": "HTTP_429"
+          }
+        ],
+        "count": 1
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "AAPL:income",
+            "at": "2026-11-01T13:02:51.497Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "AAPL:balance",
+            "at": "2026-11-01T13:02:51.793Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
+    }
+  },
+  "cursor": {
+    "FMP": 1,
+    "ALPHA_VANTAGE": 1
+  }
+}

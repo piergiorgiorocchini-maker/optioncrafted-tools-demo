@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-01T13:02:51.144Z",
+  "budgets": {
+    "FMP": 60,
+    "ALPHA_VANTAGE": 3
+  },
+  "providers": {
+    "FMP": {
+      "status": "PROVIDER_NOTICE",
+      "requestsToday": 1,
+      "attempts": [
+        {
+          "ticker": "AAPL",
+          "statement": "income",
+          "status": "HTTP_429"
+        }
+      ]
+    },
+    "ALPHA_VANTAGE": {
+      "status": "PROVIDER_NOTICE",
+      "requestsToday": 2,
+      "attempts": [
+        {
+          "ticker": "AAPL",
+          "statement": "income",
+          "status": "AVAILABLE"
+        },
+        {
+          "ticker": "AAPL",
+          "statement": "balance",
+          "status": "PREMIUM_REQUIRED"
+        }
+      ]
+    }
+  }
+}
