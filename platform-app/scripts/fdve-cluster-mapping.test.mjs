@@ -233,3 +233,15 @@ test('noncurrent long-term debt subtracts only matching reported current maturit
  x.LongTermDebtCurrent.units.USD[0].val=101;
  assert.equal(deriveLongTermDebtNoncurrent(x,2025,'2026-11-01'),null);
 });
+
+import {deriveBalanceMetric} from './fdve-cluster-mapping.mjs';
+test('GAAP balance identities require same accession and nonnegative remainder',()=>{
+ const a=fact(100,'2025-12-31',2025),b=fact(35,'2025-12-31',2025);
+ const concepts={Assets:{units:{USD:[a]}},AssetsNoncurrent:{units:{USD:[b]}}};
+ assert.equal(deriveBalanceMetric(concepts,'currentAssets',2025,'2026-11-01').value,65);
+ concepts.AssetsNoncurrent.units.USD[0].accn='different';
+ assert.equal(deriveBalanceMetric(concepts,'currentAssets',2025,'2026-11-01'),null);
+ concepts.AssetsNoncurrent.units.USD[0].accn=a.accn;
+ concepts.AssetsNoncurrent.units.USD[0].val=105;
+ assert.equal(deriveBalanceMetric(concepts,'currentAssets',2025,'2026-11-01'),null);
+});
