@@ -1,14 +1,15 @@
 import {useEffect,useState} from "react";
 import {NavLink} from "react-router-dom";
-import snapshot from "../data/assetsSnapshot.json";import appleResearch from "../data/aaplResearch.json";import {ValuationDecisionTools} from "./ValuationDecisionTools";import {ValuationFootballField} from "./ValuationFootballField";
+import snapshot from "../data/assetsSnapshot.json";import appleResearch from "../data/aaplResearch.json";import {verifiedFcf} from "../data/verifiedFinancials";import {ValuationDecisionTools} from "./ValuationDecisionTools";import {ValuationFootballField} from "./ValuationFootballField";
 export type RealAsset=(typeof snapshot.records)[number];
 const fmt=(n:number|null,digits=2)=>n===null?"N/D":new Intl.NumberFormat("en-US",{maximumFractionDigits:digits}).format(n);
 const money=(n:number|null,currency:string)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(n);
 export function RealCompany({asset}:{asset:RealAsset}){
- return <section className="panel wide"><span className="overline">COMPANY INTELLIGENCE / GOOGLE SHEETS SNAPSHOT</span><h2>{asset.name} · {asset.ticker}</h2>
- <p>{asset.sector||"Sector unavailable"} · {asset.currency||"Currency unavailable"} · Snapshot exported {snapshot.exportedAt}; individual data timestamps have not been verified.</p>
- <div className="workflow-grid">{[["Reference price",money(asset.price,asset.currency)],["EPS TTM",fmt(asset.eps)],["P/E TTM",fmt(asset.pe)],["Beta",fmt(asset.beta)],["Average volume",fmt(asset.avgVolume,0)],["Market capitalization",money(asset.marketCap,asset.currency)],["Dividend yield",asset.dividendYield===null?"N/D":fmt(asset.dividendYield)+"%"],["FCF / share","N/D"],["ROIC","N/D"]].map(([name,value])=><div key={name} className="workflow-step"><span>{name}</span><h3>{value}</h3></div>)}</div>
- <p><strong>Data boundary:</strong> FCF, ROIC, balance-sheet history, filings and comparable companies have not been validated for this asset. No synthetic metrics or research conclusions are displayed.</p>
+ const fcfEvidence=verifiedFcf(asset.ticker);
+ return <section className="panel wide"><span className="overline">COMPANY INTELLIGENCE / SHEETS MARKET DATA · {asset.priceDate??"DATE N/D"}</span><h2>{asset.name} · {asset.ticker}</h2>
+ <p>{asset.sector||"Sector unavailable"} · {asset.currency||"Currency unavailable"} · Snapshot exported {snapshot.exportedAt}. Price, EPS, P/E, beta, volume, market cap and 52-week figures are dated {asset.priceDate??"N/D"}; sector and dividend yield may come from an older cached export.</p>
+ <div className="workflow-grid">{[["Reference price",money(asset.price,asset.currency)],["EPS TTM",fmt(asset.eps)],["P/E TTM",fmt(asset.pe)],["Beta",fmt(asset.beta)],["Average volume",fmt(asset.avgVolume,0)],["Market capitalization",money(asset.marketCap,asset.currency)],["52W range",asset.low52!==null&&asset.high52!==null?`${money(asset.low52,asset.currency)} – ${money(asset.high52,asset.currency)}`:"N/D"],["52W drawdown",asset.drawdown52===null?"N/D":fmt(asset.drawdown52*100)+"%"],["Dividend yield",asset.dividendYield===null?"N/D":fmt(asset.dividendYield)+"%"],[`FCF / share · ${fcfEvidence.basis}`,money(fcfEvidence.perShare,asset.currency)],["ROIC","N/D"]].map(([name,value])=><div key={name} className="workflow-step"><span>{name}</span><h3>{value}</h3></div>)}</div>
+ <p><strong>Data boundary:</strong> FCF/share is shown from the SEC adapter where supported. ROIC, balance-sheet history and peer comparisons are not validated in this view; no synthetic metrics or conclusions are displayed.</p>
  <NavLink className="textlink" to="/valuation">Open Valuation Lab with {asset.ticker} →</NavLink></section>;
 }
 function dcf(fcf:number,growth:number,discount:number,terminal:number,horizon:number){if(fcf<=0||discount<=terminal||discount<=0)return null;let pv=0;let last=fcf;for(let i=1;i<=horizon;i++){last*=1+growth/100;pv+=last/Math.pow(1+discount/100,i)}return pv+(last*(1+terminal/100)/(discount/100-terminal/100))/Math.pow(1+discount/100,horizon)}
