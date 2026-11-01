@@ -9,6 +9,16 @@ export function validateFiscalRow(ticker,year,metrics){
   if(f.status==='DERIVED'&&(!f.method||!f.inputs?.length))issues.push({metric,code:'MISSING_DERIVATION'});
   if(['totalAssets','totalLiabilities','currentAssets','currentLiabilities','inventory','cash','longTermDebt','shortTermDebt','capex','depreciationAmortization'].includes(metric)&&f.value<0)issues.push({metric,code:'NEGATIVE_BALANCE_OR_EXPENSE'});
  }
+ // One fiscal row must refer to one consolidated reporting end date.
+ const dated=Object.entries(metrics).filter(([,f])=>['AVAILABLE','DERIVED'].includes(f.status)&&f.periodEnd);
+ const dates=new Set(dated.map(([,f])=>f.periodEnd));
+ if(dates.size>1)for(const [metric,f] of dated)issues.push({metric,code:'FISCAL_END_INCONSISTENT',periodEnd:f.periodEnd});
+ const flowKeys=new Set(['revenue','netIncome','operatingIncome','depreciationAmortization','interestExpense','cashFromOperations','capex','epsDiluted']);
+ for(const [metric,f] of dated){
+  if(!flowKeys.has(metric)||!f.periodStart)continue;
+  const duration=(Date.parse(f.periodEnd)-Date.parse(f.periodStart))/86400000;
+  if(!Number.isFinite(duration)||duration<330||duration>380)issues.push({metric,code:'INVALID_ANNUAL_DURATION'});
+ }
  const value=k=>['AVAILABLE','DERIVED'].includes(metrics[k]?.status)?metrics[k].value:null;
  const a=value('totalAssets'),l=value('totalLiabilities'),e=value('equity');
  const ca=value('currentAssets'),cl=value('currentLiabilities'),inv=value('inventory'),cash=value('cash');
