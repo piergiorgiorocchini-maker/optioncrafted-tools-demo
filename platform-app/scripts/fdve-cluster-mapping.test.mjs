@@ -253,3 +253,5 @@ test('SEC 10-K comparatives use fact end year rather than filing FY',()=>{
  comparative.fy=2026;
  assert.equal(validSecObservation(comparative,'flow',2024,'2026-11-01'),false);
 });
+
+import {validSecObservation} from './fdve-cluster-mapping.mjs';
