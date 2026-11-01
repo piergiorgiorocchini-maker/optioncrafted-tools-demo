@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T09:48:09.873Z",
+  "generatedAt": "2026-11-01T10:24:23.439Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -3734,6 +3734,1882 @@
         "year": "2025",
         "status": "PASS",
         "issues": []
+      }
+    ]
+  },
+  "dependencyAudit": {
+    "schemaVersion": 1,
+    "scope": "SEC_ANNUAL_ONLY",
+    "note": "Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires dated market data.",
+    "summary": {
+      "rows": 11,
+      "possible": 110,
+      "readyDirect": 76,
+      "readyDerived": 4,
+      "blocked": 30,
+      "blockers": {
+        "marketCap": 22,
+        "interestExpense": 2,
+        "operatingIncome": 6,
+        "depreciationAmortization": 4
+      },
+      "readinessPct": 72.73
+    },
+    "rows": [
+      {
+        "ticker": "AAPL",
+        "year": "2021",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2022",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2023",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2024",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "BLOCKED",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "interestExpense",
+                "metric": "interestExpense",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "AAPL",
+        "year": "2025",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "BLOCKED",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "interestExpense",
+                "metric": "interestExpense",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "MSFT",
+        "year": "2024",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DERIVED",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [
+              "depreciationAmortization"
+            ],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [
+              "depreciationAmortization"
+            ],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "MSFT",
+        "year": "2025",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "READY_DERIVED",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [
+              "depreciationAmortization"
+            ],
+            "missing": []
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [
+              "depreciationAmortization"
+            ],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "XOM",
+        "year": "2024",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DERIVED",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [
+              "inventory"
+            ],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "ebitda",
+                "metric": "operatingIncome",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "interestCoverage": {
+            "status": "BLOCKED",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "ebit",
+                "metric": "operatingIncome",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              },
+              {
+                "input": "ebitda",
+                "metric": "operatingIncome",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "XOM",
+        "year": "2025",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DERIVED",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [
+              "inventory"
+            ],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "ebitda",
+                "metric": "operatingIncome",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "interestCoverage": {
+            "status": "BLOCKED",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "ebit",
+                "metric": "operatingIncome",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "depreciationAmortization"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              },
+              {
+                "input": "ebitda",
+                "metric": "operatingIncome",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "WMT",
+        "year": "2024",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "ebitda",
+                "metric": "depreciationAmortization",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              },
+              {
+                "input": "ebitda",
+                "metric": "depreciationAmortization",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ticker": "WMT",
+        "year": "2025",
+        "indexes": {
+          "currentRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "quickRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "available": [
+              "currentAssets",
+              "inventory",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "cashRatio": {
+            "status": "READY_DIRECT",
+            "required": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "available": [
+              "cash",
+              "currentLiabilities"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "debtEquity": {
+            "status": "READY_DIRECT",
+            "required": [
+              "totalDebt",
+              "equity"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "equity"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "netDebtEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "ebitda",
+                "metric": "depreciationAmortization",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          },
+          "interestCoverage": {
+            "status": "READY_DIRECT",
+            "required": [
+              "ebit",
+              "interestExpense"
+            ],
+            "available": [
+              "operatingIncome",
+              "interestExpense"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "fcfDebt": {
+            "status": "READY_DIRECT",
+            "required": [
+              "freeCashFlow",
+              "totalDebt"
+            ],
+            "available": [
+              "cashFromOperations",
+              "capex",
+              "longTermDebt",
+              "shortTermDebt"
+            ],
+            "derived": [],
+            "missing": []
+          },
+          "enterpriseValue": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              }
+            ]
+          },
+          "evEbitda": {
+            "status": "BLOCKED",
+            "required": [
+              "marketCap",
+              "totalDebt",
+              "cash",
+              "ebitda"
+            ],
+            "available": [
+              "longTermDebt",
+              "shortTermDebt",
+              "cash",
+              "operatingIncome"
+            ],
+            "derived": [],
+            "missing": [
+              {
+                "input": "marketCap",
+                "reason": "EXTERNAL_MARKET_DATA"
+              },
+              {
+                "input": "ebitda",
+                "metric": "depreciationAmortization",
+                "reason": "PERIOD_MISSING"
+              }
+            ]
+          }
+        }
       }
     ]
   }
