@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T09:06:38.754Z",
+  "generatedAt": "2026-11-01T09:06:53.761Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -1495,7 +1495,91 @@
               "status": "PERIOD_MISSING",
               "metric": "depreciationAmortization",
               "year": 2024,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "depreciationAmortization",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "AmortizationOfIntangibleAssets",
+                    "label": "Amortization of Intangible Assets",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 4800000000,
+                        "start": "2023-07-01",
+                        "end": "2024-06-30",
+                        "filed": "2024-07-30",
+                        "accession": "0000950170-24-087843"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "Depreciation",
+                    "label": "Depreciation",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 15200000000,
+                        "start": "2023-07-01",
+                        "end": "2024-06-30",
+                        "filed": "2024-07-30",
+                        "accession": "0000950170-24-087843"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 1800000000,
+                        "start": "2023-07-01",
+                        "end": "2024-06-30",
+                        "filed": "2024-07-30",
+                        "accession": "0000950170-24-087843"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAfterTenYearsAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesNextRollingTwelveMonthsAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesRollingAfterYearTenAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearSixThroughTenAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearTwoThroughFiveAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesWithinOneYearAmortizedCost",
+                  "CapitalizedComputerSoftwareAmortization",
+                  "CapitalizedComputerSoftwareAmortization1",
+                  "DebtInstrumentUnamortizedDiscount",
+                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
+                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
+                  "FiniteLivedIntangibleAssetsAmortizationExpense",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
+                  "FutureAmortizationExpenseAfterYearFive",
+                  "FutureAmortizationExpenseYearFive",
+                  "FutureAmortizationExpenseYearFour",
+                  "FutureAmortizationExpenseYearOne",
+                  "FutureAmortizationExpenseYearThree",
+                  "FutureAmortizationExpenseYearTwo",
+                  "HeldToMaturitySecuritiesAmortizedCostBeforeOtherThanTemporaryImpairment"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -1756,7 +1840,91 @@
               "status": "PERIOD_MISSING",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "depreciationAmortization",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "AmortizationOfIntangibleAssets",
+                    "label": "Amortization of Intangible Assets",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 6000000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "Depreciation",
+                    "label": "Depreciation",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 22000000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 3408000000,
+                        "start": "2024-07-01",
+                        "end": "2025-06-30",
+                        "filed": "2025-07-30",
+                        "accession": "0000950170-25-100235"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAfterTenYearsAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesAmortizedCost",
+                  "AvailableForSaleSecuritiesDebtMaturitiesNextRollingTwelveMonthsAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesRollingAfterYearTenAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearSixThroughTenAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearTwoThroughFiveAmortizedCostBasis",
+                  "AvailableForSaleSecuritiesDebtMaturitiesWithinOneYearAmortizedCost",
+                  "CapitalizedComputerSoftwareAmortization",
+                  "CapitalizedComputerSoftwareAmortization1",
+                  "DebtInstrumentUnamortizedDiscount",
+                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
+                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
+                  "FiniteLivedIntangibleAssetsAmortizationExpense",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
+                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
+                  "FutureAmortizationExpenseAfterYearFive",
+                  "FutureAmortizationExpenseYearFive",
+                  "FutureAmortizationExpenseYearFour",
+                  "FutureAmortizationExpenseYearOne",
+                  "FutureAmortizationExpenseYearThree",
+                  "FutureAmortizationExpenseYearTwo",
+                  "HeldToMaturitySecuritiesAmortizedCostBeforeOtherThanTemporaryImpairment"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -2027,7 +2195,61 @@
                 "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
                 "OtherNonoperatingIncomeExpense",
                 "OtherOperatingIncomeExpenseNet"
-              ]
+              ],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "operatingIncome",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Domestic",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 12258000000,
+                        "start": "2024-01-01",
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 48873000000,
+                        "start": "2024-01-01",
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Foreign",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 36615000000,
+                        "start": "2024-01-01",
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "OtherNonoperatingIncomeExpense",
+                  "OtherOperatingIncomeExpenseNet"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "depreciationAmortization": {
               "status": "AVAILABLE",
@@ -2142,7 +2364,94 @@
                 "InventoryPartsAndComponents",
                 "InventoryPartsAndComponentsNetOfReserves",
                 "InventoryWriteDown"
-              ]
+              ],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "inventory",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "EnergyRelatedInventory",
+                    "label": "Energy Related Inventory",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 19444000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "EnergyRelatedInventoryChemicals",
+                    "label": "Energy Related Inventory, Chemicals",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 4142000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "EnergyRelatedInventoryPetroleum",
+                    "label": "Energy Related Inventory, Petroleum",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 6483000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InventoryCrudeOilProductsAndMerchandise",
+                    "label": "Energy Related Inventory, Crude Oil, Products and Merchandise",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 6017000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InventoryPartsAndComponentsNetOfReserves",
+                    "label": "Inventory, Parts and Components, Net of Reserves",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 4080000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "EffectOfLIFOInventoryLiquidationOnIncome",
+                  "EnergyRelatedInventoryNaturalGasInStorage",
+                  "IncreaseDecreaseInInventories",
+                  "InventoryFinishedGoodsAndWorkInProcess",
+                  "InventoryNet",
+                  "InventoryPartsAndComponents",
+                  "InventoryWriteDown"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -2196,7 +2505,119 @@
                 "LongTermDebtNoncurrent",
                 "ProceedsFromIssuanceOfLongTermDebt",
                 "RepaymentsOfLongTermDebt"
-              ]
+              ],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "longTermDebt",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "LongTermDebtAndCapitalLeaseObligations",
+                    "label": "Long-term Debt and Lease Obligation",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 36755000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                    "label": "Long-term Debt and Lease Obligation, Current",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 4892000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtCurrent",
+                    "label": "Long-term Debt, Current Maturities",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 4892000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                    "label": "Long-Term Debt, Maturity, Year Five",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 1604000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                    "label": "Long-Term Debt, Maturity, Year Four",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 1441000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                    "label": "Long-Term Debt, Maturity, Year Three",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 1357000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                    "label": "Long-Term Debt, Maturity, Year Two",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 5456000000,
+                        "start": null,
+                        "end": "2024-12-31",
+                        "filed": "2025-02-19",
+                        "accession": "0000034088-25-000010"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
+                  "LongTermDebtNoncurrent",
+                  "ProceedsFromIssuanceOfLongTermDebt",
+                  "RepaymentsOfLongTermDebt"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -2307,7 +2728,61 @@
                 "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
                 "OtherNonoperatingIncomeExpense",
                 "OtherOperatingIncomeExpenseNet"
-              ]
+              ],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "operatingIncome",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Domestic",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 11000000000,
+                        "start": "2025-01-01",
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 41268000000,
+                        "start": "2025-01-01",
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                    "label": "Income (Loss) from Continuing Operations before Income Taxes, Foreign",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 30268000000,
+                        "start": "2025-01-01",
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "OtherNonoperatingIncomeExpense",
+                  "OtherOperatingIncomeExpenseNet"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "depreciationAmortization": {
               "status": "AVAILABLE",
@@ -2422,7 +2897,94 @@
                 "InventoryPartsAndComponents",
                 "InventoryPartsAndComponentsNetOfReserves",
                 "InventoryWriteDown"
-              ]
+              ],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "inventory",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "EnergyRelatedInventory",
+                    "label": "Energy Related Inventory",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 22979000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "EnergyRelatedInventoryChemicals",
+                    "label": "Energy Related Inventory, Chemicals",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 4261000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "EnergyRelatedInventoryPetroleum",
+                    "label": "Energy Related Inventory, Petroleum",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 7976000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InventoryCrudeOilProductsAndMerchandise",
+                    "label": "Energy Related Inventory, Crude Oil, Products and Merchandise",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 6889000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "InventoryPartsAndComponentsNetOfReserves",
+                    "label": "Inventory, Parts and Components, Net of Reserves",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 3323000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "EffectOfLIFOInventoryLiquidationOnIncome",
+                  "EnergyRelatedInventoryNaturalGasInStorage",
+                  "IncreaseDecreaseInInventories",
+                  "InventoryFinishedGoodsAndWorkInProcess",
+                  "InventoryNet",
+                  "InventoryPartsAndComponents",
+                  "InventoryWriteDown"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -2476,7 +3038,119 @@
                 "LongTermDebtNoncurrent",
                 "ProceedsFromIssuanceOfLongTermDebt",
                 "RepaymentsOfLongTermDebt"
-              ]
+              ],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "longTermDebt",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "LongTermDebtAndCapitalLeaseObligations",
+                    "label": "Long-term Debt and Lease Obligation",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 34241000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                    "label": "Long-term Debt and Lease Obligation, Current",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 6234000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtCurrent",
+                    "label": "Long-term Debt, Current Maturities",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 6200000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                    "label": "Long-Term Debt, Maturity, Year Five",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 5300000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                    "label": "Long-Term Debt, Maturity, Year Four",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 1700000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                    "label": "Long-Term Debt, Maturity, Year Three",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 1700000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                    "label": "Long-Term Debt, Maturity, Year Two",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 2500000000,
+                        "start": null,
+                        "end": "2025-12-31",
+                        "filed": "2026-02-18",
+                        "accession": "0000034088-26-000045"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
+                  "LongTermDebtNoncurrent",
+                  "ProceedsFromIssuanceOfLongTermDebt",
+                  "RepaymentsOfLongTermDebt"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -2609,7 +3283,50 @@
               "status": "PERIOD_MISSING",
               "metric": "depreciationAmortization",
               "year": 2024,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "depreciationAmortization",
+                "year": 2024,
+                "availableTags": [
+                  {
+                    "tag": "DepreciationAmortizationAndAccretionNet",
+                    "label": "Depreciation, Amortization and Accretion, Net",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 11853000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 755000000,
+                        "start": "2023-02-01",
+                        "end": "2024-01-31",
+                        "filed": "2024-03-15",
+                        "accession": "0000104169-24-000056"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+                  "AvailableForSaleEquitySecuritiesAmortizedCostBasis",
+                  "Depreciation",
+                  "DepreciationAndAmortization",
+                  "DepreciationDepletionAndAmortization"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -2871,7 +3588,50 @@
               "status": "PERIOD_MISSING",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": []
+              "taxonomyCandidates": [],
+              "metricDiagnostics": {
+                "status": "DIAGNOSTIC_ONLY",
+                "metric": "depreciationAmortization",
+                "year": 2025,
+                "availableTags": [
+                  {
+                    "tag": "DepreciationAmortizationAndAccretionNet",
+                    "label": "Depreciation, Amortization and Accretion, Net",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 12973000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
+                    "annualObservations": 1,
+                    "observations": [
+                      {
+                        "value": 891000000,
+                        "start": "2024-02-01",
+                        "end": "2025-01-31",
+                        "filed": "2025-03-14",
+                        "accession": "0000104169-25-000021"
+                      }
+                    ]
+                  }
+                ],
+                "historicalOrOtherTags": [
+                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+                  "AvailableForSaleEquitySecuritiesAmortizedCostBasis",
+                  "Depreciation",
+                  "DepreciationAndAmortization",
+                  "DepreciationDepletionAndAmortization"
+                ],
+                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              }
             },
             "interestExpense": {
               "status": "AVAILABLE",
