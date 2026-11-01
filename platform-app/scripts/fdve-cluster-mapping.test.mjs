@@ -245,3 +245,11 @@ test('GAAP balance identities require same accession and nonnegative remainder',
  concepts.AssetsNoncurrent.units.USD[0].val=105;
  assert.equal(deriveBalanceMetric(concepts,'currentAssets',2025,'2026-11-01'),null);
 });
+
+test('SEC 10-K comparatives use fact end year rather than filing FY',()=>{
+ const comparative=fact(120,'2024-12-31',2025,{start:'2024-01-01'});
+ assert.equal(validSecObservation(comparative,'flow',2024,'2026-11-01'),true);
+ assert.equal(validSecObservation(comparative,'flow',2025,'2026-11-01'),false);
+ comparative.fy=2026;
+ assert.equal(validSecObservation(comparative,'flow',2024,'2026-11-01'),false);
+});
