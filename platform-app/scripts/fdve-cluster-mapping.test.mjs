@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags} from './fdve-cluster-mapping.mjs';
+import {selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,resolveValidatedIndustrialMetric} from './fdve-cluster-mapping.mjs';
 const fact=(val,end,fy,extra={})=>({val,end,fy,fp:'FY',form:'10-K',filed:fy+'-03-01',accn:'0000104169-25-000001',...extra});
 test('a historical tag is not coverage for FY2025',()=>{
  const concepts={InventoryNet:{units:{USD:[fact(100,'2012-01-31',2012)]}}};
@@ -52,4 +52,27 @@ test('interest tag diagnostics never promote cash interest paid to interest expe
  assert.equal(diagnostic.status,'DIAGNOSTIC_ONLY');
  assert.equal(diagnostic.availableTags[0].tag,'InterestPaidNet');
  assert.equal(diagnostic.availableTags[0].values[0].value,50);
+});
+
+test('XOM inventory is issuer-scoped and does not double count its subcomponents',()=>{
+ const fy=2025,end='2025-12-31',asOf='2026-11-01';
+ const concepts={
+  EnergyRelatedInventory:{units:{USD:[fact(22979000000,end,fy)]}},
+  InventoryPartsAndComponentsNetOfReserves:{units:{USD:[fact(3323000000,end,fy)]}},
+  EnergyRelatedInventoryChemicals:{units:{USD:[fact(4261000000,end,fy)]}},
+  EnergyRelatedInventoryPetroleum:{units:{USD:[fact(7976000000,end,fy)]}}
+ };
+ const result=resolveValidatedIndustrialMetric(concepts,'XOM','inventory','instant',fy,asOf);
+ assert.equal(result.status,'DERIVED');
+ assert.equal(result.value,26302000000);
+ assert.equal(result.inputs.length,2);
+ assert.equal(resolveValidatedIndustrialMetric(concepts,'MSFT','inventory','instant',fy,asOf),null);
+ const modified=structuredClone(concepts);
+ modified.EnergyRelatedInventory.units.USD[0].val=22979000001;
+ assert.equal(resolveValidatedIndustrialMetric(modified,'XOM','inventory','instant',fy,asOf),null);
+});
+test('XOM consolidated long-term debt mapping is never applied to other issuers',()=>{
+ const concepts={LongTermDebtAndCapitalLeaseObligations:{units:{USD:[fact(34241000000,'2025-12-31',2025)]}}};
+ assert.equal(resolveValidatedIndustrialMetric(concepts,'XOM','longTermDebt','instant',2025,'2026-11-01').value,34241000000);
+ assert.equal(resolveValidatedIndustrialMetric(concepts,'AAPL','longTermDebt','instant',2025,'2026-11-01'),null);
 });
