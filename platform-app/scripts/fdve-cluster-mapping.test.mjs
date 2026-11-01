@@ -76,3 +76,20 @@ test('XOM consolidated long-term debt mapping is never applied to other issuers'
  assert.equal(resolveValidatedIndustrialMetric(concepts,'XOM','longTermDebt','instant',2025,'2026-11-01').value,34241000000);
  assert.equal(resolveValidatedIndustrialMetric(concepts,'AAPL','longTermDebt','instant',2025,'2026-11-01'),null);
 });
+
+test('MSFT D&A is explicitly derived from two matched annual components, never the other-inclusive cashflow line',()=>{
+ const year=2025,end='2025-06-30',start='2024-07-01';
+ const concepts={
+  Depreciation:{units:{USD:[fact(22000000000,end,year,{start})]}},
+  AmortizationOfIntangibleAssets:{units:{USD:[fact(6000000000,end,year,{start})]}},
+  FinanceLeaseRightOfUseAssetAmortization:{units:{USD:[fact(3408000000,end,year,{start})]}}
+ };
+ const result=resolveValidatedIndustrialMetric(concepts,'MSFT','depreciationAmortization','flow',year,'2026-11-01');
+ assert.equal(result.status,'DERIVED');
+ assert.equal(result.value,28000000000);
+ assert.equal(result.inputs.length,2);
+ assert.equal(resolveValidatedIndustrialMetric(concepts,'XOM','depreciationAmortization','flow',year,'2026-11-01'),null);
+ const mismatch=structuredClone(concepts);
+ mismatch.AmortizationOfIntangibleAssets.units.USD[0].start='2024-08-01';
+ assert.equal(resolveValidatedIndustrialMetric(mismatch,'MSFT','depreciationAmortization','flow',year,'2026-11-01'),null);
+});
