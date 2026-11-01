@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-01T13:01:10.450Z",
+  "generatedAt": "2026-11-01T13:01:34.289Z",
   "totals": {
     "applicable": 658,
-    "available": 595,
+    "available": 598,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.9042553191489362,
-    "expectedComparisons": 595,
-    "notCompared": 595,
+    "coverage": 0.9088145896656535,
+    "expectedComparisons": 598,
+    "notCompared": 598,
     "reconciliationRate": null
   },
   "qualityGate": {
@@ -21,14 +21,14 @@
       "rows": 38,
       "possible": 380,
       "readyDirect": 200,
-      "readyDerived": 8,
-      "blocked": 172,
+      "readyDerived": 12,
+      "blocked": 168,
       "blockers": {
         "interestExpense": 5,
         "marketCap": 76,
         "operatingIncome": 27,
         "inventory": 6,
-        "longTermDebt": 48,
+        "longTermDebt": 42,
         "shortTermDebt": 42,
         "capex": 6,
         "equity": 4,
@@ -39,9 +39,9 @@
       },
       "accountingOnly": {
         "possible": 304,
-        "ready": 208,
-        "blocked": 96,
-        "readinessPct": 68.42
+        "ready": 212,
+        "blocked": 92,
+        "readinessPct": 69.74
       },
       "marketDependent": {
         "possible": 76,
@@ -49,7 +49,7 @@
         "blocked": 76,
         "readinessPct": 0
       },
-      "readinessPct": 54.74
+      "readinessPct": 55.79
     }
   },
   "companies": [
@@ -381,8 +381,8 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "missing": [
             {
@@ -398,38 +398,6 @@
                 "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
               ],
               "fiscalCandidates": []
-            },
-            {
-              "metric": "longTermDebt",
-              "status": "PERIOD_MISSING",
-              "candidates": [
-                {
-                  "tag": "LongTermDebt",
-                  "observations": 1
-                },
-                {
-                  "tag": "LongTermDebtCurrent",
-                  "observations": 1
-                }
-              ],
-              "related": [
-                "LongTermDebt",
-                "LongTermDebtAndCapitalLeaseObligations",
-                "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                "LongTermDebtNoncurrent",
-                "ProceedsFromIssuanceOfLongTermDebt",
-                "ProceedsFromIssuanceOfSeniorLongTermDebt",
-                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
-                "RepaymentsOfLongTermDebt"
-              ],
-              "fiscalCandidates": [
-                {
-                  "tag": "LongTermDebtNoncurrent",
-                  "present": true,
-                  "unitCount": 15,
-                  "nearby": []
-                }
-              ]
             }
           ]
         }
@@ -1121,34 +1089,10 @@
         "2024": {
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 15,
+            "rate": 0.8823529411764706
           },
           "missing": [
-            {
-              "metric": "netIncome",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "NetIncomeLoss",
-                  "present": true,
-                  "unitCount": 58,
-                  "nearby": [
-                    {
-                      "end": "2024-12-31",
-                      "start": "2024-01-01",
-                      "fy": null,
-                      "fp": null,
-                      "form": "DEF 14A",
-                      "filed": "2026-04-30",
-                      "valid": false
-                    }
-                  ]
-                }
-              ]
-            },
             {
               "metric": "interestExpense",
               "status": "PERIOD_MISSING",
@@ -1189,34 +1133,10 @@
         "2025": {
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 15,
+            "rate": 0.8823529411764706
           },
           "missing": [
-            {
-              "metric": "netIncome",
-              "status": "PERIOD_MISSING",
-              "candidates": [],
-              "related": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "NetIncomeLoss",
-                  "present": true,
-                  "unitCount": 58,
-                  "nearby": [
-                    {
-                      "end": "2025-12-31",
-                      "start": "2025-01-01",
-                      "fy": null,
-                      "fp": null,
-                      "form": "DEF 14A",
-                      "filed": "2026-04-30",
-                      "valid": false
-                    }
-                  ]
-                }
-              ]
-            },
             {
               "metric": "interestExpense",
               "status": "PERIOD_MISSING",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T13:01:10.450Z",
+  "generatedAt": "2026-11-01T13:01:34.289Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -14,14 +14,14 @@
   ],
   "totals": {
     "applicable": 658,
-    "available": 595,
+    "available": 598,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.9042553191489362,
-    "expectedComparisons": 595,
-    "notCompared": 595,
+    "coverage": 0.9088145896656535,
+    "expectedComparisons": 598,
+    "notCompared": 598,
     "reconciliationRate": null
   },
   "companies": [
@@ -2910,78 +2910,21 @@
               "filed": "2026-01-15"
             },
             "longTermDebt": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "longTermDebt",
               "year": 2025,
-              "taxonomyCandidates": [
+              "value": 6210000000,
+              "unit": "USD",
+              "periodEnd": "2025-11-28",
+              "method": "LONG_TERM_DEBT_INCLUDING_CURRENT_MINUS_CURRENT",
+              "inputs": [
                 "LongTermDebt",
-                "LongTermDebtAndCapitalLeaseObligations",
-                "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                "LongTermDebtNoncurrent",
-                "ProceedsFromIssuanceOfLongTermDebt",
-                "ProceedsFromIssuanceOfSeniorLongTermDebt",
-                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
-                "RepaymentsOfLongTermDebt",
-                "RepaymentsOfLongTermDebtAndCapitalSecurities",
-                "SeniorLongTermNotes",
                 "LongTermDebtCurrent"
               ],
-              "fiscalCandidates": [
-                {
-                  "tag": "LongTermDebtNoncurrent",
-                  "present": true,
-                  "unitCount": 15,
-                  "nearby": []
-                }
-              ],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "longTermDebt",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "LongTermDebt",
-                    "label": "Long-term Debt",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6210000000,
-                        "start": null,
-                        "end": "2025-11-28",
-                        "filed": "2026-01-15",
-                        "accession": "0000796343-26-000003"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtCurrent",
-                    "label": "Long-term Debt, Current Maturities",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 0,
-                        "start": null,
-                        "end": "2025-11-28",
-                        "filed": "2026-01-15",
-                        "accession": "0000796343-26-000003"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "LongTermDebtAndCapitalLeaseObligations",
-                  "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                  "LongTermDebtNoncurrent",
-                  "ProceedsFromIssuanceOfLongTermDebt",
-                  "ProceedsFromIssuanceOfSeniorLongTermDebt",
-                  "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
-                  "RepaymentsOfLongTermDebt",
-                  "RepaymentsOfLongTermDebtAndCapitalSecurities",
-                  "SeniorLongTermNotes",
-                  "SeniorNotes"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "accessions": [
+                "0000796343-26-000003",
+                "0000796343-26-000003"
+              ]
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -2999,8 +2942,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 15,
-            "rate": 0.8823529411764706
+            "available": 16,
+            "rate": 0.9411764705882353
           }
         }
       }
@@ -7364,33 +7307,22 @@
               "filed": "2025-02-14"
             },
             "netIncome": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "netIncome",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "NetIncomeLoss",
-                  "present": true,
-                  "unitCount": 58,
-                  "nearby": [
-                    {
-                      "end": "2024-12-31",
-                      "start": "2024-01-01",
-                      "fy": null,
-                      "fp": null,
-                      "form": "DEF 14A",
-                      "filed": "2026-04-30",
-                      "valid": false
-                    }
-                  ]
-                }
+              "value": 10792000000,
+              "unit": "USD",
+              "periodStart": "2024-01-01",
+              "periodEnd": "2024-12-31",
+              "method": "CONSOLIDATED_NET_INCOME_MINUS_NCI",
+              "inputs": [
+                "ProfitLoss",
+                "NetIncomeLossAttributableToNoncontrollingInterest"
               ],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "netIncome",
-                "year": 2024
-              }
+              "accessions": [
+                "0000018230-25-000008",
+                "0000018230-25-000008"
+              ]
             },
             "operatingIncome": {
               "status": "AVAILABLE",
@@ -7692,8 +7624,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 15,
+            "rate": 0.8823529411764706
           }
         },
         "2025": {
@@ -7711,33 +7643,22 @@
               "filed": "2026-02-13"
             },
             "netIncome": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "netIncome",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "fiscalCandidates": [
-                {
-                  "tag": "NetIncomeLoss",
-                  "present": true,
-                  "unitCount": 58,
-                  "nearby": [
-                    {
-                      "end": "2025-12-31",
-                      "start": "2025-01-01",
-                      "fy": null,
-                      "fp": null,
-                      "form": "DEF 14A",
-                      "filed": "2026-04-30",
-                      "valid": false
-                    }
-                  ]
-                }
+              "value": 8884000000,
+              "unit": "USD",
+              "periodStart": "2025-01-01",
+              "periodEnd": "2025-12-31",
+              "method": "CONSOLIDATED_NET_INCOME_MINUS_NCI",
+              "inputs": [
+                "ProfitLoss",
+                "NetIncomeLossAttributableToNoncontrollingInterest"
               ],
-              "metricDiagnostics": {
-                "status": "NO_DIAGNOSTIC_PATTERN",
-                "metric": "netIncome",
-                "year": 2025
-              }
+              "accessions": [
+                "0000018230-26-000008",
+                "0000018230-26-000008"
+              ]
             },
             "operatingIncome": {
               "status": "AVAILABLE",
@@ -8039,8 +7960,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 15,
+            "rate": 0.8823529411764706
           }
         }
       }
@@ -11647,14 +11568,14 @@
       "rows": 38,
       "possible": 380,
       "readyDirect": 200,
-      "readyDerived": 8,
-      "blocked": 172,
+      "readyDerived": 12,
+      "blocked": 168,
       "blockers": {
         "interestExpense": 5,
         "marketCap": 76,
         "operatingIncome": 27,
         "inventory": 6,
-        "longTermDebt": 48,
+        "longTermDebt": 42,
         "shortTermDebt": 42,
         "capex": 6,
         "equity": 4,
@@ -11665,9 +11586,9 @@
       },
       "accountingOnly": {
         "possible": 304,
-        "ready": 208,
-        "blocked": 96,
-        "readinessPct": 68.42
+        "ready": 212,
+        "blocked": 92,
+        "readinessPct": 69.74
       },
       "marketDependent": {
         "possible": 76,
@@ -11675,7 +11596,7 @@
         "blocked": 76,
         "readinessPct": 0
       },
-      "readinessPct": 54.74
+      "readinessPct": 55.79
     },
     "rows": [
       {
@@ -13297,7 +13218,7 @@
             "missing": []
           },
           "netDebt": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "cash"
@@ -13306,17 +13227,13 @@
               "shortTermDebt",
               "cash"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "totalDebt",
-                "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "longTermDebt"
+            ],
+            "missing": []
           },
           "debtEquity": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "equity"
@@ -13325,17 +13242,13 @@
               "shortTermDebt",
               "equity"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "totalDebt",
-                "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "longTermDebt"
+            ],
+            "missing": []
           },
           "netDebtEbitda": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "totalDebt",
               "cash",
@@ -13347,14 +13260,10 @@
               "operatingIncome",
               "depreciationAmortization"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "totalDebt",
-                "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "longTermDebt"
+            ],
+            "missing": []
           },
           "interestCoverage": {
             "status": "READY_DIRECT",
@@ -13370,7 +13279,7 @@
             "missing": []
           },
           "fcfDebt": {
-            "status": "BLOCKED",
+            "status": "READY_DERIVED",
             "required": [
               "freeCashFlow",
               "totalDebt"
@@ -13380,14 +13289,10 @@
               "capex",
               "shortTermDebt"
             ],
-            "derived": [],
-            "missing": [
-              {
-                "input": "totalDebt",
-                "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "derived": [
+              "longTermDebt"
+            ],
+            "missing": []
           },
           "enterpriseValue": {
             "status": "BLOCKED",
@@ -13400,16 +13305,13 @@
               "shortTermDebt",
               "cash"
             ],
-            "derived": [],
+            "derived": [
+              "longTermDebt"
+            ],
             "missing": [
               {
                 "input": "marketCap",
                 "reason": "EXTERNAL_MARKET_DATA"
-              },
-              {
-                "input": "totalDebt",
-                "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
               }
             ]
           },
@@ -13427,16 +13329,13 @@
               "operatingIncome",
               "depreciationAmortization"
             ],
-            "derived": [],
+            "derived": [
+              "longTermDebt"
+            ],
             "missing": [
               {
                 "input": "marketCap",
                 "reason": "EXTERNAL_MARKET_DATA"
-              },
-              {
-                "input": "totalDebt",
-                "metric": "longTermDebt",
-                "reason": "PERIOD_MISSING"
               }
             ]
           }
