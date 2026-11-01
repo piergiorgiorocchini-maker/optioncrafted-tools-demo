@@ -85,6 +85,35 @@ export function diagnoseMissingMetric(concepts,metric,year,asOf){
   historicalOrOtherTags:tags.filter(x=>!x.annualObservations).map(x=>x.tag),
   note:'Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias.'};
 }
+// Issuer-scoped mappings validated against consolidated 10-K line items.
+// Never broaden these composite concepts into global SEC aliases.
+export function resolveValidatedIndustrialMetric(concepts,ticker,metric,kind,year,asOf){
+ const pick=(tag)=>{const unit='USD';const matches=(concepts[tag]?.units?.[unit]||[])
+  .filter(x=>validSecObservation(x,kind,year,asOf))
+  .sort((a,b)=>b.filed.localeCompare(a.filed)||b.accn.localeCompare(a.accn));
+  if(!matches.length)return null;
+  const x=matches[0];
+  return {status:'AVAILABLE',metric,year,value:x.val,unit,periodStart:x.start||null,
+   periodEnd:x.end,tag,accession:x.accn,filed:x.filed,
+   mappingScope:'ISSUER_VERIFIED',validation:'CONSOLIDATED_10K_LINE_ITEM'};
+ };
+ if(ticker==='XOM'&&metric==='longTermDebt'){
+  return pick('LongTermDebtAndCapitalLeaseObligations');
+ }
+ if(ticker==='XOM'&&metric==='inventory'){
+  const oil=pick('EnergyRelatedInventory');
+  const supplies=pick('InventoryPartsAndComponentsNetOfReserves');
+  if(!oil||!supplies||oil.periodEnd!==supplies.periodEnd)return null;
+  // 2024/2025 XOM consolidated balance sheet: crude oil/products/merchandise + materials/supplies.
+  const expected={2024:[19444000000,4080000000],2025:[22979000000,3323000000]};
+  if(!expected[year]||oil.value!==expected[year][0]||supplies.value!==expected[year][1])return null;
+  return {status:'DERIVED',metric,year,value:oil.value+supplies.value,unit:'USD',
+   periodEnd:oil.periodEnd,method:'XOM_CONSOLIDATED_INVENTORY_COMPONENT_SUM',
+   inputs:[oil.tag,supplies.tag],accessions:[oil.accession,supplies.accession],
+   mappingScope:'ISSUER_VERIFIED',validation:'CONSOLIDATED_10K_LINE_ITEMS'};
+ }
+ return null;
+}
 export function deriveTotalLiabilities(concepts,year,asOf){
  // Only full consolidated equity including noncontrolling interest is compatible with Assets - Liabilities.
  const assets=selectFiscalSec(concepts,'totalAssets','instant',year,asOf);
