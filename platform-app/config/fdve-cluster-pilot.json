@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "purpose": "FDVE cross-sector pilot: five fiscal years for AAPL, two years for control companies",
+  "purpose": "FDVE 20-company SEC FY2024-FY2025 stress test",
   "companies": [
     {
       "ticker": "AAPL",
@@ -49,11 +49,146 @@
         2024,
         2025
       ]
+    },
+    {
+      "ticker": "ADBE",
+      "cik": "0000796343",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "CRM",
+      "cik": "0001108524",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "NVDA",
+      "cik": "0001045810",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "AVGO",
+      "cik": "0001730168",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "AMD",
+      "cik": "0000002488",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "GOOGL",
+      "cik": "0001652044",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "COST",
+      "cik": "0000909832",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "PG",
+      "cik": "0000080424",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "CAT",
+      "cik": "0000018230",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "DE",
+      "cik": "0000315189",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "CVX",
+      "cik": "0000093410",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "JNJ",
+      "cik": "0000200406",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "MRK",
+      "cik": "0000310158",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "ticker": "UNH",
+      "cik": "0000731766",
+      "profile": "industrial",
+      "fiscalYears": [
+        2024,
+        2025
+      ]
     }
   ],
   "providers": [
     "SEC companyfacts",
-    "FMP financial statements"
+    "FMP via separate daily budgeted collector"
   ],
   "periods": [
     "AAPL FY2021–FY2025",
