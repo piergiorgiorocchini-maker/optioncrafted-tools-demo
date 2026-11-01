@@ -97,6 +97,20 @@ export function resolveValidatedIndustrialMetric(concepts,ticker,metric,kind,yea
    periodEnd:x.end,tag,accession:x.accn,filed:x.filed,
    mappingScope:'ISSUER_VERIFIED',validation:'CONSOLIDATED_10K_LINE_ITEM'};
  };
+ if(ticker==='WMT'&&metric==='depreciationAmortization'&&kind==='flow'){
+  // WMT FY2025 10-K, consolidated cash-flow statement and segment reconciliation
+  // both label these amounts "Depreciation and amortization", notwithstanding
+  // the broader us-gaap XBRL tag name "DepreciationAmortizationAndAccretionNet".
+  const da=pick('DepreciationAmortizationAndAccretionNet');
+  const expected={2024:{value:11853000000,start:'2023-02-01',end:'2024-01-31'},
+                  2025:{value:12973000000,start:'2024-02-01',end:'2025-01-31'}};
+  const e=expected[year];
+  if(!da||!e||da.value!==e.value||da.periodStart!==e.start||da.periodEnd!==e.end)return null;
+  return {...da,tag:'DepreciationAmortizationAndAccretionNet',
+   mappingScope:'ISSUER_VERIFIED',validation:'CONSOLIDATED_CASH_FLOW_AND_SEGMENT_RECONCILIATION',
+   sourceFiling:'https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm',
+   caveat:'WMT 10-K line label is depreciation and amortization; issuer-scoped tag only. Revalidate future years.'};
+ }
  if(ticker==='MSFT'&&metric==='depreciationAmortization'){
   const depreciation=pick('Depreciation');
   const amortization=pick('AmortizationOfIntangibleAssets');
