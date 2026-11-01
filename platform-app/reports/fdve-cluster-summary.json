@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-01T12:34:38.484Z",
+  "generatedAt": "2026-11-01T12:49:00.462Z",
   "totals": {
-    "applicable": 709,
-    "available": 633,
+    "applicable": 658,
+    "available": 582,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 0,
-    "coverage": 0.8928067700987306,
-    "expectedComparisons": 633,
-    "notCompared": 633,
+    "coverage": 0.8844984802431611,
+    "expectedComparisons": 582,
+    "notCompared": 582,
     "reconciliationRate": null
   },
   "qualityGate": {
@@ -18,14 +18,14 @@
   },
   "dependencyAudit": {
     "summary": {
-      "rows": 41,
-      "possible": 410,
-      "readyDirect": 224,
+      "rows": 38,
+      "possible": 380,
+      "readyDirect": 200,
       "readyDerived": 4,
-      "blocked": 182,
+      "blocked": 176,
       "blockers": {
-        "marketCap": 82,
         "interestExpense": 5,
+        "marketCap": 76,
         "operatingIncome": 27,
         "inventory": 6,
         "longTermDebt": 48,
@@ -37,7 +37,7 @@
         "currentAssets": 4,
         "currentLiabilities": 6
       },
-      "readinessPct": 55.61
+      "readinessPct": 53.68
     }
   },
   "companies": [
@@ -47,30 +47,6 @@
       "sec": "OK",
       "fmp": "MISSING_CREDENTIAL",
       "years": {
-        "2021": {
-          "coverage": {
-            "applicable": 17,
-            "available": 17,
-            "rate": 1
-          },
-          "missing": []
-        },
-        "2022": {
-          "coverage": {
-            "applicable": 17,
-            "available": 17,
-            "rate": 1
-          },
-          "missing": []
-        },
-        "2023": {
-          "coverage": {
-            "applicable": 17,
-            "available": 17,
-            "rate": 1
-          },
-          "missing": []
-        },
         "2024": {
           "coverage": {
             "applicable": 17,
