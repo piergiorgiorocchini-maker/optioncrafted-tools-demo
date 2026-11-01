@@ -3,6 +3,7 @@
 // Read-only for production data. Never commits raw provider payloads or credentials.
 import fs from 'node:fs/promises';
 import {METRICS} from './fdve-model.mjs';
+import {qualityGate} from './fdve-quality-gate.mjs';
 import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,diagnoseMissingMetric,resolveValidatedIndustrialMetric} from './fdve-cluster-mapping.mjs';
 const cfg=JSON.parse(await fs.readFile('platform-app/config/fdve-cluster-pilot.json','utf8'));
 const profiles=JSON.parse(await fs.readFile('platform-app/config/fdve-sector-profiles.json','utf8'));
@@ -118,6 +119,7 @@ totals.expectedComparisons=totals.available;
 totals.notCompared=totals.expectedComparisons-totals.compared;
 totals.reconciliationRate=totals.compared?totals.matched/totals.compared:null;
 const report={schemaVersion:2,generatedAt:new Date().toISOString(),periods:[...new Set(cfg.companies.flatMap(c=>c.fiscalYears||[2024,2025]))].sort().map(y=>'FY'+y),method:'SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation',notes:['Coverage excludes stale observations and NOT_APPLICABLE metrics','Bank-specific concepts are discovery-only until definitions validated','DERIVED liabilities are not source-reported and must be marked as such','FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success'],totals,companies:out};
+report.qualityGate=qualityGate(report);
 await fs.writeFile('platform-app/reports/fdve-cluster-v2.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({totals,companies:out.map(x=>({ticker:x.ticker,sec:x.sec.status,fmp:x.fmp.status,coverageByYear:Object.fromEntries(Object.entries(x.years).map(([y,row])=>[y,row.coverage]))}))},null,2));
-if(out.some(x=>x.sec.status!=='OK'))process.exitCode=1;
+if(out.some(x=>x.sec.status!=='OK')||report.qualityGate.status!=='PASS')process.exitCode=1;
