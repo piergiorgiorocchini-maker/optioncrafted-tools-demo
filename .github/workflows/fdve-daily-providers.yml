@@ -1,0 +1,44 @@
+name: FDVE daily provider budgeted ingestion
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 8 * * 1-5'
+permissions:
+  contents: write
+concurrency:
+  group: fdve-daily-providers
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Collect incremental annual fundamentals within conservative daily call budgets
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+          FDVE_FMP_DAILY_CALLS: '3'
+          FDVE_AV_DAILY_CALLS: '3'
+        run: node platform-app/scripts/fdve-daily-provider-collector.mjs
+      - name: Commit normalized cache and durable request ledger
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platform-app/reports/provider-cache/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(fdve): daily provider budgeted ingestion"
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase -X theirs origin/main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep 3
+            done
+            exit 1
+          fi
