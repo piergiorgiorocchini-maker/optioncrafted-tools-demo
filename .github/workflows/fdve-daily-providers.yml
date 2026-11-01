@@ -23,7 +23,7 @@ jobs:
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
-          FDVE_FMP_DAILY_CALLS: '3'
+          FDVE_FMP_DAILY_CALLS: '180'
           FDVE_AV_DAILY_CALLS: '3'
         run: node platform-app/scripts/fdve-daily-provider-collector.mjs
       - name: Commit normalized cache and durable request ledger
