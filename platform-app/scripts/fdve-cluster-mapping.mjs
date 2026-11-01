@@ -50,6 +50,20 @@ export function selectFiscalSec(concepts,metric,kind,year,asOf){
  if(new Set(samePriority.map(x=>x.val)).size>1)return {status:'AMBIGUOUS',metric,year};
  return {status:'AVAILABLE',metric,year,value:chosen.val,unit,periodStart:chosen.start||null,periodEnd:chosen.end,tag:chosen.tag,accession:chosen.accn,filed:chosen.filed};
 }
+// Diagnostic-only resolver. SEC companyfacts does not expose issuer-specific extension namespaces.
+// Never silently substitute interest paid, net interest or financing costs for gross expense.
+export function diagnoseInterestTags(concepts,year,asOf){
+ const pattern=/interest|financecost|borrowingcost/i;
+ const tags=Object.entries(concepts).filter(([tag])=>pattern.test(tag)).map(([tag,concept])=>{
+  const annual=(concept.units?.USD||[]).filter(x=>validSecObservation(x,'flow',year,asOf));
+  return {tag,label:concept.label||null,description:concept.description||null,
+   annualObservations:annual.length,
+   values:annual.slice().sort((a,b)=>b.filed.localeCompare(a.filed)).slice(0,2).map(x=>({value:x.val,start:x.start,end:x.end,filed:x.filed,accession:x.accn}))};
+ });
+ return {status:'DIAGNOSTIC_ONLY',year,availableTags:tags.filter(x=>x.annualObservations>0),
+  otherTags:tags.filter(x=>!x.annualObservations).map(x=>x.tag),
+  note:'Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping.'};
+}
 export function deriveTotalLiabilities(concepts,year,asOf){
  // Only full consolidated equity including noncontrolling interest is compatible with Assets - Liabilities.
  const assets=selectFiscalSec(concepts,'totalAssets','instant',year,asOf);
