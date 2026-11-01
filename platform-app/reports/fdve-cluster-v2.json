@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T10:54:59.579Z",
+  "generatedAt": "2026-11-01T10:57:03.302Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -933,6 +933,11 @@
                   "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense"
                 ],
                 "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              },
+              "review": {
+                "status": "GROSS_INTEREST_NOT_DISCLOSED_AS_SEPARATE_10K_LINE",
+                "reason": "Other income/(expense), net is not gross interest expense; 100bp interest-rate sensitivity is not historical interest expense. Keep missing.",
+                "source": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
               }
             },
             "cashFromOperations": {
@@ -1230,6 +1235,11 @@
                   "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense"
                 ],
                 "note": "Tag candidates are not approved substitutes for InterestExpense. Review gross/net and filing presentation before mapping."
+              },
+              "review": {
+                "status": "GROSS_INTEREST_NOT_DISCLOSED_AS_SEPARATE_10K_LINE",
+                "reason": "Other income/(expense), net is not gross interest expense; 100bp interest-rate sensitivity is not historical interest expense. Keep missing.",
+                "source": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
               }
             },
             "cashFromOperations": {
@@ -2111,6 +2121,12 @@
                   "OtherOperatingIncomeExpenseNet"
                 ],
                 "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              },
+              "review": {
+                "status": "DEFINITION_REVIEW_REQUIRED",
+                "reason": "XOM 10-K presents income before tax, interest expense, non-service pension, equity-affiliate income and other income. EBIT and operating profit definitions differ; no unverified proxy may be promoted.",
+                "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm",
+                "alternative": "A separately labeled pre-tax-plus-interest EBIT proxy may be researched, but must not overwrite operatingIncome."
               }
             },
             "depreciationAmortization": {
@@ -2441,6 +2457,12 @@
                   "OtherOperatingIncomeExpenseNet"
                 ],
                 "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
+              },
+              "review": {
+                "status": "DEFINITION_REVIEW_REQUIRED",
+                "reason": "XOM 10-K presents income before tax, interest expense, non-service pension, equity-affiliate income and other income. EBIT and operating profit definitions differ; no unverified proxy may be promoted.",
+                "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm",
+                "alternative": "A separately labeled pre-tax-plus-interest EBIT proxy may be researched, but must not overwrite operatingIncome."
               }
             },
             "depreciationAmortization": {
@@ -5526,6 +5548,16 @@
           }
         }
       }
+    ]
+  },
+  "recoveryReview": {
+    "scope": "WMT_XOM_AAPL_FY2024_FY2025",
+    "policy": "NO_UNVERIFIED_PROMOTION",
+    "reviewedAt": "2026-11-01",
+    "notes": [
+      "WMT D&A approved only with exact issuer-scoped 10-K validation",
+      "XOM operatingIncome remains missing until definition reconciled",
+      "AAPL gross interest expense remains missing rather than using net other income"
     ]
   }
 }
