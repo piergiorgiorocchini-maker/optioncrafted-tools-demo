@@ -17,14 +17,15 @@ const classification=record=>{
  if(equityReview.has(t))return {instrumentType:'EQUITY_CANDIDATE',review:true,reason:'IDENTITY_OR_INSTRUMENT_TYPE'};
  return {instrumentType:'EQUITY_CANDIDATE',review:false};
 };
+const knownCiks=new Map([['AAPL','0000320193'],['MSFT','0000789019'],['XOM','0000034088'],['WMT','0000104169'],['JPM','0000019617']]);
 const records=snapshot.records.map(r=>({ticker:r.ticker,name:r.name,sourceSector:r.sector,
- ...classification(r),...listingAndMembership(),fundamentalModel:indices.has(r.ticker)?'NOT_APPLICABLE':etfs.has(r.ticker)?'FUND_ANALYTICS':'ISSUER_FUNDAMENTALS',
+ ...classification(r),...listingAndMembership(),cik:knownCiks.get(r.ticker)||null,issuerIdentityStatus:knownCiks.has(r.ticker)?'VERIFIED_PILOT':'PENDING_SEC_MATCH',fundamentalModel:indices.has(r.ticker)?'NOT_APPLICABLE':etfs.has(r.ticker)?'FUND_ANALYTICS':'ISSUER_FUNDAMENTALS',
  snapshotDate:snapshot.exportedAt}));
 const duplicates=records.filter((r,i)=>records.findIndex(x=>x.ticker===r.ticker)!==i).map(x=>x.ticker);
 const counts=Object.fromEntries([...new Set(records.map(x=>x.instrumentType))].map(k=>[k,records.filter(x=>x.instrumentType===k).length]));
 const report={schemaVersion:1,source:src,snapshotDate:snapshot.exportedAt,sourceIsLive:snapshot.dataIsLive,
  total:records.length,unique:new Set(records.map(x=>x.ticker)).size,duplicates,counts,
- manualReview:records.filter(x=>x.review),classificationCoverage:{listingVerified:0,indexMembershipVerified:0},records};
+ manualReview:records.filter(x=>x.review),classificationCoverage:{listingVerified:0,indexMembershipVerified:0,issuerIdentityVerified:records.filter(x=>x.issuerIdentityStatus==='VERIFIED_PILOT').length},records};
 if(process.argv.includes('--json'))console.log(JSON.stringify(report,null,2));
 else{
  console.log('OptionsCrafted Assets inventory | snapshot '+report.snapshotDate+' | live='+report.sourceIsLive);
