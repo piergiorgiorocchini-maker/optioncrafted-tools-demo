@@ -136,11 +136,25 @@ totals.expectedComparisons=totals.available;
 totals.notCompared=totals.expectedComparisons-totals.compared;
 totals.reconciliationRate=totals.compared?totals.matched/totals.compared:null;
 const report={schemaVersion:2,generatedAt:new Date().toISOString(),periods:[...new Set(cfg.companies.flatMap(c=>c.fiscalYears||[2024,2025]))].sort().map(y=>'FY'+y),method:'SEC 10-K fiscal-year aligned, strict aliases; optional FMP same-date and USD reconciliation',notes:['Coverage excludes stale observations and NOT_APPLICABLE metrics','Bank-specific concepts are discovery-only until definitions validated','DERIVED liabilities are not source-reported and must be marked as such','FMP comparisons require FMP_API_KEY secret; absence is reported, never interpreted as success'],totals,companies:out};
+report.statisticalBreakdown={direct:0,derived:0,missing:0,byMetric:{},byTicker:{}};
+for(const company of out){
+ const companyTotals={direct:0,derived:0,missing:0};
+ for(const row of Object.values(company.years))for(const [metric,fact] of Object.entries(row.metrics)){
+  const category=fact.status==='AVAILABLE'?'direct':fact.status==='DERIVED'?'derived':'missing';
+  report.statisticalBreakdown[category]++;
+  companyTotals[category]++;
+  report.statisticalBreakdown.byMetric[metric]??={direct:0,derived:0,missing:0};
+  report.statisticalBreakdown.byMetric[metric][category]++;
+ }
+ report.statisticalBreakdown.byTicker[company.ticker]=companyTotals;
+}
+report.statisticalBreakdown.directCoveragePct=Number((100*report.statisticalBreakdown.direct/totals.applicable).toFixed(2));
+report.statisticalBreakdown.assistedCoveragePct=Number((100*(report.statisticalBreakdown.direct+report.statisticalBreakdown.derived)/totals.applicable).toFixed(2));
 report.qualityGate=qualityGate(report);
 report.dependencyAudit=auditDependencyReport(report);
 report.recoveryReview={scope:'WMT_XOM_AAPL_FY2024_FY2025',policy:'NO_UNVERIFIED_PROMOTION',reviewedAt:asOf,notes:['WMT D&A approved only with exact issuer-scoped 10-K validation','XOM operatingIncome remains missing until definition reconciled','AAPL gross interest expense remains missing rather than using net other income']};
 await fs.writeFile('platform-app/reports/fdve-cluster-v2.json',JSON.stringify(report,null,2)+'\n');
-const compact={generatedAt:report.generatedAt,totals:report.totals,qualityGate:{status:report.qualityGate.status,summary:report.qualityGate.summary||null},dependencyAudit:{summary:report.dependencyAudit.summary||null},companies:out.map(c=>({ticker:c.ticker,profile:c.profile,sec:c.sec.status,fmp:c.fmp.status,years:Object.fromEntries(Object.entries(c.years).map(([year,v])=>[year,{coverage:v.coverage,missing:Object.entries(v.metrics).filter(([,m])=>!['AVAILABLE','DERIVED'].includes(m.status)).map(([metric,m])=>({metric,status:m.status,candidates:(m.metricDiagnostics?.availableTags||m.interestTagDiagnostics?.availableTags||[]).slice(0,5).map(x=>({tag:x.tag,observations:x.annualObservations})),related:(m.taxonomyCandidates||[]).slice(0,8),fiscalCandidates:(m.fiscalCandidates||[]).slice(0,6)}))}]))}))};
+const compact={generatedAt:report.generatedAt,totals:report.totals,statisticalBreakdown:report.statisticalBreakdown,qualityGate:{status:report.qualityGate.status,summary:report.qualityGate.summary||null},dependencyAudit:{summary:report.dependencyAudit.summary||null},companies:out.map(c=>({ticker:c.ticker,profile:c.profile,sec:c.sec.status,fmp:c.fmp.status,years:Object.fromEntries(Object.entries(c.years).map(([year,v])=>[year,{coverage:v.coverage,missing:Object.entries(v.metrics).filter(([,m])=>!['AVAILABLE','DERIVED'].includes(m.status)).map(([metric,m])=>({metric,status:m.status,candidates:(m.metricDiagnostics?.availableTags||m.interestTagDiagnostics?.availableTags||[]).slice(0,5).map(x=>({tag:x.tag,observations:x.annualObservations})),related:(m.taxonomyCandidates||[]).slice(0,8),fiscalCandidates:(m.fiscalCandidates||[]).slice(0,6)}))}]))}))};
 await fs.writeFile('platform-app/reports/fdve-cluster-summary.json',JSON.stringify(compact,null,2)+'\n');
 console.log(JSON.stringify({totals,companies:out.map(x=>({ticker:x.ticker,sec:x.sec.status,fmp:x.fmp.status,coverageByYear:Object.fromEntries(Object.entries(x.years).map(([y,row])=>[y,row.coverage]))}))},null,2));
 if(out.some(x=>x.sec.status!=='OK')||report.qualityGate.status!=='PASS')process.exitCode=1;
