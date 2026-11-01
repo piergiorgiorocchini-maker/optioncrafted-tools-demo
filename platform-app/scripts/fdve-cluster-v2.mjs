@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import {METRICS} from './fdve-model.mjs';
 import {qualityGate} from './fdve-quality-gate.mjs';
 import {auditDependencyReport} from './fdve-dependency-audit.mjs';
-import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,diagnoseMissingMetric,resolveValidatedIndustrialMetric,deriveDepreciationAmortization,deriveShareholderEquity} from './fdve-cluster-mapping.mjs';
+import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,diagnoseMissingMetric,resolveValidatedIndustrialMetric,deriveDepreciationAmortization,deriveShareholderEquity,diagnoseFiscalCandidates} from './fdve-cluster-mapping.mjs';
 const cfg=JSON.parse(await fs.readFile('platform-app/config/fdve-cluster-pilot.json','utf8'));
 const profiles=JSON.parse(await fs.readFile('platform-app/config/fdve-sector-profiles.json','utf8'));
 const asOf=new Date().toISOString().slice(0,10);
@@ -48,6 +48,7 @@ for(const company of cfg.companies){
     }
     if(found.status==='PERIOD_MISSING'){
      found.taxonomyCandidates=findRelatedTags(concepts,metric);
+     found.fiscalCandidates=diagnoseFiscalCandidates(concepts,metric,year,asOf);
      if(metric==='interestExpense')found.interestTagDiagnostics=diagnoseInterestTags(concepts,year,asOf);
      else found.metricDiagnostics=diagnoseMissingMetric(concepts,metric,year,asOf);
     }
@@ -137,7 +138,7 @@ report.qualityGate=qualityGate(report);
 report.dependencyAudit=auditDependencyReport(report);
 report.recoveryReview={scope:'WMT_XOM_AAPL_FY2024_FY2025',policy:'NO_UNVERIFIED_PROMOTION',reviewedAt:asOf,notes:['WMT D&A approved only with exact issuer-scoped 10-K validation','XOM operatingIncome remains missing until definition reconciled','AAPL gross interest expense remains missing rather than using net other income']};
 await fs.writeFile('platform-app/reports/fdve-cluster-v2.json',JSON.stringify(report,null,2)+'\n');
-const compact={generatedAt:report.generatedAt,totals:report.totals,qualityGate:{status:report.qualityGate.status,summary:report.qualityGate.summary||null},dependencyAudit:{summary:report.dependencyAudit.summary||null},companies:out.map(c=>({ticker:c.ticker,profile:c.profile,sec:c.sec.status,fmp:c.fmp.status,years:Object.fromEntries(Object.entries(c.years).map(([year,v])=>[year,{coverage:v.coverage,missing:Object.entries(v.metrics).filter(([,m])=>!['AVAILABLE','DERIVED'].includes(m.status)).map(([metric,m])=>({metric,status:m.status,candidates:(m.metricDiagnostics?.availableTags||m.interestTagDiagnostics?.availableTags||[]).slice(0,5).map(x=>({tag:x.tag,observations:x.annualObservations})),related:(m.taxonomyCandidates||[]).slice(0,8)}))}]))}))};
+const compact={generatedAt:report.generatedAt,totals:report.totals,qualityGate:{status:report.qualityGate.status,summary:report.qualityGate.summary||null},dependencyAudit:{summary:report.dependencyAudit.summary||null},companies:out.map(c=>({ticker:c.ticker,profile:c.profile,sec:c.sec.status,fmp:c.fmp.status,years:Object.fromEntries(Object.entries(c.years).map(([year,v])=>[year,{coverage:v.coverage,missing:Object.entries(v.metrics).filter(([,m])=>!['AVAILABLE','DERIVED'].includes(m.status)).map(([metric,m])=>({metric,status:m.status,candidates:(m.metricDiagnostics?.availableTags||m.interestTagDiagnostics?.availableTags||[]).slice(0,5).map(x=>({tag:x.tag,observations:x.annualObservations})),related:(m.taxonomyCandidates||[]).slice(0,8),fiscalCandidates:(m.fiscalCandidates||[]).slice(0,6)}))}]))}))};
 await fs.writeFile('platform-app/reports/fdve-cluster-summary.json',JSON.stringify(compact,null,2)+'\n');
 console.log(JSON.stringify({totals,companies:out.map(x=>({ticker:x.ticker,sec:x.sec.status,fmp:x.fmp.status,coverageByYear:Object.fromEntries(Object.entries(x.years).map(([y,row])=>[y,row.coverage]))}))},null,2));
 if(out.some(x=>x.sec.status!=='OK')||report.qualityGate.status!=='PASS')process.exitCode=1;
