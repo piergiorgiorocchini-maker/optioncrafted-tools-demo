@@ -1,0 +1,885 @@
+{
+  "generatedAt": "2026-11-01T12:34:38.484Z",
+  "totals": {
+    "applicable": 709,
+    "available": 633,
+    "compared": 0,
+    "matched": 0,
+    "differences": 0,
+    "unresolved": 0,
+    "coverage": 0.8928067700987306,
+    "expectedComparisons": 633,
+    "notCompared": 633,
+    "reconciliationRate": null
+  },
+  "qualityGate": {
+    "status": "PASS",
+    "summary": null
+  },
+  "dependencyAudit": {
+    "summary": {
+      "rows": 41,
+      "possible": 410,
+      "readyDirect": 224,
+      "readyDerived": 4,
+      "blocked": 182,
+      "blockers": {
+        "marketCap": 82,
+        "interestExpense": 5,
+        "operatingIncome": 27,
+        "inventory": 6,
+        "longTermDebt": 48,
+        "shortTermDebt": 42,
+        "capex": 6,
+        "equity": 10,
+        "depreciationAmortization": 16,
+        "cash": 20,
+        "currentAssets": 4,
+        "currentLiabilities": 6
+      },
+      "readinessPct": 55.61
+    }
+  },
+  "companies": [
+    {
+      "ticker": "AAPL",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2021": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2022": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2023": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        }
+      }
+    },
+    {
+      "ticker": "XOM",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "WMT",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        }
+      }
+    },
+    {
+      "ticker": "JPM",
+      "profile": "bank",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 6,
+            "available": 6,
+            "rate": 1
+          },
+          "missing": []
+        }
+      }
+    },
+    {
+      "ticker": "ADBE",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "CRM",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 16,
+            "rate": 0.9411764705882353
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "AVGO",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "netIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "AMD",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "inventory",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "COST",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 17,
+            "rate": 1
+          },
+          "missing": []
+        }
+      }
+    },
+    {
+      "ticker": "PG",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "CAT",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "netIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "netIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "interestExpense",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "DE",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "currentAssets",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "currentLiabilities",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 12,
+            "rate": 0.7058823529411765
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "currentAssets",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "currentLiabilities",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "CVX",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 13,
+            "rate": 0.7647058823529411
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "capex",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "cash",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "longTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "MRK",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 14,
+            "rate": 0.8235294117647058
+          },
+          "missing": [
+            {
+              "metric": "operatingIncome",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "depreciationAmortization",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "totalLiabilities",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "UNH",
+      "profile": "industrial",
+      "sec": "OK",
+      "fmp": "MISSING_CREDENTIAL",
+      "years": {
+        "2024": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        },
+        "2025": {
+          "coverage": {
+            "applicable": 17,
+            "available": 15,
+            "rate": 0.8823529411764706
+          },
+          "missing": [
+            {
+              "metric": "equity",
+              "status": "PERIOD_MISSING"
+            },
+            {
+              "metric": "shortTermDebt",
+              "status": "PERIOD_MISSING"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}\n
