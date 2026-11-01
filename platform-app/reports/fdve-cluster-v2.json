@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T10:39:55.790Z",
+  "generatedAt": "2026-11-01T10:54:59.579Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -17,14 +17,14 @@
   ],
   "totals": {
     "applicable": 199,
-    "available": 193,
+    "available": 195,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 199,
-    "coverage": 0.9698492462311558,
-    "expectedComparisons": 193,
-    "notCompared": 193,
+    "coverage": 0.9798994974874372,
+    "expectedComparisons": 195,
+    "notCompared": 195,
     "reconciliationRate": null
   },
   "companies": [
@@ -2736,53 +2736,20 @@
               "filed": "2024-03-15"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "AVAILABLE",
               "metric": "depreciationAmortization",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2024,
-                "availableTags": [
-                  {
-                    "tag": "DepreciationAmortizationAndAccretionNet",
-                    "label": "Depreciation, Amortization and Accretion, Net",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 11853000000,
-                        "start": "2023-02-01",
-                        "end": "2024-01-31",
-                        "filed": "2024-03-15",
-                        "accession": "0000104169-24-000056"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
-                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 755000000,
-                        "start": "2023-02-01",
-                        "end": "2024-01-31",
-                        "filed": "2024-03-15",
-                        "accession": "0000104169-24-000056"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AvailableForSaleEquitySecuritiesAmortizedCostBasis",
-                  "Depreciation",
-                  "DepreciationAndAmortization",
-                  "DepreciationDepletionAndAmortization"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 11853000000,
+              "unit": "USD",
+              "periodStart": "2023-02-01",
+              "periodEnd": "2024-01-31",
+              "tag": "DepreciationAmortizationAndAccretionNet",
+              "accession": "0000104169-24-000056",
+              "filed": "2024-03-15",
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "CONSOLIDATED_CASH_FLOW_AND_SEGMENT_RECONCILIATION",
+              "sourceFiling": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm",
+              "caveat": "WMT 10-K line label is depreciation and amortization; issuer-scoped tag only. Revalidate future years."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -2945,8 +2912,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 16,
-            "rate": 0.9411764705882353
+            "available": 17,
+            "rate": 1
           },
           "comparisons": {
             "revenue": {
@@ -2959,7 +2926,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "depreciationAmortization": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_MAPPING_PENDING"
             },
             "interestExpense": {
               "status": "FMP_MAPPING_PENDING"
@@ -3041,53 +3008,20 @@
               "filed": "2025-03-14"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "AVAILABLE",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "DepreciationAmortizationAndAccretionNet",
-                    "label": "Depreciation, Amortization and Accretion, Net",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 12973000000,
-                        "start": "2024-02-01",
-                        "end": "2025-01-31",
-                        "filed": "2025-03-14",
-                        "accession": "0000104169-25-000021"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
-                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 891000000,
-                        "start": "2024-02-01",
-                        "end": "2025-01-31",
-                        "filed": "2025-03-14",
-                        "accession": "0000104169-25-000021"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AvailableForSaleEquitySecuritiesAmortizedCostBasis",
-                  "Depreciation",
-                  "DepreciationAndAmortization",
-                  "DepreciationDepletionAndAmortization"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 12973000000,
+              "unit": "USD",
+              "periodStart": "2024-02-01",
+              "periodEnd": "2025-01-31",
+              "tag": "DepreciationAmortizationAndAccretionNet",
+              "accession": "0000104169-25-000021",
+              "filed": "2025-03-14",
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "CONSOLIDATED_CASH_FLOW_AND_SEGMENT_RECONCILIATION",
+              "sourceFiling": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm",
+              "caveat": "WMT 10-K line label is depreciation and amortization; issuer-scoped tag only. Revalidate future years."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -3250,8 +3184,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 16,
-            "rate": 0.9411764705882353
+            "available": 17,
+            "rate": 1
           },
           "comparisons": {
             "revenue": {
@@ -3264,7 +3198,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "depreciationAmortization": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_MAPPING_PENDING"
             },
             "interestExpense": {
               "status": "FMP_MAPPING_PENDING"
@@ -3744,16 +3678,15 @@
     "summary": {
       "rows": 11,
       "possible": 110,
-      "readyDirect": 76,
+      "readyDirect": 78,
       "readyDerived": 4,
-      "blocked": 30,
+      "blocked": 28,
       "blockers": {
         "marketCap": 22,
         "interestExpense": 2,
-        "operatingIncome": 6,
-        "depreciationAmortization": 4
+        "operatingIncome": 6
       },
-      "readinessPct": 72.73
+      "readinessPct": 74.55
     },
     "rows": [
       {
@@ -5341,7 +5274,7 @@
             "missing": []
           },
           "netDebtEbitda": {
-            "status": "BLOCKED",
+            "status": "READY_DIRECT",
             "required": [
               "totalDebt",
               "cash",
@@ -5351,16 +5284,11 @@
               "longTermDebt",
               "shortTermDebt",
               "cash",
-              "operatingIncome"
+              "operatingIncome",
+              "depreciationAmortization"
             ],
             "derived": [],
-            "missing": [
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "missing": []
           },
           "interestCoverage": {
             "status": "READY_DIRECT",
@@ -5422,18 +5350,14 @@
               "longTermDebt",
               "shortTermDebt",
               "cash",
-              "operatingIncome"
+              "operatingIncome",
+              "depreciationAmortization"
             ],
             "derived": [],
             "missing": [
               {
                 "input": "marketCap",
                 "reason": "EXTERNAL_MARKET_DATA"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
               }
             ]
           }
@@ -5513,7 +5437,7 @@
             "missing": []
           },
           "netDebtEbitda": {
-            "status": "BLOCKED",
+            "status": "READY_DIRECT",
             "required": [
               "totalDebt",
               "cash",
@@ -5523,16 +5447,11 @@
               "longTermDebt",
               "shortTermDebt",
               "cash",
-              "operatingIncome"
+              "operatingIncome",
+              "depreciationAmortization"
             ],
             "derived": [],
-            "missing": [
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
-              }
-            ]
+            "missing": []
           },
           "interestCoverage": {
             "status": "READY_DIRECT",
@@ -5594,18 +5513,14 @@
               "longTermDebt",
               "shortTermDebt",
               "cash",
-              "operatingIncome"
+              "operatingIncome",
+              "depreciationAmortization"
             ],
             "derived": [],
             "missing": [
               {
                 "input": "marketCap",
                 "reason": "EXTERNAL_MARKET_DATA"
-              },
-              {
-                "input": "ebitda",
-                "metric": "depreciationAmortization",
-                "reason": "PERIOD_MISSING"
               }
             ]
           }
