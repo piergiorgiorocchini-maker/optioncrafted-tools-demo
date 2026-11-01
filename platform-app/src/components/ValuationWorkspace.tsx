@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import {Area,Bar,BarChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
-import {verifiedFcf} from "../data/verifiedFinancials";
+import {verifiedAnnualHistory,verifiedFcf} from "../data/verifiedFinancials";
 import {ValuationFootballField} from "./ValuationFootballField";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamResearchPanel} from "./GrahamResearchPanel";
@@ -22,7 +22,7 @@ const valueString=(v:number|null)=>v===null?"":String(v);
 type Field=keyof Omit<Financials,"currency">;
 const inputFields:{key:Field;label:string;hint:string}[]=[
  {key:"price",label:"Reference price",hint:"Per share"},
- {key:"eps",label:"Normalized EPS",hint:"Per share"},
+ {key:"eps",label:"EPS TTM",hint:"Per share"},
  {key:"fcf",label:"Free cash flow",hint:"Per share"},
  {key:"dividend",label:"Annual dividend",hint:"Per share"},
  {key:"beta",label:"Equity beta",hint:"Levered"}
@@ -48,7 +48,9 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const [erp,setErp]=useState(5.5);
  const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield/100:null;
  const fcfEvidence=verifiedFcf(asset.ticker);
-  const source:Financials={price:asset.price,eps:asset.eps,fcf:fcfEvidence.perShare,dividend:snapshotDividend,beta:asset.beta,currency:asset.currency||"USD"};
+ const secAnnual=verifiedAnnualHistory(asset.ticker).at(-1);
+ const epsValue=asset.eps??secAnnual?.eps??null;
+  const source:Financials={price:asset.price,eps:epsValue,fcf:fcfEvidence.perShare,dividend:snapshotDividend,beta:asset.beta,currency:asset.currency||"USD"};
  const financials:Financials={...source};
  for(const {key} of inputFields){
   if(mode==="manual")financials[key]=num(manual[key]);
@@ -85,8 +87,8 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    <div className="nr-mode" role="group" aria-label="Valuation data mode">
     {(["automatic","hybrid","manual"] as ValuationMode[]).map(m=><button type="button" key={m} className={mode===m?"active":""} onClick={()=>setMode(m)}>{m==="automatic"?"Automatic snapshot":m==="hybrid"?"Hybrid · overrides":"Manual · free-hand"}</button>)}
    </div>
-   <p className="nr-source-note">{mode==="automatic"?(asset.price===null?"No market snapshot is available: reference price, dividend and beta remain N/D. EPS comes from the latest SEC fiscal year; FCF/share uses same-year SEC data or a disclosed 10-K recovery. The DCF can still run on per-share fundamentals, but market-relative comparisons stay N/D.":`Price, EPS, dividend and beta use the market snapshot dated ${asset.priceDate??"N/D"}. FCF/share uses the latest SEC fiscal year when matched cash-flow and earnings data support a disclosed estimate; otherwise it remains N/D. Forecast assumptions remain editable.`):mode==="hybrid"?"Snapshot values are prefilled; replace individual fields without modifying the underlying source. An override is labeled user input.":"All company financial inputs start blank. Enter only what you know; no fabricated defaults."}</p>
-   <div className="nr-field-grid">{inputFields.map(f=><label key={f.key}><span>{f.label}<small>{mode==="hybrid"&&overrides[f.key]!==undefined?"USER OVERRIDE":mode==="manual"?"MANUAL":f.key==="fcf"?(source.fcf===null?"N/D":fcfEvidence.basis.includes("derived estimate")?"SEC FY ESTIMATE":"SEC RESEARCH"):f.key==="price"?(asset.priceDate?`SHEETS · ${asset.priceDate}`:"NO MARKET SNAPSHOT"):f.key==="eps"&&asset.price===null?"SEC FY SNAPSHOT":asset.price===null?"NO MARKET SNAPSHOT":"SHEETS SNAPSHOT"}</small></span><input type="number" step="any" value={mode==="manual"?manual[f.key]:mode==="hybrid"?(overrides[f.key]??valueString(source[f.key])):valueString(source[f.key])} disabled={mode==="automatic"} onChange={e=>setField(f.key,e.target.value)} placeholder="N/D"/></label>)}</div>
+   <p className="nr-source-note">{mode==="automatic"?(asset.price===null?"No market snapshot is available: reference price, dividend and beta remain N/D. EPS comes from the latest SEC fiscal year; FCF/share uses same-year SEC data or a disclosed 10-K recovery. The DCF can still run on per-share fundamentals, but market-relative comparisons stay N/D.":`Price, EPS TTM, beta and valuation ratios use the Sheets snapshot dated ${asset.priceDate??"N/D"}. Dividend yield is retained from the cached export because the populated Sheet column is not reliably keyed to the sorted ticker. FCF/share uses the latest SEC fiscal year when matched cash-flow and earnings data support a disclosed estimate; otherwise it remains N/D. Forecast assumptions remain editable.`):mode==="hybrid"?"Snapshot values are prefilled; replace individual fields without modifying the underlying source. An override is labeled user input.":"All company financial inputs start blank. Enter only what you know; no fabricated defaults."}</p>
+   <div className="nr-field-grid">{inputFields.map(f=><label key={f.key}><span>{f.label}<small>{mode==="hybrid"&&overrides[f.key]!==undefined?"USER OVERRIDE":mode==="manual"?"MANUAL":f.key==="fcf"?(source.fcf===null?"N/D":fcfEvidence.basis.includes("derived estimate")?"SEC FY ESTIMATE":"SEC RESEARCH"):f.key==="price"?(asset.priceDate?`SHEETS · ${asset.priceDate}`:"NO MARKET SNAPSHOT"):f.key==="eps"?(asset.eps!==null?`SHEETS TTM · ${asset.priceDate??"N/D"}`:secAnnual?`SEC FY${secAnnual.year}`:"N/D"):asset.price===null?"NO MARKET SNAPSHOT":"SHEETS SNAPSHOT"}</small></span><input type="number" step="any" value={mode==="manual"?manual[f.key]:mode==="hybrid"?(overrides[f.key]??valueString(source[f.key])):valueString(source[f.key])} disabled={mode==="automatic"} onChange={e=>setField(f.key,e.target.value)} placeholder="N/D"/></label>)}</div>
    {mode==="hybrid"&&<button className="nr-text-button" type="button" onClick={()=>setOverrides({})}><RefreshCcw size={13}/> Clear overrides</button>}
    <p className="nr-source-note">FCF/share: {fcfEvidence.basis}. {fcfEvidence.warning} {fcfEvidence.sourceUrl&&<a href={fcfEvidence.sourceUrl} target="_blank" rel="noopener noreferrer">SEC filing ↗</a>} Dividend/share is derived from price × snapshot dividend yield. Market quotes are dated snapshots, not live feeds.</p>
   </section>
