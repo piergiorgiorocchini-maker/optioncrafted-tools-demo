@@ -31,7 +31,9 @@ export const BANK_SEC_CANDIDATES={
  cet1Ratio:['CommonEquityTierOneCapitalRatio']
 };
 export function validSecObservation(x,kind,year,asOf){
- if(!x||!Number.isFinite(x.val)||!x.end||!x.filed||x.filed>asOf||x.form!=='10-K'||x.fp!=='FY'||x.fy!==year)return false;
+ if(!x||!Number.isFinite(x.val)||!x.end||!x.filed||x.filed>asOf||x.form!=='10-K'||x.fp!=='FY'||![year,year+1].includes(x.fy))return false;
+ // fy labels the filing, not necessarily the comparative fiscal fact.
+ // Accept one-year-forward 10-K comparatives only when the fact itself ends in the requested year.
  if(kind==='instant')return !x.start&&x.end.slice(0,4)===String(year);
  if(!x.start||x.end.slice(0,4)!==String(year))return false;
  const days=(Date.parse(x.end)-Date.parse(x.start))/86400000;
