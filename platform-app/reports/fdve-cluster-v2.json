@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T09:13:50.719Z",
+  "generatedAt": "2026-11-01T09:14:36.547Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -17,14 +17,14 @@
   ],
   "totals": {
     "applicable": 199,
-    "available": 191,
+    "available": 193,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 199,
-    "coverage": 0.9597989949748744,
-    "expectedComparisons": 191,
-    "notCompared": 191,
+    "coverage": 0.9698492462311558,
+    "expectedComparisons": 193,
+    "notCompared": 193,
     "reconciliationRate": null
   },
   "companies": [
@@ -1492,94 +1492,25 @@
               "filed": "2024-07-30"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2024,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2024,
-                "availableTags": [
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 4800000000,
-                        "start": "2023-07-01",
-                        "end": "2024-06-30",
-                        "filed": "2024-07-30",
-                        "accession": "0000950170-24-087843"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 15200000000,
-                        "start": "2023-07-01",
-                        "end": "2024-06-30",
-                        "filed": "2024-07-30",
-                        "accession": "0000950170-24-087843"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
-                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 1800000000,
-                        "start": "2023-07-01",
-                        "end": "2024-06-30",
-                        "filed": "2024-07-30",
-                        "accession": "0000950170-24-087843"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterTenYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesNextRollingTwelveMonthsAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingAfterYearTenAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearSixThroughTenAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearTwoThroughFiveAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesWithinOneYearAmortizedCost",
-                  "CapitalizedComputerSoftwareAmortization",
-                  "CapitalizedComputerSoftwareAmortization1",
-                  "DebtInstrumentUnamortizedDiscount",
-                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpense",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
-                  "FutureAmortizationExpenseAfterYearFive",
-                  "FutureAmortizationExpenseYearFive",
-                  "FutureAmortizationExpenseYearFour",
-                  "FutureAmortizationExpenseYearOne",
-                  "FutureAmortizationExpenseYearThree",
-                  "FutureAmortizationExpenseYearTwo",
-                  "HeldToMaturitySecuritiesAmortizedCostBeforeOtherThanTemporaryImpairment"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 20000000000,
+              "unit": "USD",
+              "periodStart": "2023-07-01",
+              "periodEnd": "2024-06-30",
+              "method": "MSFT_DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0000950170-24-087843",
+                "0000950170-24-087843"
+              ],
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "COMPONENT_TAG_SUM_REVIEWED",
+              "caveat": "Finance lease ROU amortization excluded pending overlap verification; not cash flow depreciation amortization and other."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -1741,8 +1672,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 16,
-            "rate": 0.9411764705882353
+            "available": 17,
+            "rate": 1
           },
           "comparisons": {
             "revenue": {
@@ -1755,7 +1686,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "depreciationAmortization": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_MAPPING_PENDING"
             },
             "interestExpense": {
               "status": "FMP_MAPPING_PENDING"
@@ -1837,94 +1768,25 @@
               "filed": "2025-07-30"
             },
             "depreciationAmortization": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "depreciationAmortization",
               "year": 2025,
-              "taxonomyCandidates": [],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "depreciationAmortization",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "AmortizationOfIntangibleAssets",
-                    "label": "Amortization of Intangible Assets",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6000000000,
-                        "start": "2024-07-01",
-                        "end": "2025-06-30",
-                        "filed": "2025-07-30",
-                        "accession": "0000950170-25-100235"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "Depreciation",
-                    "label": "Depreciation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 22000000000,
-                        "start": "2024-07-01",
-                        "end": "2025-06-30",
-                        "filed": "2025-07-30",
-                        "accession": "0000950170-25-100235"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "FinanceLeaseRightOfUseAssetAmortization",
-                    "label": "Finance Lease, Right-of-Use Asset, Amortization",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 3408000000,
-                        "start": "2024-07-01",
-                        "end": "2025-06-30",
-                        "filed": "2025-07-30",
-                        "accession": "0000950170-25-100235"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-                  "AvailableForSaleDebtSecuritiesAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAfterTenYearsAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesAmortizedCost",
-                  "AvailableForSaleSecuritiesDebtMaturitiesNextRollingTwelveMonthsAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingAfterYearTenAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearSixThroughTenAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesRollingYearTwoThroughFiveAmortizedCostBasis",
-                  "AvailableForSaleSecuritiesDebtMaturitiesWithinOneYearAmortizedCost",
-                  "CapitalizedComputerSoftwareAmortization",
-                  "CapitalizedComputerSoftwareAmortization1",
-                  "DebtInstrumentUnamortizedDiscount",
-                  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
-                  "FiniteLivedIntangibleAssetsAccumulatedAmortization",
-                  "FiniteLivedIntangibleAssetsAmortizationExpense",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseAfterYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseNextTwelveMonths",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseRemainderOfFiscalYear",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFive",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearThree",
-                  "FiniteLivedIntangibleAssetsAmortizationExpenseYearTwo",
-                  "FutureAmortizationExpenseAfterYearFive",
-                  "FutureAmortizationExpenseYearFive",
-                  "FutureAmortizationExpenseYearFour",
-                  "FutureAmortizationExpenseYearOne",
-                  "FutureAmortizationExpenseYearThree",
-                  "FutureAmortizationExpenseYearTwo",
-                  "HeldToMaturitySecuritiesAmortizedCostBeforeOtherThanTemporaryImpairment"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 28000000000,
+              "unit": "USD",
+              "periodStart": "2024-07-01",
+              "periodEnd": "2025-06-30",
+              "method": "MSFT_DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION",
+              "inputs": [
+                "Depreciation",
+                "AmortizationOfIntangibleAssets"
+              ],
+              "accessions": [
+                "0000950170-25-100235",
+                "0000950170-25-100235"
+              ],
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "COMPONENT_TAG_SUM_REVIEWED",
+              "caveat": "Finance lease ROU amortization excluded pending overlap verification; not cash flow depreciation amortization and other."
             },
             "interestExpense": {
               "status": "AVAILABLE",
@@ -2086,8 +1948,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 16,
-            "rate": 0.9411764705882353
+            "available": 17,
+            "rate": 1
           },
           "comparisons": {
             "revenue": {
@@ -2100,7 +1962,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "depreciationAmortization": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_MAPPING_PENDING"
             },
             "interestExpense": {
               "status": "FMP_MAPPING_PENDING"
