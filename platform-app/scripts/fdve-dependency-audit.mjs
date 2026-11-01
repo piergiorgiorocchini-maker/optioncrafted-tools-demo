@@ -76,8 +76,11 @@ export function auditDependencyReport(report){
    rows.push({ticker:company.ticker,year,indexes});
   }
  }
- const summary={rows:rows.length,possible:0,readyDirect:0,readyDerived:0,blocked:0,blockers:{}};
- for(const row of rows)for(const index of Object.values(row.indexes)){
+ const summary={rows:rows.length,possible:0,readyDirect:0,readyDerived:0,blocked:0,blockers:{},accountingOnly:{possible:0,ready:0,blocked:0,readinessPct:null},marketDependent:{possible:0,ready:0,blocked:0,readinessPct:null}};
+ for(const row of rows)for(const [name,index] of Object.entries(row.indexes)){
+  const group=['enterpriseValue','evEbitda'].includes(name)?summary.marketDependent:summary.accountingOnly;
+  group.possible++;
+  if(index.status==='BLOCKED')group.blocked++;else group.ready++;
   summary.possible++;
   if(index.status==='BLOCKED'){
    summary.blocked++;
@@ -86,5 +89,6 @@ export function auditDependencyReport(report){
   else summary.readyDirect++;
  }
  summary.readinessPct=summary.possible?Number((100*(summary.readyDirect+summary.readyDerived)/summary.possible).toFixed(2)):null;
- return {schemaVersion:1,scope:'SEC_ANNUAL_ONLY',note:'Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires independently sourced USD market data dated within 7 days after the matching fiscal period end. No market values are inferred.',summary,rows};
+ for(const group of [summary.accountingOnly,summary.marketDependent])group.readinessPct=group.possible?Number((100*group.ready/group.possible).toFixed(2)):null;
+ return {schemaVersion:1,scope:'SEC_ANNUAL_ONLY',note:'Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires independently sourced USD market data dated within 7 days after the matching fiscal period end. Historical snapshots are not inferred from current Google/FMP prices. Accounting-only readiness is reported separately from market-dependent readiness.',summary,rows};
 }
