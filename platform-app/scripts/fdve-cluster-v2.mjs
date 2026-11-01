@@ -3,7 +3,7 @@
 // Read-only for production data. Never commits raw provider payloads or credentials.
 import fs from 'node:fs/promises';
 import {METRICS} from './fdve-model.mjs';
-import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags} from './fdve-cluster-mapping.mjs';
+import {BANK_SEC_CANDIDATES,FMP_FIELDS,selectFiscalSec,deriveTotalLiabilities,reconcileValue,selectBankFiscalSec,findRelatedTags,diagnoseInterestTags,diagnoseMissingMetric} from './fdve-cluster-mapping.mjs';
 const cfg=JSON.parse(await fs.readFile('platform-app/config/fdve-cluster-pilot.json','utf8'));
 const profiles=JSON.parse(await fs.readFile('platform-app/config/fdve-sector-profiles.json','utf8'));
 const asOf=new Date().toISOString().slice(0,10);
@@ -44,6 +44,7 @@ for(const company of cfg.companies){
     if(found.status==='PERIOD_MISSING'){
      found.taxonomyCandidates=findRelatedTags(concepts,metric);
      if(metric==='interestExpense')found.interestTagDiagnostics=diagnoseInterestTags(concepts,year,asOf);
+     else found.metricDiagnostics=diagnoseMissingMetric(concepts,metric,year,asOf);
     }
     metrics[metric]=found;
    }
