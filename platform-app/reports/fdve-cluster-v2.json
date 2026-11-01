@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T12:49:26.660Z",
+  "generatedAt": "2026-11-01T12:49:48.262Z",
   "periods": [
     "FY2024",
     "FY2025"
@@ -11455,7 +11455,7 @@
   "dependencyAudit": {
     "schemaVersion": 1,
     "scope": "SEC_ANNUAL_ONLY",
-    "note": "Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires independently sourced USD market data dated within 7 days after the matching fiscal period end. No market values are inferred.",
+    "note": "Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires independently sourced USD market data dated within 7 days after the matching fiscal period end. Historical snapshots are not inferred from current Google/FMP prices. Accounting-only readiness is reported separately from market-dependent readiness.",
     "summary": {
       "rows": 38,
       "possible": 380,
@@ -11475,6 +11475,18 @@
         "cash": 20,
         "currentAssets": 4,
         "currentLiabilities": 6
+      },
+      "accountingOnly": {
+        "possible": 304,
+        "ready": 204,
+        "blocked": 100,
+        "readinessPct": 67.11
+      },
+      "marketDependent": {
+        "possible": 76,
+        "ready": 0,
+        "blocked": 76,
+        "readinessPct": 0
       },
       "readinessPct": 53.68
     },

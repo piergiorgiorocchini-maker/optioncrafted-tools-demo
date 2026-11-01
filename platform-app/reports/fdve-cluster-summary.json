@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T12:49:26.660Z",
+  "generatedAt": "2026-11-01T12:49:48.262Z",
   "totals": {
     "applicable": 658,
     "available": 584,
@@ -36,6 +36,18 @@
         "cash": 20,
         "currentAssets": 4,
         "currentLiabilities": 6
+      },
+      "accountingOnly": {
+        "possible": 304,
+        "ready": 204,
+        "blocked": 100,
+        "readinessPct": 67.11
+      },
+      "marketDependent": {
+        "possible": 76,
+        "ready": 0,
+        "blocked": 76,
+        "readinessPct": 0
       },
       "readinessPct": 53.68
     }
