@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T09:11:42.914Z",
+  "generatedAt": "2026-11-01T09:11:58.219Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -17,14 +17,14 @@
   ],
   "totals": {
     "applicable": 199,
-    "available": 187,
+    "available": 191,
     "compared": 0,
     "matched": 0,
     "differences": 0,
     "unresolved": 199,
-    "coverage": 0.9396984924623115,
-    "expectedComparisons": 187,
-    "notCompared": 187,
+    "coverage": 0.9597989949748744,
+    "expectedComparisons": 191,
+    "notCompared": 191,
     "reconciliationRate": null
   },
   "companies": [
@@ -2348,110 +2348,23 @@
               "filed": "2025-02-19"
             },
             "inventory": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "inventory",
               "year": 2024,
-              "taxonomyCandidates": [
-                "EffectOfLIFOInventoryLiquidationOnIncome",
+              "value": 23524000000,
+              "unit": "USD",
+              "periodEnd": "2024-12-31",
+              "method": "XOM_CONSOLIDATED_INVENTORY_COMPONENT_SUM",
+              "inputs": [
                 "EnergyRelatedInventory",
-                "EnergyRelatedInventoryChemicals",
-                "EnergyRelatedInventoryNaturalGasInStorage",
-                "EnergyRelatedInventoryPetroleum",
-                "IncreaseDecreaseInInventories",
-                "InventoryCrudeOilProductsAndMerchandise",
-                "InventoryFinishedGoodsAndWorkInProcess",
-                "InventoryNet",
-                "InventoryPartsAndComponents",
-                "InventoryPartsAndComponentsNetOfReserves",
-                "InventoryWriteDown"
+                "InventoryPartsAndComponentsNetOfReserves"
               ],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "inventory",
-                "year": 2024,
-                "availableTags": [
-                  {
-                    "tag": "EnergyRelatedInventory",
-                    "label": "Energy Related Inventory",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 19444000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "EnergyRelatedInventoryChemicals",
-                    "label": "Energy Related Inventory, Chemicals",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 4142000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "EnergyRelatedInventoryPetroleum",
-                    "label": "Energy Related Inventory, Petroleum",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6483000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "InventoryCrudeOilProductsAndMerchandise",
-                    "label": "Energy Related Inventory, Crude Oil, Products and Merchandise",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6017000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "InventoryPartsAndComponentsNetOfReserves",
-                    "label": "Inventory, Parts and Components, Net of Reserves",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 4080000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "EffectOfLIFOInventoryLiquidationOnIncome",
-                  "EnergyRelatedInventoryNaturalGasInStorage",
-                  "IncreaseDecreaseInInventories",
-                  "InventoryFinishedGoodsAndWorkInProcess",
-                  "InventoryNet",
-                  "InventoryPartsAndComponents",
-                  "InventoryWriteDown"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "accessions": [
+                "0000034088-25-000010",
+                "0000034088-25-000010"
+              ],
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "CONSOLIDATED_10K_LINE_ITEMS"
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -2490,134 +2403,18 @@
               "filed": "2025-02-19"
             },
             "longTermDebt": {
-              "status": "PERIOD_MISSING",
+              "status": "AVAILABLE",
               "metric": "longTermDebt",
               "year": 2024,
-              "taxonomyCandidates": [
-                "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
-                "LongTermDebtAndCapitalLeaseObligations",
-                "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                "LongTermDebtCurrent",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
-                "LongTermDebtNoncurrent",
-                "ProceedsFromIssuanceOfLongTermDebt",
-                "RepaymentsOfLongTermDebt"
-              ],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "longTermDebt",
-                "year": 2024,
-                "availableTags": [
-                  {
-                    "tag": "LongTermDebtAndCapitalLeaseObligations",
-                    "label": "Long-term Debt and Lease Obligation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 36755000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                    "label": "Long-term Debt and Lease Obligation, Current",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 4892000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtCurrent",
-                    "label": "Long-term Debt, Current Maturities",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 4892000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
-                    "label": "Long-Term Debt, Maturity, Year Five",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 1604000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
-                    "label": "Long-Term Debt, Maturity, Year Four",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 1441000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
-                    "label": "Long-Term Debt, Maturity, Year Three",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 1357000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
-                    "label": "Long-Term Debt, Maturity, Year Two",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 5456000000,
-                        "start": null,
-                        "end": "2024-12-31",
-                        "filed": "2025-02-19",
-                        "accession": "0000034088-25-000010"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
-                  "LongTermDebtNoncurrent",
-                  "ProceedsFromIssuanceOfLongTermDebt",
-                  "RepaymentsOfLongTermDebt"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 36755000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2024-12-31",
+              "tag": "LongTermDebtAndCapitalLeaseObligations",
+              "accession": "0000034088-25-000010",
+              "filed": "2025-02-19",
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "CONSOLIDATED_10K_LINE_ITEM"
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -2635,8 +2432,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "comparisons": {
             "revenue": {
@@ -2673,7 +2470,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "inventory": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_SOURCE_MISSING"
             },
             "totalAssets": {
               "status": "FMP_SOURCE_MISSING"
@@ -2685,7 +2482,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "longTermDebt": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_SOURCE_MISSING"
             },
             "shortTermDebt": {
               "status": "FMP_SOURCE_MISSING"
@@ -2881,110 +2678,23 @@
               "filed": "2026-02-18"
             },
             "inventory": {
-              "status": "PERIOD_MISSING",
+              "status": "DERIVED",
               "metric": "inventory",
               "year": 2025,
-              "taxonomyCandidates": [
-                "EffectOfLIFOInventoryLiquidationOnIncome",
+              "value": 26302000000,
+              "unit": "USD",
+              "periodEnd": "2025-12-31",
+              "method": "XOM_CONSOLIDATED_INVENTORY_COMPONENT_SUM",
+              "inputs": [
                 "EnergyRelatedInventory",
-                "EnergyRelatedInventoryChemicals",
-                "EnergyRelatedInventoryNaturalGasInStorage",
-                "EnergyRelatedInventoryPetroleum",
-                "IncreaseDecreaseInInventories",
-                "InventoryCrudeOilProductsAndMerchandise",
-                "InventoryFinishedGoodsAndWorkInProcess",
-                "InventoryNet",
-                "InventoryPartsAndComponents",
-                "InventoryPartsAndComponentsNetOfReserves",
-                "InventoryWriteDown"
+                "InventoryPartsAndComponentsNetOfReserves"
               ],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "inventory",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "EnergyRelatedInventory",
-                    "label": "Energy Related Inventory",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 22979000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "EnergyRelatedInventoryChemicals",
-                    "label": "Energy Related Inventory, Chemicals",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 4261000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "EnergyRelatedInventoryPetroleum",
-                    "label": "Energy Related Inventory, Petroleum",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 7976000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "InventoryCrudeOilProductsAndMerchandise",
-                    "label": "Energy Related Inventory, Crude Oil, Products and Merchandise",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6889000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "InventoryPartsAndComponentsNetOfReserves",
-                    "label": "Inventory, Parts and Components, Net of Reserves",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 3323000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "EffectOfLIFOInventoryLiquidationOnIncome",
-                  "EnergyRelatedInventoryNaturalGasInStorage",
-                  "IncreaseDecreaseInInventories",
-                  "InventoryFinishedGoodsAndWorkInProcess",
-                  "InventoryNet",
-                  "InventoryPartsAndComponents",
-                  "InventoryWriteDown"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "accessions": [
+                "0000034088-26-000045",
+                "0000034088-26-000045"
+              ],
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "CONSOLIDATED_10K_LINE_ITEMS"
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -3023,134 +2733,18 @@
               "filed": "2026-02-18"
             },
             "longTermDebt": {
-              "status": "PERIOD_MISSING",
+              "status": "AVAILABLE",
               "metric": "longTermDebt",
               "year": 2025,
-              "taxonomyCandidates": [
-                "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
-                "LongTermDebtAndCapitalLeaseObligations",
-                "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                "LongTermDebtCurrent",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
-                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
-                "LongTermDebtNoncurrent",
-                "ProceedsFromIssuanceOfLongTermDebt",
-                "RepaymentsOfLongTermDebt"
-              ],
-              "metricDiagnostics": {
-                "status": "DIAGNOSTIC_ONLY",
-                "metric": "longTermDebt",
-                "year": 2025,
-                "availableTags": [
-                  {
-                    "tag": "LongTermDebtAndCapitalLeaseObligations",
-                    "label": "Long-term Debt and Lease Obligation",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 34241000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
-                    "label": "Long-term Debt and Lease Obligation, Current",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6234000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtCurrent",
-                    "label": "Long-term Debt, Current Maturities",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 6200000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
-                    "label": "Long-Term Debt, Maturity, Year Five",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 5300000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
-                    "label": "Long-Term Debt, Maturity, Year Four",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 1700000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
-                    "label": "Long-Term Debt, Maturity, Year Three",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 1700000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
-                    "label": "Long-Term Debt, Maturity, Year Two",
-                    "annualObservations": 1,
-                    "observations": [
-                      {
-                        "value": 2500000000,
-                        "start": null,
-                        "end": "2025-12-31",
-                        "filed": "2026-02-18",
-                        "accession": "0000034088-26-000045"
-                      }
-                    ]
-                  }
-                ],
-                "historicalOrOtherTags": [
-                  "BusinessAcquisitionPurchasePriceAllocationNoncurrentLiabilitiesLongTermDebt",
-                  "LongTermDebtNoncurrent",
-                  "ProceedsFromIssuanceOfLongTermDebt",
-                  "RepaymentsOfLongTermDebt"
-                ],
-                "note": "Candidates are NOT approved mappings. Validate definition, consolidation, period and double counting before adding an alias."
-              }
+              "value": 34241000000,
+              "unit": "USD",
+              "periodStart": null,
+              "periodEnd": "2025-12-31",
+              "tag": "LongTermDebtAndCapitalLeaseObligations",
+              "accession": "0000034088-26-000045",
+              "filed": "2026-02-18",
+              "mappingScope": "ISSUER_VERIFIED",
+              "validation": "CONSOLIDATED_10K_LINE_ITEM"
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -3168,8 +2762,8 @@
           "bank": {},
           "coverage": {
             "applicable": 17,
-            "available": 14,
-            "rate": 0.8235294117647058
+            "available": 16,
+            "rate": 0.9411764705882353
           },
           "comparisons": {
             "revenue": {
@@ -3206,7 +2800,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "inventory": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_SOURCE_MISSING"
             },
             "totalAssets": {
               "status": "FMP_SOURCE_MISSING"
@@ -3218,7 +2812,7 @@
               "status": "FMP_SOURCE_MISSING"
             },
             "longTermDebt": {
-              "status": "SEC_UNAVAILABLE"
+              "status": "FMP_SOURCE_MISSING"
             },
             "shortTermDebt": {
               "status": "FMP_SOURCE_MISSING"
