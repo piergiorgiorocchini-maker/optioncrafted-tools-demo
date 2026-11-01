@@ -97,6 +97,21 @@ export function resolveValidatedIndustrialMetric(concepts,ticker,metric,kind,yea
    periodEnd:x.end,tag,accession:x.accn,filed:x.filed,
    mappingScope:'ISSUER_VERIFIED',validation:'CONSOLIDATED_10K_LINE_ITEM'};
  };
+ if(ticker==='MSFT'&&metric==='depreciationAmortization'){
+  const depreciation=pick('Depreciation');
+  const amortization=pick('AmortizationOfIntangibleAssets');
+  const expected={2024:[15200000000,4800000000],2025:[22000000000,6000000000]};
+  if(!depreciation||!amortization||depreciation.periodEnd!==amortization.periodEnd||
+   depreciation.periodStart!==amortization.periodStart||!expected[year]||
+   depreciation.value!==expected[year][0]||amortization.value!==expected[year][1])return null;
+  return {status:'DERIVED',metric,year,value:depreciation.value+amortization.value,
+   unit:'USD',periodStart:depreciation.periodStart,periodEnd:depreciation.periodEnd,
+   method:'MSFT_DEPRECIATION_PLUS_INTANGIBLE_AMORTIZATION',
+   inputs:[depreciation.tag,amortization.tag],
+   accessions:[depreciation.accession,amortization.accession],
+   mappingScope:'ISSUER_VERIFIED',validation:'COMPONENT_TAG_SUM_REVIEWED',
+   caveat:'Finance lease ROU amortization excluded pending overlap verification; not cash flow depreciation amortization and other.'};
+ }
  if(ticker==='XOM'&&metric==='longTermDebt'){
   return pick('LongTermDebtAndCapitalLeaseObligations');
  }
