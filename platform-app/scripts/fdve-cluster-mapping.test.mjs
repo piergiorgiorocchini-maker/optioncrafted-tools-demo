@@ -146,3 +146,14 @@ test('market capitalization must be sourced and aligned with fiscal year end',()
  assert.equal(auditIndexDependencies(metrics).evEbitda.status,'BLOCKED');
  assert.equal(auditIndexDependencies(metrics,{marketSnapshot:good,periodEnd:'2025-09-27'}).evEbitda.status,'READY_DIRECT');
 });
+
+test('quality gate quarantines mixed fiscal dates within the same year',()=>{
+ const f=(value,periodEnd)=>({status:'AVAILABLE',value,periodEnd,tag:'Assets',accession:'0000000000-25-000001'});
+ const row=validateFiscalRow('TEST',2025,{totalAssets:f(100,'2025-09-27'),cash:f(10,'2025-12-31')});
+ assert.equal(row.status,'REVIEW_REQUIRED');
+ assert.ok(row.issues.some(x=>x.code==='FISCAL_END_INCONSISTENT'));
+});
+test('quality gate rejects quarterly cash flows mislabeled as annual',()=>{
+ const row=validateFiscalRow('TEST',2025,{revenue:{status:'AVAILABLE',value:100,periodStart:'2025-10-01',periodEnd:'2025-12-31',tag:'Revenues',accession:'0000000000-25-000001'}});
+ assert.ok(row.issues.some(x=>x.code==='INVALID_ANNUAL_DURATION'));
+});
