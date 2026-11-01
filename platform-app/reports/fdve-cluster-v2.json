@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T10:25:54.755Z",
+  "generatedAt": "2026-11-01T10:34:20.138Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -39,7 +39,7 @@
       },
       "fmp": {
         "status": "PARTIAL",
-        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
+        "error": "income: HTTP 429 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
       },
       "years": {
         "2021": {
@@ -1450,7 +1450,7 @@
       },
       "fmp": {
         "status": "PARTIAL",
-        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 402 from financialmodelingprep.com; cashflow: HTTP 402 from financialmodelingprep.com"
+        "error": "income: HTTP 429 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -2018,7 +2018,7 @@
       },
       "fmp": {
         "status": "PARTIAL",
-        "error": "income: HTTP 402 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
+        "error": "income: HTTP 429 from financialmodelingprep.com; balance: HTTP 429 from financialmodelingprep.com; cashflow: HTTP 429 from financialmodelingprep.com"
       },
       "years": {
         "2024": {
@@ -3740,7 +3740,7 @@
   "dependencyAudit": {
     "schemaVersion": 1,
     "scope": "SEC_ANNUAL_ONLY",
-    "note": "Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires dated market data.",
+    "note": "Readiness indicates dependency presence, not validated valuation or computed ratios. Market cap requires independently sourced USD market data dated within 7 days after the matching fiscal period end. No market values are inferred.",
     "summary": {
       "rows": 11,
       "possible": 110,
