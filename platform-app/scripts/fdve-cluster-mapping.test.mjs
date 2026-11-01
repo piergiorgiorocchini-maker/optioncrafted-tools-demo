@@ -157,3 +157,17 @@ test('quality gate rejects quarterly cash flows mislabeled as annual',()=>{
  const row=validateFiscalRow('TEST',2025,{revenue:{status:'AVAILABLE',value:100,periodStart:'2025-10-01',periodEnd:'2025-12-31',tag:'Revenues',accession:'0000000000-25-000001'}});
  assert.ok(row.issues.some(x=>x.code==='INVALID_ANNUAL_DURATION'));
 });
+
+test('WMT FY2024/2025 D&A is approved only when matching issuer 10-K line and fiscal duration',()=>{
+ const cases=[[2024,11853000000,'2023-02-01','2024-01-31'],[2025,12973000000,'2024-02-01','2025-01-31']];
+ for(const [year,value,start,end] of cases){
+  const concepts={DepreciationAmortizationAndAccretionNet:{units:{USD:[fact(value,end,year,{start})]}}};
+  const matched=resolveValidatedIndustrialMetric(concepts,'WMT','depreciationAmortization','flow',year,'2026-11-01');
+  assert.equal(matched.status,'AVAILABLE');
+  assert.equal(matched.value,value);
+  assert.equal(matched.validation,'CONSOLIDATED_CASH_FLOW_AND_SEGMENT_RECONCILIATION');
+  assert.equal(resolveValidatedIndustrialMetric(concepts,'XOM','depreciationAmortization','flow',year,'2026-11-01'),null);
+  concepts.DepreciationAmortizationAndAccretionNet.units.USD[0].val++;
+  assert.equal(resolveValidatedIndustrialMetric(concepts,'WMT','depreciationAmortization','flow',year,'2026-11-01'),null);
+ }
+});
