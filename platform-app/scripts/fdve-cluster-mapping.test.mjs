@@ -216,3 +216,20 @@ test('shareholder equity excludes NCI and requires same accession',()=>{
  c.MinorityInterest.units.USD[0].accn='different';
  assert.equal(deriveShareholderEquity(c,2025,'2026-11-01'),null);
 });
+
+import {deriveNetIncomeAttributable,deriveLongTermDebtNoncurrent} from './fdve-cluster-mapping.mjs';
+test('net income attributable to parent requires same FY and same filing NCI',()=>{
+ const p=fact(100,'2025-12-31',2025,{start:'2025-01-01'});
+ const n=fact(7,'2025-12-31',2025,{start:'2025-01-01'});
+ const c={ProfitLoss:{units:{USD:[p]}},NetIncomeLossAttributableToNoncontrollingInterest:{units:{USD:[n]}}};
+ assert.equal(deriveNetIncomeAttributable(c,2025,'2026-11-01').value,93);
+ c.NetIncomeLossAttributableToNoncontrollingInterest.units.USD[0].accn='mismatch';
+ assert.equal(deriveNetIncomeAttributable(c,2025,'2026-11-01'),null);
+});
+test('noncurrent long-term debt subtracts only matching reported current maturities',()=>{
+ const t=fact(100,'2025-12-31',2025),c=fact(25,'2025-12-31',2025);
+ const x={LongTermDebt:{units:{USD:[t]}},LongTermDebtCurrent:{units:{USD:[c]}}};
+ assert.equal(deriveLongTermDebtNoncurrent(x,2025,'2026-11-01').value,75);
+ x.LongTermDebtCurrent.units.USD[0].val=101;
+ assert.equal(deriveLongTermDebtNoncurrent(x,2025,'2026-11-01'),null);
+});
