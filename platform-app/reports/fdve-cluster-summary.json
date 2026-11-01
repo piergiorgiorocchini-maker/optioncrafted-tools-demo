@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T12:50:11.108Z",
+  "generatedAt": "2026-11-01T12:50:30.992Z",
   "totals": {
     "applicable": 658,
     "available": 584,
@@ -68,7 +68,14 @@
           "missing": [
             {
               "metric": "interestExpense",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                }
+              ],
+              "related": []
             }
           ]
         },
@@ -81,7 +88,14 @@
           "missing": [
             {
               "metric": "interestExpense",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                }
+              ],
+              "related": []
             }
           ]
         }
@@ -126,7 +140,28 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ]
             }
           ]
         },
@@ -139,7 +174,28 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense",
+                "OtherOperatingIncomeExpenseNet"
+              ]
             }
           ]
         }
@@ -208,15 +264,42 @@
           "missing": [
             {
               "metric": "inventory",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
+              ]
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "ProceedsFromIssuanceOfSeniorLongTermDebt",
+                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+                "RepaymentsOfLongTermDebt"
+              ]
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -229,11 +312,40 @@
           "missing": [
             {
               "metric": "inventory",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "DeferredTaxAssetIntraEntityTransferAssetOtherThanInventory"
+              ]
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebt",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "ProceedsFromIssuanceOfSeniorLongTermDebt",
+                "ProceedsFromRepaymentsOfLongTermDebtAndCapitalSecurities",
+                "RepaymentsOfLongTermDebt"
+              ]
             }
           ]
         }
@@ -254,11 +366,36 @@
           "missing": [
             {
               "metric": "interestExpense",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "FinanceLeaseInterestExpense",
+                  "observations": 1
+                },
+                {
+                  "tag": "FinanceLeaseInterestPaymentOnLiability",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "InterestPaidNet",
+                  "observations": 1
+                },
+                {
+                  "tag": "UnrecognizedTaxBenefitsIncomeTaxPenaltiesAndInterestExpense",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "inventory",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -271,7 +408,9 @@
           "missing": [
             {
               "metric": "inventory",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -292,7 +431,9 @@
           "missing": [
             {
               "metric": "capex",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -305,7 +446,9 @@
           "missing": [
             {
               "metric": "capex",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -326,15 +469,64 @@
           "missing": [
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtCurrent",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextRollingTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour"
+              ]
             }
           ]
         },
@@ -347,19 +539,70 @@
           "missing": [
             {
               "metric": "netIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AmortizationOfFinancingCostsAndDiscounts",
+                  "observations": 1
+                },
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligationsCurrent",
+                "LongTermDebtCurrent",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextRollingTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour"
+              ]
             }
           ]
         }
@@ -380,11 +623,36 @@
           "missing": [
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AdjustmentForAmortization",
+                  "observations": 1
+                },
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                },
+                {
+                  "tag": "OperatingLeaseRightOfUseAssetAmortizationExpense",
+                  "observations": 1
+                },
+                {
+                  "tag": "OtherDepreciationAndAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "totalLiabilities",
-              "status": "DERIVATION_UNAVAILABLE"
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -397,11 +665,36 @@
           "missing": [
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AdjustmentForAmortization",
+                  "observations": 1
+                },
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                },
+                {
+                  "tag": "OtherDepreciationAndAmortization",
+                  "observations": 1
+                },
+                {
+                  "tag": "CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "totalLiabilities",
-              "status": "DERIVATION_UNAVAILABLE"
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -422,11 +715,27 @@
           "missing": [
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "inventory",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [
+                "InventoryNet",
+                "IncreaseDecreaseInInventories"
+              ]
             }
           ]
         },
@@ -439,11 +748,27 @@
           "missing": [
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                },
+                {
+                  "tag": "FinanceLeaseRightOfUseAssetAmortization",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "inventory",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": [
+                "InventoryNet",
+                "IncreaseDecreaseInInventories"
+              ]
             }
           ]
         }
@@ -464,11 +789,15 @@
           "missing": [
             {
               "metric": "capex",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "totalLiabilities",
-              "status": "DERIVATION_UNAVAILABLE"
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -481,11 +810,15 @@
           "missing": [
             {
               "metric": "capex",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "totalLiabilities",
-              "status": "DERIVATION_UNAVAILABLE"
+              "status": "DERIVATION_UNAVAILABLE",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -530,11 +863,15 @@
           "missing": [
             {
               "metric": "cash",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -547,11 +884,15 @@
           "missing": [
             {
               "metric": "cash",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -572,19 +913,48 @@
           "missing": [
             {
               "metric": "netIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "interestExpense",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeTaxExaminationPenaltiesAndInterestExpense",
+                  "observations": 1
+                },
+                {
+                  "tag": "InterestPaidNet",
+                  "observations": 1
+                },
+                {
+                  "tag": "NetIncomeLossAttributableToNoncontrollingInterest",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -597,19 +967,48 @@
           "missing": [
             {
               "metric": "netIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "interestExpense",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeTaxExaminationPenaltiesAndInterestExpense",
+                  "observations": 1
+                },
+                {
+                  "tag": "InterestPaidNet",
+                  "observations": 1
+                },
+                {
+                  "tag": "NetIncomeLossAttributableToNoncontrollingInterest",
+                  "observations": 1
+                }
+              ],
+              "related": []
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -630,19 +1029,57 @@
           "missing": [
             {
               "metric": "currentAssets",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "currentLiabilities",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "RepaymentsOfLongTermDebt",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo"
+              ]
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -655,23 +1092,82 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OperatingIncomeLoss",
+                "OtherOperatingIncome"
+              ]
             },
             {
               "metric": "currentAssets",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "currentLiabilities",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebtNoncurrent",
+                "ProceedsFromIssuanceOfLongTermDebt",
+                "RepaymentsOfLongTermDebt",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo"
+              ]
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -692,19 +1188,76 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OtherNonoperatingIncome",
+                "OtherNonoperatingIncomeExpense"
+              ]
             },
             {
               "metric": "capex",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "cash",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtFairValue",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                "LongTermDebtCurrent",
+                "LongTermDebtFairValue",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive"
+              ]
             }
           ]
         },
@@ -717,19 +1270,76 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OtherNonoperatingIncome",
+                "OtherNonoperatingIncomeExpense"
+              ]
             },
             {
               "metric": "capex",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "cash",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "longTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligations",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtCurrent",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtFairValue",
+                  "observations": 1
+                },
+                {
+                  "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "LongTermDebt",
+                "LongTermDebtAndCapitalLeaseObligations",
+                "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+                "LongTermDebtCurrent",
+                "LongTermDebtFairValue",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+                "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive"
+              ]
             }
           ]
         }
@@ -750,11 +1360,40 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OperatingIncomeLoss",
+                "OtherNonoperatingIncomeExpense",
+                "SegmentReportingInformationOperatingIncomeLoss"
+              ]
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -767,11 +1406,40 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                "OperatingIncomeLoss",
+                "OtherNonoperatingIncomeExpense",
+                "SegmentReportingInformationOperatingIncomeLoss"
+              ]
             },
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
@@ -792,11 +1460,50 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense"
+              ]
             },
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AdjustmentForAmortization",
+                  "observations": 1
+                },
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                }
+              ],
+              "related": []
             }
           ]
         },
@@ -809,11 +1516,50 @@
           "missing": [
             {
               "metric": "operatingIncome",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                  "observations": 1
+                },
+                {
+                  "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                  "observations": 1
+                },
+                {
+                  "tag": "OtherNonoperatingIncomeExpense",
+                  "observations": 1
+                }
+              ],
+              "related": [
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                "IncomeLossFromContinuingOperationsBeforeIncomeTaxesForeign",
+                "OtherNonoperatingIncomeExpense"
+              ]
             },
             {
               "metric": "depreciationAmortization",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [
+                {
+                  "tag": "AdjustmentForAmortization",
+                  "observations": 1
+                },
+                {
+                  "tag": "AmortizationOfIntangibleAssets",
+                  "observations": 1
+                },
+                {
+                  "tag": "Depreciation",
+                  "observations": 1
+                }
+              ],
+              "related": []
             }
           ]
         }
@@ -834,11 +1580,15 @@
           "missing": [
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         },
@@ -851,11 +1601,15 @@
           "missing": [
             {
               "metric": "equity",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             },
             {
               "metric": "shortTermDebt",
-              "status": "PERIOD_MISSING"
+              "status": "PERIOD_MISSING",
+              "candidates": [],
+              "related": []
             }
           ]
         }
