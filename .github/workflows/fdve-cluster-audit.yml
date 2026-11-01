@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'platform-app/scripts/fdve-cluster-*.mjs'
+      - 'platform-app/scripts/fdve-dependency-audit.mjs'
+      - 'platform-app/scripts/fdve-quality-gate.mjs'
+      - 'platform-app/scripts/fdve-model.mjs'
       - 'platform-app/config/fdve-sector-profiles.json'
       - '.github/workflows/fdve-cluster-audit.yml'
 permissions:
