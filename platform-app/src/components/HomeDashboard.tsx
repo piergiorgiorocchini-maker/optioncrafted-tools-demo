@@ -16,7 +16,7 @@ const getMoney=(v:number|null,currency="USD")=>v===null? "N/D":money(v,currency)
 const savedList=(key:string):unknown=>{try{return JSON.parse(localStorage.getItem(key)||"null")}catch{return null}};
 function MarketQuote({label,ticker,format}:{label:string;ticker:string;format:"money"|"index"}){
  const asset=indexRecord(ticker);
- return <div className="home-market-quote"><span>{label}</span><strong>{asset?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><small>{asset?.priceDate??"Date N/D"}</small></div>;
+ return <div className="home-market-quote"><span>{label}</span><strong>{asset&&asset.price!==null?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><small>{asset?.priceDate??"Date N/D"}</small></div>;
 }
 export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
@@ -69,7 +69,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    <div className="home-welcome-actions"><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={16}/></NavLink><NavLink className="home-button" to="/discover"><Search size={15}/> Explore market</NavLink></div>
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
-   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong>VIX {vix?numberFormat.format(vix.price):"N/D"}</strong><small>Market risk gauge · {vix?.priceDate??"date N/D"}</small></article>
+   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"}</strong><small>Market risk gauge · {vix?.priceDate??"date N/D"}</small></article>
    <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>assets</em></strong><small>Google Sheets snapshot · {snapshot.exportedAt}</small></article>
    <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
    <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
