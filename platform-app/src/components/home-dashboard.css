@@ -356,3 +356,5 @@ main{min-width:0;overflow-x:clip}
 .home-model-option small{white-space:normal;overflow:visible;text-overflow:clip}
 .home-model-option>b{grid-column:2;justify-self:start}
 @media(max-width:560px){.home-model-option{grid-template-columns:28px minmax(0,1fr)}}
+
+.home-watch-actions{display:flex;align-items:center;gap:8px}
