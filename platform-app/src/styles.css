@@ -138,3 +138,6 @@ html,body,#root{min-width:320px;max-width:100%}body{overflow-x:hidden}main,.dash
  .terminal-market-tape .home-market-quote{padding-left:8px;padding-right:6px}
  .terminal-market-tape .home-market-quote small{font-size:7px}
 }
+
+/* Keep the main column aligned to the top of the viewport. */
+.shell>main{margin:0 auto}
