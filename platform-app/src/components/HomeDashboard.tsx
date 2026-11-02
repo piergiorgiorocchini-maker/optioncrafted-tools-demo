@@ -70,7 +70,12 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  return <div className="home-dashboard">
   <header className="home-welcome">
    <div className="home-welcome-copy"><span className="home-built-badge"><ChartNoAxesCombined size={14}/> BUILT FOR INDEPENDENT INVESTORS</span><h2>Your integrated options, research, and investing <b>workspace.</b></h2><p>Model options strategies, evaluate intrinsic value, build portfolios, and learn from connected research.</p></div>
-   <div className="home-welcome-actions"><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={16}/></NavLink><NavLink className="home-button" to="/discover"><Search size={15}/> Explore market</NavLink></div>
+   <div className="home-promise-points">
+    <div><Activity size={20}/><span><strong>Smarter decisions</strong><small>Data-led research</small></span></div>
+    <div><Layers3 size={20}/><span><strong>Complete workflow</strong><small>Research to execution</small></span></div>
+    <div><BookOpen size={20}/><span><strong>Learn & grow</strong><small>Education at every level</small></span></div>
+    <div><Compass size={20}/><span><strong>Independent investors</strong><small>Built for investors</small></span></div>
+   </div>
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
    <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong className="home-regime-value">{macroRegime}</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
@@ -92,6 +97,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <div className="home-buy-under"><span>DCF buy-under · {modelDefaults.mos}% margin of safety</span><strong>{getMoney(buyUnder,asset?.currency)}</strong></div>
     <small className="home-valuation-note">{valuationBasis} · FCF/share {getMoney(fcf.perShare,asset?.currency)} ({fcf.basis})</small>
     <NavLink className="home-card-link" to="/valuation/dcf">Open full valuation <ArrowRight size={14}/></NavLink>
+    <div className="home-probability-teaser"><span className="home-probability-ring"><Target size={22}/></span><div><span className="home-eyebrow">PROBABILITY STATION</span><strong>Scenario inputs needed</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"} · no option chain loaded</small><NavLink to="/options/probability">Open Probability Station <ArrowRight size={13}/></NavLink></div></div>
    </article>
   </section>
   <section className="home-ecosystem-grid" aria-label="Explore the OptionsCrafted workspace">
