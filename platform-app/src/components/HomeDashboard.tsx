@@ -53,7 +53,12 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
  const [notice,setNotice]=useState("");
- const [selectedModelId,setSelectedModelId]=useState("core");\n const [putStrike,setPutStrike]=useState<number>((asset?.price??100)*0.95);\n const [putPremium,setPutPremium]=useState<number>((asset?.price??100)*0.015);\n const [putDays,setPutDays]=useState(30);\n const [putContracts,setPutContracts]=useState(1);\n useEffect(()=>{const spot=asset?.price??100;setPutStrike(Number((spot*0.95).toFixed(2)));setPutPremium(Number((spot*0.015).toFixed(2)));},[ticker,asset?.price]);
+ const [selectedModelId,setSelectedModelId]=useState("core");
+ const [putStrike,setPutStrike]=useState<number>((asset?.price??100)*0.95);
+ const [putPremium,setPutPremium]=useState<number>((asset?.price??100)*0.015);
+ const [putDays,setPutDays]=useState(30);
+ const [putContracts,setPutContracts]=useState(1);
+ useEffect(()=>{const spot=asset?.price??100;setPutStrike(Number((spot*0.95).toFixed(2)));setPutPremium(Number((spot*0.015).toFixed(2)));},[ticker,asset?.price]);
  const macroRegime="Risk-on";
  useEffect(()=>{
   const raw=savedList(watchKey),items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
@@ -77,7 +82,21 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const selectedHoldings=selectedModel.holdings.map(h=>({ ...h,asset:indexRecord(h.ticker) }));
  const modelYtd=selectedHoldings.every(h=>h.asset?.changeYtd!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.changeYtd??0),0):null;
  const modelDay=selectedHoldings.every(h=>h.asset?.change1d!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.change1d??0),0):null;
- const modelValue=modelYtd===null?null:100000*(1+modelYtd);\n const demoSpot=marketPrice??100;\n const putCollateral=Math.max(0,putStrike)*100*putContracts;\n const putCollected=Math.max(0,putPremium)*100*putContracts;\n const putBreakEven=Math.max(0,putStrike-putPremium);\n const putMaxLoss=Math.max(0,putCollateral-putCollected);\n const putCollateralYield=putCollateral>0?putCollected/putCollateral:null;\n const chartMin=Math.max(0,demoSpot*0.55),chartMax=demoSpot*1.45,chartWidth=470,chartHeight=150,chartLeft=32,chartRight=14,chartTop=14,chartBottom=25;\n const chartInnerW=chartWidth-chartLeft-chartRight,chartInnerH=chartHeight-chartTop-chartBottom;\n const payoffAt=(price:number)=>putCollected-Math.max(putStrike-price,0)*100*putContracts;\n const chartScale=Math.max(putCollateral,putCollected,1);\n const chartX=(price:number)=>chartLeft+(price-chartMin)/(chartMax-chartMin)*chartInnerW;\n const chartY=(value:number)=>chartTop+(chartScale-value)/(2*chartScale)*chartInnerH;\n const payoffPath=Array.from({length:41},(_,i)=>{const price=chartMin+(chartMax-chartMin)*i/40;return (i===0?"M":"L")+chartX(price).toFixed(1)+","+chartY(payoffAt(price)).toFixed(1)}).join(" ");\n const payoffZeroY=chartY(0);
+ const modelValue=modelYtd===null?null:100000*(1+modelYtd);
+ const demoSpot=marketPrice??100;
+ const putCollateral=Math.max(0,putStrike)*100*putContracts;
+ const putCollected=Math.max(0,putPremium)*100*putContracts;
+ const putBreakEven=Math.max(0,putStrike-putPremium);
+ const putMaxLoss=Math.max(0,putCollateral-putCollected);
+ const putCollateralYield=putCollateral>0?putCollected/putCollateral:null;
+ const chartMin=Math.max(0,demoSpot*0.55),chartMax=demoSpot*1.45,chartWidth=470,chartHeight=150,chartLeft=32,chartRight=14,chartTop=14,chartBottom=25;
+ const chartInnerW=chartWidth-chartLeft-chartRight,chartInnerH=chartHeight-chartTop-chartBottom;
+ const payoffAt=(price:number)=>putCollected-Math.max(putStrike-price,0)*100*putContracts;
+ const chartScale=Math.max(putCollateral,putCollected,1);
+ const chartX=(price:number)=>chartLeft+(price-chartMin)/(chartMax-chartMin)*chartInnerW;
+ const chartY=(value:number)=>chartTop+(chartScale-value)/(2*chartScale)*chartInnerH;
+ const payoffPath=Array.from({length:41},(_,i)=>{const price=chartMin+(chartMax-chartMin)*i/40;return (i===0?"M":"L")+chartX(price).toFixed(1)+","+chartY(payoffAt(price)).toFixed(1)}).join(" ");
+ const payoffZeroY=chartY(0);
  const pricedCount=snapshot.records.filter(a=>a.price!==null).length;
  const screeners=[
   {title:"Value · P/E ≤ 20",count:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).length,tickers:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).sort((a,b)=>(a.pe??99)-(b.pe??99)).slice(0,3).map(a=>a.ticker).join(" · ")},
@@ -191,6 +210,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <div className="home-shortcut-grid"><NavLink to="/options"><Activity size={18}/>Options Lab</NavLink><NavLink to="/portfolio"><BriefcaseBusiness size={18}/>Portfolio Studio</NavLink><NavLink to="/options/probability"><Target size={18}/>Probability Station</NavLink><NavLink to="/discover"><Search size={18}/>Market Explorer</NavLink></div>
    </article>
   </section>
-  <section className="home-learning-grid"><article className="home-learning-card"><span className="home-learning-icon"><GraduationCap size={21}/></span><div><span className="home-eyebrow">THE OPTION EDGE</span><h3>Options education & courses</h3><p>Build the concepts behind disciplined options strategies.</p><NavLink to="/academy">Explore learning <ArrowRight size={14}/></NavLink></div></article><article className="home-learning-card newsletter"><span className="home-learning-icon"><Mail size={21}/></span><div><span className="home-eyebrow">NEWSLETTER</span><h3>OptionCrafted Free Newsletter</h3><p>Market insights, options ideas, and research from OptionCrafted.</p><a href="https://optioncrafted.com/free-newsletter" target="_blank" rel="noreferrer">Join the newsletter <ArrowUpRight size={14}/></a></div></article></section>\n  <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions. Logo sources: <a href="https://github.com/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos" target="_blank" rel="noreferrer">Nasdaq</a> · <a href="https://github.com/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos" target="_blank" rel="noreferrer">NYSE</a></footer>
+  <section className="home-learning-grid"><article className="home-learning-card"><span className="home-learning-icon"><GraduationCap size={21}/></span><div><span className="home-eyebrow">THE OPTION EDGE</span><h3>Options education & courses</h3><p>Build the concepts behind disciplined options strategies.</p><NavLink to="/academy">Explore learning <ArrowRight size={14}/></NavLink></div></article><article className="home-learning-card newsletter"><span className="home-learning-icon"><Mail size={21}/></span><div><span className="home-eyebrow">NEWSLETTER</span><h3>OptionCrafted Free Newsletter</h3><p>Market insights, options ideas, and research from OptionCrafted.</p><a href="https://optioncrafted.com/free-newsletter" target="_blank" rel="noreferrer">Join the newsletter <ArrowUpRight size={14}/></a></div></article></section>
+  <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions. Logo sources: <a href="https://github.com/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos" target="_blank" rel="noreferrer">Nasdaq</a> · <a href="https://github.com/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos" target="_blank" rel="noreferrer">NYSE</a></footer>
  </div>;
 }
