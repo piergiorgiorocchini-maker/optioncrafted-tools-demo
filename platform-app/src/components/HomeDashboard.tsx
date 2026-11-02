@@ -154,8 +154,6 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
      </div>
      <small className="home-demo-disclaimer">Scenario math only. Premium is a user-adjustable assumption; no option chain, implied volatility, probability of profit, fees or assignment forecast is available.</small>
     </div>
-    <div className="home-underlying"><div><span>UNDERLYING IN FOCUS</span><strong className="home-underlying-security"><SecurityLogo ticker={ticker}/>{ticker} · {name}</strong></div><div><span>REFERENCE PRICE · {asset?.priceDate??"N/D"}</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><NavLink to="/valuation/dcf">Review intrinsic value →</NavLink></div>
-    <p className="home-data-note">Option premiums and chains are not live. Review the model inputs in Options Lab before using a scenario.</p>
    </article>
    <article className="home-card home-valuation-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">PRICE VS. VALUE</span><h3 className="home-security-heading"><SecurityLogo ticker={ticker}/>{name} · {ticker}</h3><p>DCF base scenario · per share</p></div><button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button></header>
