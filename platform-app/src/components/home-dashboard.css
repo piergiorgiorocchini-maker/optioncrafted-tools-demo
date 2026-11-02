@@ -95,3 +95,22 @@
 .home-shortcut-grid a svg{color:#1781e8}
 @media(max-width:1180px){.home-ecosystem-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-library-card{grid-column:1/-1}.home-welcome{align-items:flex-start}.home-welcome-actions{max-width:230px}}
 @media(max-width:760px){.home-ecosystem-grid{grid-template-columns:1fr}.home-library-card{grid-column:auto}.home-welcome{display:grid;gap:13px}.home-welcome-actions{max-width:none;justify-content:flex-start}.home-welcome h2{font-size:28px}.home-feature-grid{grid-template-columns:minmax(0,1fr)}.home-lower-grid{grid-template-columns:minmax(0,1fr)}}
+
+
+/* Mockup-style workflow cues and the Probability Station entry point. */
+.home-promise-points{display:grid;grid-template-columns:repeat(2,minmax(125px,1fr));gap:12px 15px;max-width:390px}
+.home-promise-points>div{display:flex;align-items:center;gap:8px;min-width:0}
+.home-promise-points>div>svg{flex:none;color:#1683f0}
+.home-promise-points span{display:grid;gap:2px;min-width:0}
+.home-promise-points strong{font-size:9px;color:#193451;white-space:nowrap}
+.home-promise-points small{font-size:8px;color:#7a8ea3;line-height:1.3}
+.home-probability-teaser{display:flex;align-items:center;gap:11px;margin-top:12px;padding:10px;border:1px solid #e3edf6;border-radius:9px;background:#fbfdff}
+.home-probability-ring{width:40px;height:40px;flex:none;border:4px solid #dceaf7;border-top-color:#21a975;border-right-color:#21a975;border-radius:50%;display:grid;place-items:center;color:#1681e8}
+.home-probability-ring svg{width:17px;height:17px}
+.home-probability-teaser>div{display:grid;gap:3px;min-width:0}
+.home-probability-teaser .home-eyebrow{font-size:8px}
+.home-probability-teaser strong{font-size:10px;color:#193653}
+.home-probability-teaser small{font-size:8px;color:#8091a4;line-height:1.3}
+.home-probability-teaser a{display:inline-flex;align-items:center;gap:4px;margin-top:2px;color:#126fce;font-size:9px;font-weight:750;text-decoration:none}
+@media(max-width:1050px){.home-promise-points{grid-template-columns:repeat(2,minmax(110px,1fr));max-width:300px}.home-promise-points small{display:none}}
+@media(max-width:760px){.home-promise-points{max-width:none;width:100%;grid-template-columns:repeat(2,minmax(120px,1fr));gap:9px}.home-promise-points>div{padding:7px;border:1px solid #e5edf5;border-radius:8px;background:#fff}.home-promise-points strong{white-space:normal}}
