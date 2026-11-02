@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Activity,ArrowDownRight,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Plus,Search,Shield,Target,Trash2,Wallet} from "lucide-react";
+import {Activity,ArrowDownRight,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Newspaper,Plus,Search,Shield,Target,Trash2,Wallet} from "lucide-react";
 import snapshot from "../data/assetsSnapshot.json";
 import type {RealAsset} from "./RealResearch";
 import type {ValuationBridge} from "./ValuationWorkspace";
@@ -8,7 +8,15 @@ import {verifiedFcf} from "../data/verifiedFinancials";
 import {dcfModel,modelDefaults,money} from "../core/valuationModels";
 import "./home-dashboard.css";
 
-const watchKey="optionscrafted.watchlist.v1";
+type ModelHolding={ticker:string;weight:number};
+type ModelPortfolio={id:string;name:string;subtitle:string;icon:"growth"|"income"|"options"|"macro";holdings:ModelHolding[]};
+const modelPortfolios:ModelPortfolio[]=[
+{id:"core",name:"Free Core",subtitle:"Equity core + liquid reserve",icon:"growth",holdings:[{ticker:"SPY",weight:40},{ticker:"QQQ",weight:20},{ticker:"XLP",weight:10},{ticker:"BIL",weight:20},{ticker:"AAPL",weight:10}]},
+{id:"income",name:"Income Framework",subtitle:"Equities + Treasury bills",icon:"income",holdings:[{ticker:"SPY",weight:30},{ticker:"XOM",weight:15},{ticker:"JPM",weight:15},{ticker:"KO",weight:10},{ticker:"BIL",weight:30}]},
+{id:"options",name:"Options Income",subtitle:"Equity base + liquid reserve",icon:"options",holdings:[{ticker:"SPY",weight:30},{ticker:"QQQ",weight:20},{ticker:"AAPL",weight:15},{ticker:"MSFT",weight:15},{ticker:"BIL",weight:20}]},
+{id:"macro",name:"Liquid Macro",subtitle:"Index, gold, cash and energy",icon:"macro",holdings:[{ticker:"SPY",weight:25},{ticker:"GLD",weight:25},{ticker:"SHY",weight:20},{ticker:"IBIT",weight:10},{ticker:"XLE",weight:10},{ticker:"BIL",weight:10}]}
+];
+\nconst watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
@@ -43,7 +51,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
- const [notice,setNotice]=useState("");
+ const [notice,setNotice]=useState("");\n const [selectedModelId,setSelectedModelId]=useState("core");
  const macroRegime="Risk-on";
  useEffect(()=>{
   const raw=savedList(watchKey),items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
@@ -62,7 +70,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const marketPrice=asset?.price??null;
  const gap=intrinsic!==null&&intrinsic>0&&marketPrice!==null&&marketPrice>0?marketPrice/intrinsic-1:null;
  const valuationBasis=valuation?.source??(defaultDcf?"Default DCF scenario":"Data required");
- const vix=indexRecord("VIX");
+ const vix=indexRecord("VIX");\n const selectedModel=modelPortfolios.find(p=>p.id===selectedModelId)??modelPortfolios[0];\n const selectedHoldings=selectedModel.holdings.map(h=>({ ...h,asset:indexRecord(h.ticker) }));\n const modelYtd=selectedHoldings.every(h=>h.asset?.changeYtd!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.changeYtd??0),0):null;\n const modelDay=selectedHoldings.every(h=>h.asset?.change1d!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.change1d??0),0):null;\n const modelValue=modelYtd===null?null:100000*(1+modelYtd);\n const pricedCount=snapshot.records.filter(a=>a.price!==null).length;\n const screeners=[\n  {title:"Value · P/E ≤ 20",count:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).length,tickers:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).sort((a,b)=>(a.pe??99)-(b.pe??99)).slice(0,3).map(a=>a.ticker).join(" · ")},\n  {title:"Positive momentum · YTD ≥ 20%",count:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).length,tickers:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).sort((a,b)=>(b.changeYtd??0)-(a.changeYtd??0)).slice(0,3).map(a=>a.ticker).join(" · ")},\n  {title:"Lower beta · beta < 1",count:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).length,tickers:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).sort((a,b)=>(a.beta??9)-(b.beta??9)).slice(0,3).map(a=>a.ticker).join(" · ")}\n ];
  const addToWatchlist=()=>{
   if(watchlist.includes(ticker)){setNotice(ticker+" is already in your watchlist.");return}
   const next=[...watchlist,ticker];setWatchlist(next);try{localStorage.setItem(watchKey,JSON.stringify(next))}catch{}
@@ -91,7 +99,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
    <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong className="home-regime-value">{macroRegime}</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
-   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>assets</em></strong><small>Prices as of {snapshot.exportedAt}</small></article>
+   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>securities</em></strong><small>{pricedCount} with price · snapshot {snapshot.exportedAt}</small></article>
    <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
    <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
   </section>
@@ -114,28 +122,28 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   </section>
   <section className="home-ecosystem-grid" aria-label="Explore the OptionsCrafted workspace">
    <article className="home-card home-models-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">MODEL PORTFOLIOS</span><h3>Portfolios for different objectives</h3><p>Open Portfolio Studio to connect the researched portfolio frameworks.</p></div><BriefcaseBusiness size={19}/></header>
-    <div className="home-model-list">
-     <NavLink to="/portfolio"><span className="home-model-icon growth"><Activity size={16}/></span><span><strong>Free Core Portfolio</strong><small>Balanced, long-term equity allocation</small></span><ArrowRight size={14}/></NavLink>
-     <NavLink to="/portfolio"><span className="home-model-icon income"><Wallet size={16}/></span><span><strong>Income Portfolio</strong><small>Dividend income and options overlay</small></span><ArrowRight size={14}/></NavLink>
-     <NavLink to="/portfolio"><span className="home-model-icon options"><ChartNoAxesCombined size={16}/></span><span><strong>Advanced Options Income</strong><small>Options strategies for income generation</small></span><ArrowRight size={14}/></NavLink>
-     <NavLink to="/portfolio"><span className="home-model-icon macro"><Compass size={16}/></span><span><strong>Liquid Macro</strong><small>Macro-aware, liquid allocation</small></span><ArrowRight size={14}/></NavLink>
+    <header className="home-card-heading"><div><span className="home-eyebrow">MODEL PORTFOLIOS · SIMULATED</span><h3>Illustrative portfolio lab</h3><p>Choose a sample allocation built from securities in the dated market snapshot.</p></div><BriefcaseBusiness size={19}/></header>
+    <div className="home-model-list home-model-select-list">
+     {modelPortfolios.map(model=>{const ytd=model.holdings.every(h=>indexRecord(h.ticker)?.changeYtd!=null)?model.holdings.reduce((sum,h)=>sum+h.weight/100*(indexRecord(h.ticker)?.changeYtd??0),0):null;return <button type="button" className={`home-model-option ${model.id===selectedModelId?"active":""}`} onClick={()=>setSelectedModelId(model.id)} key={model.id}><span className={`home-model-icon ${model.icon}`}>{model.icon==="growth"?<Activity size={16}/>:model.icon==="income"?<Wallet size={16}/>:model.icon==="options"?<ChartNoAxesCombined size={16}/>:<Compass size={16}/>}</span><span><strong>{model.name}</strong><small>{model.subtitle}</small></span><b className={returnTone(ytd)}>{returnText(ytd)}</b></button>})}
     </div>
-    <NavLink className="home-card-link" to="/portfolio">View portfolios <ArrowRight size={14}/></NavLink>
+    <div className="home-model-detail">
+     <div className="home-model-summary"><span><strong>$100,000</strong><small>initial illustrative capital</small></span><span><strong>{modelValue===null?"N/D":getMoney(modelValue)}</strong><small>snapshot value · YTD price proxy</small></span><span><strong className={returnTone(modelDay)}>{returnText(modelDay)}</strong><small>weighted 1D proxy</small></span></div>
+     <div className="home-allocation-bar" aria-label={selectedModel.name+" illustrative allocation"}>{selectedHoldings.map(h=><span key={h.ticker} title={h.ticker+" "+h.weight+"%"} style={{width:h.weight+"%"}}/>)}</div>
+     <div className="home-holding-chips">{selectedHoldings.map(h=><span key={h.ticker}><SecurityLogo ticker={h.ticker}/><b>{h.ticker}</b><small>{h.weight}%</small></span>)}</div>
+     <small className="home-model-disclaimer">Simulation only: weighted price changes from the snapshot; assumes allocation at year start, no rebalance, dividends, fees or options premiums. Not a backtest or actual portfolio result.</small>
+    </div>
+    <NavLink className="home-card-link" to="/portfolio">Open Portfolio Studio <ArrowRight size={14}/></NavLink>
    </article>
    <article className="home-card home-screener-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">MARKET EXPLORER</span><h3>Find and evaluate securities</h3><p>Start with the current Google Sheets universe and continue into the research tools.</p></div><Layers3 size={19}/></header>
-    <div className="home-tool-list">
-     <NavLink to="/discover"><span className="home-tool-icon blue"><Search size={16}/></span><span><strong>Explore securities</strong><small>{snapshot.records.length} instruments · dated market snapshot</small></span><ArrowRight size={14}/></NavLink>
-     <NavLink to="/company"><span className="home-tool-icon green"><BriefcaseBusiness size={16}/></span><span><strong>Company Intelligence</strong><small>Review company fundamentals and financials</small></span><ArrowRight size={14}/></NavLink>
-     <NavLink to="/valuation"><span className="home-tool-icon violet"><ChartNoAxesCombined size={16}/></span><span><strong>Price vs. intrinsic value</strong><small>Compare market price with valuation scenarios</small></span><ArrowRight size={14}/></NavLink>
-     <NavLink to="/options/probability"><span className="home-tool-icon orange"><Target size={16}/></span><span><strong>Probability Station</strong><small>Run a scenario when model inputs are available</small></span><ArrowRight size={14}/></NavLink>
-    </div>
+    <header className="home-card-heading"><div><span className="home-eyebrow">STOCK SCANNERS & SCREENERS</span><h3>Snapshot filters</h3><p>Simple filters computed from the available Google Sheets fields.</p></div><ChartNoAxesCombined size={19}/></header>
+    <div className="home-screener-grid">{screeners.map(s=><div className="home-screener-tile" key={s.title}><span>{s.title}</span><strong>{s.count}</strong><small>{s.tickers||"No matching symbols"}</small></div>)}<div className="home-screener-tile coverage"><span>Price coverage</span><strong>{pricedCount}/{snapshot.records.length}</strong><small>{snapshot.records.length-pricedCount} without a reference price</small></div></div>
+    <small className="home-screener-note">Exploratory filters only · snapshot {snapshot.exportedAt} · not recommendations. Fields with incomplete coverage are excluded.</small>
+    <NavLink className="home-card-link" to="/discover">Explore market universe <ArrowRight size={14}/></NavLink>
    </article>
    <article className="home-card home-library-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">RESEARCH & KNOWLEDGE</span><h3>Research Library</h3><p>Research, education, and strategy guidance in one place.</p></div><BookOpen size={19}/></header>
-    <div className="home-library-feature"><span className="home-library-mark"><BookOpen size={20}/></span><div><strong>Research & Insights</strong><small>Internal research, articles, and company notes</small></div></div>
-    <div className="home-research-links"><NavLink to="/research">Research & articles <ArrowRight size={14}/></NavLink><NavLink to="/academy">Education & courses <ArrowRight size={14}/></NavLink><NavLink to="/options">Options strategies <ArrowRight size={14}/></NavLink></div>
+    <header className="home-card-heading"><div><span className="home-eyebrow">RESEARCH & KNOWLEDGE</span><h3>Research, articles & learning</h3><p>Editorial resources from OptionCrafted and the platform.</p></div><BookOpen size={19}/></header>
+    <a className="home-article-feature" href="https://optioncrafted.com/articles/what-options-really-are.html" target="_blank" rel="noreferrer"><span className="home-article-icon"><Newspaper size={19}/></span><span><small>FEATURED ARTICLE</small><strong>What Options Really Are: Rights, Obligations, and Income</strong><em>Read on OptionCrafted.com <ArrowUpRight size={12}/></em></span></a>
+    <div className="home-research-links"><a href="https://optioncrafted.com/options.html" target="_blank" rel="noreferrer">Options strategies <ArrowUpRight size={13}/></a><a href="https://optioncrafted.com/investing.html" target="_blank" rel="noreferrer">Investing research <ArrowUpRight size={13}/></a><a href="https://optioncrafted.com/starter-kit.html" target="_blank" rel="noreferrer">Free newsletter <ArrowUpRight size={13}/></a><NavLink to="/academy">Education & courses <ArrowRight size={14}/></NavLink></div>
    </article>
   </section>
   <section className="home-lower-grid">
