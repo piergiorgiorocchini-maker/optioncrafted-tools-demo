@@ -21,7 +21,7 @@ const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
 const demoWatchKey="optionscrafted.demo.watchlist.v1";
 const demoPortfolioKey="optionscrafted.demo.portfolio.v1";
-const starterWatchlist=["AAPL","MSFT","GOOGL","TSM","AVGO","SPY"];
+const starterWatchlist=["AAPL","MSFT","GOOGL","JPM","AVGO","SPY"];
 const starterPositions=[{ticker:"AAPL",shares:20,averageCost:290},{ticker:"MSFT",shares:8,averageCost:470},{ticker:"GOOGL",shares:12,averageCost:250},{ticker:"JPM",shares:15,averageCost:310},{ticker:"SPY",shares:25,averageCost:690}];
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
