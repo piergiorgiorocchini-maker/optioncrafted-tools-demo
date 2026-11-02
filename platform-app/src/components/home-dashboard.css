@@ -114,3 +114,7 @@
 .home-probability-teaser a{display:inline-flex;align-items:center;gap:4px;margin-top:2px;color:#126fce;font-size:9px;font-weight:750;text-decoration:none}
 @media(max-width:1050px){.home-promise-points{grid-template-columns:repeat(2,minmax(110px,1fr));max-width:300px}.home-promise-points small{display:none}}
 @media(max-width:760px){.home-promise-points{max-width:none;width:100%;grid-template-columns:repeat(2,minmax(120px,1fr));gap:9px}.home-promise-points>div{padding:7px;border:1px solid #e5edf5;border-radius:8px;background:#fff}.home-promise-points strong{white-space:normal}}
+
+
+.home-card-heading>a.home-button-primary{color:#fff}
+.terminal-heading-home .terminal-controls{margin-left:auto}
