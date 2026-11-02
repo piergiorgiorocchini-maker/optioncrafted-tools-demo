@@ -13,11 +13,13 @@ const portfolioKey="optionscrafted.portfolio.v1";
 const regimeKey="optionscrafted.macro-regime.v1";
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
+const returnText=(v:number|null)=>v===null?"N/D":`${v>=0?"+":""}${(v*100).toFixed(2)}%`;
+const returnTone=(v:number|null)=>v===null?"home-return-missing":v>=0?"home-return-positive":"home-return-negative";
 const getMoney=(v:number|null,currency="USD")=>v===null? "N/D":money(v,currency);
 const savedList=(key:string):unknown=>{try{return JSON.parse(localStorage.getItem(key)||"null")}catch{return null}};
 function MarketQuote({label,ticker,format}:{label:string;ticker:string;format:"money"|"index"}){
  const asset=indexRecord(ticker);
- return <div className="home-market-quote"><span>{label}</span><strong>{asset&&asset.price!==null?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><small>{asset?.priceDate??"Date N/D"}</small></div>;
+ return <div className="home-market-quote"><span>{label}</span><small>{asset?.priceDate??"Date N/D"}</small><strong>{asset&&asset.price!==null?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><b className={returnTone(asset?.change1d??null)}>{returnText(asset?.change1d??null)}</b></div>;
 }
 export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
@@ -53,7 +55,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   const next=watchlist.filter(x=>x!==symbol);setWatchlist(next);try{localStorage.setItem(watchKey,JSON.stringify(next))}catch{}
   setNotice(symbol+" removed from your watchlist.");
  };
- const watchRows=watchlist.map(symbol=>{const a=indexRecord(symbol);return {symbol,name:a?.name??symbol,price:a?.price??null,date:a?.priceDate??null,currency:a?.currency??"USD"}});
+ const watchRows=watchlist.map(symbol=>{const a=indexRecord(symbol);return {symbol,name:a?.name??symbol,price:a?.price??null,date:a?.priceDate??null,currency:a?.currency??"USD",change1d:a?.change1d??null,changeYtd:a?.changeYtd??null}});
  const optionModules=[
   {title:"Cash-Secured Put",text:"Income while waiting for a preferred entry.",to:"/options/csp",icon:Activity},
   {title:"Covered Call",text:"Premium income on shares you hold.",to:"/options/covered-call",icon:ArrowUpRight},
@@ -95,7 +97,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   <section className="home-lower-grid">
    <article className="home-card home-watchlist-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3></div><NavLink to="/discover">Find securities <ArrowRight size={14}/></NavLink></header>
-    {watchRows.length? <div className="home-table-wrap"><table className="home-watch-table"><thead><tr><th>Security</th><th>Reference price</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol}><td><button type="button" className="home-ticker-link" onClick={()=>onSelect(row.symbol)}><strong>{row.symbol}</strong><small>{row.name}</small></button></td><td>{getMoney(row.price,row.currency)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="home-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={15}/></button></td></tr>)}</tbody></table></div>:<div className="home-empty-watch"><Target size={21}/><strong>Your watchlist is ready</strong><p>Add {ticker} to track its reference price here.</p><button type="button" className="home-button home-button-primary" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
+    {watchRows.length? <div className="home-table-wrap"><table className="home-watch-table"><thead><tr><th>Security</th><th>Price</th><th>1D %</th><th>YTD %</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol}><td><button type="button" className="home-ticker-link" onClick={()=>onSelect(row.symbol)}><strong>{row.symbol}</strong><small>{row.name}</small></button></td><td>{getMoney(row.price,row.currency)}</td><td className={returnTone(row.change1d)}>{returnText(row.change1d)}</td><td className={returnTone(row.changeYtd)}>{returnText(row.changeYtd)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="home-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={15}/></button></td></tr>)}</tbody></table></div>:<div className="home-empty-watch"><Target size={21}/><strong>Your watchlist is ready</strong><p>Add {ticker} to track its reference price here.</p><button type="button" className="home-button home-button-primary" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
     <p className="home-inline-notice" role="status">{notice}</p>
    </article>
    <article className="home-card home-portfolio-card">
