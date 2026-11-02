@@ -141,3 +141,8 @@ html,body,#root{min-width:320px;max-width:100%}body{overflow-x:hidden}main,.dash
 
 /* Keep the main column aligned to the top of the viewport. */
 .shell>main{margin:0 auto}
+
+
+/* The Home mockup uses its welcome headline as the page title. */
+.terminal-heading-home{min-height:38px;padding:6px 0 2px}
+.terminal-heading-home>div:first-child{display:none}
