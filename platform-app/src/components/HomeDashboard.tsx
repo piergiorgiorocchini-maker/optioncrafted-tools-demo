@@ -108,7 +108,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    <article className="home-card home-screener-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">MARKET EXPLORER</span><h3>Find and evaluate securities</h3><p>Start with the current Google Sheets universe and continue into the research tools.</p></div><Layers3 size={19}/></header>
     <div className="home-tool-list">
-     <NavLink to="/discover"><span className="home-tool-icon blue"><Search size={16}/></span><span><strong>Explore securities</strong><small>227 instruments · dated market snapshot</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/discover"><span className="home-tool-icon blue"><Search size={16}/></span><span><strong>Explore securities</strong><small>{snapshot.records.length} instruments · dated market snapshot</small></span><ArrowRight size={14}/></NavLink>
      <NavLink to="/company"><span className="home-tool-icon green"><BriefcaseBusiness size={16}/></span><span><strong>Company Intelligence</strong><small>Review company fundamentals and financials</small></span><ArrowRight size={14}/></NavLink>
      <NavLink to="/valuation"><span className="home-tool-icon violet"><ChartNoAxesCombined size={16}/></span><span><strong>Price vs. intrinsic value</strong><small>Compare market price with valuation scenarios</small></span><ArrowRight size={14}/></NavLink>
      <NavLink to="/options/probability"><span className="home-tool-icon orange"><Target size={16}/></span><span><strong>Probability Station</strong><small>Run a scenario when model inputs are available</small></span><ArrowRight size={14}/></NavLink>
