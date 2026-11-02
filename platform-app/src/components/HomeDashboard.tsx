@@ -10,7 +10,6 @@ import "./home-dashboard.css";
 
 const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
-const regimeKey="optionscrafted.macro-regime.v1";
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
 const returnText=(v:number|null)=>v===null?"N/D":`${v>=0?"+":""}${(v*100).toFixed(2)}%`;
@@ -21,16 +20,22 @@ function MarketQuote({label,ticker,format}:{label:string;ticker:string;format:"m
  const asset=indexRecord(ticker);
  return <div className="home-market-quote"><span>{label}</span><small>{asset?.priceDate??"Date N/D"}</small><strong>{asset&&asset.price!==null?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><b className={returnTone(asset?.change1d??null)}>{returnText(asset?.change1d??null)}</b></div>;
 }
+export function MarketTape(){
+ return <div className="terminal-market-tape" aria-label="Market indicators">
+  <MarketQuote label="S&P 500 · SPY" ticker="SPY" format="money"/>
+  <MarketQuote label="Nasdaq Composite" ticker="INDEXNASDAQ:.IXIC" format="index"/>
+  <MarketQuote label="VIX" ticker="VIX" format="index"/>
+ </div>;
+}
 export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
  const [notice,setNotice]=useState("");
- const [macroRegime,setMacroRegime]=useState("");
+ const macroRegime="Risk-on";
  useEffect(()=>{
   const raw=savedList(watchKey),items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
   setWatchlist([...new Set(items)]);
-  setMacroRegime(localStorage.getItem(regimeKey)??"");
   const positions=savedList(portfolioKey);
   if(Array.isArray(positions)){
    const valid=positions.filter((p):p is {ticker:string;shares:number}=>!!p&&typeof p.ticker==="string"&&Number.isFinite(p.shares));
@@ -63,17 +68,12 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   {title:"Strategy Builder",text:"Compare multi-leg payoff scenarios.",to:"/options/strategy",icon:Layers3}
  ];
  return <div className="home-dashboard">
-  <div className="home-market-tape" aria-label="Market snapshot">
-   <MarketQuote label="S&P 500 ETF · SPY" ticker="SPY" format="money"/>
-   <MarketQuote label="Nasdaq Composite" ticker="INDEXNASDAQ:.IXIC" format="index"/>
-   <MarketQuote label="VIX · market risk" ticker="VIX" format="index"/>
-  </div>
   <header className="home-welcome">
    <div><span className="home-eyebrow">OPTIONSCRAFTED · INVESTMENT WORKSPACE</span><h2>Research, valuation and options in one place.</h2><p>Start with the market, find a security, compare its price with value, then explore a strategy.</p></div>
    <div className="home-welcome-actions"><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={16}/></NavLink><NavLink className="home-button" to="/discover"><Search size={15}/> Explore market</NavLink></div>
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
-   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME · MANUAL</span></div><select className="home-regime-select" aria-label="Set macro regime" value={macroRegime} onChange={event=>{setMacroRegime(event.target.value);try{if(event.target.value)localStorage.setItem(regimeKey,event.target.value);else localStorage.removeItem(regimeKey)}catch{}}}><option value="">Set manually…</option><option value="Risk-on">Risk-on</option><option value="Neutral / Selective">Neutral / Selective</option><option value="Risk-off">Risk-off</option></select><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
+   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong className="home-regime-value">{macroRegime}</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
    <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>assets</em></strong><small>Prices as of {snapshot.exportedAt}</small></article>
    <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
    <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
