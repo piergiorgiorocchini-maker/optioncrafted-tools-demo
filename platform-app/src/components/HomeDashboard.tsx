@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Activity,ArrowDownRight,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Database,Layers3,Plus,Search,Shield,Target,Trash2,Wallet} from "lucide-react";
+import {Activity,ArrowDownRight,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Plus,Search,Shield,Target,Trash2,Wallet} from "lucide-react";
 import snapshot from "../data/assetsSnapshot.json";
 import type {RealAsset} from "./RealResearch";
 import type {ValuationBridge} from "./ValuationWorkspace";
@@ -62,7 +62,6 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  ];
  return <div className="home-dashboard">
   <div className="home-market-tape" aria-label="Market snapshot">
-   <div className="home-tape-label"><Database size={15}/><span>GOOGLE SHEETS SNAPSHOT</span><small>As of {snapshot.exportedAt}</small></div>
    <MarketQuote label="S&P 500 ETF · SPY" ticker="SPY" format="money"/>
    <MarketQuote label="Nasdaq Composite" ticker="INDEXNASDAQ:.IXIC" format="index"/>
    <MarketQuote label="VIX · market risk" ticker="VIX" format="index"/>
