@@ -69,7 +69,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  ];
  return <div className="home-dashboard">
   <header className="home-welcome">
-   <div><span className="home-eyebrow">OPTIONSCRAFTED · INVESTMENT WORKSPACE</span><h2>Research, valuation and options in one place.</h2><p>Start with the market, find a security, compare its price with value, then explore a strategy.</p></div>
+   <div className="home-welcome-copy"><span className="home-built-badge"><ChartNoAxesCombined size={14}/> BUILT FOR INDEPENDENT INVESTORS</span><h2>Your integrated options, research, and investing <b>workspace.</b></h2><p>Model options strategies, evaluate intrinsic value, build portfolios, and learn from connected research.</p></div>
    <div className="home-welcome-actions"><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={16}/></NavLink><NavLink className="home-button" to="/discover"><Search size={15}/> Explore market</NavLink></div>
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
@@ -94,6 +94,32 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <NavLink className="home-card-link" to="/valuation/dcf">Open full valuation <ArrowRight size={14}/></NavLink>
    </article>
   </section>
+  <section className="home-ecosystem-grid" aria-label="Explore the OptionsCrafted workspace">
+   <article className="home-card home-models-card">
+    <header className="home-card-heading"><div><span className="home-eyebrow">MODEL PORTFOLIOS</span><h3>Portfolios for different objectives</h3><p>Open Portfolio Studio to connect the researched portfolio frameworks.</p></div><BriefcaseBusiness size={19}/></header>
+    <div className="home-model-list">
+     <NavLink to="/portfolio"><span className="home-model-icon growth"><Activity size={16}/></span><span><strong>Free Core Portfolio</strong><small>Balanced, long-term equity allocation</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/portfolio"><span className="home-model-icon income"><Wallet size={16}/></span><span><strong>Income Portfolio</strong><small>Dividend income and options overlay</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/portfolio"><span className="home-model-icon options"><ChartNoAxesCombined size={16}/></span><span><strong>Advanced Options Income</strong><small>Options strategies for income generation</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/portfolio"><span className="home-model-icon macro"><Compass size={16}/></span><span><strong>Liquid Macro</strong><small>Macro-aware, liquid allocation</small></span><ArrowRight size={14}/></NavLink>
+    </div>
+    <NavLink className="home-card-link" to="/portfolio">View portfolios <ArrowRight size={14}/></NavLink>
+   </article>
+   <article className="home-card home-screener-card">
+    <header className="home-card-heading"><div><span className="home-eyebrow">MARKET EXPLORER</span><h3>Find and evaluate securities</h3><p>Start with the current Google Sheets universe and continue into the research tools.</p></div><Layers3 size={19}/></header>
+    <div className="home-tool-list">
+     <NavLink to="/discover"><span className="home-tool-icon blue"><Search size={16}/></span><span><strong>Explore securities</strong><small>227 instruments · dated market snapshot</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/company"><span className="home-tool-icon green"><BriefcaseBusiness size={16}/></span><span><strong>Company Intelligence</strong><small>Review company fundamentals and financials</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/valuation"><span className="home-tool-icon violet"><ChartNoAxesCombined size={16}/></span><span><strong>Price vs. intrinsic value</strong><small>Compare market price with valuation scenarios</small></span><ArrowRight size={14}/></NavLink>
+     <NavLink to="/options/probability"><span className="home-tool-icon orange"><Target size={16}/></span><span><strong>Probability Station</strong><small>Run a scenario when model inputs are available</small></span><ArrowRight size={14}/></NavLink>
+    </div>
+   </article>
+   <article className="home-card home-library-card">
+    <header className="home-card-heading"><div><span className="home-eyebrow">RESEARCH & KNOWLEDGE</span><h3>Research Library</h3><p>Research, education, and strategy guidance in one place.</p></div><BookOpen size={19}/></header>
+    <div className="home-library-feature"><span className="home-library-mark"><BookOpen size={20}/></span><div><strong>Research & Insights</strong><small>Internal research, articles, and company notes</small></div></div>
+    <div className="home-research-links"><NavLink to="/research">Research & articles <ArrowRight size={14}/></NavLink><NavLink to="/academy">Education & courses <ArrowRight size={14}/></NavLink><NavLink to="/options">Options strategies <ArrowRight size={14}/></NavLink></div>
+   </article>
+  </section>
   <section className="home-lower-grid">
    <article className="home-card home-watchlist-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3></div><NavLink to="/discover">Find securities <ArrowRight size={14}/></NavLink></header>
@@ -107,9 +133,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <NavLink className="home-card-link" to="/portfolio">Open Portfolio Studio <ArrowRight size={14}/></NavLink>
    </article>
    <article className="home-card home-research-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">RESEARCH & KNOWLEDGE</span><h3>Research Library</h3></div><BookOpen size={19}/></header>
-    <p>Open internal research, company notes and educational content from one place.</p>
-    <div className="home-research-links"><NavLink to="/research">Research & articles <ArrowRight size={14}/></NavLink><NavLink to="/academy">Education & courses <ArrowRight size={14}/></NavLink><NavLink to="/options/probability">Probability Station <ArrowRight size={14}/></NavLink></div>
+    <header className="home-card-heading"><div><span className="home-eyebrow">YOUR WORKSPACE</span><h3>Quick access</h3></div><Compass size={19}/></header>
+    <div className="home-shortcut-grid"><NavLink to="/options"><Activity size={18}/>Options Lab</NavLink><NavLink to="/portfolio"><BriefcaseBusiness size={18}/>Portfolio Studio</NavLink><NavLink to="/options/probability"><Target size={18}/>Probability Station</NavLink><NavLink to="/discover"><Search size={18}/>Market Explorer</NavLink></div>
    </article>
   </section>
   <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions.</footer>
