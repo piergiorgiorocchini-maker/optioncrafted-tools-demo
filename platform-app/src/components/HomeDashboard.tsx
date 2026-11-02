@@ -19,6 +19,10 @@ const modelPortfolios:ModelPortfolio[]=[
 
 const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
+const demoWatchKey="optionscrafted.demo.watchlist.v1";
+const demoPortfolioKey="optionscrafted.demo.portfolio.v1";
+const starterWatchlist=["AAPL","MSFT","GOOGL","TSM","AVGO","SPY"];
+const starterPositions=[{ticker:"AAPL",shares:20,averageCost:290},{ticker:"MSFT",shares:8,averageCost:470},{ticker:"GOOGL",shares:12,averageCost:250},{ticker:"JPM",shares:15,averageCost:310},{ticker:"SPY",shares:25,averageCost:690}];
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
 const returnText=(v:number|null)=>v===null?"N/D":`${v>=0?"+":""}${(v*100).toFixed(2)}%`;
@@ -40,7 +44,7 @@ const logoRoots=[
  "https://cdn.jsdelivr.net/gh/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos/logos/_",
  "https://cdn.jsdelivr.net/gh/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos/logos/_"
 ];
-function SecurityLogo({ticker}:{ticker:string}){
+export function SecurityLogo({ticker}:{ticker:string}){
  const [attempt,setAttempt]=useState(0);
  useEffect(()=>setAttempt(0),[ticker]);
  const valid=/^[A-Z0-9.-]+$/i.test(ticker);
@@ -52,6 +56,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
+ const [demoWatchlist,setDemoWatchlist]=useState(false);
+ const [demoPortfolio,setDemoPortfolio]=useState(false);
  const [notice,setNotice]=useState("");
  const [selectedModelId,setSelectedModelId]=useState("core");
  const [putStrike,setPutStrike]=useState<number>((asset?.price??100)*0.95);
@@ -61,14 +67,23 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  useEffect(()=>{const spot=asset?.price??100;setPutStrike(Number((spot*0.95).toFixed(2)));setPutPremium(Number((spot*0.015).toFixed(2)));},[ticker,asset?.price]);
  const macroRegime="Risk-on";
  useEffect(()=>{
-  const raw=savedList(watchKey),items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
+  const existingWatchlist=localStorage.getItem(watchKey);
+  const isDemoWatchlist=existingWatchlist===null;
+  const raw=isDemoWatchlist?starterWatchlist:savedList(watchKey);
+  const items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
+  if(isDemoWatchlist){try{localStorage.setItem(watchKey,JSON.stringify(starterWatchlist));localStorage.setItem(demoWatchKey,"true")}catch{}}
   setWatchlist([...new Set(items)]);
-  const positions=savedList(portfolioKey);
+  setDemoWatchlist(isDemoWatchlist&&items.length>0&&localStorage.getItem(demoWatchKey)==="true");
+  const existingPortfolio=localStorage.getItem(portfolioKey);
+  const isDemoPortfolio=existingPortfolio===null;
+  const positions=isDemoPortfolio?starterPositions:savedList(portfolioKey);
+  if(isDemoPortfolio){try{localStorage.setItem(portfolioKey,JSON.stringify(starterPositions));localStorage.setItem(demoPortfolioKey,"true")}catch{}}
   if(Array.isArray(positions)){
-   const valid=positions.filter((p):p is {ticker:string;shares:number}=>!!p&&typeof p.ticker==="string"&&Number.isFinite(p.shares));
+   const valid=positions.filter((p):p is {ticker:string;shares:number;averageCost:number}=>!!p&&typeof p.ticker==="string"&&Number.isFinite(p.shares));
    setPositionCount(valid.length);
    setPortfolioValue(valid.reduce((sum,p)=>sum+(indexRecord(p.ticker)?.price??0)*p.shares,0));
   }
+  setDemoPortfolio(isDemoPortfolio&&Array.isArray(positions)&&positions.length>0&&localStorage.getItem(demoPortfolioKey)==="true");
  },[]);
  const fcf=verifiedFcf(ticker);
  const defaultDcf=useMemo(()=>dcfModel(fcf.perShare,modelDefaults.growth,modelDefaults.discount,modelDefaults.terminal,modelDefaults.years),[fcf.perShare]);
@@ -107,11 +122,11 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  ];
  const addToWatchlist=()=>{
   if(watchlist.includes(ticker)){setNotice(ticker+" is already in your watchlist.");return}
-  const next=[...watchlist,ticker];setWatchlist(next);try{localStorage.setItem(watchKey,JSON.stringify(next))}catch{}
+  const next=[...watchlist,ticker];setWatchlist(next);setDemoWatchlist(false);try{localStorage.setItem(watchKey,JSON.stringify(next));localStorage.removeItem(demoWatchKey)}catch{}
   setNotice(ticker+" added to your watchlist.");
  };
  const removeFromWatchlist=(symbol:string)=>{
-  const next=watchlist.filter(x=>x!==symbol);setWatchlist(next);try{localStorage.setItem(watchKey,JSON.stringify(next))}catch{}
+  const next=watchlist.filter(x=>x!==symbol);setWatchlist(next);setDemoWatchlist(false);try{localStorage.setItem(watchKey,JSON.stringify(next));localStorage.removeItem(demoWatchKey)}catch{}
   setNotice(symbol+" removed from your watchlist.");
  };
  const watchRows=watchlist.map(symbol=>{const a=indexRecord(symbol);return {symbol,name:a?.name??symbol,price:a?.price??null,date:a?.priceDate??null,currency:a?.currency??"USD",change1d:a?.change1d??null,changeYtd:a?.changeYtd??null}});
@@ -196,12 +211,12 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   </section>
   <section className="home-lower-grid">
    <article className="home-card home-watchlist-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3></div><NavLink to="/discover">Find securities <ArrowRight size={14}/></NavLink></header>
+    <header className="home-card-heading"><div><span className="home-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3></div><div className="home-watch-actions">{demoWatchlist&&<span className="home-demo-badge">SAMPLE LIST</span>}<NavLink to="/discover">Find securities <ArrowRight size={14}/></NavLink></div></header>
     {watchRows.length? <div className="home-table-wrap"><table className="home-watch-table"><thead><tr><th>Security</th><th>Price</th><th>1D %</th><th>YTD %</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol}><td><button type="button" className="home-ticker-link" onClick={()=>onSelect(row.symbol)}><SecurityLogo ticker={row.symbol}/><span className="home-ticker-copy"><strong>{row.symbol}</strong><small>{row.name}</small></span></button></td><td>{getMoney(row.price,row.currency)}</td><td className={returnTone(row.change1d)}>{returnText(row.change1d)}</td><td className={returnTone(row.changeYtd)}>{returnText(row.changeYtd)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="home-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={15}/></button></td></tr>)}</tbody></table></div>:<div className="home-empty-watch"><Target size={21}/><strong>Your watchlist is ready</strong><p>Add {ticker} to track its reference price here.</p><button type="button" className="home-button home-button-primary" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
     <p className="home-inline-notice" role="status">{notice}</p>
    </article>
    <article className="home-card home-portfolio-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">ALLOCATION</span><h3>Portfolios & Portfolio Studio</h3></div><BriefcaseBusiness size={19}/></header>
+    <header className="home-card-heading"><div><span className="home-eyebrow">ALLOCATION</span><h3>Portfolios & Portfolio Studio</h3></div>{demoPortfolio?<span className="home-demo-badge">SAMPLE PORTFOLIO</span>:<BriefcaseBusiness size={19}/>}</header>
     <p>Your researched portfolios can be connected here. Track positions and snapshot values in Portfolio Studio.</p>
     <div className="home-portfolio-summary"><strong>{positionCount}</strong><span>positions saved in this browser</span>{portfolioValue!==null&&<b>{getMoney(portfolioValue)} snapshot value</b>}</div>
     <NavLink className="home-card-link" to="/portfolio">Open Portfolio Studio <ArrowRight size={14}/></NavLink>
