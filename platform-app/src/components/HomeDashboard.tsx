@@ -16,7 +16,8 @@ const modelPortfolios:ModelPortfolio[]=[
 {id:"options",name:"Options Income",subtitle:"Equity base + liquid reserve",icon:"options",holdings:[{ticker:"SPY",weight:30},{ticker:"QQQ",weight:20},{ticker:"AAPL",weight:15},{ticker:"MSFT",weight:15},{ticker:"BIL",weight:20}]},
 {id:"macro",name:"Liquid Macro",subtitle:"Index, gold, cash and energy",icon:"macro",holdings:[{ticker:"SPY",weight:25},{ticker:"GLD",weight:25},{ticker:"SHY",weight:20},{ticker:"IBIT",weight:10},{ticker:"XLE",weight:10},{ticker:"BIL",weight:10}]}
 ];
-\nconst watchKey="optionscrafted.watchlist.v1";
+
+const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
@@ -51,7 +52,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
- const [notice,setNotice]=useState("");\n const [selectedModelId,setSelectedModelId]=useState("core");
+ const [notice,setNotice]=useState("");
+ const [selectedModelId,setSelectedModelId]=useState("core");
  const macroRegime="Risk-on";
  useEffect(()=>{
   const raw=savedList(watchKey),items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
@@ -70,7 +72,18 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const marketPrice=asset?.price??null;
  const gap=intrinsic!==null&&intrinsic>0&&marketPrice!==null&&marketPrice>0?marketPrice/intrinsic-1:null;
  const valuationBasis=valuation?.source??(defaultDcf?"Default DCF scenario":"Data required");
- const vix=indexRecord("VIX");\n const selectedModel=modelPortfolios.find(p=>p.id===selectedModelId)??modelPortfolios[0];\n const selectedHoldings=selectedModel.holdings.map(h=>({ ...h,asset:indexRecord(h.ticker) }));\n const modelYtd=selectedHoldings.every(h=>h.asset?.changeYtd!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.changeYtd??0),0):null;\n const modelDay=selectedHoldings.every(h=>h.asset?.change1d!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.change1d??0),0):null;\n const modelValue=modelYtd===null?null:100000*(1+modelYtd);\n const pricedCount=snapshot.records.filter(a=>a.price!==null).length;\n const screeners=[\n  {title:"Value · P/E ≤ 20",count:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).length,tickers:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).sort((a,b)=>(a.pe??99)-(b.pe??99)).slice(0,3).map(a=>a.ticker).join(" · ")},\n  {title:"Positive momentum · YTD ≥ 20%",count:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).length,tickers:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).sort((a,b)=>(b.changeYtd??0)-(a.changeYtd??0)).slice(0,3).map(a=>a.ticker).join(" · ")},\n  {title:"Lower beta · beta < 1",count:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).length,tickers:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).sort((a,b)=>(a.beta??9)-(b.beta??9)).slice(0,3).map(a=>a.ticker).join(" · ")}\n ];
+ const vix=indexRecord("VIX");
+ const selectedModel=modelPortfolios.find(p=>p.id===selectedModelId)??modelPortfolios[0];
+ const selectedHoldings=selectedModel.holdings.map(h=>({ ...h,asset:indexRecord(h.ticker) }));
+ const modelYtd=selectedHoldings.every(h=>h.asset?.changeYtd!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.changeYtd??0),0):null;
+ const modelDay=selectedHoldings.every(h=>h.asset?.change1d!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.change1d??0),0):null;
+ const modelValue=modelYtd===null?null:100000*(1+modelYtd);
+ const pricedCount=snapshot.records.filter(a=>a.price!==null).length;
+ const screeners=[
+  {title:"Value · P/E ≤ 20",count:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).length,tickers:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).sort((a,b)=>(a.pe??99)-(b.pe??99)).slice(0,3).map(a=>a.ticker).join(" · ")},
+  {title:"Positive momentum · YTD ≥ 20%",count:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).length,tickers:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).sort((a,b)=>(b.changeYtd??0)-(a.changeYtd??0)).slice(0,3).map(a=>a.ticker).join(" · ")},
+  {title:"Lower beta · beta < 1",count:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).length,tickers:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).sort((a,b)=>(a.beta??9)-(b.beta??9)).slice(0,3).map(a=>a.ticker).join(" · ")}
+ ];
  const addToWatchlist=()=>{
   if(watchlist.includes(ticker)){setNotice(ticker+" is already in your watchlist.");return}
   const next=[...watchlist,ticker];setWatchlist(next);try{localStorage.setItem(watchKey,JSON.stringify(next))}catch{}
