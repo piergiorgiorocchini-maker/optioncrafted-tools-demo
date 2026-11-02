@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Area,Bar,BarChart,CartesianGrid,ComposedChart,Line,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
+import {Bar,BarChart,CartesianGrid,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
 import {verifiedAnnualHistory,verifiedFcf} from "../data/verifiedFinancials";
