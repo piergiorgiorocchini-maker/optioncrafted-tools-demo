@@ -358,3 +358,10 @@ main{min-width:0;overflow-x:clip}
 @media(max-width:560px){.home-model-option{grid-template-columns:28px minmax(0,1fr)}}
 
 .home-watch-actions{display:flex;align-items:center;gap:8px}
+.home-focus-picker{display:grid;gap:4px;margin:9px 0 6px;max-width:280px}
+.home-focus-picker span{font-size:8px;font-weight:850;letter-spacing:.65px;color:#7389a1}
+.home-focus-picker select{width:100%;min-width:0;padding:7px 9px;border:1px solid #cfe0f1;border-radius:7px;background:#f7fbff;color:#163754;font-size:10px;font-weight:750}
+.home-focus-picker select:focus-visible{outline:2px solid #2183ec;outline-offset:2px}
+.home-watch-row-active{background:#f1f7ff}
+.home-watch-row-active .home-ticker-link strong{color:#075eb7}
+.home-watch-row-active .home-ticker-link:after{content:"IN FOCUS";margin-top:3px;color:#1774cf;font-size:7px;font-weight:850;letter-spacing:.45px}
