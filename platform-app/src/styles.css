@@ -117,3 +117,24 @@ html,body,#root{min-width:320px;max-width:100%}body{overflow-x:hidden}main,.dash
 .nav-sublink.active{color:#e7f5ff;background:#1b4a70;box-shadow:inset 2px 0 #4aabff;font-weight:800}
 @media(max-width:900px){.sidebar nav{display:grid}.sidebar nav .nav-parent>.navlink{white-space:normal}.sidebar .nav-submenu{display:grid}}
 @media(max-width:700px){.sidebar.mobile-open nav{display:grid!important}.sidebar.mobile-open .nav-entry{display:block!important}.sidebar.mobile-open .nav-submenu{display:grid!important}.sidebar.mobile-open .nav-parent{display:flex!important}}
+
+/* Shared search and compact market indicators in the application header */
+.terminal-search-wrap{flex:0 1 44%;width:auto;max-width:680px;min-width:190px}
+.terminal-market-tape{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;flex:1 1 auto;min-width:365px;gap:0}
+.terminal-market-tape .home-market-quote{border-left:1px solid #e5ebf2;padding-left:12px;padding-right:8px}
+.terminal-market-tape .home-market-quote:first-child{border-left:0;padding-left:0}
+.terminal-market-tape .home-market-quote span{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.terminal-market-tape .home-market-quote strong{font-size:13px}
+.terminal-market-tape .home-market-quote small{font-size:8px}
+.terminal-market-tape .home-market-quote b{font-size:10px}
+.terminal-meta{flex:none}
+.home-regime-value{margin:9px 0 5px!important;font-size:17px!important;letter-spacing:-.25px!important;color:#078850!important}
+@media(max-width:1180px){.terminal-search-wrap{flex-basis:35%}.terminal-market-tape{min-width:330px}.terminal-meta{gap:9px}}
+@media(max-width:700px){
+ .terminal-topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"search meta" "markets markets";height:auto;min-height:56px;padding:10px 14px!important;margin:0 -14px!important;gap:8px}
+ .terminal-search-wrap{grid-area:search;flex:1 1 auto;width:100%;min-width:0;max-width:none}
+ .terminal-market-tape{grid-area:markets;grid-template-columns:repeat(3,minmax(120px,1fr));min-width:0;width:100%;overflow-x:auto}
+ .terminal-meta{grid-area:meta;gap:8px}
+ .terminal-market-tape .home-market-quote{padding-left:8px;padding-right:6px}
+ .terminal-market-tape .home-market-quote small{font-size:7px}
+}
