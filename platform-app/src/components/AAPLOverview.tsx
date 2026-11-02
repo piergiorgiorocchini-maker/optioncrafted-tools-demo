@@ -10,7 +10,7 @@ export function AAPLOverview({ticker,asset,name}:{ticker:string;asset:RealAsset|
  const eps=asset?.eps??latest?.eps??null,price=asset?.price??null;
  const growth=(latest?.revenue!==null&&latest?.revenue!==undefined&&prior?.revenue!==null&&prior?.revenue!==undefined&&prior.revenue!==0)?(latest.revenue/prior.revenue-1)*100:null;
  const cards=[
-  ["REFERENCE PRICE",money(price),asset?.snapshotDate?"Market snapshot · "+asset.snapshotDate:"No price in snapshot"],
+  ["REFERENCE PRICE",money(price),asset?.priceDate?"Market snapshot · "+asset.snapshotDate:"No price in snapshot"],
   ["EPS TTM",money(eps),"Per share · latest available"],
   ["FREE CASH FLOW / SHARE",money(fcf.perShare),fcf.perShare===null?"Unavailable for this company":fcf.basis],
   ["LATEST FISCAL YEAR",latest?"FY "+latest.year:"N/D",latest?.periodEnd?"Period ended "+latest.periodEnd:"SEC annual statements"]
