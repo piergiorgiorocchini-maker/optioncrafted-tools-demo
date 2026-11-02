@@ -41,7 +41,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const intrinsic=valuation?.fairValue??defaultDcf?.value??null;
  const buyUnder=valuation?.buyUnder??(intrinsic===null?null:intrinsic*(1-modelDefaults.mos/100));
  const marketPrice=asset?.price??null;
- const gap=intrinsic!==null&&marketPrice!==null&&marketPrice>0?intrinsic/marketPrice-1:null;
+ const gap=intrinsic!==null&&intrinsic>0&&marketPrice!==null&&marketPrice>0?marketPrice/intrinsic-1:null;
  const valuationBasis=valuation?.source??(defaultDcf?"Default DCF scenario":"Data required");
  const vix=indexRecord("VIX");
  const addToWatchlist=()=>{
@@ -87,7 +87,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    <article className="home-card home-valuation-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">PRICE VS. VALUE</span><h3>{name} · {ticker}</h3><p>DCF base scenario · per share</p></div><button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button></header>
     <div className="home-value-pair"><div><span>Market price</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><div><span>DCF estimate</span><strong>{getMoney(intrinsic,asset?.currency)}</strong></div></div>
-    <div className={"home-upside "+(gap===null?"":gap>=0?"positive":"negative")}><span>{gap===null?"Valuation comparison unavailable":gap>=0?"Above DCF estimate":"Below DCF estimate"}</span><strong>{gap===null?"N/D":(gap>=0?"+":"")+(gap*100).toFixed(1)+"%"}</strong>{gap===null?null:gap>=0?<ArrowUpRight size={17}/>:<ArrowDownRight size={17}/>}</div>
+    <div className={"home-upside "+(gap===null?"":gap>=0?"positive":"negative")}><span>{gap===null?"Valuation comparison unavailable":gap>=0?"Market price above DCF":"Market price below DCF"}</span><strong>{gap===null?"N/D":(gap>=0?"+":"")+(gap*100).toFixed(1)+"%"}</strong>{gap===null?null:gap>=0?<ArrowUpRight size={17}/>:<ArrowDownRight size={17}/>}</div>
     <div className="home-buy-under"><span>DCF buy-under · {modelDefaults.mos}% margin of safety</span><strong>{getMoney(buyUnder,asset?.currency)}</strong></div>
     <small className="home-valuation-note">{valuationBasis} · FCF/share {getMoney(fcf.perShare,asset?.currency)} ({fcf.basis})</small>
     <NavLink className="home-card-link" to="/valuation/dcf">Open full valuation <ArrowRight size={14}/></NavLink>
