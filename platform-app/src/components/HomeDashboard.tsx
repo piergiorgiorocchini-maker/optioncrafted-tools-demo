@@ -27,6 +27,18 @@ export function MarketTape(){
   <MarketQuote label="VIX" ticker="VIX" format="index"/>
  </div>;
 }
+const logoRoots=[
+ "https://cdn.jsdelivr.net/gh/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos/logos/_",
+ "https://cdn.jsdelivr.net/gh/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos/logos/_"
+];
+function SecurityLogo({ticker}:{ticker:string}){
+ const [attempt,setAttempt]=useState(0);
+ useEffect(()=>setAttempt(0),[ticker]);
+ const valid=/^[A-Z0-9.-]+$/i.test(ticker);
+ if(!valid||attempt>=logoRoots.length)return <span className="home-security-logo home-security-fallback" aria-hidden="true">{ticker.slice(0,2).toUpperCase()}</span>;
+ const src=logoRoots[attempt]+encodeURIComponent(ticker.toUpperCase())+".png";
+ return <span className="home-security-logo" aria-hidden="true"><img src={src} alt="" loading="lazy" referrerPolicy="no-referrer" onError={()=>setAttempt(n=>n+1)}/></span>;
+}
 export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
@@ -87,11 +99,11 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    <article className="home-card home-options-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">OPTIONS STRATEGY WORKSPACE</span><h3>Options Modeling & Wheel Engine</h3><p>Choose a strategy to model it against the selected security.</p></div><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={15}/></NavLink></header>
     <div className="home-strategy-grid">{optionModules.map(({title,text,to,icon:Icon})=><NavLink className="home-strategy" to={to} key={title}><span className="home-strategy-icon"><Icon size={19}/></span><strong>{title}</strong><small>{text}</small><span className="home-strategy-open">Open module <ArrowRight size={13}/></span></NavLink>)}</div>
-    <div className="home-underlying"><div><span>UNDERLYING IN FOCUS</span><strong>{ticker} · {name}</strong></div><div><span>REFERENCE PRICE · {asset?.priceDate??"N/D"}</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><NavLink to="/valuation/dcf">Review intrinsic value →</NavLink></div>
+    <div className="home-underlying"><div><span>UNDERLYING IN FOCUS</span><strong className="home-underlying-security"><SecurityLogo ticker={ticker}/>{ticker} · {name}</strong></div><div><span>REFERENCE PRICE · {asset?.priceDate??"N/D"}</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><NavLink to="/valuation/dcf">Review intrinsic value →</NavLink></div>
     <p className="home-data-note">Option premiums and chains are not live. Review the model inputs in Options Lab before using a scenario.</p>
    </article>
    <article className="home-card home-valuation-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">PRICE VS. VALUE</span><h3>{name} · {ticker}</h3><p>DCF base scenario · per share</p></div><button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button></header>
+    <header className="home-card-heading"><div><span className="home-eyebrow">PRICE VS. VALUE</span><h3 className="home-security-heading"><SecurityLogo ticker={ticker}/>{name} · {ticker}</h3><p>DCF base scenario · per share</p></div><button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button></header>
     <div className="home-value-pair"><div><span>Market price</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><div><span>DCF estimate</span><strong>{getMoney(intrinsic,asset?.currency)}</strong></div></div>
     <div className={"home-upside "+(gap===null?"":gap>=0?"positive":"negative")}><span>{gap===null?"Valuation comparison unavailable":gap>=0?"Market price above DCF":"Market price below DCF"}</span><strong>{gap===null?"N/D":(gap>=0?"+":"")+(gap*100).toFixed(1)+"%"}</strong>{gap===null?null:gap>=0?<ArrowUpRight size={17}/>:<ArrowDownRight size={17}/>}</div>
     <div className="home-buy-under"><span>DCF buy-under · {modelDefaults.mos}% margin of safety</span><strong>{getMoney(buyUnder,asset?.currency)}</strong></div>
@@ -129,7 +141,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   <section className="home-lower-grid">
    <article className="home-card home-watchlist-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3></div><NavLink to="/discover">Find securities <ArrowRight size={14}/></NavLink></header>
-    {watchRows.length? <div className="home-table-wrap"><table className="home-watch-table"><thead><tr><th>Security</th><th>Price</th><th>1D %</th><th>YTD %</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol}><td><button type="button" className="home-ticker-link" onClick={()=>onSelect(row.symbol)}><strong>{row.symbol}</strong><small>{row.name}</small></button></td><td>{getMoney(row.price,row.currency)}</td><td className={returnTone(row.change1d)}>{returnText(row.change1d)}</td><td className={returnTone(row.changeYtd)}>{returnText(row.changeYtd)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="home-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={15}/></button></td></tr>)}</tbody></table></div>:<div className="home-empty-watch"><Target size={21}/><strong>Your watchlist is ready</strong><p>Add {ticker} to track its reference price here.</p><button type="button" className="home-button home-button-primary" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
+    {watchRows.length? <div className="home-table-wrap"><table className="home-watch-table"><thead><tr><th>Security</th><th>Price</th><th>1D %</th><th>YTD %</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol}><td><button type="button" className="home-ticker-link" onClick={()=>onSelect(row.symbol)}><SecurityLogo ticker={row.symbol}/><span className="home-ticker-copy"><strong>{row.symbol}</strong><small>{row.name}</small></span></button></td><td>{getMoney(row.price,row.currency)}</td><td className={returnTone(row.change1d)}>{returnText(row.change1d)}</td><td className={returnTone(row.changeYtd)}>{returnText(row.changeYtd)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="home-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={15}/></button></td></tr>)}</tbody></table></div>:<div className="home-empty-watch"><Target size={21}/><strong>Your watchlist is ready</strong><p>Add {ticker} to track its reference price here.</p><button type="button" className="home-button home-button-primary" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
     <p className="home-inline-notice" role="status">{notice}</p>
    </article>
    <article className="home-card home-portfolio-card">
@@ -143,6 +155,6 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <div className="home-shortcut-grid"><NavLink to="/options"><Activity size={18}/>Options Lab</NavLink><NavLink to="/portfolio"><BriefcaseBusiness size={18}/>Portfolio Studio</NavLink><NavLink to="/options/probability"><Target size={18}/>Probability Station</NavLink><NavLink to="/discover"><Search size={18}/>Market Explorer</NavLink></div>
    </article>
   </section>
-  <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions.</footer>
+  <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions. <a href="https://github.com/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos" target="_blank" rel="noreferrer">Issuer logo source ↗</a></footer>
  </div>;
 }
