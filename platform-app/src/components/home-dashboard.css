@@ -345,3 +345,14 @@ main{min-width:0;overflow-x:clip}
 .home-value-track .dcf-marker{background:#1783e6;box-shadow:0 0 0 1px #1783e6}
 .home-value-track .market-marker{background:#d98b18;box-shadow:0 0 0 1px #d98b18}
 .home-value-scale-values span{font-size:8px;font-weight:750;color:#45627d}
+
+
+/* Final compact card balance and fully readable sample portfolio names. */
+.home-ecosystem-grid{align-items:start}
+.home-lower-grid{align-items:start}
+.home-model-option{grid-template-columns:30px minmax(0,1fr);align-items:start}
+.home-model-option>span:nth-child(2){align-self:center}
+.home-model-option strong{white-space:normal;overflow:visible;text-overflow:clip}
+.home-model-option small{white-space:normal;overflow:visible;text-overflow:clip}
+.home-model-option>b{grid-column:2;justify-self:start}
+@media(max-width:560px){.home-model-option{grid-template-columns:28px minmax(0,1fr)}}
