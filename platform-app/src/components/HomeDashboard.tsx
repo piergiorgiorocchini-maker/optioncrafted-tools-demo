@@ -20,6 +20,7 @@ const modelPortfolios:ModelPortfolio[]=[
 const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
 const demoWatchKey="optionscrafted.demo.watchlist.v1";
+const demoWatchVersionKey="optionscrafted.demo.watchlist.version";
 const demoPortfolioKey="optionscrafted.demo.portfolio.v1";
 const starterWatchlist=["AAPL","MSFT","GOOGL","JPM","AVGO","SPY"];
 const starterPositions=[{ticker:"AAPL",shares:20,averageCost:290},{ticker:"MSFT",shares:8,averageCost:470},{ticker:"GOOGL",shares:12,averageCost:250},{ticker:"JPM",shares:15,averageCost:310},{ticker:"SPY",shares:25,averageCost:690}];
@@ -68,10 +69,12 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const macroRegime="Risk-on";
  useEffect(()=>{
   const existingWatchlist=localStorage.getItem(watchKey);
-  const isDemoWatchlist=existingWatchlist===null||localStorage.getItem(demoWatchKey)==="true";
-  const raw=isDemoWatchlist?starterWatchlist:savedList(watchKey);
+  const savedWatchlist=savedList(watchKey);
+  const legacyAaplDemo=localStorage.getItem(demoWatchVersionKey)!=="2"&&Array.isArray(savedWatchlist)&&savedWatchlist.length===1&&savedWatchlist[0]==="AAPL";
+  const isDemoWatchlist=existingWatchlist===null||localStorage.getItem(demoWatchKey)==="true"||legacyAaplDemo;
+  const raw=isDemoWatchlist?starterWatchlist:savedWatchlist;
   const items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
-  if(isDemoWatchlist){try{localStorage.setItem(watchKey,JSON.stringify(starterWatchlist));localStorage.setItem(demoWatchKey,"true")}catch{}}
+  if(isDemoWatchlist){try{localStorage.setItem(watchKey,JSON.stringify(starterWatchlist));localStorage.setItem(demoWatchKey,"true");localStorage.setItem(demoWatchVersionKey,"2")}catch{}}
   setWatchlist([...new Set(items)]);
   setDemoWatchlist(isDemoWatchlist&&items.length>0&&localStorage.getItem(demoWatchKey)==="true");
   const existingPortfolio=localStorage.getItem(portfolioKey);
