@@ -1,19 +1,314 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T13:02:51.144Z",
+  "generatedAt": "2026-11-02T18:20:19.150Z",
   "budgets": {
     "FMP": 60,
     "ALPHA_VANTAGE": 3
   },
   "providers": {
     "FMP": {
-      "status": "PROVIDER_NOTICE",
-      "requestsToday": 1,
+      "status": "COMPLETED",
+      "requestsToday": 60,
       "attempts": [
+        {
+          "ticker": "MSFT",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "MSFT",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "MSFT",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "XOM",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "XOM",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "XOM",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "WMT",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "WMT",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "WMT",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "JPM",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "JPM",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "JPM",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "ADBE",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "ADBE",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "ADBE",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CRM",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CRM",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CRM",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "NVDA",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "NVDA",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "NVDA",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AVGO",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AVGO",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AVGO",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AMD",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AMD",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AMD",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "GOOGL",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "GOOGL",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "GOOGL",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AMZN",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AMZN",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AMZN",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "COST",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "COST",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "COST",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "PG",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "PG",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "PG",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CAT",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CAT",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CAT",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "DE",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "DE",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "DE",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CVX",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CVX",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "CVX",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "JNJ",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "JNJ",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "JNJ",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "MRK",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "MRK",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "MRK",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "UNH",
+          "statement": "income",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "UNH",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "UNH",
+          "statement": "cashflow",
+          "status": "HTTP_402"
+        },
         {
           "ticker": "AAPL",
           "statement": "income",
-          "status": "HTTP_429"
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AAPL",
+          "statement": "balance",
+          "status": "HTTP_402"
+        },
+        {
+          "ticker": "AAPL",
+          "statement": "cashflow",
+          "status": "HTTP_402"
         }
       ]
     },
@@ -22,12 +317,12 @@
       "requestsToday": 2,
       "attempts": [
         {
-          "ticker": "AAPL",
+          "ticker": "MSFT",
           "statement": "income",
           "status": "AVAILABLE"
         },
         {
-          "ticker": "AAPL",
+          "ticker": "MSFT",
           "statement": "balance",
           "status": "PREMIUM_REQUIRED"
         }
