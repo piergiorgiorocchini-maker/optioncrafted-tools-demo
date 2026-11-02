@@ -10,6 +10,7 @@ import "./home-dashboard.css";
 
 const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
+const regimeKey="optionscrafted.macro-regime.v1";
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
 const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
 const getMoney=(v:number|null,currency="USD")=>v===null? "N/D":money(v,currency);
@@ -23,9 +24,11 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
  const [notice,setNotice]=useState("");
+ const [macroRegime,setMacroRegime]=useState("");
  useEffect(()=>{
   const raw=savedList(watchKey),items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
   setWatchlist([...new Set(items)]);
+  setMacroRegime(localStorage.getItem(regimeKey)??"");
   const positions=savedList(portfolioKey);
   if(Array.isArray(positions)){
    const valid=positions.filter((p):p is {ticker:string;shares:number}=>!!p&&typeof p.ticker==="string"&&Number.isFinite(p.shares));
@@ -69,7 +72,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    <div className="home-welcome-actions"><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={16}/></NavLink><NavLink className="home-button" to="/discover"><Search size={15}/> Explore market</NavLink></div>
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
-   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"}</strong><small>Market risk gauge · {vix?.priceDate??"date N/D"}</small></article>
+   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME · MANUAL</span></div><select className="home-regime-select" aria-label="Set macro regime" value={macroRegime} onChange={event=>{setMacroRegime(event.target.value);try{if(event.target.value)localStorage.setItem(regimeKey,event.target.value);else localStorage.removeItem(regimeKey)}catch{}}}><option value="">Set manually…</option><option value="Risk-on">Risk-on</option><option value="Neutral / Selective">Neutral / Selective</option><option value="Risk-off">Risk-off</option></select><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · Google snapshot {vix?.priceDate??"date N/D"}</small></article>
    <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>assets</em></strong><small>Google Sheets snapshot · {snapshot.exportedAt}</small></article>
    <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
    <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
