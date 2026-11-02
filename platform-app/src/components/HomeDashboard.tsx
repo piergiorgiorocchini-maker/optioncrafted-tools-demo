@@ -68,7 +68,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const macroRegime="Risk-on";
  useEffect(()=>{
   const existingWatchlist=localStorage.getItem(watchKey);
-  const isDemoWatchlist=existingWatchlist===null;
+  const isDemoWatchlist=existingWatchlist===null||localStorage.getItem(demoWatchKey)==="true";
   const raw=isDemoWatchlist?starterWatchlist:savedList(watchKey);
   const items=Array.isArray(raw)?raw.filter((x):x is string=>typeof x==="string"):[];
   if(isDemoWatchlist){try{localStorage.setItem(watchKey,JSON.stringify(starterWatchlist));localStorage.setItem(demoWatchKey,"true")}catch{}}
