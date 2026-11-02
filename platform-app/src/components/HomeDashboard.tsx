@@ -73,8 +73,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    <div className="home-welcome-actions"><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={16}/></NavLink><NavLink className="home-button" to="/discover"><Search size={15}/> Explore market</NavLink></div>
   </header>
   <section className="home-kpis" aria-label="Market and account summary">
-   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME · MANUAL</span></div><select className="home-regime-select" aria-label="Set macro regime" value={macroRegime} onChange={event=>{setMacroRegime(event.target.value);try{if(event.target.value)localStorage.setItem(regimeKey,event.target.value);else localStorage.removeItem(regimeKey)}catch{}}}><option value="">Set manually…</option><option value="Risk-on">Risk-on</option><option value="Neutral / Selective">Neutral / Selective</option><option value="Risk-off">Risk-off</option></select><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · Google snapshot {vix?.priceDate??"date N/D"}</small></article>
-   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>assets</em></strong><small>Google Sheets snapshot · {snapshot.exportedAt}</small></article>
+   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME · MANUAL</span></div><select className="home-regime-select" aria-label="Set macro regime" value={macroRegime} onChange={event=>{setMacroRegime(event.target.value);try{if(event.target.value)localStorage.setItem(regimeKey,event.target.value);else localStorage.removeItem(regimeKey)}catch{}}}><option value="">Set manually…</option><option value="Risk-on">Risk-on</option><option value="Neutral / Selective">Neutral / Selective</option><option value="Risk-off">Risk-off</option></select><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
+   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>assets</em></strong><small>Prices as of {snapshot.exportedAt}</small></article>
    <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
    <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
   </section>
@@ -112,6 +112,6 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <div className="home-research-links"><NavLink to="/research">Research & articles <ArrowRight size={14}/></NavLink><NavLink to="/academy">Education & courses <ArrowRight size={14}/></NavLink><NavLink to="/options/probability">Probability Station <ArrowRight size={14}/></NavLink></div>
    </article>
   </section>
-  <footer className="home-footer"><Shield size={14}/> Market values are dated Google Sheets snapshots, not live quotes. DCF is a scenario estimate based on visible assumptions.</footer>
+  <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions.</footer>
  </div>;
 }
