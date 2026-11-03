@@ -571,3 +571,14 @@ main{min-width:0;overflow-x:clip}
  .home-options-heading h3{font-size:20px}
  .home-options-heading>.home-button{grid-column:2;justify-self:start}
 }
+
+
+/* Desktop benefit strip: four compact icon-and-copy columns like the mockup. */
+@media(min-width:1201px){
+ .home-promise-points{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;max-width:none}
+ .home-promise-points>div{display:grid;grid-template-rows:24px auto;align-content:start;justify-items:center;gap:4px;text-align:center}
+ .home-promise-points>div>svg{width:23px;height:23px}
+ .home-promise-points span{justify-items:center;gap:3px;text-align:center}
+ .home-promise-points strong{font-size:10px;line-height:1.2;white-space:normal}
+ .home-promise-points small{font-size:9px;line-height:1.2}
+}
