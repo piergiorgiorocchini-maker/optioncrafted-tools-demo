@@ -149,12 +149,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     <div><Compass size={20}/><span><strong>Independent investors</strong><small>Built for investors</small></span></div>
    </div>
   </header>
-  <section className="home-kpis" aria-label="Market and account summary">
-   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong className="home-regime-value">{macroRegime}</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
-   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>securities</em></strong><small>{pricedCount} with price · snapshot {snapshot.exportedAt}</small></article>
-   <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
-   <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
-  </section>
+
   <section className="home-feature-grid">
    <article className="home-card home-options-card">
     <header className="home-card-heading"><div><span className="home-eyebrow">OPTIONS STRATEGY WORKSPACE</span><h3>Options Modeling & Wheel Engine</h3><p>Choose a strategy to model it against the selected security.</p></div><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={15}/></NavLink></header>
@@ -230,6 +225,12 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
    </article>
   </section>
   <section className="home-learning-grid"><article className="home-learning-card"><span className="home-learning-icon"><GraduationCap size={21}/></span><div><span className="home-eyebrow">THE OPTION EDGE</span><h3>Options education & courses</h3><p>Build the concepts behind disciplined options strategies.</p><NavLink to="/academy">Explore learning <ArrowRight size={14}/></NavLink></div></article><article className="home-learning-card newsletter"><span className="home-learning-icon"><Mail size={21}/></span><div><span className="home-eyebrow">NEWSLETTER</span><h3>OptionCrafted Free Newsletter</h3><p>Market insights, options ideas, and research from OptionCrafted.</p><a href="https://optioncrafted.com/free-newsletter" target="_blank" rel="noreferrer">Join the newsletter <ArrowUpRight size={14}/></a></div></article></section>
+  <section className="home-kpis" aria-label="Market and account summary">
+   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong className="home-regime-value">{macroRegime}</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
+   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>securities</em></strong><small>{pricedCount} with price · snapshot {snapshot.exportedAt}</small></article>
+   <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
+   <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
+  </section>
   <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions. Logo sources: <a href="https://github.com/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos" target="_blank" rel="noreferrer">Nasdaq</a> · <a href="https://github.com/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos" target="_blank" rel="noreferrer">NYSE</a></footer>
  </div>;
 }
