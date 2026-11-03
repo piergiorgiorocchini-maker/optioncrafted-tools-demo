@@ -512,3 +512,13 @@ main{min-width:0;overflow-x:clip}
  .home-learning-grid{grid-template-columns:1fr}
  .home-watch-table{min-width:590px}
 }
+
+
+/* Desktop market tape: keep each index return next to its quoted price. */
+@media(min-width:1181px){
+ .home-shell .terminal-market-tape .home-market-quote{grid-template-columns:max-content max-content;justify-content:start;gap:2px 8px}
+ .home-shell .terminal-market-tape .home-market-quote span{grid-column:1/-1;grid-row:1;max-width:100%}
+ .home-shell .terminal-market-tape .home-market-quote strong{grid-column:1;grid-row:2}
+ .home-shell .terminal-market-tape .home-market-quote b{grid-column:2;grid-row:2;justify-self:start;text-align:left}
+ .home-shell .terminal-market-tape .home-market-quote small{grid-column:1/-1;grid-row:3;justify-self:start;text-align:left}
+}
