@@ -609,5 +609,5 @@ main{min-width:0;overflow-x:clip}
 
 /* Center the four hero benefits over the Price vs. Value panel below. */
 @media(min-width:1201px){
- .home-promise-points{transform:translateX(-55px)}
+ .home-promise-points{transform:translateX(-90px)}
 }
