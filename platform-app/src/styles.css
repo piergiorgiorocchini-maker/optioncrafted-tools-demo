@@ -146,3 +146,24 @@ html,body,#root{min-width:320px;max-width:100%}body{overflow-x:hidden}main,.dash
 /* The Home mockup uses its welcome headline as the page title. */
 .terminal-heading-home{min-height:38px;padding:6px 0 2px}
 .terminal-heading-home>div:first-child{display:none}
+
+
+/* Shared account and notifications cluster in the sitewide header. */
+.terminal-meta{display:flex;align-items:center;gap:12px;flex:none;margin-left:2px;padding-left:18px;border-left:1px solid #d7e1ec;color:#111827}
+.terminal-notifications{display:grid;place-items:center;flex:none;width:42px;height:42px;padding:0;border:0;border-radius:10px;background:transparent;color:#111;cursor:pointer}
+.terminal-notifications:hover{background:#f0f5fa}
+.terminal-notifications svg{width:23px;height:23px;stroke-width:2.4}
+.terminal-user{display:flex;align-items:center;gap:10px;color:#10243d;white-space:nowrap}
+.terminal-avatar{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#0b1d31;color:#fff;font-size:13px;font-weight:850;letter-spacing:.2px}
+.terminal-user-name{font-size:14px;font-weight:750;line-height:1}
+.terminal-user>svg{flex:none;color:#233b56}
+@media(max-width:900px){.terminal-meta{gap:9px;padding-left:12px}}
+@media(max-width:700px){
+ .terminal-topbar .terminal-meta{display:flex;grid-area:meta;align-items:center;gap:7px;margin-left:0;padding-left:0;border-left:0}
+ .terminal-notifications{width:36px;height:36px}
+ .terminal-notifications svg{width:21px;height:21px}
+ .terminal-user{gap:6px}
+ .terminal-avatar{width:35px;height:35px;font-size:12px}
+ .terminal-user-name{display:none}
+ .terminal-user>svg{width:14px;height:14px}
+}
