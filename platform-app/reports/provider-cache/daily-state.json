@@ -349,10 +349,332 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-03": {
+      "FMP": {
+        "attempts": [
+          {
+            "id": "MSFT:income",
+            "at": "2026-11-03T16:14:25.324Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "MSFT:balance",
+            "at": "2026-11-03T16:14:25.518Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "MSFT:cashflow",
+            "at": "2026-11-03T16:14:25.566Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "XOM:income",
+            "at": "2026-11-03T16:14:25.606Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "XOM:balance",
+            "at": "2026-11-03T16:14:25.646Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "XOM:cashflow",
+            "at": "2026-11-03T16:14:25.688Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "WMT:income",
+            "at": "2026-11-03T16:14:25.724Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "WMT:balance",
+            "at": "2026-11-03T16:14:25.762Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "WMT:cashflow",
+            "at": "2026-11-03T16:14:25.800Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "JPM:income",
+            "at": "2026-11-03T16:14:25.881Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "JPM:balance",
+            "at": "2026-11-03T16:14:25.920Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "JPM:cashflow",
+            "at": "2026-11-03T16:14:25.959Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "ADBE:income",
+            "at": "2026-11-03T16:14:25.999Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "ADBE:balance",
+            "at": "2026-11-03T16:14:26.037Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "ADBE:cashflow",
+            "at": "2026-11-03T16:14:26.074Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CRM:income",
+            "at": "2026-11-03T16:14:26.112Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CRM:balance",
+            "at": "2026-11-03T16:14:26.151Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CRM:cashflow",
+            "at": "2026-11-03T16:14:26.203Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "NVDA:income",
+            "at": "2026-11-03T16:14:26.325Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "NVDA:balance",
+            "at": "2026-11-03T16:14:26.364Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "NVDA:cashflow",
+            "at": "2026-11-03T16:14:26.401Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AVGO:income",
+            "at": "2026-11-03T16:14:26.439Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AVGO:balance",
+            "at": "2026-11-03T16:14:26.477Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AVGO:cashflow",
+            "at": "2026-11-03T16:14:26.516Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AMD:income",
+            "at": "2026-11-03T16:14:26.563Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AMD:balance",
+            "at": "2026-11-03T16:14:26.601Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AMD:cashflow",
+            "at": "2026-11-03T16:14:26.642Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "GOOGL:income",
+            "at": "2026-11-03T16:14:26.682Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "GOOGL:balance",
+            "at": "2026-11-03T16:14:26.720Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "GOOGL:cashflow",
+            "at": "2026-11-03T16:14:26.757Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AMZN:income",
+            "at": "2026-11-03T16:14:26.800Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AMZN:balance",
+            "at": "2026-11-03T16:14:26.840Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AMZN:cashflow",
+            "at": "2026-11-03T16:14:26.877Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "COST:income",
+            "at": "2026-11-03T16:14:26.915Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "COST:balance",
+            "at": "2026-11-03T16:14:26.951Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "COST:cashflow",
+            "at": "2026-11-03T16:14:26.988Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "PG:income",
+            "at": "2026-11-03T16:14:27.025Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "PG:balance",
+            "at": "2026-11-03T16:14:27.063Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "PG:cashflow",
+            "at": "2026-11-03T16:14:27.100Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CAT:income",
+            "at": "2026-11-03T16:14:27.137Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CAT:balance",
+            "at": "2026-11-03T16:14:27.175Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CAT:cashflow",
+            "at": "2026-11-03T16:14:27.212Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "DE:income",
+            "at": "2026-11-03T16:14:27.252Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "DE:balance",
+            "at": "2026-11-03T16:14:27.291Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "DE:cashflow",
+            "at": "2026-11-03T16:14:27.328Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CVX:income",
+            "at": "2026-11-03T16:14:27.366Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CVX:balance",
+            "at": "2026-11-03T16:14:27.402Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "CVX:cashflow",
+            "at": "2026-11-03T16:14:27.440Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "JNJ:income",
+            "at": "2026-11-03T16:14:27.477Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "JNJ:balance",
+            "at": "2026-11-03T16:14:27.514Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "JNJ:cashflow",
+            "at": "2026-11-03T16:14:27.553Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "MRK:income",
+            "at": "2026-11-03T16:14:27.589Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "MRK:balance",
+            "at": "2026-11-03T16:14:27.630Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "MRK:cashflow",
+            "at": "2026-11-03T16:14:27.670Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "UNH:income",
+            "at": "2026-11-03T16:14:27.707Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "UNH:balance",
+            "at": "2026-11-03T16:14:27.747Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "UNH:cashflow",
+            "at": "2026-11-03T16:14:27.784Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AAPL:income",
+            "at": "2026-11-03T16:14:27.820Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AAPL:balance",
+            "at": "2026-11-03T16:14:27.867Z",
+            "status": "HTTP_402"
+          },
+          {
+            "id": "AAPL:cashflow",
+            "at": "2026-11-03T16:14:27.908Z",
+            "status": "HTTP_402"
+          }
+        ],
+        "count": 60
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "XOM:income",
+            "at": "2026-11-03T16:14:27.948Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "XOM:balance",
+            "at": "2026-11-03T16:14:28.185Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 2
+    "ALPHA_VANTAGE": 3
   }
 }
