@@ -598,3 +598,10 @@ main{min-width:0;overflow-x:clip}
  .home-promise-points span{grid-row:1}
  .home-promise-points>div>svg{grid-row:2}
 }
+
+
+/* Keep the complete hero headline on one line at normal desktop widths. */
+@media(min-width:1201px){
+ .home-welcome{grid-template-columns:minmax(0,1fr) minmax(330px,370px)}
+ .home-welcome h2{font-size:clamp(31px,2.4vw,40px);letter-spacing:-1.1px}
+}
