@@ -611,3 +611,13 @@ main{min-width:0;overflow-x:clip}
 @media(min-width:1201px){
  .home-promise-points{transform:translateX(-90px)}
 }
+
+ 
+/* Mobile market tape: keep each quote, daily move and snapshot date on distinct rows. */
+@media(max-width:700px){
+ .home-shell .terminal-market-tape .home-market-quote{grid-template-columns:minmax(0,1fr) auto;align-content:center;gap:2px 5px;min-width:0;padding-left:8px;padding-right:6px}
+ .home-shell .terminal-market-tape .home-market-quote span{grid-column:1/-1;grid-row:1;min-width:0;max-width:100%;font-size:9px;letter-spacing:0;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .home-shell .terminal-market-tape .home-market-quote strong{grid-column:1;grid-row:2;min-width:0;font-size:12px;line-height:1.25;white-space:nowrap}
+ .home-shell .terminal-market-tape .home-market-quote b{grid-column:2;grid-row:2;justify-self:end;text-align:right;font-size:9px;line-height:1.25;white-space:nowrap}
+ .home-shell .terminal-market-tape .home-market-quote small{grid-column:1/-1;grid-row:3;justify-self:start;text-align:left;font-size:8px;line-height:1.25;white-space:nowrap}
+}
