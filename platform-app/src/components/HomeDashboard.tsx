@@ -25,7 +25,7 @@ const demoPortfolioKey="optionscrafted.demo.portfolio.v1";
 const starterWatchlist=["AAPL","MSFT","GOOGL","JPM","AVGO","SPY"];
 const starterPositions=[{ticker:"AAPL",shares:20,averageCost:290},{ticker:"MSFT",shares:8,averageCost:470},{ticker:"GOOGL",shares:12,averageCost:250},{ticker:"JPM",shares:15,averageCost:310},{ticker:"SPY",shares:25,averageCost:690}];
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
-const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
+const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});const today=new Date();const homeDateIso=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");const homeDateLabel=new Intl.DateTimeFormat("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"}).format(today);
 const returnText=(v:number|null)=>v===null?"N/D":`${v>=0?"+":""}${(v*100).toFixed(2)}%`;
 const returnTone=(v:number|null)=>v===null?"home-return-missing":v>=0?"home-return-positive":"home-return-negative";
 const getMoney=(v:number|null,currency="USD")=>v===null? "N/D":money(v,currency);
@@ -141,7 +141,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  ];
  return <div className="home-dashboard">
   <header className="home-welcome">
-   <div className="home-welcome-copy"><span className="home-built-badge"><ChartNoAxesCombined size={14}/> BUILT FOR INDEPENDENT INVESTORS</span><h2>Your integrated options, research, and investing <b>workspace.</b></h2><p>Model options strategies, evaluate intrinsic value, build portfolios, and learn from connected research.</p></div>
+   <div className="home-welcome-topline"><span className="home-built-badge"><ChartNoAxesCombined size={14}/> BUILT FOR INDEPENDENT INVESTORS</span><time className="home-current-date" dateTime={homeDateIso}>{homeDateLabel}</time></div>
+   <div className="home-welcome-copy"><h2>Your integrated options, research, and investing <b>workspace.</b></h2><p>Model options strategies. Run the wheel. Find opportunities. Build portfolios. Access research, education, and expert insights — all in one place.</p></div>
    <div className="home-promise-points">
     <div><Activity size={20}/><span><strong>Smarter decisions</strong><small>Data-led research</small></span></div>
     <div><Layers3 size={20}/><span><strong>Complete workflow</strong><small>Research to execution</small></span></div>
