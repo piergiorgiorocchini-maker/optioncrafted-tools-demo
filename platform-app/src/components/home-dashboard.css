@@ -365,3 +365,150 @@ main{min-width:0;overflow-x:clip}
 .home-watch-row-active{background:#f1f7ff}
 .home-watch-row-active .home-ticker-link strong{color:#075eb7}
 .home-watch-row-active .home-ticker-link:after{content:"IN FOCUS";margin-top:3px;color:#1774cf;font-size:7px;font-weight:850;letter-spacing:.45px}
+
+/* Home readability pass: match the mockup's comfortable desktop scale. */
+.home-shell .terminal-topbar{min-height:70px;gap:18px}
+.home-shell .terminal-search{padding:12px 15px;font-size:14px}
+.home-shell .terminal-search input{font-size:14px}
+.home-shell .home-market-quote span{font-size:12px}
+.home-shell .home-market-quote strong{font-size:17px}
+.home-shell .home-market-quote small{font-size:10px}
+.home-shell .home-market-quote b{font-size:12px}
+.home-dashboard{gap:16px;font-size:14px}
+.home-welcome{gap:24px;padding:16px 3px 7px}
+.home-welcome h2{font-size:clamp(30px,2.5vw,40px);line-height:1.12;letter-spacing:-1px}
+.home-welcome p{font-size:14px;line-height:1.55}
+.home-promise-points{flex-basis:370px;max-width:370px;gap:13px}
+.home-promise-points strong{font-size:12px}
+.home-promise-points small{font-size:10px}
+.home-built-badge{font-size:10px;padding:7px 11px}
+.home-kpis{gap:12px}
+.home-kpi{padding:17px}
+.home-kpi>div{font-size:11px;gap:9px}
+.home-kpi strong{font-size:26px;margin:12px 0 5px}
+.home-kpi strong em{font-size:13px}
+.home-kpi small{font-size:11px;line-height:1.45}
+.home-feature-grid,.home-ecosystem-grid,.home-lower-grid{gap:14px}
+.home-options-card,.home-valuation-card,.home-watchlist-card,.home-portfolio-card,.home-research-card{padding:18px}
+.home-card-heading h3{font-size:18px;line-height:1.25}
+.home-card-heading p,.home-card>p{font-size:13px;line-height:1.5}
+.home-eyebrow{font-size:11px;letter-spacing:1px}
+.home-button{font-size:12px;padding:10px 13px}
+.home-strategy-grid{gap:10px;margin:16px 0 14px}
+.home-strategy{min-height:116px;padding:12px;gap:7px 9px}
+.home-strategy strong{font-size:13px;line-height:1.3}
+.home-strategy small{font-size:11px;line-height:1.45}
+.home-strategy-open{font-size:11px}
+.home-underlying-market{gap:12px;padding:12px 13px}
+.home-underlying-identity strong{font-size:13px}
+.home-underlying-identity small,.home-underlying-market>div>small{font-size:10px}
+.home-underlying-market>div>strong{font-size:12px}
+.home-underlying-market>a{font-size:11px}
+.home-demo-option{padding:14px}
+.home-demo-title strong{font-size:14px}
+.home-demo-title small{font-size:11px}
+.home-demo-badge{font-size:9px}
+.home-demo-grid{gap:13px}
+.home-demo-controls{gap:10px}
+.home-demo-controls>label{font-size:11px;gap:5px}
+.home-demo-controls input{height:36px;padding:7px 8px;font-size:13px}
+.home-demo-results{padding:10px 0}
+.home-demo-results>span{padding:6px 3px}
+.home-demo-results small{font-size:10px}
+.home-demo-results strong{font-size:13px}
+.home-payoff-card{padding:12px 13px 9px}
+.home-payoff-heading strong{font-size:13px}
+.home-payoff-heading small,.home-payoff-heading>span:last-child{font-size:10px}
+.home-payoff-svg{min-height:150px}
+.home-payoff-svg text{font-size:10px}
+.home-payoff-legend{gap:12px;padding:3px 2px}
+.home-payoff-legend span{font-size:10px}
+.home-demo-disclaimer{font-size:10px;line-height:1.5}
+.home-focus-picker{max-width:320px;margin:10px 0 8px}
+.home-focus-picker span{font-size:10px}
+.home-focus-picker select{min-height:38px;padding:8px 10px;font-size:12px}
+.home-value-pair{gap:10px;margin:17px 0 13px}
+.home-value-pair>div{padding:13px 12px}
+.home-value-pair span,.home-upside span,.home-buy-under span{font-size:11px}
+.home-value-pair strong{font-size:20px}
+.home-upside{padding:12px}
+.home-upside strong{font-size:18px}
+.home-buy-under{padding:14px 0}
+.home-buy-under strong{font-size:14px}
+.home-value-scale{padding:11px 10px 9px}
+.home-value-scale-labels span{font-size:9px}
+.home-value-scale-values span{font-size:10px}
+.home-valuation-note{font-size:10px;line-height:1.5}
+.home-card-link{font-size:12px;margin-top:10px}
+.home-probability-teaser{padding:12px;gap:10px}
+.home-probability-teaser .home-eyebrow{font-size:10px}
+.home-probability-teaser strong{font-size:13px}
+.home-probability-teaser small,.home-probability-teaser a{font-size:10px}
+.home-ecosystem-grid{grid-template-columns:1.1fr 1fr 1fr}
+.home-ecosystem-grid>.home-card{padding:18px}
+.home-ecosystem-grid .home-card-heading{min-height:68px}
+.home-model-option{padding:11px;gap:9px}
+.home-model-option strong{font-size:12px;line-height:1.35}
+.home-model-option small{font-size:10px;line-height:1.4}
+.home-model-option>b{font-size:12px}
+.home-model-summary{padding:12px}
+.home-model-summary strong{font-size:15px}
+.home-model-summary small{font-size:10px}
+.home-model-disclaimer,.home-screener-note{font-size:10px;line-height:1.5}
+.home-holding-chips>span{padding:5px 7px;gap:5px}
+.home-holding-chips b,.home-holding-chips small{font-size:10px}
+.home-screener-grid{gap:9px}
+.home-screener-tile{padding:12px}
+.home-screener-tile>span{font-size:10px;line-height:1.35}
+.home-screener-tile strong{font-size:23px}
+.home-screener-tile small{font-size:10px;line-height:1.4}
+.home-article-feature{padding:13px;gap:11px}
+.home-article-feature strong{font-size:13px;line-height:1.4}
+.home-article-feature small,.home-article-feature em,.home-library-card .home-research-links a{font-size:11px}
+.home-library-card .home-research-links a{padding:10px 0}
+.home-watch-table{min-width:620px}
+.home-watch-table th{font-size:10px;padding:11px 9px}
+.home-watch-table td{font-size:12px;padding:12px 9px}
+.home-ticker-link strong{font-size:13px}
+.home-ticker-link small{font-size:10px;max-width:180px}
+.home-remove-watch svg{width:17px;height:17px}
+.home-portfolio-summary{padding:14px;grid-template-columns:40px 1fr}
+.home-portfolio-summary strong{font-size:23px}
+.home-portfolio-summary span,.home-portfolio-summary b{font-size:11px}
+.home-shortcut-grid{gap:9px;margin-top:15px}
+.home-shortcut-grid a{min-height:68px;padding:11px;font-size:11px;gap:7px}
+.home-learning-card{padding:18px;gap:16px}
+.home-learning-card h3{font-size:16px}
+.home-learning-card p{font-size:12px;line-height:1.5}
+.home-learning-card a{font-size:12px}
+.home-learning-card .home-eyebrow{font-size:10px}
+.home-footer{font-size:11px;line-height:1.5}
+.home-watch-row-active .home-ticker-link:after{font-size:9px}
+@media(max-width:1200px){
+ .home-ecosystem-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-library-card{grid-column:1/-1}
+ .home-promise-points{flex-basis:330px;max-width:330px}
+}
+@media(max-width:900px){
+ .home-shell .terminal-topbar{min-height:64px}
+ .home-promise-points{flex:0 1 320px}
+ .home-ecosystem-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .home-welcome{display:grid;gap:14px}
+ .home-promise-points{max-width:none;width:100%;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-welcome h2{font-size:clamp(28px,6vw,36px)}
+ .home-card-heading h3{font-size:17px}
+}
+@media(max-width:560px){
+ .home-dashboard{gap:13px}
+ .home-kpis{gap:9px}
+ .home-kpi{padding:13px}
+ .home-kpi strong{font-size:23px}
+ .home-card-heading p,.home-card>p{font-size:12px}
+ .home-strategy strong{font-size:12px}
+ .home-strategy small,.home-strategy-open{font-size:10px}
+ .home-demo-grid{grid-template-columns:1fr}
+ .home-learning-grid{grid-template-columns:1fr}
+ .home-watch-table{min-width:590px}
+}
