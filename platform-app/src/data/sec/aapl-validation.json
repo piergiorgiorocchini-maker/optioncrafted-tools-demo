@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ticker": "AAPL",
-  "validatedAt": "2026-11-02T17:22:56.571Z",
+  "validatedAt": "2026-11-03T15:25:53.067Z",
   "status": "VALIDATED",
   "metricCount": 15,
   "issues": [],
@@ -9,92 +9,92 @@
   "metrics": {
     "revenue": {
       "status": "valid",
-      "periodEnd": "2025-09-27",
-      "filed": "2025-10-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "netIncome": {
       "status": "valid",
-      "periodEnd": "2025-09-27",
-      "filed": "2025-10-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "operatingIncome": {
       "status": "valid",
-      "periodEnd": "2025-09-27",
-      "filed": "2025-10-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "cashFromOperations": {
       "status": "valid",
-      "periodEnd": "2025-09-27",
-      "filed": "2025-10-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "capex": {
       "status": "valid",
-      "periodEnd": "2025-09-27",
-      "filed": "2025-10-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "epsDiluted": {
       "status": "valid",
-      "periodEnd": "2025-09-27",
-      "filed": "2025-10-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD/shares"
     },
     "cash": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "currentAssets": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "currentLiabilities": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "inventory": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "totalAssets": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "totalLiabilities": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "equity": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "longTermDebt": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     },
     "shortTermDebt": {
       "status": "valid",
-      "periodEnd": "2026-06-27",
-      "filed": "2026-07-31",
+      "periodEnd": "2026-09-26",
+      "filed": "2026-11-03",
       "unit": "USD"
     }
   }
