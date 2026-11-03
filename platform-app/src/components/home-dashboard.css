@@ -541,3 +541,33 @@ main{min-width:0;overflow-x:clip}
  .home-welcome-copy{grid-column:1;grid-row:2}
  .home-promise-points{grid-column:1;grid-row:3;width:100%;padding:0;border:0}
 }
+
+
+/* Match the stronger headline and featured engine panel from the mockup. */
+.home-welcome h2{font-size:clamp(34px,2.8vw,44px);line-height:1.1;letter-spacing:-1.25px}
+.home-welcome p{font-size:15px;line-height:1.5}
+.home-promise-points{max-width:420px;gap:13px 16px;padding-left:24px}
+.home-promise-points>div>svg{width:22px;height:22px}
+.home-promise-points strong{font-size:12px}
+.home-promise-points small{font-size:10px}
+.home-options-heading{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:11px 14px;margin-bottom:15px}
+.home-options-mark{display:grid;place-items:center;width:48px;height:48px;border-radius:11px;background:linear-gradient(145deg,#1687ff,#0961d3);color:#fff;box-shadow:0 5px 13px #1678e522}
+.home-options-heading>div{min-width:0}
+.home-options-heading .home-eyebrow{margin-bottom:3px;color:#2078d3;font-size:10px}
+.home-options-heading h3{margin:0 0 3px;font-size:23px;line-height:1.2;letter-spacing:-.45px}
+.home-options-heading p{margin:0;font-size:13px;line-height:1.45}
+.home-options-heading>.home-button{align-self:start;margin-top:2px}
+@media(max-width:1200px){
+ .home-welcome h2{font-size:clamp(32px,3vw,40px)}
+ .home-welcome p{font-size:14px}
+ .home-promise-points{max-width:none;padding-left:16px}
+}
+@media(max-width:760px){
+ .home-welcome h2{font-size:clamp(28px,6vw,36px);letter-spacing:-.8px}
+ .home-welcome p{font-size:14px}
+ .home-promise-points{padding:0}
+ .home-options-heading{grid-template-columns:42px minmax(0,1fr);gap:10px 12px}
+ .home-options-mark{width:42px;height:42px}
+ .home-options-heading h3{font-size:20px}
+ .home-options-heading>.home-button{grid-column:2;justify-self:start}
+}
