@@ -590,3 +590,11 @@ main{min-width:0;overflow-x:clip}
  .home-welcome h2{font-size:clamp(37px,3.1vw,48px)}
  .home-promise-points{padding-left:20px}
 }
+
+
+/* Put each benefit label before its icon while retaining the four-column row. */
+@media(min-width:1201px){
+ .home-promise-points>div{grid-template-rows:auto 24px}
+ .home-promise-points span{grid-row:1}
+ .home-promise-points>div>svg{grid-row:2}
+}
