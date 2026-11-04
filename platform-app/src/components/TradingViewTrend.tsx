@@ -12,7 +12,7 @@ export function TradingViewTrend({ticker,symbol}:{ticker:string;symbol:string|nu
   if(!("IntersectionObserver" in window)){setVisible(true);return}
   const observer=new IntersectionObserver(entries=>{
    if(entries.some(entry=>entry.isIntersecting)){setVisible(true);observer.disconnect()}
-  },{rootMargin:"140px"});
+  },{rootMargin:"1000px"});
   observer.observe(node);
   return ()=>observer.disconnect();
  },[]);
