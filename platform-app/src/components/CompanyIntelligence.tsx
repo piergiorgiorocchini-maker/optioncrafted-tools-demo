@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {verifiedFcf,verifiedAnnualHistory} from "../data/verifiedFinancials";
 import {getSecFinancialInputs} from "../data/secFinancialBridge";
 import {secCashConversion as calculateSecCashConversion,secRoicEstimate} from "../data/secQualityMetrics";
@@ -8,10 +9,12 @@ import type {Security} from "../core/contracts";import type {RealAsset} from "./
 import "./company.css";import {FinancialCharts} from "./FinancialCharts";import appleResearch from "../data/aaplResearch.json";
 import {fundamentalMetrics,missingFundamentals} from "../core/fundamentalMetrics";
 import {SecurityLogo} from "./SecurityLogo";
+import {TradingViewSecurityChart} from "./TradingViewSecurityChart";
 const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
 const compactMoney=(n:number,currency:string)=>new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",notation:"compact",maximumFractionDigits:2}).format(n);
 export function CompanyIntelligence({company,asset}:{company:Security;asset?:RealAsset}){
- const apple=asset?.ticker==="AAPL";const appleFcf=apple?appleResearch.fcfPerShare:null; const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?verifiedAnnualHistory(symbol).at(-1)?.eps??null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
+ const [logoMarkets,setLogoMarkets]=useState<Record<string,"NASDAQ"|"NYSE">>({});
+ const apple=asset?.ticker==="AAPL";const appleFcf=apple?appleResearch.fcfPerShare:null; const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const chartMarket=logoMarkets[symbol]??(symbol==="ALAB"?"NASDAQ":null);const chartSymbol=chartMarket?`${chartMarket}:${symbol}`:null;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?verifiedAnnualHistory(symbol).at(-1)?.eps??null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
  const secInputs=getSecFinancialInputs(symbol);
  const secFcf=verifiedFcf(symbol);
  const secConversion=calculateSecCashConversion(symbol);
@@ -36,7 +39,8 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
  const gap=(company.buyBelow/company.price-1)*100;
  const demoSeries=[.69,.75,.81,.88,1].map((factor,i)=>({period:String(2022+i),revenue:Math.round(100*factor),fcf:Math.round(100*factor*(1.04+i*.012))}));
  return <div className="ci">
-  <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2 className="ci-security-title"><SecurityLogo ticker={symbol}/>{name}</h2><p><b>{symbol}</b> · {sector} · {currency} · {real?`Google Sheets · as of ${asset?.priceDate??"N/D"}`:"Demo snapshot "+company.snapshotDate}</p></div><span className="ci-demo">{real?"REAL SNAPSHOT + LAB PREVIEW":"ILLUSTRATIVE FINANCIALS"}</span></section>
+  <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2 className="ci-security-title"><SecurityLogo ticker={symbol} onMarketResolved={market=>setLogoMarkets(current=>current[symbol]===market?current:{...current,[symbol]:market})}/>{name}</h2><p><b>{symbol}</b> · {sector} · {currency} · {real?`Google Sheets · as of ${asset?.priceDate??"N/D"}`:"Demo snapshot "+company.snapshotDate}</p></div><span className="ci-demo">{real?"REAL SNAPSHOT + LAB PREVIEW":"ILLUSTRATIVE FINANCIALS"}</span></section>
+  <TradingViewSecurityChart ticker={symbol} symbol={chartSymbol}/>
   <section className="ci-metrics">
    <article><span><Building2 size={16}/> REFERENCE PRICE</span><strong>{showMoney(referencePrice)}</strong><small>{real?"Google Sheets · snapshot":"Historical-style demo input"}</small></article>
    <article><span><TrendingUp size={16}/> RETURN ON INVESTED CAPITAL</span><strong>{real?roicDisplay:company.roic.toFixed(1)+"%"}</strong><small>{real?(secRoic.value!==null?"SEC FY2025 · 21% assumed tax · average capital":apple?"Apple SEC research · gross capital basis":"ROIC requires operating income and 2 FY balance sheets"):"Provided sample ratio"}</small></article>
