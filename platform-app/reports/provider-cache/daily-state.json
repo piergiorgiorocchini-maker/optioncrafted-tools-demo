@@ -688,14 +688,19 @@
             "id": "WMT:balance",
             "at": "2026-11-04T12:29:10.489Z",
             "status": "PREMIUM_REQUIRED"
+          },
+          {
+            "id": "JPM:income",
+            "at": "2026-11-04T16:17:37.089Z",
+            "status": "AVAILABLE"
           }
         ],
-        "count": 2
+        "count": 3
       }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 4
+    "ALPHA_VANTAGE": 5
   }
 }
