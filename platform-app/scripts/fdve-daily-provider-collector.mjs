@@ -73,7 +73,7 @@ for(const provider of ['FMP','ALPHA_VANTAGE']){
    }
    log.attempts[log.attempts.length-1].status=status;await save();
    rows.push({ticker,statement,status});
-   if(['PREMIUM_REQUIRED','API_NOTICE','HTTP_429','HTTP_403'].includes(status))halted=true;
+   if(['PREMIUM_REQUIRED','API_NOTICE','HTTP_402','HTTP_429','HTTP_403'].includes(status))halted=true;
   }
   if(halted)break;
  }
