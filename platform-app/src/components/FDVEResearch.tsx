@@ -37,7 +37,7 @@ export function FDVEResearch({ticker,onSelect,compact=false}:{ticker?:string;onS
     {ticker&&!compact&&<SecurityLogo ticker={ticker} size="small" onMarketResolved={resolveMarket}/>}
    </div>
   </section>;
-  return chart?<div className="company-market-overview">{panel}{chart}</div>:panel;
+  return chart?<div className="company-market-overview">{chart}{panel}</div>:panel;
  }
 
  const cards:[string,string][]=[
@@ -56,5 +56,5 @@ export function FDVEResearch({ticker,onSelect,compact=false}:{ticker?:string;onS
    {!compact&&<NavLink to="/company">See company analysis →</NavLink>}
   </div>
  </section>;
- return chart?<div className="company-market-overview">{panel}{chart}</div>:panel;
+ return chart?<div className="company-market-overview">{chart}{panel}</div>:panel;
 }
