@@ -1,6 +1,6 @@
 import {useEffect,useRef} from "react";
 
-const embedUrl="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+const embedUrl="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
 
 export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:string|null}){
  const containerRef=useRef<HTMLDivElement|null>(null);
@@ -17,36 +17,23 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
   script.src=embedUrl;
   script.async=true;
   script.textContent=JSON.stringify({
-   symbols:[[ticker,symbol+"|12M"]],
-   chartOnly:true,
+   symbol:symbol,
    width:"100%",
    height:"100%",
    locale:"en",
+   dateRange:"12M",
+   dateRanges:["12m|1D"],
    colorTheme:"light",
+   trendLineColor:"rgba(22, 126, 227, 1)",
+   underLineColor:"rgba(22, 126, 227, 0.14)",
+   underLineBottomColor:"rgba(22, 126, 227, 0)",
+   isTransparent:true,
    autosize:true,
-   showVolume:false,
-   showMA:false,
+   chartOnly:true,
+   noTimeScale:false,
    hideDateRanges:true,
    hideMarketStatus:true,
-   hideSymbolLogo:true,
-   scalePosition:"right",
-   scaleMode:"Normal",
-   fontFamily:"-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-   fontSize:"11",
-   noTimeScale:false,
-   valuesTracking:"1",
-   changeMode:"price-only",
-   chartType:"line",
-   lineWidth:2,
-   lineType:0,
-   dateRanges:["12m|1D"],
-   lineColor:"rgba(22, 126, 227, 1)",
-   upColor:"rgba(22, 126, 227, 1)",
-   downColor:"rgba(22, 126, 227, 1)",
-   gridLineColor:"rgba(35, 68, 105, 0.08)",
-   fontColor:"#657b95",
-   widgetFontColor:"#17375c",
-   backgroundColor:"#ffffff"
+   showSymbolLogo:false
   });
   container.append(widget,script);
   return ()=>container.replaceChildren();
