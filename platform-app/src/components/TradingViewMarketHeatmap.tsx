@@ -50,15 +50,13 @@ export function TradingViewMarketHeatmap(){
   cursor:"pointer"
  });
 
- return <section className="panel wide" style={{padding:20}}>
-  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:10}}>
-   <div><span className="overline">MARKET PULSE · TRADINGVIEW</span><h2 style={{margin:"8px 0 3px"}}>Market Heatmap</h2><p style={{margin:0,fontSize:12}}>S&amp;P 500 · dimensione per capitalizzazione · colore per variazione giornaliera</p></div>
+ return <div className="market-heatmap">
+  <div style={{display:"flex",justifyContent:"flex-end",marginBottom:4}}>
    <div role="tablist" aria-label="Heatmap view" style={{display:"flex",gap:6}}>
     <button type="button" role="tab" aria-selected={view==="sector"} onClick={()=>setView("sector")} style={buttonStyle(view==="sector")}>Settori</button>
     <button type="button" role="tab" aria-selected={view==="titles"} onClick={()=>setView("titles")} style={buttonStyle(view==="titles")}>Titoli</button>
    </div>
   </div>
-  <div ref={containerRef} className="market-heatmap-widget tradingview-widget-container" aria-label={"TradingView S&P 500 heatmap by "+(view==="sector"?"sector":"stock")} style={{height:"clamp(260px, 30vw, 360px)",minWidth:0,overflow:"hidden"}} />
-  <p style={{fontSize:11,margin:"8px 0 0"}}>La heatmap usa l’universo S&amp;P 500 e i dati TradingView; è distinta dai 227 titoli dello snapshot Google Sheets qui sotto. Clicca un settore per approfondire i titoli.</p>
- </section>;
+  <div ref={containerRef} className="market-heatmap-widget tradingview-widget-container" aria-label={"Market heatmap by "+(view==="sector"?"sector":"stock")} style={{height:"clamp(220px, 25vw, 320px)",minWidth:0,overflow:"hidden"}} />
+ </div>;
 }
