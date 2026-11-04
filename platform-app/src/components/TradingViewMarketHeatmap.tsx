@@ -1,4 +1,5 @@
 import {useEffect,useRef,useState} from "react";
+import type {CSSProperties} from "react";
 
 type HeatmapView="sector"|"titles";
 
@@ -38,7 +39,7 @@ export function TradingViewMarketHeatmap(){
   return ()=>container.replaceChildren();
  },[view]);
 
- const buttonStyle=(active:boolean):React.CSSProperties=>({
+ const buttonStyle=(active:boolean):CSSProperties=>({
   border:"1px solid "+(active?"#1d78d4":"#d5e1ee"),
   background:active?"#eaf4ff":"#fff",
   color:active?"#125eaa":"#62748a",
