@@ -13,5 +13,5 @@ export function SecurityLogo({ticker,size="default",onMarketResolved}:{ticker:st
  const valid=/^[A-Z0-9.-]+$/.test(symbol);
  if(!valid||attempt>=logoRoots.length)return <span className="security-logo security-logo-fallback" data-size={size} aria-hidden="true">{symbol.slice(0,2)||"?"}</span>;
  const src=logoRoots[attempt]+encodeURIComponent(symbol)+".png";
- return <span className="security-logo" data-size={size} aria-hidden="true"><img src={src} alt="" loading="lazy" referrerPolicy="no-referrer" onLoad={()=>onMarketResolved?.(attempt===0?"NASDAQ":"NYSE")} onError={()=>setAttempt(n=>n+1)}/></span>;
+ return <span className="security-logo" data-size={size} aria-hidden="true"><img src={src} alt="" loading="eager" referrerPolicy="no-referrer" onLoad={()=>onMarketResolved?.(attempt===0?"NASDAQ":"NYSE")} onError={()=>setAttempt(n=>n+1)}/></span>;
 }
