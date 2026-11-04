@@ -1,7 +1,7 @@
 import {useEffect,useMemo,useState} from "react";
 import snapshot from "../data/assetsSnapshot.json";
 import {BriefcaseBusiness,Plus,Trash2} from "lucide-react";
-import {SecurityLogo} from "./HomeDashboard";
+import {SecurityLogo} from "./SecurityLogo";
 import "./portfolio.css";
 type Position={ticker:string;shares:number;averageCost:number};
 const storageKey="optionscrafted.portfolio.v1";

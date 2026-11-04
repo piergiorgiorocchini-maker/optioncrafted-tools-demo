@@ -4,6 +4,7 @@ import {Bar,BarChart,CartesianGrid,ResponsiveContainer,Tooltip,XAxis,YAxis} from
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
 import {verifiedAnnualHistory,verifiedFcf} from "../data/verifiedFinancials";
+import {SecurityLogo} from "./SecurityLogo";
 import {ValuationFootballField} from "./ValuationFootballField";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamResearchPanel} from "./GrahamResearchPanel";
@@ -80,7 +81,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const requiredReturnText=Number.isFinite(a.requiredReturn)?a.requiredReturn.toFixed(2)+"%":"N/D";
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
  return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"?" nr-workspace--graham":"")}>
-  <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><Database size={17}/><strong>{asset.ticker}</strong><span>{sourceLabel}</span></div></header>
+  <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><SecurityLogo ticker={asset.ticker}/><strong>{asset.ticker}</strong><span>{sourceLabel}</span></div></header>
   <nav className="nr-tabbar" aria-label="Valuation methods">{tabs.map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>
   <section className="nr-control-card">
    <div className="nr-section-title"><div><span className="nr-eyebrow">DATA PROVENANCE</span><h3>Input source & financial bridge</h3></div><span className="nr-status"><ShieldCheck size={14}/> {sourceLabel}</span></div>

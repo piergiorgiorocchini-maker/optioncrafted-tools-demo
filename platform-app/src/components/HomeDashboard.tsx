@@ -6,6 +6,7 @@ import type {RealAsset} from "./RealResearch";
 import type {ValuationBridge} from "./ValuationWorkspace";
 import {verifiedFcf} from "../data/verifiedFinancials";
 import {dcfModel,modelDefaults,money} from "../core/valuationModels";
+import {SecurityLogo} from "./SecurityLogo";
 import "./home-dashboard.css";
 
 type ModelHolding={ticker:string;weight:number};
@@ -41,18 +42,7 @@ export function MarketTape(){
   <MarketQuote label="VIX" ticker="VIX" format="index"/>
  </div>;
 }
-const logoRoots=[
- "https://cdn.jsdelivr.net/gh/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos/logos/_",
- "https://cdn.jsdelivr.net/gh/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos/logos/_"
-];
-export function SecurityLogo({ticker}:{ticker:string}){
- const [attempt,setAttempt]=useState(0);
- useEffect(()=>setAttempt(0),[ticker]);
- const valid=/^[A-Z0-9.-]+$/i.test(ticker);
- if(!valid||attempt>=logoRoots.length)return <span className="home-security-logo home-security-fallback" aria-hidden="true">{ticker.slice(0,2).toUpperCase()}</span>;
- const src=logoRoots[attempt]+encodeURIComponent(ticker.toUpperCase())+".png";
- return <span className="home-security-logo" aria-hidden="true"><img src={src} alt="" loading="lazy" referrerPolicy="no-referrer" onError={()=>setAttempt(n=>n+1)}/></span>;
-}
+export {SecurityLogo} from "./SecurityLogo";
 export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);

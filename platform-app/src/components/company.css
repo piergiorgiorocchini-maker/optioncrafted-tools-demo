@@ -6,3 +6,5 @@
 .ci-balance-grid>div b{font-size:14px;color:#173657;overflow-wrap:anywhere}
 @media(max-width:1250px){.ci-balance-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){.ci-balance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.ci-security-title{display:flex;align-items:center;gap:9px}

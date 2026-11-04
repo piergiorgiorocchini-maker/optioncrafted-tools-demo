@@ -7,6 +7,7 @@ import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} 
 import type {Security} from "../core/contracts";import type {RealAsset} from "./RealResearch";
 import "./company.css";import {FinancialCharts} from "./FinancialCharts";import appleResearch from "../data/aaplResearch.json";
 import {fundamentalMetrics,missingFundamentals} from "../core/fundamentalMetrics";
+import {SecurityLogo} from "./SecurityLogo";
 const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
 const compactMoney=(n:number,currency:string)=>new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",notation:"compact",maximumFractionDigits:2}).format(n);
 export function CompanyIntelligence({company,asset}:{company:Security;asset?:RealAsset}){
@@ -35,7 +36,7 @@ export function CompanyIntelligence({company,asset}:{company:Security;asset?:Rea
  const gap=(company.buyBelow/company.price-1)*100;
  const demoSeries=[.69,.75,.81,.88,1].map((factor,i)=>({period:String(2022+i),revenue:Math.round(100*factor),fcf:Math.round(100*factor*(1.04+i*.012))}));
  return <div className="ci">
-  <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2>{name}</h2><p><b>{symbol}</b> · {sector} · {currency} · {real?`Google Sheets · as of ${asset?.priceDate??"N/D"}`:"Demo snapshot "+company.snapshotDate}</p></div><span className="ci-demo">{real?"REAL SNAPSHOT + LAB PREVIEW":"ILLUSTRATIVE FINANCIALS"}</span></section>
+  <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2 className="ci-security-title"><SecurityLogo ticker={symbol}/>{name}</h2><p><b>{symbol}</b> · {sector} · {currency} · {real?`Google Sheets · as of ${asset?.priceDate??"N/D"}`:"Demo snapshot "+company.snapshotDate}</p></div><span className="ci-demo">{real?"REAL SNAPSHOT + LAB PREVIEW":"ILLUSTRATIVE FINANCIALS"}</span></section>
   <section className="ci-metrics">
    <article><span><Building2 size={16}/> REFERENCE PRICE</span><strong>{showMoney(referencePrice)}</strong><small>{real?"Google Sheets · snapshot":"Historical-style demo input"}</small></article>
    <article><span><TrendingUp size={16}/> RETURN ON INVESTED CAPITAL</span><strong>{real?roicDisplay:company.roic.toFixed(1)+"%"}</strong><small>{real?(secRoic.value!==null?"SEC FY2025 · 21% assumed tax · average capital":apple?"Apple SEC research · gross capital basis":"ROIC requires operating income and 2 FY balance sheets"):"Provided sample ratio"}</small></article>
