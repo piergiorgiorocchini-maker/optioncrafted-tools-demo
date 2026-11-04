@@ -38,7 +38,8 @@ export function TradingViewTrend({ticker,symbol}:{ticker:string;symbol:string|nu
    locale:"en",
    noTimeScale:true,
    showSymbolLogo:false,
-   symbol:symbol+"|1D",
+   symbol:symbol,
+   dateRange:"12M",
    support_host:"https://www.tradingview.com",
    width:"120",
    height:"54"
