@@ -671,10 +671,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-04": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "WMT:income",
+            "at": "2026-11-04T12:29:10.260Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "WMT:balance",
+            "at": "2026-11-04T12:29:10.489Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 3
+    "ALPHA_VANTAGE": 4
   }
 }
