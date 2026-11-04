@@ -1,0 +1,210 @@
+OPTIONSCRAFTED — DATA PIPELINE HANDOVER
+Data: 4 novembre 2026
+Fuso orario operativo: Europe/Rome
+Ambito: Google Sheets Assets, Google Apps Script, FMP, Alpha Vantage, export GitHub e snapshot consumati dalla piattaforma.
+
+SINTESI ESECUTIVA
+
+La pipeline di mercato è stata resa giornaliera e pubblica i dati del foglio su GitHub. Il foglio “Tabella Stagionalità” contiene 227 ticker distinti. La colonna A è la sorgente; la colonna B crea la lista ordinata e senza duplicati. Sono stati tolti da A i duplicati BTC, CSX e WMT.
+
+Le colonne formula-driven di Assets (C:N e R:S) sono precompilate fino alla riga 1001, così c’è spazio per 1.000 ticker. I risultati FMP/Alpha non sono più memorizzati accanto a un numero di riga che cambia con l’ordinamento: O:P e T:U sono lookup per ticker nella scheda nascosta ProviderCache. La scheda contiene una riga per ticker e conserva i dati già presenti prima del cambio.
+
+Il 4 novembre il repository GitHub conteneva già uno snapshot Google Sheets aggiornato: assetsSnapshot.json esportato il 2026-11-04, 227 record, dataIsLive=false. Le run Actions per provider e build risultano completate con successo. Questo significa che il sito riceve uno snapshot statico aggiornato dalla pipeline, non un feed live.
+
+Pier ha confermato di aver sostituito e salvato il codice del file Apps Script UpdateExternalProvidersDaily.gs con la versione aggiornata che scrive in ProviderCache. Non è stata verificata una nuova esecuzione di refreshOCProviderDataDaily dopo tale sostituzione: il primo ciclo giornaliero successivo deve confermare il nuovo percorso.
+
+COLLEGAMENTI PRINCIPALI
+
+Google Sheet:
+https://docs.google.com/spreadsheets/d/1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw/edit
+
+Repository:
+https://github.com/piergiorgiorocchini-maker/optioncrafted-tools-demo
+
+Snapshot app:
+platform-app/src/data/assetsSnapshot.json
+
+Snapshot Probability Station:
+tools/probability-station/data/assets.json
+
+Documentazione sorgente script salvata separatamente in ChatGPT Library:
+UpdateExternalProvidersDaily.txt
+ExportAssetsJSON_v2_GitHubSync.txt
+ExportSeasonalityDashboardJSON_Resumable.txt
+
+1. GOOGLE SHEETS: STRUTTURA E COMPORTAMENTO
+
+File: “Tabella Stagionalità”
+Scheda: Assets
+
+A — elenco sorgente dei ticker. È il campo da estendere quando si aggiunge un nuovo simbolo. I duplicati rimasti al 4 novembre sono zero; i valori ripetuti rimossi erano BTC, CSX e WMT.
+
+B — lista dinamica ordinata:
+=SORT(UNIQUE(FILTER(A2:A; A2:A<>"")))
+Quindi il ticker va aggiunto in A; B si aggiorna e lo ordina automaticamente.
+
+C:N — formule Google Sheets/GOOGLEFINANCE, con protezione per righe senza ticker. Campi: prezzo, variazione a cinque giorni lavorativi, nome, valuta, market cap, volume medio, beta, P/E, EPS, massimo/minimo 52 settimane e drawdown. Le formule sono state riempite fino alla riga 1001.
+
+O:P — Dividend Yield FMP e settore FMP. Ora sono formule lookup per ticker nella scheda ProviderCache, non valori salvati per posizione di riga.
+
+Q — Category. È una classificazione distinta dal provider updater; non viene popolata da FMP/Alpha in ProviderCache e va gestita dalla logica di categoria/export o compilata secondo la convenzione del progetto.
+
+R:S — variazione giornaliera e YTD, formule precompilate fino alla riga 1001.
+
+T:U — P/E Alpha Vantage e Dividend Yield Alpha Vantage, ora formule lookup per ticker nella scheda ProviderCache.
+
+ProviderCache — scheda nascosta, chiave primaria Ticker, colonne FMP Dividend Yield, FMP Sector, Alpha P/E e Alpha Dividend Yield. Al momento del passaggio conteneva i valori statici esistenti, importati prima di sostituire le celle visibili con formule. Il nuovo updater crea una riga per i ticker nuovi e aggiorna le colonne per simbolo. Le formule O:P/T:U propagano i valori nella lista ordinata B senza disallineamenti.
+
+Capacità predisposta: formule fino alla riga 1001 (1.000 righe ticker). Se in futuro l’universo supera tale limite, bisogna estendere formule e controllare i limiti/tempi dell’export.
+
+2. AGGIORNAMENTO PROVIDER IN APPS SCRIPT
+
+File Apps Script da usare come updater canonico: UpdateExternalProvidersDaily.gs.
+Funzione giornaliera: refreshOCProviderDataDaily().
+Funzione di ripresa: continueOCProviderDataRefresh().
+
+Credenziali lette da Script Properties, senza valori inclusi qui:
+- FMP_API_KEY
+- ALPHAVANTAGE_API_KEY
+
+FMP:
+- Endpoint /stable/profile; una chiamata per ticker restituisce profilo da cui si estraggono Dividend Yield e Sector.
+- Limite interno impostato a 220 richieste/giorno, mantenendo 30 chiamate di margine rispetto al cap Free da 250/giorno.
+- Batch Apps Script da 40 richieste e trigger temporaneo di continuazione a circa 60 secondi, finché termina il batch giornaliero.
+- L’universo attuale è 227 ticker: con 220 chiamate al giorno il cursore rotante attraversa quasi tutta la lista ogni giorno e completa la copertura tra cicli consecutivi.
+- Interrompe o passa alla fase successiva quando rileva errori/quota/piano (inclusi HTTP 401/402/403/429 e messaggi di rate limit/premium).
+- I risultati validi aggiornano ProviderCache; un valore non disponibile non cancella un dato precedente.
+
+Alpha Vantage:
+- Endpoint OVERVIEW; una chiamata fornisce P/E e Dividend Yield.
+- Limite Apps Script impostato a 22 richieste/giorno. Il piano Free ha 25 richieste/giorno; 3 sono riservate alla pipeline GitHub per annual statements.
+- Cursore rotante su 227 ticker: copertura completa teorica in circa 11 giorni lavorativi. Questi campi sono fallback e non vengono ricalcolati per tutti i titoli ogni giorno.
+- I valori validi aggiornano ProviderCache Ticker → Alpha P/E/Yield.
+
+Protezione del budget: i contatori giornalieri sono mantenuti in Script Properties; il job salva data, fase, cursori e conteggi. LockService evita esecuzioni concorrenti. Un flag giornaliero impedisce di ripetere il job completo se già concluso.
+
+Trigger di ripresa: continueOCProviderDataRefresh è creato dal job quando serve e rimosso alla conclusione. Non va installato come trigger giornaliero permanente.
+
+La versione modificata dell’updater salva O:P/T:U solo in ProviderCache; non scrive più tali risultati direttamente nelle righe Assets. Pier ha riferito di averla incollata e salvata in Apps Script. Primo controllo ancora necessario: esecuzione completata del nuovo refreshOCProviderDataDaily e verifica delle nuove righe/cache in ProviderCache.
+
+3. PIPELINE GOOGLE SHEETS → GITHUB → OC
+
+Fase 1 — Refresh dei dati:
+- GOOGLEFINANCE ricalcola i campi formula-driven del foglio.
+- refreshOCProviderDataDaily aggiorna ProviderCache usando FMP e Alpha nei rispettivi limiti.
+- Le formule in Assets O:P/T:U espongono il dato associato al ticker.
+
+Fase 2 — Export stagionalità:
+- refreshGoogleSheetsDataToGitHub avvia startSeasonalityDashboardJSONExport_(true).
+- ExportSeasonalityDashboardJSON.gs.gs scorre i ticker ordinati in Assets!B2:B, seleziona ciascuno in Dashboard!A2, lascia ricalcolare la dashboard, legge matrici 10Y/5Y, medie, probabilità, migliori/peggiori mesi e curva equity.
+- Esegue batch di 20 ticker e pianifica la continuazione dopo circa 60 secondi per evitare il limite di durata Apps Script.
+- Al termine scrive JSON_seasonality; completeGoogleSheetsDataRefreshAfterSeasonality_ costruisce JSON_monthly_returns e pubblica i dataset.
+
+Fase 3 — Export assets:
+- exportAssetsJSON_v2 legge Assets!B:U, ignora ticker vuoti, elimina eventuali duplicati residui nell’export e normalizza valori/localizzazione.
+- Per il Dividend Yield preferisce FMP e usa Alpha Vantage come fallback. Per P/E usa Google Finance e poi Alpha come fallback.
+- Genera JSON_assets a blocchi.
+
+Fase 4 — Pubblicazione GitHub:
+- publishAssetsJSON_v2ToGitHub richiede Script Property GITHUB_TOKEN.
+- Pubblica assetsSnapshot.json (piattaforma), assets.json (Probability Station), seasonality-matrix.json e monthly-returns.json.
+- Google Sheets/GitHub è il ponte di pubblicazione: i moduli della piattaforma importano lo snapshot statico; non interrogano il foglio o le API in tempo reale a ogni apertura.
+
+Fase 5 — Build/deploy:
+- I commit dei JSON attivano la build OptionsCrafted e la pubblicazione GitHub Pages secondo i workflow del repository.
+- I moduli che importano platform-app/src/data/assetsSnapshot.json ricevono i nuovi valori al successivo build/deploy. HomeDashboard, LiveUniverseExplorer/Market Explorer, PortfolioStudio e altri componenti dati usano questo snapshot condiviso.
+- Probability Station carica i JSON statici nella propria cartella data.
+
+Il timestamp dello snapshot (priceDate/exportedAt) è informativo; dataIsLive=false deve rimanere esplicito. Prezzi e attributi di mercato sono snapshot al momento di export, non quotazioni live.
+
+4. TRIGGER E FREQUENZE
+
+installGoogleSheetsRefreshTriggers() elimina i trigger preesistenti dei due handler interessati e installa:
+- refreshOCProviderDataDaily circa alle 13:15 Europe/Rome;
+- refreshGoogleSheetsDataToGitHub circa alle 16:15 Europe/Rome;
+- refreshGoogleSheetsDataToGitHub circa alle 23:15 Europe/Rome.
+
+Le funzioni saltano il lavoro nel weekend. La funzione installer è stata eseguita con esito “Completata” nell’elenco Apps Script mostrato il 4 novembre alle 16:15:26. Non è stata riaperta la pagina Trigger dopo quell’esecuzione in questo passaggio; nella prossima sessione verificare che siano presenti questi tre trigger e che non siano disattivati.
+
+Le continuazioni di seasonality e provider sono trigger temporanei creati e rimossi dai rispettivi job. Non devono restare duplicati dopo la conclusione.
+
+5. STATO OSSERVATO AL 4 NOVEMBRE 2026
+
+Google Sheet:
+- 227 ticker in A, 227 unici; nessun duplicato residuo.
+- Formula B ordinata/deduplicata.
+- Formule C:N e R:S fino alla riga 1001.
+- O:P e T:U collegate alla tab ProviderCache nascosta; controllati campioni e formule fino alla riga 1001 senza errori formula.
+
+GitHub main, verificato tramite file e workflow:
+- platform-app/src/data/assetsSnapshot.json: exportedAt 2026-11-04, 227 record, dataIsLive=false.
+- Snapshot aggiornato dai workflow Google Sheets; i commit di asset/seasonality/monthly returns del 4 novembre hanno avviato build preview. Build OptionsCrafted run 41860324513 completata con successo.
+- Workflow FDVE daily provider run 41865730788 completato con successo il 4 novembre; commit dati 69bc6fd150c8a5aa8e5d700eafaaf0b26e1463ac.
+- Deploy Pages run 41865764831 concluso con successo.
+
+Uso provider nell’ultima run GitHub del 4 novembre:
+- FMP annual statements: budget configurato a 0 richieste, per sospensione temporanea dopo HTTP 402 sugli endpoint annuali; non ha consumato chiamate.
+- Alpha Vantage annual statements: budget 3 richieste/giorno; run completata e ha registrato una nuova riga income JPM come AVAILABLE. Le restanti chiamate del budget erano già conteggiate nel ledger giornaliero.
+- Il job salva cache normalizzata e ledger in platform-app/reports/provider-cache/ e fa commit su main. Non scrive in Google Sheets Assets/ProviderCache e non è il refresh del profilo FMP in Apps Script.
+
+Apps Script, evidenza da screenshot/log condivisi:
+- installGoogleSheetsRefreshTriggers completata il 4 novembre alle 16:15:26.
+- refreshGoogleSheetsDataToGitHub è stata eseguita più volte; un run di 96,705 s e uno di 37,585 s risultano completati. Un’esecuzione precedente è andata in timeout e ha richiesto la ripresa.
+- continueSeasonalityDashboardJSONExport ha continuato i batch; nell’elenco successivo le esecuzioni risultavano completate fino a circa 16:40.
+- Un log intermedio ha segnalato errori JSON “Unexpected non-whitespace character” su JSON_monthly_returns e JSON_seasonality. Successivi run hanno completato e i JSON sono stati pubblicati; controllare che il prossimo export non riporti di nuovo questi warning.
+- In uno screenshot precedente il pannello FMP mostrava 40/250 chiamate; è una lettura puntuale precedente, non il conteggio corrente del giorno.
+
+6. INVENTARIO APPS SCRIPT E RUOLO
+
+ExportAssetsJSON_v2.gs (sorgente locale di riferimento: ExportAssetsJSON_v2_GitHubSync.txt)
+- Exporta Assets, costruisce JSON_assets, seleziona yield/P-E con fallback e pubblica i file GitHub.
+- Contiene refreshGoogleSheetsDataToGitHub, completeGoogleSheetsDataRefreshAfterSeasonality_ e installGoogleSheetsRefreshTriggers.
+- Codice trigger e pubblicazione correnti; mantiene GITHUB_TOKEN in Script Properties.
+
+ExportSeasonalityDashboardJSON.gs.gs (sorgente: ExportSeasonalityDashboardJSON_Resumable.txt)
+- Esporta dashboard 10Y/5Y per ticker con batch e ripresa; al termine può completare la pipeline pubblicazione.
+
+UpdateExternalProvidersDaily.gs (sorgente aggiornata: UpdateExternalProvidersDaily.txt)
+- Updater canonico FMP + Alpha per il profilo Assets; ProviderCache come destinazione chiave-ticker. Codice incollato/salvato secondo conferma dell’utente il 4 novembre; esecuzione successiva ancora da verificare.
+
+UpdateFMP.gs — updateDividendYieldFMP()
+- Vecchio helper manuale FMP profile che scrive direttamente Dividend Yield in Assets!O. Non usare per il refresh ordinario: bypassa ProviderCache e può sovrascrivere le formule lookup.
+
+UpdateSectorFMP.gs — updateSectorFMP()
+- Vecchio helper manuale FMP profile che scrive direttamente Assets!P. Non usare per il refresh ordinario per lo stesso motivo.
+
+UpdateDividendYield.gs — updateDividendYieldAlphaVantage()
+- Vecchio helper manuale Alpha Overview che scrive direttamente Assets!O. Non usare per il refresh ordinario: bypassa il cache keyed-by-ticker.
+
+Code.gs — getPERatioAlpha(ticker)
+- Helper isolato Alpha Overview. Nello screenshot condiviso la chiave API era incorporata nel codice; il valore non è riportato qui. Non usare chiavi in chiaro nel sorgente; Script Properties è il percorso usato dall’updater canonico.
+
+AlphaAdvPE.gs, ExportMonthlyReturns.gs e CreateFundamentalsSheet.gs
+- Presenti nel progetto Apps Script visto negli screenshot. Non sono necessari per la pipeline giornaliera Assets→GitHub descritta sopra; il dettaglio del loro stato interno non è stato ricontrollato in questa sessione.
+
+Fundamentals / SEC:
+- La tab Fundamentals, SEC_Raw e Sync_Log è una pipeline separata dal refresh Assets. Il job FMP/Alpha annuale in GitHub non trasferisce automaticamente i dati in queste schede né nello snapshot assets. Il report FDVE del 1 novembre documenta copertura SEC FY2021–FY2025, 20 ticker, 1.491/1.645 osservazioni disponibili (90,64%), 154 mancanti; questi numeri derivano dall’ultimo report FDVE documentato e vanno aggiornati con il report più recente prima di usarli come stato corrente.
+
+7. LIMITI, RISCHI E PROSSIMI PASSI
+
+1) Confermare il primo refreshOCProviderDataDaily successivo all’installazione del nuovo codice: esito completato, conteggi FMP/Alpha, aggiornamento ProviderCache e formule O:P/T:U.
+2) Verificare la pagina Trigger: 1 provider trigger + 2 export trigger, timezone Europe/Rome, non disattivati.
+3) Verificare il prossimo refresh Google Sheets end-to-end: JSON_assets, JSON_seasonality e JSON_monthly_returns leggibili; record count 227; zero errori JSON; commit GitHub; build/deploy completati.
+4) Se un ticker viene aggiunto mentre un job provider è già in corso, verrà incluso nel successivo job che rilegge Assets!B2:B. Aggiungerlo prima del refresh giornaliero evita di attendere il ciclo successivo.
+5) Non eseguire i vecchi helper manuali UpdateFMP/UpdateSectorFMP/UpdateDividendYield dopo il passaggio a ProviderCache; scrivono nelle colonne lookup e li possono sostituire.
+6) Il refresh automatico non rende il sito live: l’app è alimentata da JSON statici e richiede pubblicazione/build successiva. Alcuni componenti che non importano assetsSnapshot.json potrebbero avere fonti separate.
+7) FMP statement endpoints restano sospesi a zero chiamate nel workflow GitHub finché il piano non consente l’accesso; ciò è indipendente dall’endpoint profile usato dall’updater Apps Script.
+8) Alpha Overview per il fallback dei 227 ticker è una rotazione su circa 11 giorni lavorativi; non aspettarsi nuovi valori Alpha per ogni ticker ogni giorno.
+9) La categoria Q, la tab Fundamentals e la catena opzioni non vengono completate dall’updater Assets.
+10) Spostare il codice Apps Script canonico in un archivio `.txt` versionato nel repository, se si vuole un’unica versione sorgente Git; al momento Apps Script resta il runtime, mentre i `.txt` di riferimento sono in Library.
+11) In Code.gs è stato visto un helper legacy con API key hardcoded. La chiave è stata omessa da questo report; rimuovere l’hardcoding e gestire eventuale rotazione in un passaggio separato.
+
+CHECKLIST OPERATIVA RAPIDA
+
+A. Aggiungi il simbolo in Assets!A, una sola volta.
+B. Verifica che compaia in B in ordine alfabetico e che C:N/R:S calcolino i campi disponibili.
+C. Al refresh provider, controlla la riga del ticker in ProviderCache; O:P/T:U devono mostrare lookup.
+D. Dopo il refresh export, verifica assetsSnapshot.json, monthly-returns.json e seasonality-matrix.json su GitHub.
+E. Verifica build e deploy; lo snapshot deve riportare timestamp coerente e dataIsLive=false.
+
+Nota di provenienza: lo stato del foglio è stato letto direttamente il 4 novembre 2026; lo snapshot e le run GitHub sono stati verificati sul branch main; i dettagli del progetto Apps Script derivano dal codice `.txt` condiviso e dagli screenshot dell’utente. Nessun valore di API key o GitHub token è incluso.
