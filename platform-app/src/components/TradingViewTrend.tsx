@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState} from "react";
 
-const tradingViewEmbedUrl="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+const tradingViewEmbedUrl="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
 
 export function TradingViewTrend({ticker,symbol}:{ticker:string;symbol:string|null}){
  const containerRef=useRef<HTMLDivElement|null>(null);
@@ -27,7 +27,7 @@ export function TradingViewTrend({ticker,symbol}:{ticker:string;symbol:string|nu
   script.src=tradingViewEmbedUrl;
   script.async=true;
   script.textContent=JSON.stringify({
-   autosize:true,
+   autosize:false,
    chartOnly:true,
    colorTheme:"light",
    dateRanges:["12m|1D"],
@@ -38,10 +38,10 @@ export function TradingViewTrend({ticker,symbol}:{ticker:string;symbol:string|nu
    locale:"en",
    noTimeScale:true,
    showSymbolLogo:false,
-   symbols:[[ticker,symbol+"|1D"]],
+   symbol:symbol+"|1D",
    support_host:"https://www.tradingview.com",
-   width:"100%",
-   height:"100%"
+   width:"120",
+   height:"54"
   });
   container.append(widget,script);
   return ()=>container.replaceChildren();
