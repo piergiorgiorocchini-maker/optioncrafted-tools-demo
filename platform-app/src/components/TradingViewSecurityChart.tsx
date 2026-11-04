@@ -41,7 +41,11 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
    lineType:0,
    dateRanges:["12m|1D"],
    lineColor:"rgba(22, 126, 227, 1)",
-   gridColor:"rgba(35, 68, 105, 0.08)",
+   upColor:"rgba(22, 126, 227, 1)",
+   downColor:"rgba(22, 126, 227, 1)",
+   gridLineColor:"rgba(35, 68, 105, 0.08)",
+   fontColor:"#657b95",
+   widgetFontColor:"#17375c",
    backgroundColor:"#ffffff"
   });
   container.append(widget,script);
