@@ -5,7 +5,7 @@ import {SecurityLogo} from "./SecurityLogo";
 const number=(x:number|null,digits=2)=>x===null?"N/D":new Intl.NumberFormat("en-US",{maximumFractionDigits:digits}).format(x);
 const price=(value:number|null,currency:string)=>value===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(value);
 const percent=(value:number|null)=>value===null?"N/D":`${value>=0?"+":""}${(value*100).toFixed(2)}%`;
-const tradingViewSymbol=(ticker:string,category:string,name:string,logoMarket?:"NASDAQ"|"NYSE")=>{if(ticker==="VIX")return "CBOE:VIX";if(category==="Index")return ticker==="IXIC"?"NASDAQ:IXIC":null;const isETF=category==="ETF"||/\bETF\b/i.test(name);if(isETF){if(ticker==="QQQ")return "NASDAQ:QQQ";if(ticker==="IBIT")return "NASDAQ:IBIT";return `AMEX:${ticker}`}return logoMarket?`${logoMarket}:${ticker}`:null;};
+const tradingViewSymbol=(ticker:string,category:string,name:string,logoMarket?:"NASDAQ"|"NYSE")=>{if(ticker==="VIX")return "CBOE:VIX";if(category==="Index")return ticker==="IXIC"?"NASDAQ:IXIC":null;const isETF=category==="ETF"||/\bETF\b/i.test(name);if(isETF){if(ticker==="QQQ")return "NASDAQ:QQQ";if(ticker==="IBIT")return "NASDAQ:IBIT";return `AMEX:${ticker}`}const knownMarket:Record<string,"NASDAQ"|"NYSE">={ALAB:"NASDAQ"};const market=logoMarket||knownMarket[ticker];return market?`${market}:${ticker}`:null;};
 export function LiveUniverseExplorer({onSelect,selectedTicker}:{onSelect:(ticker:string)=>void;selectedTicker:string}){
  const [query,setQuery]=useState("");
  const [onlyComplete,setOnlyComplete]=useState(false);
