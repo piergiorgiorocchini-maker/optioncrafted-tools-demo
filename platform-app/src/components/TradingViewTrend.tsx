@@ -47,6 +47,5 @@ export function TradingViewTrend({ticker,symbol}:{ticker:string;symbol:string|nu
   return ()=>container.replaceChildren();
  },[visible,symbol,ticker]);
 
- if(!symbol)return <div className="explorer-sparkline-placeholder" title="TradingView symbol unavailable">—</div>;
- return <div ref={containerRef} className="explorer-sparkline-widget" aria-label={"TradingView 1-year chart for "+ticker} title={"TradingView 1-year chart for "+ticker}/>;
+ return <div ref={containerRef} className="explorer-sparkline-widget tradingview-widget-container" aria-label={symbol?("TradingView 1-year chart for "+ticker):undefined} title={symbol?("TradingView 1-year chart for "+ticker):"TradingView symbol unavailable"}>{(!visible||!symbol)&&<span className="explorer-sparkline-placeholder">—</span>}</div>;
 }
