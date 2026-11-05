@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Activity,ArrowDownRight,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Mail,Newspaper,Plus,Search,Shield,Target,Trash2,Wallet,GraduationCap} from "lucide-react";
+import {Activity,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Mail,Newspaper,Plus,Search,Shield,Target,Trash2,Wallet,GraduationCap} from "lucide-react";
 import snapshot from "../data/assetsSnapshot.json";
 import type {RealAsset} from "./RealResearch";
 import type {ValuationBridge} from "./ValuationWorkspace";
@@ -50,6 +50,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const [demoWatchlist,setDemoWatchlist]=useState(false);
  const [demoPortfolio,setDemoPortfolio]=useState(false);
  const [notice,setNotice]=useState("");
+ const [listingMarkets,setListingMarkets]=useState<Record<string,"NASDAQ"|"NYSE">>({});
  const [selectedModelId,setSelectedModelId]=useState("core");
  const [putStrike,setPutStrike]=useState<number>((asset?.price??100)*0.95);
  const [putPremium,setPutPremium]=useState<number>((asset?.price??100)*0.015);
@@ -83,7 +84,15 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const intrinsic=valuation?.fairValue??defaultDcf?.value??null;
  const buyUnder=valuation?.buyUnder??(intrinsic===null?null:intrinsic*(1-modelDefaults.mos/100));
  const marketPrice=asset?.price??null;
- const gap=intrinsic!==null&&intrinsic>0&&marketPrice!==null&&marketPrice>0?marketPrice/intrinsic-1:null;
+ const gap=intrinsic!==null&&Number.isFinite(intrinsic)&&intrinsic>0&&marketPrice!==null&&Number.isFinite(marketPrice)&&marketPrice>0?intrinsic/marketPrice-1:null;
+ const comparisonPercent=gap===null?null:Math.abs(gap*100);
+ const roundedComparisonPercent=comparisonPercent===null?null:Number(comparisonPercent.toFixed(1));
+ const valuationState=gap===null?"unavailable":roundedComparisonPercent===0?"fair-value":gap>0?"undervalued":"overvalued";
+ const valuationLabel=valuationState==="overvalued"?"OVERVALUED":valuationState==="undervalued"?"UNDERVALUED":valuationState==="fair-value"?"AT INTRINSIC VALUE":"VALUATION UNAVAILABLE";
+ const valuationDetail=valuationState==="overvalued"?"Market price is above intrinsic value":valuationState==="undervalued"?"Market price is below intrinsic value":valuationState==="fair-value"?"Market price is at intrinsic value":"Required price or valuation data is unavailable";
+ const marginOfSafety=intrinsic!==null&&intrinsic>0&&buyUnder!==null?Math.round(Math.max(0,Math.min(100,(1-buyUnder/intrinsic)*100))*10)/10:modelDefaults.mos;
+ const listingMarket=listingMarkets[ticker]??null;
+ const resolveListingMarket=(market:"NASDAQ"|"NYSE")=>setListingMarkets(current=>current[ticker]===market?current:{...current,[ticker]:market});
  const valueScaleMax=Math.max(marketPrice??0,intrinsic??0,buyUnder??0)*1.12||1;
  const valuePosition=(value:number|null)=>value===null?0:Math.min(100,Math.max(0,value/valueScaleMax*100));
  const valuationBasis=valuation?.source??(defaultDcf?"Default DCF scenario":"Data required");
@@ -162,14 +171,31 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     </div>
    </article>
    <article className="home-card home-valuation-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">PRICE VS. VALUE</span><h3 className="home-security-heading"><SecurityLogo ticker={ticker}/>{name} · {ticker}</h3><label className="home-focus-picker"><span>SECURITY IN FOCUS</span><select aria-label="Select security in focus" value={ticker} onChange={event=>onSelect(event.target.value)}>{[...new Set([ticker,...watchlist])].map(symbol=><option key={symbol} value={symbol}>{symbol} · {indexRecord(symbol)?.name??symbol}</option>)}</select></label><p>DCF base scenario · per share</p></div><button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button></header>
-    <div className="home-value-pair"><div><span>Market price</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><div><span>DCF estimate</span><strong>{getMoney(intrinsic,asset?.currency)}</strong></div></div>
-    <div className={"home-upside "+(gap===null?"":gap>=0?"negative":"positive")}><span>{gap===null?"Valuation comparison unavailable":gap>=0?"Market price above DCF":"Market price below DCF"}</span><strong>{gap===null?"N/D":(gap>=0?"+":"")+(gap*100).toFixed(1)+"%"}</strong>{gap===null?null:gap>=0?<ArrowUpRight size={17}/>:<ArrowDownRight size={17}/>}</div>
-    <div className="home-buy-under"><span>DCF buy-under · {modelDefaults.mos}% margin of safety</span><strong>{getMoney(buyUnder,asset?.currency)}</strong></div>
-    <div className="home-value-scale" role="img" aria-label={"Per-share comparison: buy-under "+getMoney(buyUnder,asset?.currency)+", DCF "+getMoney(intrinsic,asset?.currency)+", market "+getMoney(marketPrice,asset?.currency)}><div className="home-value-scale-labels"><span>BUY-UNDER</span><span>DCF BASE</span><span>MARKET</span></div><div className="home-value-track"><i className="buy-marker" style={{left:valuePosition(buyUnder)+"%"}}/><i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}}/><i className="market-marker" style={{left:valuePosition(marketPrice)+"%"}}/></div><div className="home-value-scale-values"><span>{getMoney(buyUnder,asset?.currency)}</span><span>{getMoney(intrinsic,asset?.currency)}</span><span>{getMoney(marketPrice,asset?.currency)}</span></div></div>
+    <header className="home-card-heading home-valuation-heading">
+     <div className="home-valuation-title">
+      <span className="home-eyebrow">PRICE VS. INTRINSIC VALUE</span>
+      <h3 className="home-security-heading"><SecurityLogo ticker={ticker} onMarketResolved={resolveListingMarket}/><span className="home-security-title-copy"><span>{name} · {ticker}</span><small className="home-market-badge">{listingMarket??(asset?.currency==="USD"?"U.S. MARKET":"MARKET N/D")}</small></span></h3>
+      <p>Per share · {valuationBasis}</p>
+     </div>
+     <button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button>
+    </header>
+    <div className={"home-valuation-verdict is-"+valuationState} aria-live="polite">
+     <span className="home-valuation-verdict-label">{valuationLabel}</span>
+     <strong>{comparisonPercent===null?"N/D":comparisonPercent.toFixed(1)+"%"}</strong>
+     <small>{valuationDetail}</small>
+    </div>
+    <div className="home-value-pair home-intrinsic-value-pair">
+     <div><span>Stock Price</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div>
+     <div><span>Intrinsic Value</span><strong>{getMoney(intrinsic,asset?.currency)}</strong></div>
+    </div>
+    <div className="home-buy-under"><span>{marginOfSafety}% Margin of Safety</span><strong>Buy-under · {getMoney(buyUnder,asset?.currency)}</strong></div>
+    <div className="home-value-scale" role="img" aria-label={"Per-share comparison: buy-under "+getMoney(buyUnder,asset?.currency)+", intrinsic value "+getMoney(intrinsic,asset?.currency)+", stock price "+getMoney(marketPrice,asset?.currency)}>
+     <div className="home-value-scale-legend"><span><i className="buy-key"/>BUY-UNDER</span><span><i className="intrinsic-key"/>INTRINSIC VALUE</span><span><i className="price-key"/>STOCK PRICE</span></div>
+     <div className="home-value-track">{buyUnder===null?null:<i className="buy-marker" style={{left:valuePosition(buyUnder)+"%"}}/>}{intrinsic===null?null:<i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}}/>}{marketPrice===null?null:<i className="market-marker" style={{left:valuePosition(marketPrice)+"%"}}/>}</div>
+     <div className="home-value-scale-values"><span>{getMoney(buyUnder,asset?.currency)}</span><span>{getMoney(intrinsic,asset?.currency)}</span><span>{getMoney(marketPrice,asset?.currency)}</span></div>
+    </div>
     <small className="home-valuation-note">{valuationBasis} · FCF/share {getMoney(fcf.perShare,asset?.currency)} ({fcf.basis})</small>
     <NavLink className="home-card-link" to="/valuation/dcf">Open full valuation <ArrowRight size={14}/></NavLink>
-    <div className="home-probability-teaser"><span className="home-probability-ring"><Target size={22}/></span><div><span className="home-eyebrow">PROBABILITY STATION</span><strong>Scenario inputs needed</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"} · no option chain loaded</small><NavLink to="/options/probability">Open Probability Station <ArrowRight size={13}/></NavLink></div></div>
    </article>
   </section>
   <section className="home-ecosystem-grid" aria-label="Explore the OptionsCrafted workspace">
