@@ -704,7 +704,7 @@ main{min-width:0;overflow-x:clip}
 .home-valuation-card .home-valuation-verdict>strong{font-size:clamp(24px,6cqi,108px);line-height:1;letter-spacing:-.7px}
 .home-valuation-card .home-valuation-verdict-label{font-size:clamp(13px,2.7cqi,48px);line-height:1.1;font-weight:850;letter-spacing:.6px}
 .home-valuation-card .home-intrinsic-value-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:1cqi;margin:0 0 1.5cqi}
-.home-valuation-card .home-intrinsic-value-pair>div{display:grid;align-content:center;gap:.25cqi;min-width:0;min-height:clamp(58px,8.3cqi,150px);padding:1.1cqi 2.2cqi;border:0;border-radius:0;background:#bc944c;color:#fff}
+.home-valuation-card .home-intrinsic-value-pair>div{display:grid;align-content:center;gap:.25cqi;min-width:0;min-height:clamp(58px,8.3cqi,150px);padding:1.1cqi 2.2cqi;border:0;border-radius:0;background:#163b64;color:#fff}
 .home-valuation-card .home-intrinsic-value-pair span{color:#fff;font-size:clamp(9px,1.8cqi,34px);font-weight:750;letter-spacing:.1px;text-shadow:none}
 .home-valuation-card .home-intrinsic-value-pair strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-size:clamp(18px,3.3cqi,62px);line-height:1.05;letter-spacing:-.2px}
 .home-valuation-card .home-value-scale{margin:0;padding:1.1cqi 1.1cqi 1.5cqi;border:1px solid #d6e5f5;border-radius:1cqi;background:#fff}
@@ -734,36 +734,36 @@ main{min-width:0;overflow-x:clip}
 .home-valuation-footer{display:flex;align-items:center;justify-content:space-between;gap:1.2cqi;min-height:clamp(34px,4.1cqi,78px);margin-top:1.4cqi;padding:.8cqi 2cqi;border-radius:.8cqi;background:#e0effb;color:#163c70}
 .home-valuation-footer>strong{font-size:clamp(10px,2cqi,38px);line-height:1.1;font-weight:850}
 .home-valuation-footer>span{color:#4779b4;font-size:clamp(8px,1.7cqi,32px);line-height:1.1;text-align:right;white-space:nowrap}
-@container home-valuation (max-width:600px){
- .home-valuation-heading{grid-template-columns:minmax(0,1.05fr) minmax(150px,.95fr);align-items:center;gap:10px}
- .home-valuation-title>.home-eyebrow{font-size:12px;letter-spacing:.55px}
- .home-valuation-heading .home-security-heading{display:grid;grid-template-columns:max-content max-content;justify-content:start;align-items:center;gap:3px 5px;margin:6px 0 3px}
- .home-security-name{grid-column:1/-1;overflow:visible;text-overflow:clip;white-space:nowrap;font-size:14px}
- .home-valuation-heading .home-security-logo{width:22px;height:22px;border-radius:4px}
- .home-valuation-heading .home-market-badge{padding:2px 5px;font-size:8px}
- .home-valuation-heading .home-valuation-title p{margin:3px 0 0;font-size:11px}
- .home-valuation-card .home-valuation-verdict{min-height:86px;padding:8px}
- .home-valuation-card .home-valuation-verdict>strong{font-size:clamp(34px,8cqi,42px)}
- .home-valuation-card .home-valuation-verdict-label{font-size:14px}
- .home-valuation-card .home-intrinsic-value-pair{gap:7px;margin-bottom:10px}
- .home-valuation-card .home-intrinsic-value-pair>div{min-height:62px;padding:8px 10px}
- .home-valuation-card .home-intrinsic-value-pair span{font-size:12px}
- .home-valuation-card .home-intrinsic-value-pair strong{font-size:clamp(19px,4cqi,23px)}
- .home-valuation-card .home-value-scale{padding:8px 8px 9px}
- .home-value-range-heading{flex-wrap:nowrap;gap:6px;margin-bottom:6px}
- .home-value-range-heading>strong{font-size:12px;letter-spacing:.25px}
- .home-value-range-legend{gap:8px}
- .home-value-range-legend>span{gap:4px;font-size:9px}
- .home-value-range-legend i{width:9px;height:9px;min-width:9px;min-height:9px}
- .home-value-range-plot{height:58px;margin:0 8px}
- .home-value-callout{min-width:84px;padding:4px 6px;border-radius:4px}
- .home-value-callout>strong{font-size:9px}
- .home-value-callout>span{font-size:10px}
- .home-value-track{height:16px;bottom:6px}
- .home-value-range-axis{height:14px;font-size:9px}
- .home-valuation-footer{align-items:flex-start;flex-direction:column;gap:3px;min-height:36px;margin-top:8px;padding:7px 9px;border-radius:5px}
- .home-valuation-footer>strong{font-size:11px}
- .home-valuation-footer>span{font-size:9px;text-align:left;white-space:normal}
+@container home-valuation (max-width:700px){
+ .home-valuation-heading{grid-template-columns:minmax(0,1.15fr) minmax(150px,.85fr);align-items:center;gap:10px}
+ .home-valuation-title>.home-eyebrow{font-size:13px;letter-spacing:.3px}
+ .home-valuation-heading .home-security-heading{display:grid;grid-template-columns:max-content max-content;justify-content:start;align-items:center;gap:4px 7px;margin:7px 0 4px}
+ .home-security-name{grid-column:1/-1;overflow:visible;text-overflow:clip;white-space:normal;font-size:17px;line-height:1.1;font-weight:900}
+ .home-valuation-heading .security-logo{width:34px;height:34px;border-radius:5px}
+ .home-valuation-heading .home-market-badge{padding:3px 6px;font-size:10px}
+ .home-valuation-heading .home-valuation-title p{margin:4px 0 0;font-size:12px}
+ .home-valuation-card .home-valuation-verdict{min-height:86px;padding:10px}
+ .home-valuation-card .home-valuation-verdict>strong{font-size:clamp(36px,9cqi,48px)}
+ .home-valuation-card .home-valuation-verdict-label{font-size:15px}
+ .home-valuation-card .home-intrinsic-value-pair{gap:9px;margin-bottom:12px}
+ .home-valuation-card .home-intrinsic-value-pair>div{min-height:86px;padding:12px;background:#163b64}
+ .home-valuation-card .home-intrinsic-value-pair span{font-size:15px}
+ .home-valuation-card .home-intrinsic-value-pair strong{font-size:clamp(22px,5cqi,28px)}
+ .home-valuation-card .home-value-scale{margin-top:12px;padding:12px 10px 12px}
+ .home-value-range-heading{flex-wrap:nowrap;gap:8px;margin:0 2px 9px}
+ .home-value-range-heading>strong{font-size:13px;letter-spacing:.25px}
+ .home-value-range-legend{gap:9px}
+ .home-value-range-legend>span{gap:5px;font-size:10px}
+ .home-value-range-legend i{width:10px;height:10px;min-width:10px;min-height:10px}
+ .home-value-range-plot{height:70px;margin:0 10px}
+ .home-value-callout{min-width:90px;padding:6px 8px;border-radius:4px}
+ .home-value-callout>strong{font-size:11px}
+ .home-value-callout>span{font-size:12px}
+ .home-value-track{height:18px;bottom:7px}
+ .home-value-range-axis{height:16px;font-size:11px}
+ .home-valuation-footer{align-items:flex-start;flex-direction:column;gap:4px;min-height:40px;margin-top:12px;padding:9px 11px;border-radius:5px}
+ .home-valuation-footer>strong{font-size:12px}
+ .home-valuation-footer>span{font-size:10px;text-align:left;white-space:normal}
 }
 @media(max-width:760px){
  .home-valuation-card{padding:12px;border-radius:8px}
