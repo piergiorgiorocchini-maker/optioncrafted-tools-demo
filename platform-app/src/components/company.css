@@ -9,13 +9,13 @@
 
 .ci-security-title{display:flex;align-items:center;gap:9px}
 
-.ci-market-chart{min-width:0;overflow:hidden;background:#fff;border:1px solid #dce6f1;border-radius:12px;box-shadow:0 3px 15px #112f5009}
+.ci-market-chart{min-width:0;overflow:hidden;background:#fff;border:1px solid #dce6f1;border-radius:12px;box-shadow:0 3px 15px #112f5009;display:grid;grid-template-rows:auto minmax(0,1fr);min-height:480px}
 .ci-market-chart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px 0;color:#17375c}
 .ci-market-chart-head strong{font-size:13px;font-weight:750}
 .ci-market-chart-head span{padding:4px 8px;border-radius:6px;background:#eef6ff;color:#147ee3;font-size:11px;font-weight:750}
-.ci-market-chart-widget{width:100%;height:340px!important;min-height:340px!important;min-width:0}
+.ci-market-chart-widget{width:100%;height:100%!important;min-height:0!important;min-width:0}
 .ci-market-chart-placeholder{height:320px;display:grid;place-items:center;color:#91a3b6;font-size:12px}
-@media(max-width:760px){.ci-market-chart-widget,.ci-market-chart-placeholder{height:270px!important;min-height:270px!important}.ci-market-chart-head{padding:12px 14px 0}}
+@media(max-width:760px){.ci-market-chart{min-height:310px}.ci-market-chart-widget,.ci-market-chart-placeholder{height:270px!important;min-height:270px!important}.ci-market-chart-head{padding:12px 14px 0}}
 
 
 /* Shared intrinsic value module beside the annual TradingView chart. */
