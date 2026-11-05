@@ -98,6 +98,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const valueScaleMin=valueAnchorLow*0.67;
  const valueScaleMax=Math.max(valueScaleMin+1,valueAnchorHigh*1.4);
  const valuePosition=(value:number|null)=>value===null?0:Math.min(100,Math.max(0,(value-valueScaleMin)/(valueScaleMax-valueScaleMin)*100));
+ const axisLabelStyle=(value:number|null,other:number|null)=>{const position=valuePosition(value),otherPosition=other===null?null:valuePosition(other),crowded=otherPosition!==null&&Math.abs(position-otherPosition)<18;const transform=position<18?"translateX(0)":position>82?"translateX(-100%)":crowded?(position<otherPosition! ? "translateX(-100%)":"translateX(0)"):"translateX(-50%)";return {left:position+"%",transform}};
  const calloutPosition=(value:number|null)=>Math.min(88,Math.max(12,valuePosition(value)));
  const vix=indexRecord("VIX");
  const selectedModel=modelPortfolios.find(p=>p.id===selectedModelId)??modelPortfolios[0];
@@ -204,8 +205,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
       </div>
       <div className="home-value-range-axis">
        <span className="range-end start">{getMoney(valueScaleMin,asset?.currency)}</span>
-       {intrinsic===null?null:<span className="range-marker-value intrinsic" style={{left:valuePosition(intrinsic)+"%"}}>{getMoney(intrinsic,asset?.currency)}</span>}
-       {marketPrice===null?null:<span className="range-marker-value market" style={{left:valuePosition(marketPrice)+"%"}}>{getMoney(marketPrice,asset?.currency)}</span>}
+       {intrinsic===null?null:<span className="range-marker-value intrinsic" style={axisLabelStyle(intrinsic,marketPrice)}>{getMoney(intrinsic,asset?.currency)}</span>}
+       {marketPrice===null?null:<span className="range-marker-value market" style={axisLabelStyle(marketPrice,intrinsic)}>{getMoney(marketPrice,asset?.currency)}</span>}
        <span className="range-end finish">{getMoney(valueScaleMax,asset?.currency)}</span>
       </div>
      </div>
