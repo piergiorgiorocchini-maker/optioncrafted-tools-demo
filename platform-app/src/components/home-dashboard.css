@@ -685,8 +685,8 @@ main{min-width:0;overflow-x:clip}
 
 
 /* Home valuation module scaled to the approved full-width mockup. */
-.home-valuation-card{grid-column:1/-1;grid-row:1;container-name:home-valuation;container-type:inline-size;padding:2.2cqi;border-radius:1.1cqi}
-.home-options-card{grid-column:1/-1;grid-row:2}
+.home-valuation-card{grid-column:auto;grid-row:auto;container-name:home-valuation;container-type:inline-size;padding:2.2cqi;border-radius:1.1cqi}
+.home-options-card{grid-column:auto;grid-row:auto}
 .home-valuation-heading{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:center;gap:1.5cqi;margin:0 0 1.5cqi;padding:0}
 .home-valuation-title{min-width:0}
 .home-valuation-title>.home-eyebrow{display:block;color:#2675d5;font-size:clamp(11px,2.05cqi,36px);font-weight:850;letter-spacing:.65px;line-height:1.15}
