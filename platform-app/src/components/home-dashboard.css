@@ -686,7 +686,7 @@ main{min-width:0;overflow-x:clip}
 
 /* Home valuation module retained beside Options Engine and scaled for readability. */
 .home-feature-grid{align-items:stretch}
-.home-valuation-card{grid-column:auto;grid-row:auto;container-name:home-valuation;container-type:inline-size;padding:2.2cqi;border-radius:1.1cqi}
+.home-valuation-card{grid-column:auto;grid-row:auto;container-name:home-valuation;container-type:inline-size;padding:14px;border-radius:12px}
 .home-options-card{grid-column:auto;grid-row:auto}
 .home-valuation-heading{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:center;gap:1.5cqi;margin:0 0 1.5cqi;padding:0}
 .home-valuation-title{min-width:0}
@@ -737,9 +737,9 @@ main{min-width:0;overflow-x:clip}
 @container home-valuation (max-width:600px){
  .home-valuation-heading{grid-template-columns:minmax(0,1.05fr) minmax(150px,.95fr);align-items:center;gap:10px}
  .home-valuation-title>.home-eyebrow{font-size:12px;letter-spacing:.55px}
- .home-valuation-heading .home-security-heading{gap:5px;margin:6px 0 3px}
- .home-security-name{font-size:15px}
- .home-valuation-heading .home-security-logo{width:24px;height:24px;border-radius:4px}
+ .home-valuation-heading .home-security-heading{display:grid;grid-template-columns:max-content max-content;justify-content:start;align-items:center;gap:3px 5px;margin:6px 0 3px}
+ .home-security-name{grid-column:1/-1;overflow:visible;text-overflow:clip;white-space:nowrap;font-size:14px}
+ .home-valuation-heading .home-security-logo{width:22px;height:22px;border-radius:4px}
  .home-valuation-heading .home-market-badge{padding:2px 5px;font-size:8px}
  .home-valuation-heading .home-valuation-title p{margin:3px 0 0;font-size:11px}
  .home-valuation-card .home-valuation-verdict{min-height:86px;padding:8px}
@@ -761,9 +761,9 @@ main{min-width:0;overflow-x:clip}
  .home-value-callout>span{font-size:10px}
  .home-value-track{height:16px;bottom:6px}
  .home-value-range-axis{height:14px;font-size:9px}
- .home-valuation-footer{min-height:36px;margin-top:8px;padding:7px 9px;border-radius:5px}
+ .home-valuation-footer{align-items:flex-start;flex-direction:column;gap:3px;min-height:36px;margin-top:8px;padding:7px 9px;border-radius:5px}
  .home-valuation-footer>strong{font-size:11px}
- .home-valuation-footer>span{font-size:9px}
+ .home-valuation-footer>span{font-size:9px;text-align:left;white-space:normal}
 }
 @media(max-width:760px){
  .home-valuation-card{padding:12px;border-radius:8px}
