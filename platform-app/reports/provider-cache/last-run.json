@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T16:17:37.089Z",
+  "generatedAt": "2026-11-05T16:28:09.230Z",
   "budgets": {
     "FMP": 0,
     "ALPHA_VANTAGE": 3
@@ -11,13 +11,18 @@
       "requestsToday": 0
     },
     "ALPHA_VANTAGE": {
-      "status": "COMPLETED",
-      "requestsToday": 3,
+      "status": "PROVIDER_NOTICE",
+      "requestsToday": 2,
       "attempts": [
         {
-          "ticker": "JPM",
+          "ticker": "ADBE",
           "statement": "income",
           "status": "AVAILABLE"
+        },
+        {
+          "ticker": "ADBE",
+          "statement": "balance",
+          "status": "PREMIUM_REQUIRED"
         }
       ]
     }

@@ -697,10 +697,31 @@
         ],
         "count": 3
       }
+    },
+    "2026-11-05": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "ADBE:income",
+            "at": "2026-11-05T16:28:09.230Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "ADBE:balance",
+            "at": "2026-11-05T16:28:09.429Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 5
+    "ALPHA_VANTAGE": 6
   }
 }
