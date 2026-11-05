@@ -3,6 +3,9 @@ import {NavLink} from "react-router-dom";
 import audit from "../../reports/fdve-cluster-v2.json";
 import {SecurityLogo} from "./SecurityLogo";
 import {TradingViewSecurityChart} from "./TradingViewSecurityChart";
+import {IntrinsicValueModule} from "./IntrinsicValueModule";
+import type {RealAsset} from "./RealResearch";
+import type {ValuationBridge} from "./ValuationWorkspace";
 import "./fdveResearch.css";
 
 type Fact={status:string;value?:number;periodEnd?:string};
@@ -13,7 +16,7 @@ const fact=(m:Record<string,Fact>,key:string)=>{const f=m[key];return f&&["AVAIL
 const usd=(v:number|null)=>v===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",notation:"compact",maximumFractionDigits:2}).format(v);
 const pct=(n:number|null)=>n===null?"N/D":(n*100).toFixed(1)+"%";
 
-export function FDVEResearch({ticker,onSelect,compact=false}:{ticker?:string;onSelect?:(ticker:string)=>void;compact?:boolean}){
+export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation}:{ticker?:string;onSelect?:(ticker:string)=>void;compact?:boolean;asset?:RealAsset|null;valuation?:ValuationBridge}){
  const [year,setYear]=useState<string|null>(null);
  const [chartMarkets,setChartMarkets]=useState<Record<string,"NASDAQ"|"NYSE">>({});
  const selected=companies.find(c=>c.ticker===ticker);
@@ -37,7 +40,7 @@ export function FDVEResearch({ticker,onSelect,compact=false}:{ticker?:string;onS
     {ticker&&!compact&&<SecurityLogo ticker={ticker} size="small" onMarketResolved={resolveMarket}/>}
    </div>
   </section>;
-  return chart?<div className="company-market-overview">{chart}{panel}</div>:panel;
+  return chart?<div className="company-market-overview"><div className="company-market-top">{chart}{asset&&<IntrinsicValueModule ticker={ticker!} name={asset.name} currency={asset.currency} price={asset.price} valuation={valuation} market={chartMarket} onMarketResolved={resolveMarket}/>}</div>{panel}</div>:panel;
  }
 
  const cards:[string,string][]=[
@@ -56,5 +59,5 @@ export function FDVEResearch({ticker,onSelect,compact=false}:{ticker?:string;onS
    {!compact&&<NavLink to="/company">See company analysis →</NavLink>}
   </div>
  </section>;
- return chart?<div className="company-market-overview">{chart}{panel}</div>:panel;
+ return chart?<div className="company-market-overview"><div className="company-market-top">{chart}{asset&&<IntrinsicValueModule ticker={ticker!} name={asset.name} currency={asset.currency} price={asset.price} valuation={valuation} market={chartMarket} onMarketResolved={resolveMarket}/>}</div>{panel}</div>:panel;
 }
