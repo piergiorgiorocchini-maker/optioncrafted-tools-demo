@@ -16,7 +16,7 @@
 .home-kpi strong em{font-size:11px;color:#7b8da2;font-style:normal;font-weight:600}
 .home-regime-select{display:block;max-width:100%;margin:9px 0 5px;padding:5px 8px;border:1px solid #d6e2ef;border-radius:7px;background:#f7fbff;color:#173653;font-size:13px;font-weight:750}
 .home-kpi small{font-size:9px;color:#8190a3;line-height:1.4}
-.home-feature-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.8fr);gap:12px;align-items:stretch}
+.home-feature-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(400px,.8fr);gap:12px;align-items:stretch}
 .home-card{min-width:0;background:#fff;border:1px solid #dce7f3;border-radius:12px;box-shadow:0 3px 14px #163c6808;overflow:hidden}
 .home-options-card,.home-valuation-card,.home-watchlist-card,.home-portfolio-card,.home-research-card{padding:17px}
 .home-card-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
