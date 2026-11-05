@@ -624,3 +624,61 @@ main{min-width:0;overflow-x:clip}
 
 .home-holding-chips .security-logo{width:18px;height:18px;border-radius:5px}
 .home-holding-chips .security-logo-fallback{font-size:6px}
+
+
+/* Home Price vs. Intrinsic Value: make the valuation conclusion immediate. */
+.home-feature-grid{align-items:start}
+.home-valuation-heading{align-items:flex-start}
+.home-valuation-title{min-width:0}
+.home-valuation-heading .home-security-heading{display:flex;align-items:center;gap:8px;margin:8px 0 4px;color:#142e4c}
+.home-security-title-copy{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;min-width:0}
+.home-security-title-copy>span:first-child{font-size:14px;line-height:1.25;letter-spacing:-.2px}
+.home-market-badge{display:inline-flex;align-items:center;padding:2px 0 2px 8px;border-left:1px solid #d3dfec;color:#607791;font-size:8px;font-weight:850;letter-spacing:.7px;white-space:nowrap}
+.home-valuation-heading p{margin-top:5px}
+.home-valuation-verdict{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:112px;margin:15px 0 10px;padding:13px 15px;border-radius:0;color:#fff}
+.home-valuation-verdict.is-overvalued{background:#b42318}
+.home-valuation-verdict.is-undervalued{background:#176b45}
+.home-valuation-verdict.is-fair-value{background:#315c86}
+.home-valuation-verdict.is-unavailable{background:#52667d}
+.home-valuation-verdict-label{font-size:10px;line-height:1.2;font-weight:850;letter-spacing:1.05px}
+.home-valuation-verdict>strong{font-size:clamp(32px,2.4vw,40px);line-height:1;letter-spacing:-.8px}
+.home-valuation-verdict>small{font-size:9px;line-height:1.3;color:#fff;opacity:.94}
+.home-valuation-card .home-intrinsic-value-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 7px}
+.home-valuation-card .home-intrinsic-value-pair>div{display:grid;align-content:center;gap:6px;min-width:0;min-height:72px;padding:11px 12px;border:1px solid #846017;border-radius:0;background:#97701f;color:#fff}
+.home-valuation-card .home-intrinsic-value-pair span{color:#fff;font-size:10px;font-weight:750;letter-spacing:.15px}
+.home-valuation-card .home-intrinsic-value-pair strong{overflow-wrap:anywhere;color:#fff;font-size:clamp(17px,1.55vw,21px);line-height:1.15;letter-spacing:-.2px}
+.home-valuation-card .home-buy-under{gap:8px;margin:0;padding:8px 0;border-top:0;border-bottom:1px solid #edf1f5}
+.home-valuation-card .home-buy-under span{font-size:9px;color:#72869b}
+.home-valuation-card .home-buy-under strong{font-size:10px;color:#173a5b;white-space:nowrap}
+.home-valuation-card .home-value-scale{margin:9px 0 3px;padding:9px 8px 7px;border-radius:7px;background:#fbfdff}
+.home-valuation-card .home-value-track .buy-marker{background:#16865d;box-shadow:0 0 0 1px #16865d}
+.home-valuation-card .home-value-track .dcf-marker{background:#1879df;box-shadow:0 0 0 1px #1879df}
+.home-valuation-card .home-value-track .market-marker{background:#b4233c;box-shadow:0 0 0 1px #b4233c}
+.home-valuation-card .home-value-scale-values span{font-size:9px}
+.home-valuation-card .home-valuation-note{margin:8px 0 4px;font-size:8px}
+.home-valuation-card .home-card-link{margin-top:6px}
+@media(max-width:760px){
+ .home-valuation-card{padding:14px}
+ .home-valuation-verdict{min-height:104px;padding:12px}
+ .home-valuation-verdict>strong{font-size:34px}
+ .home-valuation-card .home-intrinsic-value-pair>div{min-height:68px;padding:10px}
+ .home-valuation-card .home-intrinsic-value-pair strong{font-size:clamp(16px,4.8vw,20px)}
+ .home-valuation-card .home-value-scale-values span{font-size:8px}
+}
+@media(max-width:360px){
+ .home-security-title-copy{align-items:flex-start;flex-direction:column;gap:3px}
+ .home-valuation-card .home-buy-under{align-items:flex-start;flex-direction:column;gap:3px}
+ .home-valuation-card .home-buy-under strong{white-space:normal}
+}
+
+.home-valuation-card .home-value-scale-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;align-items:center;margin-bottom:2px}
+.home-valuation-card .home-value-scale-legend>span{display:flex;align-items:center;gap:4px;min-width:0;color:#71859a;font-size:7px;font-weight:850;letter-spacing:.25px;white-space:nowrap}
+.home-valuation-card .home-value-scale-legend>span:nth-child(2){justify-content:center}
+.home-valuation-card .home-value-scale-legend>span:last-child{justify-content:flex-end}
+.home-valuation-card .home-value-scale-legend i{width:6px;height:6px;flex:none;display:inline-block;background:#16865d}
+.home-valuation-card .home-value-scale-legend .intrinsic-key{background:#1879df}
+.home-valuation-card .home-value-scale-legend .price-key{background:#b4233c}
+@media(max-width:760px){
+ .home-valuation-card .home-value-scale-legend>span{font-size:6px;letter-spacing:.15px;gap:3px}
+ .home-valuation-card .home-value-scale-legend i{width:5px;height:5px}
+}
