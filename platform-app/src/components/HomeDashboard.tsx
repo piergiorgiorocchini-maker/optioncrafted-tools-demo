@@ -81,6 +81,8 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  },[]);
  const fcf=verifiedFcf(ticker);
  const defaultDcf=useMemo(()=>dcfModel(fcf.perShare,modelDefaults.growth,modelDefaults.discount,modelDefaults.terminal,modelDefaults.years),[fcf.perShare]);
+ const bearDcf=useMemo(()=>dcfModel(fcf.perShare,modelDefaults.growth-3,modelDefaults.discount+2,Math.max(0,modelDefaults.terminal-1),modelDefaults.years),[fcf.perShare]);
+ const bullDcf=useMemo(()=>dcfModel(fcf.perShare,modelDefaults.growth+3,Math.max(1,modelDefaults.discount-1),Math.min(modelDefaults.terminal+0.5,Math.max(0,modelDefaults.discount-1.5)),modelDefaults.years),[fcf.perShare]);
  const intrinsic=valuation?.fairValue??defaultDcf?.value??null;
  const buyUnder=valuation?.buyUnder??(intrinsic===null?null:intrinsic*(1-modelDefaults.mos/100));
  const marketPrice=asset?.price??null;
@@ -89,13 +91,20 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
  const roundedComparisonPercent=comparisonPercent===null?null:Number(comparisonPercent.toFixed(1));
  const valuationState=gap===null?"unavailable":roundedComparisonPercent===0?"fair-value":gap>0?"undervalued":"overvalued";
  const valuationLabel=valuationState==="overvalued"?"OVERVALUED":valuationState==="undervalued"?"UNDERVALUED":valuationState==="fair-value"?"AT INTRINSIC VALUE":"VALUATION UNAVAILABLE";
- const valuationDetail=valuationState==="overvalued"?"Market price is above intrinsic value":valuationState==="undervalued"?"Market price is below intrinsic value":valuationState==="fair-value"?"Market price is at intrinsic value":"Required price or valuation data is unavailable";
  const marginOfSafety=intrinsic!==null&&intrinsic>0&&buyUnder!==null?Math.round(Math.max(0,Math.min(100,(1-buyUnder/intrinsic)*100))*10)/10:modelDefaults.mos;
  const listingMarket=listingMarkets[ticker]??null;
  const resolveListingMarket=(market:"NASDAQ"|"NYSE")=>setListingMarkets(current=>current[ticker]===market?current:{...current,[ticker]:market});
- const valueScaleMax=Math.max(marketPrice??0,intrinsic??0,buyUnder??0)*1.12||1;
- const valuePosition=(value:number|null)=>value===null?0:Math.min(100,Math.max(0,value/valueScaleMax*100));
- const valuationBasis=valuation?.source??(defaultDcf?"Default DCF scenario":"Data required");
+ const valuationScaleFactor=intrinsic!==null&&defaultDcf?.value?intrinsic/defaultDcf.value:1;
+ const bearRangeValue=bearDcf?.value==null?null:bearDcf.value*valuationScaleFactor;
+ const bullRangeValue=bullDcf?.value==null?null:bullDcf.value*valuationScaleFactor;
+ const scenarioRange=[bearRangeValue,intrinsic,bullRangeValue].filter((value):value is number=>value!==null&&Number.isFinite(value)&&value>0);
+ const fallbackRangeAnchor=intrinsic!==null&&intrinsic>0?intrinsic:marketPrice??1;
+ const intrinsicRangeLow=scenarioRange.length>=2?Math.min(...scenarioRange):fallbackRangeAnchor*0.67;
+ const intrinsicRangeHigh=scenarioRange.length>=2?Math.max(...scenarioRange):fallbackRangeAnchor*1.4;
+ const valueScaleMin=Math.max(0,Math.min(intrinsicRangeLow,marketPrice??intrinsicRangeLow));
+ const valueScaleMax=Math.max(valueScaleMin+1,intrinsicRangeHigh,marketPrice??0,intrinsic??0);
+ const valuePosition=(value:number|null)=>value===null?0:Math.min(100,Math.max(0,(value-valueScaleMin)/(valueScaleMax-valueScaleMin)*100));
+ const calloutPosition=(value:number|null)=>Math.min(92,Math.max(8,valuePosition(value)));
  const vix=indexRecord("VIX");
  const selectedModel=modelPortfolios.find(p=>p.id===selectedModelId)??modelPortfolios[0];
  const selectedHoldings=selectedModel.holdings.map(h=>({ ...h,asset:indexRecord(h.ticker) }));
@@ -171,32 +180,43 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
     </div>
    </article>
    <article className="home-card home-valuation-card">
-    <header className="home-card-heading home-valuation-heading">
-     <div className="home-valuation-title">
-      <span className="home-eyebrow">PRICE VS. INTRINSIC VALUE</span>
-      <h3 className="home-security-heading"><SecurityLogo ticker={ticker} onMarketResolved={resolveListingMarket}/><span className="home-security-title-copy"><span>{name} · {ticker}</span><small className="home-market-badge">{listingMarket??(asset?.currency==="USD"?"U.S. MARKET":"MARKET N/D")}</small></span></h3>
-      <p>Per share · {valuationBasis}</p>
+     <header className="home-card-heading home-valuation-heading">
+      <div className="home-valuation-title">
+       <span className="home-eyebrow">PRICE VS. INTRINSIC VALUE</span>
+       <h3 className="home-security-heading"><span className="home-security-name">{ticker} · {name}</span><SecurityLogo ticker={ticker} onMarketResolved={resolveListingMarket}/><small className="home-market-badge">{listingMarket??(asset?.currency==="USD"?"U.S. MARKET":"MARKET N/D")}</small></h3>
+       <p>DCF · {modelDefaults.years}Y growth exit</p>
+      </div>
+      <div className={"home-valuation-verdict is-"+valuationState} aria-live="polite">
+       <strong>{comparisonPercent===null?"N/D":comparisonPercent.toFixed(1)+"%"}</strong>
+       <span className="home-valuation-verdict-label">{valuationLabel}</span>
+      </div>
+     </header>
+     <div className="home-value-pair home-intrinsic-value-pair">
+      <div><span>Stock Price</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div>
+      <div><span>Intrinsic Value</span><strong>{getMoney(intrinsic,asset?.currency)}</strong></div>
      </div>
-     <button type="button" className="home-add-watch" onClick={addToWatchlist} aria-label={"Add "+ticker+" to watchlist"}><Plus size={16}/></button>
-    </header>
-    <div className={"home-valuation-verdict is-"+valuationState} aria-live="polite">
-     <span className="home-valuation-verdict-label">{valuationLabel}</span>
-     <strong>{comparisonPercent===null?"N/D":comparisonPercent.toFixed(1)+"%"}</strong>
-     <small>{valuationDetail}</small>
-    </div>
-    <div className="home-value-pair home-intrinsic-value-pair">
-     <div><span>Stock Price</span><strong>{getMoney(marketPrice,asset?.currency)}</strong></div>
-     <div><span>Intrinsic Value</span><strong>{getMoney(intrinsic,asset?.currency)}</strong></div>
-    </div>
-    <div className="home-buy-under"><span>{marginOfSafety}% Margin of Safety</span><strong>Buy-under · {getMoney(buyUnder,asset?.currency)}</strong></div>
-    <div className="home-value-scale" role="img" aria-label={"Per-share comparison: buy-under "+getMoney(buyUnder,asset?.currency)+", intrinsic value "+getMoney(intrinsic,asset?.currency)+", stock price "+getMoney(marketPrice,asset?.currency)}>
-     <div className="home-value-scale-legend"><span><i className="buy-key"/>BUY-UNDER</span><span><i className="intrinsic-key"/>INTRINSIC VALUE</span><span><i className="price-key"/>STOCK PRICE</span></div>
-     <div className="home-value-track">{buyUnder===null?null:<i className="buy-marker" style={{left:valuePosition(buyUnder)+"%"}}/>}{intrinsic===null?null:<i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}}/>}{marketPrice===null?null:<i className="market-marker" style={{left:valuePosition(marketPrice)+"%"}}/>}</div>
-     <div className="home-value-scale-values"><span>{getMoney(buyUnder,asset?.currency)}</span><span>{getMoney(intrinsic,asset?.currency)}</span><span>{getMoney(marketPrice,asset?.currency)}</span></div>
-    </div>
-    <small className="home-valuation-note">{valuationBasis} · FCF/share {getMoney(fcf.perShare,asset?.currency)} ({fcf.basis})</small>
-    <NavLink className="home-card-link" to="/valuation/dcf">Open full valuation <ArrowRight size={14}/></NavLink>
-   </article>
+     <div className="home-value-scale" role="img" aria-label={"Intrinsic value range from "+getMoney(valueScaleMin,asset?.currency)+" to "+getMoney(valueScaleMax,asset?.currency)+"; intrinsic value "+getMoney(intrinsic,asset?.currency)+"; stock price "+getMoney(marketPrice,asset?.currency)}>
+      <div className="home-value-range-heading">
+       <strong>INTRINSIC VALUE RANGE</strong>
+       <div className="home-value-range-legend"><span><i className="undervalued-key"/>UNDERVALUED</span><span><i className="overvalued-key"/>OVERVALUED</span></div>
+      </div>
+      <div className="home-value-range-plot">
+       {intrinsic!==null&&<div className="home-value-callout intrinsic" style={{left:calloutPosition(intrinsic)+"%"}}><strong>Intrinsic Value</strong><span>{getMoney(intrinsic,asset?.currency)}</span></div>}
+       {marketPrice!==null&&<div className="home-value-callout market" style={{left:calloutPosition(marketPrice)+"%"}}><strong>Stock Price</strong><span>{getMoney(marketPrice,asset?.currency)}</span></div>}
+       <div className="home-value-track" style={{background:"linear-gradient(90deg,#e6f2fc 0%,#e6f2fc "+valuePosition(intrinsic)+"%,#fff0f0 "+valuePosition(intrinsic)+"%,#fceaf0 100%)"}}>
+        {intrinsic===null?null:<i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}}/>}
+        {marketPrice===null?null:<i className="market-marker" style={{left:valuePosition(marketPrice)+"%"}}/>}
+       </div>
+      </div>
+      <div className="home-value-range-axis">
+       <span className="range-end start">{getMoney(valueScaleMin,asset?.currency)}</span>
+       {intrinsic===null?null:<span className="range-marker-value intrinsic" style={{left:valuePosition(intrinsic)+"%"}}>{getMoney(intrinsic,asset?.currency)}</span>}
+       {marketPrice===null?null:<span className="range-marker-value market" style={{left:valuePosition(marketPrice)+"%"}}>{getMoney(marketPrice,asset?.currency)}</span>}
+       <span className="range-end finish">{getMoney(valueScaleMax,asset?.currency)}</span>
+      </div>
+     </div>
+     <div className="home-valuation-footer"><strong>{marginOfSafety}% margin of safety · Buy-under {getMoney(buyUnder,asset?.currency)}</strong><span>Illustrative valuation · {new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(new Date())}</span></div>
+    </article>
   </section>
   <section className="home-ecosystem-grid" aria-label="Explore the OptionsCrafted workspace">
    <article className="home-card home-models-card">
