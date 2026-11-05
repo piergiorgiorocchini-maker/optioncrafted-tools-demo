@@ -785,7 +785,7 @@ main{min-width:0;overflow-x:clip}
 .home-valuation-footer{margin-top:2cqi;padding:1cqi 2cqi}
 @container home-valuation (max-width:700px){
  .home-security-name{font-size:22px}
- .home-valuation-heading .home-security-logo{width:46px;height:46px;border-radius:6px}
+ .home-valuation-heading .security-logo{width:46px;height:46px;border-radius:6px}
  .home-valuation-card .home-valuation-verdict{min-height:100px}
  .home-valuation-card .home-intrinsic-value-pair>div{min-height:112px}
  .home-valuation-card .home-value-scale{margin-top:20px;padding:18px 14px 18px}
