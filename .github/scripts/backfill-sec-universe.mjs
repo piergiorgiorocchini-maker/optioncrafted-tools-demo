@@ -535,6 +535,11 @@ const hasCategoryValue = value => typeof value === 'string' &&
   value.trim() !== '' &&
   value.trim() !== '0' &&
   !['N/A', 'N/D', 'UNCLASSIFIED'].includes(value.trim().toUpperCase());
+const hasMarketMetricValue = (metric, value, ticker) => {
+  if (metric.id === 'category') return hasCategoryValue(categoryByTicker.get(ticker));
+  if (metric.id === 'avgVolume') return hasCoverageValue(value) && Number(value) > 0;
+  return hasCoverageValue(value);
+};
 const slugifyCoverageLabel = value => String(value || '')
   .normalize('NFD')
   .replace(/[\u0300-\u036f]/g, '')
@@ -629,9 +634,7 @@ const coverageSnapshot = {
       name: hasCoverageValue(marketRow[4]) ? String(marketRow[4]).trim() : ticker,
       sector: hasCoverageValue(marketRow[15]) ? String(marketRow[15]).trim() : '',
       present: {
-        market: marketMetrics.filter(metric => metric.id === 'category'
-          ? hasCategoryValue(categoryByTicker.get(ticker))
-          : hasCoverageValue(marketRow[metric.column])).map(metric => metric.id),
+        market: marketMetrics.filter(metric => hasMarketMetricValue(metric, marketRow[metric.column], ticker)).map(metric => metric.id),
         sec: metricSpecs.filter(metric => secPresent.has(metric.key)).map(metric => metric.key),
         fundamentals: fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column])).map(metric => metric.id)
       }
