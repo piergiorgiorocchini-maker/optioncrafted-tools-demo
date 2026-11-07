@@ -500,11 +500,12 @@ if (oldLog.length > mergedLogRows.length) {
 }
 
 
-const [assetsGrid, fundamentalsGrid] = await Promise.all([
+const [assetsGrid, fundamentalsGrid, jsonAssetsGrid] = await Promise.all([
   readValues('Assets!A1:U1000'),
-  readValues('Fundamentals!A1:BD1000')
+  readValues('Fundamentals!A1:BD1000'),
+  readValues('JSON_assets!A1:B1000')
 ]);
-if (assetsGrid.length < 2 || fundamentalsGrid.length < 3 || (fundamentalsGrid[1] || []).length < 55) {
+if (assetsGrid.length < 2 || fundamentalsGrid.length < 3 || (fundamentalsGrid[1] || []).length < 55 || jsonAssetsGrid.length < 6) {
   throw new Error('Coverage snapshot source ranges are incomplete; refusing to publish.');
 }
 const hasCoverageValue = value => {
@@ -515,6 +516,25 @@ const hasCoverageValue = value => {
   }
   return true;
 };
+const categoryChunks = jsonAssetsGrid.slice(5)
+  .filter(row => Number.isInteger(Number(row?.[0])) && typeof row?.[1] === 'string')
+  .map(row => row[1]);
+let jsonAssetRecords;
+try {
+  jsonAssetRecords = JSON.parse(categoryChunks.join(''));
+} catch (error) {
+  throw new Error('Could not parse JSON_assets category export: ' + error.message);
+}
+if (!Array.isArray(jsonAssetRecords) || jsonAssetRecords.length === 0) {
+  throw new Error('JSON_assets category export is empty; refusing to publish.');
+}
+const categoryByTicker = new Map(jsonAssetRecords
+  .map(record => [normTicker(record?.ticker), record?.category])
+  .filter(([ticker]) => Boolean(ticker)));
+const hasCategoryValue = value => typeof value === 'string' &&
+  value.trim() !== '' &&
+  value.trim() !== '0' &&
+  !['N/A', 'N/D', 'UNCLASSIFIED'].includes(value.trim().toUpperCase());
 const slugifyCoverageLabel = value => String(value || '')
   .normalize('NFD')
   .replace(/[\u0300-\u036f]/g, '')
@@ -597,7 +617,7 @@ const coverageSnapshot = {
   schemaVersion: 1,
   generatedAt: new Date().toISOString(),
   definition: 'Present means at least one non-empty value exists for that ticker and field in the latest Google Sheets snapshot; it does not mean the historical series is complete.',
-  source: 'Google Sheets · Assets, SEC_Raw, Fundamentals',
+  source: 'Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals',
   universeCount: assetTickers.length,
   groups: snapshotGroups,
   tickers: assetTickers.map(ticker => {
@@ -609,7 +629,9 @@ const coverageSnapshot = {
       name: hasCoverageValue(marketRow[4]) ? String(marketRow[4]).trim() : ticker,
       sector: hasCoverageValue(marketRow[15]) ? String(marketRow[15]).trim() : '',
       present: {
-        market: marketMetrics.filter(metric => hasCoverageValue(marketRow[metric.column])).map(metric => metric.id),
+        market: marketMetrics.filter(metric => metric.id === 'category'
+          ? hasCategoryValue(categoryByTicker.get(ticker))
+          : hasCoverageValue(marketRow[metric.column])).map(metric => metric.id),
         sec: metricSpecs.filter(metric => secPresent.has(metric.key)).map(metric => metric.key),
         fundamentals: fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column])).map(metric => metric.id)
       }
