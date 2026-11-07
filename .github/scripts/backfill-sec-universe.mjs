@@ -4,6 +4,7 @@
 // for issuers with an unambiguous SEC ticker/CIK match, and updates SEC_Raw + Sync_Log.
 // It never overwrites the normalized Fundamentals sheet.
 import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
 
 const spreadsheetId = process.env.OPTIONSCRAFTED_SHEET_ID;
 const credentialsText = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -497,6 +498,128 @@ if (oldRaw.length > mergedRawRows.length) {
 if (oldLog.length > mergedLogRows.length) {
   await sheetsApi('/values/' + encodeURIComponent('Sync_Log!A' + (mergedLogRows.length + 1) + ':I' + oldLog.length) + ':clear', { method: 'POST', body: '{}' });
 }
+
+
+const [assetsGrid, fundamentalsGrid] = await Promise.all([
+  readValues('Assets!A1:U1000'),
+  readValues('Fundamentals!A1:BD1000')
+]);
+if (assetsGrid.length < 2 || fundamentalsGrid.length < 2 || (fundamentalsGrid[0] || []).length < 55) {
+  throw new Error('Coverage snapshot source ranges are incomplete; refusing to publish.');
+}
+const hasCoverageValue = value => {
+  if (value === null || value === undefined) return false;
+  if (typeof value === 'string') {
+    const text = value.trim();
+    return text !== '' && !text.startsWith('#');
+  }
+  return true;
+};
+const slugifyCoverageLabel = value => String(value || '')
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase()
+  .replace(/&/g, 'and')
+  .replace(/[^a-z0-9]+/g, '_')
+  .replace(/^_+|_+$/g, '');
+const marketMetrics = [
+  { id: 'price', label: 'Prezzo', column: 2 },
+  { id: 'change5d', label: 'Variazione 5 gg', column: 3 },
+  { id: 'name', label: 'Nome società', column: 4 },
+  { id: 'currency', label: 'Valuta', column: 5 },
+  { id: 'marketCap', label: 'Capitalizzazione', column: 6 },
+  { id: 'avgVolume', label: 'Volume medio', column: 7 },
+  { id: 'beta', label: 'Beta', column: 8 },
+  { id: 'pe', label: 'P/E', column: 9 },
+  { id: 'eps', label: 'EPS', column: 10 },
+  { id: 'high52', label: 'Massimo 52 settimane', column: 11 },
+  { id: 'low52', label: 'Minimo 52 settimane', column: 12 },
+  { id: 'drawdown52', label: 'Drawdown 52 settimane', column: 13 },
+  { id: 'dividendYield', label: 'Dividend yield', column: 14 },
+  { id: 'sector', label: 'Settore', column: 15 },
+  { id: 'category', label: 'Categoria', column: 16 },
+  { id: 'change1d', label: 'Variazione 1 giorno', column: 17 },
+  { id: 'changeYtd', label: 'Variazione YTD', column: 18 },
+  { id: 'alphaPe', label: 'P/E Alpha Vantage', column: 19 },
+  { id: 'alphaDividendYield', label: 'Dividend yield Alpha Vantage', column: 20 }
+];
+const secMetricLabels = {
+  revenue: 'Ricavi',
+  netIncome: 'Utile netto',
+  operatingIncome: 'Reddito operativo',
+  cashFromOperations: 'Flusso di cassa operativo',
+  capex: 'CapEx',
+  epsDiluted: 'EPS diluito',
+  cash: 'Cassa ed equivalenti',
+  currentAssets: 'Attività correnti',
+  currentLiabilities: 'Passività correnti',
+  inventory: 'Rimanenze',
+  totalAssets: 'Totale attivo',
+  totalLiabilities: 'Passività totali',
+  equity: 'Patrimonio netto',
+  longTermDebt: 'Debito a lungo termine',
+  shortTermDebt: 'Debito a breve termine'
+};
+const fundamentalMetrics = Array.from({ length: 43 }, (_, index) => {
+  const column = 12 + index;
+  const label = String(fundamentalsGrid[0]?.[column] ?? '').trim() || 'Fundamental field ' + (column + 1);
+  return { id: slugifyCoverageLabel(label), label, column };
+});
+if (marketMetrics.length !== 19 || metricSpecs.length !== 15 || fundamentalMetrics.length !== 43 ||
+    fundamentalMetrics.some(metric => !metric.id)) {
+  throw new Error('Unexpected admin coverage metric schema; refusing to publish.');
+}
+const marketByTicker = new Map();
+for (const row of assetsGrid.slice(1)) {
+  const ticker = normTicker(row?.[1]);
+  if (ticker) marketByTicker.set(ticker, row);
+}
+const secByTicker = new Map();
+for (const row of mergedRawRows.slice(1)) {
+  const ticker = normTicker(row?.[0]);
+  const metric = String(row?.[2] ?? '').trim();
+  if (!ticker || !metric || !hasCoverageValue(row?.[3])) continue;
+  const present = secByTicker.get(ticker) || new Set();
+  present.add(metric);
+  secByTicker.set(ticker, present);
+}
+const fundamentalsByTicker = new Map();
+for (const row of fundamentalsGrid.slice(1)) {
+  const ticker = normTicker(row?.[0]);
+  if (ticker) fundamentalsByTicker.set(ticker, row);
+}
+const snapshotGroups = [
+  { id: 'market', label: 'Dati di mercato', metrics: marketMetrics.map(({ id, label }) => ({ id, label })) },
+  { id: 'sec', label: 'Dati grezzi SEC', metrics: metricSpecs.map(metric => ({ id: metric.key, label: secMetricLabels[metric.key] || metric.key })) },
+  { id: 'fundamentals', label: 'Fundamentals normalizzati / calcolati', metrics: fundamentalMetrics.map(({ id, label }) => ({ id, label })) }
+];
+const coverageSnapshot = {
+  schemaVersion: 1,
+  generatedAt: new Date().toISOString(),
+  definition: 'Present means at least one non-empty value exists for that ticker and field in the latest Google Sheets snapshot; it does not mean the historical series is complete.',
+  source: 'Google Sheets · Assets, SEC_Raw, Fundamentals',
+  universeCount: assetTickers.length,
+  groups: snapshotGroups,
+  tickers: assetTickers.map(ticker => {
+    const marketRow = marketByTicker.get(ticker) || [];
+    const fundamentalRow = fundamentalsByTicker.get(ticker) || [];
+    const secPresent = secByTicker.get(ticker) || new Set();
+    return {
+      ticker,
+      name: hasCoverageValue(marketRow[4]) ? String(marketRow[4]).trim() : ticker,
+      sector: hasCoverageValue(marketRow[15]) ? String(marketRow[15]).trim() : '',
+      present: {
+        market: marketMetrics.filter(metric => hasCoverageValue(marketRow[metric.column])).map(metric => metric.id),
+        sec: metricSpecs.filter(metric => secPresent.has(metric.key)).map(metric => metric.key),
+        fundamentals: fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column])).map(metric => metric.id)
+      }
+    };
+  })
+};
+if (coverageSnapshot.tickers.length !== assetTickers.length) {
+  throw new Error('Coverage snapshot ticker count mismatch; refusing to publish.');
+}
+await fs.writeFile('platform-app/src/data/adminCoverageSnapshot.json', JSON.stringify(coverageSnapshot, null, 2) + '\n');
 
 const statusCounts = {};
 for (const outcome of outcomes) statusCounts[outcome.status] = (statusCounts[outcome.status] || 0) + 1;
