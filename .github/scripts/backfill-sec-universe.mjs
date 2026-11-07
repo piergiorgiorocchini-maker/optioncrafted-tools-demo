@@ -14,7 +14,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11';
+const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11-v2';
 const forms = new Set(['10-K', '10-K/A', '20-F', '20-F/A', '40-F', '40-F/A']);
 const metricSpecs = [
   { key: 'revenue', kind: 'flow', tags: ['RevenueFromContractWithCustomerExcludingAssessedTax', 'RevenueFromContractWithCustomerIncludingAssessedTax', 'Revenues', 'SalesRevenueNet', 'Revenue'] },
@@ -187,6 +187,31 @@ function factCandidates(doc, metric) {
   }
   return out;
 }
+function diagnoseNoAnnualFacts(doc, ticker) {
+  const present = [];
+  for (const metric of metricSpecs) {
+    for (const framework of ['us-gaap', 'ifrs-full']) {
+      const concepts = doc?.facts?.[framework] || {};
+      for (const tag of metric.tags) {
+        const units = concepts[tag]?.units || {};
+        for (const [unit, observations] of Object.entries(units)) {
+          if (!Array.isArray(observations) || !observations.length) continue;
+          const samples = observations.slice(-2).map(observation => ({
+            form: observation.form, start: observation.start || '', end: observation.end || '',
+            filed: observation.filed || '', value: observation.val
+          }));
+          present.push({ metric: metric.key, framework, tag, unit, count: observations.length,
+            allowedUnit: allowedUnit(metric, unit), samples });
+        }
+      }
+    }
+  }
+  console.log('[SEC_NO_ANNUAL_FACTS_DIAGNOSTIC] ' + JSON.stringify({
+    ticker, cik: doc?.cik, entityName: doc?.entityName,
+    taxonomies: Object.keys(doc?.facts || {}), present
+  }));
+}
+
 function annualPeriodEnds(candidatesByMetric) {
   const ends = new Set();
   for (const metric of metricSpecs) {
@@ -229,6 +254,7 @@ function buildRows(doc, ticker, cik, companyName, generatedAt) {
   const candidatesByMetric = {};
   for (const metric of metricSpecs) candidatesByMetric[metric.key] = factCandidates(doc, metric);
   const periodEnds = annualPeriodEnds(candidatesByMetric);
+  if (ticker === 'XOM' && !periodEnds.length) diagnoseNoAnnualFacts(doc, ticker);
   if (!periodEnds.length) return { rows: [], periodEnds: [], missingMetrics: metricSpecs.map(metric => metric.key), companyName: companyName || doc.entityName || '' };
   const currency = preferredCurrency(candidatesByMetric);
   const sourceUrl = 'https://data.sec.gov/api/xbrl/companyfacts/CIK' + cik + '.json';
@@ -284,7 +310,14 @@ for (const ticker of assetTickers) {
       cached = { doc: await fetchSecJson(sourceUrl), sourceUrl };
       factsCache.set(match.cik, cached);
     } catch (error) {
-      outcomes.push({ ticker, status: 'SOURCE_ERROR', records: [], cik: match.cik, error: error.message });
+      const missingFactsEndpoint = error.message.includes('SEC HTTP 404');
+      outcomes.push({
+        ticker, status: missingFactsEndpoint ? 'NO_COMPANYFACTS' : 'SOURCE_ERROR',
+        records: [], cik: match.cik,
+        error: missingFactsEndpoint
+          ? 'Ticker/CIK matched, but the SEC CompanyFacts endpoint returned HTTP 404; this issuer is not covered by this SEC facts dataset.'
+          : error.message
+      });
       await sleep(150);
       continue;
     }
@@ -293,7 +326,7 @@ for (const ticker of assetTickers) {
   try {
     const parsed = buildRows(cached.doc, ticker, match.cik, match.title, now);
     if (!parsed.rows.length) {
-      outcomes.push({ ticker, status: 'NO_STANDARD_FACTS', records: [], cik: match.cik, periods: parsed.periodEnds, error: 'No supported annual standard-taxonomy facts found in the latest five periods.' });
+      outcomes.push({ ticker, status: 'NO_STANDARD_FACTS', records: [], cik: match.cik, periods: parsed.periodEnds, companyName: parsed.companyName, error: 'No supported annual standard-taxonomy facts found in the latest five periods for ' + (parsed.companyName || match.title || match.cik) + '.' });
     } else {
       outcomes.push({
         ticker, status: parsed.missingMetrics.length ? 'PARTIAL' : 'OK',
