@@ -208,3 +208,90 @@ D. Dopo il refresh export, verifica assetsSnapshot.json, monthly-returns.json e 
 E. Verifica build e deploy; lo snapshot deve riportare timestamp coerente e dataIsLive=false.
 
 Nota di provenienza: lo stato del foglio è stato letto direttamente il 4 novembre 2026; lo snapshot e le run GitHub sono stati verificati sul branch main; i dettagli del progetto Apps Script derivano dal codice `.txt` condiviso e dagli screenshot dell’utente. Nessun valore di API key o GitHub token è incluso.
+
+
+AGGIORNAMENTO DEL 7 NOVEMBRE 2026 — CHIARIMENTO SULLA COPERTURA DEI FONDAMENTALI
+
+Questa sezione distingue esplicitamente l’aggiornamento dell’universo Assets dalla raccolta dei bilanci annuali. Sono pipeline collegate nel prodotto, ma non sono la stessa operazione e non hanno lo stesso perimetro.
+
+RISPOSTA DIRETTA
+
+No: al momento non risulta scaricato e validato il set completo dei fondamentali storici per tutti i 227 ticker di Assets. La copertura strutturata dei bilanci è partita con un campione di 20 società. Per queste società il test SEC considera gli esercizi FY2021–FY2025 (fino a 100 combinazioni società/anno), ma raccoglie un insieme definito di metriche applicabili: non equivale a scaricare e rendere disponibili tutti i dati XBRL SEC di ogni società.
+
+I 20 ticker configurati per il test FDVE sono: AAPL, MSFT, XOM, WMT, JPM, ADBE, CRM, NVDA, AVGO, AMD, GOOGL, AMZN, COST, PG, CAT, DE, CVX, JNJ, MRK e UNH.
+
+I dati SEC del campione sono ottenuti dal workflow FDVE direttamente da SEC EDGAR Company Facts, identificando ogni società tramite CIK. Il processo seleziona i valori annuali per esercizio fiscale, applica mapping/alias controllati, distingue metriche disponibili, derivate e mancanti e applica profili diversi per settore (in particolare per le banche). Il report diagnostico viene scritto in `platform-app/reports/fdve-cluster-v2.json` e il riepilogo in `platform-app/reports/fdve-cluster-summary.json`. L’audit salva localmente anche le risposte SEC grezze durante l’esecuzione, ma il workflow pubblica nel repository i report di audit, non un dataset finanziario di produzione per l’intero universo.
+
+Il report campione del 1 novembre 2026 riporta FY2021–FY2025, 20 società e 1.491 osservazioni disponibili su 1.645 applicabili (90,64%). È un risultato dell’audit a quella data, non una misura aggiornata al 7 novembre e non una percentuale riferibile a tutti i ticker di Assets. Il target di copertura industriale del workflow è almeno 95%; i mancanti restano espliciti, non vengono trasformati in zero.
+
+FLUSSI DISTINTI
+
+1) Universo e snapshot `Assets` — 227 ticker
+- Google Sheets `Assets` contiene il paniere ordinato proveniente da `A`, prezzi e campi disponibili da formule (incluso GOOGLEFINANCE) e alcuni campi profilo/provider.
+- Apps Script aggiorna il `ProviderCache` entro i limiti FMP/Alpha Vantage; formule in `Assets` riportano i risultati associandoli al ticker.
+- `refreshGoogleSheetsDataToGitHub` esporta e pubblica lo snapshot, stagionalità e rendimenti. Questo aggiorna ciò che i componenti OC leggono dal relativo JSON statico dopo build/deploy.
+- Questo flusso non raccoglie automaticamente per ogni simbolo i prospetti annuali completi, non riempie la scheda Fundamentals e non garantisce che ogni metrica di Company Intelligence sia disponibile.
+
+2) Dataset fondamentale SEC / FDVE — campione configurato di 20 ticker
+- Workflow: `.github/workflows/fdve-cluster-audit.yml`; configurazione ticker/anni: `platform-app/config/fdve-cluster-pilot.json`; raccolta e normalizzazione: `platform-app/scripts/fdve-cluster-v2.mjs` e mapping correlati.
+- La fonte primaria è SEC Company Facts. Per ogni società il job seleziona le metriche approvate e gli esercizi fiscali configurati, calcola la copertura e documenta i casi mancanti/ambigui.
+- Il workflow è un audit di copertura e qualità: esegue i test, produce report nel repository e non modifica Google Sheets `Assets`, `ProviderCache` o lo snapshot pubblicato della piattaforma.
+- Il primo vertical slice documentato era di 5 società (AAPL, MSFT, XOM, WMT, JPM) su FY2024–FY2025; in seguito è stato esteso il test di copertura a 20 società su FY2021–FY2025. L’estensione del test non significa che tutte le 20 abbiano ogni dato disponibile né che la piattaforma consumi già tutti questi dati come dataset completo.
+
+3) Ingestione incrementale Alpha Vantage / FMP per prospetti annuali
+- Workflow: `.github/workflows/fdve-daily-providers.yml`; collector: `platform-app/scripts/fdve-daily-provider-collector.mjs`; cache e ledger: `platform-app/reports/provider-cache/`.
+- La lista configurata è la stessa lista di 20 ticker, ma la raccolta è incrementale e con cursore round-robin persistente. Ogni risposta valida viene normalizzata e salvata nella cache provider per ticker e tipo di prospetto; un ledger giornaliero evita di ripetere richieste già tentate.
+- Al 7 novembre 2026 il workflow imposta `FDVE_AV_DAILY_CALLS=3` e `FDVE_FMP_DAILY_CALLS=0`. Le tre richieste Alpha Vantage al giorno sono condivise tra ticker e prospetti annuali; non significano tre ticker completi al giorno. La rotazione avanza in base al cursore e agli endpoint disponibili. Con gli endpoint annuali FMP disabilitati, FMP non contribuisce a questa raccolta finché non cambia il piano/configurazione.
+- Questo job salva cache provider e ledger nel repository. Non scrive direttamente né in `Assets`/`ProviderCache` di Google Sheets né nei JSON di mercato consumati dall’app.
+- La chiave Alpha Vantage abilita la richiesta ma non rende automaticamente i relativi dati una fonte canonica. Le decisioni FDVE mantengono SEC come fonte primaria; i provider alternativi servono per confronto/copertura e devono rispettare periodo, valuta, unità e definizione della metrica.
+
+PERCORSO FINO ALLA VISUALIZZAZIONE IN OC
+
+Perché un fondamentale raccolto dal flusso FDVE compaia in Company Intelligence non basta che il workflow termini con stato “Completata”. Occorre una fase esplicita di pubblicazione del dataset validato, collegamento al ticker/CIK e integrazione del componente OC che lo legge. Nello stato documentato qui, FDVE produce audit e cache provider, mentre la pipeline Google Sheets pubblica snapshot di mercato: sono due output diversi. Non si deve dedurre che i fondamentali del report campione siano già presenti per tutti i ticker nelle varie pagine del sito.
+
+ORDINE OPERATIVO PER ALLARGARE LA COPERTURA
+
+1. Usare il campione FDVE per chiudere mapping, differenze settoriali, anni fiscali, qualità e gestione dei mancanti.
+2. Pubblicare un dataset fondamentale canonico separato dallo snapshot `Assets`, con ticker, CIK, metrica, valore, unità, periodo, fonte, timestamp e stato (reported/derived/missing/review).
+3. Collegare Company Intelligence e gli altri moduli a quel dataset, conservando l’indicazione della data e della fonte.
+4. Estendere ticker per lotti, rispettando rate limit SEC/provider, controllando errori e copertura per società e metrica prima di aumentare il lotto.
+5. Considerare la copertura “universo completo” solo dopo un report aggiornato per tutti i ticker applicabili; ETF, fondi, ticker non USA o società senza CIK possono richiedere un trattamento distinto e non vanno contati automaticamente come mancanti SEC.
+
+In sintesi: il paniere Assets è ampio e il suo snapshot viene esportato; i fondamentali SEC strutturati sono stati testati su un campione controllato di 20 società/5 esercizi; l’ingestione Alpha/FMP dei prospetti è un terzo flusso incrementale con budget limitato. La copertura completa e la pubblicazione sitewide dei fondamentali restano un obiettivo da completare e verificare.
+
+
+STATO OPTIONSCRAFTED AL 7 NOVEMBRE 2026 — PRODOTTO, UI E PUBBLICAZIONE
+
+Questo aggiornamento registra le decisioni e gli esiti della sessione del 7 novembre, oltre allo stato dati descritto sopra. Per la cronologia incrementale consultare anche `docs/CHANGELOG_OPTIONSCRAFTED.txt`.
+
+MODULO PRICE VS. INTRINSIC VALUE
+
+- Il modulo è stato progettato per rendere immediato il confronto fra prezzo di mercato e valore intrinseco, mantenendo il layout a colonne della Home. Deve restare affiancato al contenuto principale, non diventare un banner a tutta larghezza.
+- Direzione grafica approvata: stato OVERVALUED/UNDERVALUED in un riquadro rosso o verde pieno, con percentuale ben visibile e senza segno +/−; riquadri Stock Price e Intrinsic Value blu navy con testo bianco; ticker, logo e mercato chiaramente leggibili; range e margin of safety più distanziati e leggibili.
+- L’utente ha chiarito che “Intrinsic Value” intende il prezzo risultante dalla triangolazione/aggregazione dei metodi di valutazione, non il Fair Value di un singolo modello DCF. La denominazione e la semantica del dato vanno riallineate quando sarà completata la triangolazione; finché non viene modificato il calcolo, non presentare il valore DCF di base come se fosse già la media dei metodi.
+- Il componente è pensato per essere riutilizzato in più pagine: una modifica al componente condiviso può propagarsi ovunque venga montato. Il comportamento e la fonte del dato devono quindi restare coerenti tra Home e Company Intelligence.
+
+COMPANY INTELLIGENCE E PRICE HISTORY
+
+- Il modulo di valutazione è stato portato nell’area Company Intelligence accanto alla chart annuale della security, preservando la chart prezzo esistente in alto. Non va aggiunta una seconda chart di prezzo per ottenere il layout affiancato.
+- Il 7 novembre è stato affrontato il problema desktop in cui la linea/asse temporale del price history occupava solo una parte della larghezza disponibile. È stato applicato un workaround di layout all’interno della chart; l’utente ha confermato l’esito con “Ottimo”. La correzione riguarda la presentazione della chart e non cambia la fonte o la frequenza dei prezzi.
+- I prezzi mostrati restano snapshot con data, salvo diversa indicazione del componente; il widget TradingView è un supporto visivo e non sostituisce la pipeline fondamentale né costituisce una nuova fonte canonica per i calcoli.
+
+LOGHI E IDENTITÀ DEI TITOLI
+
+- È stato introdotto il componente condiviso `SecurityLogo` per rendere più riconoscibili i ticker e riutilizzare le icone in più aree della piattaforma, inclusi ricerca globale, Company Intelligence, Market Explorer e strumenti di portafoglio/strategie dove integrato.
+- La disponibilità del logo dipende dal supporto del ticker/dominio e può avere fallback. Un logo mancante non deve essere interpretato come ticker o dato finanziario mancante.
+
+STATO DI CODICE, BUILD E DEPLOY
+
+- Al momento della redazione il repository locale contiene modifiche di piattaforma non ancora incluse nel commit documentale: Home e CSS del modulo, identità/loghi e riferimenti in Company Intelligence, Market Explorer, Portfolio Studio, Valuation e Options, oltre a una modifica del collector FDVE per arrestarsi anche su HTTP 402. Non includere queste modifiche applicative nel changelog come “pubblicate” senza controllare commit, workflow build e deploy.
+- L’utente ha confermato che la piattaforma è online e ha accettato il workaround della chart. Questa conferma si riferisce alla versione osservata in piattaforma; prima di attribuire alla produzione ogni modifica locale successiva, verificare la revisione GitHub/Pages effettivamente pubblicata.
+- La documentazione è stata salvata separatamente dal codice applicativo. Il commit documentale non deve trascinare nel repository `node_modules`, `dist`, file di build o altre modifiche non pertinenti.
+
+PROSSIMA CHAT — PUNTO DI RIPARTENZA
+
+1. Aprire questo dossier e `CHANGELOG_OPTIONSCRAFTED.txt` prima di chiedere nuovi screenshot o codice già condiviso.
+2. Confermare la revisione pubblicata della piattaforma e che la chart prezzo sia unica, correttamente allineata e affiancata al modulo di valutazione in Company Intelligence.
+3. Verificare se il modulo condiviso sta mostrando un Intrinsic Value triangolato o un output del DCF base; fino a verifica, descrivere con precisione il metodo effettivamente usato.
+4. Separare tre obiettivi dati: refresh dello snapshot Assets; completamento della copertura fondamentale FDVE; pubblicazione/consumo del dataset fondamentale nei moduli OC.
+5. Prima di ampliare i ticker, verificare report FDVE, cursori/ledger provider, limiti API e pipeline di deploy. Non dedurre copertura completa dal solo esito “Completata” di un workflow.
