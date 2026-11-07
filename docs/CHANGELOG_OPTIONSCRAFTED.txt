@@ -49,3 +49,11 @@ PROSSIMI PUNTI
 - Verificare lo stato dei trigger Apps Script e l’ultimo snapshot Assets pubblicato.
 - Disegnare e implementare un percorso esplicito: SEC/provider → dataset normalizzato e versionato → controlli qualità → pubblicazione → componenti Company Intelligence/Valuation.
 - Aggiornare questa cronologia ad ogni modifica futura con i relativi riferimenti a commit, run e deploy, senza includere credenziali.
+
+
+2026-11-07 — RIFERIMENTO DI MERCATO: CHATGPT FOR FINANCIAL SERVICES
+
+- Esaminata la presentazione OpenAI di ChatGPT for Financial Services: i workflow mostrati comprendono ricerca azionaria, valutazione, modellazione LBO, selezione di potenziali acquirenti, analisi dei risultati e produzione di modelli/materiali per i clienti.
+- Il prodotto associa questi workflow a dataset finanziari premium e a riferimenti verificabili alle fonti. L’annuncio lo rende disponibile alle istituzioni finanziarie idonee; per alcuni provider collega i permessi agli abbonamenti aziendali già esistenti. La pagina non indica un accesso autonomo ai dataset partner tramite API per StockCrafted o tramite il normale ChatGPT.
+- Valutazione di Pier: workflow di questo tipo sarebbero utili anche a molti analisti indipendenti; una versione individuale con dati propri o abbonamenti separati sarebbe interessante.
+- Rilevanza per OptionsCrafted/StockCrafted: usare il prodotto come riferimento per la sequenza fonti → ipotesi/calcoli → valutazione → report, con tracciabilità dei dati. I dataset premium non si considerano disponibili alla piattaforma; i workflow possono essere sviluppati sulle fonti pubbliche e sui provider già accessibili. Nessuna implementazione o decisione di prodotto è stata approvata in questa sessione.
