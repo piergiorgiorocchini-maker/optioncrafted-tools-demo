@@ -14,7 +14,10 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11-v2';
+const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11-v3';
+// SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
+// CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
+const XOM_LEGACY_CIK = '0000034088';
 const forms = new Set(['10-K', '10-K/A', '20-F', '20-F/A', '40-F', '40-F/A']);
 const metricSpecs = [
   { key: 'revenue', kind: 'flow', tags: ['RevenueFromContractWithCustomerExcludingAssessedTax', 'RevenueFromContractWithCustomerIncludingAssessedTax', 'Revenues', 'SalesRevenueNet', 'Revenue'] },
@@ -187,31 +190,6 @@ function factCandidates(doc, metric) {
   }
   return out;
 }
-function diagnoseNoAnnualFacts(doc, ticker) {
-  const present = [];
-  for (const metric of metricSpecs) {
-    for (const framework of ['us-gaap', 'ifrs-full']) {
-      const concepts = doc?.facts?.[framework] || {};
-      for (const tag of metric.tags) {
-        const units = concepts[tag]?.units || {};
-        for (const [unit, observations] of Object.entries(units)) {
-          if (!Array.isArray(observations) || !observations.length) continue;
-          const samples = observations.slice(-2).map(observation => ({
-            form: observation.form, start: observation.start || '', end: observation.end || '',
-            filed: observation.filed || '', value: observation.val
-          }));
-          present.push({ metric: metric.key, framework, tag, unit, count: observations.length,
-            allowedUnit: allowedUnit(metric, unit), samples });
-        }
-      }
-    }
-  }
-  console.log('[SEC_NO_ANNUAL_FACTS_DIAGNOSTIC] ' + JSON.stringify({
-    ticker, cik: doc?.cik, entityName: doc?.entityName,
-    taxonomies: Object.keys(doc?.facts || {}), present
-  }));
-}
-
 function annualPeriodEnds(candidatesByMetric) {
   const ends = new Set();
   for (const metric of metricSpecs) {
@@ -254,7 +232,6 @@ function buildRows(doc, ticker, cik, companyName, generatedAt) {
   const candidatesByMetric = {};
   for (const metric of metricSpecs) candidatesByMetric[metric.key] = factCandidates(doc, metric);
   const periodEnds = annualPeriodEnds(candidatesByMetric);
-  if (ticker === 'XOM' && !periodEnds.length) diagnoseNoAnnualFacts(doc, ticker);
   if (!periodEnds.length) return { rows: [], periodEnds: [], missingMetrics: metricSpecs.map(metric => metric.key), companyName: companyName || doc.entityName || '' };
   const currency = preferredCurrency(candidatesByMetric);
   const sourceUrl = 'https://data.sec.gov/api/xbrl/companyfacts/CIK' + cik + '.json';
@@ -274,6 +251,88 @@ function buildRows(doc, ticker, cik, companyName, generatedAt) {
   }
   const missingMetrics = metricSpecs.map(metric => metric.key).filter(metric => !availableMetrics.has(metric));
   return { rows, periodEnds, missingMetrics, companyName: companyName || doc.entityName || '', currency };
+}
+
+function buildQuarterlyRows(doc, ticker, cik, companyName, generatedAt) {
+  if (!doc?.facts || normCik(doc.cik) !== cik) throw new Error('SEC CIK mismatch or no facts for ' + ticker);
+  const quarterForms = new Set(['10-Q', '10-Q/A']);
+  const candidatesByMetric = {};
+  const allPeriods = new Map();
+  for (const metric of metricSpecs) {
+    const candidates = [];
+    for (const framework of ['us-gaap', 'ifrs-full']) {
+      const concepts = doc.facts[framework] || {};
+      for (let tagIndex = 0; tagIndex < metric.tags.length; tagIndex++) {
+        const tag = metric.tags[tagIndex];
+        const units = concepts[tag]?.units || {};
+        for (const [unit, observations] of Object.entries(units)) {
+          if (!allowedUnit(metric, unit) || !Array.isArray(observations)) continue;
+          for (const observation of observations) {
+            if (!quarterForms.has(observation.form) || !observation.end || !observation.filed ||
+                !Number.isFinite(Number(observation.val)) || observation.end < '2025-01-01') continue;
+            const start = observation.start || '';
+            if (metric.kind === 'instant') {
+              if (start) continue;
+            } else {
+              if (!start) continue;
+              const days = (Date.parse(observation.end) - Date.parse(start)) / 86400000;
+              // Preserve discrete quarters and 6/9-month cumulative periods from 10-Q filings.
+              if (![[60, 110], [150, 200], [240, 280]].some(([min, max]) => days >= min && days <= max)) continue;
+            }
+            const fact = {
+              value: Number(observation.val), start, end: observation.end,
+              filed: observation.filed, form: observation.form,
+              accession: observation.accn || '', tag, framework, tagIndex, unit
+            };
+            candidates.push(fact);
+            allPeriods.set(start + '|' + fact.end, { start, end: fact.end });
+          }
+        }
+      }
+    }
+    candidatesByMetric[metric.key] = candidates;
+  }
+
+  const periods = [...allPeriods.values()].sort((a, b) => a.end.localeCompare(b.end) || a.start.localeCompare(b.start));
+  const currencyCounts = new Map();
+  for (const metric of metricSpecs) {
+    if (metric.kind === 'instant') continue;
+    for (const fact of candidatesByMetric[metric.key] || []) {
+      const currency = baseCurrency(fact.unit);
+      currencyCounts.set(currency, (currencyCounts.get(currency) || 0) + 1);
+    }
+  }
+  const currency = [...currencyCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] || 'USD';
+  const sourceUrl = 'https://data.sec.gov/api/xbrl/companyfacts/CIK' + cik + '.json';
+  const rows = [];
+  const availableMetrics = new Set();
+  for (const metric of metricSpecs) {
+    const candidates = candidatesByMetric[metric.key] || [];
+    for (const period of periods) {
+      const matching = candidates.filter(fact => fact.end === period.end && fact.start === period.start);
+      if (!matching.length) continue;
+      matching.sort((a, b) => {
+        const aCurrency = baseCurrency(a.unit), bCurrency = baseCurrency(b.unit);
+        const aCurrencyRank = aCurrency === currency ? 2 : aCurrency === 'USD' ? 1 : 0;
+        const bCurrencyRank = bCurrency === currency ? 2 : bCurrency === 'USD' ? 1 : 0;
+        if (aCurrencyRank !== bCurrencyRank) return bCurrencyRank - aCurrencyRank;
+        if ((a.framework === 'us-gaap') !== (b.framework === 'us-gaap')) return a.framework === 'us-gaap' ? -1 : 1;
+        if (a.filed !== b.filed) return b.filed.localeCompare(a.filed);
+        return a.tagIndex - b.tagIndex;
+      });
+      const fact = matching[0];
+      rows.push([
+        ticker, cik, metric.key, fact.value, fact.start, fact.end, fact.filed,
+        fact.form, fact.accession, fact.tag, fact.unit, sourceUrl, generatedAt, 'VERIFIED_SOURCE'
+      ]);
+      availableMetrics.add(metric.key);
+    }
+  }
+  const missingMetrics = metricSpecs.map(metric => metric.key).filter(metric => !availableMetrics.has(metric));
+  return {
+    rows, periodEnds: [...new Set(periods.map(period => period.end))],
+    missingMetrics, companyName: companyName || doc.entityName || '', currency
+  };
 }
 
 const metadata = await sheetsApi('?fields=sheets(properties(sheetId,title,gridProperties(rowCount)))');
@@ -324,15 +383,41 @@ for (const ticker of assetTickers) {
     await sleep(150);
   }
   try {
-    const parsed = buildRows(cached.doc, ticker, match.cik, match.title, now);
+    let parsed = buildRows(cached.doc, ticker, match.cik, match.title, now);
+    if (ticker === 'XOM' && match.cik !== XOM_LEGACY_CIK) {
+      // The current SEC ticker map points XOM to its 2026 publicly traded parent.
+      // Add predecessor annual history and current-parent quarterly observations separately.
+      let legacy = factsCache.get(XOM_LEGACY_CIK);
+      if (!legacy) {
+        const legacyUrl = 'https://data.sec.gov/api/xbrl/companyfacts/CIK' + XOM_LEGACY_CIK + '.json';
+        legacy = { doc: await fetchSecJson(legacyUrl), sourceUrl: legacyUrl };
+        factsCache.set(XOM_LEGACY_CIK, legacy);
+        await sleep(150);
+      }
+      const historical = buildRows(legacy.doc, ticker, XOM_LEGACY_CIK, 'Exxon Mobil Corporation (predecessor)', now);
+      const quarterly = buildQuarterlyRows(cached.doc, ticker, match.cik, match.title, now);
+      const rows = [...historical.rows, ...quarterly.rows];
+      const covered = new Set(rows.map(row => row[2]));
+      const missingMetrics = metricSpecs.map(metric => metric.key).filter(key => !covered.has(key));
+      parsed = {
+        rows,
+        periodEnds: [...new Set([...historical.periodEnds, ...quarterly.periodEnds])],
+        missingMetrics,
+        companyName: match.title || cached.doc.entityName || 'ExxonMobil',
+        currency: historical.currency || quarterly.currency || 'USD'
+      };
+    }
     if (!parsed.rows.length) {
-      outcomes.push({ ticker, status: 'NO_STANDARD_FACTS', records: [], cik: match.cik, periods: parsed.periodEnds, companyName: parsed.companyName, error: 'No supported annual standard-taxonomy facts found in the latest five periods for ' + (parsed.companyName || match.title || match.cik) + '.' });
+      outcomes.push({ ticker, status: 'NO_STANDARD_FACTS', records: [], cik: match.cik, periods: parsed.periodEnds, companyName: parsed.companyName, error: 'No supported annual standard-taxonomy facts found for ' + (parsed.companyName || match.title || match.cik) + '.' });
     } else {
       outcomes.push({
         ticker, status: parsed.missingMetrics.length ? 'PARTIAL' : 'OK',
         records: parsed.rows, cik: match.cik, periods: parsed.periodEnds,
         currency: parsed.currency, missingMetrics: parsed.missingMetrics,
-        companyName: parsed.companyName, error: parsed.missingMetrics.length ? 'Metrics not found: ' + parsed.missingMetrics.join(', ') : ''
+        companyName: parsed.companyName,
+        error: ticker === 'XOM'
+          ? 'History: predecessor CIK ' + XOM_LEGACY_CIK + '; current quarter data: parent CIK ' + match.cik + ' after 2026 redomiciliation. Missing metrics: ' + parsed.missingMetrics.join(', ')
+          : parsed.missingMetrics.length ? 'Metrics not found: ' + parsed.missingMetrics.join(', ') : ''
       });
     }
   } catch (error) {
