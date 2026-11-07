@@ -314,7 +314,7 @@ const requiredRows = newFactRows.length + 1;
 if (requiredRows > rawCapacity) throw new Error('SEC_Raw backfill exceeds the configured row capacity: ' + requiredRows);
 
 if (secSheet.gridProperties?.rowCount < rawCapacity) {
-  await sheetsApi('/batchUpdate', {
+  await sheetsApi(':batchUpdate', {
     method: 'POST',
     body: JSON.stringify({
       requests: [{
