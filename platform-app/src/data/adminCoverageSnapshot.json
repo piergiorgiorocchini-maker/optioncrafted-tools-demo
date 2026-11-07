@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T22:01:03.672Z",
+  "generatedAt": "2026-11-07T22:13:19.393Z",
   "definition": "Present means at least one non-empty value exists for that ticker and field in the latest Google Sheets snapshot; it does not mean the historical series is complete.",
   "source": "Google Sheets · Assets, SEC_Raw, Fundamentals",
   "universeCount": 227,
