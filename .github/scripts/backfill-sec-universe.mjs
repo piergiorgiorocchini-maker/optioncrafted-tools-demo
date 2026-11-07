@@ -224,7 +224,7 @@ function chooseFact(candidates, periodEnd, kind, currency) {
   });
   return matching[0] || null;
 }
-function buildRows(doc, ticker, cik, companyName, sourceUrl, generatedAt) {
+function buildRows(doc, ticker, cik, companyName, generatedAt) {
   if (!doc?.facts || normCik(doc.cik) !== cik) throw new Error('SEC CIK mismatch or no facts for ' + ticker);
   const candidatesByMetric = {};
   for (const metric of metricSpecs) candidatesByMetric[metric.key] = factCandidates(doc, metric);
@@ -291,7 +291,7 @@ for (const ticker of assetTickers) {
     await sleep(150);
   }
   try {
-    const parsed = buildRows(cached.doc, ticker, match.cik, match.title, cached.sourceUrl, now);
+    const parsed = buildRows(cached.doc, ticker, match.cik, match.title, now);
     if (!parsed.rows.length) {
       outcomes.push({ ticker, status: 'NO_STANDARD_FACTS', records: [], cik: match.cik, periods: parsed.periodEnds, error: 'No supported annual standard-taxonomy facts found in the latest five periods.' });
     } else {
