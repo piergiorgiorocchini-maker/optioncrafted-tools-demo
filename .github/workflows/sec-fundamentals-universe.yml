@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/sec-fundamentals-universe.yml"
+      - ".github/scripts/backfill-sec-universe.mjs"
   workflow_dispatch:
 permissions:
   contents: read
