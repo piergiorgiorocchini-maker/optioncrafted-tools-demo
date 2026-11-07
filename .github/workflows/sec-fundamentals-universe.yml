@@ -7,7 +7,8 @@ on:
       - ".github/scripts/backfill-sec-universe.mjs"
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+  actions: write
 concurrency:
   group: sec-fundamentals-universe-backfill
   cancel-in-progress: false
@@ -28,3 +29,36 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           OPTIONSCRAFTED_SHEET_ID: 1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw
         run: node .github/scripts/backfill-sec-universe.mjs
+      - name: Commit refreshed admin coverage snapshot
+        id: publish_snapshot
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platform-app/src/data/adminCoverageSnapshot.json
+          echo "changed=false" >> "$GITHUB_OUTPUT"
+          if git diff --cached --quiet; then
+            echo "Coverage snapshot is unchanged."
+            exit 0
+          fi
+          git commit -m "data(admin): refresh ticker coverage snapshot"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort
+              echo "Could not rebase snapshot update safely." >&2
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "Could not publish coverage snapshot after three attempts." >&2
+          exit 1
+      - name: Rebuild the static platform preview
+        if: steps.publish_snapshot.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build-platform-preview.yml --ref main
