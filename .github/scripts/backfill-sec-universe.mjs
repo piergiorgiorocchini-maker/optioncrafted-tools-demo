@@ -14,7 +14,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11-v3';
+const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11-v4';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -82,10 +82,17 @@ async function readValues(range) {
 
 async function fetchSecJson(url) {
   for (let attempt = 0; attempt < 5; attempt++) {
-    const response = await fetch(url, {
-      headers: { 'User-Agent': secUserAgent, Accept: 'application/json', 'Accept-Encoding': 'gzip' },
-      signal: AbortSignal.timeout(30000)
-    });
+    let response;
+    try {
+      response = await fetch(url, {
+        headers: { 'User-Agent': secUserAgent, Accept: 'application/json', 'Accept-Encoding': 'gzip' },
+        signal: AbortSignal.timeout(30000)
+      });
+    } catch (error) {
+      if (attempt === 4) throw new Error('SEC network request failed after five attempts for ' + url + ': ' + error.message);
+      await sleep(1500 * (2 ** attempt));
+      continue;
+    }
     if (response.ok) return response.json();
     const retryable = [429, 500, 502, 503, 504].includes(response.status);
     if (!retryable || attempt === 4) throw new Error('SEC HTTP ' + response.status + ' for ' + url);
