@@ -1,0 +1,51 @@
+OPTIONSCRAFTED — CHANGELOG OPERATIVO
+
+Scopo: registrare per data decisioni, modifiche applicative, pipeline dati e stato della pubblicazione. Questo file integra, ma non sostituisce, il dossier `GOOGLE_SHEETS_DATA_PIPELINE_HANDOVER_2026-11-04.txt`.
+
+Regole per gli aggiornamenti futuri:
+- Inserire la data e distinguere FATTO, IN CORSO, BLOCCATO e DA VERIFICARE.
+- Separare codice modificato localmente, commit Git, build riuscita e versione effettivamente pubblicata.
+- Registrare pipeline/fonte/campi/limiti quando cambiano; non annotare segreti o chiavi API.
+- Non dichiarare copertura completa basandosi solo sul completamento di un job.
+
+
+2026-11-04 — BASELINE GOOGLE SHEETS → GITHUB → OPTIONSCRAFT
+
+FATTO / OSSERVATO
+- Il foglio Assets espone 227 ticker; la colonna B ordina e deduplica l’elenco proveniente dalla colonna A.
+- I campi formule del foglio vengono esportati come snapshot JSON verso GitHub; i componenti OC che consumano questi JSON dipendono dalla build/deploy successiva. I dati non sono un feed live.
+- La cache dei campi FMP/Alpha per Assets è impostata su ProviderCache keyed-by-ticker; O:P e T:U visualizzano lookup associati al ticker.
+- Erano stati installati trigger Apps Script per il refresh provider e per l’export Google Sheets. La presenza e l’attivazione corrente dei trigger vanno ricontrollate nell’interfaccia Apps Script.
+- Il test fondamentale SEC/FDVE era stato esteso da 5 a 20 società, con anni fiscali FY2021–FY2025. Il report del 1 novembre riportava 1.491/1.645 metriche applicabili disponibili (90,64%), solo per quel campione.
+
+LIMITI REGISTRATI
+- Il campione SEC/FDVE non copriva i 227 ticker di Assets.
+- FMP aveva restituito HTTP 402 sugli endpoint annuali; l’accesso ai prospetti annuali è stato sospeso nel workflow FDVE.
+- Alpha Vantage era limitata a 3 chiamate al giorno per i prospetti annuali nel workflow GitHub, oltre alle chiamate Overview riservate al flusso Apps Script.
+- Il workflow FDVE produce report/cache provider; non popola automaticamente Google Sheets Assets né pubblica da solo un dataset fondamentale completo consumato da tutti i moduli OC.
+
+
+2026-11-07 — MODULO DI VALUTAZIONE, COMPANY INTELLIGENCE E DOCUMENTAZIONE
+
+FATTO / CONFERMATO DALL’UTENTE
+- Definita e rifinita la direzione visiva del modulo Price vs. Intrinsic Value: mantenere il layout a colonne, badge rosso/verde pieno OVERVALUED/UNDERVALUED con percentuale prominente, riquadri Stock Price e Intrinsic Value in blu navy con testo bianco, ticker/logo/mercato leggibili e più spazio per range e margin of safety.
+- Il modulo è stato affiancato alla chart annuale nella sezione Company Intelligence, preservando la chart esistente. Il problema desktop di asse/linea temporale che appariva a metà chart è stato affrontato con un workaround interno al price history; l’utente ha confermato l’esito.
+- Registrata la distinzione di significato richiesta dall’utente: Intrinsic Value deve rappresentare il risultato della triangolazione dei metodi, non il Fair Value del solo DCF. La formula effettivamente collegata deve essere verificata prima di descrivere il numero come valore triangolato.
+- Registrato che la piattaforma era online e che la correzione della chart è stata osservata/accettata. Per modifiche locali successive, controllare comunque il commit/build/deploy effettivo.
+
+DOCUMENTAZIONE / STATO DATI
+- Aggiornato il dossier con il flusso completo, il perimetro del campione di 20 ticker, i limiti API, la distinzione fra snapshot Assets e fondamentali SEC e i passaggi necessari per portarli nei moduli OC.
+- Il target della copertura completa resta da raggiungere: allargare la validazione SEC/FDVE per l’universo applicabile, pubblicare un dataset fondamentale canonico e collegare i consumer OC. Non considerare il campione come copertura di tutto Assets.
+
+CODICE LOCALE DA RICONTROLLARE PRIMA DI DICHIARARLO PUBBLICATO
+- Modifiche locali presenti nella Home, nei CSS, nel componente SecurityLogo e nei riferimenti di Company Intelligence, Market Explorer, Portfolio Studio, Valuation, Options e ricerca globale.
+- Modifiche locali al collector FDVE e alla gestione dell’HTTP 402.
+- Al momento dell’aggiornamento queste modifiche non vanno considerate pubblicate finché non risultano nel commit corretto e non è verificato il workflow di build/deploy. Gli artefatti `dist`, `node_modules`, lockfile e cache compilate non fanno parte della documentazione e non vanno inclusi accidentalmente.
+
+PROSSIMI PUNTI
+- Verificare che i due file documentali siano nel branch remoto `main`.
+- Verificare URL/revisione della piattaforma e comportamento della chart Price History desktop.
+- Confermare la fonte/metodo del valore effettivamente mostrato nel modulo riutilizzabile.
+- Verificare lo stato dei trigger Apps Script e l’ultimo snapshot Assets pubblicato.
+- Disegnare e implementare un percorso esplicito: SEC/provider → dataset normalizzato e versionato → controlli qualità → pubblicazione → componenti Company Intelligence/Valuation.
+- Aggiornare questa cronologia ad ogni modifica futura con i relativi riferimenti a commit, run e deploy, senza includere credenziali.
