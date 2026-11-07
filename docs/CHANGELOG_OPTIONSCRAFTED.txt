@@ -57,3 +57,23 @@ PROSSIMI PUNTI
 - Il prodotto associa questi workflow a dataset finanziari premium e a riferimenti verificabili alle fonti. L’annuncio lo rende disponibile alle istituzioni finanziarie idonee; per alcuni provider collega i permessi agli abbonamenti aziendali già esistenti. La pagina non indica un accesso autonomo ai dataset partner tramite API per StockCrafted o tramite il normale ChatGPT.
 - Valutazione di Pier: workflow di questo tipo sarebbero utili anche a molti analisti indipendenti; una versione individuale con dati propri o abbonamenti separati sarebbe interessante.
 - Rilevanza per OptionsCrafted/StockCrafted: usare il prodotto come riferimento per la sequenza fonti → ipotesi/calcoli → valutazione → report, con tracciabilità dei dati. I dataset premium non si considerano disponibili alla piattaforma; i workflow possono essere sviluppati sulle fonti pubbliche e sui provider già accessibili. Nessuna implementazione o decisione di prodotto è stata approvata in questa sessione.
+
+
+2026-11-07 — DIREZIONE DI PRODOTTO: CENSIMENTO DATI E DASHBOARD
+
+DIREZIONE CONDIVISA / DA PROGETTARE
+
+- Estendere quanto possibile la raccolta dei fondamentali all’universo dei ticker in osservazione e popolare i moduli della piattaforma con i dati validati. Il pilot SEC/FDVE di 20 società resta un campione di test, non la copertura dell’universo Assets.
+- Creare un catalogo di copertura per ticker × metrica × periodo, che distingua dati riportati dalla fonte, dati normalizzati e valori calcolati/derivati dalla piattaforma.
+- Per ogni dato registrare almeno fonte/provider, periodo fiscale e tipo (annuale/trimestrale/TTM), unità e valuta, data di acquisizione, stato di freschezza e provenienza; per le metriche derivate conservare formula/metodo e versione. Gli stati devono distinguere disponibile, mancante, non applicabile, obsoleto e da verificare.
+- Progettare una Dashboard amministrativa distinta dall’esperienza investitore, con viste per copertura e provenienza, qualità e lacune, esecuzioni pipeline, budget/quota provider, errori e interventi. Aggiungere una sezione separata per andamento del sito/prodotto (utenti, traffico, uso dei moduli e conversioni) quando le relative fonti analytics saranno collegate.
+- Il concept dell’area utenti comprende dashboard personale e contesto di mercato, Market Explorer, Scanner, Company Intelligence, Valuation, Options, Probability, Macro, Portfolio Studio, ricerca e contenuti salvati, Account. Watchlist e portafoglio restano distinti; eventuali importazioni da broker appartengono a una fase futura. Autenticazione e gestione utenti non risultano ancora implementate.
+
+SEQUENZA CONSIGLIATA
+
+1. Definire il modello canonico e il censimento ticker × metrica × periodo, includendo i ticker non coperti da SEC con uno stato appropriato (per esempio non applicabile/altro provider), non come zero.
+2. Ampliare la raccolta per lotti e misurare la copertura effettiva; mantenere espliciti fonte, periodo, mancanti e calcoli interni.
+3. Realizzare la prima sezione admin per copertura, qualità e stato delle pipeline; poi collegare i componenti pubblici al dataset validato con fonte e aggiornamento visibili.
+4. Organizzare analytics del sito e strumenti amministrativi nella stessa console, ma in sezioni distinte; sviluppare l’area utenti secondo la roadmap prodotto e non confonderla con diagnostica interna.
+
+Questa voce registra la direzione e la sequenza di lavoro discusse il 7 novembre 2026. Non dichiara implementate le dashboard, il censimento completo o la gestione account e non autorizza a rappresentare come coperti i ticker per cui i dati non sono stati verificati.
