@@ -504,7 +504,7 @@ const [assetsGrid, fundamentalsGrid] = await Promise.all([
   readValues('Assets!A1:U1000'),
   readValues('Fundamentals!A1:BD1000')
 ]);
-if (assetsGrid.length < 2 || fundamentalsGrid.length < 2 || (fundamentalsGrid[0] || []).length < 55) {
+if (assetsGrid.length < 2 || fundamentalsGrid.length < 3 || (fundamentalsGrid[1] || []).length < 55) {
   throw new Error('Coverage snapshot source ranges are incomplete; refusing to publish.');
 }
 const hasCoverageValue = value => {
@@ -562,7 +562,7 @@ const secMetricLabels = {
 };
 const fundamentalMetrics = Array.from({ length: 43 }, (_, index) => {
   const column = 12 + index;
-  const label = String(fundamentalsGrid[0]?.[column] ?? '').trim() || 'Fundamental field ' + (column + 1);
+  const label = String(fundamentalsGrid[1]?.[column] ?? '').trim() || 'Fundamental field ' + (column + 1);
   return { id: slugifyCoverageLabel(label), label, column };
 });
 if (marketMetrics.length !== 19 || metricSpecs.length !== 15 || fundamentalMetrics.length !== 43 ||
@@ -584,7 +584,7 @@ for (const row of mergedRawRows.slice(1)) {
   secByTicker.set(ticker, present);
 }
 const fundamentalsByTicker = new Map();
-for (const row of fundamentalsGrid.slice(1)) {
+for (const row of fundamentalsGrid.slice(2)) {
   const ticker = normTicker(row?.[0]);
   if (ticker) fundamentalsByTicker.set(ticker, row);
 }
