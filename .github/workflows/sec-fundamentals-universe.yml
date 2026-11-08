@@ -5,6 +5,9 @@ on:
     paths:
       - ".github/workflows/sec-fundamentals-universe.yml"
       - ".github/scripts/backfill-sec-universe.mjs"
+      - "platform-app/scripts/normalize-sec-raw-snapshot.mjs"
+  schedule:
+    - cron: "20 4 * * 1-5"
   workflow_dispatch:
 permissions:
   contents: write
@@ -15,7 +18,7 @@ concurrency:
 jobs:
   backfill:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,13 +32,15 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           OPTIONSCRAFTED_SHEET_ID: 1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw
         run: node .github/scripts/backfill-sec-universe.mjs
+      - name: Normalize annual valuation facts
+        run: node platform-app/scripts/normalize-sec-raw-snapshot.mjs
       - name: Commit refreshed admin coverage snapshot
         id: publish_snapshot
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add platform-app/src/data/adminCoverageSnapshot.json
+          git add platform-app/src/data/adminCoverageSnapshot.json platform-app/src/data/googleSheetsSecFacts.json platform-app/src/data/googleSheetsSecAnnual.json
           echo "changed=false" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
             echo "Coverage snapshot is unchanged."

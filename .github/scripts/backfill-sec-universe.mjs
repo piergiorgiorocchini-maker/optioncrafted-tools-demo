@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts-standard-5FY-2026-11-v4';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-5FY-2026-11-v5';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -25,8 +25,8 @@ const metricSpecs = [
   { key: 'netIncome', kind: 'flow', tags: ['NetIncomeLoss', 'ProfitLoss'] },
   { key: 'operatingIncome', kind: 'flow', tags: ['OperatingIncomeLoss', 'OperatingProfitLoss'] },
   { key: 'cashFromOperations', kind: 'flow', tags: ['NetCashProvidedByUsedInOperatingActivities', 'CashFlowsFromUsedInOperatingActivities', 'CashFlowsFromOperatingActivities'] },
-  { key: 'capex', kind: 'flow', tags: ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsForPropertyPlantAndEquipment', 'PurchaseOfPropertyPlantAndEquipment'] },
-  { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted'] },
+  { key: 'capex', kind: 'flow', tags: ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsForPropertyPlantAndEquipment', 'PurchaseOfPropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibleAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibles', 'PurchasesOfPropertyPlantAndEquipment'] },
+  { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted', 'EarningsPerShareDilutedIncludingExtraordinaryItems', 'EarningsPerShareBasicAndDiluted'] },
   { key: 'cash', kind: 'instant', tags: ['CashAndCashEquivalentsAtCarryingValue', 'CashAndCashEquivalents'] },
   { key: 'currentAssets', kind: 'instant', tags: ['AssetsCurrent', 'CurrentAssets'] },
   { key: 'currentLiabilities', kind: 'instant', tags: ['LiabilitiesCurrent', 'CurrentLiabilities'] },
@@ -235,6 +235,123 @@ function chooseFact(candidates, periodEnd, kind, currency) {
   });
   return matching[0] || null;
 }
+
+async function fetchSecText(url) {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    let response;
+    try {
+      response = await fetch(url, {
+        headers: { 'User-Agent': secUserAgent, Accept: 'application/xml,text/xml,text/plain,*/*', 'Accept-Encoding': 'gzip' },
+        signal: AbortSignal.timeout(30000)
+      });
+    } catch (error) {
+      if (attempt === 4) throw new Error('SEC document request failed after five attempts for ' + url + ': ' + error.message);
+      await sleep(1500 * (2 ** attempt));
+      continue;
+    }
+    if (response.ok) return response.text();
+    const retryable = [429, 500, 502, 503, 504].includes(response.status);
+    if (!retryable || attempt === 4) throw new Error('SEC HTTP ' + response.status + ' for ' + url);
+    await sleep(1500 * (2 ** attempt));
+  }
+  throw new Error('SEC document request failed for ' + url);
+}
+
+function xmlAttribute(attributes, name) {
+  const match = String(attributes || '').match(new RegExp('(?:^|\\s)' + name + '=["\\x27]([^"\\x27]*)["\\x27]', 'i'));
+  return match ? match[1] : '';
+}
+function xmlValue(block, localName) {
+  const match = String(block || '').match(new RegExp('<(?:[A-Za-z_][\\w.-]*:)?' + localName + '\\b[^>]*>([^<]*)<\\/(?:[A-Za-z_][\\w.-]*:)?' + localName + '>', 'i'));
+  return match ? match[1].trim() : '';
+}
+function decodeXmlText(value) {
+  return String(value || '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&#160;|&nbsp;/gi, ' ').replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16))).replace(/&#(\d+);/g, (_, num) => String.fromCharCode(Number(num)));
+}
+function parseXbrlInstance(xml, filing) {
+  const contexts = new Map();
+  const contextPattern = /<([A-Za-z_][\w.-]*:)?context\b([^>]*)>([\s\S]*?)<\/\1context>/gi;
+  for (const match of xml.matchAll(contextPattern)) {
+    const body = match[3];
+    if (/<(?:[A-Za-z_][\w.-]*:)?(?:explicitMember|typedMember)\b/i.test(body)) continue;
+    contexts.set(xmlAttribute(match[2], 'id'), {
+      start: xmlValue(body, 'startDate'),
+      end: xmlValue(body, 'endDate') || xmlValue(body, 'instant')
+    });
+  }
+  const units = new Map();
+  const unitPattern = /<([A-Za-z_][\w.-]*:)?unit\b([^>]*)>([\s\S]*?)<\/\1unit>/gi;
+  for (const match of xml.matchAll(unitPattern)) {
+    const measures = [...match[3].matchAll(/<(?:[A-Za-z_][\w.-]*:)?measure\b[^>]*>([^<]+)<\/(?:[A-Za-z_][\w.-]*:)?measure>/gi)].map(item => item[1].trim());
+    const currency = measures.map(value => value.match(/(?:iso4217:)?([A-Z]{3})$/i)?.[1]?.toUpperCase()).find(Boolean) || '';
+    const isShares = measures.some(value => /(?:^|:)shares$/i.test(value));
+    units.set(xmlAttribute(match[2], 'id'), currency ? (isShares ? currency + '/shares' : currency) : measures.join('/'));
+  }
+  const patterns = {
+    capex: /(?:capex|capitalexpenditur|payments?toacquire.*(?:property|plant|equipment|fixedasset|productiveasset|intangibleasset)|purchases?of.*(?:property|plant|equipment|fixedasset|productiveasset|intangibleasset)|(?:property|plant|equipment).*purchases?)/i,
+    epsDiluted: /(?:(?:earnings|netincome|income|profit).*pershare.*diluted|diluted.*(?:earnings|netincome|income|profit).*pershare)/i
+  };
+  const found = [];
+  const factPattern = /<([A-Za-z_][\w.-]*:)([A-Za-z_][\w.-]*)\b([^>]*)>([^<]*)<\/\1\2>/gi;
+  for (const match of xml.matchAll(factPattern)) {
+    const localName = match[2];
+    const metric = Object.entries(patterns).find(([, pattern]) => pattern.test(localName))?.[0];
+    if (!metric || /<[^>]+>/.test(match[4]) || /xsi:nil=["']true["']/i.test(match[3])) continue;
+    const context = contexts.get(xmlAttribute(match[3], 'contextRef'));
+    if (!context?.start || !context.end) continue;
+    const days = (Date.parse(context.end + 'T00:00:00Z') - Date.parse(context.start + 'T00:00:00Z')) / 86400000;
+    if (days < 330 || days > 380) continue;
+    const unit = units.get(xmlAttribute(match[3], 'unitRef')) || '';
+    if (metric === 'epsDiluted' && !/^[A-Z]{3}\/shares$/i.test(unit)) continue;
+    if (metric === 'capex' && !/^[A-Z]{3}$/i.test(unit)) continue;
+    let valueText = decodeXmlText(match[4].replace(/<[^>]*>/g, '')).replace(/[\s,\u00a0]/g, '').trim();
+    let value = Number(valueText);
+    if (!Number.isFinite(value)) continue;
+    const scale = Number(xmlAttribute(match[3], 'scale'));
+    if (Number.isFinite(scale) && scale !== 0) value *= Math.pow(10, scale);
+    if (xmlAttribute(match[3], 'sign') === '-') value = -Math.abs(value);
+    found.push({ metric, value, start: context.start, end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl });
+  }
+  return found;
+}
+async function fetchRecentAnnualXbrlFacts(cik) {
+  const submissionsUrl = 'https://data.sec.gov/submissions/CIK' + cik + '.json';
+  const submissions = await fetchSecJson(submissionsUrl);
+  await sleep(150);
+  const recent = submissions?.filings?.recent || {};
+  const annualForms = new Set(['10-K', '10-K/A', '20-F', '20-F/A', '40-F', '40-F/A']);
+  const latestByReportEnd = new Map();
+  for (let index = 0; index < (recent.form || []).length; index++) {
+    const form = recent.form[index];
+    const reportEnd = recent.reportDate?.[index] || '';
+    if (!annualForms.has(form) || !reportEnd) continue;
+    const filing = { form, reportEnd, filed: recent.filingDate?.[index] || '', accession: recent.accessionNumber?.[index] || '', primaryDocument: recent.primaryDocument?.[index] || '' };
+    const prior = latestByReportEnd.get(reportEnd);
+    if (!prior || filing.filed > prior.filed) latestByReportEnd.set(reportEnd, filing);
+  }
+  const annualFilings = [...latestByReportEnd.values()].sort((a, b) => b.filed.localeCompare(a.filed)).slice(0, 2);
+  const collected = [];
+  for (const filing of annualFilings) {
+    const accessionFolder = filing.accession.replace(/-/g, '');
+    const cikFolder = String(Number(cik));
+    const baseUrl = 'https://www.sec.gov/Archives/edgar/data/' + cikFolder + '/' + accessionFolder;
+    const index = await fetchSecJson(baseUrl + '/index.json');
+    await sleep(150);
+    const items = index?.directory?.item || [];
+    let instance = items.find(item => /EXTRACTED XBRL INSTANCE DOCUMENT/i.test(item.type || ''));
+    if (!instance) instance = items.find(item => /_htm\.xml$/i.test(item.name || ''));
+    if (!instance?.name) {
+      await sleep(150);
+      continue;
+    }
+    filing.sourceUrl = baseUrl + '/' + instance.name;
+    const xml = await fetchSecText(filing.sourceUrl);
+    collected.push(...parseXbrlInstance(xml, filing));
+    await sleep(150);
+  }
+  return collected;
+}
+
 function buildRows(doc, ticker, cik, companyName, generatedAt) {
   if (!doc?.facts || normCik(doc.cik) !== cik) throw new Error('SEC CIK mismatch or no facts for ' + ticker);
   const candidatesByMetric = {};
@@ -432,6 +549,55 @@ for (const ticker of assetTickers) {
     outcomes.push({ ticker, status: 'SOURCE_ERROR', records: [], cik: match.cik, error: error.message });
   }
 }
+
+
+const inlineFactsCache = new Map();
+let inlineFactRowsAdded = 0;
+for (const outcome of outcomes) {
+  if (!outcome.cik) continue;
+  const annualEnds = [...new Set(outcome.records
+    .filter(row => row[4] && row[5] && metricSpecs.find(metric => metric.key === row[2])?.kind !== 'instant')
+    .map(row => row[5]))].sort().slice(-5);
+  const existing = new Set(outcome.records.map(row => row[2] + '|' + row[5]));
+  const hasGap = !annualEnds.length || annualEnds.some(end => !existing.has('capex|' + end) || !existing.has('epsDiluted|' + end));
+  if (!hasGap) continue;
+  try {
+    let facts = inlineFactsCache.get(outcome.cik);
+    if (!facts) {
+      facts = await fetchRecentAnnualXbrlFacts(outcome.cik);
+      inlineFactsCache.set(outcome.cik, facts);
+    }
+    const addedPeriods = new Set();
+    let tickerAdded = 0;
+    for (const fact of facts) {
+      if (fact.metric !== 'capex' && fact.metric !== 'epsDiluted') continue;
+      const key = fact.metric + '|' + fact.end;
+      if (existing.has(key) || addedPeriods.has(key)) continue;
+      if (annualEnds.length && !annualEnds.includes(fact.end)) continue;
+      const desiredCurrency = outcome.currency || 'USD';
+      if (!fact.unit.toUpperCase().startsWith(desiredCurrency.toUpperCase())) continue;
+      outcome.records ||= [];
+      outcome.records.push([
+        outcome.ticker, outcome.cik, fact.metric, fact.value, fact.start, fact.end,
+        fact.filed, fact.form, fact.accession, fact.tag, fact.unit, fact.sourceUrl, now, 'VERIFIED_SOURCE'
+      ]);
+      existing.add(key);
+      addedPeriods.add(key);
+      inlineFactRowsAdded++;
+      tickerAdded++;
+    }
+    if (outcome.ticker === 'ABNB' || tickerAdded > 0) console.log('Annual XBRL facts ' + outcome.ticker + ': added ' + tickerAdded + '; missing annual metrics: ' + annualEnds.filter(end => !outcome.records.some(row => row[2] === 'capex' && row[5] === end)).length + ' CapEx periods and ' + annualEnds.filter(end => !outcome.records.some(row => row[2] === 'epsDiluted' && row[5] === end)).length + ' EPS periods.');
+    if (outcome.records.length) {
+      const covered = new Set(outcome.records.map(row => row[2]));
+      outcome.missingMetrics = metricSpecs.map(metric => metric.key).filter(key => !covered.has(key));
+      outcome.status = outcome.missingMetrics.length ? 'PARTIAL' : 'OK';
+      outcome.error = outcome.missingMetrics.length ? 'Metrics not found after SEC CompanyFacts and annual XBRL filing enrichment: ' + outcome.missingMetrics.join(', ') : '';
+    }
+  } catch (error) {
+    outcome.error = [outcome.error, 'Annual XBRL enrichment: ' + error.message].filter(Boolean).join(' | ').slice(0, 1000);
+  }
+}
+console.log('Annual XBRL enrichment rows added: ' + inlineFactRowsAdded);
 
 const successfulTickers = new Set(outcomes.filter(outcome => outcome.records.length > 0).map(outcome => outcome.ticker));
 const newFactRows = outcomes.flatMap(outcome => outcome.records);
@@ -645,6 +811,30 @@ if (coverageSnapshot.tickers.length !== assetTickers.length) {
   throw new Error('Coverage snapshot ticker count mismatch; refusing to publish.');
 }
 await fs.writeFile('platform-app/src/data/adminCoverageSnapshot.json', JSON.stringify(coverageSnapshot, null, 2) + '\n');
+
+
+const valuationSourceMetrics = ['revenue', 'netIncome', 'operatingIncome', 'cashFromOperations', 'capex', 'epsDiluted'];
+const valuationSourceFacts = mergedRawRows.slice(1)
+  .filter(row => valuationSourceMetrics.includes(String(row?.[2] || '')) && Number.isFinite(Number(row?.[3])) && row?.[13] === 'VERIFIED_SOURCE')
+  .map(row => ({
+    ticker: normTicker(row[0]), cik: normCik(row[1]), metric: String(row[2]), value: Number(row[3]),
+    periodStart: String(row[4] || ''), periodEnd: String(row[5] || ''), filedDate: String(row[6] || ''),
+    form: String(row[7] || ''), accession: String(row[8] || ''), tag: String(row[9] || ''),
+    unit: String(row[10] || ''), sourceUrl: String(row[11] || ''), importedAt: String(row[12] || ''),
+    status: String(row[13] || '')
+  }));
+const valuationSourceSnapshot = {
+  schemaVersion: 1,
+  generatedAt: now.slice(0, 10),
+  source: 'Google Sheet · Tabella Stagionalità · SEC_Raw',
+  spreadsheetId,
+  sourceImportedAt: now,
+  factCount: valuationSourceFacts.length,
+  metrics: valuationSourceMetrics,
+  facts: valuationSourceFacts
+};
+await fs.writeFile('platform-app/src/data/googleSheetsSecFacts.json', JSON.stringify(valuationSourceSnapshot));
+
 
 const statusCounts = {};
 for (const outcome of outcomes) statusCounts[outcome.status] = (statusCounts[outcome.status] || 0) + 1;
