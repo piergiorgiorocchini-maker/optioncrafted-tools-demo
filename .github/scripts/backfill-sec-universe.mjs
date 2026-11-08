@@ -273,10 +273,10 @@ function parseXbrlInstance(xml, filing) {
   const contextPattern = /<([A-Za-z_][\w.-]*:)?context\b([^>]*)>([\s\S]*?)<\/\1context>/gi;
   for (const match of xml.matchAll(contextPattern)) {
     const body = match[3];
-    if (/<(?:[A-Za-z_][\w.-]*:)?(?:explicitMember|typedMember)\b/i.test(body)) continue;
     contexts.set(xmlAttribute(match[2], 'id'), {
       start: xmlValue(body, 'startDate'),
-      end: xmlValue(body, 'endDate') || xmlValue(body, 'instant')
+      end: xmlValue(body, 'endDate') || xmlValue(body, 'instant'),
+      dimensional: /<(?:[A-Za-z_][\w.-]*:)?(?:explicitMember|typedMember)\b/i.test(body)
     });
   }
   const units = new Map();
@@ -310,9 +310,9 @@ function parseXbrlInstance(xml, filing) {
     const scale = Number(xmlAttribute(match[3], 'scale'));
     if (Number.isFinite(scale) && scale !== 0) value *= Math.pow(10, scale);
     if (xmlAttribute(match[3], 'sign') === '-') value = -Math.abs(value);
-    found.push({ metric, value, start: context.start, end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl });
+    found.push({ metric, value, start: context.start, end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl, dimensional: context.dimensional });
   }
-  return found;
+  return found.sort((a, b) => Number(a.dimensional) - Number(b.dimensional) || b.filed.localeCompare(a.filed));
 }
 async function fetchRecentAnnualXbrlFacts(cik) {
   const submissionsUrl = 'https://data.sec.gov/submissions/CIK' + cik + '.json';
