@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-5FY-2026-11-v5';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-5FY-2026-11-v6';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -289,7 +289,7 @@ function parseXbrlInstance(xml, filing) {
   }
   const patterns = {
     capex: /(?:capex|capitalexpenditur|payments?toacquire.*(?:property|plant|equipment|fixedasset|productiveasset|intangibleasset)|purchases?of.*(?:property|plant|equipment|fixedasset|productiveasset|intangibleasset)|(?:property|plant|equipment).*purchases?)/i,
-    epsDiluted: /(?:(?:earnings|netincome|income|profit).*pershare.*diluted|diluted.*(?:earnings|netincome|income|profit).*pershare)/i
+    epsDiluted: /(?:(?:earnings|netincome|income|profit).*pershare.*diluted|diluted.*(?:earnings|netincome|income|profit).*pershare|income.*continuingoperationsperdilutedshare)/i
   };
   const found = [];
   const auditTags = [];
