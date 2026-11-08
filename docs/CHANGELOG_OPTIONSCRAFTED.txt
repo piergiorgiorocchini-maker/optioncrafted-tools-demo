@@ -81,7 +81,7 @@ Questa voce registra la direzione e la sequenza di lavoro discusse il 7 novembre
 
 2026-11-08 — TRIANGOLAZIONE DEL VALORE INTRINSECO
 
-FATTO / IMPLEMENTATO LOCALMENTE
+FATTO / IMPLEMENTATO E PUBBLICATO
 - Portata sulla versione corrente di `main` una pipeline comune di valutazione, usata da Home, Company Intelligence, Valuation Lab, Options e Football Field. `IntrinsicValueModule` legge il medesimo `ValuationBridge`; il DCF isolato non viene più presentato come triangolazione.
 - Importato un export Google Sheets `SEC_Raw` con 4.446 fatti SEC verificati, 6 metriche (ricavi, utile netto, reddito operativo, flusso di cassa operativo, CapEx, EPS diluito), 852 periodi annuali e 175 ticker. Importazione: 2026-11-07 22:41 UTC. Il dataset è uno snapshot versionato; il modello nel browser non interroga SEC, FMP o Alpha Vantage.
 - Derivazioni: FCF = CFO − |CapEx|; FCF/share usa le azioni implicite da utile netto / EPS diluito dello stesso periodo. È una stima, non un valore SEC riportato. Un campo assente resta assente.
@@ -97,4 +97,4 @@ COPERTURA MISURATA SULLO SNAPSHOT ASSETS DEL 2026-11-06
 
 VERIFICA E STATO PUBBLICAZIONE
 - Build locale riuscita: TypeScript, 73 asserzioni d’integrazione e Vite production build; resta un warning di bundle JS sopra 500 kB.
-- Le modifiche sopra sono state portate in un branch locale derivato dall’ultimo `main`, ma a questa voce non risultano ancora nel branch di deploy né sul sito. Registrare hash commit, workflow Actions e verifica Pages dopo il push; solo allora marcare come pubblicate.
+- Commit applicativo `2ee65d26a244649b6f029c26b0c90295957da952` presente su `main`; build app preview run `42520806052` conclusa con successo. Aggiornamento preview `492c37730a41` e pubblicazione Pages run `42520843264` concluse con successo il 2026-11-08. La triangolazione è quindi pubblicata; resta separata la verifica manuale end-to-end nel browser.
