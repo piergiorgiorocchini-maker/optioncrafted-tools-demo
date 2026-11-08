@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T21:39:23.562Z",
+  "generatedAt": "2026-11-08T21:43:50.429Z",
   "definition": "Present means at least one non-empty value exists for that ticker and field in the latest Google Sheets snapshot; it does not mean the historical series is complete.",
   "source": "Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals",
   "universeCount": 227,
@@ -464,6 +464,7 @@
           "operatingIncome",
           "cashFromOperations",
           "capex",
+          "epsDiluted",
           "cash",
           "currentAssets",
           "currentLiabilities",
@@ -5647,6 +5648,7 @@
           "operatingIncome",
           "cashFromOperations",
           "capex",
+          "epsDiluted",
           "cash",
           "currentAssets",
           "currentLiabilities",
