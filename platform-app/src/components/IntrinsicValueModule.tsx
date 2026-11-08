@@ -1,7 +1,5 @@
-import {useMemo} from "react";
-import {dcfModel,modelDefaults,money} from "../core/valuationModels";
-import type {ValuationBridge} from "./ValuationWorkspace";
-import {verifiedFcf} from "../data/verifiedFinancials";
+import {modelDefaults,money} from "../core/valuationModels";
+import type {ValuationBridge} from "../core/valuationTriangulation";
 import {SecurityLogo} from "./SecurityLogo";
 import "./home-dashboard.css";
 
@@ -11,24 +9,22 @@ type IntrinsicValueModuleProps={
  name:string;
  currency:string;
  price:number|null;
- valuation?:ValuationBridge;
+ valuation?:ValuationBridge|null;
  market?:ListingMarket|null;
  onMarketResolved?:(market:ListingMarket)=>void;
 };
 const getMoney=(value:number|null,currency="USD")=>money(value,currency);
 
 export function IntrinsicValueModule({ticker,name,currency,price,valuation,market,onMarketResolved}:IntrinsicValueModuleProps){
- const fcf=verifiedFcf(ticker);
- const defaultDcf=useMemo(()=>dcfModel(fcf.perShare,modelDefaults.growth,modelDefaults.discount,modelDefaults.terminal,modelDefaults.years),[fcf.perShare]);
- const intrinsic=valuation?.fairValue??defaultDcf?.value??null;
- const buyUnder=valuation?.buyUnder??(intrinsic===null?null:intrinsic*(1-modelDefaults.mos/100));
- const gap=intrinsic!==null&&Number.isFinite(intrinsic)&&intrinsic>0&&price!==null&&Number.isFinite(price)&&price>0?intrinsic/price-1:null;
- const comparisonPercent=gap===null?null:Math.abs(gap*100);
+ const intrinsic=valuation?.intrinsicValue??null;
+ const buyUnder=valuation?.buyUnder??null;
+ const comparisonPercent=valuation?.comparisonPercent??null;
  const roundedComparisonPercent=comparisonPercent===null?null:Number(comparisonPercent.toFixed(1));
- const valuationState=gap===null?"unavailable":roundedComparisonPercent===0?"fair-value":gap>0?"undervalued":"overvalued";
- const valuationLabel=valuationState==="overvalued"?"OVERVALUED":valuationState==="undervalued"?"UNDERVALUED":valuationState==="fair-value"?"AT INTRINSIC VALUE":"VALUATION UNAVAILABLE";
- const marginOfSafety=intrinsic!==null&&intrinsic>0&&buyUnder!==null?Math.round(Math.max(0,Math.min(100,(1-buyUnder/intrinsic)*100))*10)/10:modelDefaults.mos;
- const valueAnchors=[price,intrinsic].filter((value):value is number=>value!==null&&Number.isFinite(value)&&value>0);
+ const comparison=valuation?.marketComparison??"PENDING";
+ const valuationState=comparison==="OVERVALUED"?"overvalued":comparison==="UNDERVALUED"?"undervalued":comparison==="IN_LINE"?"fair-value":"unavailable";
+ const valuationLabel=valuationState==="overvalued"?"OVERVALUED":valuationState==="undervalued"?"UNDERVALUED":valuationState==="fair-value"?"AT INTRINSIC VALUE":valuation?.status==="TRIANGULATED"?"PRICE COMPARISON PENDING":"TRIANGULATION PENDING";
+ const marginOfSafety=valuation?.marginOfSafety??modelDefaults.mos;
+ const valueAnchors=[price,intrinsic,valuation?.familyRange?.low??null,valuation?.familyRange?.high??null].filter((value):value is number=>value!==null&&Number.isFinite(value)&&value>0);
  const valueAnchorLow=valueAnchors.length?Math.min(...valueAnchors):0;
  const valueAnchorHigh=valueAnchors.length?Math.max(...valueAnchors):1;
  const valueScaleMin=valueAnchorLow*0.67;
@@ -41,7 +37,7 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
    <div className="home-valuation-title">
     <span className="home-eyebrow">PRICE VS. INTRINSIC VALUE</span>
     <h3 className="home-security-heading"><span className="home-security-name">{ticker} · {name}</span><SecurityLogo ticker={ticker} onMarketResolved={onMarketResolved}/><small className="home-market-badge">{market??(currency==="USD"?"U.S. MARKET":"MARKET N/D")}</small></h3>
-    <p>DCF · {modelDefaults.years}Y growth exit</p>
+    <p>{valuation?.status==="TRIANGULATED"?`${valuation.eligibleFamilies} eligible valuation families · ${valuation.confidence} confidence`:"SEC fundamentals · triangulation pending"}</p>
    </div>
    <div className={"home-valuation-verdict is-"+valuationState} aria-live="polite">
     <strong>{comparisonPercent===null?"N/D":comparisonPercent.toFixed(1)+"%"}</strong>
@@ -72,6 +68,6 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
     <span className="range-end finish">{getMoney(valueScaleMax,currency)}</span>
    </div>
   </div>
-  <div className="home-valuation-footer"><strong>{marginOfSafety}% margin of safety · Buy-under {getMoney(buyUnder,currency)}</strong><span>Illustrative valuation · {new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(new Date())}</span></div>
+  <div className="home-valuation-footer"><strong>{marginOfSafety}% margin of safety · Buy-under {getMoney(buyUnder,currency)}</strong><span>{valuation?.status==="TRIANGULATED"?`Observed family range ${getMoney(valuation.familyRange?.low??null,currency)}–${getMoney(valuation.familyRange?.high??null,currency)} · secondary mean ${getMoney(valuation.simpleMean,currency)} · price ${valuation.priceDate??"date N/D"}`:valuation?.comparisonReason??"No intrinsic value is published until two method families qualify."}</span></div>
  </article>;
 }

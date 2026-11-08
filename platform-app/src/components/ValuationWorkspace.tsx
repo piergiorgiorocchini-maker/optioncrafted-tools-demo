@@ -3,6 +3,8 @@ import {NavLink} from "react-router-dom";
 import {Bar,BarChart,CartesianGrid,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
+import {buildValuationTriangulation,type ValuationBridge} from "../core/valuationTriangulation";
+export type {ValuationBridge} from "../core/valuationTriangulation";
 import {verifiedAnnualHistory,verifiedFcf} from "../data/verifiedFinancials";
 import {SecurityLogo} from "./SecurityLogo";
 import {ValuationFootballField} from "./ValuationFootballField";
@@ -35,7 +37,6 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Perpetual growth Y11+ %",step:0.25},{key:"dividendDiscount",label:"Target rate of return %",step:0.5}],
  peers:[]
 };
-export type ValuationBridge={fairValue:number|null;buyUnder:number|null;source:string};
 export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void}){
  const active=(tabs.find(x=>x.id===tab)?.id||"dcf") as ValuationMethod;
  const [mode,setMode]=useState<ValuationMode>("automatic");
@@ -66,9 +67,9 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const ddm=dividendModel(financials.dividend,a.dividendGrowth,a.dividendTerminal,a.dividendDiscount);
  const required=requiredReturnModel(financials[requiredBasis],financials.dividend,a);
  const currency=financials.currency;
- const publishedFairValue=mode==="manual"?null:base?.value??null;
- const publishedBuyUnder=publishedFairValue===null?null:publishedFairValue*(1-a.mos/100);
- useEffect(()=>{onUpdate?.(asset.ticker,{fairValue:publishedFairValue,buyUnder:publishedBuyUnder,source:mode==="hybrid"?"HYBRID · SEC FCF + USER OVERRIDES":asset.price===null?"SEC FY FCF ESTIMATE + MARKET PRICE N/D + MODEL ASSUMPTIONS":fcfEvidence.perShare!==null?"SEC FY FCF ESTIMATE + SNAPSHOT PRICE + MODEL ASSUMPTIONS":"SNAPSHOT + MODEL ASSUMPTIONS"});},[asset.ticker,publishedFairValue,publishedBuyUnder,mode,onUpdate]);
+ const hybridScenario=mode==="hybrid"&&Object.keys(overrides).length>0?base?.value??null:null;
+ const publishedValuation=useMemo(()=>{const result=buildValuationTriangulation(asset,{dcfScenarioValue:hybridScenario,dcfScenarioLabel:"Valuation Lab DCF scenario with user overrides",marginOfSafety:a.mos});return hybridScenario!==null?{...result,source:"Google Sheets SEC_Raw + Valuation Lab DCF scenario + family-balanced model"}:result;},[asset,hybridScenario,a.mos]);
+ useEffect(()=>{onUpdate?.(asset.ticker,publishedValuation);},[asset.ticker,publishedValuation,onUpdate]);
  const sourceLabel=mode==="manual"?"USER INPUT ONLY":mode==="hybrid"?(asset.price===null?"SEC FY DATA + NO MARKET SNAPSHOT + USER OVERRIDES":"SHEETS SNAPSHOT + SEC FY DATA + USER OVERRIDES"):asset.price===null?"SEC FY FUNDAMENTALS · MARKET DATA N/D":"SHEETS MARKET SNAPSHOT + SEC FY DATA";
  const setField=(key:Field,value:string)=>{if(mode==="manual")setManual(prev=>({...prev,[key]:value}));else setOverrides(prev=>({...prev,[key]:value}))};
  const chartRows=useMemo(()=>base?.projection.map(x=>({year:"Y"+x.year,cashflow:x.cashflow,presentValue:x.pv}))||[],[base]);
@@ -153,7 +154,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    </div>
   </section>}
   {active==="dcf"&&<section className="nr-panel nr-sensitivity"><div className="nr-section-title"><div><span className="nr-eyebrow">DCF SENSITIVITY</span><h3>How assumptions change estimated value</h3></div><span className="nr-status">VALUE / SHARE</span></div><p>Intrinsic value across FCF growth and required-return scenarios. Current assumptions are highlighted.</p>{base?<div className="nr-sensitivity-wrap"><table><thead><tr><th>FCF growth ↓ · Return →</th>{[-2,-1,0,1,2].map(d=><th key={d}>{(rate!+d).toFixed(1)}%</th>)}</tr></thead><tbody>{[-2,-1,0,1,2].map(gap=>{const growth=a.growth+gap;return <tr key={gap}><th>{growth.toFixed(1)}%</th>{[-2,-1,0,1,2].map(d=>{const r=rate!+d,result=dcfModel(financials.fcf,growth,r,a.terminal,a.years),isBase=gap===0&&d===0;return <td key={d} className={isBase?"is-base":""}>{result&&r>a.terminal?money(result.value,currency):"—"}</td>})}</tr>})}</tbody></table></div>:<p className="nr-chart-empty">Enter a positive FCF/share and valid discount assumptions to see the sensitivity table.</p>}</section>}
-  <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} mos={a.mos} source={sourceLabel} extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
+  <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} triangulatedValue={publishedValuation.intrinsicValue} mos={a.mos} source={sourceLabel} extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
   <div className="nr-footnote"><strong>Research boundary.</strong> Snapshot financial inputs are not live quotes. Growth, discount, multiples and exit prices are user-editable scenarios, not verified forecasts. Required-return entry price is not averaged into intrinsic fair value. <NavLink to="/options/csp">Continue to Options Execution <ArrowRight size={13}/></NavLink></div>
  </div>;
 }

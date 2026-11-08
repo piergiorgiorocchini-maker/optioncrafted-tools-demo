@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import {Activity,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Mail,Newspaper,Plus,Search,Shield,Target,Trash2,Wallet,GraduationCap} from "lucide-react";
 import snapshot from "../data/assetsSnapshot.json";
 import type {RealAsset} from "./RealResearch";
-import type {ValuationBridge} from "./ValuationWorkspace";
+import type {ValuationBridge} from "../core/valuationTriangulation";
 import {money} from "../core/valuationModels";
 import {SecurityLogo} from "./SecurityLogo";
 import {IntrinsicValueModule} from "./IntrinsicValueModule";
@@ -43,7 +43,7 @@ export function MarketTape(){
  </div>;
 }
 export {SecurityLogo} from "./SecurityLogo";
-export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge;onSelect:(ticker:string)=>void}){
+export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge|null;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);

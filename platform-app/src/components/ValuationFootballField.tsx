@@ -21,6 +21,7 @@ type Props={
  extra?:Method[];
  graham?:number|null;
  dividend?:number|null;
+ triangulatedValue?:number|null;
 };
 const valid=(value:number|null):value is number=>value!==null&&Number.isFinite(value)&&value>=0;
 const niceCeiling=(value:number)=>{
@@ -30,7 +31,7 @@ const niceCeiling=(value:number)=>{
  return ([1,1.5,2,2.5,3,4,5,6,8,10].find(x=>x>=scaled)??10)*magnitude;
 };
 
-export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,source="USER ASSUMPTIONS",extra=[],graham=null,dividend=null}:Props){
+export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,source="USER ASSUMPTIONS",extra=[],graham=null,dividend=null,triangulatedValue=null}:Props){
  const [scale,setScale]=useState<"focus"|"market">("focus");
  const isoCurrency=/^[A-Z]{3}$/.test(currency)?currency:"USD";
  const money=(value:number|null)=>valid(value)?new Intl.NumberFormat("en-US",{style:"currency",currency:isoCurrency,maximumFractionDigits:2}).format(value):"N/D";
@@ -70,14 +71,14 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
    <div className="ff-header-right"><span className="ff-source">{source}</span><div className="ff-market-reference"><small>REFERENCE MARKET PRICE</small><strong>{money(reference)}</strong><span>{marketOffScale?"Above valuation-focused scale":"Historical snapshot · not live"}</span></div></div>
   </header>
   <div className="ff-toolbar">
-   <div className="ff-legend"><span><i className="ff-legend-range"/> Scenario range</span><span><i className="ff-legend-point"/> Point estimate</span><span><i className="ff-legend-market"/> Market reference</span><span><i className="ff-legend-average"/> Multi-model average (excl. DDM)</span></div>
+   <div className="ff-legend"><span><i className="ff-legend-range"/> Scenario range</span><span><i className="ff-legend-point"/> Point estimate</span><span><i className="ff-legend-market"/> Market reference</span><span><i className="ff-legend-triangulated"/> Eligible-family triangulation</span><span><i className="ff-legend-average"/> Arithmetic mean · secondary</span></div>
    <div className="ff-scale-toggle" role="group" aria-label="Football Field vertical axis scale"><button type="button" className={scale==="focus"?"active":""} aria-pressed={scale==="focus"} onClick={()=>setScale("focus")}>Valuation focus</button><button type="button" className={scale==="market"?"active":""} aria-pressed={scale==="market"} onClick={()=>setScale("market")}>Include market price</button></div>
   </div>
   {marketOffScale&&<div className="ff-offscale"><strong>Market reference {money(reference)} is above the plotted valuation range.</strong> Select “Include market price” to display the full distance without compressing the valuation methods.</div>}
   <div className="ff-chart-scroll" tabIndex={0} aria-label="Scroll to inspect the full valuation chart on smaller screens">
    <svg className="ff-svg" viewBox="0 0 1100 393" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={"Vertical valuation football field. DCF base "+money(base)+", Graham "+money(graham)+", dividend "+money(dividend)+", market price "+money(reference)}>
     <title>Valuation Football Field</title>
-    <desc>Each column represents a valuation method. The DCF column shows a bear-to-bull range with a base marker; Graham and dividend methods show single-point estimates. The orange dashed line shows the market reference when within the selected scale. A separate orange dashed line, labeled above its left-center segment like a CFI football field, shows the average of valid intrinsic point estimates excluding dividend discount models. Entry-price thresholds are shown separately.</desc>
+    <desc>Each column represents a valuation method. The DCF column shows a bear-to-bull range with a base marker; Graham and dividend methods show single-point estimates. The blue solid line shows the shared eligibility-gated family triangulation when at least two families qualify. The orange dashed line shows the arithmetic mean as a secondary reference. The market reference and entry-price thresholds are separate.</desc>
     <defs><linearGradient id="ff-range-gradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#235d94"/><stop offset="100%" stopColor="#102f50"/></linearGradient></defs>
     <text className="ff-axis-title" x="14" y="22">VALUE / SHARE</text>
     {[0,.25,.5,.75,1].map((fraction)=>{
@@ -112,15 +113,17 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
       <text className="ff-method-value" x={x} y="366" textAnchor="middle">{available?(range?"Base ":"Value ")+money(m.mid):"N/D · pending"}</text>
      </g>;
     })}
-    {averageValuation!==null?<g><line className="ff-average-line" x1={left} x2={right} y1={y(averageValuation)} y2={y(averageValuation)}/><rect className="ff-average-tag-bg" x="342" y={Math.max(27,y(averageValuation)-33)} width="280" height="24" rx="5"/><text className="ff-average-tag" x="352" y={Math.max(44,y(averageValuation)-16)} textAnchor="start">AVERAGE VALUATION · {money(averageValuation)}</text></g>:null}
+    {valid(triangulatedValue)?<g><line className="ff-triangulated-line" x1={left} x2={right} y1={y(triangulatedValue)} y2={y(triangulatedValue)}/><rect className="ff-triangulated-tag-bg" x="616" y={Math.max(27,y(triangulatedValue)-32)} width="300" height="23" rx="5"/><text className="ff-triangulated-tag" x="766" y={Math.max(43,y(triangulatedValue)-16)} textAnchor="middle">TRIANGULATED INTRINSIC VALUE · {money(triangulatedValue)}</text></g>:null}
+    {averageValuation!==null?<g><line className="ff-average-line" x1={left} x2={right} y1={y(averageValuation)} y2={y(averageValuation)}/><rect className="ff-average-tag-bg" x="342" y={Math.max(27,y(averageValuation)-33)} width="280" height="24" rx="5"/><text className="ff-average-tag" x="352" y={Math.max(44,y(averageValuation)-16)} textAnchor="start">SECONDARY ARITHMETIC MEAN · {money(averageValuation)}</text></g>:null}
     {marketInRange&&reference!==null?<g><line className="ff-market-line" x1={left} x2={right} y1={y(reference)} y2={y(reference)}/><rect className="ff-market-tag-bg" x="826" y={Math.max(27,y(reference)-29)} width="239" height="22" rx="5"/><text className="ff-market-tag" x="1055" y={Math.max(43,y(reference)-14)} textAnchor="end">MARKET REFERENCE · {money(reference)}</text></g>:null}
    </svg>
   </div>
   <div className="ff-chart-caption"><span>DCF bar: <strong>bear → bull</strong>, horizontal marker: <strong>base case</strong>.</span><span>Graham and DDM are <strong>single estimates</strong>; no invented confidence intervals.</span></div>
+  {/* No averaging of intrinsic estimates with entry thresholds: purchase levels stay separate. */}
   <div className="ff-entry-section">
    <div className="ff-entry-title"><div><span>ENTRY DISCIPLINE</span><h4>Purchase thresholds</h4></div><small>Separate from intrinsic value · not part of a valuation average</small></div>
    <div className="ff-entry-grid">{thresholds.map((m,index)=><div className="ff-entry-card" key={m.label+"-"+index}><div><span>{m.label}</span><strong>{money(m.mid)}</strong></div><div><small>{m.detail}</small><b>{valid(m.mid)&&reference!==null?"vs market "+signedPct(distance(m.mid)):"Awaiting model inputs"}</b></div></div>)}</div>
   </div>
-  <footer className="ff-footer"><span><strong>Research boundary.</strong> Estimates depend on editable assumptions and dated financial inputs. Peer comparisons remain pending until verified.</span><span>No averaging of intrinsic estimates with entry thresholds. The market line is a reference price, not a consensus fair value. Average excludes DDM and entry thresholds.</span></footer>
+  <footer className="ff-footer"><span><strong>Research boundary.</strong> Estimates depend on editable assumptions and dated financial inputs. Peer comparisons remain pending until verified.</span><span>The family-weighted triangulation requires at least two eligible families. The arithmetic mean remains a secondary reference; neither value is a statistical confidence interval. Entry thresholds are excluded.</span></footer>
  </section>;
 }

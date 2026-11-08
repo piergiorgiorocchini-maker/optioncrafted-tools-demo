@@ -77,3 +77,24 @@ SEQUENZA CONSIGLIATA
 4. Organizzare analytics del sito e strumenti amministrativi nella stessa console, ma in sezioni distinte; sviluppare l’area utenti secondo la roadmap prodotto e non confonderla con diagnostica interna.
 
 Questa voce registra la direzione e la sequenza di lavoro discusse il 7 novembre 2026. Non dichiara implementate le dashboard, il censimento completo o la gestione account e non autorizza a rappresentare come coperti i ticker per cui i dati non sono stati verificati.
+
+
+2026-11-08 — TRIANGOLAZIONE DEL VALORE INTRINSECO
+
+FATTO / IMPLEMENTATO LOCALMENTE
+- Portata sulla versione corrente di `main` una pipeline comune di valutazione, usata da Home, Company Intelligence, Valuation Lab, Options e Football Field. `IntrinsicValueModule` legge il medesimo `ValuationBridge`; il DCF isolato non viene più presentato come triangolazione.
+- Importato un export Google Sheets `SEC_Raw` con 4.446 fatti SEC verificati, 6 metriche (ricavi, utile netto, reddito operativo, flusso di cassa operativo, CapEx, EPS diluito), 852 periodi annuali e 175 ticker. Importazione: 2026-11-07 22:41 UTC. Il dataset è uno snapshot versionato; il modello nel browser non interroga SEC, FMP o Alpha Vantage.
+- Derivazioni: FCF = CFO − |CapEx|; FCF/share usa le azioni implicite da utile netto / EPS diluito dello stesso periodo. È una stima, non un valore SEC riportato. Un campo assente resta assente.
+- Gate DCF: almeno 4 FCF/share annuali positivi consecutivi, CAGR storico limitato a ±15%, base DCF a 5 anni e sensibilità a 7/10 anni nello stesso metodo. Gate Graham: almeno 4 EPS diluiti annuali positivi consecutivi, EPS normalizzato tramite mediana degli ultimi 3 anni e crescita storica. DDM e comparabili restano pending finché non vengono collegati storico dividendi/sostenibilità e benchmark settoriali datati/verificati.
+- Intrinsic value calcolato solo con almeno 2 famiglie indipendenti, massimo un metodo per famiglia e pesi legati alla qualità, con limite del 65% per famiglia. Media semplice/mediana sono diagnostiche secondarie. Buy-under con MOS predefinito del 25% resta separato dalla triangolazione.
+- Il confronto col prezzo è bloccato se la quotazione è assente/non datata, più vecchia di 4 giorni o precedente all’ultimo filing SEC usato.
+
+COPERTURA MISURATA SULLO SNAPSHOT ASSETS DEL 2026-11-06
+- Universo: 227 ticker. DCF disponibile: 63; Graham disponibile: 62; entrambi e quindi triangolazione: 45; pending: 182.
+- Dei 45 risultati triangolati: 32 sopra il prezzo di mercato (overvalued), 12 sotto il prezzo (undervalued), 1 in linea. Nessuno dei 45 è stato bloccato dal gate di freschezza prezzo al momento del calcolo.
+- La triangolazione corrente è a due famiglie: DDM e peer comparables non sono ancora disponibili per alcun ticker. Non descriverla come consenso completo a quattro metodi.
+- Caso ABNB: triangolazione pending. Nei fatti importati manca il CapEx annuale più recente e manca EPS diluito/utile netto dello stesso periodo per derivare FCF/share; manca inoltre la serie annuale di EPS diluito richiesta da Graham. La copertura generica del ticker non basta se mancano gli input esatti. Prossimo intervento: ampliare e verificare i tag SEC, includere weighted-average shares diluite riportate, poi collegare i metodi DDM e multipli comparabili. Non riempire i buchi con zeri o stime non tracciate.
+
+VERIFICA E STATO PUBBLICAZIONE
+- Build locale riuscita: TypeScript, 73 asserzioni d’integrazione e Vite production build; resta un warning di bundle JS sopra 500 kB.
+- Le modifiche sopra sono state portate in un branch locale derivato dall’ultimo `main`, ma a questa voce non risultano ancora nel branch di deploy né sul sito. Registrare hash commit, workflow Actions e verifica Pages dopo il push; solo allora marcare come pubblicate.

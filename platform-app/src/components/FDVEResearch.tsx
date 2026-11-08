@@ -5,7 +5,7 @@ import {SecurityLogo} from "./SecurityLogo";
 import {TradingViewSecurityChart} from "./TradingViewSecurityChart";
 import {IntrinsicValueModule} from "./IntrinsicValueModule";
 import type {RealAsset} from "./RealResearch";
-import type {ValuationBridge} from "./ValuationWorkspace";
+import type {ValuationBridge} from "../core/valuationTriangulation";
 import "./fdveResearch.css";
 
 type Fact={status:string;value?:number;periodEnd?:string};
@@ -16,7 +16,7 @@ const fact=(m:Record<string,Fact>,key:string)=>{const f=m[key];return f&&["AVAIL
 const usd=(v:number|null)=>v===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",notation:"compact",maximumFractionDigits:2}).format(v);
 const pct=(n:number|null)=>n===null?"N/D":(n*100).toFixed(1)+"%";
 
-export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation}:{ticker?:string;onSelect?:(ticker:string)=>void;compact?:boolean;asset?:RealAsset|null;valuation?:ValuationBridge}){
+export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation}:{ticker?:string;onSelect?:(ticker:string)=>void;compact?:boolean;asset?:RealAsset|null;valuation?:ValuationBridge|null}){
  const [year,setYear]=useState<string|null>(null);
  const [chartMarkets,setChartMarkets]=useState<Record<string,"NASDAQ"|"NYSE">>({});
  const selected=companies.find(c=>c.ticker===ticker);

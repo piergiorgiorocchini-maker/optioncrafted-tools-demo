@@ -5,6 +5,10 @@ type Fact={status:string;value?:number;periodEnd?:string};
 type Year={metrics:Record<string,Fact>};
 type Company={ticker:string;profile:string;years:Record<string,Year>};
 const companies=audit.companies as unknown as Company[];
+/** Validated business-profile classification is currently limited to the 20-company pilot. */
+export function verifiedFinancialProfile(ticker:string):string|null{
+ return companies.find(company=>company.ticker===ticker)?.profile??null;
+}
 const value=(m:Record<string,Fact>,key:string):number|null=>{
  const f=m[key];return f&&["AVAILABLE","DERIVED"].includes(f.status)&&typeof f.value==="number"&&Number.isFinite(f.value)?f.value:null;
 };

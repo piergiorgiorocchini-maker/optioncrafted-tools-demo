@@ -74,3 +74,7 @@
 .ff-average-line{stroke:#ed861c;stroke-width:2.5;stroke-dasharray:7 5;pointer-events:none}
 .ff-average-tag-bg{fill:#fff7ec;stroke:#f0d0a7;stroke-width:1}
 .ff-average-tag{fill:#bd6813;font-size:12px;font-weight:850;letter-spacing:.2px}
+.ff-legend-triangulated{display:inline-block;width:19px;border-top:3px solid #176fc5}
+.ff-triangulated-line{stroke:#176fc5;stroke-width:3;pointer-events:none}
+.ff-triangulated-tag-bg{fill:#eef6ff;stroke:#9dc7f0;stroke-width:1}
+.ff-triangulated-tag{fill:#125da5;font-size:11px;font-weight:900;letter-spacing:.25px}
