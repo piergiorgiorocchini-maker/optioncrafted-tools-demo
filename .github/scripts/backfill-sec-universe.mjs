@@ -292,9 +292,20 @@ function parseXbrlInstance(xml, filing) {
     epsDiluted: /(?:(?:earnings|netincome|income|profit).*pershare.*diluted|diluted.*(?:earnings|netincome|income|profit).*pershare)/i
   };
   const found = [];
+  const auditTags = [];
   const factPattern = /<([A-Za-z_][\w.-]*:)([A-Za-z_][\w.-]*)\b([^>]*)>([^<]*)<\/\1\2>/gi;
   for (const match of xml.matchAll(factPattern)) {
     const localName = match[2];
+    if (filing.audit && /share|dilut|income|earnings|profit|purchase|property|equipment|capital|capex/i.test(localName) && auditTags.length < 160) {
+      const auditContext = contexts.get(xmlAttribute(match[3], 'contextRef'));
+      if (auditContext?.start && auditContext.end) {
+        const auditDays = (Date.parse(auditContext.end + 'T00:00:00Z') - Date.parse(auditContext.start + 'T00:00:00Z')) / 86400000;
+        const auditUnit = units.get(xmlAttribute(match[3], 'unitRef')) || '';
+        if (auditDays >= 330 && auditDays <= 380 && /USD|shares/i.test(auditUnit)) {
+          auditTags.push({ tag: match[1] + localName, value: match[4].trim(), unit: auditUnit, start: auditContext.start, end: auditContext.end, dimensional: auditContext.dimensional });
+        }
+      }
+    }
     const metric = Object.entries(patterns).find(([, pattern]) => pattern.test(localName))?.[0];
     if (!metric || /<[^>]+>/.test(match[4]) || /xsi:nil=["']true["']/i.test(match[3])) continue;
     const context = contexts.get(xmlAttribute(match[3], 'contextRef'));
@@ -312,6 +323,7 @@ function parseXbrlInstance(xml, filing) {
     if (xmlAttribute(match[3], 'sign') === '-') value = -Math.abs(value);
     found.push({ metric, value, start: context.start, end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl, dimensional: context.dimensional });
   }
+  if (filing.audit) console.log('SEC XBRL tag audit ABNB ' + filing.reportEnd + ': ' + JSON.stringify(auditTags));
   return found.sort((a, b) => Number(a.dimensional) - Number(b.dimensional) || b.filed.localeCompare(a.filed));
 }
 async function fetchRecentAnnualXbrlFacts(cik) {
@@ -325,7 +337,7 @@ async function fetchRecentAnnualXbrlFacts(cik) {
     const form = recent.form[index];
     const reportEnd = recent.reportDate?.[index] || '';
     if (!annualForms.has(form) || !reportEnd) continue;
-    const filing = { form, reportEnd, filed: recent.filingDate?.[index] || '', accession: recent.accessionNumber?.[index] || '', primaryDocument: recent.primaryDocument?.[index] || '' };
+    const filing = { form, reportEnd, filed: recent.filingDate?.[index] || '', accession: recent.accessionNumber?.[index] || '', primaryDocument: recent.primaryDocument?.[index] || '', audit: cik === '0001559720' };
     const prior = latestByReportEnd.get(reportEnd);
     if (!prior || filing.filed > prior.filed) latestByReportEnd.set(reportEnd, filing);
   }
