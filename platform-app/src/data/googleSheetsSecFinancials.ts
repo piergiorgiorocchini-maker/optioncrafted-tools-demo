@@ -2,7 +2,7 @@ import sheetAnnualSecFacts from "./googleSheetsSecAnnual.json";
 
 export type SecFinancialMetric="revenue"|"netIncome"|"operatingIncome"|"cashFromOperations"|"capex"|"epsDiluted"|"grossProfit"|"depreciationAndAmortization"|"interestExpense"|"dilutedShares"|"cash"|"currentAssets"|"currentLiabilities"|"inventory"|"totalAssets"|"totalLiabilities"|"equity"|"longTermDebt"|"shortTermDebt";
 type Fact={value:number;unit:string;tag:string;filedDate:string;accession:string;sourceUrl:string;form:string};
-type Period={ticker:string;cik:string;currency:string;periodStart:string;periodEnd:string;metrics:Partial<Record<SecFinancialMetric,Fact>>};
+type Period={ticker:string;cik:string;currency:string;periodStart:string;periodEnd:string;yearEndClose?:number;priceSource?:string;metrics:Partial<Record<SecFinancialMetric,Fact>>};
 export type SecAnnualFinancialYear={
  fiscalYear:string;periodStart:string;periodEnd:string;currency:string;
  revenue:number|null;grossProfit:number|null;netIncome:number|null;operatingIncome:number|null;
@@ -13,7 +13,7 @@ export type SecAnnualFinancialYear={
  totalAssets:number|null;totalLiabilities:number|null;equity:number|null;longTermDebt:number|null;shortTermDebt:number|null;
  totalDebt:number|null;netDebt:number|null;debtEquity:number|null;netDebtEbitda:number|null;interestCoverage:number|null;
  grossMargin:number|null;operatingMargin:number|null;netMargin:number|null;roe:number|null;roic:number|null;
- revenueCagr3y:number|null;revenueCagr5y:number|null;epsCagr3y:number|null;epsCagr5y:number|null;fcfCagr5y:number|null;normalizedEps5y:number|null;
+ revenueCagr3y:number|null;revenueCagr5y:number|null;epsCagr3y:number|null;epsCagr5y:number|null;fcfCagr5y:number|null;normalizedEps5y:number|null;yearEndClose:number|null;historicalPe:number|null;historicalPeSource:string|null;
  filedDate:string|null;importedAt:string|null;
  sources:Partial<Record<SecFinancialMetric,{tag:string;unit:string;filedDate:string;accession:string;sourceUrl:string}>>;
  missingMetrics:SecFinancialMetric[];
@@ -63,6 +63,9 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency="USD"):SecAn
    netMargin:netIncome!==null&&revenue!==null&&revenue!==0?netIncome/revenue:null,
    roe,roic:operatingIncome!==null&&invested!==null&&invested>0?operatingIncome*0.79/invested:null,
    revenueCagr3y:null,revenueCagr5y:null,epsCagr3y:null,epsCagr5y:null,fcfCagr5y:null,normalizedEps5y:null,
+   yearEndClose:valid(p.yearEndClose)?p.yearEndClose:null,
+   historicalPe:valid(p.yearEndClose)&&p.yearEndClose>0&&valid(eps)&&eps>0?p.yearEndClose/eps:null,
+   historicalPeSource:p.priceSource??null,
    filedDate:Object.values(p.metrics).map(f=>f.filedDate).sort().at(-1)??null,importedAt:dataset.sourceImportedAt,
    sources,missingMetrics:allMetrics.filter(m=>!p.metrics[m])
   };
