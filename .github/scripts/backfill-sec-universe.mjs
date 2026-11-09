@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-5FY-2026-11-v6';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v7';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -27,6 +27,10 @@ const metricSpecs = [
   { key: 'cashFromOperations', kind: 'flow', tags: ['NetCashProvidedByUsedInOperatingActivities', 'CashFlowsFromUsedInOperatingActivities', 'CashFlowsFromOperatingActivities'] },
   { key: 'capex', kind: 'flow', tags: ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsForPropertyPlantAndEquipment', 'PurchaseOfPropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibleAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibles', 'PurchasesOfPropertyPlantAndEquipment'] },
   { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted', 'EarningsPerShareDilutedIncludingExtraordinaryItems', 'EarningsPerShareBasicAndDiluted'] },
+  { key: 'grossProfit', kind: 'flow', tags: ['GrossProfit'] },
+  { key: 'depreciationAndAmortization', kind: 'flow', tags: ['DepreciationDepletionAndAmortizationPropertyPlantAndEquipment', 'DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet'] },
+  { key: 'interestExpense', kind: 'flow', tags: ['InterestExpenseNonOperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'] },
+  { key: 'dilutedShares', kind: 'shares', tags: ['WeightedAverageNumberOfDilutedSharesOutstanding', 'WeightedAverageNumberOfSharesOutstandingDiluted', 'WeightedAverageNumberOfDilutedSharesOutstandingBasicAndDiluted'] },
   { key: 'cash', kind: 'instant', tags: ['CashAndCashEquivalentsAtCarryingValue', 'CashAndCashEquivalents'] },
   { key: 'currentAssets', kind: 'instant', tags: ['AssetsCurrent', 'CurrentAssets'] },
   { key: 'currentLiabilities', kind: 'instant', tags: ['LiabilitiesCurrent', 'CurrentLiabilities'] },
@@ -154,6 +158,7 @@ function baseCurrency(unit) {
 }
 function allowedUnit(metric, unit) {
   if (metric.kind === 'perShare') return /^[A-Z]{3}\/shares$/i.test(unit);
+  if (metric.kind === 'shares') return /^shares$/i.test(unit);
   return /^[A-Z]{3}$/.test(unit);
 }
 function factCandidates(doc, metric) {
@@ -169,7 +174,7 @@ function factCandidates(doc, metric) {
         for (const observation of observations) {
           if (!forms.has(observation.form) || !observation.end || !observation.filed || !Number.isFinite(Number(observation.val))) continue;
           const hasStart = Boolean(observation.start);
-          if (metric.kind === 'flow') {
+          if (['flow', 'perShare', 'shares'].includes(metric.kind)) {
             if (!hasStart) continue;
             const days = (Date.parse(observation.end) - Date.parse(observation.start)) / 86400000;
             if (days < 330 || days > 380) continue;
@@ -201,7 +206,7 @@ function factCandidates(doc, metric) {
 function annualPeriodEnds(candidatesByMetric) {
   const ends = new Set();
   for (const metric of metricSpecs) {
-    if (metric.kind !== 'flow' && metric.kind !== 'perShare') continue;
+    if (!['flow', 'perShare', 'shares'].includes(metric.kind)) continue;
     for (const fact of candidatesByMetric[metric.key] || []) ends.add(fact.end);
   }
   return [...ends].sort((a, b) => b.localeCompare(a)).slice(0, 6).sort();
@@ -209,7 +214,7 @@ function annualPeriodEnds(candidatesByMetric) {
 function preferredCurrency(candidatesByMetric) {
   const counts = new Map();
   for (const metric of metricSpecs) {
-    if (metric.kind === 'instant') continue;
+    if (metric.kind === 'instant' || metric.kind === 'shares') continue;
     for (const fact of candidatesByMetric[metric.key] || []) {
       const currency = baseCurrency(fact.unit);
       counts.set(currency, (counts.get(currency) || 0) + 1);
@@ -768,6 +773,10 @@ const secMetricLabels = {
   cashFromOperations: 'Flusso di cassa operativo',
   capex: 'CapEx',
   epsDiluted: 'EPS diluito',
+  grossProfit: 'Gross profit',
+  depreciationAndAmortization: 'Depreciation & amortization',
+  interestExpense: 'Interest expense',
+  dilutedShares: 'Weighted-average diluted shares',
   cash: 'Cassa ed equivalenti',
   currentAssets: 'Attività correnti',
   currentLiabilities: 'Passività correnti',
@@ -783,7 +792,7 @@ const fundamentalMetrics = Array.from({ length: 43 }, (_, index) => {
   const label = String(fundamentalsGrid[1]?.[column] ?? '').trim() || 'Fundamental field ' + (column + 1);
   return { id: slugifyCoverageLabel(label), label, column };
 });
-if (marketMetrics.length !== 19 || metricSpecs.length !== 15 || fundamentalMetrics.length !== 43 ||
+if (marketMetrics.length !== 19 || metricSpecs.length !== 19 || fundamentalMetrics.length !== 43 ||
     fundamentalMetrics.some(metric => !metric.id)) {
   throw new Error('Unexpected admin coverage metric schema; refusing to publish.');
 }
@@ -840,7 +849,7 @@ if (coverageSnapshot.tickers.length !== assetTickers.length) {
 await fs.writeFile('platform-app/src/data/adminCoverageSnapshot.json', JSON.stringify(coverageSnapshot, null, 2) + '\n');
 
 
-const valuationSourceMetrics = ['revenue', 'netIncome', 'operatingIncome', 'cashFromOperations', 'capex', 'epsDiluted'];
+const valuationSourceMetrics = metricSpecs.map(metric => metric.key);
 const valuationSourceFacts = mergedRawRows.slice(1)
   .filter(row => valuationSourceMetrics.includes(String(row?.[2] || '')) && Number.isFinite(Number(row?.[3])) && row?.[13] === 'VERIFIED_SOURCE')
   .map(row => ({
