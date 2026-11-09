@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T16:08:24.769Z",
+  "generatedAt": "2026-11-09T16:11:35.881Z",
   "definition": "Present means at least one non-empty value exists for that ticker and field in the latest Google Sheets snapshot; it does not mean the historical series is complete.",
   "source": "Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals",
   "universeCount": 227,
@@ -593,19 +593,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -698,8 +686,19 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "revenue_ttm",
@@ -736,19 +735,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -835,8 +822,17 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -853,19 +849,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -952,6 +936,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -970,19 +959,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1073,8 +1050,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -1091,19 +1078,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1193,8 +1168,16 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -1211,19 +1194,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1312,6 +1283,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -1330,19 +1306,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1431,6 +1395,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -1449,19 +1418,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1551,8 +1508,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -1569,19 +1535,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1666,6 +1620,11 @@
         ],
         "calculated": [
           "revenueCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -1684,19 +1643,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1783,6 +1730,11 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -1801,19 +1753,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -1905,8 +1845,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -1923,19 +1873,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2025,8 +1963,16 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -2043,19 +1989,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2146,8 +2080,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -2304,19 +2248,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2404,8 +2336,17 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": []
       }
@@ -2418,19 +2359,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2519,8 +2448,18 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -2537,19 +2476,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2636,6 +2563,12 @@
           "revenueCagr3y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -2654,19 +2587,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2758,8 +2679,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -2882,19 +2813,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -2985,8 +2904,16 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -3003,19 +2930,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -3104,8 +3019,18 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -3238,19 +3163,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -3339,6 +3252,13 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -3471,19 +3391,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -3566,6 +3474,9 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -3723,19 +3634,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -3823,7 +3722,16 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
-          "epsCagr5y"
+          "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -3840,19 +3748,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -3936,6 +3832,11 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -4328,19 +4229,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -4431,8 +4320,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": []
       }
@@ -4445,19 +4343,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -4520,19 +4406,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -4617,6 +4491,10 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
           "netMargin",
           "roe"
         ],
@@ -4635,19 +4513,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -4737,6 +4603,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -4755,19 +4626,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -4856,8 +4715,17 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -4985,19 +4853,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -5084,6 +4940,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -5358,19 +5219,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -5461,8 +5310,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -5479,19 +5337,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -5575,6 +5421,9 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -5593,19 +5442,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -5694,6 +5531,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -5817,19 +5659,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -5921,8 +5751,19 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": []
       }
@@ -5935,19 +5776,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6035,6 +5864,11 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -6053,19 +5887,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6149,8 +5971,18 @@
           "shortTermDebt"
         ],
         "calculated": [
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -6167,19 +5999,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6271,8 +6091,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -6289,19 +6119,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6389,6 +6207,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -6407,19 +6230,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6510,8 +6321,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -6528,19 +6349,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6630,6 +6439,11 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -6644,19 +6458,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6742,6 +6544,11 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -6760,19 +6567,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6860,6 +6655,12 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -6878,19 +6679,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -6978,6 +6767,10 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -6992,19 +6785,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -7206,19 +6987,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -7309,6 +7078,13 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -7327,19 +7103,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -7669,19 +7433,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -7768,6 +7520,12 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -7786,19 +7544,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8255,19 +8001,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8354,8 +8088,17 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -8372,19 +8115,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8474,8 +8205,17 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -8492,19 +8232,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8595,8 +8323,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -8613,19 +8351,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8712,8 +8438,17 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -8730,19 +8465,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8821,6 +8544,7 @@
         ],
         "calculated": [
           "revenueCagr3y",
+          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -8839,19 +8563,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -8943,6 +8655,15 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -9538,19 +9259,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -9638,6 +9347,10 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -9656,19 +9369,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -9758,8 +9459,15 @@
           "revenueCagr3y",
           "normalizedEps5y",
           "epsCagr3y",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -9776,19 +9484,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -9876,8 +9572,15 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -10213,19 +9916,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -10314,8 +10005,16 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -10332,19 +10031,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -10432,6 +10119,10 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
           "netMargin",
           "roe"
         ],
@@ -10450,19 +10141,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -10552,8 +10231,15 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -10570,19 +10256,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -10672,8 +10346,15 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -10829,19 +10510,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -10932,6 +10601,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -11065,19 +10740,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -11169,8 +10832,19 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -11187,19 +10861,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -11279,7 +10941,19 @@
       "valuationProfile": "BROKERAGE",
       "notApplicable": {
         "sec": [],
-        "calculated": [],
+        "calculated": [
+          "grossMargin",
+          "operatingMargin",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "roic"
+        ],
         "fundamentals": []
       },
       "periodCounts": {
@@ -11365,9 +11039,6 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -11964,19 +11635,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -12068,8 +11727,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -12500,19 +12169,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -12600,8 +12257,16 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -12618,19 +12283,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -12720,8 +12373,16 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -12738,19 +12399,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -12839,6 +12488,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -12967,19 +12621,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -13068,8 +12710,15 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -13506,19 +13155,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -13609,8 +13246,18 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -13627,19 +13274,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -13730,6 +13365,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
           "netMargin",
           "roe"
         ],
@@ -13858,19 +13499,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -13962,8 +13591,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -13980,19 +13618,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14081,6 +13707,12 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -14099,19 +13731,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14201,6 +13821,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -14219,19 +13844,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14322,8 +13935,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -14479,19 +14102,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14582,8 +14193,16 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -14600,19 +14219,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14700,8 +14307,16 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -14718,19 +14333,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14822,8 +14425,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -14840,19 +14453,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -14944,8 +14545,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -14962,19 +14572,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15064,6 +14662,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -15078,19 +14682,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15176,6 +14768,10 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -15307,19 +14903,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15409,8 +14993,18 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -15427,19 +15021,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15529,6 +15111,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -15547,19 +15135,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15648,6 +15224,11 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -15666,19 +15247,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15769,6 +15338,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -15787,19 +15362,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -15888,6 +15451,13 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "debtEquity",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -15906,19 +15476,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16006,6 +15564,12 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -16024,19 +15588,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16128,8 +15680,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -16146,19 +15708,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16248,6 +15798,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -16266,19 +15822,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16366,6 +15910,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -16384,19 +15933,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16486,8 +16023,17 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -16504,19 +16050,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16607,8 +16141,16 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -16879,19 +16421,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -16980,6 +16510,12 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -16998,19 +16534,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17096,8 +16620,15 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -17114,19 +16645,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17215,6 +16734,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
           "netMargin",
           "roe"
         ],
@@ -17233,19 +16758,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17324,6 +16837,9 @@
           "equity"
         ],
         "calculated": [
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
           "roe"
         ],
         "fundamentals": [
@@ -17341,19 +16857,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17445,8 +16949,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -17463,19 +16977,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17567,8 +17069,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -17691,19 +17203,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17793,6 +17293,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -17811,19 +17316,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -17911,6 +17404,10 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -17929,19 +17426,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18032,6 +17517,13 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -18050,19 +17542,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18151,6 +17631,11 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -18169,19 +17654,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18265,6 +17738,10 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
           "netMargin",
           "roe"
         ],
@@ -18283,19 +17760,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18386,6 +17851,13 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -18404,19 +17876,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18506,8 +17966,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -18524,19 +17993,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18619,6 +18076,8 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
           "netMargin",
           "roe"
         ],
@@ -18637,19 +18096,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18738,6 +18185,12 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -18756,19 +18209,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18860,6 +18301,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -18878,19 +18325,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -18980,6 +18415,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
           "netMargin",
           "roe"
         ],
@@ -18998,19 +18438,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -19100,6 +18528,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "debtEquity",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -19381,19 +18815,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -19481,6 +18903,12 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -19499,19 +18927,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -19602,6 +19018,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -19891,19 +19313,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -19994,8 +19404,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -20153,19 +19572,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -20251,8 +19658,15 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -20269,19 +19683,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -20371,6 +19773,11 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -20389,19 +19796,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -20485,6 +19880,9 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -20617,19 +20015,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -20717,8 +20103,16 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -20735,19 +20129,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -20839,8 +20221,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -20857,19 +20249,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -20959,8 +20339,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -21225,19 +20614,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -21328,8 +20705,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -21346,19 +20732,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -21446,6 +20820,13 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -22112,19 +21493,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -22210,8 +21579,16 @@
         ],
         "calculated": [
           "revenueCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -22228,19 +21605,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -22332,8 +21697,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -22350,19 +21725,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -22693,19 +22056,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -22794,8 +22145,17 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -22812,19 +22172,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -22902,6 +22250,7 @@
           "equity"
         ],
         "calculated": [
+          "currentRatio",
           "roe"
         ],
         "fundamentals": [
@@ -22919,19 +22268,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -23017,6 +22354,12 @@
         ],
         "calculated": [
           "revenueCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -23035,19 +22378,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -23139,6 +22470,13 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "ebitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -23297,19 +22635,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -23400,8 +22726,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -23558,19 +22894,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -23653,6 +22977,9 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -23784,19 +23111,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -23887,6 +23202,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -24044,19 +23365,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -24146,8 +23455,19 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -24164,19 +23484,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -24268,8 +23576,17 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -24397,19 +23714,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -24497,6 +23802,10 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -25451,19 +24760,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -25553,6 +24850,11 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "ebitda",
+          "operatingMargin",
           "netMargin",
           "roe"
         ],
@@ -25851,19 +25153,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -25926,19 +25216,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -26026,8 +25304,16 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -26044,19 +25330,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -26146,8 +25420,18 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -26270,19 +25554,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -26370,8 +25642,18 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -26388,19 +25670,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -26491,8 +25761,18 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
@@ -26509,19 +25789,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -26609,6 +25877,12 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "debtEquity",
+          "ebitda",
+          "interestCoverage",
           "roe"
         ],
         "fundamentals": [
@@ -27883,19 +27157,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -27981,6 +27243,9 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
           "netMargin",
           "roe"
         ],
@@ -28139,19 +27404,7 @@
       "valuationProfile": "NON_FINANCIAL_CORPORATION",
       "notApplicable": {
         "sec": [],
-        "calculated": [
-          "grossMargin",
-          "operatingMargin",
-          "freeCashFlow",
-          "freeCashFlowPerShare",
-          "currentRatio",
-          "netDebt",
-          "debtEquity",
-          "ebitda",
-          "netDebtEbitda",
-          "interestCoverage",
-          "roic"
-        ],
+        "calculated": [],
         "fundamentals": []
       },
       "periodCounts": {
@@ -28240,8 +27493,19 @@
           "revenueCagr3y",
           "revenueCagr5y",
           "normalizedEps5y",
+          "freeCashFlow",
+          "freeCashFlowPerShare",
+          "currentRatio",
+          "netDebt",
+          "debtEquity",
+          "grossMargin",
+          "ebitda",
+          "netDebtEbitda",
+          "interestCoverage",
+          "operatingMargin",
           "netMargin",
-          "roe"
+          "roe",
+          "roic"
         ],
         "fundamentals": [
           "eps_ttm",
