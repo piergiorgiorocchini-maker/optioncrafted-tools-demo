@@ -920,7 +920,7 @@ const coverageSnapshot = {
     const secPresent = secByTicker.get(ticker) || new Set();
     const classInfo = classificationByTicker.get(ticker) || { instrumentType: 'UNKNOWN', profile: 'UNKNOWN' };
     const fundOrIndex = ['ETF', 'INDEX'].includes(classInfo.instrumentType);
-    const bankOrInsurer = /BANK|INSURANCE|FINANCIAL|CONSUMER_FINANCE/.test(classInfo.profile);
+    const bankOrInsurer = ['BANK', 'CONSUMER_FINANCE', 'BROKERAGE', 'FINANCIAL_MARKET_INFRASTRUCTURE', 'INSURANCE'].includes(classInfo.profile);
     const reitOrMlp = /REIT|MLP/.test(classInfo.profile);
     const bankNA = ['grossMargin','operatingMargin','freeCashFlow','freeCashFlowPerShare','currentRatio','netDebt','debtEquity','ebitda','netDebtEbitda','interestCoverage','roic'];
     const calculatedNA = fundOrIndex ? corporateFinancialMetrics.map(metric => metric.id) : bankOrInsurer ? bankNA : reitOrMlp ? ['freeCashFlowPerShare'] : [];
