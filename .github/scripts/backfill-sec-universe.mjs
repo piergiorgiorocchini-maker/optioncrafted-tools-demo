@@ -484,6 +484,8 @@ const assetTickers = [...new Set(assetValues.map(row => normTicker(row?.[0])).fi
 if (assetTickers.length === 0 || assetTickers.length > 1000) throw new Error('Unexpected Assets ticker count: ' + assetTickers.length);
 
 const { map: secTickerMap, source: tickerMapSource } = await loadTickerMap();
+// Deere & Company is CIK 0000315189; retain this explicit mapping if the SEC ticker file omits it.
+secTickerMap.set('DE', [{ ticker: 'DE', cik: '0000315189', title: 'Deere & Company' }]);
 console.log('Assets tickers: ' + assetTickers.length + '; SEC ticker map: ' + secTickerMap.size + ' entries from ' + tickerMapSource);
 
 const factsCache = new Map();
@@ -542,6 +544,19 @@ for (const ticker of assetTickers) {
         missingMetrics,
         companyName: match.title || cached.doc.entityName || 'ExxonMobil',
         currency: historical.currency || quarterly.currency || 'USD'
+      };
+    }
+    } else {
+      // Keep recent SEC 10-Q facts for every matched issuer; raw quarterly periods
+      // enable a later, correctly periodized TTM calculation without annual/TTM mixing.
+      const quarterly = buildQuarterlyRows(cached.doc, ticker, match.cik, match.title, now);
+      const rows = [...parsed.rows, ...quarterly.rows];
+      const covered = new Set(rows.map(row => row[2]));
+      parsed = {
+        ...parsed,
+        rows,
+        periodEnds: [...new Set([...parsed.periodEnds, ...quarterly.periodEnds])],
+        missingMetrics: metricSpecs.map(metric => metric.key).filter(key => !covered.has(key))
       };
     }
     if (!parsed.rows.length) {
