@@ -438,7 +438,7 @@ function buildQuarterlyRows(doc, ticker, cik, companyName, generatedAt) {
   const periods = [...allPeriods.values()].sort((a, b) => a.end.localeCompare(b.end) || a.start.localeCompare(b.start));
   const currencyCounts = new Map();
   for (const metric of metricSpecs) {
-    if (metric.kind === 'instant') continue;
+    if (metric.kind === 'instant' || metric.kind === 'shares') continue;
     for (const fact of candidatesByMetric[metric.key] || []) {
       const currency = baseCurrency(fact.unit);
       currencyCounts.set(currency, (currencyCounts.get(currency) || 0) + 1);
