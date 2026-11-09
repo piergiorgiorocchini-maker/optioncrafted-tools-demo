@@ -1,1 +1,21 @@
-# Nasdaq-100 batch 1: alphabetical ticker order\nAAPL\nABNB\nADBE\nADI\nADP\nADSK\nAEP\nALAB\nALNY\nAMAT\nAMD\nAMGN\nAMZN\nAPP\nARM\nASML\nAVGO\nAXON\nBKNG\nBKR\n
+# Nasdaq-100 batch 2: alphabetical ticker order
+CCEP
+CDNS
+CEG
+CMCSA
+COST
+CPRT
+CRWD
+CRWV
+CSCO
+CSX
+CTAS
+DASH
+DDOG
+DXCM
+EXC
+FANG
+FAST
+FER
+FTNT
+GEHC
