@@ -697,13 +697,14 @@ if (oldLog.length > mergedLogRows.length) {
 }
 
 
-const [assetsGrid, fundamentalsGrid, jsonAssetsGrid, classificationGrid] = await Promise.all([
+const [assetsGrid, fundamentalsGrid, jsonAssetsGrid, classificationGrid, financialHistoryGrid] = await Promise.all([
   readValues('Assets!A1:U1000'),
   readValues('Fundamentals!A1:BD1000'),
   readValues('JSON_assets!A1:B1000'),
-  readValues('Ticker_Classification!A1:M1000')
+  readValues('Ticker_Classification!A1:M1000'),
+  readValues('Financial_History!A1:AP1000')
 ]);
-if (assetsGrid.length < 2 || fundamentalsGrid.length < 3 || (fundamentalsGrid[1] || []).length < 55 || jsonAssetsGrid.length < 6 || classificationGrid.length < 2) {
+if (assetsGrid.length < 2 || fundamentalsGrid.length < 3 || (fundamentalsGrid[1] || []).length < 55 || jsonAssetsGrid.length < 6 || classificationGrid.length < 2 || financialHistoryGrid.length < 2) {
   throw new Error('Coverage snapshot source ranges are incomplete; refusing to publish.');
 }
 const hasCoverageValue = value => {
@@ -738,6 +739,7 @@ const corporateFinancialMetrics = [
   { id: 'normalizedEps5y', label: 'Normalized EPS 5Y' },
   { id: 'epsCagr3y', label: 'EPS CAGR 3Y' },
   { id: 'epsCagr5y', label: 'EPS CAGR 5Y' },
+  { id: 'historicalPe', label: 'Historical P/E (fiscal year-end)' },
   { id: 'freeCashFlow', label: 'Free Cash Flow' },
   { id: 'freeCashFlowPerShare', label: 'FCF per Share' },
   { id: 'currentRatio', label: 'Current Ratio' },
@@ -754,6 +756,14 @@ const corporateFinancialMetrics = [
 ];
 const isAnnualForm = form => ['10-K', '10-K/A', '20-F', '20-F/A', '40-F', '40-F/A'].includes(String(form || '').toUpperCase());
 const isInstantMetric = metric => ['cash', 'currentAssets', 'currentLiabilities', 'inventory', 'totalAssets', 'totalLiabilities', 'equity', 'longTermDebt', 'shortTermDebt'].includes(metric);
+const yearEndPriceByTicker = new Map();
+for (const row of financialHistoryGrid.slice(1)) {
+  const ticker = normTicker(row?.[0]), periodEnd = String(row?.[6] || ''), currency = String(row?.[7] || '').trim().toUpperCase(), close = Number(row?.[36]);
+  if (!ticker || !periodEnd || !/^[A-Z]{3}$/.test(currency) || !Number.isFinite(close) || close <= 0) continue;
+  const periods = yearEndPriceByTicker.get(ticker) || new Map();
+  periods.set(periodEnd, { close, currency });
+  yearEndPriceByTicker.set(ticker, periods);
+}
 const financialPeriodsByTicker = new Map();
 for (const row of mergedRawRows.slice(1)) {
   const ticker = normTicker(row?.[0]), metric = String(row?.[2] || '').trim(), value = Number(row?.[3]);
@@ -765,7 +775,9 @@ for (const row of mergedRawRows.slice(1)) {
     if (days < 300 || days > 430) continue;
   }
   const periods = financialPeriodsByTicker.get(ticker) || new Map();
-  const period = periods.get(end) || { periodEnd: end, metrics: {} };
+  const period = periods.get(end) || { periodEnd: end, currency: '', metrics: {} };
+  const factCurrency = String(row?.[10] || '').split('/')[0].trim().toUpperCase();
+  if (!period.currency && /^[A-Z]{3}$/.test(factCurrency)) period.currency = factCurrency;
   period.metrics[metric] = value;
   periods.set(end, period);
   financialPeriodsByTicker.set(ticker, periods);
@@ -797,6 +809,7 @@ for (const [ticker, periodMap] of financialPeriodsByTicker) {
       normalizedEps5y: index >= 4 && periods.slice(index - 4, index + 1).every(row => Number.isFinite(row.metrics.epsDiluted)) ? 1 : null,
       epsCagr3y: index >= 3 ? cagr(periods.slice(index - 3, index + 1), 'epsDiluted', 3) : null,
       epsCagr5y: index >= 5 ? cagr(periods.slice(index - 5, index + 1), 'epsDiluted', 5) : null,
+      historicalPe: (() => { const quote = yearEndPriceByTicker.get(ticker)?.get(p.periodEnd); return quote && quote.currency === p.currency && validPositive(quote.close) && validPositive(m.epsDiluted) ? quote.close / m.epsDiluted : null; })(),
       freeCashFlow: fcf,
       freeCashFlowPerShare: fcf !== null && validPositive(shares) ? fcf / shares : null,
       currentRatio: Number.isFinite(m.currentAssets) && Number.isFinite(m.currentLiabilities) && m.currentLiabilities > 0 ? m.currentAssets / m.currentLiabilities : null,
@@ -965,15 +978,17 @@ const valuationSourceFacts = mergedRawRows.slice(1)
     unit: String(row[10] || ''), sourceUrl: String(row[11] || ''), importedAt: String(row[12] || ''),
     status: String(row[13] || '')
   }));
+const annualPrices = [...yearEndPriceByTicker.entries()].flatMap(([ticker, periods]) => [...periods.entries()].map(([periodEnd, quote]) => ({ ticker, periodEnd, currency: quote.currency, close: quote.close, source: 'GOOGLEFINANCE close · Financial_History' })));
 const valuationSourceSnapshot = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: now.slice(0, 10),
   source: 'Google Sheet · Tabella Stagionalità · SEC_Raw',
   spreadsheetId,
   sourceImportedAt: now,
   factCount: valuationSourceFacts.length,
   metrics: valuationSourceMetrics,
-  facts: valuationSourceFacts
+  facts: valuationSourceFacts,
+  annualPrices
 };
 await fs.writeFile('platform-app/src/data/googleSheetsSecFacts.json', JSON.stringify(valuationSourceSnapshot));
 
