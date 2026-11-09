@@ -6,7 +6,7 @@
 .coverage-readonly{border:1px solid #cfe0f2;border-radius:100px;background:#f7fbff;color:#426987;padding:7px 10px;font-size:9px;font-weight:800;letter-spacing:.9px;white-space:nowrap}
 .coverage-notice{display:flex;align-items:flex-start;gap:9px;padding:12px 14px;border:1px solid #dbe7f2;border-radius:9px;background:#f7fafe;color:#61748b;font-size:11px;line-height:1.5}
 .coverage-notice svg{flex:0 0 auto;margin-top:1px;color:#4680b4}
-.coverage-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.coverage-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 .coverage-stats article{min-width:0;min-height:105px;padding:16px;background:#fff;border:1px solid #dce6f0;border-radius:11px;display:flex;flex-direction:column;gap:9px}
 .coverage-stats small{font-size:9px;font-weight:800;letter-spacing:.85px;color:#72849a}
 .coverage-stats strong{font-size:25px;line-height:1.1;font-variant-numeric:tabular-nums;color:#19334f}
