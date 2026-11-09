@@ -89,7 +89,8 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency?:string):Sec
    const capital=(row:SecAnnualFinancialYear)=>row.totalDebt!==null&&row.equity!==null&&row.cash!==null?row.totalDebt+row.equity-row.cash:null;
    const priorCapital=capital(rows[i-1]),currentCapital=capital(rows[i]);
    const average=days>=300&&days<=430&&priorCapital!==null&&currentCapital!==null?(priorCapital+currentCapital)/2:null;
-   rows[i].roic=rows[i].operatingIncome!==null&&average!==null&&average>0?rows[i].operatingIncome*0.79/average:null;
+   const operatingIncome=rows[i].operatingIncome;
+   rows[i].roic=operatingIncome!==null&&average!==null&&average>0?operatingIncome*0.79/average:null;
   }
  }
  return rows;
