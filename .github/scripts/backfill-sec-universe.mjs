@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // SEC fundamentals universe backfill.
-// Reads the live Assets ticker list, downloads five annual periods of standard SEC facts
+// Reads the live Assets ticker list, downloads six annual periods of standard SEC facts
 // for issuers with an unambiguous SEC ticker/CIK match, and updates SEC_Raw + Sync_Log.
 // It never overwrites the normalized Fundamentals sheet.
 import crypto from 'node:crypto';
@@ -204,7 +204,7 @@ function annualPeriodEnds(candidatesByMetric) {
     if (metric.kind !== 'flow' && metric.kind !== 'perShare') continue;
     for (const fact of candidatesByMetric[metric.key] || []) ends.add(fact.end);
   }
-  return [...ends].sort((a, b) => b.localeCompare(a)).slice(0, 5).sort();
+  return [...ends].sort((a, b) => b.localeCompare(a)).slice(0, 6).sort();
 }
 function preferredCurrency(candidatesByMetric) {
   const counts = new Map();
@@ -584,7 +584,7 @@ for (const outcome of outcomes) {
   if (!outcome.cik) continue;
   const annualEnds = [...new Set(outcome.records
     .filter(row => row[4] && row[5] && metricSpecs.find(metric => metric.key === row[2])?.kind !== 'instant')
-    .map(row => row[5]))].sort().slice(-5);
+    .map(row => row[5]))].sort().slice(-6);
   const existing = new Set(outcome.records.map(row => row[2] + '|' + row[5]));
   const hasGap = !annualEnds.length || annualEnds.some(end => !existing.has('capex|' + end) || !existing.has('epsDiluted|' + end));
   if (!hasGap) continue;
