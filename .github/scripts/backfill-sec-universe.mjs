@@ -550,7 +550,6 @@ for (const ticker of assetTickers) {
         companyName: match.title || cached.doc.entityName || 'ExxonMobil',
         currency: historical.currency || quarterly.currency || 'USD'
       };
-    }
     } else {
       // Keep recent SEC 10-Q facts for every matched issuer; raw quarterly periods
       // enable a later, correctly periodized TTM calculation without annual/TTM mixing.
