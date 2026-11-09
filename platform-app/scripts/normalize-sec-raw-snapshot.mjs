@@ -51,9 +51,17 @@ function normalize(facts,quarter=false){
  return [...periods.values()].sort((a,b)=>a.ticker.localeCompare(b.ticker)||a.periodEnd.localeCompare(b.periodEnd));
 }
 const periods=normalize(source.facts,false);
+const priceByPeriod=new Map((source.annualPrices||[]).map(price=>[[price.ticker.toUpperCase(),String(price.currency||'').toUpperCase(),price.periodEnd].join("|"),price]));
+for(const period of periods){
+ const quote=priceByPeriod.get([period.ticker,period.currency,period.periodEnd].join("|"));
+ if(quote&&Number.isFinite(quote.close)&&quote.close>0){
+  period.yearEndClose=quote.close;
+  period.priceSource=quote.source||"GOOGLEFINANCE close · Financial_History";
+ }
+}
 const quarterlyPeriods=normalize(source.facts,true);
 const annual={schemaVersion:2,generatedAt:source.generatedAt,
- source:"Google Sheets SEC_Raw · reported annual and quarterly SEC facts; balance-sheet facts joined to fiscal period end",
+ source:"Google Sheets SEC_Raw + Financial_History · SEC annual/quarterly facts and fiscal year-end closes",
  spreadsheetId:source.spreadsheetId,sourceImportedAt:source.sourceImportedAt,rawFactCount:source.factCount,
  annualPeriodCount:periods.length,quarterlyPeriodCount:quarterlyPeriods.length,
  tickerCount:new Set(periods.map(p=>p.ticker)).size,metrics:metricList,periods,quarterlyPeriods};
