@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-09T21:52:58.059Z",
+  "generatedAt": "2026-11-09T21:54:40.847Z",
   "definition": "Present means the ticker has at least one non-empty sheet value or one SEC-derived annual value with the same metric meaning. FY counts show the number of annual SEC observations; annual values never fill or relabel TTM fields. Presence does not mean the full history is complete.",
   "source": "Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals · SEC annual calculations",
   "universeCount": 229,
