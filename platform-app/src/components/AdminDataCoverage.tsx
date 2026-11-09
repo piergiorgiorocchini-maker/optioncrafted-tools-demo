@@ -78,6 +78,7 @@ export function AdminDataCoverage(){
      <tbody>
       {filtered.map(ticker=>{
        const present=new Set(ticker.present[group.id]||[]);
+       const na=new Set(ticker.notApplicable?.[group.id]||[]);
        return <tr key={ticker.ticker}>
         <th className="coverage-sticky coverage-ticker" scope="row">{ticker.ticker}</th>
         <td className="coverage-company">{ticker.name||"—"}</td>
