@@ -919,26 +919,33 @@ const coverageSnapshot = {
     const marketRow = marketByTicker.get(ticker) || [];
     const fundamentalRow = fundamentalsByTicker.get(ticker) || [];
     const secPresent = secByTicker.get(ticker) || new Set();
+    const classInfo = classificationByTicker.get(ticker) || { instrumentType: 'UNKNOWN', profile: 'UNKNOWN' };
+    const fundOrIndex = ['ETF', 'INDEX'].includes(classInfo.instrumentType);
+    const bankOrInsurer = /BANK|INSURANCE|FINANCIAL|CONSUMER_FINANCE/.test(classInfo.profile);
+    const reitOrMlp = /REIT|MLP/.test(classInfo.profile);
+    const bankNA = ['grossMargin','operatingMargin','freeCashFlow','freeCashFlowPerShare','currentRatio','netDebt','debtEquity','ebitda','netDebtEbitda','interestCoverage','roic'];
+    const calculatedNA = fundOrIndex ? corporateFinancialMetrics.map(metric => metric.id) : bankOrInsurer ? bankNA : reitOrMlp ? ['freeCashFlowPerShare'] : [];
+    const notApplicable = {
+      sec: fundOrIndex ? metricSpecs.map(metric => metric.key) : [],
+      calculated: calculatedNA,
+      fundamentals: fundOrIndex ? fundamentalMetrics.map(metric => metric.id) : []
+    };
     return {
       ticker,
       name: hasCoverageValue(marketRow[4]) ? String(marketRow[4]).trim() : ticker,
       sector: hasCoverageValue(marketRow[15]) ? String(marketRow[15]).trim() : '',
-      instrumentType: classificationByTicker.get(ticker)?.instrumentType || 'UNKNOWN',
-      valuationProfile: classificationByTicker.get(ticker)?.profile || 'UNKNOWN',
-      notApplicable: {
-        sec: ['ETF', 'INDEX'].includes(classificationByTicker.get(ticker)?.instrumentType) ? metricSpecs.map(metric => metric.key) : [],
-        calculated: ['ETF', 'INDEX'].includes(classificationByTicker.get(ticker)?.instrumentType) ? corporateFinancialMetrics.map(metric => metric.id) : [],
-        fundamentals: ['ETF', 'INDEX'].includes(classificationByTicker.get(ticker)?.instrumentType) ? fundamentalMetrics.map(metric => metric.id) : []
-      },
+      instrumentType: classInfo.instrumentType,
+      valuationProfile: classInfo.profile,
+      notApplicable,
       periodCounts: {
         sec: Object.fromEntries(metricSpecs.map(metric => [metric.key, [...(financialPeriodsByTicker.get(ticker)?.values() || [])].filter(period => Number.isFinite(period.metrics[metric.key])).length])),
         calculated: annualCalculatedByTicker.get(ticker) || {}
       },
       present: {
         market: marketMetrics.filter(metric => hasMarketMetricValue(metric, marketRow[metric.column], ticker)).map(metric => metric.id),
-        sec: metricSpecs.filter(metric => secPresent.has(metric.key)).map(metric => metric.key),
-        calculated: Object.entries(annualCalculatedByTicker.get(ticker) || {}).filter(([, count]) => count > 0).map(([metric]) => metric),
-        fundamentals: fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column])).map(metric => metric.id)
+        sec: metricSpecs.filter(metric => secPresent.has(metric.key) && !notApplicable.sec.includes(metric.key)).map(metric => metric.key),
+        calculated: Object.entries(annualCalculatedByTicker.get(ticker) || {}).filter(([metric, count]) => count > 0 && !notApplicable.calculated.includes(metric)).map(([metric]) => metric),
+        fundamentals: fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column]) && !notApplicable.fundamentals.includes(metric.id)).map(metric => metric.id)
       }
     };
   })
