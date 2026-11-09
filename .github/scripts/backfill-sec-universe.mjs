@@ -488,14 +488,24 @@ const assetValues = await readValues('Assets!B2:B1000');
 const assetTickers = [...new Set(assetValues.map(row => normTicker(row?.[0])).filter(Boolean))];
 if (assetTickers.length === 0 || assetTickers.length > 1000) throw new Error('Unexpected Assets ticker count: ' + assetTickers.length);
 
+const requestedBatchTickers = [...new Set(
+  String(process.env.SEC_TICKER_BATCH || '').split(/[\\s,;]+/).map(normTicker).filter(Boolean)
+)];
+const assetTickerSet = new Set(assetTickers);
+const unknownBatchTickers = requestedBatchTickers.filter(ticker => !assetTickerSet.has(ticker));
+if (unknownBatchTickers.length) {
+  throw new Error('SEC_TICKER_BATCH contains tickers not present in Assets: ' + unknownBatchTickers.join(', '));
+}
+const processingTickers = requestedBatchTickers.length ? requestedBatchTickers : assetTickers;
+
 const { map: secTickerMap, source: tickerMapSource } = await loadTickerMap();
 // Deere & Company is CIK 0000315189; retain this explicit mapping if the SEC ticker file omits it.
 secTickerMap.set('DE', [{ ticker: 'DE', cik: '0000315189', title: 'Deere & Company' }]);
-console.log('Assets tickers: ' + assetTickers.length + '; SEC ticker map: ' + secTickerMap.size + ' entries from ' + tickerMapSource);
+console.log('Assets tickers: ' + assetTickers.length + '; selected SEC tickers: ' + processingTickers.length + '; SEC ticker map: ' + secTickerMap.size + ' entries from ' + tickerMapSource);
 
 const factsCache = new Map();
 const outcomes = [];
-for (const ticker of assetTickers) {
+for (const ticker of processingTickers) {
   const matches = secTickerMap.get(ticker) || [];
   if (matches.length === 0) {
     outcomes.push({ ticker, status: 'NO_SEC_MATCH', records: [], cik: '', error: 'No exact ticker match in SEC issuer ticker map; another source or instrument-specific treatment is needed.' });
@@ -667,8 +677,8 @@ const logHeader = ['Ticker', 'Provider', 'Last Attempt', 'Last Success', 'Next C
 if (!oldLog[0] || logHeader.some((value, index) => oldLog[0][index] !== value)) throw new Error('Unexpected Sync_Log headers; refusing to overwrite the sheet.');
 const oldLogRows = oldLog.slice(1).filter(row => row.some(value => value !== '' && value !== null && value !== undefined));
 const oldSecLog = new Map(oldLogRows.filter(row => String(row[1]).toUpperCase() === 'SEC').map(row => [normTicker(row[0]), row]));
-const currentTickers = new Set(assetTickers);
-const retainedLogRows = oldLogRows.filter(row => !(String(row[1]).toUpperCase() === 'SEC' && currentTickers.has(normTicker(row[0]))));
+const outcomeTickers = new Set(outcomes.map(outcome => outcome.ticker));
+const retainedLogRows = oldLogRows.filter(row => !(String(row[1]).toUpperCase() === 'SEC' && outcomeTickers.has(normTicker(row[0]))));
 const nextLogRows = outcomes.map(outcome => {
   const prior = oldSecLog.get(outcome.ticker) || [];
   const successful = outcome.records.length > 0;

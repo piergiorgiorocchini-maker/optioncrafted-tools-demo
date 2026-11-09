@@ -5,6 +5,7 @@ on:
     paths:
       - ".github/workflows/sec-fundamentals-universe.yml"
       - ".github/scripts/backfill-sec-universe.mjs"
+      - ".github/sec-ticker-batch.txt"
       - "platform-app/scripts/normalize-sec-raw-snapshot.mjs"
   schedule:
     - cron: "20 4 * * 1-5"
@@ -22,10 +23,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event_name == 'push' && github.sha || 'main' }}
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Select configured SEC ticker batch
+        if: github.event_name == 'push'
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]] &&
+             git diff --name-only "$BEFORE_SHA" "$EVENT_SHA" -- .github/sec-ticker-batch.txt | grep -qx '.github/sec-ticker-batch.txt'; then
+            batch="$(awk 'NF && $1 !~ /^#/ {print toupper($1)}' .github/sec-ticker-batch.txt | paste -sd, -)"
+            if [[ -z "$batch" ]]; then
+              echo "The SEC batch file changed but contains no tickers." >&2
+              exit 1
+            fi
+            printf 'SEC_TICKER_BATCH=%s\\n' "$batch" >> "$GITHUB_ENV"
+            printf 'Selected SEC ticker batch: %s\\n' "$batch"
+          fi
       - name: Download SEC Company Facts and update Google Sheets raw data
         env:
           SEC_USER_AGENT: OptionsCrafted piergiorgio.rocchini@gmail.com
