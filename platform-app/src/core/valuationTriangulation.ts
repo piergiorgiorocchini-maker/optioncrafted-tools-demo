@@ -176,7 +176,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       if(!latest?.cashFromOperations)reasons.push("latest annual operating cash flow missing");
       if(latest?.cashFromOperations!==null&&latest?.cashFromOperations!==undefined&&latest.capex===null)reasons.push("latest annual CapEx missing");
       if(latest?.freeCashFlow!==null&&latest?.freeCashFlow!==undefined&&latest.freeCashFlow<=0)reasons.push("latest annual free cash flow is not positive");
-      if(latest?.dilutedEps===null||latest?.netIncome===null)reasons.push("same-period diluted EPS/net income required to infer shares is missing");
+      if(latest?.dilutedEps===null||latest?.netIncome===null)reasons.push("reported diluted shares or same-period net income/diluted EPS for inferred shares is missing");
       dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow",reasons.length?reasons.join("; "):"latest annual FCF/share is not positive or is unavailable.");
     }else if(fcfWindow.length<4||dcfGrowth===null){
       dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow","Requires at least four consecutive positive annual FCF/share observations to derive a three-year historical CAGR; the available SEC history does not meet that gate.");
@@ -191,8 +191,8 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       }else{
         const values=estimates.map(item=>item.result.value);
         dcfHorizonRange={low:Math.min(...values),high:Math.max(...values)};
-        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*0.68,reason:"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family.",assumptions:[`FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth.capped?` (bounded to ${dcfGrowth.applied.toFixed(1)}%)`:""}`,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,`5Y base; 7Y/10Y sensitivity only · FCF/share uses implied shares from same-year net income ÷ diluted EPS`],fiscalPeriod:latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null};
-        qualityNotes.push("FCF/share uses an implied share count from same-year SEC net income ÷ diluted EPS; it is an estimate, not a reported diluted share count.");
+        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*0.68,reason:"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family.",assumptions:[`FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth.capped?` (bounded to ${dcfGrowth.applied.toFixed(1)}%)`:""}`,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,`5Y base; 7Y/10Y sensitivity only · FCF/share uses reported diluted shares when available; otherwise it infers shares from same-year net income ÷ diluted EPS`],fiscalPeriod:latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null};
+        qualityNotes.push("FCF/share uses SEC weighted-average diluted shares when reported, and otherwise estimates shares from same-year net income ÷ diluted EPS.");
         if(dcfGrowth.capped)qualityNotes.push(`Historical FCF/share CAGR was bounded from ${dcfGrowth.raw.toFixed(1)}% to ${dcfGrowth.applied.toFixed(1)}% to reduce extrapolation risk.`);
       }
     }
