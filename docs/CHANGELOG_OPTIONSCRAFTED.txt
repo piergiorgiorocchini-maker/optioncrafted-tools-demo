@@ -98,3 +98,19 @@ COPERTURA MISURATA SULLO SNAPSHOT ASSETS DEL 2026-11-06
 VERIFICA E STATO PUBBLICAZIONE
 - Build locale riuscita: TypeScript, 73 asserzioni d’integrazione e Vite production build; resta un warning di bundle JS sopra 500 kB.
 - Commit applicativo `2ee65d26a244649b6f029c26b0c90295957da952` presente su `main`; build app preview run `42520806052` conclusa con successo. Aggiornamento preview `492c37730a41` e pubblicazione Pages run `42520843264` concluse con successo il 2026-11-08. La triangolazione è quindi pubblicata; resta separata la verifica manuale end-to-end nel browser.
+
+
+2026-11-09 — AUTOMAZIONE SEC E COPERTURA ABNB
+
+FATTO / IMPLEMENTATO E VERIFICATO
+- Il workflow SEC sec-fundamentals-universe.yml ora esegue il backfill automaticamente nei giorni feriali alle 04:20 UTC (05:20 ora italiana in inverno), oltre all’avvio manuale e agli aggiornamenti previsti. Il flusso aggiorna SEC_Raw, rigenera gli snapshot SEC usati da admin e valutazioni, li versiona su GitHub e avvia la build della piattaforma.
+- Il mapping XBRL riconosce ora anche il tag diluted EPS IncomeLossFromContinuingOperationsPerDilutedShare, usato nei filing di ABNB. Modifica: commit c88a01136131ee3c49786dd0891db1f08a0788fb.
+- Backfill run 42526463836 completata con successo; arricchimento XBRL annuale: 108 righe aggiunte. Universo Assets: 227 ticker; 176 CIK consultati; 175 ticker con fatti SEC; 10.594 righe riscritte. Esiti: 38 OK, 137 PARTIAL, 49 NO_SEC_MATCH, 2 NO_STANDARD_FACTS, 1 NO_COMPANYFACTS. Questi stati non equivalgono ancora a copertura completa dei campi per ticker.
+- Per ABNB il run ha aggiunto 4 fatti annuali: restano 3 periodi CapEx e 1 periodo EPS diluito mancanti nella serie richiesta. Il dato CapEx è esposto nella riconciliazione FCF della società e non è ancora estratto come fatto XBRL standard; non va colmato con zeri o stime non tracciate.
+- La build preview 42526654273 è terminata con successo. Lo snapshot di copertura admin è stato aggiornato dal workflow.
+
+DA COMPLETARE / REGOLA DI MISURAZIONE
+- ABNB resta da verificare nel dataset annuale normalizzato e nella triangolazione dopo l’arricchimento; la presenza del ticker o della metrica nell’admin non prova che la serie storica necessaria ai metodi sia completa.
+- Proseguire l’ampliamento dei tag SEC e la raccolta delle fonti alternative per i 49 ticker senza corrispondenza SEC, classificando i casi in cui SEC non è applicabile.
+- Obiettivo operativo: 100% dei dati reperibili e delle triangolazioni applicabili, censiti per ticker, metrica, periodo e fonte. ETF, indici e crypto vanno misurati sui campi pertinenti alla categoria; i fondamentali societari non applicabili non sono dati mancanti.
+- La triangolazione già pubblicata resta quella misurata sullo snapshot del 6 novembre (45 ticker). Non dichiarare un nuovo conteggio di triangolazioni finché la copertura non è ricalcolata sul dataset aggiornato.
