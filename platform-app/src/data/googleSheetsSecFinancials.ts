@@ -15,7 +15,7 @@ export type SecAnnualFinancialYear={
  grossMargin:number|null;operatingMargin:number|null;netMargin:number|null;roe:number|null;roic:number|null;
  revenueCagr3y:number|null;revenueCagr5y:number|null;epsCagr3y:number|null;epsCagr5y:number|null;fcfCagr5y:number|null;normalizedEps5y:number|null;
  filedDate:string|null;importedAt:string|null;
- sources:Partial<Record<SecFinancialMetric,{tag:string;unit:string;filedDate:string;accession:string;sourceUrl:string}>;
+ sources:Partial<Record<SecFinancialMetric,{tag:string;unit:string;filedDate:string;accession:string;sourceUrl:string}>>;
  missingMetrics:SecFinancialMetric[];
 };
 const dataset=sheetAnnualSecFacts as unknown as {generatedAt:string;sourceImportedAt:string;rawFactCount:number;annualPeriodCount:number;tickerCount:number;periods:Period[]};
