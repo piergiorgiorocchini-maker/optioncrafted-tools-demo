@@ -50,3 +50,5 @@
 .yes-dot{background:#48a37c}.no-dot{background:#d17a6e}
 @media(max-width:900px){.coverage-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-nav-group{display:grid!important}}
 @media(max-width:580px){.coverage-panel{padding:12px}.coverage-welcome{align-items:flex-start}.coverage-stats article{min-height:90px;padding:13px}.coverage-stats strong{font-size:22px}.coverage-controls{align-items:flex-start;flex-direction:column}.coverage-table-scroll{max-height:62vh}}
+
+.coverage-binary.na{background:#eef2f5;color:#738194}.coverage-binary small{font-size:8px;font-weight:750;opacity:.8;margin-left:2px}
