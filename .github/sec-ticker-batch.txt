@@ -1,21 +1,2 @@
-# Nasdaq-100 batch 5: alphabetical ticker order
-REGN
-RKLB
-ROP
-ROST
-SBUX
-SHOP
-SNDK
-SNPS
-SPCX
-STX
-TER
-TMUS
-TRI
-TSLA
-TTWO
-TXN
-VRTX
-WDAY
-WDC
-WMT
+# Nasdaq-100 batch 6: final remainder
+XEL
