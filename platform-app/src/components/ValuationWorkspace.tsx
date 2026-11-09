@@ -49,8 +49,8 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const [riskFree,setRiskFree]=useState(4);
  const [erp,setErp]=useState(5.5);
  const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield/100:null;
- const fcfEvidence=verifiedFcf(asset.ticker);
- const secAnnual=verifiedAnnualHistory(asset.ticker).at(-1);
+ const fcfEvidence=verifiedFcf(asset.ticker,asset.currency);
+ const secAnnual=verifiedAnnualHistory(asset.ticker,asset.currency).at(-1);
  const epsValue=asset.eps??secAnnual?.eps??null;
   const source:Financials={price:asset.price,eps:epsValue,fcf:fcfEvidence.perShare,dividend:snapshotDividend,beta:asset.beta,currency:asset.currency||"USD"};
  const financials:Financials={...source};

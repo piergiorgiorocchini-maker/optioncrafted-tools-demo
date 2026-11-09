@@ -1,40 +1,88 @@
 import {useState} from "react";
-import audit from "../../reports/fdve-cluster-v2.json";
-import avAudit from "../../reports/fdve-alpha-vantage-aapl.json";
+import {googleSheetsSecAnnualHistory,type SecAnnualFinancialYear} from "../data/googleSheetsSecFinancials";
+import {getSecFinancialClassification} from "../data/secFinancialBridge";
 import "./verifiedFundamentals.css";
-type Fact={status:string;value?:number;unit?:string;periodEnd?:string;tag?:string;method?:string};
-type Year={metrics:Record<string,Fact>;coverage:{applicable:number;available:number;rate:number}};
-type Company={ticker:string;profile:string;sec:{status:string;source?:string};years:Record<string,Year>};
-const companies=audit.companies as unknown as Company[];
-const labels:Record<string,string>={
- revenue:"Revenue",netIncome:"Net income",operatingIncome:"Operating income",
- cashFromOperations:"Operating cash flow",capex:"Capital expenditure",epsDiluted:"Diluted EPS",
- cash:"Cash & equivalents",currentAssets:"Current assets",currentLiabilities:"Current liabilities",
- inventory:"Inventory",totalAssets:"Total assets",totalLiabilities:"Total liabilities",
- equity:"Shareholders' equity",longTermDebt:"Long-term debt",shortTermDebt:"Current portion of long-term debt"
+
+type RawMetric={key:keyof SecAnnualFinancialYear;label:string;unit:"amount"|"perShare"|"shares"};
+type CalculatedMetric={key:keyof SecAnnualFinancialYear;label:string;unit:"amount"|"perShare"|"ratio"|"percent"|"multiple";method:string;financialNA?:boolean;reitNA?:boolean};
+const rawMetrics:RawMetric[]=[
+ {key:"revenue",label:"Revenue",unit:"amount"},{key:"grossProfit",label:"Gross profit",unit:"amount"},
+ {key:"netIncome",label:"Net income",unit:"amount"},{key:"operatingIncome",label:"Operating income",unit:"amount"},
+ {key:"depreciationAndAmortization",label:"Depreciation & amortization",unit:"amount"},{key:"interestExpense",label:"Interest expense",unit:"amount"},
+ {key:"dilutedShares",label:"Weighted-average diluted shares",unit:"shares"},
+ {key:"cashFromOperations",label:"Operating cash flow",unit:"amount"},{key:"capex",label:"Capital expenditure",unit:"amount"},
+ {key:"dilutedEps",label:"Diluted EPS",unit:"perShare"},{key:"cash",label:"Cash & equivalents",unit:"amount"},
+ {key:"currentAssets",label:"Current assets",unit:"amount"},{key:"currentLiabilities",label:"Current liabilities",unit:"amount"},
+ {key:"inventory",label:"Inventory",unit:"amount"},{key:"totalAssets",label:"Total assets",unit:"amount"},
+ {key:"totalLiabilities",label:"Total liabilities",unit:"amount"},{key:"equity",label:"Shareholders' equity",unit:"amount"},
+ {key:"longTermDebt",label:"Long-term debt",unit:"amount"},{key:"shortTermDebt",label:"Short-term debt",unit:"amount"}
+];
+const calculatedMetrics:CalculatedMetric[]=[
+ {key:"freeCashFlow",label:"Free cash flow",unit:"amount",method:"Operating cash flow − CapEx",financialNA:true},
+ {key:"freeCashFlowPerShare",label:"FCF per share",unit:"perShare",method:"Annual FCF ÷ diluted shares; SEC reported shares where available, otherwise implied shares",financialNA:true,reitNA:true},
+ {key:"totalDebt",label:"Total debt",unit:"amount",method:"Long-term debt + short-term debt",financialNA:true},
+ {key:"netDebt",label:"Net debt",unit:"amount",method:"Total debt − cash",financialNA:true},
+ {key:"debtEquity",label:"Debt / equity",unit:"ratio",method:"Total debt ÷ shareholders' equity",financialNA:true},
+ {key:"currentRatio",label:"Current ratio",unit:"ratio",method:"Current assets ÷ current liabilities",financialNA:true},
+ {key:"ebitda",label:"EBITDA",unit:"amount",method:"SEC operating income + depreciation and amortization",financialNA:true},
+ {key:"netDebtEbitda",label:"Net debt / EBITDA",unit:"ratio",method:"Net debt ÷ positive EBITDA",financialNA:true},
+ {key:"interestCoverage",label:"Interest coverage",unit:"ratio",method:"Operating income ÷ absolute interest expense",financialNA:true},
+ {key:"grossMargin",label:"Gross margin",unit:"percent",method:"Gross profit ÷ revenue",financialNA:true},
+ {key:"operatingMargin",label:"Operating margin",unit:"percent",method:"Operating income ÷ revenue",financialNA:true},
+ {key:"netMargin",label:"Net margin",unit:"percent",method:"Net income ÷ revenue",financialNA:true},
+ {key:"roe",label:"Return on equity",unit:"percent",method:"Net income ÷ average year-end equity"},
+ {key:"roic",label:"ROIC estimate",unit:"percent",method:"Operating income × (1 − 21% assumed tax) ÷ average invested capital",financialNA:true,reitNA:true},
+ {key:"revenueCagr3y",label:"Revenue CAGR · 3Y",unit:"percent",method:"Three-year CAGR using matched annual periods"},
+ {key:"revenueCagr5y",label:"Revenue CAGR · 5Y",unit:"percent",method:"Five-year CAGR using matched annual periods"},
+ {key:"normalizedEps5y",label:"Normalized EPS · 5Y median",unit:"perShare",method:"Median of five positive annual diluted EPS observations"},
+ {key:"epsCagr3y",label:"Diluted EPS CAGR · 3Y",unit:"percent",method:"Three-year CAGR; all annual EPS observations must be positive"},
+ {key:"epsCagr5y",label:"Diluted EPS CAGR · 5Y",unit:"percent",method:"Five-year CAGR; all annual EPS observations must be positive"},
+ {key:"fcfCagr5y",label:"FCF CAGR · 5Y",unit:"percent",method:"Five-year CAGR; all annual FCF observations must be positive",financialNA:true,reitNA:true},
+ {key:"historicalPe",label:"Fiscal year-end P/E",unit:"multiple",method:"Fiscal year-end close ÷ same-year diluted EPS"}
+];
+const value=(row:SecAnnualFinancialYear,key:keyof SecAnnualFinancialYear):number|null=>{
+ const v=row[key];return typeof v==="number"&&Number.isFinite(v)?v:null;
 };
-const fmt=(f?:Fact)=>!f||!["AVAILABLE","DERIVED"].includes(f.status)||!Number.isFinite(f.value)? "N/D":f.unit==="USD/shares"?"$"+f.value!.toFixed(2):new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(f.value!/1e9);
+const format=(n:number|null,unit:RawMetric["unit"]|CalculatedMetric["unit"],currency:string)=>{
+ if(n===null)return "N/D";
+ if(unit==="amount")return new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n/1e9)+" B";
+ if(unit==="shares")return new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n/1e9)+" B shares";
+ if(unit==="perShare")return new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(n);
+ if(unit==="percent")return (n*100).toFixed(1)+"%";
+ if(unit==="multiple")return n.toFixed(2)+"x";
+ return n.toFixed(2);
+};
 export function VerifiedFundamentals({ticker}:{ticker:string}){
  const [year,setYear]=useState<string|null>(null);
- const item=companies.find(c=>c.ticker===ticker);
- if(!item)return null;
- const availableYears=Object.keys(item.years).sort((a,b)=>Number(b)-Number(a));
+ const [tab,setTab]=useState<"raw"|"calculated">("calculated");
+ const classification=getSecFinancialClassification(ticker);
+ const history=googleSheetsSecAnnualHistory(ticker);
+ if(classification.isFundOrIndex)return <section className="vf-panel"><div className="vf-top"><div><span className="vf-kicker">SEC EDGAR</span><h3>Company fundamentals</h3><p>{classification.profile} · Corporate financial statements are not applicable.</p></div></div></section>;
+ if(!history.length)return <section className="vf-panel"><div className="vf-top"><div><span className="vf-kicker">SEC EDGAR</span><h3>Annual fundamentals</h3><p>No matched SEC annual history is currently available for {ticker}.</p></div></div></section>;
+ const availableYears=history.map(row=>row.fiscalYear).sort((a,b)=>Number(b)-Number(a));
  const activeYear=availableYears.includes(year??"")?year!:availableYears[0];
- const row=item.years[activeYear];
- if(!row)return null;
- const secLink=item.sec.source;
- const metrics=row.metrics;
- const avComparisons=ticker==="AAPL"?(avAudit.years as unknown as Record<string,{comparisons:Record<string,{status:string;deltaPct?:number}>}>)[activeYear]?.comparisons:null;
- const avCounts=avComparisons?Object.values(avComparisons).filter(c=>["MATCH","MATCH_DATE_NORMALIZED","ROUNDING","ROUNDING_DATE_NORMALIZED"].includes(c.status)).length:null;
- const isBank=item.profile==="bank";
- const display=Object.keys(labels).filter(k=>k in metrics);
- const first=metrics.revenue;
- return <section className="vf-panel" aria-label="SEC validated annual fundamentals">
-  <div className="vf-top"><div><span className="vf-kicker">FDVE / FINANCIAL STATEMENTS</span><h3>Verified annual fundamentals</h3><p>SEC EDGAR · Fiscal year {activeYear} · {first?.periodEnd??"period end unavailable"} · {isBank?"Banking profile":"Industrial profile"}</p></div>
-  <div className="vf-year">{availableYears.map(y=><button key={y} className={activeYear===y?"selected":""} type="button" onClick={()=>setYear(y)}>FY {y}</button>)}</div></div>
-  <div className="vf-summary"><div><small>SEC coverage</small><strong>{row.coverage.available}/{row.coverage.applicable}</strong></div><div><small>Validated SEC facts</small><strong>{Math.round(row.coverage.rate*100)}%</strong></div><div><small>Cross-source verification</small><strong className="vf-muted">{avCounts===null?"Pending":avCounts+"/"+Object.keys(avComparisons||{}).length}</strong></div></div>
-  <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>Metric</th><th>FY {activeYear}</th><th>Data status</th>{avComparisons&&<th>AV check</th>}</tr></thead><tbody>{display.map(k=>{const f=metrics[k];return <tr key={k}><td>{labels[k]}</td><td className="vf-number">{fmt(f)}{f?.unit==="USD/shares"?"":" "}</td><td><span className={f?.status==="AVAILABLE"?"vf-ok":f?.status==="DERIVED"?"vf-derived":"vf-missing"} title={f?.tag||f?.method||f?.status}>{f?.status==="AVAILABLE"?"SEC filed":f?.status==="DERIVED"?"Derived":"Missing / review"}</span></td>{avComparisons&&<td><span className={["MATCH","MATCH_DATE_NORMALIZED","ROUNDING","ROUNDING_DATE_NORMALIZED"].includes(avComparisons[k]?.status)?"vf-ok":"vf-missing"} title={avComparisons[k]?.status}>{avComparisons[k]?.status?.replaceAll("_"," ").toLowerCase()||"Pending"}</span></td>}</tr>})}</tbody></table></div>
-  <div className="vf-foot"><span>Amounts in USD billions, except diluted EPS in USD/share. Annual 10-K; not TTM or live.</span>{secLink&&<a href={secLink} target="_blank" rel="noreferrer">SEC companyfacts ↗</a>}</div>
-  <p className="vf-note">{ticker==="AAPL"?"AAPL cross-source comparison is a preliminary pilot. Month-end dates may be normalized and differences require review; SEC remains the primary record.":"Alpha Vantage reconciliation is not yet published for this ticker. Missing or derived fields are not independently verified."}</p>
+ const row=history.find(item=>item.fiscalYear===activeYear)!;
+ const currency=row.currency||"USD";
+ const rows=tab==="raw"?rawMetrics.map(metric=>{
+  const n=value(row,metric.key),source=row.sources[metric.key as keyof typeof row.sources];
+  return {key:metric.key,label:metric.label,display:format(n,metric.unit,currency),status:n===null?"MISSING":"DIRECT",detail:source?.tag||"SEC filing fact",sourceUrl:source?.sourceUrl||null};
+ }):calculatedMetrics.map(metric=>{
+  const notApplicable=(classification.isFinancial&&metric.financialNA)||(classification.isReitOrMlp&&metric.reitNA);
+  const n=value(row,metric.key);
+  return {key:metric.key,label:metric.label,display:notApplicable?"N/A":format(n,metric.unit,currency),status:notApplicable?"NOT_APPLICABLE":n===null?"MISSING":"DERIVED",detail:notApplicable?"Not applicable to this valuation profile":metric.key==="freeCashFlowPerShare"&&row.shareCountSource?"FCF ÷ "+row.shareCountSource:metric.key==="historicalPe"&&row.historicalPeSource?metric.method+" · "+row.historicalPeSource:metric.method,sourceUrl:null};
+ });
+ const present=rows.filter(item=>["DIRECT","DERIVED"].includes(item.status)).length;
+ return <section className="vf-panel" aria-label="SEC annual fundamentals and calculated metrics">
+  <div className="vf-top"><div><span className="vf-kicker">SEC EDGAR · FINANCIAL STATEMENTS</span><h3>Annual fundamentals & calculations</h3><p>{classification.profile} · Fiscal year {activeYear} · {row.periodEnd} · Reporting currency {currency}</p></div>
+   <div className="vf-year">{availableYears.map(y=><button key={y} className={activeYear===y?"selected":""} type="button" onClick={()=>setYear(y)}>FY {y}</button>)}</div>
+  </div>
+  <div className="vf-summary"><div><small>Fields in view</small><strong>{present}/{rows.length}</strong></div><div><small>Fiscal period</small><strong>FY {activeYear}</strong></div><div><small>Import</small><strong className="vf-muted">{row.importedAt?new Date(row.importedAt).toLocaleDateString("en-US"):"SEC annual"}</strong></div></div>
+  <div className="vf-tabs" role="tablist" aria-label="SEC data view">
+   <button type="button" role="tab" aria-selected={tab==="calculated"} className={tab==="calculated"?"selected":""} onClick={()=>setTab("calculated")}>Calculated metrics</button>
+   <button type="button" role="tab" aria-selected={tab==="raw"} className={tab==="raw"?"selected":""} onClick={()=>setTab("raw")}>SEC filing values</button>
+  </div>
+  <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>Metric</th><th>FY {activeYear} · {currency}</th><th>Data status / formula</th></tr></thead><tbody>{rows.map(item=><tr key={item.key}><td>{item.label}</td><td className="vf-number">{item.display}</td><td><span className={item.status==="DIRECT"?"vf-ok":item.status==="DERIVED"?"vf-derived":item.status==="NOT_APPLICABLE"?"vf-na":"vf-missing"} title={item.detail}>{item.status==="DIRECT"?"SEC filed":item.status==="DERIVED"?"Calculated":item.status==="NOT_APPLICABLE"?"N/A":"Missing"}</span><small className="vf-detail">{item.detail}{item.sourceUrl&&<> · <a href={item.sourceUrl} target="_blank" rel="noreferrer">SEC filing ↗</a></>}</small></td></tr>)}</tbody></table></div>
+  <div className="vf-foot"><span>Annual SEC fiscal years only. Amounts are shown in billions of the issuer reporting currency; per-share fields use that currency/share.</span><span>Source import: {row.importedAt??"N/D"}</span></div>
+  <p className="vf-note">Calculated fields use matched annual SEC inputs. They are not TTM. ROIC uses a stated 21% tax assumption and average invested capital; bank, insurer, REIT and MLP metrics follow profile-specific exclusions. Missing inputs remain N/D.</p>
  </section>;
 }

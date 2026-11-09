@@ -24,3 +24,11 @@
 .vf-foot a{color:#2862a2}
 .vf-note{margin-top:6px;line-height:1.4}
 @media(max-width:680px){.vf-panel{padding:10px}.vf-summary{grid-template-columns:1fr 1fr}.vf-summary>div:last-child{grid-column:1/-1}.vf-table{font-size:11px}.vf-table td,.vf-table th{padding:6px 4px}}
+
+.vf-tabs{display:flex;gap:6px;padding:10px 0;border-bottom:1px solid #e3eaf2}
+.vf-tabs button{border:1px solid #d7e2ed;border-radius:6px;background:#f7f9fc;color:#516b86;padding:7px 10px;font:inherit;font-size:10px;font-weight:700;cursor:pointer}
+.vf-tabs button.selected{background:#e7f1fc;border-color:#a9c9e8;color:#1c5e96}
+.vf-detail{display:block;color:#8392a3;font-size:9px;line-height:1.25;margin-top:3px;max-width:280px}
+.vf-table td:nth-child(3){text-align:left;min-width:170px}
+.vf-table .vf-na{font-size:10px;font-weight:700;color:#788597}
+@media(max-width:680px){.vf-detail{max-width:200px}}

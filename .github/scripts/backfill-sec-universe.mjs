@@ -742,7 +742,9 @@ const corporateFinancialMetrics = [
   { id: 'historicalPe', label: 'Historical P/E (fiscal year-end)' },
   { id: 'freeCashFlow', label: 'Free Cash Flow' },
   { id: 'freeCashFlowPerShare', label: 'FCF per Share' },
+  { id: 'fcfCagr5y', label: 'FCF CAGR 5Y' },
   { id: 'currentRatio', label: 'Current Ratio' },
+  { id: 'totalDebt', label: 'Total Debt' },
   { id: 'netDebt', label: 'Net Debt' },
   { id: 'debtEquity', label: 'Debt / Equity' },
   { id: 'grossMargin', label: 'Gross Margin' },
@@ -790,29 +792,51 @@ const cagr = (series, field, span) => {
     const days = (Date.parse(series[index].periodEnd + 'T00:00:00Z') - Date.parse(series[index - 1].periodEnd + 'T00:00:00Z')) / 86400000;
     if (days < 300 || days > 430) return null;
   }
-  return Math.pow(series.at(-1).metrics[field] / series[0].metrics[field], 1 / span) - 1;
+  const elapsedYears = (Date.parse(series.at(-1).periodEnd + 'T00:00:00Z') - Date.parse(series[0].periodEnd + 'T00:00:00Z')) / (365.2425 * 86400000);
+  return Math.pow(series.at(-1).metrics[field] / series[0].metrics[field], 1 / elapsedYears) - 1;
+};
+const median = values => {
+  const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
+  if (!sorted.length) return null;
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 };
 for (const [ticker, periodMap] of financialPeriodsByTicker) {
-  const periods = [...periodMap.values()].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));
+  const allPeriods = [...periodMap.values()].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));
+  const reportingCurrency = allPeriods.at(-1)?.currency;
+  const periods = allPeriods.filter(period => !reportingCurrency || period.currency === reportingCurrency);
   const counts = Object.fromEntries(corporateFinancialMetrics.map(metric => [metric.id, 0]));
   for (let index = 0; index < periods.length; index++) {
     const p = periods[index], m = p.metrics;
     const fcf = Number.isFinite(m.cashFromOperations) && Number.isFinite(m.capex) ? m.cashFromOperations - Math.abs(m.capex) : null;
+    m.freeCashFlow = fcf;
     const shares = validPositive(m.dilutedShares) ? m.dilutedShares :
       Number.isFinite(m.netIncome) && Number.isFinite(m.epsDiluted) && m.epsDiluted !== 0 && m.netIncome / m.epsDiluted > 0 ? m.netIncome / m.epsDiluted : null;
     const debt = Number.isFinite(m.longTermDebt) && Number.isFinite(m.shortTermDebt) ? m.longTermDebt + m.shortTermDebt : null;
     const netDebt = debt !== null && Number.isFinite(m.cash) ? debt - m.cash : null;
     const ebitda = Number.isFinite(m.operatingIncome) && Number.isFinite(m.depreciationAndAmortization) ? m.operatingIncome + Math.abs(m.depreciationAndAmortization) : null;
+    const epsWindow = periods.slice(Math.max(0, index - 4), index + 1).map(row => row.metrics.epsDiluted);
+    const previousPeriod = index > 0 ? periods[index - 1] : null;
+    const previous = previousPeriod?.metrics || null;
+    const periodGapDays = previousPeriod ? (Date.parse(p.periodEnd + 'T00:00:00Z') - Date.parse(previousPeriod.periodEnd + 'T00:00:00Z')) / 86400000 : null;
+    const adjacentAnnual = periodGapDays !== null && periodGapDays >= 300 && periodGapDays <= 430;
+    const currentCapital = debt !== null && Number.isFinite(m.equity) && Number.isFinite(m.cash) ? debt + m.equity - m.cash : null;
+    const previousDebt = previous && Number.isFinite(previous.longTermDebt) && Number.isFinite(previous.shortTermDebt) ? previous.longTermDebt + previous.shortTermDebt : null;
+    const previousCapital = previousDebt !== null && Number.isFinite(previous?.equity) && Number.isFinite(previous?.cash) ? previousDebt + previous.equity - previous.cash : null;
+    const averageCapital = adjacentAnnual && currentCapital !== null && previousCapital !== null ? (currentCapital + previousCapital) / 2 : null;
+    const averageEquity = adjacentAnnual && Number.isFinite(m.equity) && Number.isFinite(previous?.equity) ? (m.equity + previous.equity) / 2 : null;
     const derived = {
       revenueCagr3y: index >= 3 ? cagr(periods.slice(index - 3, index + 1), 'revenue', 3) : null,
       revenueCagr5y: index >= 5 ? cagr(periods.slice(index - 5, index + 1), 'revenue', 5) : null,
-      normalizedEps5y: index >= 4 && periods.slice(index - 4, index + 1).every(row => Number.isFinite(row.metrics.epsDiluted)) ? 1 : null,
+      normalizedEps5y: epsWindow.length === 5 && epsWindow.every(value => validPositive(value)) ? median(epsWindow) : null,
       epsCagr3y: index >= 3 ? cagr(periods.slice(index - 3, index + 1), 'epsDiluted', 3) : null,
       epsCagr5y: index >= 5 ? cagr(periods.slice(index - 5, index + 1), 'epsDiluted', 5) : null,
+      fcfCagr5y: index >= 5 ? cagr(periods.slice(index - 5, index + 1), 'freeCashFlow', 5) : null,
       historicalPe: (() => { const quote = yearEndPriceByTicker.get(ticker)?.get(p.periodEnd); return quote && quote.currency === p.currency && validPositive(quote.close) && validPositive(m.epsDiluted) ? quote.close / m.epsDiluted : null; })(),
       freeCashFlow: fcf,
       freeCashFlowPerShare: fcf !== null && validPositive(shares) ? fcf / shares : null,
       currentRatio: Number.isFinite(m.currentAssets) && Number.isFinite(m.currentLiabilities) && m.currentLiabilities > 0 ? m.currentAssets / m.currentLiabilities : null,
+      totalDebt: debt,
       netDebt,
       debtEquity: debt !== null && Number.isFinite(m.equity) && m.equity !== 0 ? debt / m.equity : null,
       grossMargin: Number.isFinite(m.grossProfit) && Number.isFinite(m.revenue) && m.revenue !== 0 ? m.grossProfit / m.revenue : null,
@@ -821,8 +845,8 @@ for (const [ticker, periodMap] of financialPeriodsByTicker) {
       interestCoverage: Number.isFinite(m.operatingIncome) && Number.isFinite(m.interestExpense) && m.interestExpense !== 0 ? m.operatingIncome / Math.abs(m.interestExpense) : null,
       operatingMargin: Number.isFinite(m.operatingIncome) && Number.isFinite(m.revenue) && m.revenue !== 0 ? m.operatingIncome / m.revenue : null,
       netMargin: Number.isFinite(m.netIncome) && Number.isFinite(m.revenue) && m.revenue !== 0 ? m.netIncome / m.revenue : null,
-      roe: Number.isFinite(m.netIncome) && Number.isFinite(m.equity) && m.equity !== 0 ? m.netIncome / m.equity : null,
-      roic: Number.isFinite(m.operatingIncome) && debt !== null && Number.isFinite(m.equity) && Number.isFinite(m.cash) && debt + m.equity - m.cash > 0 ? m.operatingIncome * 0.79 / (debt + m.equity - m.cash) : null
+      roe: Number.isFinite(m.netIncome) && averageEquity !== null && averageEquity !== 0 ? m.netIncome / averageEquity : null,
+      roic: Number.isFinite(m.operatingIncome) && averageCapital !== null && averageCapital > 0 ? m.operatingIncome * 0.79 / averageCapital : null
     };
     for (const metric of corporateFinancialMetrics) if (derived[metric.id] !== null && Number.isFinite(derived[metric.id])) counts[metric.id]++;
   }
@@ -920,11 +944,32 @@ const snapshotGroups = [
   { id: 'calculated', label: 'Metriche annuali calcolate', metrics: corporateFinancialMetrics },
   { id: 'fundamentals', label: 'Fundamentals normalizzati / calcolati', metrics: fundamentalMetrics.map(({ id, label }) => ({ id, label })) }
 ];
+const secAnnualFundamentalMap = {
+  revenue_cagr_3y: 'revenueCagr3y',
+  revenue_cagr_5y: 'revenueCagr5y',
+  normalized_eps_5y: 'normalizedEps5y',
+  eps_cagr_3y: 'epsCagr3y',
+  eps_cagr_5y: 'epsCagr5y',
+  fcf_per_share: 'freeCashFlowPerShare',
+  fcf_cagr_5y: 'fcfCagr5y',
+  total_debt: 'totalDebt',
+  net_debt: 'netDebt',
+  debt_equity: 'debtEquity',
+  net_debt_ebitda: 'netDebtEbitda',
+  current_ratio: 'currentRatio',
+  interest_coverage: 'interestCoverage',
+  gross_margin: 'grossMargin',
+  operating_margin: 'operatingMargin',
+  net_margin: 'netMargin',
+  roe: 'roe',
+  roic: 'roic'
+};
+const industrialFundamentalNA = ['operating_cash_flow_ttm','free_cash_flow_ttm','fcf_per_share','fcf_cagr_5y','total_debt','net_debt','debt_equity','net_debt_ebitda','current_ratio','interest_coverage','gross_margin','operating_margin','net_margin','roic','p_fcf','ev_ebitda'];
 const coverageSnapshot = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: new Date().toISOString(),
-  definition: 'Present means at least one non-empty value exists for that ticker and field in the latest Google Sheets snapshot; it does not mean the historical series is complete.',
-  source: 'Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals',
+  definition: 'Present means the ticker has at least one non-empty sheet value or one SEC-derived annual value with the same metric meaning. FY counts show the number of annual SEC observations; annual values never fill or relabel TTM fields. Presence does not mean the full history is complete.',
+  source: 'Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals · SEC annual calculations',
   universeCount: assetTickers.length,
   groups: snapshotGroups,
   tickers: assetTickers.map(ticker => {
@@ -932,16 +977,24 @@ const coverageSnapshot = {
     const fundamentalRow = fundamentalsByTicker.get(ticker) || [];
     const secPresent = secByTicker.get(ticker) || new Set();
     const classInfo = classificationByTicker.get(ticker) || { instrumentType: 'UNKNOWN', profile: 'UNKNOWN' };
-    const fundOrIndex = ['ETF', 'INDEX'].includes(classInfo.instrumentType);
+    const fundOrIndex = ['ETF', 'INDEX'].includes(classInfo.instrumentType) || /ETF|INDEX/.test(classInfo.profile);
     const bankOrInsurer = ['BANK', 'CONSUMER_FINANCE', 'BROKERAGE', 'FINANCIAL_MARKET_INFRASTRUCTURE', 'INSURANCE'].includes(classInfo.profile);
     const reitOrMlp = /REIT|MLP/.test(classInfo.profile);
-    const bankNA = ['grossMargin','operatingMargin','freeCashFlow','freeCashFlowPerShare','currentRatio','netDebt','debtEquity','ebitda','netDebtEbitda','interestCoverage','roic'];
-    const calculatedNA = fundOrIndex ? corporateFinancialMetrics.map(metric => metric.id) : bankOrInsurer ? bankNA : reitOrMlp ? ['freeCashFlowPerShare'] : [];
+    const bankNA = ['grossMargin','operatingMargin','netMargin','freeCashFlow','freeCashFlowPerShare','fcfCagr5y','currentRatio','totalDebt','netDebt','debtEquity','ebitda','netDebtEbitda','interestCoverage','roic'];
+    const calculatedNA = fundOrIndex ? corporateFinancialMetrics.map(metric => metric.id) : bankOrInsurer ? bankNA : reitOrMlp ? ['freeCashFlowPerShare','fcfCagr5y','roic'] : [];
+    const fundamentalsNA = fundOrIndex ? fundamentalMetrics.map(metric => metric.id) : bankOrInsurer ? industrialFundamentalNA : reitOrMlp ? ['fcf_per_share','fcf_cagr_5y','p_fcf','roic'] : [];
     const notApplicable = {
       sec: fundOrIndex ? metricSpecs.map(metric => metric.key) : [],
       calculated: calculatedNA,
-      fundamentals: fundOrIndex ? fundamentalMetrics.map(metric => metric.id) : []
+      fundamentals: fundamentalsNA
     };
+    const annualCalculated = annualCalculatedByTicker.get(ticker) || {};
+    const sheetFundamentals = fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column])).map(metric => metric.id);
+    const annualFundamentals = fundamentalMetrics.filter(metric => {
+      const calculated = secAnnualFundamentalMap[metric.id];
+      return calculated && (annualCalculated[calculated] || 0) > 0;
+    }).map(metric => metric.id);
+    const fundamentalsPresent = new Set([...sheetFundamentals, ...annualFundamentals]);
     return {
       ticker,
       name: hasCoverageValue(marketRow[4]) ? String(marketRow[4]).trim() : ticker,
@@ -951,13 +1004,17 @@ const coverageSnapshot = {
       notApplicable,
       periodCounts: {
         sec: Object.fromEntries(metricSpecs.map(metric => [metric.key, [...(financialPeriodsByTicker.get(ticker)?.values() || [])].filter(period => Number.isFinite(period.metrics[metric.key])).length])),
-        calculated: annualCalculatedByTicker.get(ticker) || {}
+        calculated: annualCalculated,
+        fundamentals: Object.fromEntries(fundamentalMetrics.map(metric => {
+          const calculated = secAnnualFundamentalMap[metric.id];
+          return [metric.id, calculated ? annualCalculated[calculated] || 0 : 0];
+        }))
       },
       present: {
         market: marketMetrics.filter(metric => hasMarketMetricValue(metric, marketRow[metric.column], ticker)).map(metric => metric.id),
         sec: metricSpecs.filter(metric => secPresent.has(metric.key) && !notApplicable.sec.includes(metric.key)).map(metric => metric.key),
-        calculated: Object.entries(annualCalculatedByTicker.get(ticker) || {}).filter(([metric, count]) => count > 0 && !notApplicable.calculated.includes(metric)).map(([metric]) => metric),
-        fundamentals: fundamentalMetrics.filter(metric => hasCoverageValue(fundamentalRow[metric.column]) && !notApplicable.fundamentals.includes(metric.id)).map(metric => metric.id)
+        calculated: Object.entries(annualCalculated).filter(([metric, count]) => count > 0 && !notApplicable.calculated.includes(metric)).map(([metric]) => metric),
+        fundamentals: fundamentalMetrics.filter(metric => fundamentalsPresent.has(metric.id) && !notApplicable.fundamentals.includes(metric.id)).map(metric => metric.id)
       }
     };
   })

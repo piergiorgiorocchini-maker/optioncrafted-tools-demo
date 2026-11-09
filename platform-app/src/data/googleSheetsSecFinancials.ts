@@ -31,9 +31,12 @@ function cagr(rows:SecAnnualFinancialYear[],field:"revenue"|"dilutedEps"|"freeCa
  const out=Math.pow(rows.at(-1)![field]!/rows[0][field]!,1/years)-1;
  return Number.isFinite(out)?out:null;
 }
-export function googleSheetsSecAnnualHistory(ticker:string,currency="USD"):SecAnnualFinancialYear[]{
- const t=ticker.trim().toUpperCase(),c=currency.trim().toUpperCase();
- const periods=dataset.periods.filter(p=>p.ticker.toUpperCase()===t&&p.currency===c).sort((a,b)=>a.periodEnd.localeCompare(b.periodEnd));
+export function googleSheetsSecAnnualHistory(ticker:string,currency?:string):SecAnnualFinancialYear[]{
+ const t=ticker.trim().toUpperCase(),requested=currency?.trim().toUpperCase();
+ const tickerPeriods=dataset.periods.filter(p=>p.ticker.toUpperCase()===t);
+ const latest=tickerPeriods.slice().sort((a,b)=>a.periodEnd.localeCompare(b.periodEnd)).at(-1);
+ const selectedCurrency=requested||latest?.currency;
+ const periods=tickerPeriods.filter(p=>!selectedCurrency||p.currency===selectedCurrency).sort((a,b)=>a.periodEnd.localeCompare(b.periodEnd));
  const rows:SecAnnualFinancialYear[]=periods.map(p=>{
   const get=(m:SecFinancialMetric)=>p.metrics[m]?.value??null;
   const revenue=get("revenue"),netIncome=get("netIncome"),operatingIncome=get("operatingIncome"),cfo=get("cashFromOperations"),rawCapex=get("capex"),capex=rawCapex===null?null:Math.abs(rawCapex);
@@ -43,8 +46,7 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency="USD"):SecAn
   const da=get("depreciationAndAmortization"),ebitda=operatingIncome!==null&&da!==null?operatingIncome+Math.abs(da):null;
   const cash=get("cash"),currentAssets=get("currentAssets"),currentLiabilities=get("currentLiabilities"),equity=get("equity"),lt=get("longTermDebt"),st=get("shortTermDebt");
   const totalDebt=lt!==null&&st!==null?lt+st:null,netDebt=totalDebt!==null&&cash!==null?totalDebt-cash:null,interest=get("interestExpense");
-  const roe=netIncome!==null&&equity!==null&&equity!==0?netIncome/equity:null;
-  const invested=totalDebt!==null&&equity!==null&&cash!==null?totalDebt+equity-cash:null;
+
   const sources=Object.fromEntries(Object.entries(p.metrics).map(([metric,f])=>[metric,{tag:f!.tag,unit:f!.unit,filedDate:f!.filedDate,accession:f!.accession,sourceUrl:f!.sourceUrl}])) as SecAnnualFinancialYear["sources"];
   return {
    fiscalYear:p.periodEnd.slice(0,4),periodStart:p.periodStart,periodEnd:p.periodEnd,currency:p.currency,
@@ -61,7 +63,7 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency="USD"):SecAn
    grossMargin:get("grossProfit")!==null&&revenue!==null&&revenue!==0?get("grossProfit")!/revenue:null,
    operatingMargin:operatingIncome!==null&&revenue!==null&&revenue!==0?operatingIncome/revenue:null,
    netMargin:netIncome!==null&&revenue!==null&&revenue!==0?netIncome/revenue:null,
-   roe,roic:operatingIncome!==null&&invested!==null&&invested>0?operatingIncome*0.79/invested:null,
+   roe:null,roic:null,
    revenueCagr3y:null,revenueCagr5y:null,epsCagr3y:null,epsCagr5y:null,fcfCagr5y:null,normalizedEps5y:null,
    yearEndClose:valid(p.yearEndClose)?p.yearEndClose:null,
    historicalPe:valid(p.yearEndClose)&&p.yearEndClose>0&&valid(eps)&&eps>0?p.yearEndClose/eps:null,
@@ -77,10 +79,17 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency="USD"):SecAn
   rows[i].epsCagr5y=i>=5?cagr(rows.slice(i-5,i+1),"dilutedEps",5):null;
   rows[i].fcfCagr5y=i>=5?cagr(rows.slice(i-5,i+1),"freeCashFlow",5):null;
   const eps=rows.slice(Math.max(0,i-4),i+1).map(r=>r.dilutedEps);
-  rows[i].normalizedEps5y=eps.length===5&&eps.every(valid)?median(eps as number[]):null;
-  if(i>0&&valid(rows[i-1].equity)&&valid(rows[i].netIncome)&&valid(rows[i].equity)){
-   const average=(rows[i-1].equity!+rows[i].equity!)/2;
-   rows[i].roe=average!==0?rows[i].netIncome!/average:null;
+  rows[i].normalizedEps5y=eps.length===5&&eps.every(v=>valid(v)&&v>0)?median(eps as number[]):null;
+  if(i>0){
+   const days=(Date.parse(rows[i].periodEnd+"T00:00:00Z")-Date.parse(rows[i-1].periodEnd+"T00:00:00Z"))/86400000;
+   if(days>=300&&days<=430&&valid(rows[i-1].equity)&&valid(rows[i].netIncome)&&valid(rows[i].equity)){
+    const average=(rows[i-1].equity!+rows[i].equity!)/2;
+    rows[i].roe=average!==0?rows[i].netIncome!/average:null;
+   }
+   const capital=(row:SecAnnualFinancialYear)=>row.totalDebt!==null&&row.equity!==null&&row.cash!==null?row.totalDebt+row.equity-row.cash:null;
+   const priorCapital=capital(rows[i-1]),currentCapital=capital(rows[i]);
+   const average=days>=300&&days<=430&&priorCapital!==null&&currentCapital!==null?(priorCapital+currentCapital)/2:null;
+   rows[i].roic=rows[i].operatingIncome!==null&&average!==null&&average>0?rows[i].operatingIncome*0.79/average:null;
   }
  }
  return rows;

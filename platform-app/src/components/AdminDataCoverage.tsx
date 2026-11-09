@@ -47,7 +47,7 @@ export function AdminDataCoverage(){
    <span className="coverage-readonly">SOLA LETTURA</span>
   </header>
 
-  <div className="coverage-notice"><Info size={16}/><span>La matrice mostra dati presenti, mancanti e non applicabili per categoria. Per le metriche annuali, il numero accanto a SÌ indica gli esercizi coperti. La presenza di almeno un esercizio non significa che l’intera serie sia completa.</span></div>
+  <div className="coverage-notice"><Info size={16}/><span>La matrice mostra dati presenti, mancanti e non applicabili per categoria. In Fundamentals, i calcoli SEC annuali aggiungono un SÌ solo ai campi con significato equivalente: non riempiono né rinominano i campi TTM. Il numero FY accanto a SÌ indica gli esercizi SEC disponibili; la presenza non significa che la serie sia completa.</span></div>
 
   <div className="coverage-stats">
    <article><small>TICKER NELL’UNIVERSO</small><strong>{snapshot.universeCount}</strong></article>
