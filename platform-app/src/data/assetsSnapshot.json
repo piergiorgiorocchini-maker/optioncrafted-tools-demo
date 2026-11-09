@@ -2625,6 +2625,26 @@
       "priceDate": "2026-11-09"
     },
     {
+      "ticker": "MRNA",
+      "price": 271.45,
+      "name": "Moderna Inc",
+      "currency": "USD",
+      "marketCap": 108334689166,
+      "avgVolume": 17488034,
+      "beta": 1.16,
+      "pe": null,
+      "eps": -7.1,
+      "high52": 280.8,
+      "low52": 22.28,
+      "drawdown52": -0.033297720797720864,
+      "dividendYield": 0,
+      "sector": "Healthcare",
+      "category": "Stock",
+      "change1d": 0.0679,
+      "changeYtd": 8.20481519159037,
+      "priceDate": "2026-11-09"
+    },
+    {
       "ticker": "MRVL",
       "price": 153.88,
       "name": "Marvell Technology Inc",
@@ -2742,6 +2762,26 @@
       "category": "Stock",
       "change1d": 0.07339999999999999,
       "changeYtd": 0.6605,
+      "priceDate": "2026-11-09"
+    },
+    {
+      "ticker": "NFLX",
+      "price": 63.82,
+      "name": "Netflix Inc",
+      "currency": "USD",
+      "marketCap": 262065660246,
+      "avgVolume": 43446600,
+      "beta": 1.62,
+      "pe": 18.43,
+      "eps": 3.46,
+      "high52": 116.73,
+      "low52": 61.39,
+      "drawdown52": -0.45326822582026904,
+      "dividendYield": 0,
+      "sector": "Communication Services",
+      "category": "Stock",
+      "change1d": 0.0065,
+      "changeYtd": -0.3193259385665529,
       "priceDate": "2026-11-09"
     },
     {
