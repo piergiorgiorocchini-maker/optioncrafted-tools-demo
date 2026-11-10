@@ -760,10 +760,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-10": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "AVGO:income",
+            "at": "2026-11-10T16:25:14.035Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "AVGO:balance",
+            "at": "2026-11-10T16:25:14.220Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 8
+    "ALPHA_VANTAGE": 9
   }
 }
