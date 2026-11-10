@@ -1,2 +1,21 @@
-# Nasdaq-100 batch 6: final remainder
-XEL
+# Nasdaq-100 mapping pass 1 (20 tickers)
+AAPL
+ABNB
+ADBE
+ADI
+ADP
+ADSK
+AEP
+ALAB
+ALNY
+AMAT
+AMD
+AMGN
+AMZN
+APP
+ARM
+ASML
+AVGO
+AXON
+BKNG
+BKR

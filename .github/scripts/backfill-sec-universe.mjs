@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v7';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v8';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -29,7 +29,8 @@ const metricSpecs = [
   { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted', 'EarningsPerShareDilutedIncludingExtraordinaryItems', 'EarningsPerShareBasicAndDiluted'] },
   { key: 'grossProfit', kind: 'flow', tags: ['GrossProfit'] },
   { key: 'depreciationAndAmortization', kind: 'flow', tags: ['DepreciationDepletionAndAmortizationPropertyPlantAndEquipment', 'DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet'] },
-  { key: 'interestExpense', kind: 'flow', tags: ['InterestExpenseNonOperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'] },
+  // InterestExpense is the standard operating/nonoperating interest-expense concept.
+  { key: 'interestExpense', kind: 'flow', tags: ['InterestExpense', 'InterestExpenseNonOperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'] },
   { key: 'dilutedShares', kind: 'shares', tags: ['WeightedAverageNumberOfDilutedSharesOutstanding', 'WeightedAverageNumberOfSharesOutstandingDiluted', 'WeightedAverageNumberOfDilutedSharesOutstandingBasicAndDiluted'] },
   { key: 'cash', kind: 'instant', tags: ['CashAndCashEquivalentsAtCarryingValue', 'CashAndCashEquivalents'] },
   { key: 'currentAssets', kind: 'instant', tags: ['AssetsCurrent', 'CurrentAssets'] },
