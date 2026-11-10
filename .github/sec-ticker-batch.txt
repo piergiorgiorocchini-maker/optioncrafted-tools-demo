@@ -1,2 +1,21 @@
-# Nasdaq-100 mapping pass 6 (final ticker)
-XEL
+# Nasdaq-100 exception audit pass 1 (20 tickers)
+FER
+HONA
+SPCX
+TRI
+ALAB
+BKR
+CCEP
+ISRG
+PCAR
+ALNY
+ARM
+CDNS
+CMCSA
+CPRT
+CSX
+DASH
+MAR
+MELI
+MPWR
+MRNA
