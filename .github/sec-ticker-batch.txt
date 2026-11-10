@@ -1,21 +1,2 @@
-# Nasdaq-100 mapping pass 5 (20 tickers)
-REGN
-RKLB
-ROP
-ROST
-SBUX
-SHOP
-SNDK
-SNPS
-SPCX
-STX
-TER
-TMUS
-TRI
-TSLA
-TTWO
-TXN
-VRTX
-WDAY
-WDC
-WMT
+# Nasdaq-100 mapping pass 6 (final ticker)
+XEL
