@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v11';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v12';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -28,7 +28,8 @@ const metricSpecs = [
   { key: 'capex', kind: 'flow', tags: ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsForPropertyPlantAndEquipment', 'PurchaseOfPropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibleAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibles', 'PurchasesOfPropertyPlantAndEquipment'] },
   { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted', 'EarningsPerShareDilutedIncludingExtraordinaryItems', 'EarningsPerShareBasicAndDiluted'] },
   { key: 'grossProfit', kind: 'flow', tags: ['GrossProfit'] },
-  { key: 'depreciationAndAmortization', kind: 'flow', tags: ['DepreciationDepletionAndAmortizationPropertyPlantAndEquipment', 'DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet'] },
+  { key: 'costOfRevenue', kind: 'flow', tags: ['CostOfRevenue', 'CostOfGoodsAndServicesSold', 'CostOfSales'] },
+  { key: 'depreciationAndAmortization', kind: 'flow', tags: ['DepreciationDepletionAndAmortizationPropertyPlantAndEquipment', 'DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet', 'DepreciationAndAmortisationExpense'] },
   // InterestExpense is the standard operating/nonoperating interest-expense concept.
   { key: 'interestExpense', kind: 'flow', tags: ['InterestExpense', 'InterestExpenseNonoperating', 'InterestExpenseNonOperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'] },
   { key: 'dilutedShares', kind: 'shares', tags: ['WeightedAverageNumberOfDilutedSharesOutstanding', 'WeightedAverageNumberOfSharesOutstandingDiluted', 'WeightedAverageNumberOfDilutedSharesOutstandingBasicAndDiluted'] },
@@ -40,7 +41,7 @@ const metricSpecs = [
   { key: 'totalLiabilities', kind: 'instant', tags: ['Liabilities', 'TotalLiabilities'] },
   { key: 'equity', kind: 'instant', tags: ['StockholdersEquity', 'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest', 'Equity'] },
   { key: 'longTermDebt', kind: 'instant', tags: ['LongTermDebtNoncurrent', 'LongTermDebt'] },
-  { key: 'shortTermDebt', kind: 'instant', tags: ['LongTermDebtCurrent', 'ShortTermBorrowings', 'ShortTermDebtCurrent'] }
+  { key: 'shortTermDebt', kind: 'instant', tags: ['LongTermDebtCurrent', 'ShortTermBorrowings', 'ShortTermDebtCurrent', 'ShorttermBorrowings', 'CurrentPortionOfLongTermDebt', 'CommercialPapersIssued', 'CommercialPaper'] }
 ];
 
 const b64 = value => Buffer.from(JSON.stringify(value)).toString('base64url');
@@ -896,7 +897,7 @@ for (const [ticker, periodMap] of financialPeriodsByTicker) {
       totalDebt: debt,
       netDebt,
       debtEquity: debt !== null && Number.isFinite(m.equity) && m.equity !== 0 ? debt / m.equity : null,
-      grossMargin: Number.isFinite(m.grossProfit) && Number.isFinite(m.revenue) && m.revenue !== 0 ? m.grossProfit / m.revenue : null,
+      grossMargin: (() => { const grossProfit = Number.isFinite(m.grossProfit) ? m.grossProfit : Number.isFinite(m.revenue) && Number.isFinite(m.costOfRevenue) ? m.revenue - Math.abs(m.costOfRevenue) : null; return Number.isFinite(grossProfit) && Number.isFinite(m.revenue) && m.revenue !== 0 ? grossProfit / m.revenue : null; })(),
       ebitda,
       netDebtEbitda: netDebt !== null && validPositive(ebitda) ? netDebt / ebitda : null,
       interestCoverage: Number.isFinite(m.operatingIncome) && Number.isFinite(m.interestExpense) && m.interestExpense !== 0 ? m.operatingIncome / Math.abs(m.interestExpense) : null,
@@ -954,6 +955,7 @@ const secMetricLabels = {
   capex: 'CapEx',
   epsDiluted: 'EPS diluito',
   grossProfit: 'Gross profit',
+  costOfRevenue: 'Cost of revenue / cost of sales',
   depreciationAndAmortization: 'Depreciation & amortization',
   interestExpense: 'Interest expense',
   dilutedShares: 'Weighted-average diluted shares',
@@ -972,7 +974,7 @@ const fundamentalMetrics = Array.from({ length: 43 }, (_, index) => {
   const label = String(fundamentalsGrid[1]?.[column] ?? '').trim() || 'Fundamental field ' + (column + 1);
   return { id: slugifyCoverageLabel(label), label, column };
 });
-if (marketMetrics.length !== 19 || metricSpecs.length !== 19 || fundamentalMetrics.length !== 43 ||
+if (marketMetrics.length !== 19 || metricSpecs.length !== 20 || fundamentalMetrics.length !== 43 ||
     fundamentalMetrics.some(metric => !metric.id)) {
   throw new Error('Unexpected admin coverage metric schema; refusing to publish.');
 }

@@ -8,7 +8,7 @@ const outputPath=resolve(root,"src/data/googleSheetsSecAnnual.json");
 const source=JSON.parse(await readFile(inputPath,"utf8"));
 const annualForms=new Set(["10-K","10-K/A","20-F","20-F/A","40-F","40-F/A"]);
 const quarterForms=new Set(["10-Q","10-Q/A"]);
-const metricList=["revenue","netIncome","operatingIncome","cashFromOperations","capex","epsDiluted","grossProfit","depreciationAndAmortization","interestExpense","dilutedShares","cash","currentAssets","currentLiabilities","inventory","totalAssets","totalLiabilities","equity","longTermDebt","shortTermDebt"];
+const metricList=["revenue","netIncome","operatingIncome","cashFromOperations","capex","epsDiluted","grossProfit","costOfRevenue","depreciationAndAmortization","interestExpense","dilutedShares","cash","currentAssets","currentLiabilities","inventory","totalAssets","totalLiabilities","equity","longTermDebt","shortTermDebt"];
 const metrics=new Set(metricList);
 const instantMetrics=new Set(["cash","currentAssets","currentLiabilities","inventory","totalAssets","totalLiabilities","equity","longTermDebt","shortTermDebt"]);
 const baseCurrency=unit=>String(unit||"").split("/")[0].trim().toUpperCase();

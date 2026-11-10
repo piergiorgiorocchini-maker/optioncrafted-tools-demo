@@ -1,11 +1,11 @@
 import sheetAnnualSecFacts from "./googleSheetsSecAnnual.json";
 
-export type SecFinancialMetric="revenue"|"netIncome"|"operatingIncome"|"cashFromOperations"|"capex"|"epsDiluted"|"grossProfit"|"depreciationAndAmortization"|"interestExpense"|"dilutedShares"|"cash"|"currentAssets"|"currentLiabilities"|"inventory"|"totalAssets"|"totalLiabilities"|"equity"|"longTermDebt"|"shortTermDebt";
+export type SecFinancialMetric="revenue"|"netIncome"|"operatingIncome"|"cashFromOperations"|"capex"|"epsDiluted"|"grossProfit"|"costOfRevenue"|"depreciationAndAmortization"|"interestExpense"|"dilutedShares"|"cash"|"currentAssets"|"currentLiabilities"|"inventory"|"totalAssets"|"totalLiabilities"|"equity"|"longTermDebt"|"shortTermDebt";
 type Fact={value:number;unit:string;tag:string;filedDate:string;accession:string;sourceUrl:string;form:string};
 type Period={ticker:string;cik:string;currency:string;periodStart:string;periodEnd:string;yearEndClose?:number;priceSource?:string;metrics:Partial<Record<SecFinancialMetric,Fact>>};
 export type SecAnnualFinancialYear={
  fiscalYear:string;periodStart:string;periodEnd:string;currency:string;
- revenue:number|null;grossProfit:number|null;netIncome:number|null;operatingIncome:number|null;
+ revenue:number|null;grossProfit:number|null;costOfRevenue:number|null;netIncome:number|null;operatingIncome:number|null;
  cashFromOperations:number|null;capex:number|null;freeCashFlow:number|null;dilutedEps:number|null;
  dilutedShares:number|null;impliedShares:number|null;shareCountSource:"SEC reported diluted shares"|"implied from net income / diluted EPS"|null;
  freeCashFlowPerShare:number|null;depreciationAndAmortization:number|null;ebitda:number|null;interestExpense:number|null;
@@ -20,7 +20,7 @@ export type SecAnnualFinancialYear={
 };
 const dataset=sheetAnnualSecFacts as unknown as {generatedAt:string;sourceImportedAt:string;rawFactCount:number;annualPeriodCount:number;tickerCount:number;periods:Period[]};
 export const googleSheetsSecFinancialsMetadata={generatedAt:dataset.generatedAt,sourceImportedAt:dataset.sourceImportedAt,factCount:dataset.rawFactCount,annualPeriodCount:dataset.annualPeriodCount,tickerCount:dataset.tickerCount,source:"Google Sheets SEC_Raw · verified SEC annual facts"} as const;
-const allMetrics:SecFinancialMetric[]=["revenue","netIncome","operatingIncome","cashFromOperations","capex","epsDiluted","grossProfit","depreciationAndAmortization","interestExpense","dilutedShares","cash","currentAssets","currentLiabilities","inventory","totalAssets","totalLiabilities","equity","longTermDebt","shortTermDebt"];
+const allMetrics:SecFinancialMetric[]=["revenue","netIncome","operatingIncome","cashFromOperations","capex","epsDiluted","grossProfit","costOfRevenue","depreciationAndAmortization","interestExpense","dilutedShares","cash","currentAssets","currentLiabilities","inventory","totalAssets","totalLiabilities","equity","longTermDebt","shortTermDebt"];
 const valid=(v:number|null|undefined):v is number=>typeof v==="number"&&Number.isFinite(v);
 const median=(values:number[])=>{const a=values.filter(Number.isFinite).sort((x,y)=>x-y);if(!a.length)return null;const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;};
 function cagr(rows:SecAnnualFinancialYear[],field:"revenue"|"dilutedEps"|"freeCashFlow",span:number):number|null{
@@ -39,7 +39,7 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency?:string):Sec
  const periods=tickerPeriods.filter(p=>!selectedCurrency||p.currency===selectedCurrency).sort((a,b)=>a.periodEnd.localeCompare(b.periodEnd));
  const rows:SecAnnualFinancialYear[]=periods.map(p=>{
   const get=(m:SecFinancialMetric)=>p.metrics[m]?.value??null;
-  const revenue=get("revenue"),netIncome=get("netIncome"),operatingIncome=get("operatingIncome"),cfo=get("cashFromOperations"),rawCapex=get("capex"),capex=rawCapex===null?null:Math.abs(rawCapex);
+  const revenue=get("revenue"),grossProfit=get("grossProfit"),costOfRevenue=get("costOfRevenue"),netIncome=get("netIncome"),operatingIncome=get("operatingIncome"),cfo=get("cashFromOperations"),rawCapex=get("capex"),capex=rawCapex===null?null:Math.abs(rawCapex);const calculatedGrossProfit=grossProfit!==null?grossProfit:revenue!==null&&costOfRevenue!==null?revenue-Math.abs(costOfRevenue):null;
   const freeCashFlow=cfo!==null&&capex!==null?cfo-capex:null,eps=get("epsDiluted"),reportedShares=get("dilutedShares");
   const inferredShares=netIncome!==null&&eps!==null&&eps!==0&&netIncome/eps>0?netIncome/eps:null;
   const shares=reportedShares!==null&&reportedShares>0?reportedShares:inferredShares;
@@ -50,7 +50,7 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency?:string):Sec
   const sources=Object.fromEntries(Object.entries(p.metrics).map(([metric,f])=>[metric,{tag:f!.tag,unit:f!.unit,filedDate:f!.filedDate,accession:f!.accession,sourceUrl:f!.sourceUrl}])) as SecAnnualFinancialYear["sources"];
   return {
    fiscalYear:p.periodEnd.slice(0,4),periodStart:p.periodStart,periodEnd:p.periodEnd,currency:p.currency,
-   revenue,grossProfit:get("grossProfit"),netIncome,operatingIncome,cashFromOperations:cfo,capex,freeCashFlow,dilutedEps:eps,
+   revenue,grossProfit,costOfRevenue,netIncome,operatingIncome,cashFromOperations:cfo,capex,freeCashFlow,dilutedEps:eps,
    dilutedShares:reportedShares,impliedShares:inferredShares,
    shareCountSource:reportedShares!==null&&reportedShares>0?"SEC reported diluted shares":inferredShares!==null?"implied from net income / diluted EPS":null,
    freeCashFlowPerShare:freeCashFlow!==null&&shares!==null&&shares>0?freeCashFlow/shares:null,
@@ -60,7 +60,7 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency?:string):Sec
    debtEquity:totalDebt!==null&&equity!==null&&equity!==0?totalDebt/equity:null,
    netDebtEbitda:netDebt!==null&&ebitda!==null&&ebitda>0?netDebt/ebitda:null,
    interestCoverage:operatingIncome!==null&&interest!==null&&interest!==0?operatingIncome/Math.abs(interest):null,
-   grossMargin:get("grossProfit")!==null&&revenue!==null&&revenue!==0?get("grossProfit")!/revenue:null,
+   grossMargin:calculatedGrossProfit!==null&&revenue!==null&&revenue!==0?calculatedGrossProfit/revenue:null,
    operatingMargin:operatingIncome!==null&&revenue!==null&&revenue!==0?operatingIncome/revenue:null,
    netMargin:netIncome!==null&&revenue!==null&&revenue!==0?netIncome/revenue:null,
    roe:null,roic:null,
