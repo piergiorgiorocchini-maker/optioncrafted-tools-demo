@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v8';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v9';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -30,7 +30,7 @@ const metricSpecs = [
   { key: 'grossProfit', kind: 'flow', tags: ['GrossProfit'] },
   { key: 'depreciationAndAmortization', kind: 'flow', tags: ['DepreciationDepletionAndAmortizationPropertyPlantAndEquipment', 'DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet'] },
   // InterestExpense is the standard operating/nonoperating interest-expense concept.
-  { key: 'interestExpense', kind: 'flow', tags: ['InterestExpense', 'InterestExpenseNonOperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'] },
+  { key: 'interestExpense', kind: 'flow', tags: ['InterestExpense', 'InterestExpenseNonoperating', 'InterestExpenseNonOperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'] },
   { key: 'dilutedShares', kind: 'shares', tags: ['WeightedAverageNumberOfDilutedSharesOutstanding', 'WeightedAverageNumberOfSharesOutstandingDiluted', 'WeightedAverageNumberOfDilutedSharesOutstandingBasicAndDiluted'] },
   { key: 'cash', kind: 'instant', tags: ['CashAndCashEquivalentsAtCarryingValue', 'CashAndCashEquivalents'] },
   { key: 'currentAssets', kind: 'instant', tags: ['AssetsCurrent', 'CurrentAssets'] },
@@ -332,7 +332,7 @@ function parseXbrlInstance(xml, filing) {
   if (filing.audit) console.log('SEC XBRL tag audit ABNB ' + filing.reportEnd + ': ' + JSON.stringify(auditTags));
   return found.sort((a, b) => Number(a.dimensional) - Number(b.dimensional) || b.filed.localeCompare(a.filed));
 }
-async function fetchRecentAnnualXbrlFacts(cik) {
+async function fetchRecentAnnualXbrlFacts(cik, desiredPeriodEnds = []) {
   const submissionsUrl = 'https://data.sec.gov/submissions/CIK' + cik + '.json';
   const submissions = await fetchSecJson(submissionsUrl);
   await sleep(150);
@@ -347,7 +347,11 @@ async function fetchRecentAnnualXbrlFacts(cik) {
     const prior = latestByReportEnd.get(reportEnd);
     if (!prior || filing.filed > prior.filed) latestByReportEnd.set(reportEnd, filing);
   }
-  const annualFilings = [...latestByReportEnd.values()].sort((a, b) => b.filed.localeCompare(a.filed)).slice(0, 2);
+  const requestedPeriodEnds = new Set(desiredPeriodEnds);
+  const annualFilings = [...latestByReportEnd.values()]
+    .filter(filing => !requestedPeriodEnds.size || requestedPeriodEnds.has(filing.reportEnd))
+    .sort((a, b) => b.filed.localeCompare(a.filed))
+    .slice(0, requestedPeriodEnds.size || 2);
   const collected = [];
   for (const filing of annualFilings) {
     const accessionFolder = filing.accession.replace(/-/g, '');
@@ -598,15 +602,17 @@ let inlineFactRowsAdded = 0;
 for (const outcome of outcomes) {
   if (!outcome.cik) continue;
   const annualEnds = [...new Set(outcome.records
-    .filter(row => row[4] && row[5] && metricSpecs.find(metric => metric.key === row[2])?.kind !== 'instant')
+    .filter(row => row[4] && row[5] && forms.has(String(row[7] || '').toUpperCase()) && metricSpecs.find(metric => metric.key === row[2])?.kind !== 'instant')
     .map(row => row[5]))].sort().slice(-6);
-  const existing = new Set(outcome.records.map(row => row[2] + '|' + row[5]));
-  const hasGap = !annualEnds.length || annualEnds.some(end => !existing.has('capex|' + end) || !existing.has('epsDiluted|' + end));
+  const annualRows = outcome.records.filter(row => forms.has(String(row[7] || '').toUpperCase()));
+  const existing = new Set(annualRows.map(row => row[2] + '|' + row[5]));
+  const missingAnnualPeriods = annualEnds.filter(end => !existing.has('capex|' + end) || !existing.has('epsDiluted|' + end));
+  const hasGap = missingAnnualPeriods.length > 0;
   if (!hasGap) continue;
   try {
     let facts = inlineFactsCache.get(outcome.cik);
     if (!facts) {
-      facts = await fetchRecentAnnualXbrlFacts(outcome.cik);
+      facts = await fetchRecentAnnualXbrlFacts(outcome.cik, missingAnnualPeriods);
       inlineFactsCache.set(outcome.cik, facts);
     }
     const addedPeriods = new Set();
