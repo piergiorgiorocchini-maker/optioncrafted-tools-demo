@@ -114,3 +114,26 @@ DA COMPLETARE / REGOLA DI MISURAZIONE
 - Proseguire l’ampliamento dei tag SEC e la raccolta delle fonti alternative per i 49 ticker senza corrispondenza SEC, classificando i casi in cui SEC non è applicabile.
 - Obiettivo operativo: 100% dei dati reperibili e delle triangolazioni applicabili, censiti per ticker, metrica, periodo e fonte. ETF, indici e crypto vanno misurati sui campi pertinenti alla categoria; i fondamentali societari non applicabili non sono dati mancanti.
 - La triangolazione già pubblicata resta quella misurata sullo snapshot del 6 novembre (45 ticker). Non dichiarare un nuovo conteggio di triangolazioni finché la copertura non è ricalcolata sul dataset aggiornato.
+
+2026-11-09 — BACKFILL SEC NASDAQ-100 E CENSIMENTO
+
+FATTO / IMPLEMENTATO E VERIFICATO
+- Caricato il roster corrente di 101 componenti Nasdaq-100, inclusi NFLX e MRNA. Tutti i 101 ticker hanno un CIK abbinato nei dati SEC; i CIK distinti sono 100 perché GOOG e GOOGL condividono lo stesso emittente. MRNA è entrata nell’indice al posto di WBD il 9 ottobre 2026.
+- Il workflow SEC supporta la selezione per blocchi tramite `.github/sec-ticker-batch.txt`. Il primo run previsto per 20 ticker ha selezionato l’intero universo Assets (229 ticker) perché il checkout superficiale non conteneva il commit base necessario al confronto. Il workflow è stato corretto con checkout completo (`fetch-depth: 0`), controllo esplicito del commit base e scrittura corretta dell’output `GITHUB_ENV`; i run successivi hanno rispettato i blocchi selezionati.
+- Run completate: 42703052003 (universo Assets selezionato dal fallback iniziale), 42705453812, 42706348570, 42706589129, 42706827189 (20 ticker ciascuno) e 42707090338 (XEL, ticker rimanente). I run dei blocchi corretti hanno completato import, normalizzazione, rigenerazione snapshot admin e build preview.
+- Il riepilogo `Sync_Log` per i 101 componenti registra 20.399 fatti SEC annuali e trimestrali complessivi. È un conteggio dei fatti importati/aggiornati, non una misura di completezza per metrica o periodo.
+- Snapshot di copertura admin rigenerato il 2026-11-09 alle 21:56 UTC, universo Assets di 229 ticker, basato su Assets, JSON_assets, SEC_Raw e Fundamentals.
+
+COPERTURA MISURATA SUI COMPONENTI NASDAQ-100
+- Presenza binaria SEC grezzi: 1.651/1.919 celle ticker-metrica (86,0%).
+- Presenza binaria delle metriche calcolate annuali: 1.533/2.121 celle (72,3%).
+- Solo 2/101 ticker presentano tutte le 19 metriche SEC grezze conteggiate e tutte le 21 metriche calcolate annuali conteggiate. Lo stato PARTIAL indica che manca almeno una metrica canonica, non che il ticker sia privo di dati.
+- Storico annuale SEC: 92 ticker hanno sei esercizi di ricavi, 91 di utile netto, 93 di flusso di cassa operativo e 88 di EPS diluito.
+- Le lacune più frequenti nei fatti grezzi restano Interest Expense (presente per 28/101), Gross Profit (53/101), D&A (70/101), debito a breve (72/101) e debito a lungo termine (82/101). Questi campi richiedono ulteriore mapping dei tag XBRL e/o riconciliazione per categoria.
+
+LIMITI E PROSSIMI PASSI
+- Il backfill SEC e l’abbinamento CIK non equivalgono a mappatura completa dei tag eccezionali né a collegamento completo dei dati ai campi Fundamentals della piattaforma.
+- Nel gruppo normalizzato Fundamentals, EPS TTM, P/E TTM e Dividend Yield risultano presenti per 98/101 ticker ciascuno; Revenue TTM, Operating Cash Flow TTM e Free Cash Flow TTM per 1/101 ciascuno; EV/EBITDA per 0/101. Il calcolo TTM dai trimestrali e l’integrazione nei consumer restano da completare.
+- Lo snapshot JSON amministrativo è aggiornato, ma i tab Google Sheets `Ticker_Data_Census` e `SEC_Period_Coverage` hanno timestamp precedenti alle ultime importazioni: vanno sincronizzati prima di considerarli aggiornati.
+- Non è stato ricalcolato il numero delle triangolazioni dopo il backfill; il conteggio pubblicato resta quello misurato sul dataset precedente. Ricalcolare solo dopo aver aggiornato e verificato il dataset canonico.
+- La triangolazione non era oggetto dei run SEC: non dichiarare nuovi risultati di valutazione sulla sola base del backfill.
