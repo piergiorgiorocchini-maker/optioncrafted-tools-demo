@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v9';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v10';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -68,17 +68,34 @@ if (!tokenResponse.ok) throw new Error('Google token HTTP ' + tokenResponse.stat
 const accessToken = (await tokenResponse.json()).access_token;
 const sheetBase = 'https://sheets.googleapis.com/v4/spreadsheets/' + encodeURIComponent(spreadsheetId);
 async function sheetsApi(path, options = {}) {
-  const response = await fetch(sheetBase + path, {
-    ...options,
-    headers: {
-      Authorization: 'Bearer ' + accessToken,
-      'Content-Type': 'application/json',
-      ...(options.headers || {})
+  for (let attempt = 0; attempt < 5; attempt++) {
+    let response;
+    try {
+      response = await fetch(sheetBase + path, {
+        ...options,
+        headers: {
+          Authorization: 'Bearer ' + accessToken,
+          'Content-Type': 'application/json',
+          ...(options.headers || {})
+        },
+        signal: options.signal || AbortSignal.timeout(30000)
+      });
+    } catch (error) {
+      if (attempt === 4) throw new Error('Google Sheets network request failed after five attempts for ' + path + ': ' + error.message);
+      await sleep(1500 * (2 ** attempt));
+      continue;
     }
-  });
-  if (!response.ok) throw new Error('Google Sheets HTTP ' + response.status + ': ' + (await response.text()).slice(0, 500));
-  if (response.status === 204) return {};
-  return response.json();
+    if (response.ok) {
+      if (response.status === 204) return {};
+      return response.json();
+    }
+    const retryable = [429, 500, 502, 503, 504].includes(response.status);
+    const detail = await response.text();
+    if (!retryable || attempt === 4) throw new Error('Google Sheets HTTP ' + response.status + ': ' + detail.slice(0, 500));
+    console.log('Google Sheets HTTP ' + response.status + ' for ' + path + '; retrying attempt ' + (attempt + 2) + ' of 5.');
+    await sleep(1500 * (2 ** attempt));
+  }
+  throw new Error('Google Sheets request failed after five attempts for ' + path);
 }
 async function readValues(range) {
   const path = '/values/' + encodeURIComponent(range) + '?valueRenderOption=UNFORMATTED_VALUE';
