@@ -1,0 +1,95 @@
+SEC XBRL EXCEPTION TAG REGISTRY
+Updated: 2026-11-10
+
+Purpose: preserve issuer-specific XBRL tag candidates found during the first Nasdaq-100 exception audit so later mapping passes can reuse and review them.
+Scope: first audit block of 20 tickers (FER, HONA, SPCX, TRI, ALAB, BKR, CCEP, ISRG, PCAR, ALNY, ARM, CDNS, CMCSA, CPRT, CSX, DASH, MAR, MELI, MPWR, MRNA). Audit output contained candidate tags for 18 issuers; HONA and SPCX produced no matching audit observations.
+Source: GitHub Actions run 42913726227, job 130170655470; 43 audit records across annual report periods.
+Counts: 169 unique candidate tags across scanned metric families; 74 issuer-specific tags in 14 company namespaces. This is a scoped audit, not a complete extraction of every filing fact or a claim that every candidate is valid.
+
+Review rules:
+- Candidate metric is a name-based audit family, not an approved semantic mapping.
+- A custom tag must be checked against the filing label, definition, calculation, context, and period before it is used.
+- dimensioned=YES means a dimensional context was observed for this concept in the scanned filings; it does not by itself invalidate the concept.
+- lease_keyword=YES means the tag name contains 'lease'; review lease treatment before using it for debt, D&A, or interest.
+- Tags with no specific note remain PENDING REVIEW; none of the company-specific tags below were automatically added as aliases.
+
+Previously integrated standard aliases (generic mappings, not custom namespaces):
+- depreciationAndAmortization: DepreciationAndAmortisationExpense
+- costOfRevenue: CostOfRevenue; CostOfGoodsAndServicesSold; CostOfSales
+- shortTermDebt: ShorttermBorrowings; CurrentPortionOfLongTermDebt; CommercialPapersIssued; CommercialPaper
+
+Fields: TICKER | CANDIDATE_METRIC | COMPANY_TAG | PERIOD_ENDS | DIMENSIONED | LEASE_KEYWORD | REVIEW_NOTE
+ALNY | depreciationAndAmortization | alny:RoyaltyLiabilityInterestExpenseIncludingAmortizationOfClosingCosts | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | Royalty-financing interest plus amortization; not total interest expense.
+ALNY | interestExpenseCandidate | alny:NonCashInterestExpenseOnLiabilitiesRelatedToTheSaleOfFutureRoyaltiesAndDevelopmentFunding | 2023-12-31,2024-12-31,2025-12-31 | NO | NO | Noncash royalty/development financing component; not total interest expense.
+ALNY | interestExpenseCandidate | alny:NonCashInterestExpenseOnSaleOfFutureRoyalties | 2022-12-31,2023-12-31,2024-12-31 | NO | NO | Specific noncash financing component; not total interest expense.
+ALNY | inventory | alny:InventoryCurrentAndNoncurrent | 2023-12-31,2024-12-31,2025-12-31 | NO | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+ARM | depreciationAndAmortization | arm:DepreciationIncludingFinanceLease | 2024-03-31,2025-03-31,2026-03-31 | YES | YES | Includes finance-lease depreciation; validate scope against total D&A.
+BKR | depreciationAndAmortization | bkr:DepreciationAndAmortizationExcludingAcceleratedDepreciation | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | Excludes accelerated depreciation; do not use as total D&A without reconciliation.
+CCEP | depreciationAndAmortization | cce:AcceleratedAmortizationExpense | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | Specific accelerated-amortization component; partial.
+CCEP | depreciationAndAmortization | cce:AcceleratedDepreciationandOtherNoncashExpenseforCostofRestructuring | 2018-12-31,2019-12-31,2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Restructuring/noncash component; not total D&A.
+CCEP | depreciationAndAmortization | cce:DecreaseIncreaseThroughAmortizationofDebtDiscountPremiumLiabilitiesFromFinancingActivities | 2019-12-31,2020-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CCEP | depreciationAndAmortization | cce:DepreciationExpenseExcludingAcceleratedDepreciationForCostOfRestructuring | 2018-12-31,2019-12-31,2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Excludes specified accelerated depreciation; partial.
+CCEP | depreciationAndAmortization | cce:ProfitLossFromOperatingActivitiesExcludingDepreciationAmortizationAndItemsImpactingComparability | 2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Operating-profit subtotal; not a D&A amount.
+CCEP | depreciationAndAmortization | cce:ProfitLossFromOperatingActivitiesExcludingDepreciationAmortizationAndItemsImpactingComparabilityOfAcquiredEntityAsIfAcquisitionAccruedAtBeginningOfPeriod | 2021-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CCEP | depreciationAndAmortization | cce:SensitivityAnalysisForTypesOfMarketRiskDepreciationProfitLossBeforeTaxesImpactOnNonFuctionalForeignCurrencyExchangeExposure | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CCEP | depreciationAndAmortization | cce:SensitivityAnalysisForTypesOfMarketRiskReasonablyPossibleChangeInRiskVariablePreTaxEquityImpactOfNonFunctionalForeignCurrencyExchangeExposureDepreciation | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CCEP | interestExpenseCandidate | cce:FinanceCostsIncomeRelatedPartyTransactions | 2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CCEP | shortTermDebt | cce:ShorttermDebtandEquityInstrumentsAmountContributedtoFairValueofPlanAssets | 2019-12-31,2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CDNS | depreciationAndAmortization | cdns:AmortizationOfAcquiredIntangibles | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Partial amortization component.
+CDNS | depreciationAndAmortization | cdns:ROUassetamortizationandchangeinoperatingleaseliabilities | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | YES | Combines ROU amortization with lease-liability movement; not a clean D&A line.
+CMCSA | depreciationAndAmortization | cmcsa:EntertainmentLicenseAgreementForProgramMaterialIncludingSportsRightsAdvancesAmortizationExpense | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Specific content/licence amortization category; partial D&A.
+CMCSA | depreciationAndAmortization | cmcsa:FilmMonetizedOnItsOwnAmortizationExpenseIncludingParticipationsAndResiduals | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Specific film amortization category; partial D&A.
+CMCSA | interestExpenseCandidate | cmcsa:NoncashInterestExpenseIncomeNet | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CSX | depreciationAndAmortization | csx:AnnualDepreciationRate | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | Rate, not a currency amount.
+CSX | depreciationAndAmortization | csx:IncreaseDecreaseInDepreciationExpense | 2026-12-31 | YES | NO | Change in depreciation expense, not total D&A.
+CSX | depreciationAndAmortization | csx:PurchasePriceAmortizationAndOther | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Purchase-price amortization plus other items; partial/ambiguous.
+CSX | longTermDebt | csx:LongTermDebtAndFinanceLeaseMaturityAfterYearFive | 2024-12-31,2025-12-31 | NO | YES | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CSX | longTermDebt | csx:LongTermDebtAndFinanceLeaseMaturityYearFive | 2024-12-31,2025-12-31 | NO | YES | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CSX | longTermDebt | csx:LongTermDebtAndFinanceLeaseMaturityYearFour | 2024-12-31,2025-12-31 | NO | YES | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CSX | longTermDebt | csx:LongTermDebtAndFinanceLeaseMaturityYearOne | 2024-12-31,2025-12-31 | NO | YES | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CSX | longTermDebt | csx:LongTermDebtAndFinanceLeaseMaturityYearThree | 2024-12-31,2025-12-31 | NO | YES | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+CSX | longTermDebt | csx:LongTermDebtAndFinanceLeaseMaturityYearTwo | 2024-12-31,2025-12-31 | NO | YES | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+DASH | depreciationAndAmortization | dash:CostOfGoodsAndServiceExcludingStockBasedCompensationAndDepreciationDepletionAndAmortization | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Cost measure excludes SBC and D&A; not full cost of revenue.
+DASH | depreciationAndAmortization | dash:GeneralAndAdministrativeExpenseExcludingStockBasedCompensationAndDepreciationDepletionAndAmortization | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | G&A expense subtotal; not cost of revenue.
+DASH | depreciationAndAmortization | dash:ResearchAndDevelopmentExpenseExcludingStockBasedCompensationAndDepreciationDepletionAndAmortization | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | R&D expense subtotal; not cost of revenue.
+DASH | depreciationAndAmortization | dash:RestructuringChargesExcludingStockBasedCompensationAndDepreciationDepletionAndAmortization | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+DASH | depreciationAndAmortization | dash:SellingAndMarketingExpenseExcludingStockBasedCompensationAndDepreciationDepletionAndAmortization | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Selling/marketing expense subtotal; not cost of revenue.
+FER | depreciationAndAmortization | fer:AdjustmentToAmortizationOfIntangibleAssets | 2022-12-31,2023-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:AmortizationOfTheIssuedBond | 2024-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:DecreaseInProvisionsThroughFixedAssetDepreciation | 2024-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:FixedAssetDepreciation | 2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:FixedAssetDepreciationVariation | 2025-12-31 | NO | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:IncreaseDecreaseInInvestmentsInInfrastructureProjectsDepreciation | 2023-12-31,2024-12-31 | NO | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:IncreaseInProvisionsThroughFixedAssetDepreciation | 2024-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:InventoriesAmortizationExpense | 2024-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | depreciationAndAmortization | fer:NetDepreciationChargesRelatedToProvisionsForReplacementsUnderIFRIC12 | 2023-12-31,2024-12-31 | NO | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | grossProfit | fer:GrossProfitLossFromDiscontinuedOperations | 2022-12-31,2023-12-31,2024-12-31 | NO | NO | Discontinued-operations gross profit; not consolidated gross profit.
+FER | shortTermDebt | fer:DebtorsAndOtherShortTermAccountsReceivable | 2023-12-31,2024-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+FER | shortTermDebt | fer:ReductionIssuedDueToTheVariationOfTheEUROCommercialPaper | 2023-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+ISRG | depreciationAndAmortization | isrg:AmortizationOfIntangibleAssetsContractAcquisitionAndOtherAssets | 2023-12-31,2024-12-31,2025-12-31 | NO | NO | Amortization component only; does not include all depreciation.
+ISRG | depreciationAndAmortization | isrg:DepreciationandGainLossonDispositionofPropertyPlantEquipment | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Includes disposal gain/loss; not clean D&A.
+MAR | costOfRevenue | mar:CostOfRevenueAmountReclassified | 2023-12-31,2024-12-31 | YES | NO | Reclassified cost-of-revenue disclosure; reconcile with the current statement line.
+MAR | costOfRevenue | mar:CostOfRevenueNetOfTax | 2022-12-31,2023-12-31 | YES | NO | Net-of-tax cost; not comparable to gross cost of revenue.
+MAR | depreciationAndAmortization | mar:DepreciationAmortizationAndOther | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Includes an unspecified 'other' component; validate before using as total D&A.
+MAR | depreciationAndAmortization | mar:DepreciationAmortizationAndOtherExcludingCapitalizedContractCostAmortization | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Excludes capitalized contract-cost amortization and includes other; not equivalent to total D&A.
+MAR | depreciationAndAmortization | mar:DepreciationAndAmortizationReclassified | 2022-12-31,2023-12-31 | NO | NO | Reclassified disclosure; verify continuity and statement meaning before mapping.
+MAR | depreciationAndAmortization | mar:RevenuesGrossofCapitalizedContractCostAmortization | 2022-12-31,2023-12-31,2024-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+MAR | depreciationAndAmortization | mar:RevenuesGrossOfCapitalizedContractCostAmortization | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+MAR | interestExpenseCandidate | mar:IncomeLossBeforeInterestExpenseAndTaxes | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+MELI | depreciationAndAmortization | meli:ConvertibleBondsAccruedInterestAndAmortizationOfDebtDiscount | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Specific bond-interest and discount-amortization component; partial.
+MELI | interestExpenseCandidate | meli:InterestExpenseAndOtherFinancialCharges | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | Includes other financial charges; broader than pure interest expense.
+PCAR | depreciationAndAmortization | pcar:DepreciationAndAmortizationEquipmentOnOperatingLeasesAndOther | 2022-12-31,2023-12-31,2024-12-31 | NO | YES | Lease/equipment/other measure; validate scope before use.
+PCAR | depreciationAndAmortization | pcar:DepreciationAndAmortizationOfOtherAssets | 2023-12-31,2024-12-31,2025-12-31 | NO | NO | Other-assets component; reconcile before using as total D&A.
+PCAR | depreciationAndAmortization | pcar:DepreciationOnEquipmentOnOperatingLeaseAndOtherVehicleRelatedExpenseAndOtherExpense | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | YES | Lease and other-expense mix; not a clean D&A total.
+PCAR | depreciationAndAmortization | pcar:FinanceLeaseRightOfUseAssetAmortizationAndInterest | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | YES | Combines lease amortization and interest; do not use as D&A or borrowing-interest total.
+PCAR | interestExpenseCandidate | pcar:InterestAndOtherBorrowingExpense | 2022-12-31,2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+PCAR | shortTermDebt | pcar:CommercialPaperAndBankLoans | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+PCAR | shortTermDebt | pcar:CommercialPaperAndTermNotes | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+PCAR | shortTermDebt | pcar:CommercialPaperBankLoansAndTermDebtAtCarryingValue | 2023-12-31,2024-12-31,2025-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
+TRI | depreciationAndAmortization | tri:AmortizationOfComputerSoftware | 2023-12-31,2024-12-31,2025-12-31 | NO | NO | Partial D&A component; not a total D&A measure.
+TRI | depreciationAndAmortization | tri:AmortizationOfOtherIdentifiableIntangibleAssets | 2023-12-31,2024-12-31,2025-12-31 | NO | NO | Partial D&A component; not a total D&A measure.
+TRI | depreciationAndAmortization | tri:OperatingExpenseExcludingDepreciationAmortizationAndOther | 2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Operating-expense total; not a D&A amount.
+TRI | interestExpenseCandidate | tri:InterestExpenseOnDerivativeFinancialInstruments | 2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31 | NO | NO | Derivative-interest component; not total borrowing interest.
+TRI | interestExpenseCandidate | tri:NetInterestExpenseFromDebtAndOther | 2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31,2025-12-31 | NO | NO | Net interest measure; not gross interest expense.
+TRI | interestExpenseCandidate | tri:NetInterestExpenseFromPensionAndOtherPostEmploymentBenefitPlans | 2020-12-31,2021-12-31,2022-12-31,2023-12-31,2024-12-31 | NO | NO | Pension/post-employment interest; not borrowing interest.
+TRI | shortTermDebt | tri:CommercialPaperBorrowingsOutstanding | 2020-12-31,2021-12-31 | YES | NO | PENDING REVIEW: inspect issuer label/definition and statement context before mapping.
