@@ -22,12 +22,41 @@ const data=JSON.parse(await fs.readFile('platform-app/src/data/sec/aapl.json','u
 if(data.ticker!=='AAPL'||data.cik!=='0000320193'||!data.metrics) throw new Error('Unexpected SEC snapshot');
 const rows=Object.entries(data.metrics).filter(([,v])=>v&&Number.isFinite(v.value)).map(([name,v])=>[data.ticker,data.cik,name,v.value,v.periodStart||'',v.periodEnd,v.filed,v.form,v.accession||'',v.tag,v.unit,v.source,data.generatedAt,'VERIFIED_SOURCE']);
 if(rows.length<8) throw new Error('SEC snapshot incomplete: '+rows.length);
-const read=async range=>api('/values/'+encodeURIComponent(range));
-const raw=await read('SEC_Raw!A1:N5000');
+const read=async range=>api('/values/'+encodeURIComponent(range)+'?valueRenderOption=UNFORMATTED_VALUE');
+function normalizeSheetNumericValue(value) {
+  if (typeof value === 'number') return value;
+  if (typeof value !== 'string') return value;
+  const compact = value.trim().replace(/[\s\u00a0]/g, '');
+  if (!compact) return value;
+  let normalized = compact;
+  if (normalized.includes(',')) {
+    if (/^[+-]?\d{1,3}(?:\.\d{3})+,\d+$/.test(normalized)) {
+      normalized = normalized.replace(/\./g, '').replace(',', '.');
+    } else if (/^[+-]?(?:\d+,\d*|,\d+)$/.test(normalized)) {
+      normalized = normalized.replace(',', '.');
+    } else {
+      return value;
+    }
+  }
+  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(normalized)) return value;
+  const number = Number(normalized);
+  return Number.isFinite(number) ? number : value;
+}
+function normalizeSecRawRow(row) {
+  return row.map((value, index) => index === 3 ? normalizeSheetNumericValue(value) : value);
+}
+function secFactKey(row) {
+  return [row[0],row[2],row[4]||'',row[5]||''].join('|');
+}
+
+const raw=await read('SEC_Raw!A1:N50000');
 const old=raw.values||[];
-const retained=old.slice(1).filter(r=>r[0]!=='AAPL'&&r.some(v=>v!==''));
-if(retained.length+rows.length>4999) throw new Error('SEC_Raw capacity exceeded');
-const all=[['Ticker','CIK','Metric','Value USD','Period Start','Period End','Filed Date','Form','Accession','SEC Tag','Unit','Source URL','Imported At','Status'],...retained,...rows];
+const rawHeader=['Ticker','CIK','Metric','Value USD','Period Start','Period End','Filed Date','Form','Accession','SEC Tag','Unit','Source URL','Imported At','Status'];
+const oldRows=old.slice(1).filter(r=>r.some(v=>v!==''&&v!==null&&v!==undefined)).map(normalizeSecRawRow);
+const incomingKeys=new Set(rows.map(secFactKey));
+const retained=oldRows.filter(r=>r[0]!=='AAPL'||!incomingKeys.has(secFactKey(r)));
+if(retained.length+rows.length+1>50000) throw new Error('SEC_Raw capacity exceeded');
+const all=[old[0]?.length?old[0]:rawHeader,...retained,...rows];
 const log=await read('Sync_Log!A1:I5000');
 const oldLog=(log.values||[]).slice(1).filter(r=>r[0]!=='AAPL'||r[1]!=='SEC');
 const latest=rows.map(r=>r[6]).sort().at(-1)||'';

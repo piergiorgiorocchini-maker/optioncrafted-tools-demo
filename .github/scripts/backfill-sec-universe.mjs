@@ -140,6 +140,28 @@ function normCik(value) {
 function normTicker(value) {
   return String(value ?? '').trim().toUpperCase();
 }
+function normalizeSheetNumericValue(value) {
+  if (typeof value === 'number') return value;
+  if (typeof value !== 'string') return value;
+  const compact = value.trim().replace(/[\s\u00a0]/g, '');
+  if (!compact) return value;
+  let normalized = compact;
+  if (normalized.includes(',')) {
+    if (/^[+-]?\d{1,3}(?:\.\d{3})+,\d+$/.test(normalized)) {
+      normalized = normalized.replace(/\./g, '').replace(',', '.');
+    } else if (/^[+-]?(?:\d+,\d*|,\d+)$/.test(normalized)) {
+      normalized = normalized.replace(',', '.');
+    } else {
+      return value;
+    }
+  }
+  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(normalized)) return value;
+  const number = Number(normalized);
+  return Number.isFinite(number) ? number : value;
+}
+function normalizeSecRawRow(row) {
+  return row.map((value, index) => index === 3 ? normalizeSheetNumericValue(value) : value);
+}
 function tickerMap(payload) {
   const map = new Map();
   for (const row of tickerRowsFromPayload(payload)) {
@@ -736,7 +758,9 @@ if (oldHeader.length < 14 || expectedHeader.some((value, index) => index !== 3 &
   throw new Error('Unexpected SEC_Raw headers; refusing to overwrite the sheet.');
 }
 const oldRawRows = oldRaw.slice(1).filter(row => row.some(value => value !== '' && value !== null && value !== undefined));
-const retainedRawRows = oldRawRows.filter(row => !successfulTickers.has(normTicker(row[0])));
+const retainedRawRows = oldRawRows
+  .map(normalizeSecRawRow)
+  .filter(row => !successfulTickers.has(normTicker(row[0])));
 const mergedRawRows = [rawHeader, ...retainedRawRows, ...newFactRows];
 if (mergedRawRows.length > rawCapacity) throw new Error('SEC_Raw merged data exceeds row capacity.');
 
