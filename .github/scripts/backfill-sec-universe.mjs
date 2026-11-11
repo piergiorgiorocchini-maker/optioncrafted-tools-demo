@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v13';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v14';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -26,7 +26,7 @@ const metricSpecs = [
   { key: 'operatingIncome', kind: 'flow', tags: ['OperatingIncomeLoss', 'OperatingProfitLoss'] },
   { key: 'cashFromOperations', kind: 'flow', tags: ['NetCashProvidedByUsedInOperatingActivities', 'CashFlowsFromUsedInOperatingActivities', 'CashFlowsFromOperatingActivities'] },
   { key: 'capex', kind: 'flow', tags: ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsForPropertyPlantAndEquipment', 'PurchaseOfPropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibleAssets', 'PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibles', 'PurchasesOfPropertyPlantAndEquipment'] },
-  { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted', 'EarningsPerShareDilutedIncludingExtraordinaryItems', 'EarningsPerShareBasicAndDiluted'] },
+  { key: 'epsDiluted', kind: 'perShare', tags: ['EarningsPerShareDiluted', 'EarningsPerShareDilutedIncludingExtraordinaryItems', 'EarningsPerShareBasicAndDiluted', 'DilutedEarningsLossPerShare', 'BasicAndDilutedEarningsLossPerShare'] },
   { key: 'grossProfit', kind: 'flow', tags: ['GrossProfit'] },
   { key: 'costOfRevenue', kind: 'flow', tags: ['CostOfRevenue', 'CostOfGoodsAndServicesSold', 'CostOfSales'] },
   { key: 'depreciationAndAmortization', kind: 'flow', tags: ['DepreciationDepletionAndAmortizationPropertyPlantAndEquipment', 'DepreciationDepletionAndAmortization', 'DepreciationAmortizationAndAccretionNet', 'DepreciationAndAmortisationExpense'] },
@@ -314,15 +314,44 @@ function xmlValue(block, localName) {
 function decodeXmlText(value) {
   return String(value || '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&#160;|&nbsp;/gi, ' ').replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16))).replace(/&#(\d+);/g, (_, num) => String.fromCharCode(Number(num)));
 }
+function contextDimensions(block) {
+  const dimensions = [];
+  const explicitPattern = /<(?:[A-Za-z_][\w.-]*:)?explicitMember\b([^>]*)>([\s\S]*?)<\/(?:[A-Za-z_][\w.-]*:)?explicitMember>/gi;
+  for (const match of block.matchAll(explicitPattern)) {
+    dimensions.push({ axis: xmlAttribute(match[1], 'dimension'), member: decodeXmlText(match[2].replace(/<[^>]*>/g, '').trim()), typed: false });
+  }
+  const typedPattern = /<(?:[A-Za-z_][\w.-]*:)?typedMember\b([^>]*)>([\s\S]*?)<\/(?:[A-Za-z_][\w.-]*:)?typedMember>/gi;
+  for (const match of block.matchAll(typedPattern)) {
+    dimensions.push({ axis: xmlAttribute(match[1], 'dimension'), member: decodeXmlText(match[2].replace(/<[^>]*>/g, '').trim()), typed: true });
+  }
+  return dimensions;
+}
+const primaryShareClassSelection = {
+  BKR: { axis: /class|share/i, member: /classa|common/i },
+  ITUB: { axis: /class|share/i, member: /preferred/i },
+  V: { axis: /class|share/i, member: /classa|common/i }
+};
+function isSelectedShareClassContext(context, metricSpec, ticker) {
+  if (!context?.dimensional) return true;
+  if (!['epsDiluted', 'dilutedShares'].includes(metricSpec?.key)) return false;
+  const selection = primaryShareClassSelection[normTicker(ticker)];
+  const dimensions = context.dimensions || [];
+  if (!selection || dimensions.length !== 1 || dimensions[0].typed) return false;
+  const axis = String(dimensions[0].axis || '').split(':').pop();
+  const member = String(dimensions[0].member || '').split(':').pop();
+  return selection.axis.test(axis) && selection.member.test(member);
+}
 function parseXbrlInstance(xml, filing) {
   const contexts = new Map();
   const contextPattern = /<([A-Za-z_][\w.-]*:)?context\b([^>]*)>([\s\S]*?)<\/\1context>/gi;
   for (const match of xml.matchAll(contextPattern)) {
     const body = match[3];
+    const dimensions = contextDimensions(body);
     contexts.set(xmlAttribute(match[2], 'id'), {
       start: xmlValue(body, 'startDate'),
       end: xmlValue(body, 'endDate') || xmlValue(body, 'instant'),
-      dimensional: /<(?:[A-Za-z_][\w.-]*:)?(?:explicitMember|typedMember)\b/i.test(body)
+      dimensions,
+      dimensional: dimensions.length > 0
     });
   }
   const units = new Map();
@@ -372,7 +401,7 @@ function parseXbrlInstance(xml, filing) {
         const signature = [auditDefinition.metric, match[1] + localName, auditContext.start || '', auditContext.end, auditUnit, auditContext.dimensional].join('|');
         if (!auditSeen.has(signature)) {
           auditSeen.add(signature);
-          auditTags.push({ metric: auditDefinition.metric, tag: match[1] + localName, value: match[4].trim(), unit: auditUnit, start: auditContext.start || '', end: auditContext.end, dimensional: auditContext.dimensional, leaseIncluded: /lease/i.test(localName) });
+          auditTags.push({ metric: auditDefinition.metric, tag: match[1] + localName, value: match[4].trim(), unit: auditUnit, start: auditContext.start || '', end: auditContext.end, dimensions: auditContext.dimensions, dimensional: auditContext.dimensional, leaseIncluded: /lease/i.test(localName) });
           auditCounts.set(auditDefinition.metric, auditCount + 1);
         }
       }
@@ -387,7 +416,7 @@ function parseXbrlInstance(xml, filing) {
     }
     if (!metricSpec || /<[^>]+>/.test(match[4]) || /xsi:nil=["']true["']/i.test(match[3])) continue;
     const context = contexts.get(xmlAttribute(match[3], 'contextRef'));
-    if (!context?.end || context.dimensional) continue;
+    if (!context?.end || (context.dimensional && !isSelectedShareClassContext(context, metricSpec, filing.ticker))) continue;
     const kind = metricSpec.kind;
     const hasStart = Boolean(context.start);
     if (kind === 'instant') {
@@ -758,9 +787,13 @@ if (oldHeader.length < 14 || expectedHeader.some((value, index) => index !== 3 &
   throw new Error('Unexpected SEC_Raw headers; refusing to overwrite the sheet.');
 }
 const oldRawRows = oldRaw.slice(1).filter(row => row.some(value => value !== '' && value !== null && value !== undefined));
+function secRawFactKey(row) {
+  return [normTicker(row?.[0]), String(row?.[2] ?? '').trim(), String(row?.[4] ?? ''), String(row?.[5] ?? '')].join('|');
+}
+const incomingFactKeys = new Set(newFactRows.map(secRawFactKey));
 const retainedRawRows = oldRawRows
   .map(normalizeSecRawRow)
-  .filter(row => !successfulTickers.has(normTicker(row[0])));
+  .filter(row => !incomingFactKeys.has(secRawFactKey(row)));
 const mergedRawRows = [rawHeader, ...retainedRawRows, ...newFactRows];
 if (mergedRawRows.length > rawCapacity) throw new Error('SEC_Raw merged data exceeds row capacity.');
 
