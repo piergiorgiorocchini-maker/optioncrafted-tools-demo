@@ -1,5 +1,5 @@
 SEC XBRL EXCEPTION TAG REGISTRY
-Updated: 2026-11-10
+Updated: 2026-11-11
 
 Purpose: preserve issuer-specific XBRL tag candidates found during the first Nasdaq-100 exception audit so later mapping passes can reuse and review them.
 Scope: first audit block of 20 tickers (FER, HONA, SPCX, TRI, ALAB, BKR, CCEP, ISRG, PCAR, ALNY, ARM, CDNS, CMCSA, CPRT, CSX, DASH, MAR, MELI, MPWR, MRNA). Audit output contained candidate tags for 18 issuers; HONA and SPCX produced no matching audit observations.
