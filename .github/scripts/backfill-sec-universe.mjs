@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v14';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v15';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -328,7 +328,7 @@ function contextDimensions(block) {
 }
 const primaryShareClassSelection = {
   BKR: { axis: /class|share/i, member: /classa|common/i },
-  ITUB: { axis: /class|share/i, member: /preferred/i },
+  ITUB: { axis: /class|share/i, member: /preference|preferred/i },
   V: { axis: /class|share/i, member: /classa|common/i }
 };
 function isSelectedShareClassContext(context, metricSpec, ticker) {
@@ -455,7 +455,9 @@ async function fetchRecentAnnualXbrlFacts(cik, desiredPeriodEnds = [], auditTick
     const prior = latestByReportEnd.get(reportEnd);
     if (!prior || filing.filed > prior.filed) latestByReportEnd.set(reportEnd, filing);
   }
+  const latestReportEnd = [...latestByReportEnd.keys()].sort().at(-1) || '';
   const requestedPeriodEnds = new Set(desiredPeriodEnds);
+  if (latestReportEnd) requestedPeriodEnds.add(latestReportEnd);
   const annualFilings = [...latestByReportEnd.values()]
     .filter(filing => !requestedPeriodEnds.size || requestedPeriodEnds.has(filing.reportEnd))
     .sort((a, b) => b.filed.localeCompare(a.filed))
@@ -479,6 +481,7 @@ async function fetchRecentAnnualXbrlFacts(cik, desiredPeriodEnds = [], auditTick
     collected.push(...parseXbrlInstance(xml, filing));
     await sleep(150);
   }
+  collected.latestReportEnd = latestReportEnd;
   return collected;
 }
 
@@ -733,7 +736,7 @@ for (const outcome of outcomes) {
       if (!metricSpec) continue;
       const key = fact.metric + '|' + fact.end;
       if (existing.has(key) || addedPeriods.has(key)) continue;
-      if (annualEnds.length && !annualEnds.includes(fact.end)) continue;
+      if (annualEnds.length && !annualEnds.includes(fact.end) && fact.end !== facts.latestReportEnd) continue;
       const desiredCurrency = outcome.currency || 'USD';
       if (metricSpec.kind !== 'shares' && baseCurrency(fact.unit) !== desiredCurrency.toUpperCase()) continue;
       outcome.records ||= [];
