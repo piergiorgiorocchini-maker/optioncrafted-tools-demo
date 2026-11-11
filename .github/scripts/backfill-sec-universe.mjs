@@ -15,7 +15,7 @@ if (!spreadsheetId || !credentialsText || !secUserAgent || !secUserAgent.include
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const now = new Date().toISOString();
-const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v12';
+const sourceVersion = 'SEC-companyfacts+annual-XBRL-enrichment-6FY-2026-11-v13';
 // SEC's 2026-Q3 filing documents the July 1, 2026 redomiciliation merger:
 // CIK 0000034088 is the predecessor; CIK 0002115436 is the publicly traded parent.
 const XOM_LEGACY_CIK = '0000034088';
@@ -311,7 +311,7 @@ function parseXbrlInstance(xml, filing) {
     const isShares = measures.some(value => /(?:^|:)shares$/i.test(value));
     units.set(xmlAttribute(match[2], 'id'), currency ? (isShares ? currency + '/shares' : currency) : measures.join('/'));
   }
-  const patterns = {
+  const fallbackPatterns = {
     capex: /(?:capex|capitalexpenditur|payments?toacquire.*(?:property|plant|equipment|fixedasset|productiveasset|intangibleasset)|purchases?of.*(?:property|plant|equipment|fixedasset|productiveasset|intangibleasset)|(?:property|plant|equipment).*purchases?)/i,
     epsDiluted: /(?:(?:earnings|netincome|income|profit).*pershare.*diluted|diluted.*(?:earnings|netincome|income|profit).*pershare|income.*continuingoperationsperdilutedshare)/i
   };
@@ -323,16 +323,20 @@ function parseXbrlInstance(xml, filing) {
     { metric: 'costOfRevenue', kind: 'flow', pattern: /costofrevenue|costofgoodsandservices/i },
     { metric: 'depreciationAndAmortization', kind: 'flow', pattern: /depreciation|depletion|amortiz/i },
     { metric: 'interestExpenseCandidate', kind: 'flow', pattern: /interest.*expense|interestanddebt|financecost/i },
-    { metric: 'longTermDebt', kind: 'instant', pattern: /longterm.*debt|debt.*longterm/i },
-    { metric: 'shortTermDebt', kind: 'instant', pattern: /shortterm.*(?:debt|borrow)|(?:debt|borrow).*shortterm|currentportionoflongtermdebt|commercialpaper/i },
+    { metric: 'longTermDebt', kind: 'instant', pattern: /longterm.*(?:debt|borrow|loan)|(?:debt|borrow|loan).*(?:longterm|noncurrent)|noncurrent.*(?:debt|borrow|loan)|(?:debt|borrow|loan).*noncurrent/i },
+    { metric: 'shortTermDebt', kind: 'instant', pattern: /shortterm.*(?:debt|borrow|loan)|(?:debt|borrow|loan).*shortterm|current(?:portionoflongterm)?(?:debt|borrowings|loans?)|(?:debt|borrowings|loans?).*current|commercialpapers?/i },
     { metric: 'inventory', kind: 'instant', pattern: /inventor/i },
     { metric: 'totalLiabilities', kind: 'instant', pattern: /^(?:liabilities|totalliabilities)$/i }
   ];
   const factPattern = /<([A-Za-z_][\w.-]*:)([A-Za-z_][\w.-]*)\b([^>]*)>([^<]*)<\/\1\2>/gi;
+  const auditLimits = { grossProfit: 25, costOfRevenue: 25, depreciationAndAmortization: 45, interestExpenseCandidate: 35, longTermDebt: 35, shortTermDebt: 35, inventory: 20, totalLiabilities: 20 };
+  const auditCounts = new Map();
   for (const match of xml.matchAll(factPattern)) {
     const localName = match[2];
+    const namespace = match[1].replace(/:$/, '').toLowerCase();
     const auditDefinition = auditDefinitions.find(item => item.pattern.test(localName));
-    if (filing.audit && auditDefinition && auditTags.length < 80) {
+    const auditCount = auditDefinition ? auditCounts.get(auditDefinition.metric) || 0 : 0;
+    if (filing.audit && auditDefinition && auditTags.length < 180 && auditCount < (auditLimits[auditDefinition.metric] || 20)) {
       const auditContext = contexts.get(xmlAttribute(match[3], 'contextRef'));
       const auditUnit = units.get(xmlAttribute(match[3], 'unitRef')) || '';
       const currencyUnit = /^[A-Z]{3}$/i.test(auditUnit);
@@ -347,28 +351,43 @@ function parseXbrlInstance(xml, filing) {
         if (!auditSeen.has(signature)) {
           auditSeen.add(signature);
           auditTags.push({ metric: auditDefinition.metric, tag: match[1] + localName, value: match[4].trim(), unit: auditUnit, start: auditContext.start || '', end: auditContext.end, dimensional: auditContext.dimensional, leaseIncluded: /lease/i.test(localName) });
+          auditCounts.set(auditDefinition.metric, auditCount + 1);
         }
       }
     }
-    const metric = Object.entries(patterns).find(([, pattern]) => pattern.test(localName))?.[0];
-    if (!metric || /<[^>]+>/.test(match[4]) || /xsi:nil=["']true["']/i.test(match[3])) continue;
+    let metricSpec = null;
+    if (namespace === 'us-gaap' || namespace === 'ifrs-full') {
+      metricSpec = metricSpecs.find(metric => metric.tags.includes(localName)) || null;
+    }
+    if (!metricSpec) {
+      const fallbackKey = Object.entries(fallbackPatterns).find(([, pattern]) => pattern.test(localName))?.[0];
+      metricSpec = metricSpecs.find(metric => metric.key === fallbackKey) || null;
+    }
+    if (!metricSpec || /<[^>]+>/.test(match[4]) || /xsi:nil=["']true["']/i.test(match[3])) continue;
     const context = contexts.get(xmlAttribute(match[3], 'contextRef'));
-    if (!context?.start || !context.end) continue;
-    const days = (Date.parse(context.end + 'T00:00:00Z') - Date.parse(context.start + 'T00:00:00Z')) / 86400000;
-    if (days < 330 || days > 380) continue;
+    if (!context?.end || context.dimensional) continue;
+    const kind = metricSpec.kind;
+    const hasStart = Boolean(context.start);
+    if (kind === 'instant') {
+      if (hasStart) continue;
+    } else {
+      if (!hasStart) continue;
+      const days = (Date.parse(context.end + 'T00:00:00Z') - Date.parse(context.start + 'T00:00:00Z')) / 86400000;
+      if (days < 330 || days > 380) continue;
+    }
     const unit = units.get(xmlAttribute(match[3], 'unitRef')) || '';
-    if (metric === 'epsDiluted' && !/^[A-Z]{3}\/shares$/i.test(unit)) continue;
-    if (metric === 'capex' && !/^[A-Z]{3}$/i.test(unit)) continue;
+    if (!allowedUnit(metricSpec, unit)) continue;
     let valueText = decodeXmlText(match[4].replace(/<[^>]*>/g, '')).replace(/[\s,\u00a0]/g, '').trim();
     let value = Number(valueText);
     if (!Number.isFinite(value)) continue;
     const scale = Number(xmlAttribute(match[3], 'scale'));
     if (Number.isFinite(scale) && scale !== 0) value *= Math.pow(10, scale);
     if (xmlAttribute(match[3], 'sign') === '-') value = -Math.abs(value);
-    found.push({ metric, value, start: context.start, end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl, dimensional: context.dimensional });
+    const tagIndex = metricSpec.tags.indexOf(localName);
+    found.push({ metric: metricSpec.key, value, start: context.start || '', end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl, dimensional: context.dimensional, tagIndex: tagIndex < 0 ? 999 : tagIndex });
   }
   if (filing.audit) console.log('SEC XBRL exception audit ' + (filing.ticker || filing.cik || '') + ' ' + filing.reportEnd + ': ' + JSON.stringify(auditTags));
-  return found.sort((a, b) => Number(a.dimensional) - Number(b.dimensional) || b.filed.localeCompare(a.filed));
+  return found.sort((a, b) => Number(a.dimensional) - Number(b.dimensional) || a.tagIndex - b.tagIndex || b.filed.localeCompare(a.filed));
 }
 async function fetchRecentAnnualXbrlFacts(cik, desiredPeriodEnds = [], auditTicker = '') {
   const submissionsUrl = 'https://data.sec.gov/submissions/CIK' + cik + '.json';
@@ -645,8 +664,8 @@ for (const outcome of outcomes) {
   const annualRows = outcome.records.filter(row => forms.has(String(row[7] || '').toUpperCase()));
   const existing = new Set(annualRows.map(row => row[2] + '|' + row[5]));
   const missingAnnualPeriods = annualEnds.filter(end => !existing.has('capex|' + end) || !existing.has('epsDiluted|' + end));
-  const auditMetricKeys = ['grossProfit', 'depreciationAndAmortization', 'interestExpense', 'longTermDebt', 'shortTermDebt', 'inventory', 'totalLiabilities'];
-  const auditPeriodEnds = annualEnds.filter(end => auditMetricKeys.some(key => !existing.has(key + '|' + end))).slice(-2);
+  const inlineMetricKeys = metricSpecs.map(metric => metric.key);
+  const auditPeriodEnds = annualEnds.filter(end => inlineMetricKeys.some(key => !existing.has(key + '|' + end)));
   const desiredPeriodEnds = [...new Set([...missingAnnualPeriods, ...auditPeriodEnds])].sort();
   const hasGap = desiredPeriodEnds.length > 0;
   if (!hasGap) continue;
@@ -659,12 +678,13 @@ for (const outcome of outcomes) {
     const addedPeriods = new Set();
     let tickerAdded = 0;
     for (const fact of facts) {
-      if (fact.metric !== 'capex' && fact.metric !== 'epsDiluted') continue;
+      const metricSpec = metricSpecs.find(metric => metric.key === fact.metric);
+      if (!metricSpec) continue;
       const key = fact.metric + '|' + fact.end;
       if (existing.has(key) || addedPeriods.has(key)) continue;
       if (annualEnds.length && !annualEnds.includes(fact.end)) continue;
       const desiredCurrency = outcome.currency || 'USD';
-      if (!fact.unit.toUpperCase().startsWith(desiredCurrency.toUpperCase())) continue;
+      if (metricSpec.kind !== 'shares' && baseCurrency(fact.unit) !== desiredCurrency.toUpperCase()) continue;
       outcome.records ||= [];
       outcome.records.push([
         outcome.ticker, outcome.cik, fact.metric, fact.value, fact.start, fact.end,
