@@ -781,10 +781,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-11": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "AMD:income",
+            "at": "2026-11-11T16:09:06.685Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "AMD:balance",
+            "at": "2026-11-11T16:09:07.002Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 9
+    "ALPHA_VANTAGE": 10
   }
 }

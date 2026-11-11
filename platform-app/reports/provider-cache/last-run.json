@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-10T16:25:14.035Z",
+  "generatedAt": "2026-11-11T16:09:06.685Z",
   "budgets": {
     "FMP": 0,
     "ALPHA_VANTAGE": 3
@@ -15,12 +15,12 @@
       "requestsToday": 2,
       "attempts": [
         {
-          "ticker": "AVGO",
+          "ticker": "AMD",
           "statement": "income",
           "status": "AVAILABLE"
         },
         {
-          "ticker": "AVGO",
+          "ticker": "AMD",
           "statement": "balance",
           "status": "PREMIUM_REQUIRED"
         }
