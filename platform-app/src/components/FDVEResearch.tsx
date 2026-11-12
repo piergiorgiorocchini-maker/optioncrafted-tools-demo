@@ -16,7 +16,7 @@ const fact=(m:Record<string,Fact>,key:string)=>{const f=m[key];return f&&["AVAIL
 const usd=(v:number|null)=>v===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",notation:"compact",maximumFractionDigits:2}).format(v);
 const pct=(n:number|null)=>n===null?"N/D":(n*100).toFixed(1)+"%";
 
-export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation}:{ticker?:string;onSelect?:(ticker:string)=>void;compact?:boolean;asset?:RealAsset|null;valuation?:ValuationBridge|null}){
+export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation,showAnnualSummary=true}:{ticker?:string;onSelect?:(ticker:string)=>void;compact?:boolean;asset?:RealAsset|null;valuation?:ValuationBridge|null;showAnnualSummary?:boolean}){
  const [year,setYear]=useState<string|null>(null);
  const [chartMarkets,setChartMarkets]=useState<Record<string,"NASDAQ"|"NYSE">>({});
  const selected=companies.find(c=>c.ticker===ticker);
@@ -40,7 +40,7 @@ export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation}:{ti
     {ticker&&!compact&&<SecurityLogo ticker={ticker} size="small" onMarketResolved={resolveMarket}/>}
    </div>
   </section>;
-  return chart?<div className="company-market-overview"><div className="company-market-top">{chart}{asset&&<IntrinsicValueModule ticker={ticker!} name={asset.name} currency={asset.currency} price={asset.price} valuation={valuation} market={chartMarket} onMarketResolved={resolveMarket}/>}</div>{panel}</div>:panel;
+  return chart?<div className="company-market-overview"><div className="company-market-top">{chart}{asset&&<IntrinsicValueModule ticker={ticker!} name={asset.name} currency={asset.currency} price={asset.price} valuation={valuation} market={chartMarket} onMarketResolved={resolveMarket}/>}</div>{showAnnualSummary?panel:null}</div>:showAnnualSummary?panel:null;
  }
 
  const cards:[string,string][]=[
@@ -59,5 +59,5 @@ export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation}:{ti
    {!compact&&<NavLink to="/company">See company analysis →</NavLink>}
   </div>
  </section>;
- return chart?<div className="company-market-overview"><div className="company-market-top">{chart}{asset&&<IntrinsicValueModule ticker={ticker!} name={asset.name} currency={asset.currency} price={asset.price} valuation={valuation} market={chartMarket} onMarketResolved={resolveMarket}/>}</div>{panel}</div>:panel;
+ return chart?<div className="company-market-overview"><div className="company-market-top">{chart}{asset&&<IntrinsicValueModule ticker={ticker!} name={asset.name} currency={asset.currency} price={asset.price} valuation={valuation} market={chartMarket} onMarketResolved={resolveMarket}/>}</div>{showAnnualSummary?panel:null}</div>:showAnnualSummary?panel:null;
 }
