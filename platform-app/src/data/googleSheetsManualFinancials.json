@@ -1,0 +1,1248 @@
+{
+  "generatedAt": "2026-11-12",
+  "sourceSpreadsheetId": "1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw",
+  "sourceSpreadsheetTitle": "Tabella Stagionalità",
+  "ticker": "NVDA",
+  "currency": "USD",
+  "ttm": {
+    "fiscalYear": "2027",
+    "periodStart": "2025-07-28",
+    "periodEnd": "2026-07-26",
+    "currency": "USD",
+    "source": "User-provided Google Sheets snapshot; core inputs cross-checked to SEC Company Facts",
+    "metrics": {
+      "revenue": {
+        "value": 302970000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Total Revenue (TTM)",
+        "xbrlTag": "Revenues",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD."
+      },
+      "netIncome": {
+        "value": 192880000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Net Income Available to Common Stockholders (TTM)",
+        "xbrlTag": "NetIncomeLoss",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD."
+      },
+      "operatingIncome": {
+        "value": 197579000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Total Operating Profit/Loss (TTM)",
+        "xbrlTag": "OperatingIncomeLoss",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD. Rounded to $197.58B in screenshot."
+      },
+      "cashFromOperations": {
+        "value": 134360000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Cash Flow from Operating Activities (TTM)",
+        "xbrlTag": "NetCashProvidedByUsedInOperatingActivities",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD."
+      },
+      "capex": {
+        "value": 7354000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Capital Expenditure, Calculated (TTM)",
+        "xbrlTag": "PaymentsToAcquireProductiveAssets",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD. SEC-derived $7.354B; screenshot rounds to $7.35B."
+      },
+      "epsDiluted": {
+        "value": 7.91,
+        "unit": "USD/share",
+        "currency": "USD",
+        "reportedLabel": "Diluted EPS (TTM)",
+        "xbrlTag": "EarningsPerShareDiluted",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD."
+      },
+      "grossProfit": {
+        "value": 226241000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Gross Profit (TTM)",
+        "xbrlTag": "GrossProfit",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD. Rounded to $226.24B in screenshot."
+      },
+      "costOfRevenue": {
+        "value": 76729000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Cost of Revenue (TTM)",
+        "xbrlTag": "CostOfRevenue",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD. Stored as positive expense; screenshot displays -$76.73B."
+      },
+      "depreciationAndAmortization": {
+        "value": 3687000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Depreciation, Depletion and Amortization (TTM)",
+        "xbrlTag": "DepreciationDepletionAndAmortization",
+        "source": "SEC Company Facts; cross-checked to user screenshot",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM FY2027, verified against SEC Company Facts through 2026-07-26 and the user's screenshot; amounts in USD. SEC-derived $3.687B; consistent with screenshot EBITDA less EBIT, rounded to $3.69B."
+      },
+      "interestExpense": {
+        "value": 463000000,
+        "unit": "USD",
+        "currency": "USD",
+        "reportedLabel": "Interest Expense (TTM)",
+        "xbrlTag": "InterestExpenseNonoperating",
+        "source": "User-provided screenshot; cross-checked to SEC Company Facts",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "TTM source screenshot displays -$463M; stored as a positive expense value of $463M. SEC reconstruction is $464M; use screenshot figure."
+      },
+      "dilutedShares": {
+        "value": 24480000000,
+        "unit": "shares",
+        "currency": "USD",
+        "reportedLabel": "Diluted Weighted Average Shares Outstanding (TTM)",
+        "xbrlTag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+        "source": "User-provided screenshot; cross-checked to SEC Company Facts",
+        "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "dataStatus": "DIRECT",
+        "reviewStatus": "VERIFIED",
+        "notes": "Corrected to diluted shares 24.48B from screenshot; 24.28B belongs to basic weighted average shares."
+      }
+    },
+    "calculated": {
+      "standardFreeCashFlow": 127006000000,
+      "standardFreeCashFlowPerShare": 5.188153594771242,
+      "calculatedEbitdaCore": 201266000000,
+      "grossMargin": 0.7467439020365053,
+      "operatingMargin": 0.652140475954715,
+      "netMargin": 0.6366306895072119
+    },
+    "supplemental": {
+      "reportedEbit": 227980000000,
+      "reportedEbitda": 231670000000,
+      "normalizedEbitda": 208350000000,
+      "normalizedIncome": 170820000000,
+      "reportedNormalizedEps": 7.01,
+      "freeCashFlowToFirm": 168140000000,
+      "sourceReportedCommonDividendPerShare": 0.28
+    }
+  },
+  "balanceSheetSnapshot": {
+    "fiscalYear": "2026",
+    "periodEnd": "2026-01-31",
+    "currency": "USD",
+    "unitScale": "USD billions",
+    "totalAssets": 206.8,
+    "currentAssets": 125.61,
+    "cashAndShortTermInvestments": 62.56,
+    "inventory": 21.4,
+    "receivables": 38.47,
+    "otherCurrentAssets": 3.18,
+    "totalNonCurrentAssets": 81.2,
+    "totalLiabilities": 49.51,
+    "equity": 157.29,
+    "debtMaturitySchedule": 8.47,
+    "operatingLeaseObligationMaturitySchedule": 2.94,
+    "totalDebt": 11.04,
+    "netDebt": -51.52,
+    "workingCapital": 93.44,
+    "investedCapital": 168.33,
+    "tangibleBookValue": 133.16,
+    "commonEquityBookValue": 157.29,
+    "currentLiabilitiesDerived": 32.17,
+    "currentLiabilitiesDerivedNote": "Derived as current assets minus source-reported working capital; not separately shown in the screenshot."
+  },
+  "statementDetail": [
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "revenue",
+      "reportedLabel": "Total Revenue",
+      "values": {
+        "FY2023": 26.97,
+        "FY2024": 60.92,
+        "FY2025": 130.5,
+        "FY2026": 215.94,
+        "TTM": 302.97
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "revenue",
+      "reportedLabel": "Business Revenue",
+      "values": {
+        "FY2023": 26.97,
+        "FY2024": 60.92,
+        "FY2025": 130.5,
+        "FY2026": 215.94,
+        "TTM": 302.97
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": "Source shows same figures as Total Revenue."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "costOfRevenue",
+      "reportedLabel": "Cost of Revenue",
+      "values": {
+        "FY2023": -11.62,
+        "FY2024": -16.52,
+        "FY2025": -32.64,
+        "FY2026": -62.48,
+        "TTM": -76.73
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": "Source displays expenses as negative; Manual_Financials_Input stores expense magnitude as positive."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "grossProfit",
+      "reportedLabel": "Gross Profit",
+      "values": {
+        "FY2023": 15.36,
+        "FY2024": 44.3,
+        "FY2025": 97.86,
+        "FY2026": 153.46,
+        "TTM": 226.24
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Selling, General and Administrative Expenses",
+      "values": {
+        "FY2023": -2.44,
+        "FY2024": -2.65,
+        "FY2025": -3.49,
+        "FY2026": -4.58,
+        "TTM": -5.07
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Research and Development Expenses",
+      "values": {
+        "FY2023": -7.34,
+        "FY2024": -8.68,
+        "FY2025": -12.91,
+        "FY2026": -18.5,
+        "TTM": -23.59
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Operating Income/Expenses",
+      "values": {
+        "FY2023": -9.7,
+        "FY2024": -11.33,
+        "FY2025": -16.41,
+        "FY2026": -23.08,
+        "TTM": -28.65
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source expense subtotal; kept under its reported label."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "operatingIncome",
+      "reportedLabel": "Total Operating Profit/Loss",
+      "values": {
+        "FY2023": 5.58,
+        "FY2024": 32.97,
+        "FY2025": 81.45,
+        "FY2026": 130.39,
+        "TTM": 197.58
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Total Net Finance Income/Expense",
+      "values": {
+        "FY2023": 0.005,
+        "FY2024": 0.609,
+        "FY2025": 1.54,
+        "FY2026": 2.04,
+        "TTM": 1.77
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Net Interest Income/Expense",
+      "values": {
+        "FY2023": 0.005,
+        "FY2024": 0.609,
+        "FY2025": 1.54,
+        "FY2026": 2.04,
+        "TTM": 1.77
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Retained as the separate source line."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "interestExpense",
+      "reportedLabel": "Interest Expense Net of Capitalized Interest",
+      "values": {
+        "FY2023": -0.262,
+        "FY2024": -0.267,
+        "FY2025": -0.247,
+        "FY2026": -0.259,
+        "TTM": -0.463
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": "Source displays a negative expense. TTM screenshot is $463M; core input stores +$463M."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Interest Income",
+      "values": {
+        "FY2023": 0.267,
+        "FY2024": 0.866,
+        "FY2025": 1.79,
+        "FY2026": 2.3,
+        "TTM": 2.23
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Irregular Income/Expenses",
+      "values": {
+        "FY2023": -1.35,
+        "FY2024": 0,
+        "FY2025": 0,
+        "FY2026": 0,
+        "TTM": 0
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Zeros and dashes preserved as shown in the screenshot."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Merger and Acquisition Income/Expense",
+      "values": {
+        "FY2023": -1.35,
+        "FY2024": 0,
+        "FY2025": 0.146,
+        "FY2026": null,
+        "TTM": 0
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source shows a dash for FY2026; left blank here rather than converting the dash to zero."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Other Income, Expense, Non-Operating",
+      "values": {
+        "FY2023": -0.048,
+        "FY2024": 0.237,
+        "FY2025": 1.03,
+        "FY2026": 9.02,
+        "TTM": 6.69
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Non-Operating Income/Expenses, Total",
+      "values": {
+        "FY2023": -1.4,
+        "FY2024": 0.846,
+        "FY2025": 2.57,
+        "FY2026": 11.06,
+        "TTM": 32.17
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source aggregate retained as displayed."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Pretax Income",
+      "values": {
+        "FY2023": 4.18,
+        "FY2024": 33.82,
+        "FY2025": 84.03,
+        "FY2026": 141.45,
+        "TTM": 229.74
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Provision for Income Tax",
+      "values": {
+        "FY2023": 0.187,
+        "FY2024": -4.06,
+        "FY2025": -11.15,
+        "FY2026": -21.38,
+        "TTM": -36.86
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source sign retained; FY2023 shows a tax benefit."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "netIncome",
+      "reportedLabel": "Net Income from Continuing Operations",
+      "values": {
+        "FY2023": 4.37,
+        "FY2024": 29.76,
+        "FY2025": 72.88,
+        "FY2026": 120.07,
+        "TTM": 192.88
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "netIncome",
+      "reportedLabel": "Net Income after Extraordinary Items and Non-Controlling Items",
+      "values": {
+        "FY2023": 4.37,
+        "FY2024": 29.76,
+        "FY2025": 72.88,
+        "FY2026": 120.07,
+        "TTM": 192.88
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "netIncome",
+      "reportedLabel": "Net Income after Non-Controlling/Minority Interest",
+      "values": {
+        "FY2023": 4.37,
+        "FY2024": 29.76,
+        "FY2025": 72.88,
+        "FY2026": 120.07,
+        "TTM": 192.88
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "netIncome",
+      "reportedLabel": "Net Income Available to Common Stockholders",
+      "values": {
+        "FY2023": 4.37,
+        "FY2024": 29.76,
+        "FY2025": 72.88,
+        "FY2026": 120.07,
+        "TTM": 192.88
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "netIncome",
+      "reportedLabel": "Diluted Net Income Available to Common Stockholders",
+      "values": {
+        "FY2023": 4.37,
+        "FY2024": 29.76,
+        "FY2025": 72.88,
+        "FY2026": 120.07,
+        "TTM": 192.88
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Common Dividend per Share",
+      "values": {
+        "FY2023": 0.02,
+        "FY2024": 0.02,
+        "FY2025": 0.03,
+        "FY2026": 0.04,
+        "TTM": 0.28
+      },
+      "unit": "USD/share",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "TTM value preserved as displayed in the screenshot; provider split/dividend conventions can differ."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Basic EPS",
+      "values": {
+        "FY2023": 0.18,
+        "FY2024": 1.21,
+        "FY2025": 2.97,
+        "FY2026": 4.93,
+        "TTM": 7.95
+      },
+      "unit": "USD/share",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Basic EPS from Continuing Operations",
+      "values": {
+        "FY2023": 0.18,
+        "FY2024": 1.21,
+        "FY2025": 2.97,
+        "FY2026": 4.93,
+        "TTM": 7.95
+      },
+      "unit": "USD/share",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "epsDiluted",
+      "reportedLabel": "Diluted EPS",
+      "values": {
+        "FY2023": 0.17,
+        "FY2024": 1.19,
+        "FY2025": 2.94,
+        "FY2026": 4.93,
+        "TTM": 7.91
+      },
+      "unit": "USD/share",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "epsDiluted",
+      "reportedLabel": "Diluted EPS from Continuing Operations",
+      "values": {
+        "FY2023": 0.17,
+        "FY2024": 1.19,
+        "FY2025": 2.94,
+        "FY2026": 4.93,
+        "TTM": 7.91
+      },
+      "unit": "USD/share",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Basic Weighted Average Shares Outstanding",
+      "values": {
+        "FY2023": 24.87,
+        "FY2024": 24.69,
+        "FY2025": 24.56,
+        "FY2026": 24.36,
+        "TTM": 24.28
+      },
+      "unit": "shares bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "dilutedShares",
+      "reportedLabel": "Diluted Weighted Average Shares Outstanding",
+      "values": {
+        "FY2023": 25.07,
+        "FY2024": 24.94,
+        "FY2025": 24.88,
+        "FY2026": 24.51,
+        "TTM": 24.48
+      },
+      "unit": "shares bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": "TTM diluted shares are 24.48B; 24.28B in the source belongs to basic shares."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Reported Normalized Data",
+      "values": {
+        "FY2023": 0.33,
+        "FY2024": 1.3,
+        "FY2025": 2.99,
+        "FY2026": 4.77,
+        "TTM": 7.01
+      },
+      "unit": "USD/share",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source label is abbreviated; values retained as displayed."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "EBIT",
+      "values": {
+        "FY2023": 4.18,
+        "FY2024": 33.21,
+        "FY2025": 82.49,
+        "FY2026": 139.41,
+        "TTM": 227.98
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Supplemental source definition; not substituted for the core operatingIncome metric."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "EBITDA",
+      "values": {
+        "FY2023": 5.72,
+        "FY2024": 34.72,
+        "FY2025": 84.35,
+        "FY2026": 142.25,
+        "TTM": 231.67
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Normalized EBITDA",
+      "values": {
+        "FY2023": 9.83,
+        "FY2024": 38.03,
+        "FY2025": 88.06,
+        "FY2026": 139.72,
+        "TTM": 208.35
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Normalized Income",
+      "values": {
+        "FY2023": 8.37,
+        "FY2024": 32.31,
+        "FY2025": 74.72,
+        "FY2026": 117,
+        "TTM": 170.82
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Total Unusual Items",
+      "values": {
+        "FY2023": 4.11,
+        "FY2024": 3.31,
+        "FY2025": 3.71,
+        "FY2026": -2.53,
+        "TTM": -23.31
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Total Unusual Items Excluding Goodwill",
+      "values": {
+        "FY2023": 4.11,
+        "FY2024": 3.31,
+        "FY2025": 3.71,
+        "FY2026": -2.53,
+        "TTM": -23.31
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Tax Effect of Unusual Items",
+      "values": {
+        "FY2023": 0.86247,
+        "FY2024": 0.39732,
+        "FY2025": 0.49303,
+        "FY2026": -0.38233,
+        "TTM": -3.74
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": null,
+      "reportedLabel": "Tax Rate, Calculated",
+      "values": {
+        "FY2023": 0.21,
+        "FY2024": 0.12,
+        "FY2025": 0.13,
+        "FY2026": 0.15,
+        "TTM": 0.16
+      },
+      "unit": "ratio (decimal)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Stored as ratios, not percentages."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": "totalAssets",
+      "reportedLabel": "Total Assets",
+      "values": {
+        "FY2023": 41.18,
+        "FY2024": 65.73,
+        "FY2025": 111.6,
+        "FY2026": 206.8,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core annual field already present in SEC history; screenshot detail retained",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": "currentAssets",
+      "reportedLabel": "Total Current Assets",
+      "values": {
+        "FY2023": 23.07,
+        "FY2024": 44.35,
+        "FY2025": 80.13,
+        "FY2026": 125.61,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core annual field already present in SEC history; screenshot detail retained",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Cash, Cash Equivalents & Short-Term Investments",
+      "values": {
+        "FY2023": 13.3,
+        "FY2024": 25.98,
+        "FY2025": 43.21,
+        "FY2026": 62.56,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Broader liquidity definition than the core cash field; kept separate."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": "inventory",
+      "reportedLabel": "Inventories",
+      "values": {
+        "FY2023": 5.16,
+        "FY2024": 5.28,
+        "FY2025": 10.08,
+        "FY2026": 21.4,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core annual field already present in SEC history; screenshot detail retained",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Trade and Other Receivables, Current",
+      "values": {
+        "FY2023": 3.83,
+        "FY2024": 10,
+        "FY2025": 23.07,
+        "FY2026": 38.47,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Other Current Assets",
+      "values": {
+        "FY2023": 0.791,
+        "FY2024": 3.08,
+        "FY2025": 3.77,
+        "FY2026": 3.18,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Total Non-Current Assets",
+      "values": {
+        "FY2023": 18.11,
+        "FY2024": 21.38,
+        "FY2025": 31.48,
+        "FY2026": 81.2,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": "totalLiabilities",
+      "reportedLabel": "Total Liabilities",
+      "values": {
+        "FY2023": 19.08,
+        "FY2024": 22.75,
+        "FY2025": 32.27,
+        "FY2026": 49.51,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core annual field already present in SEC history; screenshot detail retained",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": "equity",
+      "reportedLabel": "Total Equity",
+      "values": {
+        "FY2023": 22.1,
+        "FY2024": 42.98,
+        "FY2025": 79.33,
+        "FY2026": 157.29,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core annual field already present in SEC history; screenshot detail retained",
+      "notes": "Point-in-time values; no TTM."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Debt Maturity Schedule Total",
+      "values": {
+        "FY2023": 10.95,
+        "FY2024": 9.71,
+        "FY2025": 8.46,
+        "FY2026": 8.47,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Supplemental maturity schedule; not mapped directly to longTermDebt."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Operating Lease Obligation Maturity Schedule Total",
+      "values": {
+        "FY2023": 1.08,
+        "FY2024": 1.35,
+        "FY2025": 1.81,
+        "FY2026": 2.94,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Supplemental maturity schedule; not mapped directly to debt."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Total Debt",
+      "values": {
+        "FY2023": 12.03,
+        "FY2024": 11.06,
+        "FY2025": 9.98,
+        "FY2026": 11.04,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source-specific total debt definition retained separately."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Net Debt",
+      "values": {
+        "FY2023": -1.27,
+        "FY2024": -14.93,
+        "FY2025": -33.23,
+        "FY2026": -51.52,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source-specific net debt uses the broader cash-and-short-term-investments line above."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Working Capital",
+      "values": {
+        "FY2023": 16.51,
+        "FY2024": 33.71,
+        "FY2025": 62.08,
+        "FY2026": 93.44,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source-reported calculation; point-in-time."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Invested Capital",
+      "values": {
+        "FY2023": 34.13,
+        "FY2024": 54.03,
+        "FY2025": 89.31,
+        "FY2026": 168.33,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source-reported supplemental calculation."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": null,
+      "reportedLabel": "Tangible Book Value",
+      "values": {
+        "FY2023": 16.05,
+        "FY2024": 37.44,
+        "FY2025": 73.33,
+        "FY2026": 133.16,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source-reported supplemental calculation."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Balance Sheet",
+      "metricId": "equity",
+      "reportedLabel": "Common Equity Book Value",
+      "values": {
+        "FY2023": 22.1,
+        "FY2024": 42.98,
+        "FY2025": 79.33,
+        "FY2026": 157.29,
+        "TTM": null
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail: duplicate/alternate source line; do not import twice",
+      "notes": "Same reported values as Total Equity."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": "cashFromOperations",
+      "reportedLabel": "Cash Flow from Operating Activities, Indirect",
+      "values": {
+        "FY2023": 5.64,
+        "FY2024": 28.09,
+        "FY2025": 64.09,
+        "FY2026": 102.72,
+        "TTM": 134.36
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Cash Flow from Investing Activities",
+      "values": {
+        "FY2023": 7.38,
+        "FY2024": -10.57,
+        "FY2025": -20.42,
+        "FY2026": -52.23,
+        "TTM": -75.01
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Cash Flow from Financing Activities",
+      "values": {
+        "FY2023": -11.62,
+        "FY2024": -13.63,
+        "FY2025": -42.36,
+        "FY2026": -48.47,
+        "TTM": -48.55
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Cash and Cash Equivalents, End of Period",
+      "values": {
+        "FY2023": 3.39,
+        "FY2024": 7.28,
+        "FY2025": 8.59,
+        "FY2026": 10.61,
+        "TTM": 22.44
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Ending balance is a point-in-time figure, including in the source TTM column."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Free Cash Flow to Firm",
+      "values": {
+        "FY2023": 6.22,
+        "FY2024": 30.97,
+        "FY2025": 70.45,
+        "FY2026": 112.84,
+        "TTM": 168.14
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Retained under the source label; differs from platform FCF calculated as operating cash flow less CapEx."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": "capex",
+      "reportedLabel": "Capital Expenditure, Calculated",
+      "values": {
+        "FY2023": 1.83,
+        "FY2024": 1.07,
+        "FY2025": 3.24,
+        "FY2026": 6.04,
+        "TTM": 7.35
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": null
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Issuance of Capital Stock",
+      "values": {
+        "FY2023": 0,
+        "FY2024": 0,
+        "FY2025": 0,
+        "FY2026": 0,
+        "TTM": 0
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Zeros are explicitly shown in the screenshot."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Repurchase of Capital Stock",
+      "values": {
+        "FY2023": -10.04,
+        "FY2024": -9.53,
+        "FY2025": -33.71,
+        "FY2026": -40.09,
+        "TTM": -55.32
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Source sign retained."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Cash Flow",
+      "metricId": null,
+      "reportedLabel": "Free Cash Flow to Cash Flow from Operations",
+      "values": {
+        "FY2023": 0.77,
+        "FY2024": 0.97,
+        "FY2025": 0.96,
+        "FY2026": 0.95,
+        "TTM": 0.96
+      },
+      "unit": "ratio (decimal)",
+      "handling": "Detail only: current importer does not accept this line",
+      "notes": "Stored as ratios, not percentages."
+    },
+    {
+      "ticker": "NVDA",
+      "statement": "Income Statement",
+      "metricId": "depreciationAndAmortization",
+      "reportedLabel": "Depreciation and Amortization (SEC cross-check)",
+      "values": {
+        "FY2023": null,
+        "FY2024": null,
+        "FY2025": null,
+        "FY2026": null,
+        "TTM": 3.687
+      },
+      "unit": "USD bn (×1e9)",
+      "handling": "Core: TTM input; annual values already in SEC history",
+      "notes": "Not a separate visible line in the screenshot; SEC TTM value retained in the import sheet and is consistent with EBITDA less EBIT to rounding."
+    }
+  ]
+}
