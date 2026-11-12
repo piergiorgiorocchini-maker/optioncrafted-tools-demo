@@ -1,7 +1,7 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
 import {Bar,BarChart,CartesianGrid,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
-import {ArrowRight,Database,FlaskConical,RefreshCcw,ShieldCheck} from "lucide-react";
+import {ArrowRight,Database,FlaskConical,RefreshCcw} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
 import {buildValuationTriangulation,type ValuationBridge} from "../core/valuationTriangulation";
 export type {ValuationBridge} from "../core/valuationTriangulation";
