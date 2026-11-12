@@ -51,9 +51,11 @@ export function getManualTtmFinancials(ticker:string,currency?:string):ManualTtm
  const symbol=ticker.trim().toUpperCase(),requested=currency?.trim().toUpperCase();
  if(symbol!==data.ticker||requested&&requested!==data.currency)return null;
  const metric=(key:string)=>core(key);
- const revenue=metric("revenue"),grossProfit=metric("grossProfit"),costOfRevenue=metric("costOfRevenue"),netIncome=metric("netIncome");
- const operatingIncome=metric("operatingIncome"),cashFromOperations=metric("cashFromOperations"),capex=metric("capex");
- const dilutedEps=metric("epsDiluted"),dilutedShares=metric("dilutedShares"),depreciationAndAmortization=metric("depreciationAndAmortization"),interestExpense=metric("interestExpense");
+ const requiredMetrics=["revenue","grossProfit","costOfRevenue","netIncome","operatingIncome","cashFromOperations","capex","epsDiluted","dilutedShares","depreciationAndAmortization","interestExpense"];
+ if(requiredMetrics.some(key=>typeof metric(key)!=="number"))return null;
+ const revenue=metric("revenue")!,grossProfit=metric("grossProfit")!,costOfRevenue=metric("costOfRevenue")!,netIncome=metric("netIncome")!;
+ const operatingIncome=metric("operatingIncome")!,cashFromOperations=metric("cashFromOperations")!,capex=metric("capex")!;
+ const dilutedEps=metric("epsDiluted")!,dilutedShares=metric("dilutedShares")!,depreciationAndAmortization=metric("depreciationAndAmortization")!,interestExpense=metric("interestExpense")!;
  const sourceUrl=data.ttm.metrics.revenue.sourceUrl||null;
  return {ticker:symbol,currency:data.currency,fiscalYear:data.ttm.fiscalYear,periodStart:data.ttm.periodStart,periodEnd:data.ttm.periodEnd,source:data.ttm.source,sourceUrl,
   revenue,grossProfit,costOfRevenue,netIncome,operatingIncome,cashFromOperations,capex,
