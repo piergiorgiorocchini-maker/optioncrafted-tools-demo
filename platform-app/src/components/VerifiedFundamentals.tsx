@@ -62,12 +62,12 @@ const formatManual=(n:number|null|undefined,unit:ManualUnit)=>{
  if(unit==="percent")return (n*100).toFixed(1)+"%";
  return String(n);
 };
-const formatDetail=(n:number|null,unit:string)=>{
+const formatDetail=(n:number|null,unit:string,label:string)=>{
  if(n===null)return "—";
  if(unit.startsWith("USD bn"))return (n<0?"−$":"$")+Math.abs(n).toFixed(2)+"B";
  if(unit.startsWith("shares bn"))return n.toFixed(2)+"B";
  if(unit==="USD/share")return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n);
- if(unit.startsWith("ratio"))return n.toFixed(2)+"x";
+ if(unit.startsWith("ratio"))return label==="Tax Rate, Calculated"?(n*100).toFixed(1)+"%":n.toFixed(2)+"x";
  return String(n);
 };
 function ManualTtmPanel({data}:{data:ManualStatementData}){
@@ -116,11 +116,11 @@ function ManualTtmPanel({data}:{data:ManualStatementData}){
  return <section className="vf-panel" aria-label="Imported NVDA TTM and statement data">
   <div className="vf-top"><div><span className="vf-kicker">MANUAL IMPORT · SEC CROSS-CHECK</span><h3>NVDA TTM fundamentals & statement snapshot</h3><p>TTM {t.periodStart} to {t.periodEnd} · balance sheet FY{b.fiscalYear} at {b.periodEnd} · USD</p></div></div>
   <div className="vf-summary"><div><small>Core TTM inputs</small><strong>11 verified</strong></div><div><small>Standard FCF</small><strong>{formatManual(t.freeCashFlow,"amount")}</strong></div><div><small>FCF / share</small><strong>{formatManual(t.freeCashFlowPerShare,"perShare")}</strong></div></div>
-  <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>TTM metric</th><th>Value</th><th>Data basis / calculation</th></tr></thead><tbody>{inputRows.map((item,index)=><tr key={index}><td>{item.label}</td><td className="vf-number">{formatManual(item.value,item.unit)}</td><td><span className={index<11?"vf-ok":"vf-derived"}>{index<11?"Imported":"Calculated / supplemental"}</span><small className="vf-detail">{item.detail}</small></td></tr>)}</tbody></table></div>
+  <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>TTM metric</th><th>Value</th><th>Data basis / calculation</th></tr></thead><tbody>{inputRows.map((item,index)=><tr key={index}><td>{item.label}</td><td className="vf-number">{formatManual(item.value,item.unit)}</td><td><span className={index<11?"vf-ok":index<17?"vf-derived":"vf-muted"}>{index<11?"Imported":index<17?"Calculated":"Supplemental"}</span><small className="vf-detail">{item.detail}</small></td></tr>)}</tbody></table></div>
   <div className="vf-table-wrap" style={{marginTop:14}}><table className="vf-table"><thead><tr><th>Balance sheet · FY{b.fiscalYear}</th><th>Value</th><th>Basis</th></tr></thead><tbody>{balanceRows.map((item,index)=><tr key={index}><td>{item.label}</td><td className="vf-number">{formatManual(item.value,"amount")}</td><td><small className="vf-detail">{item.detail}</small></td></tr>)}</tbody></table></div>
-  <p className="vf-note">TTM flows and FY2026 point-in-time balances retain their own dates. DCF uses standard FCF = operating cash flow − CapEx; the source-reported FCFF of {formatManual(t.freeCashFlowToFirm,"amount")} remains a separate supplemental figure. Current liabilities are derived from current assets less reported working capital.</p>
+  <p className="vf-note">TTM flows and FY2026 point-in-time balances retain their own dates. DCF uses standard FCF = operating cash flow − CapEx; source-reported EBIT/EBITDA and FCFF remain supplemental, not replacements for core calculations. Source-reported FCFF is {formatManual(t.freeCashFlowToFirm,"amount")} remains a separate supplemental figure. Current liabilities are derived from current assets less reported working capital.</p>
   <details className="vf-details"><summary>Imported statement detail · {data.statementDetail.length} rows · FY2023–FY2026 and TTM</summary>
-   <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>Statement</th><th>Reported metric</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>TTM</th></tr></thead><tbody>{data.statementDetail.map((item,index)=><tr key={index}><td>{item.statement}</td><td title={item.notes??undefined}>{item.reportedLabel}<small className="vf-detail">{item.handling}</small></td><td className="vf-number">{formatDetail(item.values.FY2023??null,item.unit)}</td><td className="vf-number">{formatDetail(item.values.FY2024??null,item.unit)}</td><td className="vf-number">{formatDetail(item.values.FY2025??null,item.unit)}</td><td className="vf-number">{formatDetail(item.values.FY2026??null,item.unit)}</td><td className="vf-number">{formatDetail(item.values.TTM??null,item.unit)}</td></tr>)}</tbody></table></div>
+   <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>Statement</th><th>Reported metric</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>TTM</th></tr></thead><tbody>{data.statementDetail.map((item,index)=><tr key={index}><td>{item.statement}</td><td title={item.notes??undefined}>{item.reportedLabel}<small className="vf-detail">{item.handling}</small></td><td className="vf-number">{formatDetail(item.values.FY2023??null,item.unit,item.reportedLabel)}</td><td className="vf-number">{formatDetail(item.values.FY2024??null,item.unit,item.reportedLabel)}</td><td className="vf-number">{formatDetail(item.values.FY2025??null,item.unit,item.reportedLabel)}</td><td className="vf-number">{formatDetail(item.values.FY2026??null,item.unit,item.reportedLabel)}</td><td className="vf-number">{formatDetail(item.values.TTM??null,item.unit,item.reportedLabel)}</td></tr>)}</tbody></table></div>
   </details>
  </section>;
 }
