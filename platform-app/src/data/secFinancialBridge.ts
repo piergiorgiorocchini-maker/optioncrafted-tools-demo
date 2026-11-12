@@ -27,7 +27,7 @@ export function getSecFinancialInputs(ticker:string,currency?:string):SecFinanci
   ...(manualTtm?{periodEnd:manualTtm.periodEnd,fiscalYear:manualTtm.fiscalYear,currency:manualTtm.currency}:latest?{periodEnd:latest.periodEnd,fiscalYear:latest.year,currency:latest.currency}:{}),
   ...(manualBalance?{balanceSheetPeriodEnd:manualBalance.periodEnd,balanceSheetNote:manualBalance.currentLiabilitiesDerivedNote}:{})
  };
- if(classification.isFundOrIndex||classification.isFinancial||classification.isReitOrMlp)return metadata;
+ if(classification.isFundOrIndex||classification.isFinancial)return metadata;
  if(!latest&&!manualTtm)return metadata;
  return {...metadata,
   cash:manualBalance?.cashAndShortTermInvestments??latest?.cash??null,
