@@ -1,6 +1,7 @@
 import {useMemo,useState} from "react";
 import {BarChart3,Calculator,Check,Database,Info,Search,X} from "lucide-react";
 import snapshotJson from "../data/adminCoverageSnapshot.json";
+import {getManualStatementData,type ManualStatementData} from "../data/googleSheetsManualFinancials";
 import "./adminCoverage.css";
 
 type CoverageMetric={id:string;label:string};
@@ -8,6 +9,31 @@ type CoverageGroup={id:string;label:string;metrics:CoverageMetric[]};
 type CoverageTicker={ticker:string;name:string;sector:string;instrumentType?:string;valuationProfile?:string;present:Record<string,string[]>;notApplicable?:Record<string,string[]>;periodCounts?:Record<string,Record<string,number>>};
 type CoverageSnapshot={schemaVersion:number;generatedAt:string;definition:string;source:string;universeCount:number;groups:CoverageGroup[];tickers:CoverageTicker[]};
 const snapshot=snapshotJson as unknown as CoverageSnapshot;
+type AdminStatementName="Income Statement"|"Balance Sheet"|"Cash Flow";
+const adminStatementTabs:AdminStatementName[]=["Income Statement","Balance Sheet","Cash Flow"];
+const formatAuditValue=(n:number|null|undefined,unit:string,label:string)=>{
+ if(n===null||n===undefined||!Number.isFinite(n))return "—";
+ if(unit.startsWith("USD bn")||unit.startsWith("shares bn"))return new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(n*1_000_000);
+ if(unit==="USD/share")return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n);
+ if(unit.startsWith("ratio"))return label.includes("Tax Rate")?(n*100).toFixed(1)+"%":n.toFixed(2);
+ return String(n);
+};
+function ManualStatementAudit({data}:{data:ManualStatementData}){
+ const [activeStatement,setActiveStatement]=useState<AdminStatementName>("Income Statement");
+ const rows=data.statementDetail.filter(item=>item.statement===activeStatement);
+ return <details className="admin-statement-details">
+  <summary>NVDA statement detail · {data.statementDetail.length} rows</summary>
+  <div className="coverage-panel-head admin-statement-head"><div><span className="coverage-section-kicker">ADMIN DETAIL</span><h3>NVDA · financial statements</h3><p>Reported lines, treatment notes, FY2023–FY2026 and TTM.</p></div></div>
+  <div className="coverage-tabs" role="tablist" aria-label="Statement detail">
+   {adminStatementTabs.map(statement=><button key={statement} type="button" role="tab" aria-selected={activeStatement===statement} className={activeStatement===statement?"active":""} onClick={()=>setActiveStatement(statement)}><span>{statement}</span></button>)}
+  </div>
+  <div className="admin-statement-scroll" role="tabpanel" aria-label={activeStatement}>
+   <table className="admin-statement-table"><thead><tr><th>Reported metric</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>TTM</th><th>Handling and notes</th></tr></thead><tbody>
+    {rows.map((item,index)=><tr key={index}><th scope="row">{item.reportedLabel}</th><td>{formatAuditValue(item.values.FY2023??null,item.unit,item.reportedLabel)}</td><td>{formatAuditValue(item.values.FY2024??null,item.unit,item.reportedLabel)}</td><td>{formatAuditValue(item.values.FY2025??null,item.unit,item.reportedLabel)}</td><td>{formatAuditValue(item.values.FY2026??null,item.unit,item.reportedLabel)}</td><td>{formatAuditValue(item.values.TTM??null,item.unit,item.reportedLabel)}</td><td><strong>{item.handling}</strong>{item.notes&&<small>{item.notes}</small>}</td></tr>)}
+   </tbody></table>
+  </div>
+ </details>;
+}
 
 const groupIcon=(id:string)=>{
  if(id==="market")return <BarChart3 size={16}/>;
@@ -37,6 +63,7 @@ export function AdminDataCoverage(){
  },[query,missingOnly,group]);
 
  const updatedAt=new Intl.DateTimeFormat("it-IT",{dateStyle:"medium",timeStyle:"short"}).format(new Date(snapshot.generatedAt));
+ const manualStatementData=getManualStatementData("NVDA");
  return <section className="admin-coverage">
   <header className="coverage-welcome">
    <div>
@@ -96,5 +123,6 @@ export function AdminDataCoverage(){
    </div>
    <div className="coverage-legend"><span><i className="coverage-legend-dot yes-dot"></i>SÌ · disponibile</span><span><i className="coverage-legend-dot no-dot"></i>NO · mancante</span><span>N/A · non applicabile alla categoria</span></div>
   </section>
+  {manualStatementData&&<ManualStatementAudit data={manualStatementData}/>}
  </section>;
 }
