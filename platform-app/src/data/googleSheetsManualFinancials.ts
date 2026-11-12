@@ -26,7 +26,7 @@ type Dataset={
 const data=snapshot as unknown as Dataset;
 
 export type ManualTtmFinancials={
- ticker:string;currency:string;fiscalYear:string;periodStart:string;periodEnd:string;source:string;sourceUrl:string|null;
+ ticker:string;currency:string;fiscalYear:string;periodStart:string;periodEnd:string;source:string;sourceUrl:string|null;importedAt:string;
  revenue:number;grossProfit:number;costOfRevenue:number;netIncome:number;operatingIncome:number;
  cashFromOperations:number;capex:number;freeCashFlow:number;freeCashFlowPerShare:number;dilutedEps:number;dilutedShares:number;
  depreciationAndAmortization:number;interestExpense:number;calculatedEbitda:number;
@@ -57,7 +57,7 @@ export function getManualTtmFinancials(ticker:string,currency?:string):ManualTtm
  const operatingIncome=metric("operatingIncome")!,cashFromOperations=metric("cashFromOperations")!,capex=metric("capex")!;
  const dilutedEps=metric("epsDiluted")!,dilutedShares=metric("dilutedShares")!,depreciationAndAmortization=metric("depreciationAndAmortization")!,interestExpense=metric("interestExpense")!;
  const sourceUrl=data.ttm.metrics.revenue.sourceUrl||null;
- return {ticker:symbol,currency:data.currency,fiscalYear:data.ttm.fiscalYear,periodStart:data.ttm.periodStart,periodEnd:data.ttm.periodEnd,source:data.ttm.source,sourceUrl,
+ return {ticker:symbol,currency:data.currency,fiscalYear:data.ttm.fiscalYear,periodStart:data.ttm.periodStart,periodEnd:data.ttm.periodEnd,source:data.ttm.source,sourceUrl,importedAt:data.generatedAt,
   revenue,grossProfit,costOfRevenue,netIncome,operatingIncome,cashFromOperations,capex,
   freeCashFlow:data.ttm.calculated.standardFreeCashFlow,freeCashFlowPerShare:data.ttm.calculated.standardFreeCashFlowPerShare,
   dilutedEps,dilutedShares,depreciationAndAmortization,interestExpense,calculatedEbitda:data.ttm.calculated.calculatedEbitdaCore,
