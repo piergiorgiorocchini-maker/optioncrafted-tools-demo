@@ -802,10 +802,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-12": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "GOOGL:income",
+            "at": "2026-11-12T16:48:04.624Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "GOOGL:balance",
+            "at": "2026-11-12T16:48:04.926Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 10
+    "ALPHA_VANTAGE": 11
   }
 }
