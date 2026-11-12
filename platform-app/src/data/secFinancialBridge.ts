@@ -1,5 +1,6 @@
 import type {FundamentalInputs} from "../core/fundamentalMetrics";
 import {verifiedAnnualHistory,verifiedFinancialProfile} from "./verifiedFinancials";
+import {getManualBalanceSheetSnapshot,getManualTtmFinancials} from "./googleSheetsManualFinancials";
 import adminCoverage from "./adminCoverageSnapshot.json";
 type CoverageTicker={ticker:string;instrumentType?:string;valuationProfile?:string};
 const classifications=(adminCoverage as unknown as {tickers:CoverageTicker[]}).tickers;
@@ -11,13 +12,36 @@ export function getSecFinancialClassification(ticker:string):SecClassification{
  const profile=String(entry?.valuationProfile||verifiedFinancialProfile(symbol)||"UNKNOWN").toUpperCase();
  return {instrumentType,profile,isFundOrIndex:["ETF","INDEX"].includes(instrumentType)||profile.startsWith("ETF_")||profile.endsWith("_INDEX")||profile==="BROAD_MARKET_INDEX"||profile==="VOLATILITY_INDEX",isFinancial:financialProfiles.has(profile),isReitOrMlp:/REIT|MLP/.test(profile)};
 }
-export type SecFinancialInputs=Partial<FundamentalInputs>&{periodEnd?:string;fiscalYear?:string;profile?:string;instrumentType?:string;currency?:string;source?:string};
+export type SecFinancialInputs=Partial<FundamentalInputs>&{periodEnd?:string;fiscalYear?:string;profile?:string;instrumentType?:string;currency?:string;source?:string;balanceSheetPeriodEnd?:string;balanceSheetNote?:string};
 export function getSecFinancialInputs(ticker:string,currency?:string):SecFinancialInputs{
  const classification=getSecFinancialClassification(ticker);
  const latest=verifiedAnnualHistory(ticker,currency).at(-1);
- const metadata:SecFinancialInputs={profile:classification.profile,instrumentType:classification.instrumentType,source:latest&&!classification.isFundOrIndex?"SEC EDGAR · annual":"",...(latest?{periodEnd:latest.periodEnd,fiscalYear:latest.year,currency:latest.currency}:{})};
- if(!latest||classification.isFundOrIndex||classification.isFinancial)return metadata;
- return {...metadata,cash:latest.cash,shortTermInvestments:null,currentAssets:latest.currentAssets,currentLiabilities:latest.currentLiabilities,
-  inventory:latest.inventory,receivables:null,totalDebt:latest.totalDebt,minorityInterest:null,preferredEquity:null,ebitda:latest.ebitda,
-  ebit:latest.operatingIncome,interestExpense:latest.interestExpense,freeCashFlow:latest.fcf,equity:latest.equity};
+ const manualTtm=getManualTtmFinancials(ticker,currency);
+ const manualBalance=getManualBalanceSheetSnapshot(ticker,currency);
+ const hasManual=Boolean(manualTtm||manualBalance);
+ const metadata:SecFinancialInputs={
+  profile:classification.profile,instrumentType:classification.instrumentType,
+  source:hasManual
+   ? "Google Sheets manual statement import · income/cash flow TTM through "+(manualTtm?.periodEnd??"N/D")+" · balance sheet "+(manualBalance?.periodEnd??"N/D")
+   : latest&&!classification.isFundOrIndex?"SEC EDGAR · annual":"",
+  ...(manualTtm?{periodEnd:manualTtm.periodEnd,fiscalYear:manualTtm.fiscalYear,currency:manualTtm.currency}:latest?{periodEnd:latest.periodEnd,fiscalYear:latest.year,currency:latest.currency}:{}),
+  ...(manualBalance?{balanceSheetPeriodEnd:manualBalance.periodEnd,balanceSheetNote:manualBalance.currentLiabilitiesDerivedNote}:{})
+ };
+ if(classification.isFundOrIndex||classification.isFinancial||classification.isReitOrMlp)return metadata;
+ if(!latest&&!manualTtm)return metadata;
+ return {...metadata,
+  cash:manualBalance?.cashAndShortTermInvestments??latest?.cash??null,
+  shortTermInvestments:null,
+  currentAssets:manualBalance?.currentAssets??latest?.currentAssets??null,
+  currentLiabilities:manualBalance?.currentLiabilities??latest?.currentLiabilities??null,
+  inventory:manualBalance?.inventory??latest?.inventory??null,
+  receivables:manualBalance?.receivables??null,
+  totalDebt:manualBalance?.totalDebt??latest?.totalDebt??null,
+  minorityInterest:null,preferredEquity:null,
+  ebitda:manualTtm?.calculatedEbitda??latest?.ebitda??null,
+  ebit:manualTtm?.operatingIncome??latest?.operatingIncome??null,
+  interestExpense:manualTtm?.interestExpense??latest?.interestExpense??null,
+  freeCashFlow:manualTtm?.freeCashFlow??latest?.fcf??null,
+  equity:manualBalance?.equity??latest?.equity??null
+ };
 }
