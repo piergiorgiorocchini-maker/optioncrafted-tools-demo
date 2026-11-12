@@ -56,7 +56,7 @@ const format=(n:number|null,unit:RawMetric["unit"]|CalculatedMetric["unit"],curr
 type ManualUnit="amount"|"perShare"|"shares"|"percent";
 const formatManual=(n:number|null|undefined,unit:ManualUnit)=>{
  if(n===null||n===undefined||!Number.isFinite(n))return "N/D";
- if(unit==="amount")return (n<0?"−$":"$")+Math.abs(n/1e9).toFixed(2)+"B";
+ if(unit==="amount"){const absolute=Math.abs(n);return n<0?"−$"+(absolute>=1e9?(absolute/1e9).toFixed(2)+"B":(absolute/1e6).toFixed(0)+"M"):"$"+(absolute>=1e9?(absolute/1e9).toFixed(2)+"B":(absolute/1e6).toFixed(0)+"M");}
  if(unit==="shares")return (n/1e9).toFixed(2)+"B shares";
  if(unit==="perShare")return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n);
  if(unit==="percent")return (n*100).toFixed(1)+"%";
@@ -64,7 +64,7 @@ const formatManual=(n:number|null|undefined,unit:ManualUnit)=>{
 };
 const formatDetail=(n:number|null,unit:string,label:string)=>{
  if(n===null)return "—";
- if(unit.startsWith("USD bn"))return (n<0?"−$":"$")+Math.abs(n).toFixed(2)+"B";
+ if(unit.startsWith("USD bn"))return n<0?"−$"+(Math.abs(n)>=1?Math.abs(n).toFixed(2)+"B":(Math.abs(n)*1000).toFixed(0)+"M"):"$"+(Math.abs(n)>=1?Math.abs(n).toFixed(2)+"B":(Math.abs(n)*1000).toFixed(0)+"M");
  if(unit.startsWith("shares bn"))return n.toFixed(2)+"B";
  if(unit==="USD/share")return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n);
  if(unit.startsWith("ratio"))return label==="Tax Rate, Calculated"?(n*100).toFixed(1)+"%":n.toFixed(2)+"x";
