@@ -3,6 +3,7 @@ import audit from "../../reports/fdve-cluster-v2.json";
 import appleResearch from "./aaplResearch.json";
 import adminCoverage from "./adminCoverageSnapshot.json";
 import {googleSheetsSecAnnualHistory,type SecAnnualFinancialYear} from "./googleSheetsSecFinancials";
+import {getManualTtmFinancials} from "./googleSheetsManualFinancials";
 
 type Fact={status:string;value?:number;periodEnd?:string};
 type Year={metrics:Record<string,Fact>};
@@ -108,7 +109,7 @@ export function verifiedAnnualHistory(ticker:string,currency?:string):FinancialY
  if(!currency||currency.trim().toUpperCase()==="USD")return legacyHistory(symbol);
  return [];
 }
-export type VerifiedFcf={perShare:number|null;annualAmount:number|null;currency:string|null;periodEnd:string|null;basis:string;warning:string;sourceUrl:string|null};
+export type VerifiedFcf={perShare:number|null;annualAmount:number|null;ttmAmount?:number|null;currency:string|null;periodEnd:string|null;basis:string;warning:string;sourceUrl:string|null};
 export function verifiedFcf(ticker:string,currency?:string):VerifiedFcf{
  const symbol=ticker.trim().toUpperCase(),requested=currency?.trim().toUpperCase();
  if(isFundOrIndex(symbol)||isFinancial(symbol)||isReitOrMlp(symbol))return {perShare:null,annualAmount:null,currency:null,periodEnd:null,basis:"Not applicable",warning:"Industrial FCF/share is not applicable to this instrument or financial profile.",sourceUrl:null};
@@ -117,6 +118,11 @@ export function verifiedFcf(ticker:string,currency?:string):VerifiedFcf{
   basis:"SEC reconstructed TTM",warning:"Approximate TTM FCF per outstanding share; not diluted weighted-average FCF/share.",
   sourceUrl:appleResearch.sourceUrls[1]??appleResearch.sourceUrls[0]??null
  };
+ const manualTtm=getManualTtmFinancials(symbol,requested);
+ if(manualTtm)return {perShare:manualTtm.freeCashFlowPerShare,annualAmount:null,ttmAmount:manualTtm.freeCashFlow,currency:manualTtm.currency,periodEnd:manualTtm.periodEnd,
+  basis:"Manual TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd+" · CFO − CapEx · diluted shares",
+  warning:"TTM FCF/share = (operating cash flow − CapEx) ÷ reported diluted weighted-average shares. The screenshot's $168.14B FCFF is retained separately and is not substituted for this standard FCF measure.",
+  sourceUrl:manualTtm.sourceUrl};
  const rows=verifiedAnnualHistory(symbol,requested),latest=rows.at(-1);
  if(!latest||latest.fcf===null)return {perShare:null,annualAmount:null,currency:latest?.currency??null,periodEnd:latest?.periodEnd??null,basis:"SEC annual",warning:"Annual FCF unavailable.",sourceUrl:latest?.fcfSourceUrl??null};
  const annualAmount=latest.fcf,periodEnd=latest.periodEnd||null;

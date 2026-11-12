@@ -1,6 +1,7 @@
 import {dcfModel,grahamModel,modelDefaults} from "./valuationModels";
 import {googleSheetsSecAnnualHistory,googleSheetsSecFinancialsMetadata,type SecAnnualFinancialYear} from "../data/googleSheetsSecFinancials";
 import {verifiedFinancialProfile} from "../data/verifiedFinancials";
+import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 
 type AssetForValuation = {
   ticker:string;
@@ -149,6 +150,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   const history=googleSheetsSecAnnualHistory(asset.ticker,currency);
   const profile=profileGate(asset);
   const latest=history.at(-1);
+  const manualTtm=getManualTtmFinancials(asset.ticker,currency);
   const sourceAsOf=history.map(year=>year.filedDate).filter((date):date is string=>Boolean(date)).sort().at(-1)??null;
   const qualityNotes:string[]=[];
   const methods:ValuationMethodResult[]=[];
@@ -161,7 +163,9 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",profile.reason??"Profile gate pending.");
   }else{
     const fcfWindow=continuousAnnualWindow(history,year=>year.freeCashFlowPerShare,year=>year.periodEnd,4);
-    const latestFcfPerShare=getLastMetric(latest,"freeCashFlowPerShare");
+    const latestFcfPerShare=manualTtm?.freeCashFlowPerShare??getLastMetric(latest,"freeCashFlowPerShare");
+    const fcfBasePeriod=manualTtm?"TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd:latest?.fiscalYear??null;
+    const fcfBaseDate=manualTtm?.periodEnd??latest?.periodEnd??null;
     const dcfGrowthRaw=fcfWindow.length>=4?cagrPercent(fcfWindow[0].freeCashFlowPerShare!,fcfWindow.at(-1)!.freeCashFlowPerShare!,fcfWindow[0].periodEnd,fcfWindow.at(-1)!.periodEnd):null;
     const dcfGrowth=dcfGrowthRaw===null?null:boundedGrowth(dcfGrowthRaw,-15,15);
     const scenarioValue=options.dcfScenarioValue;
@@ -191,8 +195,8 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       }else{
         const values=estimates.map(item=>item.result.value);
         dcfHorizonRange={low:Math.min(...values),high:Math.max(...values)};
-        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*0.68,reason:"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family.",assumptions:[`FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth.capped?` (bounded to ${dcfGrowth.applied.toFixed(1)}%)`:""}`,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,`5Y base; 7Y/10Y sensitivity only · FCF/share uses reported diluted shares when available; otherwise it infers shares from same-year net income ÷ diluted EPS`],fiscalPeriod:latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null};
-        qualityNotes.push("FCF/share uses SEC weighted-average diluted shares when reported, and otherwise estimates shares from same-year net income ÷ diluted EPS.");
+        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*0.68,reason:manualTtm?"Five-year base estimate using imported TTM FCF/share; 7- and 10-year values are sensitivity views inside this same family. Historical growth still comes from annual SEC observations.":"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family.",assumptions:[`FCF/share base: ${latestFcfPerShare.toFixed(2)} ${currency}/share from ${manualTtm?"manual TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd:"SEC FY"+(latest?.fiscalYear??"N/D")}`,`Historical annual FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth.capped?` (bounded to ${dcfGrowth.applied.toFixed(1)}%)`:""}`,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,`5Y base; 7Y/10Y sensitivity only · standard FCF = operating cash flow − CapEx; diluted shares use the same TTM period`],fiscalPeriod:fcfBasePeriod,filedDate:fcfBaseDate??latest?.filedDate??null,sourceUrl:manualTtm?.sourceUrl??latest?.sources.cashFromOperations?.sourceUrl??null};
+        qualityNotes.push(manualTtm?"NVDA DCF base uses manual TTM FCF/share; the historical FCF/share CAGR remains annual SEC data.":"FCF/share uses SEC weighted-average diluted shares when reported, and otherwise estimates shares from same-year net income ÷ diluted EPS.");
         if(dcfGrowth.capped)qualityNotes.push(`Historical FCF/share CAGR was bounded from ${dcfGrowth.raw.toFixed(1)}% to ${dcfGrowth.applied.toFixed(1)}% to reduce extrapolation risk.`);
       }
     }
@@ -285,9 +289,9 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     median:eligibleFamilies>=requiredFamilies?familyMedian:null,
     familyRange:eligibleFamilies>=requiredFamilies?familyRange:null,
     dcfHorizonRange,
-    source:"Google Sheets SEC_Raw · verified annual SEC facts + shared family-balanced model",
+    source:manualTtm?"Google Sheets SEC_Raw + NVDA manual TTM statement snapshot · annual SEC history for growth + shared family-balanced model":"Google Sheets SEC_Raw · verified annual SEC facts + shared family-balanced model",
     sourceAsOf,
-    importedAt:googleSheetsSecFinancialsMetadata.sourceImportedAt,
+    importedAt:manualTtm?.importedAt??googleSheetsSecFinancialsMetadata.sourceImportedAt,
     profileBasis:profile.basis,
     profileEligible:profile.eligible,
     qualityNotes:[...new Set(qualityNotes)],

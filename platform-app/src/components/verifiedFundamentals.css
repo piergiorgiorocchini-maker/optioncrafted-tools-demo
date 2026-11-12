@@ -32,3 +32,10 @@
 .vf-table td:nth-child(3){text-align:left;min-width:170px}
 .vf-table .vf-na{font-size:10px;font-weight:700;color:#788597}
 @media(max-width:680px){.vf-detail{max-width:200px}}
+
+.vf-details{margin-top:9px;border-top:1px solid #e3eaf2;padding-top:8px;color:#466584;font-size:11px}
+.vf-details summary{cursor:pointer;font-weight:700}
+.vf-details[open] summary{margin-bottom:8px}
+.vf-details .vf-table{min-width:980px}
+.vf-details .vf-table th:nth-child(n+3),.vf-details .vf-table td:nth-child(n+3){text-align:right;min-width:72px}
+.vf-details .vf-table td:nth-child(2){text-align:left;min-width:220px}
