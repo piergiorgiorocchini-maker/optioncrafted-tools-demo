@@ -84,6 +84,7 @@ export function VerifiedFundamentals({ticker}:{ticker:string}){
  const classification=getSecFinancialClassification(ticker);
  const history=googleSheetsSecAnnualHistory(ticker);
  const manualData=getManualStatementData(ticker);
+ if(manualData)return <ManualStatementsPanel data={manualData}/>;
  if(classification.isFundOrIndex)return <section className="vf-panel"><div className="vf-top"><div><span className="vf-kicker">SEC EDGAR</span><h3>Company fundamentals</h3><p>{classification.profile} · Corporate financial statements are not applicable.</p></div></div></section>;
  if(!history.length)return <section className="vf-panel"><div className="vf-top"><div><span className="vf-kicker">SEC EDGAR</span><h3>Annual fundamentals</h3><p>No matched SEC annual history is currently available for {ticker}.</p></div></div></section>;
  const availableYears=history.map(row=>row.fiscalYear).sort((a,b)=>Number(b)-Number(a));
@@ -111,5 +112,5 @@ export function VerifiedFundamentals({ticker}:{ticker:string}){
   <div className="vf-table-wrap"><table className="vf-table"><thead><tr><th>Metric</th><th>FY {activeYear} · {currency}</th><th>Data status / formula</th></tr></thead><tbody>{rows.map(item=><tr key={item.key}><td>{item.label}</td><td className="vf-number">{item.display}</td><td><span className={item.status==="DIRECT"?"vf-ok":item.status==="DERIVED"?"vf-derived":item.status==="NOT_APPLICABLE"?"vf-na":"vf-missing"} title={item.detail}>{item.status==="DIRECT"?"SEC filed":item.status==="DERIVED"?"Calculated":item.status==="NOT_APPLICABLE"?"N/A":"Missing"}</span><small className="vf-detail">{item.detail}{item.sourceUrl&&<> · <a href={item.sourceUrl} target="_blank" rel="noreferrer">SEC filing ↗</a></>}</small></td></tr>)}</tbody></table></div>
   <div className="vf-foot"><span>Annual SEC fiscal years only. Amounts are shown in billions of the issuer reporting currency; per-share fields use that currency/share.</span><span>Source import: {row.importedAt??"N/D"}</span></div>
   <p className="vf-note">Calculated fields use matched annual SEC inputs. They are not TTM. ROIC uses a stated 21% tax assumption and average invested capital; bank, insurer, REIT and MLP metrics follow profile-specific exclusions. Missing inputs remain N/D.</p>
- </section></>;
+ </section>;
 }
