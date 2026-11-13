@@ -23,7 +23,7 @@ export const googleSheetsSecFinancialsMetadata={generatedAt:dataset.generatedAt,
 const allMetrics:SecFinancialMetric[]=["revenue","netIncome","operatingIncome","cashFromOperations","capex","reportedFreeCashFlow","epsDiluted","grossProfit","costOfRevenue","depreciationAndAmortization","interestExpense","dilutedShares","cash","shortTermInvestments","currentAssets","currentLiabilities","inventory","receivables","totalAssets","totalNonCurrentAssets","totalLiabilities","equity","totalDebt","longTermDebt","shortTermDebt"];
 type FmpAnnualRow={year?:string|number;date?:string;filedDate?:string|null;currency?:string|null;values?:Record<string,number|null>};
 type FmpAnnualCache={provider?:string;ticker?:string;statements?:Record<string,FmpAnnualRow[]>};
-const fmpAnnualCacheFiles=import.meta.glob("../../reports/provider-cache/fmp-*.json",{eager:true,import:"default"}) as Record<string,FmpAnnualCache>;
+const fmpAnnualCacheFiles=(import.meta as unknown as {glob:(pattern:string,options:{eager:boolean;import:string})=>Record<string,FmpAnnualCache>}).glob("../../reports/provider-cache/fmp-*.json",{eager:true,import:"default"});
 const fmpUnits:Partial<Record<SecFinancialMetric,string>>={epsDiluted:"USD/shares",dilutedShares:"shares"};
 function fmpAnnualPeriods(ticker:string,currency?:string):Period[]{
  const symbol=ticker.trim().toUpperCase(),requested=currency?.trim().toUpperCase(),byYear=new Map<string,Period>();
