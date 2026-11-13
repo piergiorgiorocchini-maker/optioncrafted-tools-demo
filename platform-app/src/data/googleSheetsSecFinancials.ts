@@ -7,15 +7,15 @@ export type SecAnnualFinancialYear={
  fiscalYear:string;periodStart:string;periodEnd:string;currency:string;
  revenue:number|null;grossProfit:number|null;costOfRevenue:number|null;netIncome:number|null;operatingIncome:number|null;
  cashFromOperations:number|null;capex:number|null;freeCashFlow:number|null;dilutedEps:number|null;
- dilutedShares:number|null;impliedShares:number|null;shareCountSource:"SEC reported diluted shares"|"implied from net income / diluted EPS"|null;
+ dilutedShares:number|null;impliedShares:number|null;shareCountSource:"SEC reported diluted shares"|"FMP reported diluted shares"|"implied from net income / diluted EPS"|null;
  freeCashFlowPerShare:number|null;depreciationAndAmortization:number|null;ebitda:number|null;interestExpense:number|null;
  cash:number|null;shortTermInvestments:number|null;currentAssets:number|null;currentLiabilities:number|null;currentRatio:number|null;inventory:number|null;receivables:number|null;
- totalAssets:number|null;totalNonCurrentAssets:number|null;totalLiabilities:number|null;equity:number|null;totalDebt:number|null;longTermDebt:number|null;shortTermDebt:number|null;
+ totalAssets:number|null;totalNonCurrentAssets:number|null;totalLiabilities:number|null;equity:number|null;longTermDebt:number|null;shortTermDebt:number|null;
  totalDebt:number|null;netDebt:number|null;debtEquity:number|null;netDebtEbitda:number|null;interestCoverage:number|null;
  grossMargin:number|null;operatingMargin:number|null;netMargin:number|null;roe:number|null;roic:number|null;
  revenueCagr3y:number|null;revenueCagr5y:number|null;epsCagr3y:number|null;epsCagr5y:number|null;fcfCagr5y:number|null;normalizedEps5y:number|null;yearEndClose:number|null;historicalPe:number|null;historicalPeSource:string|null;
  filedDate:string|null;importedAt:string|null;
- sources:Partial<Record<SecFinancialMetric,{tag:string;unit:string;filedDate:string;accession:string;sourceUrl:string}>>;
+ sources:Partial<Record<SecFinancialMetric,{tag:string;unit:string;filedDate:string;accession:string;sourceUrl:string;provider?:"SEC"|"FMP"}>>;
  missingMetrics:SecFinancialMetric[];
 };
 const dataset=sheetAnnualSecFacts as unknown as {generatedAt:string;sourceImportedAt:string;rawFactCount:number;annualPeriodCount:number;tickerCount:number;periods:Period[]};
@@ -31,7 +31,7 @@ function fmpAnnualPeriods(ticker:string,currency?:string):Period[]{
   if(cache.ticker?.trim().toUpperCase()!==symbol)continue;
   for(const reports of Object.values(cache.statements||{}))for(const report of Array.isArray(reports)?reports:[]){
    const periodEnd=report.date||"",reportedCurrency=String(report.currency||"USD").toUpperCase();
-   if(!/^20\\d\\d-\\d\\d-\\d\\d$/.test(periodEnd)||requested&&reportedCurrency!==requested)continue;
+   if(!/^20\d\d-\d\d-\d\d$/.test(periodEnd)||requested&&reportedCurrency!==requested)continue;
    const year=String(report.year||periodEnd.slice(0,4)),key=year+"|"+reportedCurrency;
    let period=byYear.get(key);
    if(!period){period={ticker:symbol,cik:"",currency:reportedCurrency,periodStart:"",periodEnd,metrics:{}};byYear.set(key,period);}
@@ -81,12 +81,12 @@ export function googleSheetsSecAnnualHistory(ticker:string,currency?:string):Sec
   const cash=get("cash"),currentAssets=get("currentAssets"),currentLiabilities=get("currentLiabilities"),equity=get("equity"),lt=get("longTermDebt"),st=get("shortTermDebt");
   const reportedDebt=get("totalDebt"),totalDebt=lt!==null&&st!==null?lt+st:reportedDebt,netDebt=totalDebt!==null&&cash!==null?totalDebt-cash:null,interest=get("interestExpense");
 
-  const sources=Object.fromEntries(Object.entries(p.metrics).map(([metric,f])=>[metric,{tag:f!.tag,unit:f!.unit,filedDate:f!.filedDate,accession:f!.accession,sourceUrl:f!.sourceUrl}])) as SecAnnualFinancialYear["sources"];
+  const sources=Object.fromEntries(Object.entries(p.metrics).map(([metric,f])=>[metric,{tag:f!.tag,unit:f!.unit,filedDate:f!.filedDate,accession:f!.accession,sourceUrl:f!.sourceUrl,provider:f!.provider??"SEC"}])) as SecAnnualFinancialYear["sources"];
   return {
    fiscalYear:p.periodEnd.slice(0,4),periodStart:p.periodStart,periodEnd:p.periodEnd,currency:p.currency,
    revenue,grossProfit,costOfRevenue,netIncome,operatingIncome,cashFromOperations:cfo,capex,freeCashFlow,dilutedEps:eps,
    dilutedShares:reportedShares,impliedShares:inferredShares,
-   shareCountSource:reportedShares!==null&&reportedShares>0?"SEC reported diluted shares":inferredShares!==null?"implied from net income / diluted EPS":null,
+   shareCountSource:reportedShares!==null&&reportedShares>0?(p.metrics.dilutedShares?.provider==="FMP"?"FMP reported diluted shares":"SEC reported diluted shares"):inferredShares!==null?"implied from net income / diluted EPS":null,
    freeCashFlowPerShare:freeCashFlow!==null&&shares!==null&&shares>0?freeCashFlow/shares:null,
    depreciationAndAmortization:da,ebitda,interestExpense:interest,
    cash,shortTermInvestments:get("shortTermInvestments"),currentAssets,currentLiabilities,currentRatio:currentAssets!==null&&currentLiabilities!==null&&currentLiabilities>0?currentAssets/currentLiabilities:null,
