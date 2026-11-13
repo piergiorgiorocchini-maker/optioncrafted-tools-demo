@@ -22,7 +22,7 @@ const statementRows:Record<FinancialStatementName,StatementRow[]>={
   {label:"Depreciation & Amortization",unit:"amount",read:row=>row.depreciationAndAmortization===null?null:Math.abs(row.depreciationAndAmortization)},
   {label:"Interest Expense",unit:"amount",read:row=>row.interestExpense===null?null:-Math.abs(row.interestExpense)},
   {label:"Net Income",unit:"amount",read:row=>numberValue(row.netIncome)},
-  {label:"Diluted EPS",unit:"perShare",read:row=>numberValue(row.eps)},
+  {label:"Diluted EPS",unit:"perShare",read:row=>numberValue(row.dilutedEps)},
   {label:"Diluted Weighted-average Shares",unit:"shares",read:row=>numberValue(row.dilutedShares)}
  ],
  "Balance Sheet":[
@@ -39,7 +39,7 @@ const statementRows:Record<FinancialStatementName,StatementRow[]>={
  "Cash Flow":[
   {label:"Cash from Operating Activities",unit:"amount",read:row=>numberValue(row.cashFromOperations)},
   {label:"Capital Expenditure",unit:"amount",read:row=>row.capex===null?null:-Math.abs(row.capex)},
-  {label:"Free Cash Flow",unit:"amount",read:row=>numberValue(row.fcf)},
+  {label:"Free Cash Flow",unit:"amount",read:row=>numberValue(row.freeCashFlow)},
   {label:"Depreciation & Amortization",unit:"amount",read:row=>row.depreciationAndAmortization===null?null:Math.abs(row.depreciationAndAmortization)}
  ]
 };
@@ -53,7 +53,7 @@ const financialStatementValue=(value:number|null|undefined,unit:string,currency=
 };
 const periodLabel=(row:SecAnnualFinancialYear)=>{
  const date=Date.parse(row.periodEnd+"T00:00:00Z");
- return Number.isFinite(date)?new Intl.DateTimeFormat("en-US",{month:"numeric",day:"numeric",year:"numeric",timeZone:"UTC"}).format(date):"FY "+row.year;
+ return Number.isFinite(date)?new Intl.DateTimeFormat("en-US",{month:"numeric",day:"numeric",year:"numeric",timeZone:"UTC"}).format(date):"FY "+row.fiscalYear;
 };
 
 function ManualStatementsPanel({data}:{data:ManualStatementData}){
