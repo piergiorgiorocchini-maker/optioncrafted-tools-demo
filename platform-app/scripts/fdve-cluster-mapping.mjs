@@ -12,17 +12,17 @@ export const SEC_ALIASES={
  interestExpense:['InterestExpenseNonOperating','InterestExpenseNonoperating','InterestExpense','InterestExpenseDebt']
 };
 export const FMP_FIELDS={
- revenue:['income','revenue',1],netIncome:['income','netIncome',1],
- operatingIncome:['income','operatingIncome',1],epsDiluted:['income','epsDiluted',1],
- cashFromOperations:['cashflow','operatingCashFlow',1],
- capex:['cashflow','capitalExpenditure',-1],
- cash:['balance','cashAndCashEquivalents',1],
- currentAssets:['balance','totalCurrentAssets',1],
- currentLiabilities:['balance','totalCurrentLiabilities',1],
- inventory:['balance','inventory',1],totalAssets:['balance','totalAssets',1],
- totalLiabilities:['balance','totalLiabilities',1],
- equity:['balance','totalStockholdersEquity',1],
- longTermDebt:['balance','longTermDebt',1],shortTermDebt:['balance','shortTermDebt',1]
+ revenue:['income','revenue',1],costOfRevenue:['income','costOfRevenue',1],grossProfit:['income','grossProfit',1],
+ netIncome:['income','netIncome',1],operatingIncome:['income','operatingIncome',1],
+ epsDiluted:['income','epsDiluted',1],dilutedShares:['income','weightedAverageShsOutDil',1],
+ depreciationAndAmortization:['income','depreciationAndAmortization',1],interestExpense:['income','interestExpense',1],
+ cashFromOperations:['cashflow','operatingCashFlow',1],capex:['cashflow','capitalExpenditure',-1],
+ cash:['balance','cashAndCashEquivalents',1],shortTermInvestments:['balance','shortTermInvestments',1],
+ currentAssets:['balance','totalCurrentAssets',1],currentLiabilities:['balance','totalCurrentLiabilities',1],
+ inventory:['balance','inventory',1],receivables:['balance','netReceivables',1],
+ totalAssets:['balance','totalAssets',1],totalNonCurrentAssets:['balance','totalNonCurrentAssets',1],
+ totalLiabilities:['balance','totalLiabilities',1],equity:['balance','totalStockholdersEquity',1],
+ totalDebt:['balance','totalDebt',1],longTermDebt:['balance','longTermDebt',1],shortTermDebt:['balance','shortTermDebt',1]
 };
 export const BANK_SEC_CANDIDATES={
  netInterestIncome:['InterestIncomeExpenseNet'],
