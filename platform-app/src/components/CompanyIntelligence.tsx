@@ -29,6 +29,7 @@ export function CompanyIntelligence({company,asset,valuation}:{company:Security;
  const history=verifiedAnnualHistory(symbol,currency),latest=history.at(-1);
  const earnings=real?(asset?.eps??latest?.eps??null):company.eps;
  const classification=getSecFinancialClassification(symbol),secInputs=real?getSecFinancialInputs(symbol):missingFundamentals;
+ const secInputCurrency="currency" in secInputs?secInputs.currency:null;
  const secFcf=verifiedFcf(symbol,currency),secConversion=calculateSecCashConversion(symbol),secRoic=secRoicEstimate(symbol);
  const isFinancial=classification.isFinancial,isFundOrIndex=classification.isFundOrIndex,isReitMlp=classification.isReitOrMlp;
  const triangulatedValue=valuation?.intrinsicValue??null;
@@ -39,7 +40,7 @@ export function CompanyIntelligence({company,asset,valuation}:{company:Security;
     :secFcf.annualAmount!==null&&asset?.marketCap!==null&&asset?.marketCap!==undefined&&asset.marketCap>0&&secFcf.currency===currency?secFcf.annualAmount/asset.marketCap*100:null
   :company.fcfPerShare/company.price*100;
  const fcfYieldLabel=isFundOrIndex||isFinancial||isReitMlp?"N/A":fcfYield===null?"N/D":fcfYield.toFixed(2)+"%";
- const balanceInputs={...missingFundamentals,...(real?secInputs:{}),...(asset?.marketCap!==null&&asset?.marketCap!==undefined&&secInputs.currency===currency?{marketCap:asset.marketCap}:{})};
+ const balanceInputs={...missingFundamentals,...(real?secInputs:{}),...(asset?.marketCap!==null&&asset?.marketCap!==undefined&&secInputCurrency===currency?{marketCap:asset.marketCap}:{})};
  const metrics=fundamentalMetrics(balanceInputs);
  const rows:{label:string;value:string}[]=[];
  const addPercent=(label:string,value:number|null|undefined)=>{if(typeof value==="number"&&Number.isFinite(value))rows.push({label,value:percent(value)});};
