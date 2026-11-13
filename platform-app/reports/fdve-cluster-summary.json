@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T20:47:41.478Z",
+  "generatedAt": "2026-11-13T09:04:50.402Z",
   "totals": {
     "applicable": 1645,
     "available": 1491,
@@ -327,7 +327,7 @@
               "candidates": [
                 {
                   "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-                  "observations": 1
+                  "observations": 2
                 }
               ],
               "related": [],
@@ -1988,7 +1988,7 @@
                 {
                   "tag": "LongTermDebtCurrent",
                   "present": true,
-                  "unitCount": 20,
+                  "unitCount": 22,
                   "nearby": []
                 }
               ]
@@ -2069,7 +2069,7 @@
                 {
                   "tag": "LongTermDebtCurrent",
                   "present": true,
-                  "unitCount": 20,
+                  "unitCount": 22,
                   "nearby": [
                     {
                       "end": "2022-12-31",
@@ -4288,7 +4288,7 @@
                 {
                   "tag": "NetCashProvidedByUsedInOperatingActivities",
                   "present": true,
-                  "unitCount": 136,
+                  "unitCount": 138,
                   "nearby": [
                     {
                       "end": "2021-03-31",
@@ -4312,7 +4312,7 @@
                 {
                   "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
                   "present": true,
-                  "unitCount": 27,
+                  "unitCount": 29,
                   "nearby": [
                     {
                       "end": "2021-12-31",
@@ -4374,7 +4374,7 @@
                 {
                   "tag": "NetCashProvidedByUsedInOperatingActivities",
                   "present": true,
-                  "unitCount": 136,
+                  "unitCount": 138,
                   "nearby": [
                     {
                       "end": "2022-12-31",

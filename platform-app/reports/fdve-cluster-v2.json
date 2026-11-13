@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T20:47:41.478Z",
+  "generatedAt": "2026-11-13T09:04:50.402Z",
   "periods": [
     "FY2021",
     "FY2022",
@@ -964,8 +964,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "netIncome": {
               "status": "AVAILABLE",
@@ -976,8 +976,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "NetIncomeLoss",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "operatingIncome": {
               "status": "AVAILABLE",
@@ -988,8 +988,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "OperatingIncomeLoss",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "depreciationAmortization": {
               "status": "AVAILABLE",
@@ -1000,8 +1000,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "DepreciationDepletionAndAmortization",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "interestExpense": {
               "status": "PERIOD_MISSING",
@@ -1030,8 +1030,15 @@
                     "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
                     "label": "Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",
                     "description": "Amount of income (loss) from continuing operations, including income (loss) from equity method investments, before deduction of income tax expense (benefit), and income (loss) attributable to noncontrolling interest.",
-                    "annualObservations": 1,
+                    "annualObservations": 2,
                     "values": [
+                      {
+                        "value": 132729000000,
+                        "start": "2024-09-29",
+                        "end": "2025-09-27",
+                        "filed": "2026-11-03",
+                        "accession": "0000320193-26-000026"
+                      },
                       {
                         "value": 132729000000,
                         "start": "2024-09-29",
@@ -1073,8 +1080,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "NetCashProvidedByUsedInOperatingActivities",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "capex": {
               "status": "AVAILABLE",
@@ -1085,8 +1092,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "epsDiluted": {
               "status": "AVAILABLE",
@@ -1097,8 +1104,8 @@
               "periodStart": "2024-09-29",
               "periodEnd": "2025-09-27",
               "tag": "EarningsPerShareDiluted",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "cash": {
               "status": "AVAILABLE",
@@ -1109,8 +1116,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "CashAndCashEquivalentsAtCarryingValue",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "currentAssets": {
               "status": "AVAILABLE",
@@ -1121,8 +1128,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "AssetsCurrent",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "currentLiabilities": {
               "status": "AVAILABLE",
@@ -1133,8 +1140,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "LiabilitiesCurrent",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "inventory": {
               "status": "AVAILABLE",
@@ -1145,8 +1152,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "InventoryNet",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "totalAssets": {
               "status": "AVAILABLE",
@@ -1157,8 +1164,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "Assets",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "totalLiabilities": {
               "status": "AVAILABLE",
@@ -1169,8 +1176,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "Liabilities",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "equity": {
               "status": "AVAILABLE",
@@ -1181,8 +1188,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "StockholdersEquity",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "longTermDebt": {
               "status": "AVAILABLE",
@@ -1193,8 +1200,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "LongTermDebtNoncurrent",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             },
             "shortTermDebt": {
               "status": "AVAILABLE",
@@ -1205,8 +1212,8 @@
               "periodStart": null,
               "periodEnd": "2025-09-27",
               "tag": "LongTermDebtCurrent",
-              "accession": "0000320193-25-000079",
-              "filed": "2025-10-31"
+              "accession": "0000320193-26-000026",
+              "filed": "2026-11-03"
             }
           },
           "bank": {},
@@ -1225,7 +1232,7 @@
       "sec": {
         "status": "OK",
         "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
-        "company": "MICROSOFT CORPORATION"
+        "company": "MICROSOFT CORP"
       },
       "fmp": {
         "status": "MISSING_CREDENTIAL"
@@ -12437,7 +12444,7 @@
       "sec": {
         "status": "OK",
         "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
-        "company": "ADVANCED MICRO DEVICES INC"
+        "company": "ADVANCED MICRO DEVICES, INC"
       },
       "fmp": {
         "status": "MISSING_CREDENTIAL"
@@ -12781,7 +12788,7 @@
                 {
                   "tag": "LongTermDebtCurrent",
                   "present": true,
-                  "unitCount": 20,
+                  "unitCount": 22,
                   "nearby": []
                 }
               ],
@@ -13147,7 +13154,7 @@
                 {
                   "tag": "LongTermDebtCurrent",
                   "present": true,
-                  "unitCount": 20,
+                  "unitCount": 22,
                   "nearby": [
                     {
                       "end": "2022-12-31",
@@ -26582,7 +26589,7 @@
                 {
                   "tag": "NetCashProvidedByUsedInOperatingActivities",
                   "present": true,
-                  "unitCount": 136,
+                  "unitCount": 138,
                   "nearby": [
                     {
                       "end": "2021-03-31",
@@ -26611,7 +26618,7 @@
                 {
                   "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
                   "present": true,
-                  "unitCount": 27,
+                  "unitCount": 29,
                   "nearby": [
                     {
                       "end": "2021-12-31",
@@ -26937,7 +26944,7 @@
                 {
                   "tag": "NetCashProvidedByUsedInOperatingActivities",
                   "present": true,
-                  "unitCount": 136,
+                  "unitCount": 138,
                   "nearby": [
                     {
                       "end": "2022-12-31",
@@ -47554,7 +47561,7 @@
   "recoveryReview": {
     "scope": "WMT_XOM_AAPL_FY2024_FY2025",
     "policy": "NO_UNVERIFIED_PROMOTION",
-    "reviewedAt": "2026-11-01",
+    "reviewedAt": "2026-11-13",
     "notes": [
       "WMT D&A approved only with exact issuer-scoped 10-K validation",
       "XOM operatingIncome remains missing until definition reconciled",
