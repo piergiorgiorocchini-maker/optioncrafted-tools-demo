@@ -59,36 +59,50 @@ const periodLabel=(row:SecAnnualFinancialYear)=>{
  return Number.isFinite(date)?new Intl.DateTimeFormat("en-US",{month:"numeric",day:"numeric",year:"numeric",timeZone:"UTC"}).format(date):"FY "+row.fiscalYear;
 };
 
+const manualPeriodTitle=(column:string)=>column==="TTM"?"TTM":"1/31/"+column.replace(/^FY/,"");
+
 function ManualStatementsPanel({data}:{data:ManualStatementData}){
  const [activeStatement,setActiveStatement]=useState<FinancialStatementName>("Income Statement");
+ const [mobileStart,setMobileStart]=useState(0);
  const rows=data.statementDetail.filter(item=>item.statement===activeStatement);
  const columns=activeStatement==="Balance Sheet"?["FY2026","FY2025","FY2024","FY2023"]:["TTM","FY2026","FY2025","FY2024","FY2023"];
+ const mobileColumns=columns.slice(mobileStart,mobileStart+2);
+ const selectStatement=(statement:FinancialStatementName)=>{setActiveStatement(statement);setMobileStart(0);};
+ const table=(visibleColumns:string[],mobile=false)=><table className={"vf-table vf-statement-table"+(mobile?" vf-mobile-table":"")}><thead><tr><th>Metric</th>{visibleColumns.map(column=><th key={column} className="vf-number">{manualPeriodTitle(column)}</th>)}</tr></thead><tbody>
+  {rows.length?rows.map((item,index)=>{const section=visibleColumns.every(column=>item.values[column]===null||item.values[column]===undefined);const displayLabel=item.reportedLabel.replace(/\s*\((?:SEC|EDGAR|FMP|Yahoo|Google Sheets)[^)]*\)/gi,"");return <tr key={index} className={section?"vf-statement-section":""}><td>{displayLabel}</td>{visibleColumns.map(column=><td key={column}>{financialStatementValue(item.values[column]??null,item.unit,data.currency)}</td>)}</tr>;}):<tr><td colSpan={visibleColumns.length+1}>No data available for this statement.</td></tr>}
+ </tbody></table>;
  return <section className="vf-panel vf-statements" aria-label="Financial statements">
   <div className="vf-top"><div><h3>Financial statements</h3><p>Currency in {data.currency} · amounts and shares in thousands, except per-share data</p></div><small className="vf-period-note">TTM through {data.ttm.periodEnd} · Balance sheet {data.balanceSheet.periodEnd}</small></div>
   <div className="vf-statement-tabs" role="tablist" aria-label="Financial statements">
-   {financialStatementTabs.map(statement=><button key={statement} type="button" role="tab" aria-selected={activeStatement===statement} className={activeStatement===statement?"selected":""} onClick={()=>setActiveStatement(statement)}>{statement}</button>)}
+   {financialStatementTabs.map(statement=><button key={statement} type="button" role="tab" aria-selected={activeStatement===statement} className={activeStatement===statement?"selected":""} onClick={()=>selectStatement(statement)}>{statement}</button>)}
   </div>
-  <div className="vf-table-wrap" role="tabpanel" aria-label={activeStatement}>
-   <table className="vf-table vf-statement-table"><thead><tr><th>Metric</th>{columns.map(column=><th key={column} className="vf-number">{column==="TTM"?"TTM":column==="FY2026"?"1/31/2026":column==="FY2025"?"1/31/2025":column==="FY2024"?"1/31/2024":"1/31/2023"}</th>)}</tr></thead><tbody>
-    {rows.length?rows.map((item,index)=>{const section=columns.every(column=>item.values[column]===null||item.values[column]===undefined);return <tr key={index} className={section?"vf-statement-section":""}><td>{item.reportedLabel.replace(/\s*\((?:SEC|EDGAR|FMP|Yahoo|Google Sheets)[^)]*\)/gi, "")}</td>{columns.map(column=><td key={column}>{financialStatementValue(item.values[column]??null,item.unit,data.currency)}</td>)}</tr>;}):<tr><td colSpan={columns.length+1}>No data available for this statement.</td></tr>}
-   </tbody></table>
+  <div className="vf-table-wrap vf-desktop-statement" role="tabpanel" aria-label={activeStatement}>{table(columns)}</div>
+  <div className="vf-mobile-statement" role="tabpanel" aria-label={activeStatement+" mobile periods"}>
+   <div className="vf-mobile-period-controls"><button type="button" onClick={()=>setMobileStart(start=>Math.max(0,start-2))} disabled={mobileStart===0} aria-label="Show newer periods">← Recenti</button><span aria-live="polite">{mobileColumns.map(manualPeriodTitle).join(" · ")}</span><button type="button" onClick={()=>setMobileStart(start=>Math.min(Math.max(0,columns.length-2),start+2))} disabled={mobileStart+2>=columns.length} aria-label="Show older periods">Anni precedenti →</button></div>
+   <div className="vf-table-wrap">{table(mobileColumns,true)}</div>
   </div>
  </section>;
 }
 function AnnualStatementsPanel({ticker,history}:{ticker:string;history:SecAnnualFinancialYear[]}){
  const [activeStatement,setActiveStatement]=useState<FinancialStatementName>("Income Statement");
+ const [mobileStart,setMobileStart]=useState(0);
  const periods=history.slice(-6).reverse();
+ const mobilePeriods=periods.slice(mobileStart,mobileStart+2);
  const currency=periods[0]?.currency||"USD";
  const rows=statementRows[activeStatement].filter(metric=>periods.some(period=>metric.read(period)!==null));
+ const selectStatement=(statement:FinancialStatementName)=>{setActiveStatement(statement);setMobileStart(0);};
+ const table=(visiblePeriods:SecAnnualFinancialYear[],mobile=false)=><table className={"vf-table vf-statement-table"+(mobile?" vf-mobile-table":"")}><thead><tr><th>Metric</th>{visiblePeriods.map(period=><th key={period.periodEnd} className="vf-number">{periodLabel(period)}</th>)}</tr></thead><tbody>
+  {rows.length?rows.map(metric=><tr key={metric.label}><td>{metric.label}</td>{visiblePeriods.map(period=><td key={period.periodEnd}>{financialStatementValue(metric.read(period),metric.unit,period.currency)}</td>)}</tr>):<tr><td colSpan={visiblePeriods.length+1}>No data available for this statement.</td></tr>}
+ </tbody></table>;
  return <section className="vf-panel vf-statements" aria-label={"Financial statements for "+ticker}>
   <div className="vf-top"><div><h3>Financial statements</h3><p>Currency in {currency} · amounts and shares in thousands, except per-share data</p></div><small className="vf-period-note">Annual periods · latest available</small></div>
   <div className="vf-statement-tabs" role="tablist" aria-label="Financial statements">
-   {financialStatementTabs.map(statement=><button key={statement} type="button" role="tab" aria-selected={activeStatement===statement} className={activeStatement===statement?"selected":""} onClick={()=>setActiveStatement(statement)}>{statement}</button>)}
+   {financialStatementTabs.map(statement=><button key={statement} type="button" role="tab" aria-selected={activeStatement===statement} className={activeStatement===statement?"selected":""} onClick={()=>selectStatement(statement)}>{statement}</button>)}
   </div>
-  <div className="vf-table-wrap" role="tabpanel" aria-label={activeStatement}>
-   <table className="vf-table vf-statement-table"><thead><tr><th>Metric</th>{periods.map(period=><th key={period.periodEnd} className="vf-number">{periodLabel(period)}</th>)}</tr></thead><tbody>
-    {rows.length?rows.map(metric=><tr key={metric.label}><td>{metric.label}</td>{periods.map(period=><td key={period.periodEnd}>{financialStatementValue(metric.read(period),metric.unit,period.currency)}</td>)}</tr>):<tr><td colSpan={periods.length+1}>No data available for this statement.</td></tr>}
-   </tbody></table>
+  <div className="vf-table-wrap vf-desktop-statement" role="tabpanel" aria-label={activeStatement}>{table(periods)}</div>
+  <div className="vf-mobile-statement" role="tabpanel" aria-label={activeStatement+" mobile periods"}>
+   <div className="vf-mobile-period-controls"><button type="button" onClick={()=>setMobileStart(start=>Math.max(0,start-2))} disabled={mobileStart===0} aria-label="Show newer periods">← Recenti</button><span aria-live="polite">{mobilePeriods.map(periodLabel).join(" · ")}</span><button type="button" onClick={()=>setMobileStart(start=>Math.min(Math.max(0,periods.length-2),start+2))} disabled={mobileStart+2>=periods.length} aria-label="Show older periods">Anni precedenti →</button></div>
+   <div className="vf-table-wrap">{table(mobilePeriods,true)}</div>
   </div>
  </section>;
 }

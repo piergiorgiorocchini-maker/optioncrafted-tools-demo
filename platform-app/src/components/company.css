@@ -22,3 +22,30 @@
 @media(max-width:1100px){}
 @media(max-width:980px){}
 @media(max-width:760px){}
+
+
+/* The Company Intelligence content is a composable 12-column module grid. */
+.dashboard-page-company .ci{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:13px;min-width:0}
+.dashboard-page-company .ci>.ci-head,
+.dashboard-page-company .ci>.ci-metrics,
+.dashboard-page-company .ci>.vf-statements,
+.dashboard-page-company .ci>.fc-grid,
+.dashboard-page-company .ci>.ci-wide,
+.dashboard-page-company .ci>.ci-foot{grid-column:1/-1;min-width:0}
+.dashboard-page-company .ci-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dashboard-page-company .ci-metrics article{padding:15px}
+.dashboard-page-company .ci-metrics strong{font-size:22px}
+.dashboard-page-company .fc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+@media(max-width:900px){
+ .dashboard-page-company .ci-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .dashboard-page-company .fc-grid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+ .dashboard-page-company .ci{gap:10px}
+ .dashboard-page-company .ci-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .dashboard-page-company .ci-metrics article{padding:11px;gap:7px}
+ .dashboard-page-company .ci-metrics article>span{font-size:8px;line-height:1.35}
+ .dashboard-page-company .ci-metrics strong{font-size:17px}
+ .dashboard-page-company .ci-metrics small{font-size:9px}
+ .dashboard-page-company .fc-grid{grid-template-columns:1fr}
+}
