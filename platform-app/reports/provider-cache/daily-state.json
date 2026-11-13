@@ -840,14 +840,19 @@
             "id": "AMZN:balance",
             "at": "2026-11-13T09:16:34.558Z",
             "status": "PREMIUM_REQUIRED"
+          },
+          {
+            "id": "COST:income",
+            "at": "2026-11-13T16:19:09.082Z",
+            "status": "AVAILABLE"
           }
         ],
-        "count": 2
+        "count": 3
       }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 12
+    "ALPHA_VANTAGE": 13
   }
 }
