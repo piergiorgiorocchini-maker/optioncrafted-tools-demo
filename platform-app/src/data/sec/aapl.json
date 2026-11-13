@@ -5,7 +5,7 @@
   "company": "Apple Inc.",
   "source": "SEC EDGAR companyfacts",
   "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
-  "generatedAt": "2026-11-12T16:09:18.253Z",
+  "generatedAt": "2026-11-13T15:38:04.748Z",
   "units": "USD (raw, not millions)",
   "metrics": {
     "revenue": {
