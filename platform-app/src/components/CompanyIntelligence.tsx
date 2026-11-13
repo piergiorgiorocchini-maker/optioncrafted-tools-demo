@@ -3,7 +3,7 @@ import {getSecFinancialInputs,getSecFinancialClassification} from "../data/secFi
 import {secCashConversion as calculateSecCashConversion,secRoicEstimate} from "../data/secQualityMetrics";
 import {VerifiedFundamentals} from "./VerifiedFundamentals";
 import {NavLink} from "react-router-dom";
-import {Building2,ChartNoAxesCombined,ShieldCheck,Target} from "lucide-react";
+import {Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
 import type {Security} from "../core/contracts";
 import type {RealAsset} from "./RealResearch";
 import "./company.css";
@@ -15,14 +15,6 @@ import type {ValuationBridge} from "../core/valuationTriangulation";
 const compactMoney=(n:number,currency:string)=>new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",notation:"compact",maximumFractionDigits:2}).format(n);
 const money=(n:number|null,currency:string)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
 const percent=(n:number|null|undefined)=>typeof n!=="number"||!Number.isFinite(n)?"N/D":(n*100).toFixed(1)+"%";
-const ratingLabel=(value:ValuationBridge["marketComparison"]|undefined)=>{
- if(value==="UNDERVALUED")return "Below fair value";
- if(value==="OVERVALUED")return "Above fair value";
- if(value==="IN_LINE")return "Near fair value";
- return "Pending";
-};
-const confidenceLabel=(value:ValuationBridge["confidence"]|undefined)=>value?value[0]+value.slice(1).toLowerCase():"Pending";
-
 export function CompanyIntelligence({company,asset,valuation}:{company:Security;asset?:RealAsset;valuation?:ValuationBridge|null}){
  const real=Boolean(asset),name=asset?.name??company.name,symbol=asset?.ticker??company.ticker,sector=asset?.sector??company.sector;
  const currency=asset?.currency??company.currency,price=asset?.price??(real?null:company.price);
@@ -32,8 +24,8 @@ export function CompanyIntelligence({company,asset,valuation}:{company:Security;
  const secInputCurrency="currency" in secInputs?secInputs.currency:null;
  const secFcf=verifiedFcf(symbol,currency),secConversion=calculateSecCashConversion(symbol),secRoic=secRoicEstimate(symbol);
  const isFinancial=classification.isFinancial,isFundOrIndex=classification.isFundOrIndex,isReitMlp=classification.isReitOrMlp;
- const triangulatedValue=valuation?.intrinsicValue??null;
- const rating=ratingLabel(valuation?.marketComparison),confidence=confidenceLabel(valuation?.confidence);
+ const roicLabel=isFundOrIndex||isFinancial||isReitMlp?"N/A":real?secRoic.value===null?"N/D":secRoic.value.toFixed(1)+"%":company.roic.toFixed(1)+"%";
+ const earningsYieldLabel=isFundOrIndex?"N/A":earnings!==null&&price!==null&&price>0?(earnings/price*100).toFixed(2)+"%":"N/D";
  const fcfYield=real
   ?isFundOrIndex||isFinancial||isReitMlp?null
    :secFcf.perShare!==null&&price!==null&&price>0&&secFcf.currency===currency?secFcf.perShare/price*100
@@ -51,8 +43,8 @@ export function CompanyIntelligence({company,asset,valuation}:{company:Security;
   addPercent("Operating margin",latest?.operatingMargin);
   addPercent("Net margin",latest?.netMargin);
   addPercent("Return on equity",latest?.roe);
-  if(secRoic.value!==null&&!isReitMlp)addPercent("Return on invested capital",secRoic.value/100);
   if(secConversion.value!==null&&!isReitMlp)addPercent("Cash conversion",secConversion.value/100);
+  if(secFcf.perShare!==null)rows.push({label:"Free cash flow per share",value:money(secFcf.perShare,secFcf.currency||currency)});
   addRatio("Current ratio",metrics.currentRatio.value);
   addMoney("Net debt",metrics.netDebt.value);
   addRatio("Net debt / EBITDA",metrics.netDebtEbitda.value);
@@ -66,9 +58,9 @@ export function CompanyIntelligence({company,asset,valuation}:{company:Security;
   <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2 className="ci-security-title"><SecurityLogo ticker={symbol}/>{name}</h2><p><b>{symbol}</b> · {sector} · {currency}{real&&asset?.priceDate?" · "+asset.priceDate:""}</p></div><span className="ci-demo">COMPANY PROFILE</span></section>
   <section className="ci-metrics">
    <article><span><Building2 size={16}/> REFERENCE PRICE</span><strong>{money(price,currency)}</strong><small>{real&&asset?.priceDate?asset.priceDate:""}</small></article>
-   <article><span><Target size={16}/> TRIANGULATED VALUE</span><strong>{money(triangulatedValue,currency)}</strong><small>Per share</small></article>
-   <article><span><ShieldCheck size={16}/> VALUATION RATING</span><strong>{rating}</strong><small>{confidence} confidence</small></article>
-   <article><span><ChartNoAxesCombined size={16}/> FREE CASH FLOW YIELD</span><strong>{fcfYieldLabel}</strong><small></small></article>
+   <article><span><Target size={16}/> RETURN ON INVESTED CAPITAL</span><strong>{roicLabel}</strong><small>{latest?"FY "+latest.year:""}</small></article>
+   <article><span><ChartNoAxesCombined size={16}/> FREE CASH FLOW YIELD</span><strong>{fcfYieldLabel}</strong><small>{secFcf.ttmAmount!==null&&secFcf.ttmAmount!==undefined?"TTM":latest?"FY "+latest.year:""}</small></article>
+   <article><span><TrendingUp size={16}/> EARNINGS YIELD</span><strong>{earningsYieldLabel}</strong><small>{latest?"FY "+latest.year:""}</small></article>
   </section>
   <VerifiedFundamentals ticker={symbol}/>
   <FinancialCharts asset={asset} company={company}/>
