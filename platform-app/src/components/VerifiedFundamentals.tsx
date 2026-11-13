@@ -70,7 +70,7 @@ function ManualStatementsPanel({data}:{data:ManualStatementData}){
   </div>
   <div className="vf-table-wrap" role="tabpanel" aria-label={activeStatement}>
    <table className="vf-table vf-statement-table"><thead><tr><th>Metric</th>{columns.map(column=><th key={column} className="vf-number">{column==="TTM"?"TTM":column==="FY2026"?"1/31/2026":column==="FY2025"?"1/31/2025":column==="FY2024"?"1/31/2024":"1/31/2023"}</th>)}</tr></thead><tbody>
-    {rows.length?rows.map((item,index)=>{const section=columns.every(column=>item.values[column]===null||item.values[column]===undefined);return <tr key={index} className={section?"vf-statement-section":""}><td>{item.reportedLabel}</td>{columns.map(column=><td key={column}>{financialStatementValue(item.values[column]??null,item.unit,data.currency)}</td>)}</tr>;}):<tr><td colSpan={columns.length+1}>No data available for this statement.</td></tr>}
+    {rows.length?rows.map((item,index)=>{const section=columns.every(column=>item.values[column]===null||item.values[column]===undefined);return <tr key={index} className={section?"vf-statement-section":""}><td>{item.reportedLabel.replace(/\s*\((?:SEC|EDGAR|FMP|Yahoo|Google Sheets)[^)]*\)/gi, "")}</td>{columns.map(column=><td key={column}>{financialStatementValue(item.values[column]??null,item.unit,data.currency)}</td>)}</tr>;}):<tr><td colSpan={columns.length+1}>No data available for this statement.</td></tr>}
    </tbody></table>
   </div>
  </section>;
