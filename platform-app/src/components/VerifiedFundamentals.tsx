@@ -77,7 +77,7 @@ function AnnualStatementsPanel({ticker,history}:{ticker:string;history:SecAnnual
  const periods=history.slice(-6).reverse();
  const currency=periods[0]?.currency||"USD";
  const rows=statementRows[activeStatement].filter(metric=>periods.some(period=>metric.read(period)!==null));
- return <section className="vf-panel vf-statements" aria-label="Financial statements for "+ticker}>
+ return <section className="vf-panel vf-statements" aria-label={"Financial statements for "+ticker}>
   <div className="vf-top"><div><h3>Financial statements</h3><p>Currency in {currency} · amounts and shares in thousands, except per-share data</p></div><small className="vf-period-note">Annual periods · latest available</small></div>
   <div className="vf-statement-tabs" role="tablist" aria-label="Financial statements">
    {financialStatementTabs.map(statement=><button key={statement} type="button" role="tab" aria-selected={activeStatement===statement} className={activeStatement===statement?"selected":""} onClick={()=>setActiveStatement(statement)}>{statement}</button>)}
