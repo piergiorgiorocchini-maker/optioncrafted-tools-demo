@@ -27,9 +27,12 @@ const statementRows:Record<FinancialStatementName,StatementRow[]>={
  ],
  "Balance Sheet":[
   {label:"Cash & Equivalents",unit:"amount",read:row=>numberValue(row.cash)},
+  {label:"Short-term Investments",unit:"amount",read:row=>numberValue(row.shortTermInvestments)},
+  {label:"Trade and Other Receivables",unit:"amount",read:row=>numberValue(row.receivables)},
   {label:"Current Assets",unit:"amount",read:row=>numberValue(row.currentAssets)},
   {label:"Inventory",unit:"amount",read:row=>numberValue(row.inventory)},
   {label:"Current Liabilities",unit:"amount",read:row=>numberValue(row.currentLiabilities)},
+  {label:"Non-current Assets",unit:"amount",read:row=>numberValue(row.totalNonCurrentAssets)},
   {label:"Total Assets",unit:"amount",read:row=>numberValue(row.totalAssets)},
   {label:"Total Liabilities",unit:"amount",read:row=>numberValue(row.totalLiabilities)},
   {label:"Total Debt",unit:"amount",read:row=>numberValue(row.totalDebt)},
