@@ -59,8 +59,8 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
     {intrinsic!==null&&<div className="home-value-callout intrinsic" style={{left:calloutPosition(intrinsic)+"%"}}><strong>Triangulated Value</strong><span>{getMoney(intrinsic,currency)}</span></div>}
     {price!==null&&<div className="home-value-callout market" style={{left:calloutPosition(price)+"%"}}><strong>Reference Price</strong><span>{getMoney(price,currency)}</span></div>}
     <div className="home-value-track" style={{background:"linear-gradient(90deg,#e6f2fc 0%,#e6f2fc "+valuePosition(intrinsic)+"%,#fff0f0 "+valuePosition(intrinsic)+"%,#fceaf0 100%)"}}>
-     {intrinsic===null?null:<i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}/>}
-     {price===null?null:<i className="market-marker" style={{left:valuePosition(price)+"%"}/>}
+     {intrinsic===null?null:<i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}}/>}
+     {price===null?null:<i className="market-marker" style={{left:valuePosition(price)+"%"}}/>}
     </div>
    </div>
    <div className="home-value-range-axis">
