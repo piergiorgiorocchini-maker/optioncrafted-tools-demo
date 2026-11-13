@@ -16,7 +16,7 @@ export const FMP_FIELDS={
  netIncome:['income','netIncome',1],operatingIncome:['income','operatingIncome',1],
  epsDiluted:['income','epsDiluted',1],dilutedShares:['income','weightedAverageShsOutDil',1],
  depreciationAndAmortization:['income','depreciationAndAmortization',1],interestExpense:['income','interestExpense',1],
- cashFromOperations:['cashflow','operatingCashFlow',1],capex:['cashflow','capitalExpenditure',-1],
+ cashFromOperations:['cashflow','operatingCashFlow',1],reportedFreeCashFlow:['cashflow','freeCashFlow',1],capex:['cashflow','capitalExpenditure',1],
  cash:['balance','cashAndCashEquivalents',1],shortTermInvestments:['balance','shortTermInvestments',1],
  currentAssets:['balance','totalCurrentAssets',1],currentLiabilities:['balance','totalCurrentLiabilities',1],
  inventory:['balance','inventory',1],receivables:['balance','netReceivables',1],
