@@ -43,10 +43,13 @@ const statementRows:Record<FinancialStatementName,StatementRow[]>={
   {label:"Depreciation & Amortization",unit:"amount",read:row=>row.depreciationAndAmortization===null?null:Math.abs(row.depreciationAndAmortization)}
  ]
 };
-const financialStatementValue=(value:number|null,unit:StatementUnit,currency:string)=>{
- if(value===null)return "—";
- if(unit==="perShare")return new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(value);
- return new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(value/1000);
+const financialStatementValue=(value:number|null|undefined,unit:string,currency="USD")=>{
+ if(value===null||value===undefined||!Number.isFinite(value))return "—";
+ if(unit==="perShare"||unit==="USD/share")return new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",maximumFractionDigits:2}).format(value);
+ if(unit==="ratio"||unit.startsWith("ratio"))return value.toFixed(2);
+ if(unit==="amount"||unit==="shares")return new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(value/1000);
+ if(unit.startsWith("USD bn")||unit.startsWith("shares bn"))return new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(value*1_000_000);
+ return new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(value);
 };
 const periodLabel=(row:SecAnnualFinancialYear)=>{
  const date=Date.parse(row.periodEnd+"T00:00:00Z");
@@ -64,7 +67,7 @@ function ManualStatementsPanel({data}:{data:ManualStatementData}){
   </div>
   <div className="vf-table-wrap" role="tabpanel" aria-label={activeStatement}>
    <table className="vf-table vf-statement-table"><thead><tr><th>Metric</th>{columns.map(column=><th key={column} className="vf-number">{column==="TTM"?"TTM":column==="FY2026"?"1/31/2026":column==="FY2025"?"1/31/2025":column==="FY2024"?"1/31/2024":"1/31/2023"}</th>)}</tr></thead><tbody>
-    {rows.length?rows.map((item,index)=>{const section=columns.every(column=>item.values[column]===null||item.values[column]===undefined);return <tr key={index} className={section?"vf-statement-section":""}><td>{item.reportedLabel}</td>{columns.map(column=><td key={column}>{financialStatementValue(item.values[column]??null,item.unit)}</td>)}</tr>;}):<tr><td colSpan={columns.length+1}>No data available for this statement.</td></tr>}
+    {rows.length?rows.map((item,index)=>{const section=columns.every(column=>item.values[column]===null||item.values[column]===undefined);return <tr key={index} className={section?"vf-statement-section":""}><td>{item.reportedLabel}</td>{columns.map(column=><td key={column}>{financialStatementValue(item.values[column]??null,item.unit,data.currency)}</td>)}</tr>;}):<tr><td colSpan={columns.length+1}>No data available for this statement.</td></tr>}
    </tbody></table>
   </div>
  </section>;
