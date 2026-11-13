@@ -823,10 +823,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-13": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "AMZN:income",
+            "at": "2026-11-13T09:16:34.283Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "AMZN:balance",
+            "at": "2026-11-13T09:16:34.558Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 11
+    "ALPHA_VANTAGE": 12
   }
 }

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T16:48:04.624Z",
+  "generatedAt": "2026-11-13T09:16:34.283Z",
   "budgets": {
     "FMP": 0,
     "ALPHA_VANTAGE": 3
   },
   "providers": {
     "FMP": {
-      "status": "DAILY_BUDGET_EXHAUSTED",
+      "status": "DISPLAY_LICENSE_REQUIRED",
       "requestsToday": 0
     },
     "ALPHA_VANTAGE": {
@@ -15,12 +15,12 @@
       "requestsToday": 2,
       "attempts": [
         {
-          "ticker": "GOOGL",
+          "ticker": "AMZN",
           "statement": "income",
           "status": "AVAILABLE"
         },
         {
-          "ticker": "GOOGL",
+          "ticker": "AMZN",
           "statement": "balance",
           "status": "PREMIUM_REQUIRED"
         }
