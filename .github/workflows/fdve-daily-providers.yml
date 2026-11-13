@@ -26,7 +26,9 @@ jobs:
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
-          FDVE_FMP_DAILY_CALLS: '0'  # Statement endpoints returned HTTP 402; keep FMP calls for the Apps Script profile refresh until plan upgrade.
+          FDVE_FMP_DAILY_CALLS: ${{ vars.FDVE_FMP_DAILY_CALLS || '0' }}
+          FMP_DATA_DISPLAY_LICENSED: ${{ vars.FMP_DATA_DISPLAY_LICENSED }}
+          FDVE_FMP_PUBLIC_CACHE_APPROVED: ${{ vars.FDVE_FMP_PUBLIC_CACHE_APPROVED }}
           FDVE_PROVIDER_TICKERS: 'AAPL,MSFT,XOM,WMT,JPM,ADBE,CRM,NVDA,AVGO,AMD,GOOGL,AMZN,COST,PG,CAT,DE,CVX,JNJ,MRK,UNH'
           FDVE_AV_DAILY_CALLS: '3'  # Reserve these calls for annual-statements ingestion; Apps Script uses the remaining 22 Overview calls.
         run: node platform-app/scripts/fdve-daily-provider-collector.mjs
