@@ -1,84 +1,81 @@
-
 import {verifiedFcf,verifiedAnnualHistory} from "../data/verifiedFinancials";
 import {getSecFinancialInputs,getSecFinancialClassification} from "../data/secFinancialBridge";
 import {secCashConversion as calculateSecCashConversion,secRoicEstimate} from "../data/secQualityMetrics";
 import {VerifiedFundamentals} from "./VerifiedFundamentals";
 import {NavLink} from "react-router-dom";
-import {ArrowRight,Building2,ChartNoAxesCombined,ShieldCheck,Target,TrendingUp} from "lucide-react";
-import type {Security} from "../core/contracts";import type {RealAsset} from "./RealResearch";
-import "./company.css";import {FinancialCharts} from "./FinancialCharts";import appleResearch from "../data/aaplResearch.json";
+import {Building2,ChartNoAxesCombined,ShieldCheck,Target} from "lucide-react";
+import type {Security} from "../core/contracts";
+import type {RealAsset} from "./RealResearch";
+import "./company.css";
+import {FinancialCharts} from "./FinancialCharts";
 import {fundamentalMetrics,missingFundamentals} from "../core/fundamentalMetrics";
 import {SecurityLogo} from "./SecurityLogo";
 import type {ValuationBridge} from "../core/valuationTriangulation";
-const fmt=(v:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v);
+
 const compactMoney=(n:number,currency:string)=>new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD",notation:"compact",maximumFractionDigits:2}).format(n);
+const money=(n:number|null,currency:string)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
+const percent=(n:number|null|undefined)=>typeof n!=="number"||!Number.isFinite(n)?"N/D":(n*100).toFixed(1)+"%";
+const ratingLabel=(value:ValuationBridge["marketComparison"]|undefined)=>{
+ if(value==="UNDERVALUED")return "Below fair value";
+ if(value==="OVERVALUED")return "Above fair value";
+ if(value==="IN_LINE")return "Near fair value";
+ return "Pending";
+};
+const confidenceLabel=(value:ValuationBridge["confidence"]|undefined)=>value?value[0]+value.slice(1).toLowerCase():"Pending";
+
 export function CompanyIntelligence({company,asset,valuation}:{company:Security;asset?:RealAsset;valuation?:ValuationBridge|null}){
- const apple=asset?.ticker==="AAPL";const appleFcf=apple?appleResearch.fcfPerShare:null; const real=Boolean(asset);const name=asset?.name??company.name;const symbol=asset?.ticker??company.ticker;const sector=asset?.sector??company.sector;const currency=asset?.currency??company.currency;const referencePrice=asset?.price??(real?null:company.price);const earnings=asset?.eps??(real?verifiedAnnualHistory(symbol,currency).at(-1)?.eps??null:company.eps);const show=(n:number|null,suffix="")=>n===null?"N/D":n.toFixed(2)+suffix;const showMoney=(n:number|null)=>n===null?"N/D":new Intl.NumberFormat("en-US",{style:"currency",currency:/^[A-Z]{3}$/.test(currency)?currency:"USD"}).format(n);
- const classification=getSecFinancialClassification(symbol);
- const secInputs=getSecFinancialInputs(symbol);
- const secFcf=verifiedFcf(symbol);
- const manualTtmInput=secFcf.basis.includes("Manual TTM");
- const secConversion=calculateSecCashConversion(symbol);
- const secRoic=secRoicEstimate(symbol);
- const secHistory=verifiedAnnualHistory(symbol);
- const secLatest=secHistory.at(-1);
- const financialCurrency=secLatest?.currency??secInputs.currency??currency;
- const isFinancial=classification.isFinancial;
- const isFundOrIndex=classification.isFundOrIndex;
- const isReitMlp=classification.isReitOrMlp;
- const roicDisplay=isFundOrIndex||isFinancial||isReitMlp?"N/A":secRoic.value!==null?secRoic.value.toFixed(1)+"% (est.)":apple?appleResearch.roic.toFixed(1)+"%":"N/D";
- const conversionDisplay=isFundOrIndex||isFinancial||isReitMlp?"N/A":secConversion.value!==null?secConversion.value.toFixed(1)+"%":"N/D";
- const secOperatingIncome=secLatest?.operatingIncome??null;
- const secOperatingMargin=isFundOrIndex||isFinancial?null:secLatest?.operatingMargin===null||secLatest?.operatingMargin===undefined?null:secLatest.operatingMargin*100;
- const secCashConversion=isFundOrIndex||isFinancial||isReitMlp?null:secLatest?.fcf!==null&&secLatest?.fcf!==undefined&&secLatest.netIncome!==null&&secLatest.netIncome>0?secLatest.fcf/secLatest.netIncome*100:null;
- const snapshotPE=asset?.pe??null;
- const fcfCurrencyMatches=Boolean(secFcf.currency&&secFcf.currency===currency);
- const fcfYieldFromMarketCap=fcfCurrencyMatches&&secFcf.annualAmount!==null&&asset?.marketCap!==null&&asset?.marketCap!==undefined&&asset.marketCap>0?secFcf.annualAmount/asset.marketCap*100:null;
- const fcfYieldFromPerShare=fcfCurrencyMatches&&secFcf.perShare!==null&&referencePrice!==null&&referencePrice>0?secFcf.perShare/referencePrice*100:null;
- const fcfYieldVerified=fcfYieldFromMarketCap??fcfYieldFromPerShare;
- const balanceInputs={...missingFundamentals,...(apple?{cash:appleResearch.balanceSheet.cash,currentAssets:appleResearch.balanceSheet.currentAssets,currentLiabilities:appleResearch.balanceSheet.currentLiabilities,inventory:appleResearch.balanceSheet.inventory,totalDebt:appleResearch.balanceSheet.totalDebt,equity:appleResearch.balanceSheet.shareholdersEquity,freeCashFlow:appleResearch.annualData[3].fcfB*1000}:{}),...secInputs,...(asset?.marketCap!==null&&asset?.marketCap!==undefined&&secInputs.currency===currency?{marketCap:asset.marketCap}:{})};
- const balanceMetrics=fundamentalMetrics(balanceInputs);
- const balanceRows=[["Current ratio",balanceMetrics.currentRatio],["Quick ratio",balanceMetrics.quickRatio],["Cash ratio",balanceMetrics.cashRatio],["Net debt",balanceMetrics.netDebt],["Net debt / EBITDA",balanceMetrics.netDebtEbitda],["Debt / Equity",balanceMetrics.debtEquity],["Interest coverage",balanceMetrics.interestCoverage],["FCF / Debt",balanceMetrics.fcfDebt],["Enterprise value · basic",balanceMetrics.enterpriseValue],["EV / EBITDA · basic",balanceMetrics.evEbitda]] as const;
- const earningsYield=company.eps/company.price*100;
- const fcfYield=company.fcfPerShare/company.price*100;
- const gap=(company.buyBelow/company.price-1)*100;
- const demoSeries=[.69,.75,.81,.88,1].map((factor,i)=>({period:String(2022+i),revenue:Math.round(100*factor),fcf:Math.round(100*factor*(1.04+i*.012))}));
+ const real=Boolean(asset),name=asset?.name??company.name,symbol=asset?.ticker??company.ticker,sector=asset?.sector??company.sector;
+ const currency=asset?.currency??company.currency,price=asset?.price??(real?null:company.price);
+ const history=verifiedAnnualHistory(symbol,currency),latest=history.at(-1);
+ const earnings=real?(asset?.eps??latest?.eps??null):company.eps;
+ const classification=getSecFinancialClassification(symbol),secInputs=real?getSecFinancialInputs(symbol):missingFundamentals;
+ const secFcf=verifiedFcf(symbol,currency),secConversion=calculateSecCashConversion(symbol),secRoic=secRoicEstimate(symbol);
+ const isFinancial=classification.isFinancial,isFundOrIndex=classification.isFundOrIndex,isReitMlp=classification.isReitOrMlp;
+ const triangulatedValue=valuation?.intrinsicValue??null;
+ const rating=ratingLabel(valuation?.marketComparison),confidence=confidenceLabel(valuation?.confidence);
+ const fcfYield=real
+  ?isFundOrIndex||isFinancial||isReitMlp?null
+   :secFcf.perShare!==null&&price!==null&&price>0&&secFcf.currency===currency?secFcf.perShare/price*100
+    :secFcf.annualAmount!==null&&asset?.marketCap!==null&&asset?.marketCap!==undefined&&asset.marketCap>0&&secFcf.currency===currency?secFcf.annualAmount/asset.marketCap*100:null
+  :company.fcfPerShare/company.price*100;
+ const fcfYieldLabel=isFundOrIndex||isFinancial||isReitMlp?"N/A":fcfYield===null?"N/D":fcfYield.toFixed(2)+"%";
+ const balanceInputs={...missingFundamentals,...(real?secInputs:{}),...(asset?.marketCap!==null&&asset?.marketCap!==undefined&&secInputs.currency===currency?{marketCap:asset.marketCap}:{})};
+ const metrics=fundamentalMetrics(balanceInputs);
+ const rows:{label:string;value:string}[]=[];
+ const addPercent=(label:string,value:number|null|undefined)=>{if(typeof value==="number"&&Number.isFinite(value))rows.push({label,value:percent(value)});};
+ const addRatio=(label:string,value:number|null|undefined)=>{if(typeof value==="number"&&Number.isFinite(value))rows.push({label,value:value.toFixed(2)+"x"});};
+ const addMoney=(label:string,value:number|null|undefined)=>{if(typeof value==="number"&&Number.isFinite(value))rows.push({label,value:compactMoney(value,currency)});};
+ if(!isFundOrIndex&&!isFinancial){
+  addPercent("Gross margin",latest?.grossMargin);
+  addPercent("Operating margin",latest?.operatingMargin);
+  addPercent("Net margin",latest?.netMargin);
+  addPercent("Return on equity",latest?.roe);
+  if(secRoic.value!==null&&!isReitMlp)addPercent("Return on invested capital",secRoic.value/100);
+  if(secConversion.value!==null&&!isReitMlp)addPercent("Cash conversion",secConversion.value/100);
+  addRatio("Current ratio",metrics.currentRatio.value);
+  addMoney("Net debt",metrics.netDebt.value);
+  addRatio("Net debt / EBITDA",metrics.netDebtEbitda.value);
+  addRatio("Debt / equity",metrics.debtEquity.value);
+  addRatio("Interest coverage",metrics.interestCoverage.value);
+ }
+ if(earnings!==null)rows.unshift({label:"Earnings per share",value:money(earnings,currency)});
+ const pe=real?asset?.pe??null:company.price/company.eps;
+ if(typeof pe==="number"&&Number.isFinite(pe)&&pe>0)rows.splice(1,0,{label:"P/E",value:pe.toFixed(2)+"x"});
  return <div className="ci">
-  <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2 className="ci-security-title"><SecurityLogo ticker={symbol}/>{name}</h2><p><b>{symbol}</b> · {sector} · {currency} · {real?`as of ${asset?.priceDate??"N/D"}`:"Demo snapshot "+company.snapshotDate}</p></div><span className="ci-demo">{real?"COMPANY PROFILE":"ILLUSTRATIVE FINANCIALS"}</span></section>
+  <section className="ci-head"><div><div className="ci-overline">EQUITY RESEARCH / COMPANY INTELLIGENCE</div><h2 className="ci-security-title"><SecurityLogo ticker={symbol}/>{name}</h2><p><b>{symbol}</b> · {sector} · {currency}{real&&asset?.priceDate?" · "+asset.priceDate:""}</p></div><span className="ci-demo">COMPANY PROFILE</span></section>
   <section className="ci-metrics">
-   <article><span><Building2 size={16}/> REFERENCE PRICE</span><strong>{showMoney(referencePrice)}</strong><small>{real?"As of "+(asset?.priceDate??"N/D"):"Illustrative reference price"}</small></article>
-   <article><span><TrendingUp size={16}/> RETURN ON INVESTED CAPITAL</span><strong>{real?roicDisplay:company.roic.toFixed(1)+"%"}</strong><small>{real?(secRoic.value!==null?"Annual estimate · 21% assumed tax":isFundOrIndex||isFinancial||isReitMlp?secRoic.note:apple?"Apple SEC research · gross capital basis":"ROIC requires operating income and 2 FY balance sheets"):"Provided sample ratio"}</small></article>
-   <article><span><ChartNoAxesCombined size={16}/> FREE CASH FLOW YIELD</span><strong>{isFundOrIndex||isFinancial||isReitMlp?"N/A":fcfYieldVerified!==null?fcfYieldVerified.toFixed(2)+"%":apple&&referencePrice!==null&&currency==="USD"?(appleFcf!/referencePrice*100).toFixed(2)+"%":real?"N/D":fcfYield.toFixed(2)+"%"}</strong><small>{real?"TTM FCF / reference price":"FCF/share / price"}</small></article>
-   <article><span><Target size={16}/> EARNINGS YIELD</span><strong>{isFundOrIndex?"N/A":real?(earnings!==null&&referencePrice!==null&&referencePrice>0?show(earnings/referencePrice*100,"%"):"N/D"):earningsYield.toFixed(2)+"%"}</strong><small>{isFundOrIndex?"Not applicable to ETFs and indices":real?"EPS / reference price":"Illustrative ratio"}</small></article>
+   <article><span><Building2 size={16}/> REFERENCE PRICE</span><strong>{money(price,currency)}</strong><small>{real&&asset?.priceDate?asset.priceDate:""}</small></article>
+   <article><span><Target size={16}/> TRIANGULATED VALUE</span><strong>{money(triangulatedValue,currency)}</strong><small>Per share</small></article>
+   <article><span><ShieldCheck size={16}/> VALUATION RATING</span><strong>{rating}</strong><small>{confidence} confidence</small></article>
+   <article><span><ChartNoAxesCombined size={16}/> FREE CASH FLOW YIELD</span><strong>{fcfYieldLabel}</strong><small></small></article>
   </section>
   <VerifiedFundamentals ticker={symbol}/>
   <FinancialCharts asset={asset} company={company}/>
-  <section className="ci-panel ci-wide"><div className="ci-panel-head"><h3>Liquidity, leverage & enterprise value</h3><span>{secInputs.source?(manualTtmInput?"TTM through "+secInputs.periodEnd+" · balance sheet "+secInputs.balanceSheetPeriodEnd:"FY "+(secInputs.fiscalYear??"N/D")):apple?"FY 2026":isFundOrIndex?"Not applicable":"Data pending"}</span></div><div className="ci-balance-grid">{(isFinancial||isFundOrIndex?[]:balanceRows).map(([label,metric])=><div key={label}><span>{label}</span><b title={"Requires: "+metric.required.join(", ")}>{metric.value===null?"N/D":metric.unit==="money"?compactMoney(metric.value,financialCurrency):metric.value.toFixed(2)+(metric.unit==="percent"?"%":"x")}</b></div>)}</div><p className="ci-note">Amounts in USD. Periods are shown above.</p></section>
-  <div className="ci-main">
-   <section className="ci-panel"><div className="ci-panel-head"><h3>Financial overview</h3><span>{real?"Real partial snapshot":"Sample snapshot"}</span></div><div className="ci-fundamentals">
-    <div><span>Earnings per share</span><b>{isFundOrIndex?"N/A":showMoney(earnings)}</b></div>
-    <div><span>P/E · snapshot</span><b>{isFundOrIndex?"N/A":snapshotPE!==null&&snapshotPE>0?snapshotPE.toFixed(2)+"x":real?"N/D":(company.price/company.eps).toFixed(2)+"x"}</b></div>
-    <div><span>Industry P/E · median</span><b>{isFundOrIndex?"N/A":"N/D · peer set pending"}</b></div>
-    <div><span>52W range · Sheets</span><b>{asset?.low52!=null&&asset?.high52!=null?showMoney(asset.low52)+" – "+showMoney(asset.high52):"N/D"}</b></div>
-    <div><span>52W drawdown · Sheets</span><b>{asset?.drawdown52==null?"N/D":(asset.drawdown52*100).toFixed(1)+"%"}</b></div>
-    <div><span>Operating income · FY {secLatest?.year??"—"}</span><b>{isFundOrIndex?"N/A":secOperatingIncome!==null?compactMoney(secOperatingIncome,financialCurrency):"N/D"}</b></div>
-    <div><span>Operating margin · FY {secLatest?.year??"—"}</span><b>{isFundOrIndex||isFinancial?"N/A":secOperatingMargin===null?"N/D":secOperatingMargin.toFixed(1)+"%"}</b></div>
-    <div><span>FCF / net income · FY {secLatest?.year??"—"}</span><b>{isFundOrIndex||isFinancial||isReitMlp?"N/A":secCashConversion===null?"N/D":secCashConversion.toFixed(1)+"%"}</b></div>
-    <div><span>{manualTtmInput?"EBITDA · TTM · operating":"EBITDA · FY "+(secLatest?.year??"—")+" · operating"}</span><b>{isFundOrIndex||isFinancial?"N/A":balanceInputs.ebitda!==null&&balanceInputs.ebitda!==undefined?compactMoney(balanceInputs.ebitda,financialCurrency):"N/D · D&A pending"}</b></div>
-    <div><span>Free cash flow per share</span><b>{isFundOrIndex||isFinancial||isReitMlp?"N/A":secFcf.perShare!==null?new Intl.NumberFormat("en-US",{style:"currency",currency:secFcf.currency||"USD"}).format(secFcf.perShare):real?"N/D":fmt(company.fcfPerShare)}</b></div>
-    <div><span>FCF / EPS conversion</span><b>{real?conversionDisplay:(company.fcfPerShare/company.eps*100).toFixed(1)+"%"}</b></div>
-    <div><span>Return on invested capital</span><b>{real?roicDisplay:company.roic.toFixed(1)+"%"}</b></div>
-    <div><span>Sector</span><b>{sector}</b></div>
-    
-   </div><p className="ci-note">{manualTtmInput?"Income statement and cash-flow figures are TTM; balance sheet is at period end.":"Amounts are shown for the selected fiscal year."}</p></section>
-   <section className="ci-panel"><div className="ci-panel-head"><h3>Quality lens</h3><span>Interpretation framework</span></div>
-    <div className="ci-quality"><div className="ci-quality-line"><span>Capital efficiency</span><strong>{real?roicDisplay:company.roic.toFixed(1)+"% ROIC*"}</strong></div><div className="ci-bar"><span style={{width:`${real?(secRoic.value!==null?Math.min(100,Math.max(0,secRoic.value/25*100)):0):Math.min(100,Math.max(0,company.roic/25*100))}%`}}/></div>
-    <div className="ci-quality-line"><span>Cash earnings conversion</span><strong>{real?conversionDisplay:(company.fcfPerShare/company.eps*100).toFixed(1)+"%*"}</strong></div><div className="ci-bar"><span style={{width:`${real?(secConversion.value!==null?Math.min(100,Math.max(0,secConversion.value)):0):Math.min(100,Math.max(0,company.fcfPerShare/company.eps*70))}%`}}/></div>
-    <div className="ci-quality-line"><span>Leverage / balance-sheet risk</span><strong>Data required</strong></div><div className="ci-bar ci-empty"></div></div>
-    <p className="ci-note">{real?"Cash conversion uses same-year SEC FCF and net income. ROIC estimates use the latest available annual SEC operating income, average annual invested capital and an explicitly assumed 21% tax rate; where unavailable, the metric remains N/D. Apple historical ROIC fallback uses a different gross-capital methodology. Not a verified sector score.":"* Ratios use illustrative data. Quality scores remain disabled until sector-specific definitions are established."}</p></section>
-   <section className="ci-panel ci-wide"><div className="ci-panel-head"><h3>From quality to valuation</h3><span>Connected workflow</span></div>
-    <div className="ci-next"><div><span>{real?"Triangulated buy-under target":"Illustrative buy-under target"}</span><strong>{real?showMoney(valuation?.buyUnder??null):fmt(company.buyBelow)}</strong><small>{real?`Intrinsic value ${showMoney(valuation?.intrinsicValue??null)} · ${valuation?.eligibleFamilies??0}/${valuation?.familyCountRequired??2} required families · ${valuation?.confidence??"INSUFFICIENT"}`:"Gap versus price: "+gap.toFixed(1)+"%"}</small></div><p>{real?valuation?.status==="TRIANGULATED"?`The same ${showMoney(valuation.intrinsicValue)} family-weighted intrinsic estimate appears in Home and beside the price chart. Buy-under applies ${valuation.marginOfSafety}% margin of safety; SEC filings through ${valuation.sourceAsOf??"N/D"}, market snapshot ${valuation.priceDate??"N/D"}.`:valuation?.methods.filter(method=>method.status==="PENDING").map(method=>method.label+": "+method.reason).join(" ")||"A triangulated value is pending until at least two eligible valuation families have verified inputs.":"Review business fundamentals, select an appropriate valuation model, and carry the same ticker into the Options Lab. Current buy-under values are illustrative inputs, not computed fair values."}</p><NavLink to="/valuation">Continue to Valuation Lab <ArrowRight size={16}/></NavLink></div>
-   </section>
-  </div><div className="ci-foot"><ShieldCheck size={15}/> FINANCIAL INFORMATION · NOT INVESTMENT ADVICE</div>
+  <section className="ci-panel ci-wide">
+   <div className="ci-panel-head"><h3>Key financial metrics</h3><span>{latest?"FY "+latest.year:""}</span></div>
+   <div className="ci-fundamentals">{rows.length?rows.map(row=><div key={row.label}><span>{row.label}</span><b>{row.value}</b></div>):<div><span>No metrics available</span><b>—</b></div>}</div>
+   <NavLink className="textlink" to="/valuation">Open Valuation Lab →</NavLink>
+  </section>
+  <div className="ci-foot"><ShieldCheck size={15}/> FINANCIAL INFORMATION · NOT INVESTMENT ADVICE</div>
  </div>;
 }
