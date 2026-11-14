@@ -234,7 +234,7 @@
 .ci-quote-change.neutral{color:#60758c}
 .ci-quote-change small{font-size:12px;font-weight:600;color:#64748b}
 .ci-quote-asof{color:#66788e;font-size:12px;line-height:1.4}
-.ci-quote-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.4vw,22px);min-width:0}
+.ci-quote-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,22px);min-width:0}
 .ci-quote-fact{display:grid;align-content:center;gap:7px;min-width:0}
 .ci-quote-fact>span{min-height:32px;color:#62748a;font-size:13px;font-weight:600;line-height:1.3}
 .ci-quote-fact>strong{color:#182b43;font-size:18px;font-weight:750;line-height:1.2;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
@@ -248,4 +248,68 @@
  .ci-quote-fact>span{min-height:0;font-size:13px}
  .ci-quote-fact>strong{font-size:17px}
  .ci-quote-price-line>strong{font-size:29px}
+}
+
+
+/* The price header already shows the security price, so the OC module displays one
+   fair-value badge and gives the comparison scale the recovered width. */
+.company-market-valuation-row>.home-valuation-card{
+ grid-template-columns:minmax(250px,.85fr) 150px minmax(420px,1.7fr);
+}
+.company-market-valuation-row .home-valuation-heading{
+ grid-column:1;
+ grid-row:1;
+ grid-template-columns:minmax(0,1fr) 150px;
+}
+.company-market-valuation-row .home-valuation-verdict,
+.company-market-valuation-row .home-fair-value-box{
+ width:150px;
+ min-height:62px;
+ box-sizing:border-box;
+}
+.company-market-valuation-row .home-fair-value-box{
+ grid-column:2;
+ grid-row:1;
+ align-self:stretch;
+}
+.company-market-valuation-row .home-value-scale{
+ grid-column:3;
+ grid-row:1;
+}
+@container (max-width:1050px){
+ .company-market-valuation-row>.home-valuation-card{
+  grid-template-columns:minmax(0,.9fr) minmax(150px,1.1fr);
+ }
+ .company-market-valuation-row .home-valuation-heading{
+  grid-column:1;
+  grid-row:1;
+  grid-template-columns:minmax(0,1fr) 150px;
+ }
+ .company-market-valuation-row .home-fair-value-box{
+  grid-column:2;
+  grid-row:1;
+ }
+ .company-market-valuation-row .home-value-scale{
+  grid-column:1/-1;
+  grid-row:2;
+ }
+ .company-market-valuation-row .home-valuation-footer{
+  grid-column:1/-1;
+  grid-row:3;
+ }
+}
+@container (max-width:650px){
+ .company-market-valuation-row>.home-valuation-card{
+  grid-template-columns:minmax(0,1fr);
+ }
+ .company-market-valuation-row .home-valuation-heading,
+ .company-market-valuation-row .home-fair-value-box,
+ .company-market-valuation-row .home-value-scale,
+ .company-market-valuation-row .home-valuation-footer{
+  grid-column:1;
+  grid-row:auto;
+ }
+ .company-market-valuation-row .home-valuation-heading{
+  grid-template-columns:minmax(0,1fr) 150px;
+ }
 }

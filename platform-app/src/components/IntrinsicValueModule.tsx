@@ -37,27 +37,27 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
  return <article className="home-card home-valuation-card">
   <header className="home-card-heading home-valuation-heading">
    <div className="home-valuation-title">
-    <span className="home-eyebrow">PRICE VS. TRIANGULATED VALUE</span>
+    <span className="home-eyebrow">PRICE VS. FAIR VALUE</span>
     <h3 className="home-security-heading"><span className="home-security-name">{ticker} · {name}</span><SecurityLogo ticker={ticker} onMarketResolved={onMarketResolved}/><small className="home-market-badge">{market??(currency==="USD"?"U.S. MARKET":"MARKET N/D")}</small></h3>
-    <p>{valuation?.status==="TRIANGULATED"?"Triangulated valuation · "+confidence.toLowerCase()+" confidence":"Triangulated valuation pending"}</p>
+    <p>{valuation?.status==="TRIANGULATED"?"Fair value · "+confidence.toLowerCase()+" confidence":"Fair value pending"}</p>
    </div>
    <div className={"home-valuation-verdict is-"+valuationState} aria-live="polite">
     <strong>{comparisonPercent===null?"N/D":comparisonPercent.toFixed(1)+"%"}</strong>
     <span className="home-valuation-verdict-label">{comparisonText(comparison)}</span>
    </div>
   </header>
-  <div className="home-value-pair home-intrinsic-value-pair">
-   <div><span>Reference Price</span><strong>{getMoney(price,currency)}</strong></div>
-   <div><span>Triangulated Value</span><strong>{getMoney(intrinsic,currency)}</strong></div>
+  <div className="home-fair-value-box" aria-label={"Fair value "+getMoney(intrinsic,currency)}>
+   <strong>{getMoney(intrinsic,currency)}</strong>
+   <span className="home-valuation-verdict-label">FAIR VALUE</span>
   </div>
-  <div className="home-value-scale" role="img" aria-label={"Reference price "+getMoney(price,currency)+" and triangulated value "+getMoney(intrinsic,currency)}>
+  <div className="home-value-scale" role="img" aria-label={"Price "+getMoney(price,currency)+" and fair value "+getMoney(intrinsic,currency)}>
    <div className="home-value-range-heading">
-    <strong>PRICE VS VALUE</strong>
-    <div className="home-value-range-legend"><span><i className="undervalued-key"/>BELOW VALUE</span><span><i className="overvalued-key"/>ABOVE VALUE</span></div>
+    <strong>PRICE VS FAIR VALUE</strong>
+    <div className="home-value-range-legend"><span><i className="undervalued-key"/>BELOW FAIR VALUE</span><span><i className="overvalued-key"/>ABOVE FAIR VALUE</span></div>
    </div>
    <div className="home-value-range-plot">
-    {intrinsic!==null&&<div className="home-value-callout intrinsic" style={{left:calloutPosition(intrinsic)+"%"}}><strong>Triangulated Value</strong><span>{getMoney(intrinsic,currency)}</span></div>}
-    {price!==null&&<div className="home-value-callout market" style={{left:calloutPosition(price)+"%"}}><strong>Reference Price</strong><span>{getMoney(price,currency)}</span></div>}
+    {intrinsic!==null&&<div className="home-value-callout intrinsic" style={{left:calloutPosition(intrinsic)+"%"}}><strong>Fair Value</strong><span>{getMoney(intrinsic,currency)}</span></div>}
+    {price!==null&&<div className="home-value-callout market" style={{left:calloutPosition(price)+"%"}}><strong>Price</strong><span>{getMoney(price,currency)}</span></div>}
     <div className="home-value-track" style={{background:"linear-gradient(90deg,#e6f2fc 0%,#e6f2fc "+valuePosition(intrinsic)+"%,#fff0f0 "+valuePosition(intrinsic)+"%,#fceaf0 100%)"}}>
      {intrinsic===null?null:<i className="dcf-marker" style={{left:valuePosition(intrinsic)+"%"}}/>}
      {price===null?null:<i className="market-marker" style={{left:valuePosition(price)+"%"}}/>}
@@ -70,6 +70,6 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
     <span className="range-end finish">{getMoney(valueScaleMax,currency)}</span>
    </div>
   </div>
-  <div className="home-valuation-footer"><strong>Valuation confidence · {confidence.toLowerCase()}</strong><span>{valuation?.status==="TRIANGULATED"?"Current triangulated estimate.":"The estimate will appear when sufficient valuation data is available."}</span></div>
+  <div className="home-valuation-footer"><strong>Valuation confidence · {confidence.toLowerCase()}</strong><span>{valuation?.status==="TRIANGULATED"?"Current fair value estimate.":"The estimate will appear when sufficient valuation data is available."}</span></div>
  </article>;
 }

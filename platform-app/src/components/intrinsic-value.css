@@ -81,3 +81,40 @@
  .home-value-range-heading{gap:4px}
  .home-value-callout{min-width:68px}
 }
+
+
+/* Fair value badge matches the size and type hierarchy of the red/green verdict. */
+.home-fair-value-box{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:1px;
+ width:150px;
+ max-width:100%;
+ min-height:62px;
+ box-sizing:border-box;
+ padding:8px;
+ background:#163b64;
+ color:#fff;
+ text-align:center;
+}
+.home-fair-value-box>strong{
+ color:#fff;
+ font-size:clamp(25px,6cqi,42px);
+ line-height:1;
+ letter-spacing:-.7px;
+ font-variant-numeric:tabular-nums;
+}
+.home-fair-value-box .home-valuation-verdict-label{
+ color:#fff;
+ font-size:clamp(10px,2.5cqi,14px);
+ line-height:1.12;
+ font-weight:850;
+ letter-spacing:.55px;
+}
+@media(max-width:700px){
+ .home-fair-value-box{min-height:65px}
+ .home-fair-value-box>strong{font-size:clamp(25px,8cqi,36px)}
+ .home-fair-value-box .home-valuation-verdict-label{font-size:10px}
+}

@@ -55,17 +55,16 @@ export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation,show
   setChartMarkets(current=>current[ticker]===market?current:{...current,[ticker]:market});
  };
  const chart=ticker&&!compact?(chartMarket?<TradingViewSecurityChart ticker={ticker} symbol={chartMarket+":"+ticker}/>:<section className="ci-market-chart" aria-label={ticker+" interactive TradingView chart"}><div className="ci-market-chart-placeholder"><div><SecurityLogo ticker={ticker} size="small" onMarketResolved={resolveMarket}/><span>Connecting to TradingView…</span></div></div></section>):null;
- const marketSnapshot=ticker&&!compact?<section className="ci-native-quote" aria-label={quoteName+" market snapshot"}>
+ const marketSnapshot=ticker&&!compact?<section className="ci-native-quote" aria-label={quoteName+" price and key data"}>
   <div className="ci-quote-identity">
    <SecurityLogo ticker={ticker} onMarketResolved={resolveMarket}/>
    <div className="ci-quote-identity-copy"><h2>{quoteName}</h2><p><b>{ticker}</b>{exchangeLabel&&<span>· {exchangeLabel}</span>}</p></div>
   </div>
   <div className="ci-quote-price">
    <div className="ci-quote-price-line"><strong>{quoteMoney(quoteAsset?.price,quoteCurrency)}</strong><span className={"ci-quote-change "+quoteChangeClass}>{quotePercent(quoteChange)}<small>1D</small></span></div>
-   <span className="ci-quote-asof">Market snapshot · {marketSnapshotDate}</span>
+   <span className="ci-quote-asof">Price · {marketSnapshotDate}</span>
   </div>
   <div className="ci-quote-facts">
-   <div className="ci-quote-fact"><span>Upcoming earnings</span><strong>N/D</strong></div>
    <div className="ci-quote-fact"><span>EPS · TTM</span><strong>{quoteMoney(quoteAsset?.eps,quoteCurrency)}</strong></div>
    <div className="ci-quote-fact"><span>Market cap</span><strong>{quoteMoney(quoteAsset?.marketCap,quoteCurrency,true)}</strong></div>
    <div className="ci-quote-fact"><span>Dividend yield</span><strong>{quotePercent(quoteAsset?.dividendYield)}</strong></div>
