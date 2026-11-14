@@ -1,6 +1,6 @@
 import type {ValuationBridge} from "../core/valuationTriangulation";
 import {SecurityLogo} from "./SecurityLogo";
-import "./home-dashboard.css";
+import "./intrinsic-value.css";
 
 type ListingMarket="NASDAQ"|"NYSE";
 type IntrinsicValueModuleProps={
