@@ -478,7 +478,7 @@ body{overflow-x:hidden}
    are just wider than the navigation column; content uses the remaining grid. */
 @media(min-width:1600px){
  .shell{
-  width:72vw!important;
+  width:82vw!important;
   max-width:none!important;
   grid-template-columns:13.5vw minmax(0,1fr)!important;
   column-gap:1vw!important;
