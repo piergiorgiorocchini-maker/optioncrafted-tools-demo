@@ -309,3 +309,16 @@ body{overflow-x:hidden}
  .dashboard-page-company .vf-panel .vf-table th,.dashboard-page-company .vf-panel .vf-table td{font-size:12px;padding:8px 5px}
  .dashboard-page-company .vf-panel .vf-statement-tabs button{font-size:13px}
 }
+
+
+/* Desktop workspace proportions: treat navigation as a full-sized fixed module beside the dashboard. */
+@media(min-width:901px){
+ .shell{width:100%;max-width:none;margin-inline:0;grid-template-columns:minmax(338px,22vw) minmax(0,1fr)}
+ .sidebar{width:auto;min-width:338px;padding-inline:24px}
+ .shell>main{min-width:0}
+ .terminal-heading,.dashboard,.shell>main>footer{width:min(calc(100% - 64px),2300px);max-width:2300px}
+}
+@media(min-width:1600px){
+ .shell{grid-template-columns:minmax(350px,22vw) minmax(0,1fr)}
+ .sidebar{min-width:350px;padding-inline:26px}
+}
