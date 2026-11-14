@@ -588,3 +588,102 @@ body{overflow-x:hidden}
  .dashboard-page-company .ci-year strong,
  .dashboard-page-company .ci-legend{font-size:16px!important}
 }
+
+
+/* Company Intelligence uses a clean white canvas around TradingView widgets. */
+body:has(.dashboard-page-company),
+body:has(.dashboard-page-company) #root,
+body:has(.dashboard-page-company) .shell,
+body:has(.dashboard-page-company) .shell>main,
+body:has(.dashboard-page-company) main,
+body:has(.dashboard-page-company) .terminal-heading,
+body:has(.dashboard-page-company) .dashboard-page-company{
+ background:#fff!important;
+}
+body:has(.dashboard-page-company) .sidebar{
+ background:#fff!important;
+ color:#173451!important;
+ border-right:1px solid #dbe4ed!important;
+ box-shadow:none!important;
+}
+body:has(.dashboard-page-company) .brand b,
+body:has(.dashboard-page-company) .brand small,
+body:has(.dashboard-page-company) .sidebar>.overline,
+body:has(.dashboard-page-company) .sidebar .nav-group>.overline,
+body:has(.dashboard-page-company) .sidebar .navlink,
+body:has(.dashboard-page-company) .sidebar .nav-sublink,
+body:has(.dashboard-page-company) .sidebar .nav-expand,
+body:has(.dashboard-page-company) .sidebar-foot{
+ color:#173451!important;
+}
+body:has(.dashboard-page-company) .sidebar>.overline,
+body:has(.dashboard-page-company) .sidebar .nav-group>.overline{
+ color:#62788d!important;
+}
+body:has(.dashboard-page-company) .sidebar .nav-group,
+body:has(.dashboard-page-company) .sidebar .nav-submenu{
+ border-color:#dbe4ed!important;
+}
+body:has(.dashboard-page-company) .sidebar .navlink.active,
+body:has(.dashboard-page-company) .sidebar .nav-sublink.active{
+ color:#075da8!important;
+ background:#eef6ff!important;
+ border-color:#b9d9f5!important;
+ box-shadow:inset 3px 0 #2183d4!important;
+}
+body:has(.dashboard-page-company) .sidebar .navlink:not(.active):hover,
+body:has(.dashboard-page-company) .sidebar .nav-sublink:hover,
+body:has(.dashboard-page-company) .sidebar .nav-expand:hover{
+ color:#075da8!important;
+ background:#f4f9ff!important;
+}
+body:has(.dashboard-page-company) .sidebar .nav-expand{
+ background:#fff!important;
+ border-color:#d4e0eb!important;
+}
+body:has(.dashboard-page-company) .sidebar-plan{
+ background:#fff!important;
+ border:1px solid #d4e0eb!important;
+ color:#173451!important;
+}
+body:has(.dashboard-page-company) .sidebar-plan p{
+ color:#516b83!important;
+}
+body:has(.dashboard-page-company) .sidebar-plan a{
+ color:#1769ab!important;
+ background:#fff!important;
+ border-color:#9fc8eb!important;
+}
+body:has(.dashboard-page-company) .terminal-topbar{
+ background:#fff!important;
+ border-bottom-color:#dbe4ed!important;
+}
+body:has(.dashboard-page-company) .mobile-appbar{
+ color:#173451!important;
+ background:#fff!important;
+ border-bottom:1px solid #dbe4ed!important;
+ box-shadow:none!important;
+}
+body:has(.dashboard-page-company) .mobile-appbar strong{
+ color:#173451!important;
+}
+body:has(.dashboard-page-company) .mobile-menu-toggle{
+ color:#173451!important;
+ background:#fff!important;
+ border-color:#cbd9e7!important;
+}
+body:has(.dashboard-page-company) .dashboard-page-company .ci-metrics article,
+body:has(.dashboard-page-company) .dashboard-page-company .ci-panel,
+body:has(.dashboard-page-company) .dashboard-page-company .vf-statements,
+body:has(.dashboard-page-company) .dashboard-page-company .fc-panel,
+body:has(.dashboard-page-company) .dashboard-page-company .home-valuation-card,
+body:has(.dashboard-page-company) .dashboard-page-company .fdve-panel,
+body:has(.dashboard-page-company) .dashboard-page-company .tv-company-widget,
+body:has(.dashboard-page-company) .dashboard-page-company .ci-market-chart{
+ background-color:#fff!important;
+}
+body:has(.dashboard-page-company) .dashboard-page-company .ci-tradingview-note{
+ background:#fff!important;
+ border:1px solid #dbe4ed!important;
+ border-left:3px solid #2183d4!important;
+}
