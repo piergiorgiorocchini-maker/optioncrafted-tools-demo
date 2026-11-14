@@ -14,7 +14,7 @@
 .home-valuation-verdict.is-undervalued{background:#0a873f}
 .home-valuation-verdict.is-fair-value{background:#315c86}
 .home-valuation-verdict.is-unavailable{background:#52667d}
-.home-valuation-verdict>strong{font-size:clamp(25px,6cqi,42px);line-height:1;letter-spacing:-.7px}
+.home-valuation-verdict>strong{font-size:clamp(24px,3cqi,30px);line-height:1;letter-spacing:-.7px}
 .home-valuation-verdict-label{font-size:clamp(10px,2.5cqi,14px);line-height:1.12;font-weight:850;letter-spacing:.55px}
 .home-intrinsic-value-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0}
 .home-intrinsic-value-pair>div{display:grid;align-content:center;gap:4px;min-width:0;min-height:58px;padding:10px 11px;background:#163b64;color:#fff}
@@ -60,7 +60,7 @@
  .home-security-name{white-space:normal;font-size:16px}
  .home-valuation-heading .security-logo{width:22px;height:22px}
  .home-valuation-verdict{min-height:65px}
- .home-valuation-verdict>strong{font-size:clamp(25px,8cqi,36px)}
+ .home-valuation-verdict>strong{font-size:clamp(24px,5cqi,28px)}
  .home-valuation-verdict-label{font-size:10px}
  .home-intrinsic-value-pair>div{min-height:54px;padding:9px}
  .home-intrinsic-value-pair span{font-size:9px}
@@ -101,7 +101,7 @@
 }
 .home-fair-value-box>strong{
  color:#fff;
- font-size:clamp(25px,6cqi,42px);
+ font-size:clamp(24px,3cqi,30px);
  line-height:1;
  letter-spacing:-.7px;
  font-variant-numeric:tabular-nums;
@@ -115,6 +115,6 @@
 }
 @media(max-width:700px){
  .home-fair-value-box{min-height:65px}
- .home-fair-value-box>strong{font-size:clamp(25px,8cqi,36px)}
+ .home-fair-value-box>strong{font-size:clamp(24px,5cqi,28px)}
  .home-fair-value-box .home-valuation-verdict-label{font-size:10px}
 }
