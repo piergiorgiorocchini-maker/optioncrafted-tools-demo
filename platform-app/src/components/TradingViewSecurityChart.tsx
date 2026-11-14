@@ -19,6 +19,16 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
   container.replaceChildren();
   if(!symbol)return;
 
+  const applyEmbedScale=()=>{
+   const viewportWidth=window.innerWidth||1;
+   const displayWidth=Math.max(1,window.screen.width||viewportWidth);
+   const scale=Math.min(2,Math.max(1.15,viewportWidth/displayWidth));
+   container.style.setProperty("--tv-content-scale",scale.toFixed(3));
+   container.style.setProperty("--tv-content-inverse",(1/scale).toFixed(4));
+  };
+  applyEmbedScale();
+  window.addEventListener("resize",applyEmbedScale);
+
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
   widget.style.height="calc(100% - 24px)";
@@ -69,7 +79,10 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
   });
 
   container.append(widget,attribution,script);
-  return ()=>container.replaceChildren();
+  return ()=>{
+   window.removeEventListener("resize",applyEmbedScale);
+   container.replaceChildren();
+  };
  },[ticker,symbol,compactViewport]);
 
  return <section className="ci-market-chart" aria-label={ticker+" interactive TradingView chart"}>
