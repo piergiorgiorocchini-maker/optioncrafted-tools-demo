@@ -338,3 +338,11 @@ body{overflow-x:hidden}
 
 /* Preserve normal main flow while keeping modules adjacent to the sidebar. */
 @media(min-width:901px){.shell>main{display:block}}
+
+/* Enforce equal sidebar width and grid track on wide screens, including the home workspace. */
+@media(min-width:901px){
+ .shell{display:grid!important;width:100%!important;max-width:none!important;margin:0!important;grid-template-columns:350px minmax(0,1fr)!important}
+ .sidebar{grid-column:1;grid-row:1 / span 3;width:350px!important;min-width:350px!important}
+ .shell>main{grid-column:2;grid-row:1 / span 3;width:auto!important;min-width:0!important;max-width:none!important;display:block!important;margin:0!important}
+ .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+}
