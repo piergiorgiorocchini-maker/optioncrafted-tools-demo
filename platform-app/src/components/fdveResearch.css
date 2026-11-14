@@ -37,3 +37,18 @@
 .ci-market-chart-widget{height:100%!important;min-height:0!important}
 @media(max-width:900px){.ci-market-chart{height:390px;min-height:390px}}
 @media(max-width:700px){.ci-market-chart{height:300px;min-height:300px}.ci-market-chart-widget,.ci-market-chart-placeholder{height:260px!important;min-height:260px!important}}
+
+
+/* TradingView Advanced Chart: leave room for intervals, indicators and drawing tools. */
+.ci-market-chart{height:520px;min-height:520px}
+.company-market-top>.ci-market-chart .ci-market-chart-widget{display:block;height:100%!important;min-height:0!important;min-width:0}
+.company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;width:100%!important}
+.company-market-top>.ci-market-chart .tradingview-widget-copyright{display:flex;justify-content:center;align-items:center;gap:3px;height:24px;padding:2px 0 0;color:#70839a;font-size:11px;line-height:1.2}
+.company-market-top>.ci-market-chart .tradingview-widget-copyright a{color:#2862a2;text-decoration:none}
+.company-market-top>.ci-market-chart .tradingview-widget-copyright a:hover{text-decoration:underline}
+@media(max-width:900px){.ci-market-chart{height:450px;min-height:450px}}
+@media(max-width:700px){
+ .ci-market-chart{height:370px;min-height:370px}
+ .company-market-top>.ci-market-chart .ci-market-chart-widget{height:100%!important;min-height:0!important}
+ .company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;min-height:0!important}
+}
