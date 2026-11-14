@@ -55,6 +55,7 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
   const host=hostRef.current;
   if(!host||!symbol)return;
   host.replaceChildren();
+  const shouldScale=kind!=="symbol-info";
   const applyEmbedScale=()=>{
    const viewportWidth=window.innerWidth||1;
    const displayWidth=Math.max(1,window.screen.width||viewportWidth);
@@ -62,8 +63,13 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
    host.style.setProperty("--tv-content-scale",scale.toFixed(3));
    host.style.setProperty("--tv-content-inverse",(1/scale).toFixed(4));
   };
-  applyEmbedScale();
-  window.addEventListener("resize",applyEmbedScale);
+  if(shouldScale){
+   applyEmbedScale();
+   window.addEventListener("resize",applyEmbedScale);
+  }else{
+   host.style.removeProperty("--tv-content-scale");
+   host.style.removeProperty("--tv-content-inverse");
+  }
 
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
@@ -95,12 +101,12 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
   });
 
   host.append(widget,attribution,script);
-  return ()=>{window.removeEventListener("resize",applyEmbedScale);host.replaceChildren()};
- },[config.height,config.options,config.script,symbol,ticker]);
+  return ()=>{if(shouldScale)window.removeEventListener("resize",applyEmbedScale);host.replaceChildren()};
+ },[config.height,config.options,config.script,kind,symbol,ticker]);
 
  return <section className={"tv-company-widget tv-company-widget-"+kind} aria-label={title??titleByKind[kind]}>
   {(title||description)&&<header className="tv-company-widget-heading"><div><h3>{title??titleByKind[kind]}</h3>{description&&<p>{description}</p>}</div><span>TradingView</span></header>}
-  {symbol?<div ref={hostRef} className="tv-company-widget-host tradingview-widget-container"/>:
+  {symbol?<div ref={hostRef} className={"tv-company-widget-host tradingview-widget-container "+(kind==="symbol-info"?"tv-company-widget-host-native":"tv-company-widget-host-scaled")}/>:
    <div className="tv-company-widget-waiting"><SecurityLogo ticker={ticker} size="small" onMarketResolved={onMarketResolved}/><span>Resolving the exchange for <b>{ticker}</b>…</span></div>}
  </section>;
 }
