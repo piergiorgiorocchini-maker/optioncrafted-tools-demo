@@ -52,3 +52,27 @@
  .company-market-top>.ci-market-chart .ci-market-chart-widget{height:100%!important;min-height:0!important}
  .company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;min-height:0!important}
 }
+
+/* Keep the TradingView chart and valuation card level when they share a row. */
+@media(min-width:701px){
+ .company-market-top{align-items:stretch}
+ .company-market-top>.ci-market-chart,
+ .company-market-top>.home-valuation-card{
+  height:auto!important;
+  min-height:0!important;
+  align-self:stretch;
+ }
+ .company-market-top>.ci-market-chart{
+  display:flex;
+  flex-direction:column;
+ }
+ .company-market-top>.ci-market-chart .ci-market-chart-widget{
+  flex:1 1 auto;
+  height:auto!important;
+  min-height:0!important;
+ }
+ .company-market-top>.ci-market-chart .tradingview-widget-container__widget{
+  height:calc(100% - 24px)!important;
+  min-height:0!important;
+ }
+}
