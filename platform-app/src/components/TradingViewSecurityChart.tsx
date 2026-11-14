@@ -19,16 +19,6 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
   container.replaceChildren();
   if(!symbol)return;
 
-  const applyEmbedScale=()=>{
-   const viewportWidth=window.innerWidth||1;
-   const displayWidth=Math.max(1,window.screen.width||viewportWidth);
-   const scale=Math.min(2,Math.max(1.15,viewportWidth/displayWidth));
-   container.style.setProperty("--tv-content-scale",scale.toFixed(3));
-   container.style.setProperty("--tv-content-inverse",(1/scale).toFixed(4));
-  };
-  applyEmbedScale();
-  window.addEventListener("resize",applyEmbedScale);
-
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
   widget.style.height="calc(100% - 24px)";
@@ -56,7 +46,7 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
    autosize:true,
    locale:"en",
    timezone:"exchange",
-   interval:"D",
+   interval:"W",
    theme:"light",
    style:"1",
    backgroundColor:"rgba(255, 255, 255, 1)",
@@ -74,13 +64,12 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
    show_popup_button:true,
    popup_width:"1200",
    popup_height:"800",
-   studies:["MACD@tv-basicstudies"],
+   studies:[],
    support_host:"https://www.tradingview.com"
   });
 
   container.append(widget,attribution,script);
   return ()=>{
-   window.removeEventListener("resize",applyEmbedScale);
    container.replaceChildren();
   };
  },[ticker,symbol,compactViewport]);
