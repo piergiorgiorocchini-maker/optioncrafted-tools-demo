@@ -407,3 +407,33 @@ body{overflow-x:hidden}
  .shell>main{grid-column:2;grid-row:1;display:block!important;width:auto!important;min-width:0!important;margin:0!important;padding:0 14px 28px!important}
  .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
 }
+
+/* Final workstation proportions: centered width, readable navigation and balanced module spacing. */
+@media(min-width:1200px){
+ .shell{
+  width:min(calc(100% - 48px),1400px)!important;
+  max-width:1400px!important;
+  grid-template-columns:300px minmax(0,1fr)!important;
+  column-gap:12px!important;
+ }
+ .sidebar{
+  width:300px!important;min-width:300px!important;
+  padding:26px 18px!important;
+ }
+ .sidebar .brand b{font-size:19px!important}
+ .sidebar .brand small{font-size:11px!important}
+ .sidebar .overline{font-size:10px!important}
+ .sidebar .navlink{
+  min-height:46px!important;padding:11px 11px!important;
+  font-size:18px!important;line-height:1.4!important;font-weight:500!important;
+ }
+ .sidebar .nav-sublink,.sidebar .nav-group a{
+  min-height:40px!important;padding:9px 9px!important;
+  font-size:17px!important;line-height:1.4!important;font-weight:450!important;
+ }
+ .shell>main{padding:0 16px 32px!important}
+ .shell>main>.terminal-topbar{
+  margin-left:-16px!important;margin-right:-16px!important;
+  padding-left:16px!important;padding-right:16px!important;
+ }
+}
