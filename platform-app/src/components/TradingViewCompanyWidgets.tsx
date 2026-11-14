@@ -54,7 +54,8 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
  useEffect(()=>{
   const host=hostRef.current;
   if(!host||!symbol)return;
-  host.replaceChildren();
+  let disposed=false;
+  let settled=false;
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
   if(config.height!==undefined)widget.style.height=config.height+"px";
@@ -84,13 +85,15 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
    ...config.options
   });
 
+  script.onload=()=>{settled=true;if(disposed)host.replaceChildren()};
+  script.onerror=()=>{settled=true;if(disposed)host.replaceChildren()};
   host.append(widget,attribution,script);
-  return ()=>{host.replaceChildren()};
+  return ()=>{disposed=true;if(settled)host.replaceChildren()};
  },[config.height,config.options,config.script,kind,symbol,ticker]);
 
  return <section className={"tv-company-widget tv-company-widget-"+kind} aria-label={title??titleByKind[kind]}>
   {(title||description)&&<header className="tv-company-widget-heading"><div><h3>{title??titleByKind[kind]}</h3>{description&&<p>{description}</p>}</div><span>TradingView</span></header>}
-  {symbol?<div ref={hostRef} className="tv-company-widget-host tv-company-widget-host-native tradingview-widget-container"/>:
+  {symbol?<div key={kind+":"+symbol} ref={hostRef} className="tv-company-widget-host tv-company-widget-host-native tradingview-widget-container"/>:
    <div className="tv-company-widget-waiting"><SecurityLogo ticker={ticker} size="small" onMarketResolved={onMarketResolved}/><span>Resolving the exchange for <b>{ticker}</b>…</span></div>}
  </section>;
 }
