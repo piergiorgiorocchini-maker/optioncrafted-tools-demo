@@ -473,3 +473,54 @@ body{overflow-x:hidden}
  .sidebar-plan a{font-size:13px!important}
  .sidebar-foot{font-size:11px!important}
 }
+
+/* Wide-screen proportions based on the Real Vision reference: outer gutters
+   are just wider than the navigation column; content uses the remaining grid. */
+@media(min-width:1600px){
+ .shell{
+  width:72vw!important;
+  max-width:none!important;
+  grid-template-columns:13.5vw minmax(0,1fr)!important;
+  column-gap:1vw!important;
+ }
+ .sidebar{
+  width:13.5vw!important;min-width:13.5vw!important;
+  padding:1.5vw .5vw!important;
+  gap:1.2vw!important;
+ }
+ .sidebar .brand{gap:.7vw!important;padding-inline:.3vw!important}
+ .sidebar .brand b{font-size:1.15vw!important;white-space:nowrap}
+ .sidebar .brand small{font-size:.62vw!important}
+ .sidebar>.overline,.sidebar .nav-group>.overline{
+  font-size:.7vw!important;
+  letter-spacing:.08vw!important;
+  line-height:1.45!important;
+ }
+ .sidebar nav{gap:.2vw!important}
+ .sidebar .navlink{
+  min-height:2.8vw!important;
+  padding:.5vw .45vw!important;
+  gap:.6vw!important;
+  font-size:1vw!important;
+  line-height:1.35!important;
+ }
+ .sidebar .navlink svg{width:1.1vw!important;height:1.1vw!important;flex:none}
+ .sidebar .nav-sublink,.sidebar .nav-group a{
+  min-height:2.35vw!important;
+  padding:.45vw .55vw!important;
+  font-size:.9vw!important;
+  line-height:1.35!important;
+ }
+ .sidebar .nav-submenu{margin-left:1.4vw!important;padding-left:.6vw!important}
+ .sidebar .nav-group{padding:1vw .6vw 0!important}
+ .sidebar-plan{padding:.9vw!important}
+ .sidebar-plan>span{font-size:.7vw!important}
+ .sidebar-plan p{font-size:.72vw!important;line-height:1.5!important}
+ .sidebar-plan a{font-size:.75vw!important;padding:.55vw!important}
+ .sidebar-foot{font-size:.62vw!important}
+ .shell>main{padding:0 1vw 32px!important}
+ .shell>main>.terminal-topbar{
+  margin-left:-1vw!important;margin-right:-1vw!important;
+  padding-left:1vw!important;padding-right:1vw!important;
+ }
+}
