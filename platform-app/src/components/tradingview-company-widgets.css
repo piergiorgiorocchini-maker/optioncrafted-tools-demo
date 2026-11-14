@@ -36,11 +36,3 @@
 }
 
 
-/* Scale chart and fixed-height reference embeds; keep Symbol Info content-sized. */
-.tv-company-widget-host-scaled .tradingview-widget-container__widget iframe,
-.ci-market-chart-widget iframe{
- width:calc(100% * var(--tv-content-inverse,.87))!important;
- height:calc((100% - 32px) * var(--tv-content-inverse,.87))!important;
- transform:scale(var(--tv-content-scale,1.15));
- transform-origin:top left;
-}
