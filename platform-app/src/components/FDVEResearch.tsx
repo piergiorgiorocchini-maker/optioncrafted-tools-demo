@@ -45,7 +45,7 @@ export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation,show
  const chartMarket=ticker?chartMarkets[ticker]??(ticker==="ALAB"?"NASDAQ":null):null;
  const quoteAsset=asset??snapshot.records.find(row=>row.ticker===ticker);
  const quoteCurrency=quoteAsset?.currency??"USD";
- const quoteName=quoteAsset?.name??selected?.sec.company??ticker??"";
+ const quoteName=quoteAsset?.name??selected?.ticker??ticker??"";
  const quoteChange=quoteAsset?.change1d??null;
  const quoteChangeClass=typeof quoteChange==="number"&&Number.isFinite(quoteChange)?quoteChange>0?"positive":quoteChange<0?"negative":"neutral":"neutral";
  const exchangeLabel=chartMarket==="NASDAQ"?"Nasdaq Stock Market":chartMarket==="NYSE"?"New York Stock Exchange":"";
