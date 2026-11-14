@@ -687,3 +687,32 @@ body:has(.dashboard-page-company) .dashboard-page-company .ci-tradingview-note{
  border:1px solid #dbe4ed!important;
  border-left:3px solid #2183d4!important;
 }
+
+
+/* Desktop navigation stays pinned without a visible inner scrollbar. */
+@media(min-width:701px){
+ .shell>.sidebar{
+  position:sticky!important;
+  top:0!important;
+  align-self:start!important;
+  height:100vh!important;
+  height:100dvh!important;
+  max-height:100dvh!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+ }
+ .shell>.sidebar::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+}
+
+/* On wide desktops, balance the sidebar by drawing the main workspace inward
+   from the right edge. Mobile and standard laptop widths keep their current fit. */
+@media(min-width:1600px){
+ .shell>main{
+  padding-right:calc(1vw + min(200px, 10vw))!important;
+ }
+ .shell>main>.terminal-topbar{
+  margin-right:-1vw!important;
+ }
+}
