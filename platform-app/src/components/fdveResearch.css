@@ -99,3 +99,20 @@
  .company-market-top>.ci-market-chart{height:300px!important;min-height:300px!important}
  .company-market-top>.home-valuation-card{height:auto!important;min-height:340px!important}
 }
+
+
+/* Square Company Intelligence modules keep the chart and valuation equally prominent. */
+.company-market-top{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.company-market-top>.ci-market-chart,
+.company-market-top>.home-valuation-card{box-sizing:border-box;aspect-ratio:1/1;height:auto!important;min-height:0!important}
+.company-market-top>.ci-market-chart{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.company-market-top>.ci-market-chart .ci-market-chart-widget{height:100%!important;min-height:0!important;flex:initial}
+.company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;min-height:0!important}
+@media(max-width:900px){
+ .company-market-top{grid-template-columns:minmax(0,1fr);gap:12px}
+}
+@media(max-width:700px){
+ .company-market-top>.ci-market-chart .ci-market-chart-widget,
+ .company-market-top>.ci-market-chart .ci-market-chart-placeholder{height:calc(100% - 24px)!important;min-height:0!important}
+ .company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;min-height:0!important}
+}
