@@ -168,7 +168,7 @@
 .company-market-top>.ci-market-chart{
  display:block!important;
  width:100%!important;
- height:clamp(420px,34vw,620px)!important;
+ height:clamp(520px,40vw,900px)!important;
  min-height:430px!important;
  aspect-ratio:auto!important;
  box-sizing:border-box;
