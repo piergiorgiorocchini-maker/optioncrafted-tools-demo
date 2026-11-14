@@ -12,3 +12,25 @@
 .tv-company-widget-waiting b{color:#17395c}
 .tv-company-widget-symbol-info .tv-company-widget-host{padding:0 4px}
 @media(max-width:700px){.tv-company-widget-heading{align-items:flex-start;padding:13px 14px 9px}.tv-company-widget-heading h3{font-size:15px}.tv-company-widget-heading p{font-size:11px}.tv-company-widget-waiting{min-height:72px;padding:12px 14px}}
+
+
+/* Symbol Info is content-height driven in TradingView's stock solution. */
+.tv-company-widget-symbol-info{
+ overflow:visible!important;
+ background:#fff!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ color:#111827!important;
+}
+.tv-company-widget-symbol-info .tv-company-widget-host{
+ height:auto!important;
+ min-height:0!important;
+ padding:0!important;
+ overflow:visible!important;
+}
+.tv-company-widget-symbol-info .tv-company-widget-container__widget{
+ height:auto!important;
+ min-height:0!important;
+ overflow:visible!important;
+}
