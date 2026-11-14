@@ -50,7 +50,7 @@ const titleByKind:Record<TradingViewWidgetKind,string>={
 export function TradingViewCompanyWidget({ticker,market,kind,title,description,onMarketResolved}:{ticker:string;market:TradingViewMarket|null;kind:TradingViewWidgetKind;title?:string;description?:string;onMarketResolved?:(market:TradingViewMarket)=>void}){
  const hostRef=useRef<HTMLDivElement|null>(null);
  const config=widgetConfigs[kind];
- const symbol=market?market+":"+ticker.trim().toUpperCase():null;\./g,"-").replace(/\//g,"-").replace(/-/g,".")&&market+":"+ticker.trim().toUpperCase():null;
+ const symbol=market?market+":"+ticker.trim().toUpperCase():null;
 
  useEffect(()=>{
   const host=hostRef.current;
