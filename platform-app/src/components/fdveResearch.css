@@ -153,3 +153,52 @@
  .company-market-top>.ci-market-chart{height:clamp(280px,72vw,380px)!important}
  .company-market-top>.ci-market-chart .ci-market-chart-placeholder{height:100%!important}
 }
+
+
+/* Company Intelligence: full-width TradingView stock solution chart. */
+.company-market-overview{
+ width:100%;
+ max-width:none;
+}
+.company-market-top{
+ display:block!important;
+ width:100%!important;
+ min-width:0;
+}
+.company-market-top>.ci-market-chart{
+ display:block!important;
+ width:100%!important;
+ height:clamp(430px,42vw,620px)!important;
+ min-height:430px!important;
+ aspect-ratio:auto!important;
+ box-sizing:border-box;
+}
+.company-market-top>.ci-market-chart .ci-market-chart-widget{
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:0!important;
+}
+.company-market-top>.ci-market-chart .tradingview-widget-container__widget{
+ width:100%!important;
+ height:calc(100% - 24px)!important;
+ min-height:0!important;
+}
+.company-market-top>.ci-market-chart .tradingview-widget-copyright{
+ height:24px;
+}
+@media(max-width:900px){
+ .company-market-top>.ci-market-chart{
+  height:clamp(410px,58vw,540px)!important;
+  min-height:410px!important;
+ }
+}
+@media(max-width:700px){
+ .company-market-top>.ci-market-chart{
+  height:clamp(360px,100vw,480px)!important;
+  min-height:360px!important;
+ }
+ .company-market-top>.ci-market-chart .tradingview-widget-container__widget{
+  height:calc(100% - 24px)!important;
+ }
+}
