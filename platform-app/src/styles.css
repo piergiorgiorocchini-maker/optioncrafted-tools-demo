@@ -437,3 +437,39 @@ body{overflow-x:hidden}
   padding-left:16px!important;padding-right:16px!important;
  }
 }
+
+/* Large desktop: keep the navigation readable at normal viewing distance. */
+@media(min-width:1200px){
+ .shell{
+  grid-template-columns:320px minmax(0,1fr)!important;
+  column-gap:16px!important;
+ }
+ .sidebar{
+  width:320px!important;min-width:320px!important;
+  padding-inline:20px!important;
+ }
+ .sidebar .navlink{
+  min-height:48px!important;
+  padding:10px 12px!important;
+  color:#e8f1fa!important;
+  font-size:20px!important;
+  font-weight:600!important;
+  line-height:1.35!important;
+ }
+ .sidebar .nav-sublink,.sidebar .nav-group a{
+  min-height:40px!important;
+  padding:8px 11px!important;
+  color:#d3e2ef!important;
+  font-size:18px!important;
+  font-weight:500!important;
+  line-height:1.4!important;
+ }
+ .sidebar>.overline,.sidebar .nav-group>.overline{
+  font-size:12px!important;
+  line-height:1.45!important;
+ }
+ .sidebar-plan>span{font-size:12px!important}
+ .sidebar-plan p{font-size:13px!important;line-height:1.55!important}
+ .sidebar-plan a{font-size:13px!important}
+ .sidebar-foot{font-size:11px!important}
+}
