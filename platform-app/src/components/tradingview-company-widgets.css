@@ -34,3 +34,14 @@
  min-height:0!important;
  overflow:visible!important;
 }
+
+
+/* TradingView iframe content scales with the display zoom to keep labels readable. */
+.tradingview-widget-container__widget iframe,
+.tv-company-widget-host iframe,
+.ci-market-chart-widget iframe{
+ width:calc(100% * var(--tv-content-inverse,.87))!important;
+ height:calc((100% - 32px) * var(--tv-content-inverse,.87))!important;
+ transform:scale(var(--tv-content-scale,1.15));
+ transform-origin:top left;
+}
