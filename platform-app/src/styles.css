@@ -524,3 +524,67 @@ body{overflow-x:hidden}
   padding-left:1vw!important;padding-right:1vw!important;
  }
 }
+
+
+/* Company Intelligence: larger in-module typography for comfortable desktop reading.
+   Grid positions stay fixed; table and chart data get clearer type and row spacing. */
+@media(min-width:901px){
+ .dashboard-page-company .vf-statements .vf-top h3{font-size:20px!important;line-height:1.3!important}
+ .dashboard-page-company .vf-statements .vf-top p,
+ .dashboard-page-company .vf-statements .vf-period-note{font-size:14px!important;line-height:1.45!important}
+ .dashboard-page-company .vf-statements .vf-statement-tabs button{font-size:16px!important;min-height:44px!important;padding:9px 14px!important}
+ .dashboard-page-company .vf-statements .vf-table th{font-size:15px!important;line-height:1.4!important;padding:10px 10px!important}
+ .dashboard-page-company .vf-statements .vf-table td{font-size:16px!important;line-height:1.5!important;padding:10px 10px!important}
+ .dashboard-page-company .ci-panel-head h3{font-size:20px!important;line-height:1.3!important}
+ .dashboard-page-company .ci-panel-head>span{font-size:13px!important;line-height:1.4!important}
+ .dashboard-page-company .ci-fundamentals>div{font-size:16px!important;line-height:1.45!important;padding:13px 0!important}
+ .dashboard-page-company .ci-fundamentals>div span{font-size:15px!important}
+ .dashboard-page-company .ci-fundamentals>div b{font-size:16px!important}
+ .dashboard-page-company .ci-metrics article>span{font-size:13px!important;line-height:1.4!important}
+ .dashboard-page-company .ci-metrics strong{font-size:25px!important}
+ .dashboard-page-company .ci-metrics small{font-size:13px!important}
+ .dashboard-page-company .fc-controls{font-size:14px!important;line-height:1.4!important}
+ .dashboard-page-company .fc-controls button,
+ .dashboard-page-company .fc-controls select{font-size:14px!important;min-height:38px!important}
+ .dashboard-page-company .fc-column,
+ .dashboard-page-company .fc-number,
+ .dashboard-page-company .fc-scatter text,
+ .dashboard-page-company .fc-scatter .fc-target-label,
+ .dashboard-page-company .ci-year strong,
+ .dashboard-page-company .ci-legend{font-size:14px!important}
+ .dashboard-page-company .fc-combined text{font-size:13px!important}
+ .dashboard-page-company .ci-note{font-size:13px!important;line-height:1.55!important}
+ .dashboard-page-company .ci-foot{font-size:12px!important}
+}
+@media(min-width:1200px){
+ .dashboard-page-company .vf-statements .vf-table th{font-size:16px!important}
+ .dashboard-page-company .vf-statements .vf-table td{font-size:18px!important;padding:11px 12px!important}
+ .dashboard-page-company .ci-fundamentals>div{font-size:17px!important}
+ .dashboard-page-company .ci-fundamentals>div span,
+ .dashboard-page-company .ci-fundamentals>div b{font-size:17px!important}
+ .dashboard-page-company .ci-panel-head h3{font-size:21px!important}
+ .dashboard-page-company .ci-metrics article>span{font-size:14px!important}
+ .dashboard-page-company .ci-metrics strong{font-size:27px!important}
+ .dashboard-page-company .fc-controls,
+ .dashboard-page-company .fc-controls button,
+ .dashboard-page-company .fc-controls select{font-size:15px!important}
+ .dashboard-page-company .fc-column,
+ .dashboard-page-company .fc-number,
+ .dashboard-page-company .fc-scatter text,
+ .dashboard-page-company .fc-scatter .fc-target-label,
+ .dashboard-page-company .ci-year strong,
+ .dashboard-page-company .ci-legend{font-size:15px!important}
+ .dashboard-page-company .fc-combined text{font-size:14px!important}
+}
+@media(min-width:1700px){
+ .dashboard-page-company .vf-statements .vf-table td{font-size:19px!important}
+ .dashboard-page-company .ci-fundamentals>div,
+ .dashboard-page-company .ci-fundamentals>div span,
+ .dashboard-page-company .ci-fundamentals>div b{font-size:18px!important}
+ .dashboard-page-company .fc-scatter text,
+ .dashboard-page-company .fc-scatter .fc-target-label,
+ .dashboard-page-company .fc-column,
+ .dashboard-page-company .fc-number,
+ .dashboard-page-company .ci-year strong,
+ .dashboard-page-company .ci-legend{font-size:16px!important}
+}
