@@ -322,3 +322,16 @@ body{overflow-x:hidden}
  .shell{grid-template-columns:minmax(350px,22vw) minmax(0,1fr)}
  .sidebar{min-width:350px;padding-inline:26px}
 }
+
+
+/* Keep dashboard modules visually attached to the navigation column. */
+@media(min-width:901px){
+ .shell{width:100%;max-width:none;grid-template-columns:338px minmax(0,1fr);margin:0}
+ .sidebar{width:338px;min-width:338px}
+ .shell>main{min-width:0;display:flex;flex-direction:column;align-items:stretch}
+ .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{width:auto;max-width:none;margin-left:0;margin-right:0;align-self:stretch}
+}
+@media(min-width:1600px){
+ .shell{grid-template-columns:350px minmax(0,1fr)}
+ .sidebar{width:350px;min-width:350px}
+}
