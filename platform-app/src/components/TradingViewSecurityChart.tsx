@@ -16,8 +16,9 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
  useEffect(()=>{
   const container=containerRef.current;
   if(!container)return;
-  container.replaceChildren();
   if(!symbol)return;
+  let disposed=false;
+  let settled=false;
 
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
@@ -68,13 +69,16 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
    support_host:"https://www.tradingview.com"
   });
 
+  script.onload=()=>{settled=true;if(disposed)container.replaceChildren()};
+  script.onerror=()=>{settled=true;if(disposed)container.replaceChildren()};
   container.append(widget,attribution,script);
   return ()=>{
-   container.replaceChildren();
+   disposed=true;
+   if(settled)container.replaceChildren();
   };
  },[ticker,symbol,compactViewport]);
 
  return <section className="ci-market-chart" aria-label={ticker+" interactive TradingView chart"}>
-  {symbol?<div ref={containerRef} className="ci-market-chart-widget tradingview-widget-container"/>:<div className="ci-market-chart-placeholder">Chart unavailable for this symbol</div>}
+  {symbol?<div key={symbol+":"+(compactViewport?"compact":"wide")} ref={containerRef} className="ci-market-chart-widget tradingview-widget-container"/>:<div className="ci-market-chart-placeholder">Chart unavailable for this symbol</div>}
  </section>;
 }
