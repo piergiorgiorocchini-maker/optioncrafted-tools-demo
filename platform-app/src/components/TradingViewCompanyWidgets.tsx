@@ -47,10 +47,10 @@ const titleByKind:Record<TradingViewWidgetKind,string>={
  news:"Related news · TradingView"
 };
 
-export function TradingViewCompanyWidget({ticker,market,kind,title,description}:{ticker:string;market:TradingViewMarket|null;kind:TradingViewWidgetKind;title?:string;description?:string}){
+export function TradingViewCompanyWidget({ticker,market,kind,title,description,onMarketResolved}:{ticker:string;market:TradingViewMarket|null;kind:TradingViewWidgetKind;title?:string;description?:string;onMarketResolved?:(market:TradingViewMarket)=>void}){
  const hostRef=useRef<HTMLDivElement|null>(null);
  const config=widgetConfigs[kind];
- const symbol=market?ticker.trim().toUpperCase().replace(/\./g,"-").replace(/\//g,"-").replace(/-/g,".")&&market+":"+ticker.trim().toUpperCase():null;
+ const symbol=market?market+":"+ticker.trim().toUpperCase():null;\./g,"-").replace(/\//g,"-").replace(/-/g,".")&&market+":"+ticker.trim().toUpperCase():null;
 
  useEffect(()=>{
   const host=hostRef.current;
@@ -93,6 +93,6 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description}:
  return <section className={"tv-company-widget tv-company-widget-"+kind} aria-label={title??titleByKind[kind]}>
   {(title||description)&&<header className="tv-company-widget-heading"><div><h3>{title??titleByKind[kind]}</h3>{description&&<p>{description}</p>}</div><span>TradingView</span></header>}
   {symbol?<div ref={hostRef} className="tv-company-widget-host tradingview-widget-container"/>:
-   <div className="tv-company-widget-waiting"><SecurityLogo ticker={ticker} size="small"/><span>Resolving the exchange for <b>{ticker}</b>…</span></div>}
+   <div className="tv-company-widget-waiting"><SecurityLogo ticker={ticker} size="small" onMarketResolved={onMarketResolved}/><span>Resolving the exchange for <b>{ticker}</b>…</span></div>}
  </section>;
 }
