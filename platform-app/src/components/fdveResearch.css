@@ -116,3 +116,40 @@
  .company-market-top>.ci-market-chart .ci-market-chart-placeholder{height:calc(100% - 24px)!important;min-height:0!important}
  .company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;min-height:0!important}
 }
+
+/* TradingView stock solution sequence: snapshot, full-width chart, OC valuation, company profile. */
+.company-market-overview{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important;align-items:stretch!important;min-width:0}
+.company-market-overview>.tv-company-widget-symbol-info,
+.company-market-overview>.tv-company-widget-company-profile{grid-column:1/-1;min-width:0;width:100%}
+.company-market-top{display:block!important;grid-template-columns:minmax(0,1fr)!important;min-width:0;width:100%}
+.company-market-top>.ci-market-chart{display:grid!important;grid-template-rows:auto minmax(0,1fr)!important;width:100%;height:clamp(300px,38vw,520px)!important;min-height:0!important;aspect-ratio:auto!important;box-sizing:border-box}
+.company-market-top>.ci-market-chart .ci-market-chart-widget{height:100%!important;min-height:0!important}
+.company-market-top>.ci-market-chart .tradingview-widget-container__widget{height:calc(100% - 24px)!important;min-height:0!important}
+.company-market-top>.ci-market-chart .ci-market-chart-placeholder{height:100%!important;min-height:0!important}
+.company-market-top>.ci-market-chart .ci-market-chart-placeholder>div{display:flex;align-items:center;gap:10px}
+.company-market-valuation-row{min-width:0;width:100%;container-type:inline-size}
+.company-market-valuation-row>.home-valuation-card{display:grid!important;grid-template-columns:minmax(250px,.85fr) minmax(300px,1fr) minmax(360px,1.25fr);grid-template-rows:auto auto;align-items:stretch;gap:12px;width:100%;height:auto!important;min-height:0!important;aspect-ratio:auto!important;box-sizing:border-box;padding:16px!important}
+.company-market-valuation-row .home-valuation-heading{grid-column:1;grid-row:1;grid-template-columns:minmax(0,1fr) minmax(108px,.7fr);align-self:stretch}
+.company-market-valuation-row .home-intrinsic-value-pair{grid-column:2;grid-row:1;align-self:stretch;gap:8px}
+.company-market-valuation-row .home-intrinsic-value-pair>div{min-height:0;padding:14px}
+.company-market-valuation-row .home-value-scale{grid-column:3;grid-row:1;min-height:0!important;flex:initial!important;align-self:stretch;justify-content:center;padding:11px 12px}
+.company-market-valuation-row .home-value-range-plot{height:82px}
+.company-market-valuation-row .home-valuation-footer{grid-column:1/-1;grid-row:2;min-height:34px;margin-top:0!important}
+@container (max-width:1050px){
+ .company-market-valuation-row>.home-valuation-card{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+ .company-market-valuation-row .home-valuation-heading{grid-column:1;grid-row:1}
+ .company-market-valuation-row .home-intrinsic-value-pair{grid-column:2;grid-row:1}
+ .company-market-valuation-row .home-value-scale{grid-column:1/-1;grid-row:2;min-height:128px!important}
+ .company-market-valuation-row .home-valuation-footer{grid-row:3}
+}
+@container (max-width:650px){
+ .company-market-valuation-row>.home-valuation-card{grid-template-columns:minmax(0,1fr);gap:10px;padding:13px!important}
+ .company-market-valuation-row .home-valuation-heading,.company-market-valuation-row .home-intrinsic-value-pair,.company-market-valuation-row .home-value-scale,.company-market-valuation-row .home-valuation-footer{grid-column:1;grid-row:auto}
+ .company-market-valuation-row .home-value-scale{min-height:130px!important}
+ .company-market-valuation-row .home-valuation-heading{grid-template-columns:minmax(0,1fr) minmax(116px,.72fr)}
+}
+@media(max-width:700px){
+ .company-market-overview{gap:11px!important}
+ .company-market-top>.ci-market-chart{height:clamp(280px,72vw,380px)!important}
+ .company-market-top>.ci-market-chart .ci-market-chart-placeholder{height:100%!important}
+}
