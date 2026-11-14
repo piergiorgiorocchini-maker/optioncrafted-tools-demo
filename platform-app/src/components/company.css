@@ -54,3 +54,9 @@
 .ci-metrics article>span,.ci-metrics small{font-size:11px;line-height:1.4}
 .ci-metrics strong{font-size:22px}
 .ci-market-chart-head strong{font-size:15px}
+
+/* Consistent modern surfaces and readable headings for fixed company modules. */
+.ci-head h2{font-size:27px;line-height:1.2}
+.ci-market-chart,.fc-panel,.home-valuation-card{border-radius:12px;box-shadow:0 4px 16px #18334e0b}
+.ci-market-chart-head strong{font-size:15px}
+.ci-metrics article{border-radius:12px}

@@ -246,3 +246,66 @@ body{overflow-x:hidden}
  .dashboard-page-company .vf-panel .vf-statement-tabs button{font-size:12px}
  .dashboard-page-company .vf-metrics article>span{font-size:10px}
 }
+
+/* Modern, readable research workspace skin. Module grid positions remain unchanged. */
+:root{font-size:16px;line-height:1.45;color:#172b45;background:#f2f5f9}
+.shell{width:min(100%,2800px);max-width:2800px;margin-inline:auto;grid-template-columns:260px minmax(0,1fr)}
+.sidebar{padding:28px 18px;gap:22px;background:#10243b}
+.sidebar .brand{gap:12px;margin-bottom:12px}
+.sidebar .brand b{font-size:18px;letter-spacing:-.2px}
+.sidebar .brand small{font-size:11px;letter-spacing:1.1px;color:#bdcde0}
+.sidebar .navlink,.sidebar .nav-sublink,.sidebar .nav-group a{font-size:15px;line-height:1.4}
+.sidebar .navlink{min-height:42px;padding:9px 10px;border-radius:8px;color:#e0eaf5}
+.sidebar .navlink:hover,.sidebar .nav-sublink:hover{background:#1b3552;color:#fff}
+.sidebar .navlink.active{background:#1d4e7c;color:#fff}
+.sidebar .nav-sublink{min-height:36px;padding:8px 10px;color:#cfdaea}
+.sidebar .overline{font-size:10px;letter-spacing:1.2px;color:#b0c3d8}
+.sidebar .nav-group a{min-height:34px;display:flex;align-items:center}
+.terminal-topbar{min-height:56px;background:#fff;border-bottom:1px solid #d9e2ed}
+.terminal-search input{font-size:14px}
+.terminal-heading h1{font-size:32px;line-height:1.15;letter-spacing:-.7px}
+.terminal-heading p{font-size:14px;line-height:1.5;color:#51657d}
+.terminal-heading,.dashboard,.shell>main>footer{width:min(calc(100% - 56px),1900px);max-width:1900px}
+.dashboard{gap:18px;align-items:start}
+.dashboard :is(button,input,select){font-size:14px}
+.dashboard-page-company .ci{font-size:15px;line-height:1.5}
+.dashboard-page-company .ci-head h2{font-size:27px;line-height:1.2}
+.dashboard-page-company .ci-metrics{gap:12px}
+.dashboard-page-company .ci-metrics article{padding:17px;border:1px solid #d6e0eb;border-radius:12px;box-shadow:0 3px 12px #1b35520a}
+.dashboard-page-company .ci-metrics article>span{font-size:12px;line-height:1.4;color:#4d6681}
+.dashboard-page-company .ci-metrics strong{font-size:24px}
+.dashboard-page-company .ci-metrics small{font-size:12px;line-height:1.4;color:#60758c}
+.dashboard-page-company .vf-panel,.dashboard-page-company .fc-panel,.dashboard-page-company .ci-market-chart,.dashboard-page-company .home-valuation-card{border-radius:12px;box-shadow:0 4px 16px #18334e0b}
+.dashboard-page-company .vf-panel .vf-top h3,.dashboard-page-company .fc-panel h3{font-size:19px;line-height:1.3}
+.dashboard-page-company .vf-panel .vf-top p,.dashboard-page-company .vf-period-note{font-size:13px;line-height:1.45;color:#536c86}
+.dashboard-page-company .vf-panel .vf-statement-tabs button{font-size:14px;min-height:40px}
+.dashboard-page-company .vf-panel .vf-table th,.dashboard-page-company .vf-panel .vf-table td{font-size:14px;line-height:1.45;padding:9px 10px}
+.dashboard-page-company .vf-panel .vf-table th{font-weight:750}
+.dashboard-page-company .vf-panel .vf-table tbody tr:nth-child(even) td{background:#f7f9fc}
+.dashboard-page-company .vf-panel .vf-table tbody tr:hover td{background:#eef5fc}
+@media(min-width:1600px){
+ .shell{grid-template-columns:300px minmax(0,1fr)}
+ .sidebar{padding:30px 20px;gap:24px}
+ .sidebar .navlink{min-height:44px}
+ .sidebar .navlink,.sidebar .nav-sublink,.sidebar .nav-group a{font-size:16px}
+ .terminal-heading,.dashboard,.shell>main>footer{width:min(calc(100% - 72px),1900px);max-width:1900px}
+ .dashboard{gap:20px}
+ .dashboard-page-company .vf-panel .vf-table th,.dashboard-page-company .vf-panel .vf-table td{font-size:15px;padding:10px 11px}
+}
+@media(max-width:900px){
+ .shell{width:100%;max-width:none;grid-template-columns:1fr}
+ .terminal-heading,.dashboard,.shell>main>footer{width:calc(100% - 32px);max-width:none}
+ .dashboard{gap:14px}
+ .dashboard-page-company .ci-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .dashboard-page-company .fc-grid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+ .terminal-heading,.dashboard,.shell>main>footer{width:calc(100% - 28px)}
+ .dashboard-page-company .ci{gap:12px}
+ .dashboard-page-company .ci-metrics{gap:9px}
+ .dashboard-page-company .ci-metrics article{padding:13px}
+ .dashboard-page-company .ci-metrics article>span{font-size:11px}
+ .dashboard-page-company .ci-metrics strong{font-size:19px}
+ .dashboard-page-company .vf-panel .vf-table th,.dashboard-page-company .vf-panel .vf-table td{font-size:12px;padding:8px 5px}
+ .dashboard-page-company .vf-panel .vf-statement-tabs button{font-size:13px}
+}

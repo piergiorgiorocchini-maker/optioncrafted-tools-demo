@@ -31,3 +31,9 @@
 .ci-market-chart-widget{height:100%!important;min-height:0!important}
 @media(max-width:900px){.ci-market-chart{height:380px;min-height:380px}}
 @media(max-width:700px){.ci-market-chart{height:290px;min-height:290px}.ci-market-chart-widget,.ci-market-chart-placeholder{height:250px!important;min-height:250px!important}}
+
+/* Stable TradingView module height across desktop and smaller screens. */
+.ci-market-chart{height:440px;min-height:440px}
+.ci-market-chart-widget{height:100%!important;min-height:0!important}
+@media(max-width:900px){.ci-market-chart{height:390px;min-height:390px}}
+@media(max-width:700px){.ci-market-chart{height:300px;min-height:300px}.ci-market-chart-widget,.ci-market-chart-placeholder{height:260px!important;min-height:260px!important}}

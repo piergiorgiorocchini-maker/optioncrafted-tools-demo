@@ -80,3 +80,17 @@
  .vf-mobile-period-controls button{font-size:12px;min-height:42px}
  .vf-mobile-period-controls span{font-size:11px}
 }
+
+/* Higher contrast and row separation for statements; preserve the existing table structure. */
+.vf-panel{border-color:#d5dfeb;border-radius:12px;box-shadow:0 4px 16px #18334e0b}
+.vf-statements .vf-table th,.vf-statements .vf-table td{font-size:14px;line-height:1.45;padding:9px 10px;color:#263b54}
+.vf-statements .vf-table th{color:#536b84;font-weight:750;background:#f3f7fb}
+.vf-statements .vf-table tbody tr:nth-child(even) td{background:#f7f9fc}
+.vf-statements .vf-table tbody tr:hover td{background:#eef5fc}
+.vf-statement-tabs button{font-size:14px;min-height:40px;border-radius:8px}
+.vf-mobile-period-controls button{font-size:13px;min-height:42px;border-radius:8px}
+@media(min-width:1600px){.vf-statements .vf-table th,.vf-statements .vf-table td{font-size:15px;padding:10px 11px}}
+@media(max-width:760px){
+ .vf-mobile-table th,.vf-mobile-table td{font-size:12px;padding:8px 5px}
+ .vf-mobile-period-controls button{font-size:12px;min-height:42px}
+}
