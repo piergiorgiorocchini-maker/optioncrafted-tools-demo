@@ -346,3 +346,64 @@ body{overflow-x:hidden}
  .shell>main{grid-column:2;grid-row:1 / span 3;width:auto!important;min-width:0!important;max-width:none!important;display:block!important;margin:0!important}
  .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
 }
+
+
+/* Centered workstation frame with a roomy, high-contrast navigation column. */
+@media(min-width:1200px){
+ .shell{
+  display:grid!important;
+  width:min(86vw,1500px)!important;
+  max-width:1500px!important;
+  margin-inline:auto!important;
+  grid-template-columns:350px minmax(0,1fr)!important;
+  column-gap:16px!important;
+ }
+ .sidebar{
+  grid-column:1;grid-row:1;
+  width:350px!important;min-width:350px!important;
+  padding:28px 20px!important;
+  gap:24px!important;
+ }
+ .sidebar .brand b{font-size:20px!important}
+ .sidebar .brand small{font-size:12px!important;line-height:1.45}
+ .sidebar .overline{font-size:11px!important;line-height:1.45}
+ .sidebar .navlink{
+  min-height:48px!important;
+  padding:12px 12px!important;
+  font-size:20px!important;
+  line-height:1.4!important;
+  font-weight:550!important;
+ }
+ .sidebar .nav-sublink,.sidebar .nav-group a{
+  min-height:42px!important;
+  padding:9px 10px!important;
+  font-size:18px!important;
+  line-height:1.4!important;
+ }
+ .shell>main{
+  grid-column:2;grid-row:1;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  display:block!important;margin:0!important;
+  padding:0 18px 32px!important;
+ }
+ .shell>main>.terminal-topbar{
+  margin-left:-18px!important;margin-right:-18px!important;
+  padding-left:18px!important;padding-right:18px!important;
+ }
+ .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{
+  width:auto!important;max-width:none!important;
+  margin-left:0!important;margin-right:0!important;
+ }
+}
+@media(min-width:901px) and (max-width:1199px){
+ .shell{
+  display:grid!important;width:calc(100% - 40px)!important;max-width:none!important;
+  margin-inline:auto!important;grid-template-columns:300px minmax(0,1fr)!important;
+  column-gap:14px!important;
+ }
+ .sidebar{grid-column:1;grid-row:1;width:300px!important;min-width:300px!important}
+ .sidebar .navlink{font-size:18px!important;min-height:46px!important}
+ .sidebar .nav-sublink,.sidebar .nav-group a{font-size:16px!important;min-height:40px!important}
+ .shell>main{grid-column:2;grid-row:1;display:block!important;width:auto!important;min-width:0!important;margin:0!important;padding:0 14px 28px!important}
+ .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+}
