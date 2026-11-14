@@ -55,6 +55,15 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
   const host=hostRef.current;
   if(!host||!symbol)return;
   host.replaceChildren();
+  const applyEmbedScale=()=>{
+   const viewportWidth=window.innerWidth||1;
+   const displayWidth=Math.max(1,window.screen.width||viewportWidth);
+   const scale=Math.min(2,Math.max(1.15,viewportWidth/displayWidth));
+   host.style.setProperty("--tv-content-scale",scale.toFixed(3));
+   host.style.setProperty("--tv-content-inverse",(1/scale).toFixed(4));
+  };
+  applyEmbedScale();
+  window.addEventListener("resize",applyEmbedScale);
 
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
@@ -86,7 +95,7 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
   });
 
   host.append(widget,attribution,script);
-  return ()=>host.replaceChildren();
+  return ()=>{window.removeEventListener("resize",applyEmbedScale);host.replaceChildren()};
  },[config.height,config.options,config.script,symbol,ticker]);
 
  return <section className={"tv-company-widget tv-company-widget-"+kind} aria-label={title??titleByKind[kind]}>
