@@ -716,3 +716,152 @@ body:has(.dashboard-page-company) .dashboard-page-company .ci-tradingview-note{
   margin-right:-1vw!important;
  }
 }
+
+
+/* Template Bianco — shared canvas, navigation, and module surfaces for every app route. */
+:root{
+ --oc-template-canvas:#fff;
+ --oc-template-surface:#fff;
+ --oc-template-border:#dbe4ed;
+ --oc-template-ink:#173451;
+ color-scheme:light;
+ background:var(--oc-template-canvas)!important;
+ color:var(--oc-template-ink)!important;
+}
+html,body,#root{background:var(--oc-template-canvas)!important}
+body{
+ background:var(--oc-template-canvas)!important;
+ color:var(--oc-template-ink)!important;
+}
+body .shell,
+body .shell>main,
+body main,
+body .terminal-heading,
+body .dashboard{
+ background:var(--oc-template-canvas)!important;
+}
+body .panel,
+body .dashboard-module,
+body .nr-control-card,
+body .vl-panel,
+body .ci-panel,
+body .vf-statements{
+ background-color:var(--oc-template-surface)!important;
+ border-color:var(--oc-template-border);
+}
+body .sidebar{
+ background:var(--oc-template-surface)!important;
+ color:var(--oc-template-ink)!important;
+ border-right:1px solid var(--oc-template-border)!important;
+ box-shadow:none!important;
+}
+body .brand b,
+body .brand small,
+body .sidebar>.overline,
+body .sidebar .nav-group>.overline,
+body .sidebar .navlink,
+body .sidebar .nav-sublink,
+body .sidebar .nav-expand,
+body .sidebar-foot{
+ color:var(--oc-template-ink)!important;
+}
+body .sidebar>.overline,
+body .sidebar .nav-group>.overline{
+ color:#62788d!important;
+}
+body .sidebar .nav-group,
+body .sidebar .nav-submenu{
+ border-color:var(--oc-template-border)!important;
+}
+body .sidebar .navlink.active,
+body .sidebar .nav-sublink.active{
+ color:#075da8!important;
+ background:#eef6ff!important;
+ border-color:#b9d9f5!important;
+ box-shadow:inset 3px 0 #2183d4!important;
+}
+body .sidebar .navlink:not(.active):hover,
+body .sidebar .nav-sublink:hover,
+body .sidebar .nav-expand:hover{
+ color:#075da8!important;
+ background:#f4f9ff!important;
+}
+body .sidebar .nav-expand{
+ background:#fff!important;
+ border-color:#d4e0eb!important;
+}
+body .sidebar-plan{
+ background:#fff!important;
+ border:1px solid #d4e0eb!important;
+ color:var(--oc-template-ink)!important;
+}
+body .sidebar-plan p{color:#516b83!important}
+body .sidebar-plan a{
+ color:#1769ab!important;
+ background:#fff!important;
+ border-color:#9fc8eb!important;
+}
+body .terminal-topbar{
+ background:#fff!important;
+ border-bottom-color:var(--oc-template-border)!important;
+}
+body .mobile-appbar{
+ color:var(--oc-template-ink)!important;
+ background:#fff!important;
+ border-bottom:1px solid var(--oc-template-border)!important;
+ box-shadow:none!important;
+}
+body .mobile-appbar strong{color:var(--oc-template-ink)!important}
+body .mobile-menu-toggle{
+ color:var(--oc-template-ink)!important;
+ background:#fff!important;
+ border-color:#cbd9e7!important;
+}
+
+/* Keep prominent research headers on the same white surface as the workspace. */
+body .hero,
+body .premium-hero,
+body .nr-hero{
+ color:var(--oc-template-ink)!important;
+ background:#fff!important;
+ border-color:var(--oc-template-border)!important;
+ box-shadow:0 4px 18px #1738590b!important;
+}
+body .hero h2,
+body .premium-hero h2,
+body .nr-hero h2,
+body .nr-hero-meta strong{color:var(--oc-template-ink)!important}
+body .hero p,
+body .premium-hero-copy>p,
+body .nr-hero p{color:#60758b!important}
+body .hero-symbol,
+body .premium-security-card{
+ color:var(--oc-template-ink)!important;
+ background:#fff!important;
+ border-color:var(--oc-template-border)!important;
+}
+body .hero-symbol span,
+body .hero-symbol small,
+body .premium-security-top,
+body .premium-security-card p,
+body .premium-price-line span,
+body .premium-security-foot,
+body .premium-ticker-chip{
+ color:#60758b!important;
+}
+body .premium-price-line{border-top-color:var(--oc-template-border)!important}
+body .premium-outline,
+body .hero-actions a{
+ color:#1769ab!important;
+ border-color:#b9d9f5!important;
+}
+body .premium-primary,
+body .hero-actions a:first-child{
+ color:#fff!important;
+ background:#2183d4!important;
+ border-color:#2183d4!important;
+}
+body .nr-hero .nr-eyebrow{color:#9b741e!important}
+body .nr-hero h2 span{color:#2679ca!important}
+body .nr-hero-meta{border-left-color:var(--oc-template-border)!important}
+body .nr-hero-meta span{color:#60758b!important}
