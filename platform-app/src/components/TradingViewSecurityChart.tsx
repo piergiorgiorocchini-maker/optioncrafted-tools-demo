@@ -49,7 +49,7 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
    interval:"D",
    theme:"light",
    style:"1",
-   backgroundColor:"rgba(255, 255, 255, 0)",
+   backgroundColor:"rgba(255, 255, 255, 1)",
    gridColor:"rgba(30, 69, 105, 0.08)",
    withdateranges:true,
    hide_top_toolbar:false,
@@ -64,7 +64,7 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
    show_popup_button:true,
    popup_width:"1200",
    popup_height:"800",
-   studies:[],
+   studies:["MACD@tv-basicstudies"],
    support_host:"https://www.tradingview.com"
   });
 
@@ -73,7 +73,6 @@ export function TradingViewSecurityChart({ticker,symbol}:{ticker:string;symbol:s
  },[ticker,symbol,compactViewport]);
 
  return <section className="ci-market-chart" aria-label={ticker+" interactive TradingView chart"}>
-  <div className="ci-market-chart-head"><strong>Price history</strong><span>TradingView</span></div>
   {symbol?<div ref={containerRef} className="ci-market-chart-widget tradingview-widget-container"/>:<div className="ci-market-chart-placeholder">Chart unavailable for this symbol</div>}
  </section>;
 }
