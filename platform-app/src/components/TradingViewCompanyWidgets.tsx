@@ -7,15 +7,14 @@ export type TradingViewWidgetKind="symbol-info"|"company-profile"|"financials"|"
 
 type WidgetConfig={
  script:string;
- height:number;
+ height?:number;
  options:Record<string,unknown>;
 };
 
 const widgetConfigs:Record<TradingViewWidgetKind,WidgetConfig>={
  "symbol-info":{
   script:"embed-widget-symbol-info.js",
-  height:144,
-  options:{}
+  options:{isTransparent:true}
  },
  "company-profile":{
   script:"embed-widget-symbol-profile.js",
@@ -59,7 +58,7 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
 
   const widget=document.createElement("div");
   widget.className="tradingview-widget-container__widget";
-  widget.style.height=config.height+"px";
+  if(config.height!==undefined)widget.style.height=config.height+"px";
   widget.style.width="100%";
 
   const attribution=document.createElement("div");
@@ -79,7 +78,7 @@ export function TradingViewCompanyWidget({ticker,market,kind,title,description,o
   script.textContent=JSON.stringify({
    symbol,
    width:"100%",
-   height:config.height,
+   ...(config.height!==undefined?{height:config.height}:{}),
    colorTheme:"light",
    isTransparent:false,
    locale:"en",
