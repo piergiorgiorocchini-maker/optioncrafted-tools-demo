@@ -60,3 +60,12 @@
 .ci-market-chart,.fc-panel,.home-valuation-card{border-radius:12px;box-shadow:0 4px 16px #18334e0b}
 .ci-market-chart-head strong{font-size:15px}
 .ci-metrics article{border-radius:12px}
+
+/* TradingView sections supplement OC company analysis after the OC calculation modules. */
+.dashboard-page-company .ci>.ci-tradingview-references{grid-column:1/-1;display:grid;gap:13px;min-width:0}
+.ci-tradingview-note{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border-left:3px solid #2c83df;border-radius:6px;background:#eaf4fc;color:#17395c}
+.ci-tradingview-note strong{flex:none;font-size:13px}
+.ci-tradingview-note span{color:#567696;font-size:12px;line-height:1.4}
+.ci-tradingview-pair{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:13px;min-width:0}
+@media(max-width:900px){.ci-tradingview-pair{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:650px){.ci-tradingview-note{align-items:flex-start;flex-direction:column;gap:4px;padding:10px}.ci-tradingview-note strong{font-size:12px}.ci-tradingview-note span{font-size:11px}}
