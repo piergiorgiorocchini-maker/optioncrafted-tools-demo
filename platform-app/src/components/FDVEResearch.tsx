@@ -32,7 +32,7 @@ export function FDVEResearch({ticker,onSelect,compact=false,asset,valuation,show
   if(!ticker)return;
   setChartMarkets(current=>current[ticker]===market?current:{...current,[ticker]:market});
  };
- const chart=ticker&&!compact?(chartMarket?<TradingViewSecurityChart ticker={ticker} symbol={chartMarket+":"+ticker}/>:<section className="ci-market-chart" aria-label={ticker+" interactive TradingView chart"}><div className="ci-market-chart-head"><strong>Price history</strong><span>TradingView</span></div><div className="ci-market-chart-placeholder"><div><SecurityLogo ticker={ticker} size="small" onMarketResolved={resolveMarket}/><span>Connecting to TradingView…</span></div></div></section>):null;
+ const chart=ticker&&!compact?(chartMarket?<TradingViewSecurityChart ticker={ticker} symbol={chartMarket+":"+ticker}/>:<section className="ci-market-chart" aria-label={ticker+" interactive TradingView chart"}><div className="ci-market-chart-placeholder"><div><SecurityLogo ticker={ticker} size="small" onMarketResolved={resolveMarket}/><span>Connecting to TradingView…</span></div></div></section>):null;
  const marketSnapshot=ticker&&!compact?<TradingViewCompanyWidget ticker={ticker} market={chartMarket} kind="symbol-info" onMarketResolved={resolveMarket}/>:null;
  const companyProfile=ticker&&!compact?<TradingViewCompanyWidget ticker={ticker} market={chartMarket} kind="company-profile" onMarketResolved={resolveMarket}/>:null;
 
