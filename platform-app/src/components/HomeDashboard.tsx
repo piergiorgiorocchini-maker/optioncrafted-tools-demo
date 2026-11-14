@@ -24,13 +24,13 @@ const getMoney=(v:number|null,currency="USD")=>v===null?"N/D":money(v,currency);
 const savedList=(key:string):unknown=>{try{return JSON.parse(localStorage.getItem(key)||"null")}catch{return null}};
 
 const tradingViewAssets=[
- {sectionName:"U.S. indices & volatility",symbols:["FOREXCOM:SPXUSD","NASDAQ:IXIC","NASDAQ:NDX","CBOE:VIX"]},
+ {sectionName:"U.S. indices & volatility",symbols:["FOREXCOM:SPXUSD","FOREXCOM:NSXUSD","FOREXCOM:DJI","CBOE:VIX"]},
  {sectionName:"U.S. Treasury yields",symbols:["TVC:US02Y","TVC:US10Y","TVC:US30Y"]},
  {sectionName:"Major stocks",symbols:["NASDAQ:NVDA","NASDAQ:AAPL","NASDAQ:MSFT","NASDAQ:AMZN"]}
 ];
 const tradingViewMarketAttributes={"symbol-sectors":JSON.stringify(tradingViewAssets),theme:"light"};
 const tradingViewLightAttributes={theme:"light"};
-const tradingViewYieldAttributes={symbol:"TVC:US10Y-TVC:US02Y",interval:"1D",theme:"light"};
+const tradingViewYieldAttributes={symbol:"FRED:T10Y2Y",interval:"1D",theme:"light"};
 
 const tvWidgetPromises=new Map<string,Promise<void>>();
 function loadTradingViewWidget(tag:string,source:string):Promise<void>{
@@ -156,9 +156,9 @@ export function HomeDashboard({ticker,name,onSelect}:{ticker:string;name:string;
    </section>
 
    <section className="dashboard-module dashboard-module--rates">
-    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">RATES & MACRO</span><h3>U.S. Treasury yield curve</h3><p>10-year yield minus 2-year yield · 2s10s spread</p></div><a className="dashboard-source-link" href="https://www.tradingview.com/chart/?symbol=TVC%3AUS10Y-TVC%3AUS02Y" target="_blank" rel="noreferrer">Open chart <ArrowUpRight size={13}/></a></header>
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">RATES & MACRO</span><h3>U.S. 10Y–2Y yield spread</h3><p>Daily Treasury spread series · sourced from FRED</p></div><a className="dashboard-source-link" href="https://www.tradingview.com/chart/?symbol=FRED%3AT10Y2Y" target="_blank" rel="noreferrer">Open chart <ArrowUpRight size={13}/></a></header>
     <TradingViewEmbed tag="tv-advanced-chart" source="https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js" attributes={tradingViewYieldAttributes} link="https://www.tradingview.com/chart/?symbol=TVC%3AUS10Y-TVC%3AUS02Y" label="Treasury yield spread" className="dashboard-tv-rates"/>
-    <p className="dashboard-module-note">A positive value means the 10-year yield is above the 2-year yield.</p>
+    <p className="dashboard-module-note">A positive value means the 10-year yield is above the 2-year yield. Daily series, not intraday data.</p>
    </section>
 
    <section className="dashboard-module dashboard-module--news">
