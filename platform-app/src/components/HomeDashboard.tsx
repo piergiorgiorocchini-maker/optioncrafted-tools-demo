@@ -1,22 +1,10 @@
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Activity,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,ChartNoAxesCombined,Compass,Layers3,Mail,Newspaper,Plus,Search,Shield,Target,Trash2,Wallet,GraduationCap} from "lucide-react";
+import {Activity,ArrowRight,ArrowUpRight,BookOpen,BriefcaseBusiness,CalendarDays,ChartNoAxesCombined,ExternalLink,GraduationCap,Layers3,Newspaper,Plus,Search,Shield,Target,Trash2,Wallet} from "lucide-react";
 import snapshot from "../data/assetsSnapshot.json";
-import type {RealAsset} from "./RealResearch";
-import type {ValuationBridge} from "../core/valuationTriangulation";
 import {money} from "../core/valuationModels";
 import {SecurityLogo} from "./SecurityLogo";
-import {IntrinsicValueModule} from "./IntrinsicValueModule";
 import "./home-dashboard.css";
-
-type ModelHolding={ticker:string;weight:number};
-type ModelPortfolio={id:string;name:string;subtitle:string;icon:"growth"|"income"|"options"|"macro";holdings:ModelHolding[]};
-const modelPortfolios:ModelPortfolio[]=[
-{id:"core",name:"Free Core",subtitle:"Equity core + liquid reserve",icon:"growth",holdings:[{ticker:"SPY",weight:40},{ticker:"QQQ",weight:20},{ticker:"XLP",weight:10},{ticker:"BIL",weight:20},{ticker:"AAPL",weight:10}]},
-{id:"income",name:"Income Framework",subtitle:"Equities + Treasury bills",icon:"income",holdings:[{ticker:"SPY",weight:30},{ticker:"XOM",weight:15},{ticker:"JPM",weight:15},{ticker:"KO",weight:10},{ticker:"BIL",weight:30}]},
-{id:"options",name:"Options Income",subtitle:"Equity base + liquid reserve",icon:"options",holdings:[{ticker:"SPY",weight:30},{ticker:"QQQ",weight:20},{ticker:"AAPL",weight:15},{ticker:"MSFT",weight:15},{ticker:"BIL",weight:20}]},
-{id:"macro",name:"Liquid Macro",subtitle:"Index, gold, cash and energy",icon:"macro",holdings:[{ticker:"SPY",weight:25},{ticker:"GLD",weight:25},{ticker:"SHY",weight:20},{ticker:"IBIT",weight:10},{ticker:"XLE",weight:10},{ticker:"BIL",weight:10}]}
-];
 
 const watchKey="optionscrafted.watchlist.v1";
 const portfolioKey="optionscrafted.portfolio.v1";
@@ -26,38 +14,89 @@ const demoPortfolioKey="optionscrafted.demo.portfolio.v1";
 const starterWatchlist=["AAPL","MSFT","GOOGL","JPM","AVGO","SPY"];
 const starterPositions=[{ticker:"AAPL",shares:20,averageCost:290},{ticker:"MSFT",shares:8,averageCost:470},{ticker:"GOOGL",shares:12,averageCost:250},{ticker:"JPM",shares:15,averageCost:310},{ticker:"SPY",shares:25,averageCost:690}];
 const indexRecord=(ticker:string)=>snapshot.records.find(a=>a.ticker===ticker)??null;
-const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});const today=new Date();const homeDateIso=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");const homeDateLabel=new Intl.DateTimeFormat("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"}).format(today);
+const numberFormat=new Intl.NumberFormat("en-US",{maximumFractionDigits:2});
+const today=new Date();
+const homeDateIso=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");
+const homeDateLabel=new Intl.DateTimeFormat("en-US",{weekday:"long",month:"long",day:"numeric"}).format(today);
 const returnText=(v:number|null)=>v===null?"N/D":`${v>=0?"+":""}${(v*100).toFixed(2)}%`;
 const returnTone=(v:number|null)=>v===null?"home-return-missing":v>=0?"home-return-positive":"home-return-negative";
-const getMoney=(v:number|null,currency="USD")=>v===null? "N/D":money(v,currency);
+const getMoney=(v:number|null,currency="USD")=>v===null?"N/D":money(v,currency);
 const savedList=(key:string):unknown=>{try{return JSON.parse(localStorage.getItem(key)||"null")}catch{return null}};
-function MarketQuote({label,ticker,format}:{label:string;ticker:string;format:"money"|"index"}){
- const asset=indexRecord(ticker);
- return <div className="home-market-quote"><span>{label}</span><small>{asset?.priceDate??"Date N/D"}</small><strong>{asset&&asset.price!==null?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><b className={returnTone(asset?.change1d??null)}>{returnText(asset?.change1d??null)}</b></div>;
+
+const tradingViewAssets=[
+ {sectionName:"U.S. indices & volatility",symbols:["FOREXCOM:SPXUSD","NASDAQ:IXIC","NASDAQ:NDX","CBOE:VIX"]},
+ {sectionName:"U.S. Treasury yields",symbols:["TVC:US02Y","TVC:US10Y","TVC:US30Y"]},
+ {sectionName:"Major stocks",symbols:["NASDAQ:NVDA","NASDAQ:AAPL","NASDAQ:MSFT","NASDAQ:AMZN"]}
+];
+const tradingViewMarketAttributes={"symbol-sectors":JSON.stringify(tradingViewAssets),theme:"light"};
+const tradingViewLightAttributes={theme:"light"};
+const tradingViewYieldAttributes={symbol:"TVC:US10Y-TVC:US02Y",interval:"1D",theme:"light"};
+
+const tvWidgetPromises=new Map<string,Promise<void>>();
+function loadTradingViewWidget(tag:string,source:string):Promise<void>{
+ if(customElements.get(tag))return Promise.resolve();
+ const existing=tvWidgetPromises.get(tag);
+ if(existing)return existing;
+ const pending=new Promise<void>((resolve,reject)=>{
+  const script=document.createElement("script");
+  script.type="module";
+  script.src=source;
+  script.async=true;
+  script.onload=()=>customElements.get(tag)?resolve():reject(new Error("TradingView widget was not registered."));
+  script.onerror=()=>reject(new Error("TradingView widget could not be loaded."));
+  document.head.append(script);
+ });
+ tvWidgetPromises.set(tag,pending);
+ pending.catch(()=>tvWidgetPromises.delete(tag));
+ return pending;
 }
+
+function TradingViewEmbed({tag,source,attributes,link,label,className}:{tag:string;source:string;attributes:Record<string,string>;link:string;label:string;className?:string}){
+ const containerRef=useRef<HTMLDivElement|null>(null);
+ const [loadFailed,setLoadFailed]=useState(false);
+ useEffect(()=>{
+  let active=true;
+  setLoadFailed(false);
+  loadTradingViewWidget(tag,source).then(()=>{
+   const container=containerRef.current;
+   if(!active||!container)return;
+   const widget=document.createElement(tag);
+   Object.entries(attributes).forEach(([key,value])=>widget.setAttribute(key,value));
+   widget.style.display="block";
+   widget.style.width="100%";
+   widget.style.height="100%";
+   container.replaceChildren(widget);
+  }).catch(()=>{
+   if(active)setLoadFailed(true);
+  });
+  return ()=>{active=false;containerRef.current?.replaceChildren()};
+ },[tag,source,attributes]);
+ return <div ref={containerRef} className={"dashboard-tv-widget"+(className?" "+className:"")}>
+  {loadFailed&&<div className="dashboard-widget-fallback"><p>{label} could not load in this preview.</p><a href={link} target="_blank" rel="noreferrer">Open on TradingView <ArrowUpRight size={13}/></a></div>}
+ </div>;
+}
+
 export function MarketTape(){
+ const quote=(label:string,ticker:string,format:"money"|"index")=>{
+  const asset=indexRecord(ticker);
+  return <div className="home-market-quote" key={ticker}><span>{label}</span><small>{asset?.priceDate??"Date N/D"}</small><strong>{asset&&asset.price!==null?format==="money"?getMoney(asset.price,asset.currency):numberFormat.format(asset.price):"N/D"}</strong><b className={returnTone(asset?.change1d??null)}>{returnText(asset?.change1d??null)}</b></div>;
+ };
  return <div className="terminal-market-tape" aria-label="Market indicators">
-  <MarketQuote label="S&P 500 · SPY" ticker="SPY" format="money"/>
-  <MarketQuote label="Nasdaq Composite" ticker="INDEXNASDAQ:.IXIC" format="index"/>
-  <MarketQuote label="VIX" ticker="VIX" format="index"/>
+  {quote("S&P 500 · SPY","SPY","money")}
+  {quote("Nasdaq Composite","INDEXNASDAQ:.IXIC","index")}
+  {quote("VIX","VIX","index")}
  </div>;
 }
 export {SecurityLogo} from "./SecurityLogo";
-export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:string;asset:RealAsset|null;name:string;valuation?:ValuationBridge|null;onSelect:(ticker:string)=>void}){
+
+export function HomeDashboard({ticker,name,onSelect}:{ticker:string;name:string;onSelect:(ticker:string)=>void}){
  const [watchlist,setWatchlist]=useState<string[]>([]);
  const [positionCount,setPositionCount]=useState(0);
  const [portfolioValue,setPortfolioValue]=useState<number|null>(null);
  const [demoWatchlist,setDemoWatchlist]=useState(false);
  const [demoPortfolio,setDemoPortfolio]=useState(false);
  const [notice,setNotice]=useState("");
- const [listingMarkets,setListingMarkets]=useState<Record<string,"NASDAQ"|"NYSE">>({});
- const [selectedModelId,setSelectedModelId]=useState("core");
- const [putStrike,setPutStrike]=useState<number>((asset?.price??100)*0.95);
- const [putPremium,setPutPremium]=useState<number>((asset?.price??100)*0.015);
- const [putDays,setPutDays]=useState(30);
- const [putContracts,setPutContracts]=useState(1);
- useEffect(()=>{const spot=asset?.price??100;setPutStrike(Number((spot*0.95).toFixed(2)));setPutPremium(Number((spot*0.015).toFixed(2)));},[ticker,asset?.price]);
- const macroRegime="Risk-on";
+
  useEffect(()=>{
   const existingWatchlist=localStorage.getItem(watchKey);
   const savedWatchlist=savedList(watchKey);
@@ -68,6 +107,7 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   if(isDemoWatchlist){try{localStorage.setItem(watchKey,JSON.stringify(starterWatchlist));localStorage.setItem(demoWatchKey,"true");localStorage.setItem(demoWatchVersionKey,"2")}catch{}}
   setWatchlist([...new Set(items)]);
   setDemoWatchlist(isDemoWatchlist&&items.length>0&&localStorage.getItem(demoWatchKey)==="true");
+
   const existingPortfolio=localStorage.getItem(portfolioKey);
   const isDemoPortfolio=existingPortfolio===null;
   const positions=isDemoPortfolio?starterPositions:savedList(portfolioKey);
@@ -79,135 +119,79 @@ export function HomeDashboard({ticker,asset,name,valuation,onSelect}:{ticker:str
   }
   setDemoPortfolio(isDemoPortfolio&&Array.isArray(positions)&&positions.length>0&&localStorage.getItem(demoPortfolioKey)==="true");
  },[]);
- const marketPrice=asset?.price??null;
- const listingMarket=listingMarkets[ticker]??null;
- const resolveListingMarket=(market:"NASDAQ"|"NYSE")=>setListingMarkets(current=>current[ticker]===market?current:{...current,[ticker]:market});
- const vix=indexRecord("VIX");
- const selectedModel=modelPortfolios.find(p=>p.id===selectedModelId)??modelPortfolios[0];
- const selectedHoldings=selectedModel.holdings.map(h=>({ ...h,asset:indexRecord(h.ticker) }));
- const modelYtd=selectedHoldings.every(h=>h.asset?.changeYtd!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.changeYtd??0),0):null;
- const modelDay=selectedHoldings.every(h=>h.asset?.change1d!=null)?selectedHoldings.reduce((sum,h)=>sum+h.weight/100*(h.asset?.change1d??0),0):null;
- const modelValue=modelYtd===null?null:100000*(1+modelYtd);
- const demoSpot=marketPrice??100;
- const putCollateral=Math.max(0,putStrike)*100*putContracts;
- const putCollected=Math.max(0,putPremium)*100*putContracts;
- const putBreakEven=Math.max(0,putStrike-putPremium);
- const putMaxLoss=Math.max(0,putCollateral-putCollected);
- const putCollateralYield=putCollateral>0?putCollected/putCollateral:null;
- const chartMin=Math.max(0,demoSpot*0.55),chartMax=demoSpot*1.45,chartWidth=470,chartHeight=150,chartLeft=32,chartRight=14,chartTop=14,chartBottom=25;
- const chartInnerW=chartWidth-chartLeft-chartRight,chartInnerH=chartHeight-chartTop-chartBottom;
- const payoffAt=(price:number)=>putCollected-Math.max(putStrike-price,0)*100*putContracts;
- const chartScale=Math.max(putCollateral,putCollected,1);
- const chartX=(price:number)=>chartLeft+(price-chartMin)/(chartMax-chartMin)*chartInnerW;
- const chartY=(value:number)=>chartTop+(chartScale-value)/(2*chartScale)*chartInnerH;
- const payoffPath=Array.from({length:41},(_,i)=>{const price=chartMin+(chartMax-chartMin)*i/40;return (i===0?"M":"L")+chartX(price).toFixed(1)+","+chartY(payoffAt(price)).toFixed(1)}).join(" ");
- const payoffZeroY=chartY(0);
- const pricedCount=snapshot.records.filter(a=>a.price!==null).length;
- const screeners=[
-  {title:"Value · P/E ≤ 20",count:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).length,tickers:snapshot.records.filter(a=>a.pe!==null&&a.pe>0&&a.pe<=20).sort((a,b)=>(a.pe??99)-(b.pe??99)).slice(0,3).map(a=>a.ticker).join(" · ")},
-  {title:"Positive momentum · YTD ≥ 20%",count:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).length,tickers:snapshot.records.filter(a=>a.changeYtd!==null&&a.changeYtd>=.2).sort((a,b)=>(b.changeYtd??0)-(a.changeYtd??0)).slice(0,3).map(a=>a.ticker).join(" · ")},
-  {title:"Lower beta · beta < 1",count:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).length,tickers:snapshot.records.filter(a=>a.beta!==null&&a.beta>0&&a.beta<1).sort((a,b)=>(a.beta??9)-(b.beta??9)).slice(0,3).map(a=>a.ticker).join(" · ")}
- ];
+
  const addToWatchlist=()=>{
   if(watchlist.includes(ticker)){setNotice(ticker+" is already in your watchlist.");return}
-  const next=[...watchlist,ticker];setWatchlist(next);setDemoWatchlist(false);try{localStorage.setItem(watchKey,JSON.stringify(next));localStorage.removeItem(demoWatchKey)}catch{}
+  const next=[...watchlist,ticker];
+  setWatchlist(next);setDemoWatchlist(false);
+  try{localStorage.setItem(watchKey,JSON.stringify(next));localStorage.removeItem(demoWatchKey)}catch{}
   setNotice(ticker+" added to your watchlist.");
  };
  const removeFromWatchlist=(symbol:string)=>{
-  const next=watchlist.filter(x=>x!==symbol);setWatchlist(next);setDemoWatchlist(false);try{localStorage.setItem(watchKey,JSON.stringify(next));localStorage.removeItem(demoWatchKey)}catch{}
+  const next=watchlist.filter(x=>x!==symbol);
+  setWatchlist(next);setDemoWatchlist(false);
+  try{localStorage.setItem(watchKey,JSON.stringify(next));localStorage.removeItem(demoWatchKey)}catch{}
   setNotice(symbol+" removed from your watchlist.");
  };
- const watchRows=watchlist.map(symbol=>{const a=indexRecord(symbol);return {symbol,name:a?.name??symbol,price:a?.price??null,date:a?.priceDate??null,currency:a?.currency??"USD",change1d:a?.change1d??null,changeYtd:a?.changeYtd??null}});
- const optionModules=[
-  {title:"Cash-Secured Put",text:"Income while waiting for a preferred entry.",to:"/options/csp",icon:Activity},
-  {title:"Covered Call",text:"Premium income on shares you hold.",to:"/options/covered-call",icon:ArrowUpRight},
-  {title:"Wheel Strategy",text:"A two-step entry and income plan.",to:"/options/wheel",icon:Compass},
-  {title:"Strategy Builder",text:"Compare multi-leg payoff scenarios.",to:"/options/strategy",icon:Layers3}
- ];
- return <div className="home-dashboard">
-  <header className="home-welcome">
-   <div className="home-welcome-topline"><span className="home-built-badge"><ChartNoAxesCombined size={14}/> BUILT FOR INDEPENDENT INVESTORS</span><time className="home-current-date" dateTime={homeDateIso}>{homeDateLabel}</time></div>
-   <div className="home-welcome-copy"><h2>Your integrated options, research, and investing <b>workspace.</b></h2><p>Model options strategies. Run the wheel. Find opportunities. Build portfolios. Access research, education, and expert insights — all in one place.</p></div>
-   <div className="home-promise-points">
-    <div><Activity size={20}/><span><strong>Smarter decisions</strong><small>Data-led research</small></span></div>
-    <div><Layers3 size={20}/><span><strong>Complete workflow</strong><small>Research to execution</small></span></div>
-    <div><BookOpen size={20}/><span><strong>Learn & grow</strong><small>Education at every level</small></span></div>
-    <div><Compass size={20}/><span><strong>Independent investors</strong><small>Built for investors</small></span></div>
-   </div>
-  </header>
+ const watchRows=watchlist.map(symbol=>{
+  const a=indexRecord(symbol);
+  return {symbol,name:a?.name??symbol,price:a?.price??null,date:a?.priceDate??null,currency:a?.currency??"USD",change1d:a?.change1d??null,changeYtd:a?.changeYtd??null};
+ });
 
-  <section className="home-feature-grid">
-   <article className="home-card home-options-card">
-    <header className="home-card-heading home-options-heading"><span className="home-options-mark"><ChartNoAxesCombined size={23}/></span><div><span className="home-eyebrow">THE CORE OF OPTIONCRAFTED</span><h3>Options Modeling & Wheel Engine</h3><p>Analyze, compare, and execute high-probability options strategies with real data. From single trades to the complete wheel.</p></div><NavLink className="home-button home-button-primary" to="/options">Open Options Lab <ArrowRight size={15}/></NavLink></header>
-    <div className="home-strategy-grid">{optionModules.map(({title,text,to,icon:Icon})=><NavLink className="home-strategy" to={to} key={title}><span className="home-strategy-icon"><Icon size={19}/></span><strong>{title}</strong><small>{text}</small><span className="home-strategy-open">Open module <ArrowRight size={13}/></span></NavLink>)}</div>
-    <div className="home-underlying-market"><div className="home-underlying-identity"><SecurityLogo ticker={ticker}/><span><strong>{ticker} · {name}</strong><small>Google Sheets snapshot · {asset?.priceDate??"date N/D"}</small></span></div><div><small>REFERENCE PRICE</small><strong>{getMoney(marketPrice,asset?.currency)}</strong></div><div><small>1D SNAPSHOT</small><strong className={returnTone(asset?.change1d??null)}>{returnText(asset?.change1d??null)}</strong></div><div><small>YTD</small><strong className={returnTone(asset?.changeYtd??null)}>{returnText(asset?.changeYtd??null)}</strong></div><NavLink to="/valuation/dcf">Review intrinsic value <ArrowRight size={13}/></NavLink></div>
-    <div className="home-demo-option">
-     <div className="home-demo-title"><span><strong>Cash-Secured Put</strong><small>Manual scenario · illustrative inputs, not option quotes</small></span><span className="home-demo-badge">DEMO SCENARIO</span></div>
-     <div className="home-demo-grid">
-      <div className="home-demo-controls">
-       <label>Put strike <span><b>$</b><input type="number" min="0" step="0.01" value={putStrike.toFixed(2)} onChange={e=>setPutStrike(Number(e.target.value)||0)}/></span></label>
-       <label>Premium / share <span><b>$</b><input type="number" min="0" step="0.01" value={putPremium.toFixed(2)} onChange={e=>setPutPremium(Number(e.target.value)||0)}/></span></label>
-       <label>Days to expiry <input type="number" min="1" max="730" value={putDays} onChange={e=>setPutDays(Math.max(1,Number(e.target.value)||1))}/></label>
-       <label>Contracts <input type="number" min="1" max="100" value={putContracts} onChange={e=>setPutContracts(Math.min(100,Math.max(1,Number(e.target.value)||1)))}/></label>
-       <div className="home-demo-results"><span><small>Premium collected</small><strong>{getMoney(putCollected)}</strong></span><span><small>Break-even</small><strong>{getMoney(putBreakEven)}</strong></span><span><small>Capital secured</small><strong>{getMoney(putCollateral)}</strong></span><span><small>Max loss at $0</small><strong>{getMoney(putMaxLoss)}</strong></span></div>
-      </div>
-      <div className="home-payoff-card"><div className="home-payoff-heading"><span><strong>Payoff at expiration</strong><small>{putDays} DTE · {putContracts} contract{putContracts===1?"":"s"} · per scenario</small></span><span>Net P/L</span></div><svg className="home-payoff-svg" viewBox={"0 0 "+chartWidth+" "+chartHeight} role="img" aria-label="Illustrative cash-secured put payoff at expiration"><line x1={chartLeft} x2={chartWidth-chartRight} y1={payoffZeroY} y2={payoffZeroY} className="home-payoff-axis"/><line x1={chartX(demoSpot)} x2={chartX(demoSpot)} y1={chartTop} y2={chartHeight-chartBottom} className="home-payoff-spot"/><path d={payoffPath} className="home-payoff-line"/>{putBreakEven>=chartMin&&putBreakEven<=chartMax&&<line x1={chartX(putBreakEven)} x2={chartX(putBreakEven)} y1={chartTop} y2={chartHeight-chartBottom} className="home-payoff-breakeven"/>}<text x={chartLeft} y={chartHeight-5}>{getMoney(chartMin)}</text><text x={chartX(demoSpot)} y={chartHeight-5} textAnchor="middle">Spot {getMoney(demoSpot)}</text><text x={chartWidth-chartRight} y={chartHeight-5} textAnchor="end">{getMoney(chartMax)}</text><text x={chartLeft-5} y={chartTop+4} textAnchor="end">{getMoney(chartScale)}</text><text x={chartLeft-5} y={payoffZeroY+3} textAnchor="end">$0</text><text x={chartLeft-5} y={chartHeight-chartBottom} textAnchor="end">-{getMoney(chartScale)}</text></svg><div className="home-payoff-legend"><span><i/>Strategy P/L</span><span><i/>Break-even {getMoney(putBreakEven)}</span><span><i/>Reference price {getMoney(demoSpot)}</span></div></div>
-     </div>
-     <small className="home-demo-disclaimer">Scenario math only. Premium is a user-adjustable assumption; no option chain, implied volatility, probability of profit, fees or assignment forecast is available.</small>
+ return <div className="home-dashboard">
+  <section className="dashboard-intro">
+   <div><span className="dashboard-eyebrow">OPTIONCRAFTED · MARKET WORKSPACE</span><h2>Dashboard</h2><p>Market context, economic events, important news and your watchlist in one place.</p></div>
+   <div className="dashboard-date"><CalendarDays size={17}/><span>{homeDateLabel}</span></div>
+  </section>
+
+  <div className="dashboard-grid">
+   <section className="dashboard-module dashboard-module--market">
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">MARKET OVERVIEW</span><h3>Indices, volatility and key securities</h3><p>Explore the Nasdaq, S&P 500, VIX and Treasury yields.</p></div><a className="dashboard-source-link" href="https://www.tradingview.com/markets/" target="_blank" rel="noreferrer">TradingView <ExternalLink size={13}/></a></header>
+    <TradingViewEmbed tag="tv-market-overview" source="https://widgets.tradingview-widget.com/w/en/tv-market-overview.js" attributes={tradingViewMarketAttributes} link="https://www.tradingview.com/markets/" label="Market overview" className="dashboard-tv-market"/>
+   </section>
+
+   <section className="dashboard-module dashboard-module--calendar">
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">ECONOMIC EVENTS</span><h3>Economic calendar</h3><p>Upcoming releases and central-bank events.</p></div><a className="dashboard-source-link" href="https://www.tradingview.com/economic-calendar/" target="_blank" rel="noreferrer">Full calendar <ArrowUpRight size={13}/></a></header>
+    <TradingViewEmbed tag="tv-economic-calendar" source="https://widgets.tradingview-widget.com/w/en/tv-economic-calendar.js" attributes={tradingViewLightAttributes} link="https://www.tradingview.com/economic-calendar/" label="Economic calendar" className="dashboard-tv-calendar"/>
+   </section>
+
+   <section className="dashboard-module dashboard-module--rates">
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">RATES & MACRO</span><h3>U.S. Treasury yield curve</h3><p>10-year yield minus 2-year yield · 2s10s spread</p></div><a className="dashboard-source-link" href="https://www.tradingview.com/chart/?symbol=TVC%3AUS10Y-TVC%3AUS02Y" target="_blank" rel="noreferrer">Open chart <ArrowUpRight size={13}/></a></header>
+    <TradingViewEmbed tag="tv-advanced-chart" source="https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js" attributes={tradingViewYieldAttributes} link="https://www.tradingview.com/chart/?symbol=TVC%3AUS10Y-TVC%3AUS02Y" label="Treasury yield spread" className="dashboard-tv-rates"/>
+    <p className="dashboard-module-note">A positive value means the 10-year yield is above the 2-year yield.</p>
+   </section>
+
+   <section className="dashboard-module dashboard-module--news">
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">MARKET NEWS</span><h3>Important stories</h3><p>Top market stories and headlines.</p></div><a className="dashboard-source-link" href="https://www.tradingview.com/news/" target="_blank" rel="noreferrer">More news <ArrowUpRight size={13}/></a></header>
+    <TradingViewEmbed tag="tv-news-feed" source="https://widgets.tradingview-widget.com/w/en/tv-news-feed.js" attributes={tradingViewLightAttributes} link="https://www.tradingview.com/news/" label="Market news" className="dashboard-tv-news"/>
+   </section>
+
+   <section className="dashboard-module dashboard-module--watchlist">
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3><p>{watchlist.length} {watchlist.length===1?"security":"securities"} saved in this browser.</p></div><div className="dashboard-watch-actions">{demoWatchlist&&<span className="dashboard-sample-badge">Sample list</span>}<NavLink to="/discover">Find securities <ArrowRight size={13}/></NavLink></div></header>
+    {watchRows.length?<div className="dashboard-table-wrap"><table className="dashboard-watch-table"><thead><tr><th>Security</th><th>Price</th><th>1D</th><th>YTD</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol} className={row.symbol===ticker?"dashboard-watch-row-active":""}><td><button type="button" className="dashboard-ticker-button" onClick={()=>onSelect(row.symbol)} aria-label={"Set "+row.symbol+" as security in focus"} aria-current={row.symbol===ticker?"true":undefined}><SecurityLogo ticker={row.symbol}/><span><strong>{row.symbol}</strong><small>{row.name}</small></span></button></td><td>{getMoney(row.price,row.currency)}</td><td className={returnTone(row.change1d)}>{returnText(row.change1d)}</td><td className={returnTone(row.changeYtd)}>{returnText(row.changeYtd)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="dashboard-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={16}/></button></td></tr>)}</tbody></table></div>:<div className="dashboard-empty-watch"><Target size={22}/><strong>Your watchlist is ready</strong><p>Add {ticker} ({name}) to track it here.</p><button type="button" className="dashboard-primary-button" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
+    <p className="dashboard-inline-notice" role="status">{notice}</p>
+   </section>
+
+   <section className="dashboard-module dashboard-module--workspace">
+    <header className="dashboard-module-head"><div><span className="dashboard-eyebrow">OPTIONCRAFTED WORKSPACE</span><h3>Your tools and portfolio</h3><p>Go from research to an options strategy.</p></div><BriefcaseBusiness size={19}/></header>
+    <div className="dashboard-portfolio-strip"><span className="dashboard-portfolio-icon"><Wallet size={18}/></span><span><strong>Portfolio Studio</strong><small>{demoPortfolio?"Illustrative sample · ":""}{positionCount} {positionCount===1?"position":"positions"} in this browser</small></span><b>{portfolioValue===null?"Open":getMoney(portfolioValue)}</b><NavLink to="/portfolio" aria-label="Open Portfolio Studio"><ArrowRight size={15}/></NavLink></div>
+    <div className="dashboard-options-grid">
+     <NavLink to="/options/csp"><Activity size={17}/><span><strong>Cash-Secured Put</strong><small>Plan a preferred entry</small></span></NavLink>
+     <NavLink to="/options/covered-call"><ArrowUpRight size={17}/><span><strong>Covered Call</strong><small>Income on shares held</small></span></NavLink>
+     <NavLink to="/options/wheel"><ChartNoAxesCombined size={17}/><span><strong>Wheel Strategy</strong><small>Entry and income workflow</small></span></NavLink>
+     <NavLink to="/options/strategy"><Layers3 size={17}/><span><strong>Strategy Builder</strong><small>Compare payoff scenarios</small></span></NavLink>
     </div>
-   </article>
-   <IntrinsicValueModule ticker={ticker} name={name} currency={asset?.currency??"USD"} price={marketPrice} valuation={valuation} market={listingMarket} onMarketResolved={resolveListingMarket}/>
-  </section>
-  <section className="home-ecosystem-grid" aria-label="Explore the OptionsCrafted workspace">
-   <article className="home-card home-models-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">MODEL PORTFOLIOS · SIMULATED</span><h3>Illustrative portfolio lab</h3><p>Choose a sample allocation built from securities in the dated market snapshot.</p></div><BriefcaseBusiness size={19}/></header>
-    <div className="home-model-list home-model-select-list">
-     {modelPortfolios.map(model=>{const ytd=model.holdings.every(h=>indexRecord(h.ticker)?.changeYtd!=null)?model.holdings.reduce((sum,h)=>sum+h.weight/100*(indexRecord(h.ticker)?.changeYtd??0),0):null;return <button type="button" className={`home-model-option ${model.id===selectedModelId?"active":""}`} onClick={()=>setSelectedModelId(model.id)} key={model.id}><span className={`home-model-icon ${model.icon}`}>{model.icon==="growth"?<Activity size={16}/>:model.icon==="income"?<Wallet size={16}/>:model.icon==="options"?<ChartNoAxesCombined size={16}/>:<Compass size={16}/>}</span><span><strong>{model.name}</strong><small>{model.subtitle}</small></span><b className={returnTone(ytd)}>{returnText(ytd)}</b></button>})}
+    <div className="dashboard-workspace-links">
+     <NavLink to="/company"><BriefcaseBusiness size={15}/>Company Intelligence</NavLink>
+     <NavLink to="/valuation/dcf"><ChartNoAxesCombined size={15}/>Valuation Lab</NavLink>
+     <NavLink to="/options/probability"><Target size={15}/>Probability Station</NavLink>
+     <NavLink to="/academy"><GraduationCap size={15}/>Education</NavLink>
     </div>
-    <div className="home-model-detail">
-     <div className="home-model-summary"><span><strong>$100,000</strong><small>initial illustrative capital</small></span><span><strong>{modelValue===null?"N/D":getMoney(modelValue)}</strong><small>snapshot value · YTD price proxy</small></span><span><strong className={returnTone(modelDay)}>{returnText(modelDay)}</strong><small>weighted 1D proxy</small></span></div>
-     <div className="home-allocation-bar" aria-label={selectedModel.name+" illustrative allocation"}>{selectedHoldings.map(h=><span key={h.ticker} title={h.ticker+" "+h.weight+"%"} style={{width:h.weight+"%"}}/>)}</div>
-     <div className="home-holding-chips">{selectedHoldings.map(h=><span key={h.ticker}><SecurityLogo ticker={h.ticker}/><b>{h.ticker}</b><small>{h.weight}%</small></span>)}</div>
-     <small className="home-model-disclaimer">Simulation only: weighted price changes from the snapshot; assumes allocation at year start, no rebalance, dividends, fees or options premiums. Not a backtest or actual portfolio result.</small>
-    </div>
-    <NavLink className="home-card-link" to="/portfolio">Open Portfolio Studio <ArrowRight size={14}/></NavLink>
-   </article>
-   <article className="home-card home-screener-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">STOCK SCANNERS & SCREENERS</span><h3>Snapshot filters</h3><p>Simple filters computed from the available Google Sheets fields.</p></div><ChartNoAxesCombined size={19}/></header>
-    <div className="home-screener-grid">{screeners.map(s=><div className="home-screener-tile" key={s.title}><span>{s.title}</span><strong>{s.count}</strong><small>{s.tickers||"No matching symbols"}</small></div>)}<div className="home-screener-tile coverage"><span>Price coverage</span><strong>{pricedCount}/{snapshot.records.length}</strong><small>{snapshot.records.length-pricedCount} without a reference price</small></div></div>
-    <small className="home-screener-note">Exploratory filters only · snapshot {snapshot.exportedAt} · not recommendations. Fields with incomplete coverage are excluded.</small>
-    <NavLink className="home-card-link" to="/discover">Explore market universe <ArrowRight size={14}/></NavLink>
-   </article>
-   <article className="home-card home-library-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">RESEARCH & KNOWLEDGE</span><h3>Research, articles & learning</h3><p>Editorial resources from OptionCrafted and the platform.</p></div><BookOpen size={19}/></header>
-    <a className="home-article-feature" href="https://optioncrafted.com/articles/what-options-really-are.html" target="_blank" rel="noreferrer"><span className="home-article-icon"><Newspaper size={19}/></span><span><small>FEATURED ARTICLE</small><strong>What Options Really Are: Rights, Obligations, and Income</strong><em>Read on OptionCrafted.com <ArrowUpRight size={12}/></em></span></a>
-    <div className="home-research-links"><a href="https://optioncrafted.com/options.html" target="_blank" rel="noreferrer">Options strategies <ArrowUpRight size={13}/></a><a href="https://optioncrafted.com/investing.html" target="_blank" rel="noreferrer">Investing research <ArrowUpRight size={13}/></a><a href="https://optioncrafted.com/free-newsletter" target="_blank" rel="noreferrer">Free newsletter <ArrowUpRight size={13}/></a><NavLink to="/academy">Education & courses <ArrowRight size={14}/></NavLink></div>
-   </article>
-  </section>
-  <section className="home-lower-grid">
-   <article className="home-card home-watchlist-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">YOUR SECURITIES</span><h3>Watchlist</h3></div><div className="home-watch-actions">{demoWatchlist&&<span className="home-demo-badge">SAMPLE LIST</span>}<NavLink to="/discover">Find securities <ArrowRight size={14}/></NavLink></div></header>
-    {watchRows.length? <div className="home-table-wrap"><table className="home-watch-table"><thead><tr><th>Security</th><th>Price</th><th>1D %</th><th>YTD %</th><th>Snapshot date</th><th></th></tr></thead><tbody>{watchRows.map(row=><tr key={row.symbol} className={row.symbol===ticker?"home-watch-row-active":""}><td><button type="button" className="home-ticker-link" onClick={()=>onSelect(row.symbol)} aria-label={"Set "+row.symbol+" as security in focus"} aria-current={row.symbol===ticker?"true":undefined}><SecurityLogo ticker={row.symbol}/><span className="home-ticker-copy"><strong>{row.symbol}</strong><small>{row.name}</small></span></button></td><td>{getMoney(row.price,row.currency)}</td><td className={returnTone(row.change1d)}>{returnText(row.change1d)}</td><td className={returnTone(row.changeYtd)}>{returnText(row.changeYtd)}</td><td>{row.date??"N/D"}</td><td><button type="button" className="home-remove-watch" onClick={()=>removeFromWatchlist(row.symbol)} aria-label={"Remove "+row.symbol+" from watchlist"}><Trash2 size={15}/></button></td></tr>)}</tbody></table></div>:<div className="home-empty-watch"><Target size={21}/><strong>Your watchlist is ready</strong><p>Add {ticker} to track its reference price here.</p><button type="button" className="home-button home-button-primary" onClick={addToWatchlist}><Plus size={15}/> Add {ticker}</button></div>}
-    <p className="home-inline-notice" role="status">{notice}</p>
-   </article>
-   <article className="home-card home-portfolio-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">ALLOCATION</span><h3>Portfolios & Portfolio Studio</h3></div>{demoPortfolio?<span className="home-demo-badge">SAMPLE PORTFOLIO</span>:<BriefcaseBusiness size={19}/>}</header>
-    <p>Your researched portfolios can be connected here. Track positions and snapshot values in Portfolio Studio.</p>
-    <div className="home-portfolio-summary"><strong>{positionCount}</strong><span>positions saved in this browser</span>{portfolioValue!==null&&<b>{getMoney(portfolioValue)} snapshot value</b>}</div>
-    <NavLink className="home-card-link" to="/portfolio">Open Portfolio Studio <ArrowRight size={14}/></NavLink>
-   </article>
-   <article className="home-card home-research-card">
-    <header className="home-card-heading"><div><span className="home-eyebrow">YOUR WORKSPACE</span><h3>Quick access</h3></div><Compass size={19}/></header>
-    <div className="home-shortcut-grid"><NavLink to="/options"><Activity size={18}/>Options Lab</NavLink><NavLink to="/portfolio"><BriefcaseBusiness size={18}/>Portfolio Studio</NavLink><NavLink to="/options/probability"><Target size={18}/>Probability Station</NavLink><NavLink to="/discover"><Search size={18}/>Market Explorer</NavLink><NavLink to="/discover"><ChartNoAxesCombined size={18}/>Stock Scanner</NavLink><NavLink to="/company"><BriefcaseBusiness size={18}/>Company Intelligence</NavLink><NavLink to="/research"><Newspaper size={18}/>Research Library</NavLink><NavLink to="/academy"><GraduationCap size={18}/>Education</NavLink></div>
-   </article>
-  </section>
-  <section className="home-learning-grid"><article className="home-learning-card"><span className="home-learning-icon"><GraduationCap size={21}/></span><div><span className="home-eyebrow">THE OPTION EDGE</span><h3>Options education & courses</h3><p>Build the concepts behind disciplined options strategies.</p><NavLink to="/academy">Explore learning <ArrowRight size={14}/></NavLink></div></article><article className="home-learning-card newsletter"><span className="home-learning-icon"><Mail size={21}/></span><div><span className="home-eyebrow">NEWSLETTER</span><h3>OptionCrafted Free Newsletter</h3><p>Market insights, options ideas, and research from OptionCrafted.</p><a href="https://optioncrafted.com/free-newsletter" target="_blank" rel="noreferrer">Join the newsletter <ArrowUpRight size={14}/></a></div></article></section>
-  <section className="home-kpis" aria-label="Market and account summary">
-   <article className="home-kpi"><div><Activity size={17}/><span>MACRO REGIME</span></div><strong className="home-regime-value">{macroRegime}</strong><small>VIX {vix&&vix.price!==null?numberFormat.format(vix.price):"N/D"} · {vix?.priceDate??"date N/D"}</small></article>
-   <article className="home-kpi"><div><Layers3 size={17}/><span>SCREENING UNIVERSE</span></div><strong>{snapshot.records.length} <em>securities</em></strong><small>{pricedCount} with price · snapshot {snapshot.exportedAt}</small></article>
-   <article className="home-kpi"><div><Target size={17}/><span>WATCHLIST</span></div><strong>{watchlist.length} <em>{watchlist.length===1?"security":"securities"}</em></strong><small>Saved in this browser</small></article>
-   <article className="home-kpi"><div><Wallet size={17}/><span>PORTFOLIO</span></div><strong>{positionCount} <em>{positionCount===1?"position":"positions"}</em></strong><small>{portfolioValue===null?"Open Portfolio Studio":getMoney(portfolioValue)+" · snapshot value"}</small></article>
-  </section>
-  <footer className="home-footer"><Shield size={14}/> Market prices are dated reference values, not live quotes. DCF is a scenario estimate based on visible assumptions. Logo sources: <a href="https://github.com/ahmeterenodaci/Nasdaq-Stock-Exchange-including-Symbols-and-Logos" target="_blank" rel="noreferrer">Nasdaq</a> · <a href="https://github.com/ahmeterenodaci/New-York-Stock-Exchange--NYSE--including-Symbols-and-Logos" target="_blank" rel="noreferrer">NYSE</a></footer>
+    <div className="dashboard-screener-link"><span className="dashboard-screener-icon"><Search size={16}/></span><span><strong>TradingView Stock Screener</strong><small>Open the market screener; use it alongside OptionsCrafted research.</small></span><a href="https://www.tradingview.com/screener/" target="_blank" rel="noreferrer" aria-label="Open TradingView Stock Screener"><ArrowUpRight size={15}/></a></div>
+    <a className="dashboard-newsletter-link" href="https://optioncrafted.com/free-newsletter" target="_blank" rel="noreferrer"><BookOpen size={16}/> OptionsCrafted research & newsletter <ArrowUpRight size={13}/></a>
+   </section>
+  </div>
+
+  <footer className="dashboard-footer"><Shield size={14}/> TradingView widgets are embedded in the dashboard. Prices in the app's top market strip remain dated reference snapshots.</footer>
  </div>;
 }
