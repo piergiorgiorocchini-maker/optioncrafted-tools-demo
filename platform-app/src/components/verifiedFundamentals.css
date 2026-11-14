@@ -69,3 +69,14 @@
  .vf-mobile-table th:not(:first-child),.vf-mobile-table td:not(:first-child){width:28%;min-width:0!important;white-space:normal;overflow-wrap:anywhere;text-align:right;font-variant-numeric:tabular-nums}
  .vf-mobile-table th,.vf-mobile-table td{padding:7px 3px;font-size:9px}
 }
+/* Legible financial tables; the responsive period controls retain the same module layout. */
+.vf-statements .vf-table{font-size:13px}
+.vf-statements .vf-table th,.vf-statements .vf-table td{font-size:13px;line-height:1.4;padding:8px 9px}
+.vf-statement-tabs button{font-size:13px;min-height:38px}
+.vf-mobile-period-controls button,.vf-mobile-period-controls span{font-size:12px}
+@media(max-width:760px){
+ .vf-mobile-table{font-size:12px}
+ .vf-mobile-table th,.vf-mobile-table td{font-size:12px;padding:8px 5px}
+ .vf-mobile-period-controls button{font-size:12px;min-height:42px}
+ .vf-mobile-period-controls span{font-size:11px}
+}

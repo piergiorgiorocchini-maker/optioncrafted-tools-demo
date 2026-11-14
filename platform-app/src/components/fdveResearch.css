@@ -26,3 +26,8 @@
  .ci-market-chart{height:270px;min-height:0}
  .ci-market-chart-widget,.ci-market-chart-placeholder{height:230px!important;min-height:230px!important}
 }
+/* Fixed chart module height keeps the TradingView plot useful at desktop widths. */
+.ci-market-chart{height:420px;min-height:420px}
+.ci-market-chart-widget{height:100%!important;min-height:0!important}
+@media(max-width:900px){.ci-market-chart{height:380px;min-height:380px}}
+@media(max-width:700px){.ci-market-chart{height:290px;min-height:290px}.ci-market-chart-widget,.ci-market-chart-placeholder{height:250px!important;min-height:250px!important}}

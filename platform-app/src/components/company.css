@@ -49,3 +49,8 @@
  .dashboard-page-company .ci-metrics small{font-size:9px}
  .dashboard-page-company .fc-grid{grid-template-columns:1fr}
 }
+/* Company modules keep fixed grid positions with readable labels and chart controls. */
+.ci-head h2{font-size:24px;line-height:1.2}
+.ci-metrics article>span,.ci-metrics small{font-size:11px;line-height:1.4}
+.ci-metrics strong{font-size:22px}
+.ci-market-chart-head strong{font-size:15px}
