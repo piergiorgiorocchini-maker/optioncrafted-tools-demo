@@ -246,3 +246,16 @@
 @media(max-width:850px){.wacc-kpis,.wacc-output-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wacc-bridge-table{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:620px){.nr-rate-tabs{position:sticky;top:5px;z-index:5;width:100%;justify-content:stretch}.nr-rate-tabs button{flex:1;padding:10px 8px;font-size:11px}.wacc-panel{padding:14px}.wacc-heading{align-items:flex-start;flex-direction:column}.wacc-status{justify-items:start;white-space:normal}.wacc-heading h3{font-size:18px}.wacc-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.wacc-kpis article{padding:12px}.wacc-kpis article>strong{font-size:19px}.wacc-output-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.wacc-output-grid article{padding:12px}.wacc-output-grid article>strong{font-size:15px}.wacc-output-grid .wacc-fair-value>strong{font-size:21px}.wacc-bridge-table{grid-template-columns:repeat(2,minmax(0,1fr))}.wacc-section-title{align-items:flex-start;flex-direction:column}.wacc-period{font-size:9px}}
 @media(max-width:380px){.wacc-kpis,.wacc-output-grid{grid-template-columns:1fr}.wacc-bridge-table{grid-template-columns:1fr 1fr}}
+
+/* Manual DCF: emphasize the primary intrinsic value as in the WACC bridge. */
+.nr-dcf-summary-first .nr-dcf-primary-value{
+ background:#eaf4fc;
+ border-color:#a9cce8;
+}
+.nr-dcf-summary-first .nr-dcf-primary-value>strong{
+ color:#0c63a5;
+ font-size:25px;
+}
+@media(max-width:620px){
+ .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:22px}
+}
