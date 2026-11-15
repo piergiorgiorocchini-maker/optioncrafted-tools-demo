@@ -32,7 +32,8 @@ for(const [path,markers] of Object.entries(required)){
 }
 // The Football Field must occur only in the dedicated Premium synthesis surface.
 if(read("platform-app/src/components/ValuationWorkspace.tsx").includes("ValuationFootballField"))throw new Error("Football Field must not render in individual valuation methods");
-if(!read("platform-app/src/main.tsx").includes('subpage==="synthesis"')||!read("platform-app/src/main.tsx").includes('subpage==="synthesis")?"dcf"'))throw new Error("Premium synthesis route and tier gate are required");
+if(!read("platform-app/src/main.tsx").includes('page==="premium-analysis"?<PremiumAnalysisWorkspace')||!read("platform-app/src/core/access.ts").includes('"premium-analysis"'))throw new Error("Premium Analysis workbook route and tier gate are required");
+if(!read("platform-app/src/components/PremiumAnalysisWorkspace.tsx").includes('"precedent-transactions"')||!read("platform-app/src/components/PremiumAnalysisWorkspace.tsx").includes('"multiples"'))throw new Error("Premium workbook tabs must remain available");
 checks+=2;
 for(const path of ["tools/index.html","tools/probability-station/index.html","tools/options-strategy-lab/index.html","tools/edge-station/index.html"]){if(read(path).includes("tools-embed-bridge.js"))throw new Error("Legacy page must remain standalone: "+path);checks++;}
 if(read("platform-app/src/main.tsx").includes("<LegacyToolsWorkspace"))throw new Error("Iframe-based tools must not be embedded in the native app");
