@@ -136,7 +136,7 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
  ];
 
  return <section className="wacc-worksheet" aria-label="Adobe WACC discounted cash flow worksheet">
-  <section className="wacc-panel">
+  <section className="wacc-overview">
    
    <div className="wacc-output-grid">
     <article className="wacc-fair-value"><span>Intrinsic Value / Share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
@@ -146,7 +146,7 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
 
    </div>
   </section>
-  <section className="wacc-panel">
+  <section className="wacc-panel wacc-sensitivity-panel">
    <div className="wacc-section-title"><div><span className="wacc-eyebrow">SENSITIVITY ANALYSIS</span></div></div>
    <div className="wacc-table-scroll"><table className="wacc-sensitivity-table"><thead><tr><th>WACC \ terminal growth</th>{model.terminalCases.map(growth=><th key={growth}>{formatPct(growth,1)}</th>)}</tr></thead><tbody>{model.waccCases.map((scenarioWacc,rowIndex)=><tr key={scenarioWacc}><th>{formatPct(scenarioWacc)}</th>{model.sensitivity[rowIndex].map((value,columnIndex)=><td className={rowIndex===1&&columnIndex===2?"wacc-base-case":""} key={columnIndex}>{formatPrice(value)}</td>)}</tr>)}</tbody></table></div>
    <p className="wacc-note">Only the discount rate and terminal growth change in this matrix. The explicit revenue path, operating margins, net debt and diluted share count remain fixed.</p>
