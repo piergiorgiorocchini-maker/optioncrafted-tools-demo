@@ -138,13 +138,13 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
  return <section className="wacc-worksheet" aria-label="Adobe WACC discounted cash flow worksheet">
   <section className="wacc-panel">
    
-   <div className="wacc-output-grid">\n    <article className="wacc-fair-value"><span>Intrinsic Value / Share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
+   <div className="wacc-output-grid">
+    <article className="wacc-fair-value"><span>Intrinsic Value / Share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
     <article><span>Terminal value · FY2031</span><strong>{formatMillions(model.terminalValue)}</strong></article>
     <article><span>Enterprise value</span><strong>{formatMillions(model.enterpriseValue)}</strong></article>
     <article><span>Equity value</span><strong>{formatMillions(model.equityValue)}</strong><small>EV less net debt</small></article>
 
    </div>
-   <div className="wacc-bridge-table"><div><span>PV explicit FCFF</span><strong>{formatMillions(model.pvExplicit)}</strong></div><div><span>PV terminal value</span><strong>{formatMillions(model.pvTerminal)}</strong></div><div><span>Net debt · excluding leases</span><strong>−{formatMillions(model.netDebt)}</strong></div><div><span>Diluted shares</span><strong>{formatNumber(input.dilutedShares,0)}m</strong></div><div><span>PV terminal value / EV</span><strong>{formatPct(model.terminalShare,1)}</strong></div></div>
   </section>
   <section className="wacc-panel">
    <div className="wacc-section-title"><div><span className="wacc-eyebrow">SENSITIVITY ANALYSIS</span></div></div>
@@ -161,6 +161,10 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
    <article><span>Terminal growth</span><strong>{formatPct(input.terminalGrowth,1)}</strong><small>CBO nominal GDP proxy</small></article>
    <article><span>Normalized TTM FCFF</span><strong>{formatMillions(model.normalizedStartingFcff)}</strong><small>Excludes the one-off NWC cash release</small></article>
   </div>
+  <section className="wacc-panel wacc-bridge-details">
+   <div className="wacc-section-title"><div><span className="wacc-eyebrow">VALUATION BRIDGE</span><h4>Enterprise value to equity value</h4></div></div>
+   <div className="wacc-bridge-table"><div><span>PV explicit FCFF</span><strong>{formatMillions(model.pvExplicit)}</strong></div><div><span>PV terminal value</span><strong>{formatMillions(model.pvTerminal)}</strong></div><div><span>Net debt · excluding leases</span><strong>−{formatMillions(model.netDebt)}</strong></div><div><span>Diluted shares</span><strong>{formatNumber(input.dilutedShares,0)}m</strong></div><div><span>PV terminal value / EV</span><strong>{formatPct(model.terminalShare,1)}</strong></div></div>
+  </section>
   <section className="wacc-panel">
    <div className="wacc-section-title"><div><span className="wacc-eyebrow">MODEL INPUTS</span><h4>Financial, capital and market assumptions</h4></div><span className="wacc-period">USD millions except per-share data and rates</span></div>
    <div className="wacc-table-scroll"><table className="wacc-input-table"><tbody>{metricRows.map((row,index)=><tr key={index}><th>{row[0]}</th><td>{row[1]}</td><th>{row[2]}</th><td>{row[3]}</td></tr>)}</tbody></table></div>
