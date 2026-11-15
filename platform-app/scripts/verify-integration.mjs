@@ -18,7 +18,7 @@ const required={
  "tools/edge-station/index.html":["id=\"edgePayoffChart\"","id=\"metricRiskProfile\""],
  "platform-app/src/main.tsx":["ValuationWorkspace","OptionsWorkspace","nav-submenu","onSelect={openAsset}"],
  "platform-app/src/components/ValuationWorkspace.tsx":["requiredReturnModel","grahamModel","dividendModel","ResponsiveContainer"],
- "platform-app/src/components/ValuationSynthesis.tsx":["ValuationFootballField","ValuationBridge","PREMIUM"],
+ "platform-app/src/components/ValuationSynthesis.tsx":["ValuationFootballField","ValuationBridge","Fair Value","Market Price","Upside / Downside"],
  "platform-app/src/components/OptionsWorkspace.tsx":["cspModel","coveredCallModel","wheelModel","hedgeModel","lognormalProbability","ResponsiveContainer"],
  "platform-app/src/components/ValuationFootballField.tsx":["ff-vertical-range","ff-single-estimate","ff-market-line","ff-scale-toggle","ff-entry-section","Purchase thresholds","No averaging of intrinsic estimates with entry thresholds"],
  "platform-app/src/core/valuationModels.ts":["function dcfModel","function requiredReturnModel","function grahamModel","function dividendModel"],
