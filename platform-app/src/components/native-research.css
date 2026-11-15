@@ -166,16 +166,18 @@
 @media(max-width:450px){.nr-required-metrics{grid-template-columns:1fr}.nr-required-metrics .nr-required-primary{grid-column:auto}.nr-required-metrics .nr-metric{min-height:auto}.nr-basis-toggle>small{min-width:0}.nr-schedule-table th,.nr-schedule-table td{padding:7px 9px}}
 
 
-.nr-sensitivity{margin-top:14px}
-.nr-sensitivity>p{color:#b7cbe0;font-size:12px;line-height:1.55;margin:0 0 12px}
-.nr-sensitivity-wrap{overflow:auto}
-.nr-sensitivity table{width:100%;border-collapse:collapse;min-width:520px;font-size:12px}
-.nr-sensitivity th,.nr-sensitivity td{padding:10px 12px;border-bottom:1px solid #29445f;text-align:right;white-space:nowrap}
-.nr-sensitivity thead th{color:#9fc4e5;background:#132f4b;font-size:11px}
-.nr-sensitivity tbody th{color:#c9d9e9;text-align:left}
-.nr-sensitivity td{color:#f0f6fc;font-variant-numeric:tabular-nums}
-.nr-sensitivity td.is-base{background:#224c70;color:#fff;font-weight:800;box-shadow:inset 0 0 0 1px #65b5ff}
-.nr-sensitivity .nr-chart-empty{min-height:90px;color:#b7cbe0}
+.nr-sensitivity{margin-top:14px;color:#173553}
+.nr-sensitivity>p{color:#5d7187;font-size:12px;line-height:1.55;margin:0 0 12px}
+.nr-sensitivity-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #dbe6f1;border-radius:9px}
+.nr-sensitivity table{width:100%;border-collapse:collapse;min-width:520px;font-size:12px;background:#fff}
+.nr-sensitivity th,.nr-sensitivity td{padding:10px 12px;border-bottom:1px solid #dce6f0;text-align:right;white-space:nowrap}
+.nr-sensitivity thead th{color:#eaf4ff;background:#173f63;font-size:11px;font-weight:800}
+.nr-sensitivity tbody tr{background:#fff}
+.nr-sensitivity tbody tr:nth-child(even){background:#f4f8fc}
+.nr-sensitivity tbody th{color:#294d6e;text-align:left;font-weight:750}
+.nr-sensitivity td{color:#243e59;font-weight:600;font-variant-numeric:tabular-nums}
+.nr-sensitivity td.is-base{background:#dceeff;color:#0b5488;font-weight:850;box-shadow:inset 0 0 0 1px #65b5ff}
+.nr-sensitivity .nr-chart-empty{min-height:90px;color:#5d7187}
 
 /* Separate equity CAPM from enterprise FCFF/WACC valuation. */
 .nr-rate-tabs{display:flex;align-items:center;gap:5px;width:max-content;max-width:100%;padding:5px;background:#edf3f9;border:1px solid #dce6f0;border-radius:11px}
