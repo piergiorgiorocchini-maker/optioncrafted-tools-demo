@@ -612,3 +612,13 @@
  .nr-synthesis-metrics article>strong{font-size:26px}
 }
 @media(max-width:420px){.nr-synthesis-metrics{grid-template-columns:minmax(0,1fr)}}
+
+/* Show the research security prominently, not as a tiny trailing ticker. */
+.nr-synthesis-security{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px 13px;min-width:0}
+.nr-synthesis-security strong{font-size:23px;font-weight:850;color:#173553;letter-spacing:.1px}
+.nr-synthesis-security span{font-size:17px;font-weight:650;color:#55728e;overflow-wrap:anywhere}
+@media(max-width:700px){
+ .nr-synthesis-security{justify-content:flex-start}
+ .nr-synthesis-security strong{font-size:21px}
+ .nr-synthesis-security span{font-size:15px}
+}
