@@ -259,3 +259,23 @@
 @media(max-width:620px){
  .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:22px}
 }
+
+/* Manual DCF model visualization follows the white Valuation Lab design. */
+.nr-chart-card.nr-dcf-chart-light{
+ background:#fff;
+ border-color:#dbe6f1;
+ color:#173553;
+ box-shadow:0 3px 14px #1738590b;
+}
+.nr-dcf-chart-light .nr-section-title h3{color:#173a5d}
+.nr-dcf-chart-light .nr-eyebrow{color:#2183d4}
+.nr-dcf-chart-light .nr-status{
+ color:#527c9f;background:#f0f6fc;border-color:#dbe6f1;
+}
+.nr-dcf-chart-light .nr-bridge>div{
+ background:#f5f9fd;border-color:#dce6f0;
+}
+.nr-dcf-chart-light .nr-bridge span{color:#607e99}
+.nr-dcf-chart-light .nr-bridge b{color:#173553}
+.nr-dcf-chart-light .nr-chart-empty strong{color:#173553}
+.nr-dcf-chart-light .nr-chart-empty span{color:#607e99}
