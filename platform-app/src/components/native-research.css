@@ -294,3 +294,8 @@
  .nr-dcf-chart-legend{gap:7px 12px;font-size:10px}
  .nr-dcf-chart-legend small{flex-basis:100%}
 }
+
+/* Unit caption remains visible when the header legend wraps on mobile. */
+.nr-dcf-unit-label{display:block;margin-top:4px;color:#607e99;font-size:11px;font-weight:600}
+.nr-dcf-chart-light .nr-section-title>.nr-dcf-chart-legend{margin:0;justify-content:flex-end}
+@media(max-width:620px){.nr-dcf-chart-light .nr-section-title>.nr-dcf-chart-legend{justify-content:flex-start}}
