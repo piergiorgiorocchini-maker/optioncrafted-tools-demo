@@ -56,6 +56,12 @@ if(!visibleDcf.includes("dcfModel(fcf,inputs.growth,inputs.discount")||!visibleD
 if(!waccModel.includes("if(!input||input.ticker.toUpperCase()")||!waccModel.includes("result.fairValue")||!waccPanel.includes('from "../core/waccValuation"'))throw new Error("WACC must use shared and ticker-specific verified inputs");
 if(!synthesis.includes('DCF Composite')||!synthesis.includes('valuation.dcfComponents'))throw new Error("Premium synthesis must disclose DCF Composite components");
 checks+=3;
+// Premium DCF must stay within the viewport; wide data tables scroll locally.
+const responsive=read("platform-app/src/components/native-research.css");
+for(const marker of [".premium-analysis-sheet>.nr-workspace","grid-template-columns:minmax(0,1fr)","overscroll-behavior-x:contain",".premium-analysis-sheet .wacc-table-scroll"]){
+ if(!responsive.includes(marker))throw new Error("Missing mobile DCF containment rule: "+marker);
+ checks++;
+}
 const football=read("platform-app/src/components/ValuationFootballField.tsx");
 if(football.includes("averageCandidates")||football.includes("averageValuation"))throw new Error("Football Field must not invent an independent arithmetic Fair Value");
 if(!football.includes("triangulatedValue")||!football.includes("methods=candidates.filter"))throw new Error("Football Field must plot eligible methods and use the shared triangulated Fair Value");
