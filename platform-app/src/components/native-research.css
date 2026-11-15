@@ -638,3 +638,48 @@
  .nr-dcf-composite-breakdown{padding:12px 14px;gap:8px}
  .nr-dcf-composite-breakdown>strong{font-size:20px}
 }
+
+/* Premium DCF mobile containment: grid tracks must be shrinkable.
+   Wide sensitivity/forecast tables scroll INSIDE their cards, not the page. */
+.premium-analysis-sheet>.nr-workspace{
+ display:grid;
+ grid-template-columns:minmax(0,1fr);
+ min-width:0;
+ width:100%;
+ max-width:100%;
+}
+.premium-analysis-sheet>.nr-workspace>*, 
+.premium-analysis-sheet .nr-sensitivity,
+.premium-analysis-sheet .nr-sensitivity-wrap,
+.premium-analysis-sheet .nr-control-card,
+.premium-analysis-sheet .nr-model-layout,
+.premium-analysis-sheet .nr-chart-card,
+.premium-analysis-sheet .nr-dcf-chart-scroll,
+.premium-analysis-sheet .wacc-worksheet,
+.premium-analysis-sheet .wacc-panel,
+.premium-analysis-sheet .wacc-table-scroll{
+ min-width:0;
+ max-width:100%;
+}
+.premium-analysis-sheet .nr-sensitivity-wrap,
+.premium-analysis-sheet .wacc-table-scroll,
+.premium-analysis-sheet .nr-dcf-chart-scroll{
+ overflow-x:auto;
+ overscroll-behavior-x:contain;
+ -webkit-overflow-scrolling:touch;
+}
+@media(max-width:700px){
+ .premium-analysis-sheet>.nr-workspace{gap:12px}
+ .premium-analysis-sheet .nr-hero{min-width:0;max-width:100%;padding:16px}
+ .premium-analysis-sheet .nr-hero>div:first-child{min-width:0}
+ .premium-analysis-sheet .nr-rate-tabs{max-width:100%;min-width:0}
+ .premium-analysis-sheet .nr-metric-grid,
+ .premium-analysis-sheet .nr-dcf-summary-first,
+ .premium-analysis-sheet .wacc-output-grid{min-width:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .premium-analysis-sheet .nr-field-grid,
+ .premium-analysis-sheet .nr-assumptions{grid-template-columns:repeat(auto-fit,minmax(min(100%,145px),1fr))}
+}
+@media(max-width:380px){
+ .premium-analysis-sheet .nr-dcf-summary-first,
+ .premium-analysis-sheet .wacc-output-grid{grid-template-columns:minmax(0,1fr)}
+}
