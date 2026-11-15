@@ -11,9 +11,11 @@ import {SecurityLogo} from "./SecurityLogo";
 import {ValuationFootballField} from "./ValuationFootballField";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamResearchPanel} from "./GrahamResearchPanel";
+import {WaccResearchPanel} from "./WaccResearchPanel";
 import aaaYieldSnapshot from "../data/aaaYieldSnapshot.json";
 import {dcfModel,dividendModel,grahamModel,modelDefaults,money,requiredReturnModel,type Financials,type ModelInputs,type ValuationMethod,type ValuationMode} from "../core/valuationModels";
 import "./native-research.css";
+type DiscountTab="manual"|"capm"|"wacc";
 const tabs:{id:ValuationMethod;label:string;sub:string}[]=[
  {id:"dcf",label:"DCF Engine",sub:"Intrinsic cash flow"},
  {id:"required-return",label:"Required Return",sub:"Entry-price discipline"},
@@ -45,7 +47,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const [overrides,setOverrides]=useState<Partial<Record<Field,string>>>({});
  const [a,setA]=useState<ModelInputs>({...modelDefaults,aaaYield:aaaYieldSnapshot.value});
  const [aaaManual,setAaaManual]=useState(false);
- const [rateMode,setRateMode]=useState<"manual"|"capm">("manual");
+ const [rateMode,setRateMode]=useState<DiscountTab>(()=>{try{const saved=localStorage.getItem("optionscrafted.valuation.dcf-rate-tab.v1");return saved==="capm"||saved==="wacc"?saved:"manual"}catch{return"manual"}});
  const [requiredBasis,setRequiredBasis]=useState<"eps"|"fcf">("eps");
  const [riskFree,setRiskFree]=useState(4);
  const [erp,setErp]=useState(5.5);
@@ -82,9 +84,13 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
  const requiredMultipleName=requiredBasis==="eps"?"P/E":"P/FCF";
  const requiredReturnText=Number.isFinite(a.requiredReturn)?a.requiredReturn.toFixed(2)+"%":"N/D";
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
+ const chooseRateTab=(next:DiscountTab)=>{setRateMode(next);try{localStorage.setItem("optionscrafted.valuation.dcf-rate-tab.v1",next)}catch{}};
+ const isWaccTab=active==="dcf"&&rateMode==="wacc";
  return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"?" nr-workspace--graham":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">OPTIONSCRAFTED / VALUATION INTELLIGENCE</span><h2>Valuation Lab <span>2.0</span></h2><p>One financial model layer, five research methods. Calculated values flow directly into the Football Field.</p></div><div className="nr-hero-meta"><SecurityLogo ticker={asset.ticker}/><strong>{asset.ticker}</strong></div></header>
   <nav className="nr-tabbar" aria-label="Valuation methods">{tabs.map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>
+  {active==="dcf"&&<nav className="nr-rate-tabs" role="tablist" aria-label="DCF discount method"><button type="button" role="tab" aria-selected={rateMode==="manual"} className={rateMode==="manual"?"active":""} onClick={()=>chooseRateTab("manual")}>Manual DCF</button><button type="button" role="tab" aria-selected={rateMode==="capm"} className={rateMode==="capm"?"active":""} onClick={()=>chooseRateTab("capm")}>CAPM</button><button type="button" role="tab" aria-selected={rateMode==="wacc"} className={rateMode==="wacc"?"active":""} onClick={()=>chooseRateTab("wacc")}>WACC</button></nav>}
+  {isWaccTab?<WaccResearchPanel ticker={asset.ticker}/>:<>
   <section className="nr-control-card">
    <div className="nr-section-title"><div><span className="nr-eyebrow">VALUATION INPUTS</span><h3>Valuation inputs</h3></div></div>
    <div className="nr-mode" role="group" aria-label="Valuation data mode">
@@ -96,9 +102,9 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
   <section className="nr-control-card nr-model-inputs"><div className="nr-section-title"><div><span className="nr-eyebrow">MODEL CONFIGURATION</span><h3>{selected.label}</h3></div><span className="nr-status"><FlaskConical size={14}/> ASSUMPTIONS</span></div>
     {active==="peers"?<p className="nr-source-note">Peer multiples need an audited comparable-company set, normalized EBITDA/earnings and consistent fiscal periods. No fabricated peer valuations are published.</p>:<>
     {active==="required-return"&&<div className="nr-basis-toggle"><span>Projection basis</span><div className="nr-mode"><button type="button" className={requiredBasis==="eps"?"active":""} onClick={()=>setRequiredBasis("eps")}>EPS / P/E</button><button type="button" className={requiredBasis==="fcf"?"active":""} onClick={()=>setRequiredBasis("fcf")}>FCF / P/FCF</button></div><small>The same ten-year model can project earnings or free cash flow per share. The exit multiple follows the selected basis.</small></div>}
-    <div className="nr-field-grid nr-assumptions">{assumptionsByTab[active].map(f=><label key={f.key}><span>{active==="required-return"&&requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?null:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}));if(f.key==="aaaYield")setAaaManual(true)}} placeholder="Enter rate"/></label>)}</div>
+    <div className="nr-field-grid nr-assumptions">{assumptionsByTab[active].filter(f=>!(active==="dcf"&&rateMode==="capm"&&f.key==="discount")).map(f=><label key={f.key}><span>{active==="required-return"&&requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?null:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}));if(f.key==="aaaYield")setAaaManual(true)}} placeholder="Enter rate"/></label>)}</div>
     {active==="graham"&&<div className="nr-graham-rate-note"><strong>Moody’s Aaa yield (DAAA): {aaaYieldSnapshot.value.toFixed(2)}% · {aaaYieldSnapshot.observationDate}</strong><span>{aaaManual?"USER OVERRIDE · the input above is manually set":"VERIFIED FRED SNAPSHOT · NOT LIVE"}</span><a href={aaaYieldSnapshot.sourceUrl} target="_blank" rel="noopener noreferrer">Verify current yield on FRED</a><button type="button" onClick={()=>{setA(prev=>({...prev,aaaYield:aaaYieldSnapshot.value}));setAaaManual(false)}}>Use dated FRED observation</button></div>}
-    {active==="dcf"&&<div className="nr-capm"><span>Discount rate source</span><div className="nr-mode"><button type="button" className={rateMode==="manual"?"active":""} onClick={()=>setRateMode("manual")}>Manual</button><button type="button" className={rateMode==="capm"?"active":""} onClick={()=>setRateMode("capm")}>CAPM</button></div>{rateMode==="capm"&&<div className="nr-field-grid"><label><span>Risk-free % · assumption</span><input type="number" value={riskFree} step="0.1" onChange={e=>setRiskFree(Number(e.target.value))}/></label><label><span>Equity risk premium % · assumption</span><input type="number" value={erp} step="0.1" onChange={e=>setErp(Number(e.target.value))}/></label></div>}<small>Applied equity discount rate: {rate===null?"N/D":rate.toFixed(2)+"%"} · WACC is not used to discount equity FCF/share.</small></div>}
+    {active==="dcf"&&rateMode==="capm"&&<div className="nr-capm"><span>CAPM cost of equity inputs</span><div className="nr-field-grid"><label><span>Risk-free rate %</span><input type="number" value={riskFree} step="0.1" onChange={e=>setRiskFree(Number(e.target.value))}/></label><label><span>Equity risk premium %</span><input type="number" value={erp} step="0.1" onChange={e=>setErp(Number(e.target.value))}/></label></div><small>Applied equity discount rate: {rate===null?"N/D":rate.toFixed(2)+"%"} · CAPM discounts equity cash flows; WACC is shown in its separate FCFF worksheet.</small></div>}
     <button type="button" className="nr-text-button" onClick={()=>{setA({...modelDefaults,aaaYield:aaaYieldSnapshot.value});setAaaManual(false)}}><RefreshCcw size={13}/> Reset assumptions</button>
     </>}
     {noValue&&<div className="nr-empty" role="status">Model awaiting valid financial inputs and assumptions. No value is published until the required fields are available.</div>}
@@ -155,5 +161,6 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
   {active==="dcf"&&<section className="nr-panel nr-sensitivity"><div className="nr-section-title"><div><span className="nr-eyebrow">DCF SENSITIVITY</span><h3>How assumptions change estimated value</h3></div><span className="nr-status">VALUE / SHARE</span></div><p>Intrinsic value across FCF growth and required-return scenarios. Current assumptions are highlighted.</p>{base?<div className="nr-sensitivity-wrap"><table><thead><tr><th>FCF growth ↓ · Return →</th>{[-2,-1,0,1,2].map(d=><th key={d}>{(rate!+d).toFixed(1)}%</th>)}</tr></thead><tbody>{[-2,-1,0,1,2].map(gap=>{const growth=a.growth+gap;return <tr key={gap}><th>{growth.toFixed(1)}%</th>{[-2,-1,0,1,2].map(d=>{const r=rate!+d,result=dcfModel(financials.fcf,growth,r,a.terminal,a.years),isBase=gap===0&&d===0;return <td key={d} className={isBase?"is-base":""}>{result&&r>a.terminal?money(result.value,currency):"—"}</td>})}</tr>})}</tbody></table></div>:<p className="nr-chart-empty">Enter a positive FCF/share and valid discount assumptions to see the sensitivity table.</p>}</section>}
   <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} triangulatedValue={publishedValuation.intrinsicValue} mos={a.mos} source="" extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
   <div className="nr-footnote"><strong>Research boundary.</strong> Snapshot financial inputs are not live quotes. Growth, discount, multiples and exit prices are user-editable scenarios, not verified forecasts. Required-return entry price is not averaged into intrinsic fair value. <NavLink to="/options/csp">Continue to Options Execution <ArrowRight size={13}/></NavLink></div>
+  </>}
  </div>;
 }
