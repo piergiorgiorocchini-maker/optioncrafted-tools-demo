@@ -136,25 +136,25 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
  ];
 
  return <section className="wacc-worksheet" aria-label="Adobe WACC discounted cash flow worksheet">
-  <header className="wacc-panel wacc-heading">
-   <div><span className="wacc-eyebrow">ADOBE INC. · DISCOUNTED CASH FLOW</span><h3>WACC valuation worksheet</h3><p>Enterprise cash flows discounted at the weighted average cost of capital, then bridged to equity value per diluted share.</p></div>
-   <div className="wacc-status"><span>INPUTS VERIFIED</span><small>Financials through {input.financialAsOf} · market snapshot {input.marketAsOf}</small></div>
-  </header>
   <section className="wacc-panel">
-   <div className="wacc-section-title"><div><span className="wacc-eyebrow">VALUATION BRIDGE</span><h4>From enterprise value to intrinsic value per share</h4></div><span className="wacc-period">Perpetuity growth terminal value</span></div>
-   <div className="wacc-output-grid">
+   
+   <div className="wacc-output-grid">\n    <article className="wacc-fair-value"><span>Intrinsic Value / Share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
     <article><span>Terminal value · FY2031</span><strong>{formatMillions(model.terminalValue)}</strong></article>
     <article><span>Enterprise value</span><strong>{formatMillions(model.enterpriseValue)}</strong></article>
     <article><span>Equity value</span><strong>{formatMillions(model.equityValue)}</strong><small>EV less net debt</small></article>
-    <article className="wacc-fair-value"><span>Fair value / diluted share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
+
    </div>
    <div className="wacc-bridge-table"><div><span>PV explicit FCFF</span><strong>{formatMillions(model.pvExplicit)}</strong></div><div><span>PV terminal value</span><strong>{formatMillions(model.pvTerminal)}</strong></div><div><span>Net debt · excluding leases</span><strong>−{formatMillions(model.netDebt)}</strong></div><div><span>Diluted shares</span><strong>{formatNumber(input.dilutedShares,0)}m</strong></div><div><span>PV terminal value / EV</span><strong>{formatPct(model.terminalShare,1)}</strong></div></div>
   </section>
   <section className="wacc-panel">
-   <div className="wacc-section-title"><div><span className="wacc-eyebrow">SENSITIVITY</span><h4>Fair value per share</h4></div><span className="wacc-period">WACC ±0.50 percentage points</span></div>
+   <div className="wacc-section-title"><div><span className="wacc-eyebrow">SENSITIVITY ANALYSIS</span></div></div>
    <div className="wacc-table-scroll"><table className="wacc-sensitivity-table"><thead><tr><th>WACC \ terminal growth</th>{model.terminalCases.map(growth=><th key={growth}>{formatPct(growth,1)}</th>)}</tr></thead><tbody>{model.waccCases.map((scenarioWacc,rowIndex)=><tr key={scenarioWacc}><th>{formatPct(scenarioWacc)}</th>{model.sensitivity[rowIndex].map((value,columnIndex)=><td className={rowIndex===1&&columnIndex===2?"wacc-base-case":""} key={columnIndex}>{formatPrice(value)}</td>)}</tr>)}</tbody></table></div>
    <p className="wacc-note">Only the discount rate and terminal growth change in this matrix. The explicit revenue path, operating margins, net debt and diluted share count remain fixed.</p>
   </section>
+  <header className="wacc-panel wacc-heading">
+   <div><span className="wacc-eyebrow">ADOBE INC. · DISCOUNTED CASH FLOW</span><h3>WACC valuation worksheet</h3><p>Enterprise cash flows discounted at the weighted average cost of capital, then bridged to equity value per diluted share.</p></div>
+   <div className="wacc-status"><span>INPUTS VERIFIED</span><small>Financials through {input.financialAsOf} · market snapshot {input.marketAsOf}</small></div>
+  </header>
   <div className="wacc-kpis">
    <article><span>Cost of equity · CAPM</span><strong>{formatPct(model.costOfEquity)}</strong><small>Risk-free + beta × ERP</small></article>
    <article className="wacc-kpi-primary"><span>WACC · working rate</span><strong>{formatPct(model.wacc)}</strong><small>Market-value weights · after-tax debt cost</small></article>
