@@ -39,7 +39,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const dcfRange=[bear,base,bull].filter(valid);
  const candidates:Series[]=[
   {id:"dcf",label:"DCF",low:dcfRange.length?Math.min(...dcfRange):null,mid:valid(base)?base:null,high:dcfRange.length?Math.max(...dcfRange):null,detail:"DCF range across available scenarios"},
-  {id:"earnings",label:"Graham / Lynch",low:graham,mid:graham,high:graham,detail:"Graham earnings-based valuation; not EPS"},
+  {id:"earnings",label:"Graham Valuation",low:graham,mid:graham,high:graham,detail:"Graham earnings-based valuation; not EPS"},
   {id:"dividend",label:"Dividend",low:dividend,mid:dividend,high:dividend,detail:"DDM method"},
   ...extra.filter(m=>m.kind!=="entry").map((m,i)=>({id:"extra-"+i,label:m.label,low:m.low,mid:m.mid,high:m.high,detail:m.detail}))
  ];
@@ -97,6 +97,11 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
       {range?<rect className="ff-vertical-range" x={x-29} y={y(hi)} width="58" height={Math.max(3,y(lo)-y(hi))} rx="4"/>:null}
       <line className={range?"ff-base-marker":"ff-single-estimate"} x1={x-32} x2={x+32} y1={y(m.mid!)} y2={y(m.mid!)}/>
       {!range?<circle className="ff-single-center" cx={x} cy={y(m.mid!)} r="6"/>:null}
+      {range?<g aria-label={m.label+" range values"}>
+       <text className="ff-value-label ff-range-value-high" x={x} y={Math.max(25,y(hi)-11)} textAnchor="middle">High {money(hi)}</text>
+       <text className="ff-value-label ff-range-value-low" x={x} y={Math.min(334,y(lo)+20)} textAnchor="middle">Low {money(lo)}</text>
+       <text className="ff-value-label ff-range-value-base" x={x+39} y={y(m.mid!)+5} textAnchor="start">Base {money(m.mid)}</text>
+      </g>:<text className="ff-value-label ff-point-value" x={x} y={Math.max(24,y(m.mid!)-14)} textAnchor="middle">{money(m.mid)}</text>}
       <title>{m.label+": "+money(m.mid)+"; range "+money(lo)+" to "+money(hi)}</title>
       <text className="ff-method-name" x={x} y="350" textAnchor="middle">{m.label}</text>
      </g>
