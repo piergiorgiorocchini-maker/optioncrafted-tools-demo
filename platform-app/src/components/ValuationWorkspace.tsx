@@ -162,14 +162,14 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
      <ResponsiveContainer width="100%" height={360}>
       <BarChart data={chartRows} margin={{top:46,right:16,left:8,bottom:18}} barGap={5} barCategoryGap="26%">
        <CartesianGrid stroke="#e4ebf2" strokeDasharray="3 5" vertical={false}/>
-       <XAxis dataKey="year" stroke="#637c95" tick={{fontSize:15,fontWeight:650,fill:"#173553"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} dy={6}/>
-       <YAxis stroke="#637c95" tick={{fontSize:14,fontWeight:600,fill:"#173553"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} width={52} domain={[0,"auto"]} tickFormatter={v=>Number(v).toFixed(0)}/>
+       <XAxis dataKey="year" stroke="#637c95" tick={{fontSize:16,fontWeight:650,fill:"#173553"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} dy={6}/>
+       <YAxis stroke="#637c95" tick={{fontSize:15,fontWeight:600,fill:"#173553"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} width={52} domain={[0,"auto"]} tickFormatter={v=>Number(v).toFixed(0)}/>
        <Tooltip contentStyle={{background:"#fff",border:"1px solid #dbe6f1",borderRadius:10,color:"#173553"}} itemStyle={{color:"#173553"}} formatter={v=>money(Number(v),currency)}/>
        <Bar dataKey="cashflow" name="FCF / share" fill="#173553" radius={[4,4,0,0]}>
-        <LabelList dataKey="cashflow" position="top" fill="#173553" fontSize={16} fontWeight={700} formatter={(v: number)=>Number(v).toFixed(1)}/>
+        <LabelList dataKey="cashflow" position="top" fill="#173553" fontSize={18} fontWeight={700} formatter={(v: number)=>Number(v).toFixed(1)}/>
        </Bar>
        <Bar dataKey="presentValue" name="PV / share" fill="#D4A94D" radius={[4,4,0,0]}>
-        <LabelList dataKey="presentValue" position="top" fill="#806016" fontSize={16} fontWeight={700} formatter={(v: number)=>Number(v).toFixed(1)}/>
+        <LabelList dataKey="presentValue" position="top" fill="#806016" fontSize={18} fontWeight={700} formatter={(v: number)=>Number(v).toFixed(1)}/>
        </Bar>
       </BarChart>
      </ResponsiveContainer>
