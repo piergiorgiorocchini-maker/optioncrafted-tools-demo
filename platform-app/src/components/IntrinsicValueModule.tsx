@@ -34,12 +34,23 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
  const valuePosition=(value:number|null)=>value===null?0:Math.min(100,Math.max(0,(value-valueScaleMin)/(valueScaleMax-valueScaleMin)*100));
  const axisLabelStyle=(value:number|null,other:number|null)=>{const position=valuePosition(value),otherPosition=other===null?null:valuePosition(other),crowded=otherPosition!==null&&Math.abs(position-otherPosition)<18;const transform=position<18?"translateX(0)":position>82?"translateX(-100%)":crowded?(position<otherPosition!?"translateX(-100%)":"translateX(0)"):"translateX(-50%)";return {left:position+"%",transform}};
  const calloutPosition=(value:number|null)=>Math.min(88,Math.max(12,valuePosition(value)));
+ const hasTriangulatedEstimate=valuation?.status==="TRIANGULATED"&&intrinsic!==null;
+ const hasIndicativeEstimate=valuation?.status==="INDICATIVE"&&intrinsic!==null;
+ const availableMethods=valuation?.methods.filter(method=>method.status==="AVAILABLE")??[];
+ const pendingModelReasons=valuation?.methods.filter(method=>method.status==="PENDING"&&(method.id==="dcf"||method.id==="earnings")).map(method=>`${method.label}: ${method.reason}`)??[];
+ const valuationDetail=hasTriangulatedEstimate
+  ?`Composite estimate from ${valuation?.eligibleFamilies??0} eligible valuation families.`
+  :hasIndicativeEstimate
+   ?`Indicative estimate from ${availableMethods[0]?.label??"one available method family"}; it is not triangulated and has low confidence.`
+   :valuation
+    ?`No estimate yet. ${pendingModelReasons.join(" · ")||"Required DCF/Graham inputs are incomplete."}`
+    :"No valuation estimate is available yet.";
  return <article className="home-card home-valuation-card">
   <header className="home-card-heading home-valuation-heading">
    <div className="home-valuation-title">
     <span className="home-eyebrow">PRICE VS. FAIR VALUE</span>
     <h3 className="home-security-heading"><span className="home-security-name">{ticker} · {name}</span><SecurityLogo ticker={ticker} onMarketResolved={onMarketResolved}/><small className="home-market-badge">{market??(currency==="USD"?"U.S. MARKET":"MARKET N/D")}</small></h3>
-    <p>{valuation?.status==="TRIANGULATED"?"Fair value · "+confidence.toLowerCase()+" confidence":"Fair value pending"}</p>
+    <p>{hasTriangulatedEstimate?`Fair value · ${confidence.toLowerCase()} confidence · ${valuation?.eligibleFamilies??0} families`:hasIndicativeEstimate?"Indicative fair value · one family · low confidence":"Fair value pending"}</p>
    </div>
    <div className={"home-valuation-verdict is-"+valuationState} aria-live="polite">
     <strong>{comparisonPercent===null?"N/D":comparisonPercent.toFixed(1)+"%"}</strong>
@@ -70,6 +81,6 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
     <span className="range-end finish">{getMoney(valueScaleMax,currency)}</span>
    </div>
   </div>
-  <div className="home-valuation-footer"><strong>Valuation confidence · {confidence.toLowerCase()}</strong><span>{valuation?.status==="TRIANGULATED"?"Current fair value estimate.":"The estimate will appear when sufficient valuation data is available."}</span></div>
+  <div className="home-valuation-footer"><strong>Valuation confidence · {confidence.toLowerCase()}</strong><span title={valuationDetail}>{valuationDetail}</span></div>
  </article>;
 }
