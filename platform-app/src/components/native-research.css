@@ -525,3 +525,13 @@
  .dashboard-page-valuation .nr-dcf-summary-first .nr-metric,
  .dashboard-page-valuation .wacc-output-grid article{min-height:105px;padding:13px}
 }
+
+/* Single Premium synthesis surface, outside the individual method tabs. */
+.nr-premium-synthesis,.nr-synthesis-empty{grid-column:1/-1;min-width:0;width:100%;display:grid;gap:14px}
+.nr-synthesis-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;padding:20px 22px;background:#fff;border:1px solid #dbe6f1;border-radius:13px}
+.nr-synthesis-header h2{color:#173553;font-size:26px;margin:4px 0}
+.nr-synthesis-header p,.nr-synthesis-context p{font-size:15px;color:#516f89;line-height:1.55;margin:0}
+.nr-synthesis-status{font-size:12px;font-weight:800;letter-spacing:.4px;color:#1a659c;background:#eaf4fc;border:1px solid #c8dff1;border-radius:20px;padding:8px 12px}
+.nr-synthesis-context{border:1px solid #dbe6f1;background:#f7fbff;border-radius:11px;padding:16px 18px;display:grid;gap:10px}
+.nr-synthesis-context a{color:#136eb1;font-weight:750;font-size:15px}
+@media(max-width:700px){.nr-synthesis-header{padding:16px}.nr-synthesis-header h2{font-size:23px}}
