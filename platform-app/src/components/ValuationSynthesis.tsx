@@ -28,6 +28,11 @@ export function ValuationSynthesis({valuation,companyName}:{valuation:ValuationB
    <article><span>Market Price</span><strong>{formatMoney(price)}</strong><small>Reference snapshot · not live</small></article>
    <article><span>Upside / Downside</span><strong className={comparison!==null?(comparison>=0?"nr-synthesis-positive":"nr-synthesis-negative"):""}>{formatComparison}</strong><small>Fair Value vs. reference price</small></article>
   </div>
+  {valuation&&valuation.dcfComponents.length>0&&<div className="nr-dcf-composite-breakdown" aria-label="DCF composite components">
+   <div><strong>DCF Composite</strong><span>{valuation.dcfComponents.map(component=>component.label+" "+formatMoney(component.value)).join(" + ")}</span></div>
+   <strong>{formatMoney(dcfValue)}</strong>
+   <small>{valuation.dcfComponents.length} valid model{valuation.dcfComponents.length===1?"":"s"} · equal-weight mean · one cash-flow family</small>
+  </div>}
   {valuation?<ValuationFootballField
    price={price}
    currency={currency}
