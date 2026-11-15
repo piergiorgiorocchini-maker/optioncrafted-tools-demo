@@ -18,7 +18,7 @@ type DiscountTab="manual"|"capm"|"wacc";
 const tabs:{id:ValuationMethod;label:string;sub:string}[]=[
  {id:"dcf",label:"DCF Engine",sub:"Intrinsic cash flow"},
  {id:"required-return",label:"Required Return",sub:"Entry-price discipline"},
- {id:"graham",label:"Graham / Lynch",sub:"Earnings & PEG"},
+ {id:"graham",label:"Graham Valuation",sub:"Graham formula"},
  {id:"dividend",label:"Dividend Value",sub:"30-year DDM"},
  {id:"peers",label:"Peer Comparables",sub:"Verified peers only"}
 ];
