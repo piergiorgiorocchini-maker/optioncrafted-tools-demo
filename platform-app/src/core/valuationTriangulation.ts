@@ -31,6 +31,7 @@ export type ValuationMethodResult = {
   fiscalPeriod:string|null;
   filedDate:string|null;
   sourceUrl:string|null;
+  estimateBasis?:"HISTORICAL"|"ASSUMPTION"|"USER_SCENARIO";
 };
 
 export type ValuationBridge = {
@@ -39,7 +40,7 @@ export type ValuationBridge = {
   marketPrice:number|null;
   priceDate:string|null;
   intrinsicValue:number|null;
-  /** Compatibility alias; non-null only when at least two valuation families qualify. */
+  /** Compatibility alias; available once at least one eligible valuation family produces an estimate. */
   fairValue:number|null;
   buyUnder:number|null;
   marginOfSafety:number;
@@ -170,10 +171,12 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     const dcfGrowth=dcfGrowthRaw===null?null:boundedGrowth(dcfGrowthRaw,-15,15);
     const scenarioValue=options.dcfScenarioValue;
     const scenarioAvailable=typeof scenarioValue==="number"&&Number.isFinite(scenarioValue)&&scenarioValue>0;
+    const hasHistoricalDcfGrowth=fcfWindow.length>=4&&dcfGrowth!==null;
+    const dcfGrowthRate=dcfGrowth?.applied??modelDefaults.growth;
 
     if(scenarioAvailable){
       const scenarioLabel=options.dcfScenarioLabel??"Valuation Lab user scenario";
-      dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:scenarioValue,low:scenarioValue,high:scenarioValue,quality:profile.quality*0.55,reason:`${scenarioLabel}; this is a user-edited scenario, not an automatic base estimate.`,assumptions:["User-edited Valuation Lab DCF", "Not treated as a forecast or a statistical confidence interval"],fiscalPeriod:latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null};
+      dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:scenarioValue,low:scenarioValue,high:scenarioValue,quality:profile.quality*0.55,reason:`${scenarioLabel}; this is a user-edited scenario, not an automatic base estimate.`,assumptions:["User-edited Valuation Lab DCF", "Not treated as a forecast or a statistical confidence interval"],fiscalPeriod:latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null,estimateBasis:"USER_SCENARIO"};
       qualityNotes.push("DCF is using an explicitly labelled user scenario from Valuation Lab.");
     }else if(!latestFcfPerShare||latestFcfPerShare<=0){
       const reasons:string[]=[];
@@ -182,11 +185,9 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       if(latest?.freeCashFlow!==null&&latest?.freeCashFlow!==undefined&&latest.freeCashFlow<=0)reasons.push("latest annual free cash flow is not positive");
       if(latest?.dilutedEps===null||latest?.netIncome===null)reasons.push("reported diluted shares or same-period net income/diluted EPS for inferred shares is missing");
       dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow",reasons.length?reasons.join("; "):"latest annual FCF/share is not positive or is unavailable.");
-    }else if(fcfWindow.length<4||dcfGrowth===null){
-      dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow","Requires at least four consecutive positive annual FCF/share observations to derive a three-year historical CAGR; the available SEC history does not meet that gate.");
     }else{
       const estimates=DCF_HORIZONS.map(years=>{
-        const result=dcfModel(latestFcfPerShare,dcfGrowth.applied,DCF_DISCOUNT,DCF_TERMINAL,years);
+        const result=dcfModel(latestFcfPerShare,dcfGrowthRate,DCF_DISCOUNT,DCF_TERMINAL,years);
         return result?{years,result}:null;
       }).filter((item):item is NonNullable<typeof item>=>item!==null);
       const base=estimates.find(item=>item.years===5)?.result??null;
@@ -195,28 +196,49 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       }else{
         const values=estimates.map(item=>item.result.value);
         dcfHorizonRange={low:Math.min(...values),high:Math.max(...values)};
-        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*0.68,reason:manualTtm?"Five-year base estimate using imported TTM FCF/share; 7- and 10-year values are sensitivity views inside this same family. Historical growth still comes from annual SEC observations.":"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family.",assumptions:[`FCF/share base: ${latestFcfPerShare.toFixed(2)} ${currency}/share from ${manualTtm?"manual TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd:"SEC FY"+(latest?.fiscalYear??"N/D")}`,`Historical annual FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth.capped?` (bounded to ${dcfGrowth.applied.toFixed(1)}%)`:""}`,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,`5Y base; 7Y/10Y sensitivity only · standard FCF = operating cash flow − CapEx; diluted shares use the same TTM period`],fiscalPeriod:fcfBasePeriod,filedDate:fcfBaseDate??latest?.filedDate??null,sourceUrl:manualTtm?.sourceUrl??latest?.sources.cashFromOperations?.sourceUrl??null};
+        const growthEvidence=hasHistoricalDcfGrowth
+          ?`Historical annual FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth!.capped?` (bounded to ${dcfGrowth!.applied.toFixed(1)}%)`:""}`
+          :`Historical FCF/share growth is incomplete; uses Valuation Lab default growth of ${modelDefaults.growth}% as an assumption, not an observed rate.`;
+        const dcfReason=hasHistoricalDcfGrowth
+          ?manualTtm?"Five-year base estimate using imported TTM FCF/share; 7- and 10-year values are sensitivity views inside this same family. Historical growth comes from annual SEC observations.":"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family."
+          :`Indicative five-year DCF using default ${modelDefaults.growth}% growth because four consecutive annual FCF/share observations are unavailable; this is a model assumption, not observed growth.`;
+        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*(hasHistoricalDcfGrowth?0.68:0.42),reason:dcfReason,assumptions:[`FCF/share base: ${latestFcfPerShare.toFixed(2)} ${currency}/share from ${manualTtm?"manual TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd:"SEC FY"+(latest?.fiscalYear??"N/D")}`,growthEvidence,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,"5Y base; 7Y/10Y sensitivity only · standard FCF = operating cash flow − CapEx; diluted shares use the same TTM period"],fiscalPeriod:fcfBasePeriod,filedDate:fcfBaseDate??latest?.filedDate??null,sourceUrl:manualTtm?.sourceUrl??latest?.sources.cashFromOperations?.sourceUrl??null,estimateBasis:hasHistoricalDcfGrowth?"HISTORICAL":"ASSUMPTION"};
         qualityNotes.push(manualTtm?"NVDA DCF base uses manual TTM FCF/share; the historical FCF/share CAGR remains annual SEC data.":"FCF/share uses SEC weighted-average diluted shares when reported, and otherwise estimates shares from same-year net income ÷ diluted EPS.");
-        if(dcfGrowth.capped)qualityNotes.push(`Historical FCF/share CAGR was bounded from ${dcfGrowth.raw.toFixed(1)}% to ${dcfGrowth.applied.toFixed(1)}% to reduce extrapolation risk.`);
+        if(!hasHistoricalDcfGrowth)qualityNotes.push(`DCF uses the Valuation Lab default ${modelDefaults.growth}% growth assumption because the SEC FCF/share history is incomplete.`);
+        if(hasHistoricalDcfGrowth&&dcfGrowth!.capped)qualityNotes.push(`Historical FCF/share CAGR was bounded from ${dcfGrowth!.raw.toFixed(1)}% to ${dcfGrowth!.applied.toFixed(1)}% to reduce extrapolation risk.`);
       }
     }
 
     const epsWindow=continuousAnnualWindow(history,year=>year.dilutedEps,year=>year.periodEnd,4);
-    const positiveEps=history.filter(year=>validPositive(year.dilutedEps));
     const normalizedEpsRows=history.slice(-5);
     const normalizedEps=normalizedEpsRows.length===5&&normalizedEpsRows.every(year=>validPositive(year.dilutedEps))?median(normalizedEpsRows.map(year=>year.dilutedEps!)):null;
     const epsGrowthRaw=epsWindow.length>=4?cagrPercent(epsWindow[0].dilutedEps!,epsWindow.at(-1)!.dilutedEps!,epsWindow[0].periodEnd,epsWindow.at(-1)!.periodEnd):null;
     const epsGrowth=epsGrowthRaw===null?null:boundedGrowth(epsGrowthRaw,-15,15);
-    if(!normalizedEps||!epsGrowth||!validPositive(latest?.dilutedEps)){
-      const noEps=history.every(year=>year.dilutedEps===null);
-      earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",noEps?"SEC_Raw has no annual diluted EPS for this ticker; normalized earnings and its historical growth cannot be computed.":"Requires five consecutive positive annual diluted-EPS observations for five-year normalized EPS and four consecutive observations for the three-year growth rate.");
-    }else if(epsGrowth.applied<=-4.25){
+    const currentEps=manualTtm?.dilutedEps??asset.eps??latest?.dilutedEps??null;
+    const currentEpsSource=manualTtm?.dilutedEps!==null&&manualTtm?.dilutedEps!==undefined?"manual TTM EPS":asset.eps!==null?"market snapshot EPS":"latest SEC diluted EPS";
+    const grahamEps=normalizedEps??(validPositive(currentEps)?currentEps:null);
+    const hasHistoricalGrahamBasis=normalizedEps!==null&&epsGrowth!==null;
+    const grahamGrowthRate=epsGrowth?.applied??modelDefaults.growth;
+    if(!validPositive(currentEps)||!grahamEps){
+      const noEps=history.every(year=>year.dilutedEps===null)&&!validPositive(asset.eps)&&!validPositive(manualTtm?.dilutedEps);
+      earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",noEps?"No positive diluted EPS is available in the current snapshot or SEC history.":"Latest EPS is not positive; a Graham earnings value is not published.");
+    }else if(epsGrowth&&epsGrowth.applied<=-4.25){
       earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings","Historical diluted-EPS CAGR is below the Graham model's usable range; a positive earnings power estimate is not published.");
     }else{
-      const graham=grahamModel(normalizedEps,epsGrowth.applied,null,asset.price,asset.dividendYield===null?null:asset.dividendYield*100);
+      const graham=grahamModel(grahamEps,grahamGrowthRate,null,asset.price,asset.dividendYield===null?null:asset.dividendYield*100);
       const value=graham?.classic??null;
-      earningsMethod=value===null?methodPending("earnings","Normalized earnings · Graham","earnings","Normalized EPS and growth did not produce a valid positive estimate."):{id:"earnings",label:"Normalized earnings · Graham",family:"earnings",status:"AVAILABLE",value,low:value,high:value,quality:profile.quality*0.88,reason:"Classic Graham earnings value using reported diluted EPS; the last five consecutive positive fiscal years are normalized by their median.",assumptions:[`Normalized EPS (5 FY): median FY${normalizedEpsRows[0].fiscalYear}–FY${normalizedEpsRows.at(-1)!.fiscalYear} = ${normalizedEps!.toFixed(2)} ${currency}/share`,`Diluted-EPS CAGR from FY${epsWindow[0].fiscalYear}–FY${epsWindow.at(-1)!.fiscalYear}: ${epsGrowthRaw!.toFixed(1)}%${epsGrowth.capped?` (bounded to ${epsGrowth.applied.toFixed(1)}%)`:""}`,"Classic Graham formula: normalized EPS × (8.5 + 2 × growth percentage); AAA-adjusted output is not used in the primary estimate"],fiscalPeriod:normalizedEpsRows.at(-1)!.fiscalYear,filedDate:normalizedEpsRows.map(year=>year.filedDate).filter((date):date is string=>Boolean(date)).sort().at(-1)??null,sourceUrl:normalizedEpsRows.at(-1)!.sources.epsDiluted?.sourceUrl??null};
-      if(epsGrowth.capped)qualityNotes.push(`Historical diluted-EPS CAGR was bounded from ${epsGrowth.raw.toFixed(1)}% to ${epsGrowth.applied.toFixed(1)}% in the Graham family.`);
+      const grahamReason=hasHistoricalGrahamBasis
+        ?"Classic Graham earnings value using five-year median diluted EPS and observed historical growth."
+        :`Indicative Graham estimate using ${normalizedEps!==null?"available positive diluted EPS":"current "+currentEpsSource} and ${epsGrowth?`observed ${epsGrowth.applied.toFixed(1)}% EPS growth`:`default ${modelDefaults.growth}% growth assumption`}; five-year normalization and/or growth history is incomplete, so confidence is low.`;
+      const epsBaseAssumption=normalizedEps!==null
+        ?`Normalized EPS (5 FY): median FY${normalizedEpsRows[0].fiscalYear}–FY${normalizedEpsRows.at(-1)!.fiscalYear} = ${normalizedEps.toFixed(2)} ${currency}/share`
+        :`EPS base (${currentEpsSource}): ${grahamEps.toFixed(2)} ${currency}/share; five-year median normalization unavailable`;
+      const epsGrowthAssumption=epsGrowth
+        ?`Diluted-EPS CAGR from FY${epsWindow[0].fiscalYear}–FY${epsWindow.at(-1)!.fiscalYear}: ${epsGrowthRaw!.toFixed(1)}%${epsGrowth.capped?` (bounded to ${epsGrowth.applied.toFixed(1)}%)`:""}`
+        :`Historical diluted-EPS growth unavailable; uses default ${modelDefaults.growth}% growth, an assumption and not observed history`;
+      earningsMethod=value===null?methodPending("earnings","Normalized earnings · Graham","earnings","EPS and growth did not produce a valid positive estimate."):{id:"earnings",label:"Normalized earnings · Graham",family:"earnings",status:"AVAILABLE",value,low:value,high:value,quality:profile.quality*(hasHistoricalGrahamBasis?0.88:0.42),reason:grahamReason,assumptions:[epsBaseAssumption,epsGrowthAssumption,"Classic Graham formula: EPS × (8.5 + 2 × growth percentage); AAA-adjusted output is not used in the primary estimate"],fiscalPeriod:normalizedEpsRows.at(-1)?.fiscalYear??manualTtm?.periodEnd??latest?.fiscalYear??null,filedDate:normalizedEpsRows.map(year=>year.filedDate).filter((date):date is string=>Boolean(date)).sort().at(-1)??latest?.filedDate??null,sourceUrl:normalizedEpsRows.at(-1)?.sources.epsDiluted?.sourceUrl??latest?.sources.epsDiluted?.sourceUrl??null,estimateBasis:hasHistoricalGrahamBasis?"HISTORICAL":"ASSUMPTION"};
+      if(epsGrowth?.capped)qualityNotes.push(`Historical diluted-EPS CAGR was bounded from ${epsGrowth.raw.toFixed(1)}% to ${epsGrowth.applied.toFixed(1)}% in the Graham family.`);
+      if(!hasHistoricalGrahamBasis)qualityNotes.push("Graham uses a current/available EPS and default or partial-history growth assumptions because five-year normalization and/or continuous historical EPS growth is incomplete.");
     }
   }
 
@@ -256,7 +278,8 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     qualityNotes.push(`Only one eligible valuation family (${eligibleMethods[0].label}) is available. The displayed fair value is indicative, is not triangulated, and has low confidence.`);
   }
   const methodSpread=eligibleFamilies>=requiredFamilies&&intrinsicValue!==null&&familyRange?(familyRange.high-familyRange.low)/Math.max(intrinsicValue,0.01):null;
-  const confidence=intrinsicValue===null?"INSUFFICIENT":eligibleFamilies<requiredFamilies?"LOW":methodSpread!==null&&methodSpread<0.25?"PRELIMINARY":"LOW";
+  const hasAssumptionBasedMethod=eligibleMethods.some(method=>method.estimateBasis==="ASSUMPTION"||method.estimateBasis==="USER_SCENARIO");
+  const confidence=intrinsicValue===null?"INSUFFICIENT":eligibleFamilies<requiredFamilies||hasAssumptionBasedMethod?"LOW":methodSpread!==null&&methodSpread<0.25?"PRELIMINARY":"LOW";
   const buyUnder=intrinsicValue===null?null:intrinsicValue*(1-marginOfSafety/100);
   const parsedPriceDate=asset.priceDate?Date.parse(`${asset.priceDate}T00:00:00Z`):NaN;
   const priceAgeDays=Number.isFinite(parsedPriceDate)?Math.max(0,Math.floor((Date.now()-parsedPriceDate)/86_400_000)):null;
