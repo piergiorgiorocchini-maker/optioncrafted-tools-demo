@@ -34,7 +34,7 @@ export function ValuationSynthesis({valuation}:{valuation:ValuationBridge|null})
   />
   <div className="nr-synthesis-context">
    <p><strong>Research status: {valuation.status}.</strong> {valuation.eligibleFamilies} eligible valuation families. Estimates without sufficient evidence remain pending. DCF ranges use available horizon scenarios, not statistical confidence intervals.</p>
-   <NavLink to="/valuation/dcf">Review valuation assumptions →</NavLink>
+   <NavLink to="/premium-analysis/dcf">Review valuation assumptions →</NavLink>
   </div>
  </section>;
 }
