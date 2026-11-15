@@ -865,3 +865,13 @@ body .nr-hero .nr-eyebrow{color:#9b741e!important}
 body .nr-hero h2 span{color:#2679ca!important}
 body .nr-hero-meta{border-left-color:var(--oc-template-border)!important}
 body .nr-hero-meta span{color:#60758b!important}
+
+/* Valuation Lab already has a dedicated module title. Keep the global tier controls compact. */
+.terminal-heading-valuation{padding-top:10px;padding-bottom:8px;min-height:0}
+.terminal-heading-valuation .terminal-controls{margin-left:auto}
+@media(max-width:700px){
+ main{padding:0 18px 25px!important}
+ .terminal-topbar{margin:0 -18px!important;padding:8px 18px!important}
+ .terminal-heading-valuation{padding:4px 0 8px!important}
+ .terminal-heading-valuation .terminal-controls{width:100%;justify-content:flex-end;gap:12px}
+}
