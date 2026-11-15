@@ -45,6 +45,15 @@ if(!financialCharts.includes("verifiedAnnualHistory(symbol)"))throw new Error("F
 if(financialCharts.includes("const sample=")||financialCharts.includes("INDEXED DESIGN PREVIEW"))throw new Error("Simulated financial chart data detected");
 const financialBridge=read("platform-app/src/data/verifiedFinancials.ts");
 if(!financialBridge.includes("cfo-capex"))throw new Error("Annual FCF must derive from SEC CFO less capex");
+// WACC must be a validated cash-flow component, never another family vote.
+const bridge=read("platform-app/src/core/valuationTriangulation.ts");
+const waccModel=read("platform-app/src/core/waccValuation.ts");
+const waccPanel=read("platform-app/src/components/WaccResearchPanel.tsx");
+const synthesis=read("platform-app/src/components/ValuationSynthesis.tsx");
+if(!bridge.includes("getWaccValuation(asset.ticker,currency)")||!bridge.includes('label:"DCF Composite · FCF/share + WACC"')||!bridge.includes("dcfComponents"))throw new Error("WACC must enter one DCF Composite family");
+if(!waccModel.includes("if(!input||input.ticker.toUpperCase()")||!waccModel.includes("result.fairValue")||!waccPanel.includes('from "../core/waccValuation"'))throw new Error("WACC must use shared and ticker-specific verified inputs");
+if(!synthesis.includes('DCF Composite')||!synthesis.includes('valuation.dcfComponents'))throw new Error("Premium synthesis must disclose DCF Composite components");
+checks+=3;
 const football=read("platform-app/src/components/ValuationFootballField.tsx");
 if(football.includes("averageCandidates")||football.includes("averageValuation"))throw new Error("Football Field must not invent an independent arithmetic Fair Value");
 if(!football.includes("triangulatedValue")||!football.includes("methods=candidates.filter"))throw new Error("Football Field must plot eligible methods and use the shared triangulated Fair Value");
