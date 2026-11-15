@@ -39,7 +39,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const dcfRange=[bear,base,bull].filter(valid);
  const candidates:Series[]=[
   {id:"dcf",label:"DCF",low:dcfRange.length?Math.min(...dcfRange):null,mid:valid(base)?base:null,high:dcfRange.length?Math.max(...dcfRange):null,detail:"DCF range across available scenarios"},
-  {id:"earnings",label:"Earnings",low:graham,mid:graham,high:graham,detail:"Graham / earnings method"},
+  {id:"earnings",label:"Graham / Lynch",low:graham,mid:graham,high:graham,detail:"Graham earnings-based valuation; not EPS"},
   {id:"dividend",label:"Dividend",low:dividend,mid:dividend,high:dividend,detail:"DDM method"},
   ...extra.filter(m=>m.kind!=="entry").map((m,i)=>({id:"extra-"+i,label:m.label,low:m.low,mid:m.mid,high:m.high,detail:m.detail}))
  ];
