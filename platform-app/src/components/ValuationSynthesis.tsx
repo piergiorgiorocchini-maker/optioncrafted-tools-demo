@@ -8,7 +8,7 @@ import "./native-research.css";
  * shared valuation engine has at least two eligible valuation families.
  * An indicative single-family value must not masquerade as a fair value.
  */
-export function ValuationSynthesis({valuation}:{valuation:ValuationBridge|null}){
+export function ValuationSynthesis({valuation,companyName}:{valuation:ValuationBridge|null;companyName?:string|null}){
  const valid=(value:number|null|undefined):value is number=>typeof value==="number"&&Number.isFinite(value)&&value>0;
  const currency=valuation?.currency||"USD";
  const formatMoney=(value:number|null|undefined)=>valid(value)?new Intl.NumberFormat("en-US",{style:"currency",currency,maximumFractionDigits:2}).format(value):"N/D";
@@ -22,7 +22,7 @@ export function ValuationSynthesis({valuation}:{valuation:ValuationBridge|null})
  const dcfValue=cash?.value??null;
  const dcfRange=valuation?.dcfHorizonRange;
  return <section className="nr-premium-synthesis" aria-label="Valuation Synthesis">
-  <header className="nr-synthesis-title"><h2>Valuation Synthesis</h2><strong>{valuation?.ticker??"N/D"}</strong></header>
+  <header className="nr-synthesis-title"><h2>Valuation Synthesis</h2><div className="nr-synthesis-security"><strong>{valuation?.ticker??"N/D"}</strong>{companyName&&<span>{companyName}</span>}</div></header>
   <div className="nr-synthesis-metrics" aria-label="Valuation summary">
    <article className="nr-synthesis-primary"><span>Fair Value</span><strong>{formatMoney(fairValue)}</strong><small>{valid(fairValue)?"Triangulated · eligible valuation families":"Pending · insufficient eligible methods"}</small></article>
    <article><span>Market Price</span><strong>{formatMoney(price)}</strong><small>Reference snapshot · not live</small></article>
