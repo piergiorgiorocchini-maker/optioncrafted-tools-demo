@@ -8,7 +8,6 @@ export type {ValuationBridge} from "../core/valuationTriangulation";
 import {verifiedAnnualHistory,verifiedFcf} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 import {SecurityLogo} from "./SecurityLogo";
-import {ValuationFootballField} from "./ValuationFootballField";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamResearchPanel} from "./GrahamResearchPanel";
 import {WaccResearchPanel} from "./WaccResearchPanel";
@@ -182,7 +181,6 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
    </div>
   </section>}
 
-  <ValuationFootballField price={financials.price} currency={currency} bear={bear?.value??null} base={base?.value??null} bull={bull?.value??null} graham={graham?.adjusted??graham?.classic??null} dividend={ddm?.value??null} triangulatedValue={publishedValuation.intrinsicValue} mos={a.mos} source="" extra={required?[{label:"Required-return entry",low:required.entry,mid:required.entry,high:required.entry,kind:"entry" as const,detail:"10Y required-return price, not an intrinsic estimate"}]:[]}/>
   <div className="nr-footnote"><strong>Research boundary.</strong> Snapshot financial inputs are not live quotes. Growth, discount, multiples and exit prices are user-editable scenarios, not verified forecasts. Required-return entry price is not averaged into intrinsic fair value. <NavLink to="/options/csp">Continue to Options Execution <ArrowRight size={13}/></NavLink></div>
   </>}
  </div>;
