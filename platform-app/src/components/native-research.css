@@ -571,3 +571,44 @@
  .premium-analysis-placeholder{padding:16px;min-height:350px}
  .premium-analysis-blank{min-height:250px}
 }
+
+/* Premium Synthesis: result-first research dashboard and unmistakable workbook tabs. */
+.premium-analysis-tabs{gap:7px;padding:8px 9px 0;background:#edf3f9;border-color:#cedce9}
+.premium-analysis-tab{
+ min-height:52px;padding:13px 19px;font-size:17px;font-weight:800;
+ color:#345b7c;background:#e4edf6;border:1px solid #d5e2ed;border-bottom:0;
+ transition:background .15s ease,color .15s ease;
+}
+.premium-analysis-tab:hover{color:#123d60;background:#d7e8f7}
+.premium-analysis-tab.active{
+ color:#fff;background:#174f7e;border-color:#174f7e;
+ box-shadow:0 -2px 0 #357eb7 inset;
+}
+.premium-analysis-tab:focus-visible{outline:3px solid #d5a64e;outline-offset:2px}
+.nr-synthesis-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 1px}
+.nr-synthesis-title h2{font-size:26px;color:#173553;letter-spacing:-.4px;margin:0;font-weight:850}
+.nr-synthesis-title strong{font-size:17px;color:#426b8e}
+.nr-synthesis-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.nr-synthesis-metrics article{
+ min-width:0;min-height:112px;padding:17px 19px;display:grid;align-content:center;gap:7px;
+ background:#fff;border:1px solid #dbe6f1;border-radius:11px;
+}
+.nr-synthesis-metrics article.nr-synthesis-primary{background:#eaf4fc;border-color:#a9cce8}
+.nr-synthesis-metrics article>span{font-size:15px;color:#53738f;font-weight:750}
+.nr-synthesis-metrics article>strong{font-size:clamp(26px,2.6vw,37px);color:#173553;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.nr-synthesis-metrics article.nr-synthesis-primary>strong{color:#0c63a5}
+.nr-synthesis-metrics article>small{font-size:13px;color:#748da2;line-height:1.4}
+.nr-synthesis-metrics article>strong.nr-synthesis-positive{color:#207a5b}
+.nr-synthesis-metrics article>strong.nr-synthesis-negative{color:#a94a42}
+.nr-premium-synthesis .ff-header{align-items:center}
+.nr-premium-synthesis .ff-header h3{font-size:22px;margin:0 0 4px}
+.nr-premium-synthesis .ff-toolbar{margin:12px 0}
+@media(max-width:800px){.nr-synthesis-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+ .premium-analysis-tabs{gap:6px;padding:6px 7px 0}
+ .premium-analysis-tab{min-height:48px;font-size:15px;padding:12px 15px}
+ .nr-synthesis-title h2{font-size:23px}
+ .nr-synthesis-metrics article{padding:14px;min-height:104px}
+ .nr-synthesis-metrics article>strong{font-size:26px}
+}
+@media(max-width:420px){.nr-synthesis-metrics{grid-template-columns:minmax(0,1fr)}}
