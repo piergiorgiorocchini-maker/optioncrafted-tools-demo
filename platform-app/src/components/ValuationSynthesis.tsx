@@ -45,7 +45,7 @@ export function ValuationSynthesis({valuation,companyName}:{valuation:ValuationB
    mos={valuation.marginOfSafety}
   />:<p className="nr-synthesis-context">No valuation data is available for this security.</p>}
   <div className="nr-synthesis-context">
-   <p>{valuation?<>Research status: <strong>{valuation.status}</strong>. {valuation.eligibleFamilies} eligible valuation families. Unverified methods remain pending; displayed ranges are scenarios, not confidence intervals.</>:"Values remain unavailable until source data is validated."}</p>
+   <p>{valuation?<>Research status: <strong>{valuation.status}</strong>. {valuation.eligibleFamilies} eligible valuation families. Unverified methods remain pending. The DCF range spans available model estimates, not a confidence interval.</>:"Values remain unavailable until source data is validated."}</p>
    <NavLink to="/premium-analysis/dcf">Review DCF assumptions</NavLink>
   </div>
  </section>;
