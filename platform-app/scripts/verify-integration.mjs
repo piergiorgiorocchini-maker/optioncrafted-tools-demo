@@ -20,7 +20,7 @@ const required={
  "platform-app/src/components/ValuationWorkspace.tsx":["requiredReturnModel","grahamModel","dividendModel","ResponsiveContainer"],
  "platform-app/src/components/ValuationSynthesis.tsx":["ValuationFootballField","ValuationBridge","Fair Value","Market Price","Upside / Downside"],
  "platform-app/src/components/OptionsWorkspace.tsx":["cspModel","coveredCallModel","wheelModel","hedgeModel","lognormalProbability","ResponsiveContainer"],
- "platform-app/src/components/ValuationFootballField.tsx":["ff-vertical-range","ff-single-estimate","ff-market-line","ff-scale-toggle","ff-entry-section","Purchase thresholds","No averaging of intrinsic estimates with entry thresholds"],
+ "platform-app/src/components/ValuationFootballField.tsx":["ff-vertical-range","ff-single-estimate","ff-market-line","ff-entry-section","Purchase thresholds","No averaging of intrinsic estimates with entry thresholds"],
  "platform-app/src/core/valuationModels.ts":["function dcfModel","function requiredReturnModel","function grahamModel","function dividendModel"],
  "platform-app/src/core/optionsModels.ts":["function cspModel","function coveredCallModel","function wheelModel","function hedgeModel","function lognormalProbability"],
  "tools/assets/js/tools-hub.js":["initFairValueCalculator","initDividendValueCalculator","initGrahamLynchCalculator","initCashSecuredPutCalculator","initCoveredCallCalculator","initWheelStrategyCalculator","initPortfolioIncomePlanner"]
@@ -30,6 +30,8 @@ for(const [path,markers] of Object.entries(required)){
  const content=read(path);
  for(const marker of markers){if(!content.includes(marker))throw new Error("Missing "+marker+" in "+path);checks++;}
 }
+if(read("platform-app/src/components/ValuationFootballField.tsx").includes("ff-scale-toggle"))throw new Error("Redundant Football Field scale toggle must remain removed");
+checks++;
 // The Football Field must occur only in the dedicated Premium synthesis surface.
 if(read("platform-app/src/components/ValuationWorkspace.tsx").includes("ValuationFootballField"))throw new Error("Football Field must not render in individual valuation methods");
 if(!read("platform-app/src/main.tsx").includes('page==="premium-analysis"?<PremiumAnalysisWorkspace')||!read("platform-app/src/core/access.ts").includes('"premium-analysis"'))throw new Error("Premium Analysis workbook route and tier gate are required");
