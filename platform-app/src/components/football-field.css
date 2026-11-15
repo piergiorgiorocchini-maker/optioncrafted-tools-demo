@@ -111,3 +111,12 @@
  .ff-clean .ff-method-summary-card>strong{font-size:18px}
 }
 @media(max-width:420px){.ff-clean .ff-method-summary{grid-template-columns:minmax(0,1fr)}}
+
+/* Readable on-chart method labels with a white halo over benchmark lines. */
+.ff-clean .ff-value-label{
+ font-size:14px;font-weight:850;fill:#173e60;
+ paint-order:stroke fill;stroke:#fff;stroke-width:5px;
+ stroke-linejoin:round;pointer-events:none;font-variant-numeric:tabular-nums;
+}
+.ff-clean .ff-range-value-base{fill:#0b669c}
+.ff-clean .ff-point-value{fill:#173e60}
