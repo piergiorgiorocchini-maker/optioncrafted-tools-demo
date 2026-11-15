@@ -156,7 +156,7 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
   </section>}
   {active!=="required-return"&&active!=="dividend"&&active!=="graham"&&<section className="nr-model-output">
    <div className={"nr-chart-card"+(active==="dcf"?" nr-dcf-chart-light":"")}>
-    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow per share":"Comparable valuation coverage"}</h3></div><span className="nr-status">{active==="dcf"?currency+" / SHARE":"RECHARTS · VECTOR"}</span></div>
+    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow per share":"Comparable valuation coverage"}</h3>{active==="dcf"&&<small className="nr-dcf-unit-label">{currency} per share</small>}</div>{active==="dcf"&&<div className="nr-dcf-chart-legend" aria-label="DCF chart legend"><span><i className="nr-dcf-legend-navy"/>FCF / share</span><span><i className="nr-dcf-legend-gold"/>PV / share</span></div>}</div>
     {active==="dcf"&&base?<>
      <ResponsiveContainer width="100%" height={320}>
       <BarChart data={chartRows} margin={{top:32,right:12,left:4,bottom:12}} barGap={5} barCategoryGap="26%">
@@ -165,14 +165,14 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
        <YAxis stroke="#637c95" tick={{fontSize:11,fill:"#3b5570"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} width={45} domain={[0,"auto"]} tickFormatter={v=>Number(v).toFixed(0)}/>
        <Tooltip contentStyle={{background:"#fff",border:"1px solid #dbe6f1",borderRadius:10,color:"#173553"}} itemStyle={{color:"#173553"}} formatter={v=>money(Number(v),currency)}/>
        <Bar dataKey="cashflow" name="FCF / share" fill="#173553" radius={[4,4,0,0]}>
-        <LabelList dataKey="cashflow" position="top" fill="#173553" fontSize={11} formatter={v=>Number(v).toFixed(1)}/>
+        <LabelList dataKey="cashflow" position="top" fill="#173553" fontSize={11} formatter={(v: number)=>Number(v).toFixed(1)}/>
        </Bar>
        <Bar dataKey="presentValue" name="PV / share" fill="#D4A94D" radius={[4,4,0,0]}>
-        <LabelList dataKey="presentValue" position="top" fill="#8b691d" fontSize={11} formatter={v=>Number(v).toFixed(1)}/>
+        <LabelList dataKey="presentValue" position="top" fill="#8b691d" fontSize={11} formatter={(v: number)=>Number(v).toFixed(1)}/>
        </Bar>
       </BarChart>
      </ResponsiveContainer>
-     <div className="nr-dcf-chart-legend" aria-label="DCF chart legend and units"><span><i className="nr-dcf-legend-navy"/>FCF / share</span><span><i className="nr-dcf-legend-gold"/>PV / share</span><small>{currency} per share · nominal values, not millions</small></div>
+     
     </>:null}
 
     {active==="peers"||noValue?<div className="nr-chart-empty"><Database size={27}/><strong>{active==="peers"?"Peer data not yet validated":"Waiting for valid model inputs"}</strong><span>No simulated historical series or peer estimates are displayed.</span></div>:null}
