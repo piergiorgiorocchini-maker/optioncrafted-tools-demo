@@ -876,4 +876,6 @@ body .nr-hero-meta span{color:#60758b!important}
  .shell>main>.terminal-heading,.shell>main>.dashboard,.shell>main>footer{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
  .terminal-heading-valuation{padding:4px 0 8px!important}
  .terminal-heading-valuation .terminal-controls{width:100%;justify-content:flex-end;gap:12px}
+ /* Keep the Valuation Lab cards inset from the right edge on narrow screens. */
+ .dashboard-page-valuation>.nr-workspace{padding-right:14px!important}
 }
