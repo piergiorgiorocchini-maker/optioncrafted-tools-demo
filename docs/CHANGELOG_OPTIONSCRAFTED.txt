@@ -156,3 +156,34 @@ VERIFICA E PUBBLICAZIONE
 - `npm run build` in `platform-app` completata: TypeScript senza errori e 85 asserzioni d’integrazione superate. Resta l’avviso Vite già noto sul bundle JavaScript sopra 500 kB.
 - La preview Vite locale si avvia, ma il browser cloud non può raggiungere l’indirizzo loopback del workspace (`ERR_CONNECTION_REFUSED`); nessuna verifica visiva è dichiarata in questa sessione.
 - Modifiche non committate né pubblicate. Il checkout contiene numerosi cambi locali preesistenti; non includerli in un commit o deploy cumulativo senza revisione.
+
+
+2026-11-15 — PREMIUM ANALYSIS / DCF COMPOSITE / FOOTBALL FIELD / MOBILE RESPONSIVE
+
+FATTO / IMPLEMENTATO IN GITHUB
+- Organizzato Premium Analysis come workbook con schede interne Valuation Synthesis, DCF Engine, Multiples, Comparables e Precedent Transactions. La Synthesis resta l'unica vista che contiene il Football Field.
+- Valuation Synthesis: riepilogo Fair Value, Market Price, Upside/Downside; ticker e nome società visibili in intestazione (per esempio ADBE / Adobe Inc.); valori delle metodologie esposti nella chart e nei riepiloghi.
+- Football Field: etichetta "Graham Valuation" distinta dal futuro metodo Lynch, numeri High / Low / Base visibili; se Base coincide graficamente con un estremo, etichetta unificata "Low / Base" oppure "High / Base". Fair Value e Market Price sono linee di riferimento disegnate dietro ai dati. Rimosso lo switch ridondante Valuation Focus / Include Market: la scala comprende sempre il prezzo di mercato. I modelli pending non generano colonne vuote.
+- WACC/FCFF: modello Adobe spostato nella funzione condivisa platform-app/src/core/waccValuation.ts; WaccResearchPanel e motore centrale impiegano la medesima formula. Presente solo quando ci sono input specifici per ticker; per gli altri titoli non sono inventati risultati.
+- Revisione sostanziale del DCF Composite: la precedente routine implicita di DCF basata su FCF storico (che per ADBE mostrava circa $500.13) NON deve più costituire un quarto modello nascosto. Creato platform-app/src/core/visibleDcfComposite.ts; platform-app/src/core/valuationTriangulation.ts ora aggrega esclusivamente i risultati eleggibili degli stessi metodi disponibili nel DCF Engine: Manual DCF, CAPM DCF e FCFF/WACC DCF. Valori mancanti esclusi dal divisore, mai considerati zero. I tre risultati rimangono una SOLA famiglia cash_flow nella successiva triangolazione Fair Value con Graham e le altre famiglie eleggibili.
+- Manual DCF e CAPM usano la medesima funzione dcfModel e gli stessi input FCFF/FCF per azione pertinenti al laboratorio, con tassi di sconto distinti; WACC utilizza enterprise FCFF e conversione a equity per share. La Synthesis espone un riepilogo delle componenti del Composite. Il range del Football Field rappresenta minimo e massimo dei risultati DCF disponibili, non un intervallo statistico.
+- Baseline ADBE illustrativa con input di default della sessione: Manual $350.44/share, CAPM $290.15/share, WACC $333.39/share, Composite $324.66/share. Sono risultati condizionati agli input, non un dato di mercato live né un fair value definitivo. Il modello di Graham rimane separato.
+- Corretto il responsive mobile del DCF Engine tramite platform-app/src/components/native-research.css: griglie shrink-to-fit con minmax(0,1fr), contenitori con min-width:0 e max-width:100%, scroll orizzontale SOLO interno per tabelle di sensitivity, input WACC e forecast FCFF. Non alterata la scheda Valuation Synthesis, già responsive.
+- Aggiornati i controlli di integrazione in platform-app/scripts/verify-integration.mjs per impedire il ritorno dello switch inutile, del DCF storico parallelo e dell'espansione orizzontale dei contenitori premium.
+
+VERIFICA / PUBBLICAZIONE
+- Le build e i test automatizzati del DCF Composite sono riusciti: run GitHub Actions 43767207362, con compilazione e pubblicazione dell'artefatto statico superate; il deploy Pages corrispondente 43767299649 risulta riuscito.
+- Correzione responsive DCF Engine: commit sorgente CSS 3f9006c9 e commit test 2e93fcc7; run 43768512146 con Validate and build e Publish static preview within repository entrambi success; primo deploy Pages run 43768512460 success. Il deploy successivo dei compilati era in corso all'ultima verifica tecnica, quindi non si dichiara completato senza prova.
+- CONFERMA MANUALE DELL'UTENTE (2026-11-15): il problema mobile nella linguetta DCF è risolto, "Funziona, ottimo lavoro". La Synthesis risultava già corretta. Questa è la verifica visiva funzionale, distinta dai test di build.
+
+NOTE METODOLOGICHE / DA COMPLETARE
+- Gli input default del DCF Composite sono riproducibili nei pannelli Manual DCF e CAPM, mentre la modalità manual/hybrid permette scenari personalizzati. Distinguere esplicitamente una valutazione di riferimento da una modificata dall'utente; evitare che scenari personali contaminino silenziosamente un fair value di riferimento.
+- Manual DCF e CAPM non sono evidenze indipendenti (condividono FCF/share, crescita e valore terminale). La media semplice tra modelli DCF è una soluzione iniziale trasparente, NON una ponderazione ottimizzata. WACC è metodologicamente più articolato ma sensibile a terminal value, crescita e struttura finanziaria. Calibrare pesi, normalizzazioni e controlli di qualità soltanto dopo ulteriori verifiche su ticker diversi.
+- WACC specifico ADBE utilizza input statici datati. Estendere il modello ad altri ticker solo con dati finanziari verificati, metadati di fonte e coerenza temporale. Evitare presunzioni di copertura universale.
+- Il Fair Value finale della Synthesis continua a dipendere dalla qualità dei metodi e dalle regole di eleggibilità. Confermare nei test end-to-end sia i valori del composite sia l'effettivo passaggio alla triangolazione. Conservare distinzione tra risultati automatici e discrezionali.
+- Verificare le tre schede DCF a desktop, su ulteriori viewport mobile e per ticker senza dati WACC; mantenere documentato il comportamento N/D.
+
+RIFERIMENTI
+- Repository: https://github.com/piergiorgiorocchini-maker/optioncrafted-tools-demo
+- Preview: https://piergiorgiorocchini-maker.github.io/optioncrafted-tools-demo/platform-preview/
+- Commit significativi: 59419076 (etichette chart), dab4d2ce (collisioni), 624d7e2b (identità ticker), d40f7f5a (scala unica), 0ed9a9e4 (prima integrazione WACC), 4681e3a4 (Composite da modelli visibili), 2e93fcc7 (responsive e test).
