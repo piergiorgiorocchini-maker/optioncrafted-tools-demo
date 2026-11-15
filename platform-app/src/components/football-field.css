@@ -78,3 +78,36 @@
 .ff-triangulated-line{stroke:#176fc5;stroke-width:3;pointer-events:none}
 .ff-triangulated-tag-bg{fill:#eef6ff;stroke:#9dc7f0;stroke-width:1}
 .ff-triangulated-tag{fill:#125da5;font-size:11px;font-weight:900;letter-spacing:.25px}
+
+/* Clean, extensible family-based Football Field: no overlapping in-chart labels. */
+.ff-clean .ff-header{align-items:center}
+.ff-clean .ff-header h3{font-size:23px;margin:0}
+.ff-clean .ff-toolbar{margin:16px 0 14px}
+.ff-clean .ff-legend{gap:12px 20px;font-size:14px;font-weight:700;color:#3c5d7b}
+.ff-clean .ff-legend span{gap:9px}
+.ff-clean .ff-axis-title{font-size:14px;font-weight:850;letter-spacing:.3px;fill:#3b5873}
+.ff-clean .ff-axis-tick{font-size:17px;font-weight:750;fill:#294964}
+.ff-clean .ff-method-name{font-size:16px;font-weight:800;fill:#244e71}
+.ff-clean .ff-svg{min-width:660px}
+.ff-clean .ff-gridline{stroke:#e3ebf2}
+.ff-clean .ff-triangulated-line{stroke:#176fc5;stroke-width:3}
+.ff-clean .ff-market-line{stroke:#de9b2e;stroke-width:2.7;stroke-dasharray:8 6}
+.ff-clean .ff-base-marker{stroke:#2c9ad7;stroke-width:4.5}
+.ff-clean .ff-method-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:13px 0 20px}
+.ff-clean .ff-method-summary-card{display:grid;gap:5px;background:#f8fbfd;border:1px solid #dce6f0;border-radius:9px;padding:12px 14px;min-width:0}
+.ff-clean .ff-method-summary-card>span{color:#607b94;font-size:13px;font-weight:750}
+.ff-clean .ff-method-summary-card>strong{font-size:20px;color:#173553;font-variant-numeric:tabular-nums}
+.ff-clean .ff-method-summary-card>small{color:#71869a;font-size:12px}
+.ff-clean .ff-pending-note{grid-column:1/-1;color:#617f98;font-size:13px;padding:6px 2px;line-height:1.45}
+.ff-clean .ff-pending-note strong{color:#355979}
+.ff-clean .ff-scale-toggle button{font-size:13px;min-height:37px}
+.ff-clean .ff-entry-section{padding-top:15px}
+.ff-clean .ff-entry-title h4{font-size:18px}
+@media(max-width:730px){
+ .ff-clean .ff-legend{font-size:13px;gap:10px 14px}
+ .ff-clean .ff-svg{min-width:660px}
+ .ff-clean .ff-method-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ff-clean .ff-method-summary-card{padding:10px}
+ .ff-clean .ff-method-summary-card>strong{font-size:18px}
+}
+@media(max-width:420px){.ff-clean .ff-method-summary{grid-template-columns:minmax(0,1fr)}}
