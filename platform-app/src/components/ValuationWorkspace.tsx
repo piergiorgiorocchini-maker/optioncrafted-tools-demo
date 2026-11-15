@@ -1,6 +1,6 @@
 import {useEffect,useMemo,useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Bar,BarChart,CartesianGrid,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
+import {Bar,BarChart,CartesianGrid,LabelList,ResponsiveContainer,Tooltip,XAxis,YAxis} from "recharts";
 import {ArrowRight,Database,FlaskConical,RefreshCcw} from "lucide-react";
 import type {RealAsset} from "./RealResearch";
 import {buildValuationTriangulation,type ValuationBridge} from "../core/valuationTriangulation";
@@ -156,8 +156,24 @@ export function ValuationWorkspace({asset,tab="dcf",onUpdate}:{asset:RealAsset;t
   </section>}
   {active!=="required-return"&&active!=="dividend"&&active!=="graham"&&<section className="nr-model-output">
    <div className={"nr-chart-card"+(active==="dcf"?" nr-dcf-chart-light":"")}>
-    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow":"Comparable valuation coverage"}</h3></div><span className="nr-status">RECHARTS · VECTOR</span></div>
-    {active==="dcf"&&base?<ResponsiveContainer width="100%" height={290}><BarChart data={chartRows} margin={{top:16,right:14,left:4,bottom:5}} barCategoryGap="28%"><CartesianGrid stroke="#e2eaf2" strokeDasharray="3 5" vertical={false}/><XAxis dataKey="year" stroke="#6b8298" tickLine={false} axisLine={false}/><YAxis stroke="#6b8298" tickLine={false} axisLine={false} width={48}/><Tooltip contentStyle={{background:"#fff",border:"1px solid #dbe6f1",borderRadius:10,color:"#173553"}} formatter={(v:number)=>money(v,currency)}/><Bar dataKey="cashflow" name="FCF / share" fill="#4ba7ff" radius={[4,4,0,0]}/><Bar dataKey="presentValue" name="PV / share" fill="#e9bc69" radius={[4,4,0,0]}/></BarChart></ResponsiveContainer>:null}
+    <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow per share":"Comparable valuation coverage"}</h3></div><span className="nr-status">{active==="dcf"?currency+" / SHARE":"RECHARTS · VECTOR"}</span></div>
+    {active==="dcf"&&base?<>
+     <ResponsiveContainer width="100%" height={320}>
+      <BarChart data={chartRows} margin={{top:32,right:12,left:4,bottom:12}} barGap={5} barCategoryGap="26%">
+       <CartesianGrid stroke="#e4ebf2" strokeDasharray="3 5" vertical={false}/>
+       <XAxis dataKey="year" stroke="#637c95" tick={{fontSize:12,fill:"#3b5570"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} dy={6}/>
+       <YAxis stroke="#637c95" tick={{fontSize:11,fill:"#3b5570"}} tickLine={{stroke:"#9bafc1"}} axisLine={{stroke:"#9bafc1"}} width={45} domain={[0,"auto"]} tickFormatter={v=>Number(v).toFixed(0)}/>
+       <Tooltip contentStyle={{background:"#fff",border:"1px solid #dbe6f1",borderRadius:10,color:"#173553"}} itemStyle={{color:"#173553"}} formatter={v=>money(Number(v),currency)}/>
+       <Bar dataKey="cashflow" name="FCF / share" fill="#173553" radius={[4,4,0,0]}>
+        <LabelList dataKey="cashflow" position="top" fill="#173553" fontSize={11} formatter={v=>Number(v).toFixed(1)}/>
+       </Bar>
+       <Bar dataKey="presentValue" name="PV / share" fill="#D4A94D" radius={[4,4,0,0]}>
+        <LabelList dataKey="presentValue" position="top" fill="#8b691d" fontSize={11} formatter={v=>Number(v).toFixed(1)}/>
+       </Bar>
+      </BarChart>
+     </ResponsiveContainer>
+     <div className="nr-dcf-chart-legend" aria-label="DCF chart legend and units"><span><i className="nr-dcf-legend-navy"/>FCF / share</span><span><i className="nr-dcf-legend-gold"/>PV / share</span><small>{currency} per share · nominal values, not millions</small></div>
+    </>:null}
 
     {active==="peers"||noValue?<div className="nr-chart-empty"><Database size={27}/><strong>{active==="peers"?"Peer data not yet validated":"Waiting for valid model inputs"}</strong><span>No simulated historical series or peer estimates are displayed.</span></div>:null}
     {active==="dcf"&&base?<div className="nr-bridge"><div><span>PV explicit FCF</span><b>{money(base.pvCashflows,currency)}</b></div><div><span>PV terminal</span><b>{money(base.pvTerminal,currency)}</b></div><div><span>Buy-under at {a.mos}% MOS</span><b>{money(base.value*(1-a.mos/100),currency)}</b></div></div>:null}
