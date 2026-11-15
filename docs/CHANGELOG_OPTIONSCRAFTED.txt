@@ -137,3 +137,22 @@ LIMITI E PROSSIMI PASSI
 - Lo snapshot JSON amministrativo è aggiornato, ma i tab Google Sheets `Ticker_Data_Census` e `SEC_Period_Coverage` hanno timestamp precedenti alle ultime importazioni: vanno sincronizzati prima di considerarli aggiornati.
 - Non è stato ricalcolato il numero delle triangolazioni dopo il backfill; il conteggio pubblicato resta quello misurato sul dataset precedente. Ricalcolare solo dopo aver aggiornato e verificato il dataset canonico.
 - La triangolazione non era oggetto dei run SEC: non dichiarare nuovi risultati di valutazione sulla sola base del backfill.
+
+2026-11-15 — NUOVA SCHEDA WACC / FCFF PER ADBE
+
+IMPLEMENTATO LOCALMENTE
+- Aggiunta la scheda `WACC` nella sezione DCF del Valuation Lab, accanto alle schede `Manual DCF` e `CAPM`. La selezione resta memorizzata anche cambiando ticker.
+- Creato `platform-app/src/components/WaccResearchPanel.tsx`: per ADBE mostra input finanziari e di mercato, formazione del CAPM e del costo del debito, pesi di capitale, WACC, forecast FCFF a cinque anni con crescita lineare fino al terminal growth, ponte EV → Equity Value → fair value per azione diluita, sensibilità WACC/g e fonti.
+- Per tutti i ticker senza input verificati la scheda visualizza `No data`; non genera stime sostitutive.
+
+CASO ADBE / ASSUNZIONI DELLA VERSIONE INIZIALE
+- Input finanziari TTM fino al 2026-08-28: ricavi $25,970m; ricavi TTM precedenti $23,181m; EBIT $9,271m; D&A $766m; CapEx $214m; interessi $260m; debito $6,363m; cassa $4,359m; investimenti a breve $1,280m; tax rate normalizzata 22.5%; diluted shares guida FY2026 400m.
+- Snapshot di mercato 2026-11-13: prezzo $243.08; capitalizzazione $94,610m; beta 1.38; Treasury decennale 5.15%; ERP 4.41%. Terminal growth 3.8%, usato come proxy di crescita nominale di lungo periodo.
+- Il costo del capitale proprio CAPM è 11.24%; costo del debito pre-tax 4.14%, post-tax 3.21%; WACC 10.73%. La crescita TTM 12.03% scende linearmente al 3.8% su cinque esercizi. Margine EBIT, D&A/ricavi e CapEx/ricavi restano costanti; ΔNWC prospettico è posto a zero. Il rilascio TTM di capitale circolante di $498m non è considerato ricorrente; SBC resta incluso come costo operativo; il debito netto esclude i lease.
+- Output del caso base: PV FCFF espliciti circa $36.1bn; PV terminal value circa $98.0bn; enterprise value circa $134.1bn; net debt $0.724bn; equity value circa $133.4bn; fair value circa $333.39/azione, circa 37.2% sopra il prezzo snapshot. Circa il 73.1% dell’EV deriva dal valore terminale: interpretare il risultato insieme alla sensibilità, non come stima puntuale certa.
+- I valori sono un modello iniziale trasparente, non ancora un calcolo automatico da FMP. Beta, ERP, Treasury, market cap e quote hanno snapshot/date diverse; gli assunti vanno riallineati quando sarà disponibile una pipeline dati versionata e omogenea.
+
+VERIFICA E PUBBLICAZIONE
+- `npm run build` in `platform-app` completata: TypeScript senza errori e 85 asserzioni d’integrazione superate. Resta l’avviso Vite già noto sul bundle JavaScript sopra 500 kB.
+- La preview Vite locale si avvia, ma il browser cloud non può raggiungere l’indirizzo loopback del workspace (`ERR_CONNECTION_REFUSED`); nessuna verifica visiva è dichiarata in questa sessione.
+- Modifiche non committate né pubblicate. Il checkout contiene numerosi cambi locali preesistenti; non includerli in un commit o deploy cumulativo senza revisione.
