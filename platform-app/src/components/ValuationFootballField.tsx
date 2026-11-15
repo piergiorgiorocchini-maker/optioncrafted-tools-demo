@@ -87,27 +87,32 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
     <defs><linearGradient id="ff-range-gradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#235d94"/><stop offset="100%" stopColor="#102f50"/></linearGradient></defs>
     <text className="ff-axis-title" x="16" y="17">{isoCurrency} / SHARE</text>
     {ticks.map((v,i)=><g key={i}><line className={i===0?"ff-grid-baseline":"ff-gridline"} x1={left} x2={right} y1={y(v)} y2={y(v)}/><text className="ff-axis-tick" x={left-14} y={y(v)+5} textAnchor="end">{axisValue(v)}</text></g>)}
+    {fairValue!==null?<line className="ff-triangulated-line" x1={left} x2={right} y1={y(fairValue)} y2={y(fairValue)}/>:null}
+    {reference!==null&&reference<=axisMax?<line className="ff-market-line" x1={left} x2={right} y1={y(reference)} y2={y(reference)}/>:null}
     {methods.map((m,i)=>{
      const x=center(i);
      const lo=valid(m.low)?m.low:m.mid!;
      const hi=valid(m.high)?m.high:m.mid!;
      const range=hi-lo>0.00001;
+     const lowIsBase=range&&Math.abs(y(m.mid!)-y(lo))<24;
+     const highIsBase=range&&Math.abs(y(m.mid!)-y(hi))<24;
+     const lowLabel=lowIsBase?"Low / Base "+money(lo):"Low "+money(lo);
+     const highLabel=highIsBase?"High / Base "+money(hi):"High "+money(hi);
+     const showBase=range&&!lowIsBase&&!highIsBase;
      return <g key={m.id}>
       <line className="ff-column-guide" x1={x} x2={x} y1={top} y2={bottom}/>
       {range?<rect className="ff-vertical-range" x={x-29} y={y(hi)} width="58" height={Math.max(3,y(lo)-y(hi))} rx="4"/>:null}
       <line className={range?"ff-base-marker":"ff-single-estimate"} x1={x-32} x2={x+32} y1={y(m.mid!)} y2={y(m.mid!)}/>
       {!range?<circle className="ff-single-center" cx={x} cy={y(m.mid!)} r="6"/>:null}
       {range?<g aria-label={m.label+" range values"}>
-       <text className="ff-value-label ff-range-value-high" x={x} y={Math.max(25,y(hi)-11)} textAnchor="middle">High {money(hi)}</text>
-       <text className="ff-value-label ff-range-value-low" x={x} y={Math.min(334,y(lo)+20)} textAnchor="middle">Low {money(lo)}</text>
-       <text className="ff-value-label ff-range-value-base" x={x+39} y={y(m.mid!)+5} textAnchor="start">Base {money(m.mid)}</text>
-      </g>:<text className="ff-value-label ff-point-value" x={x} y={Math.max(24,y(m.mid!)-14)} textAnchor="middle">{money(m.mid)}</text>}
+       <text className="ff-value-label ff-range-value-high" x={x} y={Math.max(25,y(hi)-14)} textAnchor="middle">{highLabel}</text>
+       <text className="ff-value-label ff-range-value-low" x={x} y={Math.min(334,y(lo)+23)} textAnchor="middle">{lowLabel}</text>
+       {showBase?<text className="ff-value-label ff-range-value-base" x={x+41} y={y(m.mid!)+5} textAnchor="start">Base {money(m.mid)}</text>:null}
+      </g>:<text className="ff-value-label ff-point-value" x={x} y={Math.max(24,y(m.mid!)-15)} textAnchor="middle">{money(m.mid)}</text>}
       <title>{m.label+": "+money(m.mid)+"; range "+money(lo)+" to "+money(hi)}</title>
       <text className="ff-method-name" x={x} y="350" textAnchor="middle">{m.label}</text>
      </g>
     })}
-    {fairValue!==null?<line className="ff-triangulated-line" x1={left} x2={right} y1={y(fairValue)} y2={y(fairValue)}/>:null}
-    {reference!==null&&reference<=axisMax?<line className="ff-market-line" x1={left} x2={right} y1={y(reference)} y2={y(reference)}/>:null}
    </svg>
   </div>
   <div className="ff-method-summary" aria-label="Method values and model availability">
