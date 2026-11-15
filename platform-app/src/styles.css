@@ -938,3 +938,28 @@ body .nr-hero-meta span{color:#60758b!important}
   overflow-x:auto!important;-webkit-overflow-scrolling:touch;
  }
 }
+
+
+/* Readability across navigation and shared header: avoid tiny secondary copy. */
+@media(min-width:701px){
+ .shell .sidebar .brand small{font-size:max(13px,.7vw)!important}
+ .shell .sidebar>.overline,.shell .sidebar .nav-group>.overline{font-size:max(12px,.65vw)!important}
+ .shell .sidebar .navlink{font-size:max(16px,1vw)!important}
+ .shell .sidebar .nav-sublink,.shell .sidebar .nav-group a{font-size:max(15px,.9vw)!important}
+ .shell .sidebar .sidebar-foot{font-size:13px!important}
+ .shell .terminal-search input{font-size:16px!important}
+ .shell .terminal-search-results button span{font-size:15px}
+ .shell .terminal-search-results button small{font-size:13px}
+ .shell .terminal-market-tape .home-market-quote span{font-size:12px}
+ .shell .terminal-market-tape .home-market-quote strong{font-size:16px}
+ .shell .terminal-market-tape .home-market-quote small{font-size:11px}
+ .shell .terminal-market-tape .home-market-quote b{font-size:13px}
+ .shell .terminal-controls .tier{font-size:15px}
+ .shell .terminal-controls select{font-size:15px}
+}
+@media(max-width:700px){
+ .shell .terminal-search input{font-size:16px}
+ .shell .terminal-market-tape .home-market-quote strong{font-size:13px}
+ .shell .terminal-market-tape .home-market-quote span{font-size:11px}
+ .shell .terminal-market-tape .home-market-quote small{font-size:10px}
+}
