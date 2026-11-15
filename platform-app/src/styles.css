@@ -885,7 +885,7 @@ body .nr-hero-meta span{color:#60758b!important}
    viewport belongs to .dashboard, not to individual ticker widgets. */
 @media(max-width:700px){
  .shell,.shell>main{width:100%!important;max-width:100%!important;min-width:0!important}
- .shell>main{padding:0 0 25px!important;overflow-x:clip}
+ .shell>main{padding:0 0 25px!important;min-width:0!important}
  .shell>main>.terminal-topbar{
   box-sizing:border-box!important;width:100%!important;max-width:100%!important;
   margin:0!important;padding:8px 14px!important;
@@ -898,7 +898,6 @@ body .nr-hero-meta span{color:#60758b!important}
   box-sizing:border-box!important;width:100%!important;max-width:100%!important;
   min-width:0!important;margin:0!important;padding:0 14px!important;
   grid-template-columns:minmax(0,1fr)!important;
-  overflow-x:clip;
  }
  .shell>main>.dashboard>*{min-width:0!important;max-width:100%!important}
  /* Individual research modules must fit the shared content column. */
@@ -912,4 +911,30 @@ body .nr-hero-meta span{color:#60758b!important}
  .dashboard-page-company .ci,
  .dashboard-page-company .ci>*{min-width:0!important;max-width:100%!important}
  .dashboard-page-company iframe,.dashboard-page-company img{max-width:100%}
+}
+
+/* Keep Valuation Lab's inner grid shrinkable so oversized model data
+   scroll inside their own panels instead of clipping the right border. */
+@media(max-width:700px){
+ .dashboard-page-valuation>.nr-workspace{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:0!important;padding:0!important;
+ }
+ .dashboard-page-valuation .nr-workspace>*{
+  min-width:0!important;max-width:100%!important;grid-column:1/-1;
+ }
+ .dashboard-page-valuation .nr-model-layout,
+ .dashboard-page-valuation .wacc-worksheet,
+ .dashboard-page-valuation .nr-control-card,
+ .dashboard-page-valuation .wacc-panel{
+  min-width:0!important;max-width:100%!important;
+ }
+ .dashboard-page-valuation .nr-chart-table,
+ .dashboard-page-valuation .nr-schedule-scroll,
+ .dashboard-page-valuation .nr-sensitivity-wrap,
+ .dashboard-page-valuation .wacc-table-scroll{
+  max-width:100%!important;min-width:0!important;
+  overflow-x:auto!important;-webkit-overflow-scrolling:touch;
+ }
 }
