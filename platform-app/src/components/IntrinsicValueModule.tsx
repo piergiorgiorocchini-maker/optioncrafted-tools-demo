@@ -37,11 +37,12 @@ export function IntrinsicValueModule({ticker,name,currency,price,valuation,marke
  const hasTriangulatedEstimate=valuation?.status==="TRIANGULATED"&&intrinsic!==null;
  const hasIndicativeEstimate=valuation?.status==="INDICATIVE"&&intrinsic!==null;
  const availableMethods=valuation?.methods.filter(method=>method.status==="AVAILABLE")??[];
+ const assumptionMethods=availableMethods.filter(method=>method.estimateBasis!=="HISTORICAL");
  const pendingModelReasons=valuation?.methods.filter(method=>method.status==="PENDING"&&(method.id==="dcf"||method.id==="earnings")).map(method=>`${method.label}: ${method.reason}`)??[];
  const valuationDetail=hasTriangulatedEstimate
-  ?`Composite estimate from ${valuation?.eligibleFamilies??0} eligible valuation families.`
+  ?`Composite estimate from ${valuation?.eligibleFamilies??0} eligible valuation families${assumptionMethods.length?`; includes assumption-based ${assumptionMethods.map(method=>method.label).join(", ")}.`:"."}`
   :hasIndicativeEstimate
-   ?`Indicative estimate from ${availableMethods[0]?.label??"one available method family"}; it is not triangulated and has low confidence.`
+   ?`Indicative estimate from ${availableMethods[0]?.label??"one available method family"}${availableMethods[0]?.estimateBasis==="ASSUMPTION"?"; uses fallback growth/normalization assumptions because history is incomplete":""}; it is not triangulated and has low confidence.`
    :valuation
     ?`No estimate yet. ${pendingModelReasons.join(" · ")||"Required DCF/Graham inputs are incomplete."}`
     :"No valuation estimate is available yet.";
