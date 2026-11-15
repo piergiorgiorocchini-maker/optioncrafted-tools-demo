@@ -1,8 +1,8 @@
-import {dcfModel,grahamModel,modelDefaults} from "./valuationModels";
+import {grahamModel,modelDefaults} from "./valuationModels";
 import {googleSheetsSecAnnualHistory,googleSheetsSecFinancialsMetadata,type SecAnnualFinancialYear} from "../data/googleSheetsSecFinancials";
 import {verifiedFinancialProfile} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
-import {getWaccValuation} from "./waccValuation";
+import {buildVisibleDcfComposite} from "./visibleDcfComposite";
 
 type AssetForValuation = {
   ticker:string;
@@ -14,6 +14,7 @@ type AssetForValuation = {
   priceDate:string|null;
   eps:number|null;
   dividendYield:number|null;
+  beta?:number|null;
 };
 
 export type ValuationFamily = "cash_flow"|"earnings"|"dividend"|"trading_comps";
@@ -57,7 +58,7 @@ export type ValuationBridge = {
   median:number|null;
   familyRange:{low:number;high:number}|null;
   dcfHorizonRange:{low:number;high:number}|null;
-  dcfComponents:{id:"fcfe"|"wacc";label:string;value:number;financialAsOf:string|null}[];
+  dcfComponents:{id:"manual"|"capm"|"wacc";label:string;value:number;financialAsOf:string|null}[];
   source:string;
   sourceAsOf:string|null;
   importedAt:string;
@@ -75,9 +76,6 @@ export type ValuationBuildOptions = {
 };
 
 const MOS=modelDefaults.mos;
-const DCF_DISCOUNT=modelDefaults.discount;
-const DCF_TERMINAL=modelDefaults.terminal;
-const DCF_HORIZONS=[5,7,10] as const;
 const requiredFamilies=2;
 const validPositive=(value:number|null|undefined):value is number=>typeof value==="number"&&Number.isFinite(value)&&value>0;
 
@@ -145,8 +143,6 @@ function methodPending(id:string,label:string,family:ValuationFamily,reason:stri
   return {id,label,family,status:"PENDING",value:null,low:null,high:null,quality:null,reason,assumptions:[],fiscalPeriod:null,filedDate:null,sourceUrl:null};
 }
 
-function getLastMetric(year:SecAnnualFinancialYear|undefined,metric:"freeCashFlowPerShare"|"dilutedEps"){return year?.[metric]??null;}
-
 export function buildValuationTriangulation(asset:AssetForValuation,options:ValuationBuildOptions={}):ValuationBridge{
   const currency=asset.currency||"USD";
   const marginOfSafety=Number.isFinite(options.marginOfSafety)&&options.marginOfSafety!>=0&&options.marginOfSafety!<100?options.marginOfSafety!:MOS;
@@ -162,55 +158,39 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   let dcfMethod:ValuationMethodResult;
   let earningsMethod:ValuationMethodResult;
 
+  const visibleDcf=profile.eligible?buildVisibleDcfComposite({...asset,beta:asset.beta??null}):null;
   if(!profile.eligible){
-    dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow",profile.reason??"Profile gate pending.");
+    dcfMethod=methodPending("dcf","DCF Composite · Manual / CAPM / WACC","cash_flow",profile.reason??"Profile gate pending.");
     earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",profile.reason??"Profile gate pending.");
   }else{
-    const fcfWindow=continuousAnnualWindow(history,year=>year.freeCashFlowPerShare,year=>year.periodEnd,4);
-    const latestFcfPerShare=manualTtm?.freeCashFlowPerShare??getLastMetric(latest,"freeCashFlowPerShare");
-    const fcfBasePeriod=manualTtm?"TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd:latest?.fiscalYear??null;
-    const fcfBaseDate=manualTtm?.periodEnd??latest?.periodEnd??null;
-    const dcfGrowthRaw=fcfWindow.length>=4?cagrPercent(fcfWindow[0].freeCashFlowPerShare!,fcfWindow.at(-1)!.freeCashFlowPerShare!,fcfWindow[0].periodEnd,fcfWindow.at(-1)!.periodEnd):null;
-    const dcfGrowth=dcfGrowthRaw===null?null:boundedGrowth(dcfGrowthRaw,-15,15);
-    const scenarioValue=options.dcfScenarioValue;
-    const scenarioAvailable=typeof scenarioValue==="number"&&Number.isFinite(scenarioValue)&&scenarioValue>0;
-    const hasHistoricalDcfGrowth=fcfWindow.length>=4&&dcfGrowth!==null;
-    const dcfGrowthRate=dcfGrowth?.applied??modelDefaults.growth;
-
-    if(scenarioAvailable){
-      const scenarioLabel=options.dcfScenarioLabel??"Valuation Lab user scenario";
-      dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:scenarioValue,low:scenarioValue,high:scenarioValue,quality:profile.quality*0.55,reason:`${scenarioLabel}; this is a user-edited scenario, not an automatic base estimate.`,assumptions:["User-edited Valuation Lab DCF", "Not treated as a forecast or a statistical confidence interval"],fiscalPeriod:latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null,estimateBasis:"USER_SCENARIO"};
-      qualityNotes.push("DCF is using an explicitly labelled user scenario from Valuation Lab.");
-    }else if(!latestFcfPerShare||latestFcfPerShare<=0){
-      const reasons:string[]=[];
-      if(!latest?.cashFromOperations)reasons.push("latest annual operating cash flow missing");
-      if(latest?.cashFromOperations!==null&&latest?.cashFromOperations!==undefined&&latest.capex===null)reasons.push("latest annual CapEx missing");
-      if(latest?.freeCashFlow!==null&&latest?.freeCashFlow!==undefined&&latest.freeCashFlow<=0)reasons.push("latest annual free cash flow is not positive");
-      if(latest?.dilutedEps===null||latest?.netIncome===null)reasons.push("reported diluted shares or same-period net income/diluted EPS for inferred shares is missing");
-      dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow",reasons.length?reasons.join("; "):"latest annual FCF/share is not positive or is unavailable.");
-    }else{
-      const estimates=DCF_HORIZONS.map(years=>{
-        const result=dcfModel(latestFcfPerShare,dcfGrowthRate,DCF_DISCOUNT,DCF_TERMINAL,years);
-        return result?{years,result}:null;
-      }).filter((item):item is NonNullable<typeof item>=>item!==null);
-      const base=estimates.find(item=>item.years===5)?.result??null;
-      if(!base){
-        dcfMethod=methodPending("dcf","DCF · cash flow","cash_flow","DCF calculation rejected the input combination (discount rate must exceed terminal growth and FCF must be positive).");
-      }else{
-        const values=estimates.map(item=>item.result.value);
-        dcfHorizonRange={low:Math.min(...values),high:Math.max(...values)};
-        const growthEvidence=hasHistoricalDcfGrowth
-          ?`Historical annual FCF/share CAGR from ${fcfWindow[0].fiscalYear}–${fcfWindow.at(-1)!.fiscalYear}: ${dcfGrowthRaw!.toFixed(1)}%${dcfGrowth!.capped?` (bounded to ${dcfGrowth!.applied.toFixed(1)}%)`:""}`
-          :`Historical FCF/share growth is incomplete; uses Valuation Lab default growth of ${modelDefaults.growth}% as an assumption, not an observed rate.`;
-        const dcfReason=hasHistoricalDcfGrowth
-          ?manualTtm?"Five-year base estimate using imported TTM FCF/share; 7- and 10-year values are sensitivity views inside this same family. Historical growth comes from annual SEC observations.":"Five-year base estimate; 7- and 10-year values are sensitivity views inside this same family."
-          :`Indicative five-year DCF using default ${modelDefaults.growth}% growth because four consecutive annual FCF/share observations are unavailable; this is a model assumption, not observed growth.`;
-        dcfMethod={id:"dcf",label:"DCF · cash flow",family:"cash_flow",status:"AVAILABLE",value:base.value,low:dcfHorizonRange.low,high:dcfHorizonRange.high,quality:profile.quality*(hasHistoricalDcfGrowth?0.68:0.42),reason:dcfReason,assumptions:[`FCF/share base: ${latestFcfPerShare.toFixed(2)} ${currency}/share from ${manualTtm?"manual TTM "+manualTtm.periodStart+" to "+manualTtm.periodEnd:"SEC FY"+(latest?.fiscalYear??"N/D")}`,growthEvidence,`Discount rate ${DCF_DISCOUNT}% · terminal growth ${DCF_TERMINAL}%`,"5Y base; 7Y/10Y sensitivity only · standard FCF = operating cash flow − CapEx; diluted shares use the same TTM period"],fiscalPeriod:fcfBasePeriod,filedDate:fcfBaseDate??latest?.filedDate??null,sourceUrl:manualTtm?.sourceUrl??latest?.sources.cashFromOperations?.sourceUrl??null,estimateBasis:hasHistoricalDcfGrowth?"HISTORICAL":"ASSUMPTION"};
-        qualityNotes.push(manualTtm?"NVDA DCF base uses manual TTM FCF/share; the historical FCF/share CAGR remains annual SEC data.":"FCF/share uses SEC weighted-average diluted shares when reported, and otherwise estimates shares from same-year net income ÷ diluted EPS.");
-        if(!hasHistoricalDcfGrowth)qualityNotes.push(`DCF uses the Valuation Lab default ${modelDefaults.growth}% growth assumption because the SEC FCF/share history is incomplete.`);
-        if(hasHistoricalDcfGrowth&&dcfGrowth!.capped)qualityNotes.push(`Historical FCF/share CAGR was bounded from ${dcfGrowth!.raw.toFixed(1)}% to ${dcfGrowth!.applied.toFixed(1)}% to reduce extrapolation risk.`);
-      }
-    }
+    const userScenario=options.dcfScenarioValue;
+    const hasScenario=typeof userScenario==="number"&&Number.isFinite(userScenario)&&userScenario>0;
+    const sourceParts=visibleDcf?.parts??[];
+    const pieces=sourceParts.map(part=>part.id==="manual"&&hasScenario?{...part,label:"Manual DCF · user scenario",value:userScenario}:part);
+    const availableValues=pieces.map(part=>part.value);
+    const base=availableValues.length?availableValues.reduce((sum,v)=>sum+v,0)/availableValues.length:null;
+    dcfHorizonRange=availableValues.length?{low:Math.min(...availableValues),high:Math.max(...availableValues)}:null;
+    pieces.forEach(part=>dcfComponents.push({id:part.id,label:part.label,value:part.value,financialAsOf:part.id==="wacc"?visibleDcf?.wacc?.financialAsOf??null:latest?.periodEnd??null}));
+    dcfMethod=base===null
+      ?methodPending("dcf","DCF Composite · Manual / CAPM / WACC","cash_flow","No valid Manual DCF, CAPM DCF or WACC DCF result is available with the selected security's inputs.")
+      :{
+        id:"dcf",label:"DCF Composite · Manual / CAPM / WACC",family:"cash_flow",status:"AVAILABLE",
+        value:base,low:dcfHorizonRange!.low,high:dcfHorizonRange!.high,
+        quality:profile.quality*(pieces.length>=2?0.7:0.45),
+        reason:"Equal-weight average of valid DCF Engine methods. The range is the minimum and maximum of the available model values, not a confidence interval.",
+        assumptions:[
+         "Manual DCF and CAPM DCF use the same source FCF/share, forecast period, growth and terminal assumptions displayed in DCF Engine.",
+         "CAPM cost of equity = risk-free rate + beta × ERP; WACC uses the shared FCFF worksheet.",
+         `Included: ${pieces.map(p=>p.label+" "+p.value.toFixed(2)).join("; ")}. Missing models receive zero weight, not a numeric value of zero.`,
+         `Inputs: FCF/share ${visibleDcf?.fcfPerShare?.toFixed(4)??"N/D"}; growth ${modelDefaults.growth}%; manual discount ${modelDefaults.discount}%; terminal growth ${modelDefaults.terminal}%; period ${modelDefaults.years}Y; CAPM risk-free 4%; ERP 5.5%.`
+        ],
+        fiscalPeriod:latest?.fiscalYear??null,filedDate:sourceAsOf,
+        sourceUrl:latest?.sources.cashFromOperations?.sourceUrl??null,
+        estimateBasis:hasScenario?"USER_SCENARIO":"ASSUMPTION"
+      };
+    qualityNotes.push("DCF family uses only Manual DCF, CAPM DCF and the available FCFF/WACC model shown in Premium Analysis. The prior standalone historical-growth DCF is excluded.");
+    if(hasScenario)qualityNotes.push("An explicitly entered hybrid user scenario substitutes the Manual DCF value; it is not independent research evidence.");
+    if(availableValues.length<3)qualityNotes.push("DCF methods with missing inputs are excluded from the denominator, never assigned a value of zero.");
 
     const epsWindow=continuousAnnualWindow(history,year=>year.dilutedEps,year=>year.periodEnd,4);
     const normalizedEpsRows=history.slice(-5);
@@ -243,48 +223,6 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       if(epsGrowth?.capped)qualityNotes.push(`Historical diluted-EPS CAGR was bounded from ${epsGrowth.raw.toFixed(1)}% to ${epsGrowth.applied.toFixed(1)}% in the Graham family.`);
       if(!hasHistoricalGrahamBasis)qualityNotes.push("Graham uses a current/available EPS and default or partial-history growth assumptions because five-year normalization and/or continuous historical EPS growth is incomplete.");
     }
-  }
-
-  // DCF Composite: one valuation family, combining the existing FCF/share
-  // model and the source-backed FCFF/WACC model when available. Never insert
-  // a missing model as zero, and never count two DCF variants as two families.
-  const waccEvidence=profile.eligible?getWaccValuation(asset.ticker,currency):null;
-  const fcfeAvailable=dcfMethod!.status==="AVAILABLE"&&validPositive(dcfMethod!.value);
-  if(fcfeAvailable){
-    dcfComponents.push({id:"fcfe",label:dcfMethod!.estimateBasis==="USER_SCENARIO"?"DCF · user scenario":"DCF · FCF/share",value:dcfMethod!.value!,financialAsOf:dcfMethod!.filedDate});
-  }
-  if(waccEvidence){
-    dcfComponents.push({id:"wacc",label:"DCF · FCFF/WACC",value:waccEvidence.value,financialAsOf:waccEvidence.financialAsOf});
-  }
-  if(waccEvidence&&fcfeAvailable){
-    const original=dcfMethod!;
-    const composite=(original.value!+waccEvidence.value)/2;
-    const low=dcfHorizonRange?.low??original.value!;
-    const high=dcfHorizonRange?.high??original.value!;
-    dcfHorizonRange={low:(low+waccEvidence.value)/2,high:(high+waccEvidence.value)/2};
-    dcfMethod={
-      ...original,
-      label:"DCF Composite · FCF/share + WACC",
-      value:composite,
-      low:dcfHorizonRange.low,
-      high:dcfHorizonRange.high,
-      quality:Math.min(0.85,((original.quality??0.4)+waccEvidence.quality)/2),
-      reason:"Equal-weight mean of the existing FCF/share DCF and the available FCFF/WACC worksheet; one cash-flow valuation family. Manual interactive adjustments are not independent model evidence.",
-      assumptions:[...original.assumptions,`FCFF/WACC: ${waccEvidence.value.toFixed(2)} ${currency}/share · WACC ${(waccEvidence.wacc*100).toFixed(2)}%`,`Composite: (${original.value!.toFixed(2)} + ${waccEvidence.value.toFixed(2)}) / 2; absent methods receive zero weight, never a value of zero.`],
-      estimateBasis:original.estimateBasis==="USER_SCENARIO"?"USER_SCENARIO":"ASSUMPTION"
-    };
-    qualityNotes.push("DCF Composite includes FCF/share and FCFF/WACC as equally weighted variants of one cash-flow family. Its range averages FCF horizon endpoints with the fixed WACC base, not a statistical confidence interval.");
-  }else if(waccEvidence&&!fcfeAvailable){
-    dcfMethod={
-      id:"dcf",label:"DCF Composite · WACC only",family:"cash_flow",status:"AVAILABLE",
-      value:waccEvidence.value,low:waccEvidence.value,high:waccEvidence.value,
-      quality:waccEvidence.quality*0.75,
-      reason:"Only the FCFF/WACC model is available; no other DCF variant is assigned a zero value.",
-      assumptions:[`FCFF/WACC ${waccEvidence.value.toFixed(2)} ${currency}/share`],
-      fiscalPeriod:waccEvidence.financialAsOf,filedDate:waccEvidence.financialAsOf,sourceUrl:null,estimateBasis:"ASSUMPTION"
-    };
-    dcfHorizonRange=null;
-    qualityNotes.push("DCF family is based on a single FCFF/WACC variant; FCF/share is unavailable and excluded.");
   }
 
   methods.push(dcfMethod!,earningsMethod!);
