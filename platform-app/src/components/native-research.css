@@ -314,216 +314,216 @@
 
 /* Valuation Lab readability pass: replace miniature 9-12px research typography.
    Applies to ALL Valuation methods, including WACC, while preserving the layout. */
-.dashboard-page-valuation .nr-workspace{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-workspace{
  font-size:16px;
  line-height:1.5;
 }
-.dashboard-page-valuation .nr-eyebrow,
-.dashboard-page-valuation .wacc-eyebrow{font-size:13px;letter-spacing:.6px}
-.dashboard-page-valuation .nr-hero h2{font-size:clamp(28px,2.6vw,38px)}
-.dashboard-page-valuation .nr-hero p,
-.dashboard-page-valuation .wacc-heading p{font-size:16px;line-height:1.5}
-.dashboard-page-valuation .nr-tabbar a b{font-size:17px;line-height:1.35}
-.dashboard-page-valuation .nr-tabbar a small{font-size:14px;line-height:1.4}
-.dashboard-page-valuation .nr-rate-tabs button{font-size:16px;min-height:43px}
-.dashboard-page-valuation .nr-section-title h3{font-size:20px}
-.dashboard-page-valuation .nr-section-title p,
-.dashboard-page-valuation .nr-source-note,
-.dashboard-page-valuation .nr-sensitivity>p,
-.dashboard-page-valuation .nr-note,
-.dashboard-page-valuation .nr-footnote,
-.dashboard-page-valuation .nr-capm>small{font-size:15px;line-height:1.55}
-.dashboard-page-valuation .nr-section-title h4,
-.dashboard-page-valuation .wacc-section-title h4{font-size:19px}
-.dashboard-page-valuation .nr-status,
-.dashboard-page-valuation .nr-capm>span{font-size:14px}
-.dashboard-page-valuation .nr-mode button,
-.dashboard-page-valuation .nr-text-button{font-size:15px;min-height:38px}
-.dashboard-page-valuation .nr-field-grid label>span,
-.dashboard-page-valuation .nr-input>span,
-.dashboard-page-valuation .nr-leg label,
-.dashboard-page-valuation .nr-basis-toggle>span{font-size:15px}
-.dashboard-page-valuation .nr-field-grid label>span small,
-.dashboard-page-valuation .nr-input>span small,
-.dashboard-page-valuation .nr-basis-toggle>small{font-size:13px}
-.dashboard-page-valuation .nr-field-grid input,
-.dashboard-page-valuation .nr-field-grid select,
-.dashboard-page-valuation .nr-input input,
-.dashboard-page-valuation .nr-leg input,
-.dashboard-page-valuation .nr-leg select{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-eyebrow,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-eyebrow{font-size:13px;letter-spacing:.6px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-hero h2{font-size:clamp(28px,2.6vw,38px)}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-hero p,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-heading p{font-size:16px;line-height:1.5}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a b{font-size:17px;line-height:1.35}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a small{font-size:14px;line-height:1.4}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-rate-tabs button{font-size:16px;min-height:43px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-section-title h3{font-size:20px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-section-title p,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-source-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity>p,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-footnote,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-capm>small{font-size:15px;line-height:1.55}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-section-title h4,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-section-title h4{font-size:19px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-status,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-capm>span{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-mode button,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-text-button{font-size:15px;min-height:38px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid label>span,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-input>span,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-leg label,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-basis-toggle>span{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid label>span small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-input>span small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-basis-toggle>small{font-size:13px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid input,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid select,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-input input,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-leg input,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-leg select{
  font-size:17px;min-height:46px;
 }
-.dashboard-page-valuation .nr-metric>span{font-size:15px}
-.dashboard-page-valuation .nr-metric strong{font-size:clamp(24px,2.2vw,32px)}
-.dashboard-page-valuation .nr-metric small{font-size:13px}
-.dashboard-page-valuation .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:clamp(27px,2.6vw,36px)}
-.dashboard-page-valuation .nr-dcf-chart-light .nr-dcf-chart-legend{font-size:16px}
-.dashboard-page-valuation .nr-dcf-chart-light .nr-dcf-unit-label{font-size:15px}
-.dashboard-page-valuation .nr-bridge span{font-size:14px}
-.dashboard-page-valuation .nr-bridge b{font-size:22px}
-.dashboard-page-valuation .nr-sensitivity table,
-.dashboard-page-valuation .nr-sensitivity thead th,
-.dashboard-page-valuation .nr-sensitivity th,
-.dashboard-page-valuation .nr-sensitivity td{font-size:15px}
-.dashboard-page-valuation .wacc-heading h3{font-size:24px}
-.dashboard-page-valuation .wacc-status small,
-.dashboard-page-valuation .wacc-status>span{font-size:13px}
-.dashboard-page-valuation .wacc-kpis article>span,
-.dashboard-page-valuation .wacc-output-grid article>span{font-size:15px}
-.dashboard-page-valuation .wacc-kpis article>strong{font-size:27px}
-.dashboard-page-valuation .wacc-output-grid article>strong{font-size:22px}
-.dashboard-page-valuation .wacc-output-grid .wacc-fair-value>strong{font-size:30px}
-.dashboard-page-valuation .wacc-kpis article>small,
-.dashboard-page-valuation .wacc-output-grid article>small,
-.dashboard-page-valuation .wacc-note,
-.dashboard-page-valuation .wacc-formula-note,
-.dashboard-page-valuation .wacc-period,
-.dashboard-page-valuation .wacc-sources{font-size:14px;line-height:1.5}
-.dashboard-page-valuation .wacc-input-table th,
-.dashboard-page-valuation .wacc-input-table td,
-.dashboard-page-valuation .wacc-forecast-table th,
-.dashboard-page-valuation .wacc-forecast-table td,
-.dashboard-page-valuation .wacc-forecast-table thead th,
-.dashboard-page-valuation .wacc-sensitivity-table th,
-.dashboard-page-valuation .wacc-sensitivity-table td{font-size:15px}
-.dashboard-page-valuation .wacc-bridge-table span{font-size:14px}
-.dashboard-page-valuation .wacc-bridge-table strong{font-size:18px}
-.dashboard-page-valuation .wacc-no-data h3{font-size:19px}
-.dashboard-page-valuation .wacc-no-data p{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric>span{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric strong{font-size:clamp(24px,2.2vw,32px)}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric small{font-size:13px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:clamp(27px,2.6vw,36px)}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-chart-light .nr-dcf-chart-legend{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-chart-light .nr-dcf-unit-label{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-bridge span{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-bridge b{font-size:22px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity table,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity thead th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity td{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-heading h3{font-size:24px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-status small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-status>span{font-size:13px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-kpis article>span,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article>span{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-kpis article>strong{font-size:27px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article>strong{font-size:22px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid .wacc-fair-value>strong{font-size:30px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-kpis article>small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article>small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-formula-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-period,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sources{font-size:14px;line-height:1.5}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-input-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-input-table td,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table td,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table thead th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table td{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-bridge-table span{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-bridge-table strong{font-size:18px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-no-data h3{font-size:19px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-no-data p{font-size:15px}
 @media(max-width:700px){
- .dashboard-page-valuation .nr-tabbar a b{font-size:15px}
- .dashboard-page-valuation .nr-tabbar a small{font-size:13px}
- .dashboard-page-valuation .nr-metric strong{font-size:23px}
- .dashboard-page-valuation .wacc-input-table,
- .dashboard-page-valuation .wacc-forecast-table{max-width:none}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a b{font-size:15px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a small{font-size:13px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric strong{font-size:23px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-input-table,
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table{max-width:none}
 }
 
 /* Valuation Lab readability refinement 2026-11-15:
    a small, controlled step beyond the first accessibility pass. */
-.dashboard-page-valuation .nr-workspace{font-size:17px}
-.dashboard-page-valuation .nr-eyebrow,
-.dashboard-page-valuation .wacc-eyebrow{font-size:14px}
-.dashboard-page-valuation .nr-hero p,
-.dashboard-page-valuation .wacc-heading p{font-size:17px}
-.dashboard-page-valuation .nr-tabbar a b{font-size:18px}
-.dashboard-page-valuation .nr-tabbar a small{font-size:15px}
-.dashboard-page-valuation .nr-rate-tabs button{font-size:17px}
-.dashboard-page-valuation .nr-section-title h3{font-size:22px}
-.dashboard-page-valuation .nr-section-title h4,
-.dashboard-page-valuation .wacc-section-title h4{font-size:21px}
-.dashboard-page-valuation .nr-section-title p,
-.dashboard-page-valuation .nr-source-note,
-.dashboard-page-valuation .nr-sensitivity>p,
-.dashboard-page-valuation .nr-note,
-.dashboard-page-valuation .nr-footnote,
-.dashboard-page-valuation .nr-capm>small{font-size:16px}
-.dashboard-page-valuation .nr-status,
-.dashboard-page-valuation .nr-capm>span{font-size:15px}
-.dashboard-page-valuation .nr-mode button,
-.dashboard-page-valuation .nr-text-button{font-size:16px}
-.dashboard-page-valuation .nr-field-grid label>span,
-.dashboard-page-valuation .nr-input>span,
-.dashboard-page-valuation .nr-leg label,
-.dashboard-page-valuation .nr-basis-toggle>span{font-size:16px}
-.dashboard-page-valuation .nr-field-grid label>span small,
-.dashboard-page-valuation .nr-input>span small,
-.dashboard-page-valuation .nr-basis-toggle>small{font-size:14px}
-.dashboard-page-valuation .nr-field-grid input,
-.dashboard-page-valuation .nr-field-grid select,
-.dashboard-page-valuation .nr-input input,
-.dashboard-page-valuation .nr-leg input,
-.dashboard-page-valuation .nr-leg select{font-size:18px}
-.dashboard-page-valuation .nr-metric>span{font-size:16px}
-.dashboard-page-valuation .nr-metric strong{font-size:clamp(26px,2.3vw,34px)}
-.dashboard-page-valuation .nr-metric small{font-size:14px}
-.dashboard-page-valuation .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:clamp(29px,2.7vw,38px)}
-.dashboard-page-valuation .nr-dcf-chart-light .nr-dcf-chart-legend{font-size:17px}
-.dashboard-page-valuation .nr-dcf-chart-light .nr-dcf-unit-label{font-size:16px}
-.dashboard-page-valuation .nr-bridge span{font-size:15px}
-.dashboard-page-valuation .nr-bridge b{font-size:23px}
-.dashboard-page-valuation .nr-sensitivity table,
-.dashboard-page-valuation .nr-sensitivity thead th,
-.dashboard-page-valuation .nr-sensitivity th,
-.dashboard-page-valuation .nr-sensitivity td{font-size:16px}
-.dashboard-page-valuation .wacc-heading h3{font-size:26px}
-.dashboard-page-valuation .wacc-status small,
-.dashboard-page-valuation .wacc-status>span{font-size:14px}
-.dashboard-page-valuation .wacc-kpis article>span,
-.dashboard-page-valuation .wacc-output-grid article>span{font-size:16px}
-.dashboard-page-valuation .wacc-kpis article>strong{font-size:29px}
-.dashboard-page-valuation .wacc-output-grid article>strong{font-size:24px}
-.dashboard-page-valuation .wacc-output-grid .wacc-fair-value>strong{font-size:32px}
-.dashboard-page-valuation .wacc-kpis article>small,
-.dashboard-page-valuation .wacc-output-grid article>small,
-.dashboard-page-valuation .wacc-note,
-.dashboard-page-valuation .wacc-formula-note,
-.dashboard-page-valuation .wacc-period,
-.dashboard-page-valuation .wacc-sources{font-size:15px}
-.dashboard-page-valuation .wacc-input-table th,
-.dashboard-page-valuation .wacc-input-table td,
-.dashboard-page-valuation .wacc-forecast-table th,
-.dashboard-page-valuation .wacc-forecast-table td,
-.dashboard-page-valuation .wacc-forecast-table thead th,
-.dashboard-page-valuation .wacc-sensitivity-table th,
-.dashboard-page-valuation .wacc-sensitivity-table td{font-size:16px}
-.dashboard-page-valuation .wacc-bridge-table span{font-size:15px}
-.dashboard-page-valuation .wacc-bridge-table strong{font-size:19px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-workspace{font-size:17px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-eyebrow,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-eyebrow{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-hero p,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-heading p{font-size:17px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a b{font-size:18px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a small{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-rate-tabs button{font-size:17px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-section-title h3{font-size:22px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-section-title h4,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-section-title h4{font-size:21px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-section-title p,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-source-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity>p,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-footnote,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-capm>small{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-status,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-capm>span{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-mode button,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-text-button{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid label>span,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-input>span,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-leg label,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-basis-toggle>span{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid label>span small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-input>span small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-basis-toggle>small{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid input,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-field-grid select,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-input input,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-leg input,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-leg select{font-size:18px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric>span{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric strong{font-size:clamp(26px,2.3vw,34px)}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric small{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:clamp(29px,2.7vw,38px)}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-chart-light .nr-dcf-chart-legend{font-size:17px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-chart-light .nr-dcf-unit-label{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-bridge span{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-bridge b{font-size:23px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity table,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity thead th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-sensitivity td{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-heading h3{font-size:26px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-status small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-status>span{font-size:14px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-kpis article>span,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article>span{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-kpis article>strong{font-size:29px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article>strong{font-size:24px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid .wacc-fair-value>strong{font-size:32px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-kpis article>small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article>small,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-formula-note,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-period,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sources{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-input-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-input-table td,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table td,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-forecast-table thead th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table td{font-size:16px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-bridge-table span{font-size:15px}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-bridge-table strong{font-size:19px}
 @media(max-width:700px){
- .dashboard-page-valuation .nr-tabbar a b{font-size:16px}
- .dashboard-page-valuation .nr-tabbar a small{font-size:14px}
- .dashboard-page-valuation .nr-metric strong{font-size:25px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a b{font-size:16px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-tabbar a small{font-size:14px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-metric strong{font-size:25px}
 }
 
 /* Unified DCF/CAPM/WACC result-first presentation. */
-.dashboard-page-valuation .nr-dcf-summary-first,
-.dashboard-page-valuation .wacc-output-grid{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid{
  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;
 }
-.dashboard-page-valuation .nr-dcf-summary-first .nr-metric,
-.dashboard-page-valuation .wacc-output-grid article{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first .nr-metric,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article{
  min-width:0;min-height:112px;display:grid;align-content:center;gap:7px;
  padding:15px 17px;background:#fff;border:1px solid #dbe6f1;border-radius:11px;
  box-shadow:0 3px 14px #1738590b;
 }
-.dashboard-page-valuation .nr-dcf-summary-first .nr-dcf-primary-value,
-.dashboard-page-valuation .wacc-output-grid article.wacc-fair-value{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first .nr-dcf-primary-value,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article.wacc-fair-value{
  background:#eaf4fc;border-color:#a9cce8;
 }
-.dashboard-page-valuation .nr-dcf-summary-first .nr-dcf-primary-value>strong,
-.dashboard-page-valuation .wacc-output-grid .wacc-fair-value>strong{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first .nr-dcf-primary-value>strong,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid .wacc-fair-value>strong{
  color:#0c63a5;font-size:clamp(29px,2.7vw,38px);
 }
-.dashboard-page-valuation .wacc-overview{min-width:0}
-.dashboard-page-valuation .wacc-sensitivity-panel{margin-top:0}
-.dashboard-page-valuation .wacc-sensitivity-panel .wacc-table-scroll{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-overview{min-width:0}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-panel{margin-top:0}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-panel .wacc-table-scroll{
  border:1px solid #dbe6f1;border-radius:9px;
 }
-.dashboard-page-valuation .wacc-sensitivity-table{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table{
  min-width:520px;border-collapse:collapse;background:#fff;
 }
-.dashboard-page-valuation .wacc-sensitivity-table th,
-.dashboard-page-valuation .wacc-sensitivity-table td{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table th,
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table td{
  padding:10px 12px;border-bottom:1px solid #dce6f0;
  color:#243e59;font-weight:600;
 }
-.dashboard-page-valuation .wacc-sensitivity-table thead th{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table thead th{
  background:#173f63;color:#eaf4ff;font-weight:800;
 }
-.dashboard-page-valuation .wacc-sensitivity-table tbody tr:nth-child(even){background:#f4f8fc}
-.dashboard-page-valuation .wacc-sensitivity-table tbody th{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table tbody tr:nth-child(even){background:#f4f8fc}
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table tbody th{
  background:transparent;color:#294d6e;text-align:left;font-weight:750;
 }
-.dashboard-page-valuation .wacc-sensitivity-table td.wacc-base-case{
+:is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-sensitivity-table td.wacc-base-case{
  background:#dceeff;color:#0b5488;font-weight:850;
  box-shadow:inset 0 0 0 1px #65b5ff;
 }
 @media(max-width:850px){
- .dashboard-page-valuation .nr-dcf-summary-first,
- .dashboard-page-valuation .wacc-output-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first,
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:620px){
- .dashboard-page-valuation .nr-dcf-summary-first .nr-metric,
- .dashboard-page-valuation .wacc-output-grid article{min-height:105px;padding:13px}
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .nr-dcf-summary-first .nr-metric,
+ :is(.dashboard-page-valuation,.dashboard-page-premium-analysis) .wacc-output-grid article{min-height:105px;padding:13px}
 }
 
 /* Single Premium synthesis surface, outside the individual method tabs. */
@@ -535,3 +535,39 @@
 .nr-synthesis-context{border:1px solid #dbe6f1;background:#f7fbff;border-radius:11px;padding:16px 18px;display:grid;gap:10px}
 .nr-synthesis-context a{color:#136eb1;font-weight:750;font-size:15px}
 @media(max-width:700px){.nr-synthesis-header{padding:16px}.nr-synthesis-header h2{font-size:23px}}
+
+/* Premium Analysis: one workbook with internal worksheet tabs (not sidebar links).
+   Retain established Valuation Lab styling and balanced mobile gutters. */
+.dashboard-page-premium-analysis{grid-template-columns:minmax(0,1fr)!important;min-width:0}
+.premium-analysis-workbook{grid-column:1/-1;display:grid;gap:0;min-width:0;width:100%;max-width:100%}
+.premium-analysis-tabs{
+ display:flex;gap:5px;flex-wrap:wrap;align-items:flex-end;
+ padding:5px 6px 0;background:#f2f6fb;border:1px solid #dce6f0;
+ border-bottom:0;border-radius:12px 12px 0 0;
+}
+.premium-analysis-tab{
+ display:inline-flex;align-items:center;justify-content:center;min-height:45px;
+ color:#496d8d;text-decoration:none;font-size:16px;font-weight:750;
+ padding:10px 17px;border-radius:9px 9px 0 0;
+ border:1px solid transparent;border-bottom:0;
+}
+.premium-analysis-tab:hover{color:#114c7a;background:#e6f1fa}
+.premium-analysis-tab.active{color:#174f7e;background:#fff;border-color:#cfdeeb}
+.premium-analysis-sheet{
+ min-width:0;width:100%;max-width:100%;padding:16px 0 0;
+ border-top:1px solid #cfdeeb;
+}
+.premium-analysis-sheet>.nr-workspace,.premium-analysis-sheet>.nr-premium-synthesis{width:100%;min-width:0;max-width:100%}
+.premium-analysis-placeholder{
+ min-width:0;min-height:520px;padding:26px;background:#fff;border:1px solid #dce6f0;
+ border-radius:12px;display:flex;flex-direction:column;gap:10px;
+}
+.premium-analysis-placeholder h2{font-size:26px;color:#173553;margin:0}
+.premium-analysis-blank{flex:1;min-height:350px;background:#fff}
+@media(max-width:700px){
+ .premium-analysis-tabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+ .premium-analysis-tab{flex:0 0 auto;font-size:14px;min-height:43px;padding:10px 13px;white-space:nowrap}
+ .premium-analysis-sheet{padding-top:12px}
+ .premium-analysis-placeholder{padding:16px;min-height:350px}
+ .premium-analysis-blank{min-height:250px}
+}
