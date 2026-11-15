@@ -4,37 +4,44 @@ import {ValuationFootballField} from "./ValuationFootballField";
 import "./native-research.css";
 
 /**
- * Single Premium-only synthesis view for the currently selected security.
- * The figures come from the shared source-aware valuation bridge, not
- * transient inputs on an individual modelling tab.
+ * Premium synthesis is result-first. A fair value is shown only when the
+ * shared valuation engine has at least two eligible valuation families.
+ * An indicative single-family value must not masquerade as a fair value.
  */
 export function ValuationSynthesis({valuation}:{valuation:ValuationBridge|null}){
- if(!valuation)return <section className="nr-synthesis-empty"><h2>Valuation Synthesis</h2><p>No validated valuation snapshot is available for this security.</p></section>;
- const cash=valuation.methods.find(method=>method.family==="cash_flow"&&method.status==="AVAILABLE");
- const earnings=valuation.methods.find(method=>method.family==="earnings"&&method.status==="AVAILABLE");
- const dividend=valuation.methods.find(method=>method.family==="dividend"&&method.status==="AVAILABLE");
+ const valid=(value:number|null|undefined):value is number=>typeof value==="number"&&Number.isFinite(value)&&value>0;
+ const currency=valuation?.currency||"USD";
+ const formatMoney=(value:number|null|undefined)=>valid(value)?new Intl.NumberFormat("en-US",{style:"currency",currency,maximumFractionDigits:2}).format(value):"N/D";
+ const price=valuation?.marketPrice??null;
+ const fairValue=valuation?.status==="TRIANGULATED"?valuation.intrinsicValue:null;
+ const comparison=valid(fairValue)&&valid(price)?(fairValue/price-1)*100:null;
+ const formatComparison=comparison===null?"N/D":(comparison>0?"+":"")+comparison.toFixed(1)+"%";
+ const cash=valuation?.methods.find(method=>method.family==="cash_flow"&&method.status==="AVAILABLE");
+ const earnings=valuation?.methods.find(method=>method.family==="earnings"&&method.status==="AVAILABLE");
+ const dividend=valuation?.methods.find(method=>method.family==="dividend"&&method.status==="AVAILABLE");
  const dcfValue=cash?.value??null;
- const dcfRange=valuation.dcfHorizonRange;
- return <section className="nr-premium-synthesis" aria-label="Premium Valuation Synthesis">
-  <header className="nr-synthesis-header">
-   <div><span className="nr-eyebrow">OPTIONSCRAFTED / PREMIUM RESEARCH</span><h2>Valuation Synthesis</h2><p>{valuation.ticker} · Unified valuation methods and risk-aware entry thresholds</p></div>
-   <span className="nr-synthesis-status">PREMIUM · RESEARCH VIEW</span>
-  </header>
-  <ValuationFootballField
-   price={valuation.marketPrice}
-   currency={valuation.currency}
+ const dcfRange=valuation?.dcfHorizonRange;
+ return <section className="nr-premium-synthesis" aria-label="Valuation Synthesis">
+  <header className="nr-synthesis-title"><h2>Valuation Synthesis</h2><strong>{valuation?.ticker??"N/D"}</strong></header>
+  <div className="nr-synthesis-metrics" aria-label="Valuation summary">
+   <article className="nr-synthesis-primary"><span>Fair Value</span><strong>{formatMoney(fairValue)}</strong><small>{valid(fairValue)?"Triangulated · eligible valuation families":"Pending · insufficient eligible methods"}</small></article>
+   <article><span>Market Price</span><strong>{formatMoney(price)}</strong><small>Reference snapshot · not live</small></article>
+   <article><span>Upside / Downside</span><strong className={comparison!==null?(comparison>=0?"nr-synthesis-positive":"nr-synthesis-negative"):""}>{formatComparison}</strong><small>Fair Value vs. reference price</small></article>
+  </div>
+  {valuation?<ValuationFootballField
+   price={price}
+   currency={currency}
    bear={dcfRange?.low??dcfValue}
    base={dcfValue}
    bull={dcfRange?.high??dcfValue}
    graham={earnings?.value??null}
    dividend={dividend?.value??null}
-   triangulatedValue={valuation.status==="TRIANGULATED"?valuation.intrinsicValue:null}
+   triangulatedValue={fairValue}
    mos={valuation.marginOfSafety}
-   source={valuation.sourceAsOf?"SOURCE AS OF "+valuation.sourceAsOf:"DATED RESEARCH SNAPSHOT"}
-  />
+  />:<p className="nr-synthesis-context">No valuation data is available for this security.</p>}
   <div className="nr-synthesis-context">
-   <p><strong>Research status: {valuation.status}.</strong> {valuation.eligibleFamilies} eligible valuation families. Estimates without sufficient evidence remain pending. DCF ranges use available horizon scenarios, not statistical confidence intervals.</p>
-   <NavLink to="/premium-analysis/dcf">Review valuation assumptions →</NavLink>
+   <p>{valuation?<>Research status: <strong>{valuation.status}</strong>. {valuation.eligibleFamilies} eligible valuation families. Unverified methods remain pending; displayed ranges are scenarios, not confidence intervals.</>:"Values remain unavailable until source data is validated."}</p>
+   <NavLink to="/premium-analysis/dcf">Review DCF assumptions</NavLink>
   </div>
  </section>;
 }
