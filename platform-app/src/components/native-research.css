@@ -310,3 +310,90 @@
  .nr-dcf-chart-canvas{width:620px;min-width:620px}
  .nr-dcf-chart-light .nr-dcf-chart-legend{font-size:13px}
 }
+
+
+/* Valuation Lab readability pass: replace miniature 9-12px research typography.
+   Applies to ALL Valuation methods, including WACC, while preserving the layout. */
+.dashboard-page-valuation .nr-workspace{
+ font-size:16px;
+ line-height:1.5;
+}
+.dashboard-page-valuation .nr-eyebrow,
+.dashboard-page-valuation .wacc-eyebrow{font-size:13px;letter-spacing:.6px}
+.dashboard-page-valuation .nr-hero h2{font-size:clamp(28px,2.6vw,38px)}
+.dashboard-page-valuation .nr-hero p,
+.dashboard-page-valuation .wacc-heading p{font-size:16px;line-height:1.5}
+.dashboard-page-valuation .nr-tabbar a b{font-size:17px;line-height:1.35}
+.dashboard-page-valuation .nr-tabbar a small{font-size:14px;line-height:1.4}
+.dashboard-page-valuation .nr-rate-tabs button{font-size:16px;min-height:43px}
+.dashboard-page-valuation .nr-section-title h3{font-size:20px}
+.dashboard-page-valuation .nr-section-title p,
+.dashboard-page-valuation .nr-source-note,
+.dashboard-page-valuation .nr-sensitivity>p,
+.dashboard-page-valuation .nr-note,
+.dashboard-page-valuation .nr-footnote,
+.dashboard-page-valuation .nr-capm>small{font-size:15px;line-height:1.55}
+.dashboard-page-valuation .nr-section-title h4,
+.dashboard-page-valuation .wacc-section-title h4{font-size:19px}
+.dashboard-page-valuation .nr-status,
+.dashboard-page-valuation .nr-capm>span{font-size:14px}
+.dashboard-page-valuation .nr-mode button,
+.dashboard-page-valuation .nr-text-button{font-size:15px;min-height:38px}
+.dashboard-page-valuation .nr-field-grid label>span,
+.dashboard-page-valuation .nr-input>span,
+.dashboard-page-valuation .nr-leg label,
+.dashboard-page-valuation .nr-basis-toggle>span{font-size:15px}
+.dashboard-page-valuation .nr-field-grid label>span small,
+.dashboard-page-valuation .nr-input>span small,
+.dashboard-page-valuation .nr-basis-toggle>small{font-size:13px}
+.dashboard-page-valuation .nr-field-grid input,
+.dashboard-page-valuation .nr-field-grid select,
+.dashboard-page-valuation .nr-input input,
+.dashboard-page-valuation .nr-leg input,
+.dashboard-page-valuation .nr-leg select{
+ font-size:17px;min-height:46px;
+}
+.dashboard-page-valuation .nr-metric>span{font-size:15px}
+.dashboard-page-valuation .nr-metric strong{font-size:clamp(24px,2.2vw,32px)}
+.dashboard-page-valuation .nr-metric small{font-size:13px}
+.dashboard-page-valuation .nr-dcf-summary-first .nr-dcf-primary-value>strong{font-size:clamp(27px,2.6vw,36px)}
+.dashboard-page-valuation .nr-dcf-chart-light .nr-dcf-chart-legend{font-size:16px}
+.dashboard-page-valuation .nr-dcf-chart-light .nr-dcf-unit-label{font-size:15px}
+.dashboard-page-valuation .nr-bridge span{font-size:14px}
+.dashboard-page-valuation .nr-bridge b{font-size:22px}
+.dashboard-page-valuation .nr-sensitivity table,
+.dashboard-page-valuation .nr-sensitivity thead th,
+.dashboard-page-valuation .nr-sensitivity th,
+.dashboard-page-valuation .nr-sensitivity td{font-size:15px}
+.dashboard-page-valuation .wacc-heading h3{font-size:24px}
+.dashboard-page-valuation .wacc-status small,
+.dashboard-page-valuation .wacc-status>span{font-size:13px}
+.dashboard-page-valuation .wacc-kpis article>span,
+.dashboard-page-valuation .wacc-output-grid article>span{font-size:15px}
+.dashboard-page-valuation .wacc-kpis article>strong{font-size:27px}
+.dashboard-page-valuation .wacc-output-grid article>strong{font-size:22px}
+.dashboard-page-valuation .wacc-output-grid .wacc-fair-value>strong{font-size:30px}
+.dashboard-page-valuation .wacc-kpis article>small,
+.dashboard-page-valuation .wacc-output-grid article>small,
+.dashboard-page-valuation .wacc-note,
+.dashboard-page-valuation .wacc-formula-note,
+.dashboard-page-valuation .wacc-period,
+.dashboard-page-valuation .wacc-sources{font-size:14px;line-height:1.5}
+.dashboard-page-valuation .wacc-input-table th,
+.dashboard-page-valuation .wacc-input-table td,
+.dashboard-page-valuation .wacc-forecast-table th,
+.dashboard-page-valuation .wacc-forecast-table td,
+.dashboard-page-valuation .wacc-forecast-table thead th,
+.dashboard-page-valuation .wacc-sensitivity-table th,
+.dashboard-page-valuation .wacc-sensitivity-table td{font-size:15px}
+.dashboard-page-valuation .wacc-bridge-table span{font-size:14px}
+.dashboard-page-valuation .wacc-bridge-table strong{font-size:18px}
+.dashboard-page-valuation .wacc-no-data h3{font-size:19px}
+.dashboard-page-valuation .wacc-no-data p{font-size:15px}
+@media(max-width:700px){
+ .dashboard-page-valuation .nr-tabbar a b{font-size:15px}
+ .dashboard-page-valuation .nr-tabbar a small{font-size:13px}
+ .dashboard-page-valuation .nr-metric strong{font-size:23px}
+ .dashboard-page-valuation .wacc-input-table,
+ .dashboard-page-valuation .wacc-forecast-table{max-width:none}
+}
