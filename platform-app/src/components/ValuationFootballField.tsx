@@ -1,4 +1,3 @@
-import {useState} from "react";
 import "./football-field.css";
 
 type Method={
@@ -30,7 +29,6 @@ const prettyStep=(range:number)=>{
  return ([1,2,2.5,5,10].find(n=>n*power>=raw)??10)*power;
 };
 export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,extra=[],graham=null,dividend=null,triangulatedValue=null}:Props){
- const [scale,setScale]=useState<"focus"|"market">("market");
  const isoCurrency=/^[A-Z]{3}$/.test(currency)?currency:"USD";
  const money=(value:number|null)=>valid(value)?new Intl.NumberFormat("en-US",{style:"currency",currency:isoCurrency,maximumFractionDigits:2}).format(value):"N/D";
  const axisValue=(value:number)=>new Intl.NumberFormat("en-US",{maximumFractionDigits:1,notation:value>=10000?"compact":"standard"}).format(value);
@@ -48,7 +46,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const reference=valid(price)?price:null;
  const fairValue=valid(triangulatedValue)?triangulatedValue:null;
  const observed=[...methods.flatMap(m=>[m.low,m.mid,m.high]).filter(valid),...([fairValue].filter(valid))];
- if(scale==="market"&&reference!==null)observed.push(reference);
+ if(reference!==null)observed.push(reference);
  const maximum=Math.max(...observed,1);
  const step=prettyStep(maximum*1.1);
  const axisMax=Math.ceil(maximum*1.1/step)*step;
@@ -57,7 +55,6 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const y=(v:number)=>bottom-v/axisMax*(bottom-top);
  const slotWidth=(right-left)/Math.max(methods.length,1);
  const center=(i:number)=>left+(i+.5)*slotWidth;
- const marketOffScale=reference!==null&&reference>axisMax;
  const toPercent=(target:number|null)=>valid(target)&&reference!==null?(target/reference-1)*100:null;
  const signedPct=(v:number|null)=>v===null?"N/D":(v>0?"+":"")+v.toFixed(1)+"%";
  const thresholds:Method[]=[
@@ -74,12 +71,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
     <span><i className="ff-legend-triangulated"/>Fair Value</span>
     <span><i className="ff-legend-market"/>Market Price</span>
    </div>
-   <div className="ff-scale-toggle" role="group" aria-label="Football Field price scale">
-    <button type="button" className={scale==="focus"?"active":""} aria-pressed={scale==="focus"} onClick={()=>setScale("focus")}>Valuation focus</button>
-    <button type="button" className={scale==="market"?"active":""} aria-pressed={scale==="market"} onClick={()=>setScale("market")}>Include market</button>
-   </div>
   </div>
-  {marketOffScale&&<p className="ff-offscale">The market price is outside this focused valuation range. Select “Include market” to compare it.</p>}
   <div className="ff-chart-scroll" tabIndex={0} aria-label="Valuation methods plotted against a price-per-share axis">
    <svg className="ff-svg" viewBox="0 0 1100 365" role="img" aria-label={"Valuation range and point estimates in "+isoCurrency+" per share"}>
     <title>Valuation Football Field</title>
