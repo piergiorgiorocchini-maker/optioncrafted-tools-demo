@@ -49,7 +49,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const fairValue=valid(triangulatedValue)?triangulatedValue:null;
  const observed=[...methods.flatMap(m=>[m.low,m.mid,m.high]).filter(valid),...([fairValue].filter(valid))];
  if(scale==="market"&&reference!==null)observed.push(reference);
- const maximum=Math.max(...observed,reference??1,1);
+ const maximum=Math.max(...observed,1);
  const step=prettyStep(maximum*1.1);
  const axisMax=Math.ceil(maximum*1.1/step)*step;
  const ticks=Array.from({length:Math.round(axisMax/step)+1},(_,i)=>i*step);
