@@ -44,6 +44,7 @@ if(financialCharts.includes("const sample=")||financialCharts.includes("INDEXED 
 const financialBridge=read("platform-app/src/data/verifiedFinancials.ts");
 if(!financialBridge.includes("cfo-capex"))throw new Error("Annual FCF must derive from SEC CFO less capex");
 const football=read("platform-app/src/components/ValuationFootballField.tsx");
-if(!football.includes("averageCandidates.length>=2"))throw new Error("A single model must not be displayed as an average valuation");
+if(football.includes("averageCandidates")||football.includes("averageValuation"))throw new Error("Football Field must not invent an independent arithmetic Fair Value");
+if(!football.includes("triangulatedValue")||!football.includes("methods=candidates.filter"))throw new Error("Football Field must plot eligible methods and use the shared triangulated Fair Value");
 checks+=4;
 console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
