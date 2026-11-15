@@ -140,6 +140,21 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
    <div><span className="wacc-eyebrow">ADOBE INC. · DISCOUNTED CASH FLOW</span><h3>WACC valuation worksheet</h3><p>Enterprise cash flows discounted at the weighted average cost of capital, then bridged to equity value per diluted share.</p></div>
    <div className="wacc-status"><span>INPUTS VERIFIED</span><small>Financials through {input.financialAsOf} · market snapshot {input.marketAsOf}</small></div>
   </header>
+  <section className="wacc-panel">
+   <div className="wacc-section-title"><div><span className="wacc-eyebrow">VALUATION BRIDGE</span><h4>From enterprise value to intrinsic value per share</h4></div><span className="wacc-period">Perpetuity growth terminal value</span></div>
+   <div className="wacc-output-grid">
+    <article><span>Terminal value · FY2031</span><strong>{formatMillions(model.terminalValue)}</strong></article>
+    <article><span>Enterprise value</span><strong>{formatMillions(model.enterpriseValue)}</strong></article>
+    <article><span>Equity value</span><strong>{formatMillions(model.equityValue)}</strong><small>EV less net debt</small></article>
+    <article className="wacc-fair-value"><span>Fair value / diluted share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
+   </div>
+   <div className="wacc-bridge-table"><div><span>PV explicit FCFF</span><strong>{formatMillions(model.pvExplicit)}</strong></div><div><span>PV terminal value</span><strong>{formatMillions(model.pvTerminal)}</strong></div><div><span>Net debt · excluding leases</span><strong>−{formatMillions(model.netDebt)}</strong></div><div><span>Diluted shares</span><strong>{formatNumber(input.dilutedShares,0)}m</strong></div><div><span>PV terminal value / EV</span><strong>{formatPct(model.terminalShare,1)}</strong></div></div>
+  </section>
+  <section className="wacc-panel">
+   <div className="wacc-section-title"><div><span className="wacc-eyebrow">SENSITIVITY</span><h4>Fair value per share</h4></div><span className="wacc-period">WACC ±0.50 percentage points</span></div>
+   <div className="wacc-table-scroll"><table className="wacc-sensitivity-table"><thead><tr><th>WACC \ terminal growth</th>{model.terminalCases.map(growth=><th key={growth}>{formatPct(growth,1)}</th>)}</tr></thead><tbody>{model.waccCases.map((scenarioWacc,rowIndex)=><tr key={scenarioWacc}><th>{formatPct(scenarioWacc)}</th>{model.sensitivity[rowIndex].map((value,columnIndex)=><td className={rowIndex===1&&columnIndex===2?"wacc-base-case":""} key={columnIndex}>{formatPrice(value)}</td>)}</tr>)}</tbody></table></div>
+   <p className="wacc-note">Only the discount rate and terminal growth change in this matrix. The explicit revenue path, operating margins, net debt and diluted share count remain fixed.</p>
+  </section>
   <div className="wacc-kpis">
    <article><span>Cost of equity · CAPM</span><strong>{formatPct(model.costOfEquity)}</strong><small>Risk-free + beta × ERP</small></article>
    <article className="wacc-kpi-primary"><span>WACC · working rate</span><strong>{formatPct(model.wacc)}</strong><small>Market-value weights · after-tax debt cost</small></article>
@@ -155,21 +170,6 @@ export function WaccResearchPanel({ticker}:{ticker:string}){
    <div className="wacc-section-title"><div><span className="wacc-eyebrow">EXPLICIT FORECAST · 5 YEARS</span><h4>Revenue fade and FCFF build</h4></div><span className="wacc-period">Growth fades linearly from TTM to terminal growth</span></div>
    <div className="wacc-table-scroll"><table className="wacc-forecast-table"><thead><tr><th>Fiscal year</th><th>Revenue growth</th><th>Revenue</th><th>EBIT margin</th><th>EBIT</th><th>Tax rate</th><th>NOPAT</th><th>D&amp;A</th><th>CapEx</th><th>ΔNWC</th><th>FCFF</th><th>Discount factor</th><th>PV of FCFF</th></tr></thead><tbody>{model.projections.map(row=><tr key={row.year}><th>FY{row.year}</th><td>{formatPct(row.growth)}</td><td>{formatNumber(row.revenue)}</td><td>{formatPct(row.ebitMargin,1)}</td><td>{formatNumber(row.ebit)}</td><td>{formatPct(row.taxRate,1)}</td><td>{formatNumber(row.nopat)}</td><td>{formatNumber(row.depreciation)}</td><td>{formatNumber(row.capex)}</td><td>—</td><td><strong>{formatNumber(row.fcff)}</strong></td><td>{formatPct(row.discountFactor,1)}</td><td><strong>{formatNumber(row.pvFcff)}</strong></td></tr>)}</tbody><tfoot><tr><th>TTM base</th><td>{formatPct(model.revenueGrowth)}</td><td>{formatNumber(input.revenueTtm)}</td><td>{formatPct(model.ebitMargin,1)}</td><td>{formatNumber(input.ebitTtm)}</td><td>{formatPct(input.taxRate,1)}</td><td>{formatNumber(input.ebitTtm*(1-input.taxRate))}</td><td>{formatNumber(input.depreciation)}</td><td>{formatNumber(input.capex)}</td><td>{formatMillions(input.historicalNwcCashRelease)} historical</td><td><strong>{formatNumber(model.normalizedStartingFcff)}</strong></td><td>—</td><td>—</td></tr></tfoot></table></div>
    <p className="wacc-formula-note">FCFF = EBIT × (1 − tax) + D&amp;A − CapEx + ΔNWC. EBIT margin, D&amp;A/revenue and CapEx/revenue stay at TTM levels; share-based compensation remains an operating expense.</p>
-  </section>
-  <section className="wacc-panel">
-   <div className="wacc-section-title"><div><span className="wacc-eyebrow">VALUATION BRIDGE</span><h4>From enterprise value to intrinsic value per share</h4></div><span className="wacc-period">Perpetuity growth terminal value</span></div>
-   <div className="wacc-output-grid">
-    <article><span>Terminal value · FY2031</span><strong>{formatMillions(model.terminalValue)}</strong></article>
-    <article><span>Enterprise value</span><strong>{formatMillions(model.enterpriseValue)}</strong></article>
-    <article><span>Equity value</span><strong>{formatMillions(model.equityValue)}</strong><small>EV less net debt</small></article>
-    <article className="wacc-fair-value"><span>Fair value / diluted share</span><strong>{formatPrice(model.fairValue)}</strong><small>{formatPct(model.upside,1)} vs. reference price {formatPrice(input.price)}</small></article>
-   </div>
-   <div className="wacc-bridge-table"><div><span>PV explicit FCFF</span><strong>{formatMillions(model.pvExplicit)}</strong></div><div><span>PV terminal value</span><strong>{formatMillions(model.pvTerminal)}</strong></div><div><span>Net debt · excluding leases</span><strong>−{formatMillions(model.netDebt)}</strong></div><div><span>Diluted shares</span><strong>{formatNumber(input.dilutedShares,0)}m</strong></div><div><span>PV terminal value / EV</span><strong>{formatPct(model.terminalShare,1)}</strong></div></div>
-  </section>
-  <section className="wacc-panel">
-   <div className="wacc-section-title"><div><span className="wacc-eyebrow">SENSITIVITY</span><h4>Fair value per share</h4></div><span className="wacc-period">WACC ±0.50 percentage points</span></div>
-   <div className="wacc-table-scroll"><table className="wacc-sensitivity-table"><thead><tr><th>WACC \ terminal growth</th>{model.terminalCases.map(growth=><th key={growth}>{formatPct(growth,1)}</th>)}</tr></thead><tbody>{model.waccCases.map((scenarioWacc,rowIndex)=><tr key={scenarioWacc}><th>{formatPct(scenarioWacc)}</th>{model.sensitivity[rowIndex].map((value,columnIndex)=><td className={rowIndex===1&&columnIndex===2?"wacc-base-case":""} key={columnIndex}>{formatPrice(value)}</td>)}</tr>)}</tbody></table></div>
-   <p className="wacc-note">Only the discount rate and terminal growth change in this matrix. The explicit revenue path, operating margins, net debt and diluted share count remain fixed.</p>
   </section>
   <footer className="wacc-sources"><strong>Sources and dates</strong><span>Official filings supply the financial statements; public market and macro references supply beta, price, rates and terminal-growth proxy.</span><div>{sourceLinks.map(source=><a href={source.url} key={source.label} target="_blank" rel="noreferrer">{source.label} ↗</a>)}</div></footer>
  </section>;
