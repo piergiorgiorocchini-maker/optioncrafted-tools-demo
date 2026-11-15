@@ -17,7 +17,8 @@ const required={
  "tools/options-strategy-lab/index.html":["id=\"payoffChart\"","id=\"scenarioTableBody\""],
  "tools/edge-station/index.html":["id=\"edgePayoffChart\"","id=\"metricRiskProfile\""],
  "platform-app/src/main.tsx":["ValuationWorkspace","OptionsWorkspace","nav-submenu","onSelect={openAsset}"],
- "platform-app/src/components/ValuationWorkspace.tsx":["ValuationFootballField","requiredReturnModel","grahamModel","dividendModel","ResponsiveContainer"],
+ "platform-app/src/components/ValuationWorkspace.tsx":["requiredReturnModel","grahamModel","dividendModel","ResponsiveContainer"],
+ "platform-app/src/components/ValuationSynthesis.tsx":["ValuationFootballField","ValuationBridge","PREMIUM"],
  "platform-app/src/components/OptionsWorkspace.tsx":["cspModel","coveredCallModel","wheelModel","hedgeModel","lognormalProbability","ResponsiveContainer"],
  "platform-app/src/components/ValuationFootballField.tsx":["ff-vertical-range","ff-single-estimate","ff-market-line","ff-scale-toggle","ff-entry-section","Purchase thresholds","No averaging of intrinsic estimates with entry thresholds"],
  "platform-app/src/core/valuationModels.ts":["function dcfModel","function requiredReturnModel","function grahamModel","function dividendModel"],
@@ -29,6 +30,10 @@ for(const [path,markers] of Object.entries(required)){
  const content=read(path);
  for(const marker of markers){if(!content.includes(marker))throw new Error("Missing "+marker+" in "+path);checks++;}
 }
+// The Football Field must occur only in the dedicated Premium synthesis surface.
+if(read("platform-app/src/components/ValuationWorkspace.tsx").includes("ValuationFootballField"))throw new Error("Football Field must not render in individual valuation methods");
+if(!read("platform-app/src/main.tsx").includes('subpage==="synthesis"')||!read("platform-app/src/main.tsx").includes('subpage==="synthesis")?"dcf"'))throw new Error("Premium synthesis route and tier gate are required");
+checks+=2;
 for(const path of ["tools/index.html","tools/probability-station/index.html","tools/options-strategy-lab/index.html","tools/edge-station/index.html"]){if(read(path).includes("tools-embed-bridge.js"))throw new Error("Legacy page must remain standalone: "+path);checks++;}
 if(read("platform-app/src/main.tsx").includes("<LegacyToolsWorkspace"))throw new Error("Iframe-based tools must not be embedded in the native app");
 // Prevent reintroduction of simulated financial histories for live securities.
