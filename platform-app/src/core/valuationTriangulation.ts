@@ -2,6 +2,7 @@ import {dcfModel,grahamModel,modelDefaults} from "./valuationModels";
 import {googleSheetsSecAnnualHistory,googleSheetsSecFinancialsMetadata,type SecAnnualFinancialYear} from "../data/googleSheetsSecFinancials";
 import {verifiedFinancialProfile} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
+import {getWaccValuation} from "./waccValuation";
 
 type AssetForValuation = {
   ticker:string;
@@ -56,6 +57,7 @@ export type ValuationBridge = {
   median:number|null;
   familyRange:{low:number;high:number}|null;
   dcfHorizonRange:{low:number;high:number}|null;
+  dcfComponents:{id:"fcfe"|"wacc";label:string;value:number;financialAsOf:string|null}[];
   source:string;
   sourceAsOf:string|null;
   importedAt:string;
@@ -156,6 +158,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   const qualityNotes:string[]=[];
   const methods:ValuationMethodResult[]=[];
   let dcfHorizonRange:{low:number;high:number}|null=null;
+  const dcfComponents:ValuationBridge["dcfComponents"]=[];
   let dcfMethod:ValuationMethodResult;
   let earningsMethod:ValuationMethodResult;
 
@@ -242,6 +245,48 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     }
   }
 
+  // DCF Composite: one valuation family, combining the existing FCF/share
+  // model and the source-backed FCFF/WACC model when available. Never insert
+  // a missing model as zero, and never count two DCF variants as two families.
+  const waccEvidence=profile.eligible?getWaccValuation(asset.ticker,currency):null;
+  const fcfeAvailable=dcfMethod!.status==="AVAILABLE"&&validPositive(dcfMethod!.value);
+  if(fcfeAvailable){
+    dcfComponents.push({id:"fcfe",label:dcfMethod!.estimateBasis==="USER_SCENARIO"?"DCF · user scenario":"DCF · FCF/share",value:dcfMethod!.value!,financialAsOf:dcfMethod!.filedDate});
+  }
+  if(waccEvidence){
+    dcfComponents.push({id:"wacc",label:"DCF · FCFF/WACC",value:waccEvidence.value,financialAsOf:waccEvidence.financialAsOf});
+  }
+  if(waccEvidence&&fcfeAvailable){
+    const original=dcfMethod!;
+    const composite=(original.value!+waccEvidence.value)/2;
+    const low=dcfHorizonRange?.low??original.value!;
+    const high=dcfHorizonRange?.high??original.value!;
+    dcfHorizonRange={low:(low+waccEvidence.value)/2,high:(high+waccEvidence.value)/2};
+    dcfMethod={
+      ...original,
+      label:"DCF Composite · FCF/share + WACC",
+      value:composite,
+      low:dcfHorizonRange.low,
+      high:dcfHorizonRange.high,
+      quality:Math.min(0.85,((original.quality??0.4)+waccEvidence.quality)/2),
+      reason:"Equal-weight mean of the existing FCF/share DCF and the available FCFF/WACC worksheet; one cash-flow valuation family. Manual interactive adjustments are not independent model evidence.",
+      assumptions:[...original.assumptions,`FCFF/WACC: ${waccEvidence.value.toFixed(2)} ${currency}/share · WACC ${(waccEvidence.wacc*100).toFixed(2)}%`,`Composite: (${original.value!.toFixed(2)} + ${waccEvidence.value.toFixed(2)}) / 2; absent methods receive zero weight, never a value of zero.`],
+      estimateBasis:original.estimateBasis==="USER_SCENARIO"?"USER_SCENARIO":"ASSUMPTION"
+    };
+    qualityNotes.push("DCF Composite includes FCF/share and FCFF/WACC as equally weighted variants of one cash-flow family. Its range averages FCF horizon endpoints with the fixed WACC base, not a statistical confidence interval.");
+  }else if(waccEvidence&&!fcfeAvailable){
+    dcfMethod={
+      id:"dcf",label:"DCF Composite · WACC only",family:"cash_flow",status:"AVAILABLE",
+      value:waccEvidence.value,low:waccEvidence.value,high:waccEvidence.value,
+      quality:waccEvidence.quality*0.75,
+      reason:"Only the FCFF/WACC model is available; no other DCF variant is assigned a zero value.",
+      assumptions:[`FCFF/WACC ${waccEvidence.value.toFixed(2)} ${currency}/share`],
+      fiscalPeriod:waccEvidence.financialAsOf,filedDate:waccEvidence.financialAsOf,sourceUrl:null,estimateBasis:"ASSUMPTION"
+    };
+    dcfHorizonRange=null;
+    qualityNotes.push("DCF family is based on a single FCFF/WACC variant; FCF/share is unavailable and excluded.");
+  }
+
   methods.push(dcfMethod!,earningsMethod!);
   const dividendMethod:ValuationMethodResult=asset.dividendYield===0
     ?{...methodPending("ddm","Dividend discount","dividend","Current snapshot reports a zero dividend yield; DDM is not applicable."),status:"NOT_APPLICABLE"}
@@ -315,6 +360,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     median:eligibleFamilies>0?familyMedian:null,
     familyRange:eligibleFamilies>0?familyRange:null,
     dcfHorizonRange,
+    dcfComponents,
     source:manualTtm?"Google Sheets SEC_Raw + NVDA manual TTM statement snapshot · annual SEC history for growth + shared family-balanced model":"Google Sheets SEC_Raw · verified annual SEC facts + shared family-balanced model",
     sourceAsOf,
     importedAt:manualTtm?.importedAt??googleSheetsSecFinancialsMetadata.sourceImportedAt,
