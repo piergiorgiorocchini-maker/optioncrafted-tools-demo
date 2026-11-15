@@ -176,3 +176,71 @@
 .nr-sensitivity td{color:#f0f6fc;font-variant-numeric:tabular-nums}
 .nr-sensitivity td.is-base{background:#224c70;color:#fff;font-weight:800;box-shadow:inset 0 0 0 1px #65b5ff}
 .nr-sensitivity .nr-chart-empty{min-height:90px;color:#b7cbe0}
+
+/* Separate equity CAPM from enterprise FCFF/WACC valuation. */
+.nr-rate-tabs{display:flex;align-items:center;gap:5px;width:max-content;max-width:100%;padding:5px;background:#edf3f9;border:1px solid #dce6f0;border-radius:11px}
+.nr-rate-tabs button{border:0;border-radius:8px;padding:10px 17px;background:transparent;color:#52718e;font-size:12px;font-weight:800;cursor:pointer}
+.nr-rate-tabs button.active{background:#174f7e;color:#fff;box-shadow:0 2px 8px #17385924}
+.nr-rate-tabs button:focus-visible{outline:2px solid #338ed1;outline-offset:2px}
+.wacc-worksheet{display:grid;gap:14px;min-width:0;color:#173553}
+.wacc-panel{min-width:0;padding:19px 21px;background:#fff;border:1px solid #dbe6f1;border-radius:13px;box-shadow:0 3px 14px #17385909}
+.wacc-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(110deg,#fff,#f5f9fd)}
+.wacc-eyebrow{display:block;color:#397caf;font-size:9px;letter-spacing:1.1px;font-weight:850}
+.wacc-heading h3{margin:6px 0;color:#173a5b;font-size:20px;letter-spacing:-.4px}
+.wacc-heading p{max-width:760px;margin:0;color:#6c8298;font-size:11px;line-height:1.6}
+.wacc-status{display:grid;gap:5px;justify-items:end;white-space:nowrap}
+.wacc-status>span,.wacc-no-data-badge{padding:7px 10px;border-radius:20px;background:#eaf5ee;border:1px solid #cfe7d6;color:#257044;font-size:9px;font-weight:850;letter-spacing:.45px}
+.wacc-status small{color:#7d91a6;font-size:9px}
+.wacc-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.wacc-kpis article,.wacc-output-grid article{display:grid;align-content:start;gap:7px;min-width:0;padding:15px 16px;background:#fff;border:1px solid #dbe6f1;border-radius:11px}
+.wacc-kpis article>span,.wacc-output-grid article>span{color:#6c8298;font-size:10px;font-weight:750}
+.wacc-kpis article>strong{color:#153e62;font-size:22px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.wacc-kpis article>small,.wacc-output-grid article>small{color:#8799aa;font-size:9px;line-height:1.45}
+.wacc-kpis article.wacc-kpi-primary{background:#eaf4fc;border-color:#bfdbf1}
+.wacc-kpi-primary>strong{color:#1266a8!important}
+.wacc-section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.wacc-section-title h4{margin:5px 0 0;color:#173a5b;font-size:15px;letter-spacing:-.2px}
+.wacc-period{color:#8094a7;font-size:9px}
+.wacc-table-scroll{width:100%;overflow-x:auto;border:1px solid #e0e9f1;border-radius:8px}
+.wacc-input-table,.wacc-forecast-table,.wacc-sensitivity-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.wacc-input-table{min-width:660px}
+.wacc-input-table th,.wacc-input-table td{width:25%;padding:8px 10px;border-bottom:1px solid #e8eef4;text-align:left;font-size:10px}
+.wacc-input-table th{background:#f5f8fb;color:#59748d;font-weight:750}
+.wacc-input-table td{color:#173e60;font-weight:750;text-align:right}
+.wacc-input-table tr:last-child th,.wacc-input-table tr:last-child td{border-bottom:0}
+.wacc-note,.wacc-formula-note{margin:11px 0 0;color:#71869a;font-size:10px;line-height:1.6}
+.wacc-forecast-table{min-width:1220px}
+.wacc-forecast-table th,.wacc-forecast-table td{padding:9px 10px;border-bottom:1px solid #e8eef4;text-align:right;white-space:nowrap;font-size:10px}
+.wacc-forecast-table thead th{background:#eef4f9;color:#4e6c87;font-size:9px;font-weight:850}
+.wacc-forecast-table th:first-child,.wacc-forecast-table tbody th{text-align:left}
+.wacc-forecast-table tbody th{color:#173e60;font-weight:800}
+.wacc-forecast-table td{color:#3e5c77}
+.wacc-forecast-table td strong,.wacc-forecast-table tfoot strong{color:#164f7c}
+.wacc-forecast-table tbody tr:nth-child(even){background:#fafcfe}
+.wacc-forecast-table tfoot th,.wacc-forecast-table tfoot td{background:#f3f7fb;border-bottom:0;color:#385c7c;font-weight:750}
+.wacc-output-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.wacc-output-grid article>strong{color:#163e62;font-size:18px;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.wacc-output-grid article.wacc-fair-value{background:#eaf4fc;border-color:#a9cce8}
+.wacc-output-grid .wacc-fair-value>strong{color:#0c63a5;font-size:25px}
+.wacc-bridge-table{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:10px}
+.wacc-bridge-table>div{display:grid;gap:5px;padding:10px 11px;background:#f6f9fc;border:1px solid #e5edf4;border-radius:8px}
+.wacc-bridge-table span{color:#73889d;font-size:9px}
+.wacc-bridge-table strong{color:#214b6e;font-size:12px;font-variant-numeric:tabular-nums}
+.wacc-sensitivity-table{min-width:440px}
+.wacc-sensitivity-table th,.wacc-sensitivity-table td{padding:10px 14px;border-bottom:1px solid #e6edf4;text-align:right;white-space:nowrap;font-size:11px}
+.wacc-sensitivity-table thead th{background:#eef4f9;color:#4e6c87;font-weight:850}
+.wacc-sensitivity-table tbody th{text-align:left;color:#173e60;background:#f7f9fc}
+.wacc-sensitivity-table td{color:#345876;font-variant-numeric:tabular-nums}
+.wacc-sensitivity-table td.wacc-base-case{background:#e7f3fc;color:#0b5c9b;font-weight:900;box-shadow:inset 0 0 0 1px #9ac8eb}
+.wacc-sources{display:grid;gap:7px;padding:4px 2px;color:#71869a;font-size:9px;line-height:1.5}
+.wacc-sources>strong{color:#476581;font-size:10px}
+.wacc-sources>div{display:flex;flex-wrap:wrap;gap:7px 13px}
+.wacc-sources a{color:#2472ab;text-decoration:none;font-weight:700}
+.wacc-sources a:hover{text-decoration:underline}
+.wacc-no-data{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 14px;padding:16px 19px;background:#fff;border:1px solid #dbe6f1;border-radius:12px;color:#173553}
+.wacc-no-data h3{margin:4px 0 0;color:#173a5b;font-size:15px}
+.wacc-no-data .wacc-no-data-badge{background:#f1f5f8;border-color:#dfe7ed;color:#637a8e}
+.wacc-no-data p{grid-column:1/-1;margin:5px 0 0;color:#75899c;font-size:10px;line-height:1.5}
+@media(max-width:850px){.wacc-kpis,.wacc-output-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wacc-bridge-table{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.nr-rate-tabs{position:sticky;top:5px;z-index:5;width:100%;justify-content:stretch}.nr-rate-tabs button{flex:1;padding:10px 8px;font-size:11px}.wacc-panel{padding:14px}.wacc-heading{align-items:flex-start;flex-direction:column}.wacc-status{justify-items:start;white-space:normal}.wacc-heading h3{font-size:18px}.wacc-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.wacc-kpis article{padding:12px}.wacc-kpis article>strong{font-size:19px}.wacc-output-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.wacc-output-grid article{padding:12px}.wacc-output-grid article>strong{font-size:15px}.wacc-output-grid .wacc-fair-value>strong{font-size:21px}.wacc-bridge-table{grid-template-columns:repeat(2,minmax(0,1fr))}.wacc-section-title{align-items:flex-start;flex-direction:column}.wacc-period{font-size:9px}}
+@media(max-width:380px){.wacc-kpis,.wacc-output-grid{grid-template-columns:1fr}.wacc-bridge-table{grid-template-columns:1fr 1fr}}
