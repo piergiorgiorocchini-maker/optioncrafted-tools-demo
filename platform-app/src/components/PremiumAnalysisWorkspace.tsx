@@ -20,7 +20,7 @@ export function PremiumAnalysisWorkspace({asset,tab,valuation,onUpdate}:{asset:R
    {tabs.map(item=><NavLink to={"/premium-analysis/"+item.id} key={item.id} className={({isActive})=>"premium-analysis-tab"+(isActive?" active":"")}>{item.label}</NavLink>)}
   </nav>
   <div className="premium-analysis-sheet">
-   {active==="synthesis"?<ValuationSynthesis valuation={valuation}/>:
+   {active==="synthesis"?<ValuationSynthesis valuation={valuation} companyName={asset?.name}/>:
     active==="dcf"?(asset?<ValuationWorkspace key={asset.ticker} asset={asset} tab="dcf" premiumDcf onUpdate={onUpdate}/>:<section className="premium-analysis-placeholder"><h2>DCF Engine</h2><p>No financial snapshot available for the selected security.</p></section>):
     <section className="premium-analysis-placeholder" aria-label={tabs.find(item=>item.id===active)?.label}>
      <span className="nr-eyebrow">PREMIUM ANALYSIS / WORKSHEET</span>
