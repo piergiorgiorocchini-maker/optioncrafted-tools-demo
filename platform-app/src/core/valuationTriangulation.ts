@@ -47,7 +47,7 @@ export type ValuationBridge = {
   comparisonPercent:number|null;
   priceAgeDays:number|null;
   comparisonReason:string|null;
-  status:"TRIANGULATED"|"PENDING";
+  status:"TRIANGULATED"|"INDICATIVE"|"PENDING";
   confidence:"PRELIMINARY"|"LOW"|"INSUFFICIENT";
   eligibleFamilies:number;
   familyCountRequired:number;
@@ -228,37 +228,40 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   methods.push(dividendMethod,peersMethod);
 
   const available=methods.filter(method=>method.status==="AVAILABLE"&&method.value!==null&&method.quality!==null);
-  const familyValues=available.map(method=>method.value!);
-  const eligibleFamilies=new Set(available.map(method=>method.family)).size;
+  const uniqueByFamily=new Map<ValuationFamily,ValuationMethodResult>();
+  for(const method of available){
+    const prior=uniqueByFamily.get(method.family);
+    if(!prior||((method.quality??0)>(prior.quality??0)))uniqueByFamily.set(method.family,method);
+  }
+  const eligibleMethods=[...uniqueByFamily.values()];
+  const familyValues=eligibleMethods.map(method=>method.value!);
+  const eligibleFamilies=eligibleMethods.length;
   const simpleMean=familyValues.length?familyValues.reduce((total,value)=>total+value,0)/familyValues.length:null;
   const sortedFamilies=familyValues.slice().sort((a,b)=>a-b);
   const familyMedian=median(familyValues);
   const familyRange=sortedFamilies.length?{low:sortedFamilies[0],high:sortedFamilies.at(-1)!}:null;
   let intrinsicValue:number|null=null;
   if(eligibleFamilies>=requiredFamilies){
-    const uniqueByFamily=new Map<ValuationFamily,ValuationMethodResult>();
-    for(const method of available){
-      const prior=uniqueByFamily.get(method.family);
-      if(!prior||((method.quality??0)>(prior.quality??0)))uniqueByFamily.set(method.family,method);
-    }
-    const eligible=[...uniqueByFamily.values()];
-    const rawWeights=eligible.map(method=>Math.max(0.01,method.quality??0.5));
+    const rawWeights=eligibleMethods.map(method=>Math.max(0.01,method.quality??0.5));
     const total=rawWeights.reduce((sum,weight)=>sum+weight,0);
     const weights=rawWeights.map(weight=>Math.min(0.65,weight/total));
     const normalizer=weights.reduce((sum,weight)=>sum+weight,0);
-    intrinsicValue=eligible.reduce((sum,method,index)=>sum+method.value!*weights[index]/normalizer,0);
+    intrinsicValue=eligibleMethods.reduce((sum,method,index)=>sum+method.value!*weights[index]/normalizer,0);
     if(familyRange&&familyRange.high>0){
       const spread=(familyRange.high-familyRange.low)/intrinsicValue;
-      qualityNotes.push(spread>0.5?"The two valuation families diverge by more than 50% of the composite; the result is preliminary and low confidence.":spread>0.25?"Method estimates diverge materially; treat the composite as preliminary.":"The two eligible valuation families are reasonably close, but this is not a statistical confidence interval.");
+      qualityNotes.push(spread>0.5?"The eligible valuation families diverge by more than 50% of the composite; the result is preliminary and low confidence.":spread>0.25?"Method estimates diverge materially; treat the composite as preliminary.":"The eligible valuation families are reasonably close, but this is not a statistical confidence interval.");
     }
+  }else if(eligibleFamilies===1){
+    intrinsicValue=eligibleMethods[0].value!;
+    qualityNotes.push(`Only one eligible valuation family (${eligibleMethods[0].label}) is available. The displayed fair value is indicative, is not triangulated, and has low confidence.`);
   }
-  const methodSpread=intrinsicValue!==null&&familyRange?(familyRange.high-familyRange.low)/Math.max(intrinsicValue,0.01):null;
-  const confidence=intrinsicValue===null?"INSUFFICIENT":methodSpread!==null&&methodSpread<0.25?"PRELIMINARY":"LOW";
+  const methodSpread=eligibleFamilies>=requiredFamilies&&intrinsicValue!==null&&familyRange?(familyRange.high-familyRange.low)/Math.max(intrinsicValue,0.01):null;
+  const confidence=intrinsicValue===null?"INSUFFICIENT":eligibleFamilies<requiredFamilies?"LOW":methodSpread!==null&&methodSpread<0.25?"PRELIMINARY":"LOW";
   const buyUnder=intrinsicValue===null?null:intrinsicValue*(1-marginOfSafety/100);
   const parsedPriceDate=asset.priceDate?Date.parse(`${asset.priceDate}T00:00:00Z`):NaN;
   const priceAgeDays=Number.isFinite(parsedPriceDate)?Math.max(0,Math.floor((Date.now()-parsedPriceDate)/86_400_000)):null;
   let comparisonReason:string|null=null;
-  if(intrinsicValue===null)comparisonReason=`At least ${requiredFamilies} eligible independent valuation families are required.`;
+  if(intrinsicValue===null)comparisonReason="No eligible valuation model produced an estimate; check the DCF and Graham method requirements.";
   else if(!validPositive(asset.price))comparisonReason="A positive market price is unavailable.";
   else if(priceAgeDays===null)comparisonReason="The market-price date is unavailable.";
   else if(priceAgeDays>4)comparisonReason=`The market-price snapshot is ${priceAgeDays} days old; comparison is held until the quote refreshes.`;
@@ -281,13 +284,13 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     comparisonPercent,
     priceAgeDays,
     comparisonReason,
-    status:intrinsicValue===null?"PENDING":"TRIANGULATED",
+    status:intrinsicValue===null?"PENDING":eligibleFamilies>=requiredFamilies?"TRIANGULATED":"INDICATIVE",
     confidence,
     eligibleFamilies,
     familyCountRequired:requiredFamilies,
-    simpleMean:eligibleFamilies>=requiredFamilies?simpleMean:null,
-    median:eligibleFamilies>=requiredFamilies?familyMedian:null,
-    familyRange:eligibleFamilies>=requiredFamilies?familyRange:null,
+    simpleMean:eligibleFamilies>0?simpleMean:null,
+    median:eligibleFamilies>0?familyMedian:null,
+    familyRange:eligibleFamilies>0?familyRange:null,
     dcfHorizonRange,
     source:manualTtm?"Google Sheets SEC_Raw + NVDA manual TTM statement snapshot · annual SEC history for growth + shared family-balanced model":"Google Sheets SEC_Raw · verified annual SEC facts + shared family-balanced model",
     sourceAsOf,
