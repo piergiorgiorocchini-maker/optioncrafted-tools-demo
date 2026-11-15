@@ -31,7 +31,7 @@ const niceCeiling=(value:number)=>{
  return ([1,1.5,2,2.5,3,4,5,6,8,10].find(x=>x>=scaled)??10)*magnitude;
 };
 
-export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,source="USER ASSUMPTIONS",extra=[],graham=null,dividend=null,triangulatedValue=null}:Props){
+export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,extra=[],graham=null,dividend=null,triangulatedValue=null}:Props){
  const [scale,setScale]=useState<"focus"|"market">("focus");
  const isoCurrency=/^[A-Z]{3}$/.test(currency)?currency:"USD";
  const money=(value:number|null)=>valid(value)?new Intl.NumberFormat("en-US",{style:"currency",currency:isoCurrency,maximumFractionDigits:2}).format(value):"N/D";
@@ -66,10 +66,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const signedPct=(value:number|null)=>value===null?"N/D":(value>0?"+":"")+value.toFixed(1)+"%";
 
  return <section className="ff-panel">
-  <header className="ff-header">
-   <div><span>VALUATION TRIANGULATION</span><h3>Valuation Football Field</h3><p>Comparable valuation methods on a shared price-per-share axis.</p></div>
-   <div className="ff-header-right"><span className="ff-source">{source}</span><div className="ff-market-reference"><small>REFERENCE MARKET PRICE</small><strong>{money(reference)}</strong><span>{marketOffScale?"Above valuation-focused scale":"Historical snapshot · not live"}</span></div></div>
-  </header>
+  <header className="ff-header"><h3>Valuation Football Field</h3></header>
   <div className="ff-toolbar">
    <div className="ff-legend"><span><i className="ff-legend-range"/> Scenario range</span><span><i className="ff-legend-point"/> Point estimate</span><span><i className="ff-legend-market"/> Market reference</span><span><i className="ff-legend-triangulated"/> Eligible-family triangulation</span><span><i className="ff-legend-average"/> Arithmetic mean · secondary</span></div>
    <div className="ff-scale-toggle" role="group" aria-label="Football Field vertical axis scale"><button type="button" className={scale==="focus"?"active":""} aria-pressed={scale==="focus"} onClick={()=>setScale("focus")}>Valuation focus</button><button type="button" className={scale==="market"?"active":""} aria-pressed={scale==="market"} onClick={()=>setScale("market")}>Include market price</button></div>
