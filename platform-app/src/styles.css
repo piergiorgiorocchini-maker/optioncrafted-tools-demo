@@ -880,21 +880,36 @@ body .nr-hero-meta span{color:#60758b!important}
  .dashboard-page-valuation>.nr-workspace{padding-right:14px!important}
 }
 
-/* Mobile route containment: selecting a security from global search must not
-   let wide company widgets resize the page viewport or its 14px gutters. */
-@media (max-width:700px){
- html,body,#root{width:100%;max-width:100%;overflow-x:clip}
- .shell,.shell>main{width:100%!important;min-width:0!important;max-width:100%!important}
- .shell>main{overflow-x:clip}
- .shell>main>.dashboard{width:100%!important;max-width:100%!important;min-width:0!important}
- .dashboard-page-company{min-width:0!important;grid-template-columns:minmax(0,1fr)!important}
- .dashboard-page-company>*,.dashboard-page-company .ci,
- .dashboard-page-company .ci>*,.dashboard-page-company .ci-tradingview-references,
- .dashboard-page-company .tv-company-widget,.dashboard-page-company .tv-company-widget-host{
-  min-width:0!important;max-width:100%!important;
+/* Shared mobile layout contract:
+   all research routes get the same 14px content gutter.  The content
+   viewport belongs to .dashboard, not to individual ticker widgets. */
+@media(max-width:700px){
+ .shell,.shell>main{width:100%!important;max-width:100%!important;min-width:0!important}
+ .shell>main{padding:0 0 25px!important;overflow-x:clip}
+ .shell>main>.terminal-topbar{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+  margin:0!important;padding:8px 14px!important;
  }
- .dashboard-page-company img,.dashboard-page-company iframe{max-width:100%}
- .dashboard-page-company .vf-table,.dashboard-page-company table{
-  max-width:100%;
+ .shell>main>.terminal-heading,.shell>main>footer{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+  min-width:0!important;margin:0!important;padding-left:14px!important;padding-right:14px!important;
  }
+ .shell>main>.dashboard{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+  min-width:0!important;margin:0!important;padding:0 14px!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  overflow-x:clip;
+ }
+ .shell>main>.dashboard>*{min-width:0!important;max-width:100%!important}
+ /* Individual research modules must fit the shared content column. */
+ .dashboard-page-valuation>.nr-workspace,
+ .dashboard-page-company>.ci,.dashboard-page-company>.fdve-research{
+  box-sizing:border-box!important;width:100%!important;min-width:0!important;
+  max-width:100%!important;padding-right:0!important;
+ }
+ .dashboard-page-company .tv-company-widget,
+ .dashboard-page-company .tv-company-widget-host,
+ .dashboard-page-company .ci,
+ .dashboard-page-company .ci>*{min-width:0!important;max-width:100%!important}
+ .dashboard-page-company iframe,.dashboard-page-company img{max-width:100%}
 }
