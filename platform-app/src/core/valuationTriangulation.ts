@@ -212,6 +212,16 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",noEps?(manualGraham?"Enter a positive EPS to publish a Manual Graham estimate.":"No positive diluted EPS is available in the current snapshot or SEC history."):"Latest EPS is not positive; a Graham earnings value is not published.");
     }else if(grahamGrowthRate===null||!Number.isFinite(grahamGrowthRate)||grahamGrowthRate<=-4.25){
       earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",manualGraham?"Manual Graham growth must be above -4.25%.":growthEvidence.note);
+    }else if(!manualGraham){
+      // Historical EPS CAGR is an observed backward-looking statistic, not a
+      // defensible forward-growth forecast. Calculate it in the Graham Lab as
+      // a diagnostic scenario, but do not insert it as an independent family
+      // into Fair Value or the investment-decision Football Field.
+      earningsMethod=methodPending(
+        "earnings","Graham · historical growth scenario","earnings",
+        "Only historical EPS CAGR is available ("+grahamGrowthRate.toFixed(2)+"%). It is not a validated forward earnings-growth forecast. The Graham historical scenario remains visible in Valuation Lab but is excluded from triangulated Fair Value."
+      );
+      qualityNotes.push("Graham Automatic is scenario-only: historical EPS growth "+grahamGrowthRate.toFixed(2)+"% does not establish sustainable future growth; no Graham contribution to Fair Value until a validated forward basis exists.");
     }else{
       const graham=grahamModel(grahamEps,grahamGrowthRate,grahamAaaYield,asset.price,asset.dividendYield===null?null:asset.dividendYield*100);
       if(validPositive(graham?.classic))grahamComponents.push({id:"classic",label:"Classic Graham",value:graham!.classic});
