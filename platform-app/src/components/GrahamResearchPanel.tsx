@@ -45,19 +45,16 @@ export function GrahamResearchPanel({bridgeGraham,grahamComponents,ticker,price,
   {name:"Financial filings",preferred:"Primary filings to validate EPS, share count, dividend payments and unusual items.",source:"SEC EDGAR · "+symbol,url:sec}
  ];
  return <div className="nr-graham-panel">
-  <section className="nr-graham-published" aria-label="Published Graham Composite for Valuation Synthesis">
-   <div><span className="nr-eyebrow">PUBLISHED GRAHAM · VALUATION SYNTHESIS / FOOTBALL FIELD</span><h3>Graham Composite</h3><p>{grahamComponents.length?grahamComponents.map(part=>part.label+": "+money(part.value,currency)).join(" · "):"Awaiting a valid earnings valuation."}</p><small>Equal-weight mean of eligible classic and Aaa-adjusted estimates using a shared normalized EPS and growth basis. The independent calculator below can use different user-adjusted assumptions.</small></div>
-   <strong>{money(bridgeGraham,currency)}</strong>
-  </section>
   <section className="nr-graham-summary" aria-label="Graham Lynch model outputs">
-   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM CALCULATOR · CLASSIC / AAA / PEG</span><h3>Six research outputs</h3></div><span className="nr-status">SCENARIO · NOT A QUOTE</span></div>
+   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM CALCULATOR · CLASSIC / AAA / PEG</span><h3>Graham Valuation</h3></div><span className="nr-status">MODEL ESTIMATE · NOT A QUOTE</span></div>
    <div className="nr-graham-metrics">
+    <div className="nr-metric nr-graham-primary"><span>Graham Composite · Valuation Synthesis / Football Field</span><strong>{money(bridgeGraham,currency)}</strong><small>{grahamComponents.length?grahamComponents.map(part=>part.label+" "+money(part.value,currency)).join(" + ")+" · equal-weight mean":"Pending valid model inputs"}</small></div>
     <div className="nr-metric"><span>Classic Graham value</span><strong>{money(result?.classic??null,currency)}</strong><small>EPS × (8.5 + 2g)</small></div>
-    <div className="nr-metric nr-graham-primary"><span>Calculator scenario · Aaa-adjusted Graham</span><strong>{money(adjusted,currency)}</strong><small>Bond-adjusted earnings anchor</small></div>
+    <div className="nr-metric"><span>Aaa-adjusted Graham</span><strong>{money(adjusted,currency)}</strong><small>Bond-adjusted earnings anchor</small></div>
     <div className="nr-metric"><span>Upside / downside</span><strong className={upside!==null?(upside<0?"nr-graham-down":"nr-graham-up"):""}>{signedPct(upside)}</strong><small>Adjusted value vs reference price</small></div>
     <div className="nr-metric"><span>PEG</span><strong>{multiple(peg)}</strong><small>P/E ÷ expected growth %</small></div>
     <div className="nr-metric"><span>Dividend-adjusted PEG</span><strong>{multiple(pegDividend)}</strong><small>P/E ÷ (growth % + dividend yield %)</small></div>
-    <div className="nr-metric"><span>Screening verdict</span><strong className="nr-graham-verdict">{reading}</strong><small>Heuristic, not an investment rating</small></div>
+    
    </div>
    <div className="nr-graham-provenance"><span>Reference price: <b>{money(price,currency)}</b></span><span>Derived P/E: <b>{multiple(pe)}</b></span><span>Bond input: <b>{pct(aaaYield)}</b></span><span>{bondDate}</span><a href={aaaSourceUrl} target="_blank" rel="noopener noreferrer">Verify on FRED <ExternalLink size={12}/></a></div>
   </section>
