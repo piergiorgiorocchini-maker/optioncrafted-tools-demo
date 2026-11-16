@@ -1,4 +1,5 @@
 import {grahamModel,modelDefaults} from "./valuationModels";
+import aaaYieldSnapshot from "../data/aaaYieldSnapshot.json";
 import {googleSheetsSecAnnualHistory,googleSheetsSecFinancialsMetadata,type SecAnnualFinancialYear} from "../data/googleSheetsSecFinancials";
 import {verifiedFinancialProfile} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
@@ -59,6 +60,7 @@ export type ValuationBridge = {
   familyRange:{low:number;high:number}|null;
   dcfHorizonRange:{low:number;high:number}|null;
   dcfComponents:{id:"manual"|"capm"|"wacc";label:string;value:number;financialAsOf:string|null}[];
+  grahamComponents:{id:"classic"|"aaa";label:string;value:number}[];
   source:string;
   sourceAsOf:string|null;
   importedAt:string;
@@ -155,6 +157,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   const methods:ValuationMethodResult[]=[];
   let dcfHorizonRange:{low:number;high:number}|null=null;
   const dcfComponents:ValuationBridge["dcfComponents"]=[];
+  const grahamComponents:ValuationBridge["grahamComponents"]=[];
   let dcfMethod:ValuationMethodResult;
   let earningsMethod:ValuationMethodResult;
 
@@ -208,10 +211,12 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     }else if(epsGrowth&&epsGrowth.applied<=-4.25){
       earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings","Historical diluted-EPS CAGR is below the Graham model's usable range; a positive earnings power estimate is not published.");
     }else{
-      const graham=grahamModel(grahamEps,grahamGrowthRate,null,asset.price,asset.dividendYield===null?null:asset.dividendYield*100);
-      const value=graham?.classic??null;
+      const graham=grahamModel(grahamEps,grahamGrowthRate,aaaYieldSnapshot.value,asset.price,asset.dividendYield===null?null:asset.dividendYield*100);
+      if(validPositive(graham?.classic))grahamComponents.push({id:"classic",label:"Classic Graham",value:graham!.classic});
+      if(validPositive(graham?.adjusted))grahamComponents.push({id:"aaa",label:"Aaa-adjusted Graham",value:graham!.adjusted!});
+      const value=grahamComponents.length?grahamComponents.reduce((sum,part)=>sum+part.value,0)/grahamComponents.length:null;
       const grahamReason=hasHistoricalGrahamBasis
-        ?"Classic Graham earnings value using five-year median diluted EPS and observed historical growth."
+        ?"Graham composite based on five-year median diluted EPS and observed historical growth; classic and Aaa-adjusted values are averaged when both exist."
         :`Indicative Graham estimate using ${normalizedEps!==null?"available positive diluted EPS":"current "+currentEpsSource} and ${epsGrowth?`observed ${epsGrowth.applied.toFixed(1)}% EPS growth`:`default ${modelDefaults.growth}% growth assumption`}; five-year normalization and/or growth history is incomplete, so confidence is low.`;
       const epsBaseAssumption=normalizedEps!==null
         ?`Normalized EPS (5 FY): median FY${normalizedEpsRows[0].fiscalYear}–FY${normalizedEpsRows.at(-1)!.fiscalYear} = ${normalizedEps.toFixed(2)} ${currency}/share`
@@ -219,7 +224,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       const epsGrowthAssumption=epsGrowth
         ?`Diluted-EPS CAGR from FY${epsWindow[0].fiscalYear}–FY${epsWindow.at(-1)!.fiscalYear}: ${epsGrowthRaw!.toFixed(1)}%${epsGrowth.capped?` (bounded to ${epsGrowth.applied.toFixed(1)}%)`:""}`
         :`Historical diluted-EPS growth unavailable; uses default ${modelDefaults.growth}% growth, an assumption and not observed history`;
-      earningsMethod=value===null?methodPending("earnings","Normalized earnings · Graham","earnings","EPS and growth did not produce a valid positive estimate."):{id:"earnings",label:hasHistoricalGrahamBasis?"Normalized earnings · Graham":"Graham · indicative",family:"earnings",status:"AVAILABLE",value,low:value,high:value,quality:profile.quality*(hasHistoricalGrahamBasis?0.88:0.42),reason:grahamReason,assumptions:[epsBaseAssumption,epsGrowthAssumption,"Classic Graham formula: EPS × (8.5 + 2 × growth percentage); AAA-adjusted output is not used in the primary estimate"],fiscalPeriod:normalizedEpsRows.at(-1)?.fiscalYear??manualTtm?.periodEnd??latest?.fiscalYear??null,filedDate:normalizedEpsRows.map(year=>year.filedDate).filter((date):date is string=>Boolean(date)).sort().at(-1)??latest?.filedDate??null,sourceUrl:normalizedEpsRows.at(-1)?.sources.epsDiluted?.sourceUrl??latest?.sources.epsDiluted?.sourceUrl??null,estimateBasis:hasHistoricalGrahamBasis?"HISTORICAL":"ASSUMPTION"};
+      earningsMethod=value===null?methodPending("earnings","Normalized earnings · Graham","earnings","EPS and growth did not produce a valid positive estimate."):{id:"earnings",label:hasHistoricalGrahamBasis?"Graham Composite · classic / Aaa":"Graham Composite · indicative",family:"earnings",status:"AVAILABLE",value,low:value,high:value,quality:profile.quality*(hasHistoricalGrahamBasis?0.88:0.42),reason:grahamReason,assumptions:[epsBaseAssumption,epsGrowthAssumption,`Graham composite: ${grahamComponents.map(part=>part.label+" "+part.value.toFixed(2)).join("; ")}. Equal-weight mean of available variants; Aaa yield snapshot ${aaaYieldSnapshot.value}% as of ${aaaYieldSnapshot.observationDate}. Both variants use the same normalized EPS and growth.`],fiscalPeriod:normalizedEpsRows.at(-1)?.fiscalYear??manualTtm?.periodEnd??latest?.fiscalYear??null,filedDate:normalizedEpsRows.map(year=>year.filedDate).filter((date):date is string=>Boolean(date)).sort().at(-1)??latest?.filedDate??null,sourceUrl:normalizedEpsRows.at(-1)?.sources.epsDiluted?.sourceUrl??latest?.sources.epsDiluted?.sourceUrl??null,estimateBasis:hasHistoricalGrahamBasis?"HISTORICAL":"ASSUMPTION"};
       if(epsGrowth?.capped)qualityNotes.push(`Historical diluted-EPS CAGR was bounded from ${epsGrowth.raw.toFixed(1)}% to ${epsGrowth.applied.toFixed(1)}% in the Graham family.`);
       if(!hasHistoricalGrahamBasis)qualityNotes.push("Graham uses a current/available EPS and default or partial-history growth assumptions because five-year normalization and/or continuous historical EPS growth is incomplete.");
     }
@@ -299,6 +304,7 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     familyRange:eligibleFamilies>0?familyRange:null,
     dcfHorizonRange,
     dcfComponents,
+    grahamComponents,
     source:manualTtm?"Google Sheets SEC_Raw + NVDA manual TTM statement snapshot · annual SEC history for growth + shared family-balanced model":"Google Sheets SEC_Raw · verified annual SEC facts + shared family-balanced model",
     sourceAsOf,
     importedAt:manualTtm?.importedAt??googleSheetsSecFinancialsMetadata.sourceImportedAt,
