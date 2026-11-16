@@ -62,10 +62,11 @@
 @media(max-width:700px){.nr-graham-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.nr-graham-summary{padding:14px}.nr-graham-formulas{grid-template-columns:1fr}.nr-graham-panel .nr-graham-method,.nr-graham-panel .nr-graham-sources{padding:14px}}
 @media(max-width:450px){.nr-graham-metrics{grid-template-columns:1fr}.nr-graham-metrics .nr-metric{min-height:auto}.nr-graham-table th,.nr-graham-table td{padding:8px 9px}}
 
-/* The value used by the research synthesis, independent of editable scenarios. */
-.nr-graham-published{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:15px;padding:18px 20px;border:1px solid #bad5ec;background:#eef6fd;border-radius:12px;min-width:0}
-.nr-graham-published>div{flex:1 1 300px;min-width:0}
-.nr-graham-published h3{margin:5px 0 8px;font-size:21px;color:#143c5a}
-.nr-graham-published p{margin:0 0 6px;font-size:14px;color:#3f617c;line-height:1.5}
-.nr-graham-published small{font-size:12px;color:#67859e;line-height:1.5}
-.nr-graham-published>strong{font-size:clamp(26px,3vw,34px);color:#0e649e;font-variant-numeric:tabular-nums}
+
+/* Graham's single lead result uses the same quiet light-card hierarchy as Valuation Lab. */
+.nr-graham-top-summary{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:18px 22px;border:1px solid #c9ddec;border-radius:13px;background:#f3f8fd;min-width:0}
+.nr-graham-top-summary>div{flex:1 1 280px;min-width:0}
+.nr-graham-top-summary h3{font-size:17px;margin:5px 0 6px;color:#173a5d}
+.nr-graham-top-summary p{font-size:12px;line-height:1.5;color:#58758e;margin:0}
+.nr-graham-top-summary>strong{font-size:clamp(26px,3.1vw,36px);line-height:1.15;color:#174c78;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:600px){.nr-graham-top-summary{padding:15px 16px;gap:9px}.nr-graham-top-summary>strong{font-size:28px}}
