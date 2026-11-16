@@ -75,9 +75,11 @@
 /* Graham reference layout: compact grey panels, white inputs, solid navy outputs. */
 .nr-graham-io{
  display:grid;
- grid-template-columns:minmax(0,430px) minmax(0,570px);
- column-gap:22px;row-gap:16px;align-items:start;
- width:min(100%,1022px);max-width:100%;min-width:0;
+ /* Match the lead Graham Composite card (one third of the container).
+    Two equal cards + 18px gap occupy precisely two such columns. */
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ column-gap:18px;row-gap:16px;align-items:start;
+ width:calc(66.666667% + 6px);max-width:100%;min-width:0;
 }
 .nr-graham-io-panel{
  min-width:0;overflow:hidden;
@@ -117,7 +119,7 @@
 .nr-graham-io-rows input{
  width:100%;min-width:0;
  padding:6px 9px;min-height:35px;
- border:1px solid #173d60;border-radius:0;
+ border:2px solid #173d60;border-radius:0;
  background:#fff;color:#171717;
  text-align:center;font-size:17px;font-weight:500;
  font-variant-numeric:tabular-nums;box-shadow:none;
@@ -148,13 +150,15 @@
  text-align:right;font-size:18px;font-weight:750;
  line-height:1.3;font-variant-numeric:tabular-nums;
 }
-@media(max-width:1050px){
- .nr-graham-io{width:100%;grid-template-columns:minmax(0,0.42fr) minmax(0,0.58fr);gap:14px}
+@media(max-width:850px){
+ /* At this breakpoint the lead composite is half-width: match it exactly. */
+ .nr-graham-io{width:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
  .nr-graham-io-rows label{grid-template-columns:minmax(0,1fr) 105px;font-size:16px}
  .nr-graham-io-result{font-size:16px}
 }
-@media(max-width:620px){
- .nr-graham-io{grid-template-columns:minmax(0,1fr);gap:12px}
+@media(max-width:600px){
+ /* On phones all three modules become full-width. */
+ .nr-graham-io{width:100%;grid-template-columns:minmax(0,1fr);gap:12px}
  .nr-graham-io-panel{width:100%}
  .nr-graham-io-rows label{grid-template-columns:minmax(0,1fr) 112px;font-size:16px}
  .nr-graham-io-result{font-size:16px}
