@@ -24,13 +24,15 @@ const multiple=(n:number|null)=>n!==null&&Number.isFinite(n)?n.toFixed(2)+"×":"
 const signedPct=(n:number|null)=>n!==null&&Number.isFinite(n)?(n>=0?"+":"")+(n*100).toFixed(2)+"%":"N/D";
 const cleanTicker=(ticker:string)=>ticker.trim().toUpperCase().replace(/[^A-Z0-9.\-]/g,"");
 
-export function GrahamResearchPanel({bridgeGraham,grahamComponents,ticker,price,eps,dividendYield,growth,aaaYield,currency,result,aaaObservationDate,aaaSourceUrl,aaaIsManual}:Props){
+export function GrahamResearchPanel({bridgeGraham,valuationMode,grahamComponents,ticker,price,eps,dividendYield,growth,aaaYield,currency,result,aaaObservationDate,aaaSourceUrl,aaaIsManual}:Props){
  const symbol=cleanTicker(ticker);
  const stockAnalysis="https://stockanalysis.com/stocks/"+encodeURIComponent(symbol.toLowerCase())+"/statistics/";
  const yahoo="https://finance.yahoo.com/quote/"+encodeURIComponent(symbol)+"/key-statistics/";
  const sec="https://www.sec.gov/edgar/search/?entityName="+encodeURIComponent(symbol);
  const pe=price!==null&&eps!==null&&eps>0?price/eps:null;
  const adjusted=result?.adjusted??null;
+ const historicalScenario=result?.classic!==null&&result?.classic!==undefined&&adjusted!==null?(result.classic+adjusted)/2:null;
+ const unpublished=valuationMode==="automatic"&&bridgeGraham===null;
  const upside=adjusted!==null&&price!==null&&price>0?adjusted/price-1:null;
  const peg=result?.peg??null;
  const pegDividend=result?.pegDividend??null;
@@ -46,14 +48,14 @@ export function GrahamResearchPanel({bridgeGraham,grahamComponents,ticker,price,
  ];
  return <div className="nr-graham-panel">
   <section className="nr-graham-summary" aria-label="Graham Lynch model outputs">
-   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM CALCULATOR · CLASSIC / AAA / PEG</span><h3>Graham Valuation</h3></div><span className="nr-status">MODEL ESTIMATE · NOT A QUOTE</span></div>
+   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM CALCULATOR · CLASSIC / AAA / PEG</span><h3>Graham Valuation</h3></div><span className="nr-status">{unpublished?"HISTORICAL SCENARIO · NOT FAIR VALUE":"MODEL ESTIMATE · NOT A QUOTE"}</span></div>
    <div className="nr-graham-metrics">
-    <div className="nr-metric nr-graham-primary"><span>Graham Composite · Valuation Synthesis / Football Field</span><strong>{money(bridgeGraham,currency)}</strong><small>{grahamComponents.length?grahamComponents.map(part=>part.label+" "+money(part.value,currency)).join(" + ")+" · equal-weight mean":"Pending valid model inputs"}</small></div>
+    <div className="nr-metric nr-graham-primary"><span>{unpublished?"Published Graham · not eligible":"Graham Composite · Valuation Synthesis / Football Field"}</span><strong>{money(bridgeGraham,currency)}</strong><small>{unpublished?"Historical EPS growth is not a verified forward forecast. Indicative historical scenario: "+money(historicalScenario,currency)+". Excluded from Fair Value and Football Field.":grahamComponents.length?grahamComponents.map(part=>part.label+" "+money(part.value,currency)).join(" + ")+" · equal-weight mean":"Pending valid model inputs"}</small></div>
     <div className="nr-metric"><span>Classic Graham value</span><strong>{money(result?.classic??null,currency)}</strong><small>EPS × (8.5 + 2g)</small></div>
     <div className="nr-metric"><span>Aaa-adjusted Graham</span><strong>{money(adjusted,currency)}</strong><small>Bond-adjusted earnings anchor</small></div>
-    <div className="nr-metric"><span>Upside / downside</span><strong className={upside!==null?(upside<0?"nr-graham-down":"nr-graham-up"):""}>{signedPct(upside)}</strong><small>Adjusted value vs reference price</small></div>
-    <div className="nr-metric"><span>PEG</span><strong>{multiple(peg)}</strong><small>P/E ÷ expected growth %</small></div>
-    <div className="nr-metric"><span>Dividend-adjusted PEG</span><strong>{multiple(pegDividend)}</strong><small>P/E ÷ (growth % + dividend yield %)</small></div>
+    <div className="nr-metric"><span>Upside / downside</span><strong className={upside!==null?(upside<0?"nr-graham-down":"nr-graham-up"):""}>{signedPct(upside)}</strong><small>{unpublished?"Historical scenario only; not investable upside":"Adjusted value vs reference price"}</small></div>
+    <div className="nr-metric"><span>PEG</span><strong>{multiple(peg)}</strong><small>{unpublished?"P/E ÷ historical EPS CAGR (not a forecast)":"P/E ÷ expected growth %"}</small></div>
+    <div className="nr-metric"><span>Dividend-adjusted PEG</span><strong>{multiple(pegDividend)}</strong><small>{unpublished?"Historical EPS CAGR; screening only":"P/E ÷ (growth % + dividend yield %)"}</small></div>
     
    </div>
    <div className="nr-graham-provenance"><span>Reference price: <b>{money(price,currency)}</b></span><span>Derived P/E: <b>{multiple(pe)}</b></span><span>Bond input: <b>{pct(aaaYield)}</b></span><span>{bondDate}</span><a href={aaaSourceUrl} target="_blank" rel="noopener noreferrer">Verify on FRED <ExternalLink size={12}/></a></div>
