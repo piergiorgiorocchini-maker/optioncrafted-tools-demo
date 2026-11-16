@@ -683,3 +683,86 @@
  .premium-analysis-sheet .nr-dcf-summary-first,
  .premium-analysis-sheet .wacc-output-grid{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Required Return: Graham-inspired top ledger, with a shorter chart on the left.
+   The established detail modules below are intentionally retained. */
+.nr-workspace--required .nr-required-lead{
+ width:calc((100% - 36px)/3);
+ max-width:100%;
+ min-width:0;
+ background:#eaf4fc;
+ border:1px solid #b8d8f0;
+ border-radius:10px;
+ padding:15px 18px;
+}
+.nr-required-lead h3{margin:4px 0;font-size:16px;color:#173a5d}
+.nr-required-lead strong{display:block;color:#17629d;font-size:32px;line-height:1.2;font-variant-numeric:tabular-nums}
+.nr-required-lead small{display:block;font-size:12px;line-height:1.5;color:#59758e;margin-top:5px}
+.nr-workspace--required .nr-required-io{
+ display:grid;
+ grid-template-columns:minmax(0,0.78fr) repeat(2,minmax(0,1.15fr));
+ gap:18px;
+ width:100%;min-width:0;
+ align-items:stretch;
+}
+.nr-required-io-panel{
+ display:flex;flex-direction:column;
+ min-width:0;overflow:hidden;
+ border:2px solid #173d60;
+ border-radius:0;background:#f1f1f1;
+}
+.nr-required-io-panel>h3{
+ margin:0;padding:5px 9px;
+ background:#173d60;color:#fff;
+ text-align:center;font-size:18px;font-weight:800;line-height:1.2;
+}
+.nr-required-io-rows{display:grid;align-content:start;gap:7px;padding:14px 16px}
+.nr-required-io-rows label,
+.nr-required-io-rows>div{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;
+ align-items:center;gap:10px;min-height:38px;
+}
+.nr-required-io-rows label>span,
+.nr-required-io-rows>div>span{
+ font-size:17px;line-height:1.3;color:#111;font-weight:500;
+}
+.nr-required-io-rows input{
+ box-sizing:border-box;width:94px;min-width:0;
+ padding:6px 8px;min-height:36px;
+ border:2.5px solid #173d60;border-radius:0;
+ background:#fff;color:#161616;
+ text-align:center;font-size:17px;
+ font-variant-numeric:tabular-nums;
+}
+.nr-required-io-rows>div>strong{
+ display:inline-block;min-width:100px;padding:6px 9px;
+ background:#173d60;color:#fff;text-align:right;
+ font-size:18px;font-weight:750;font-variant-numeric:tabular-nums;
+}
+.nr-required-io-rows>div.nr-required-io-key-result{margin-top:6px;padding-top:8px;border-top:1px solid #c6d4df}
+.nr-required-io-rows>div.nr-required-io-key-result>strong{background:#0f5283;color:#fff;font-size:21px}
+.nr-required-io-inputs>small{display:block;margin-top:auto;padding:4px 12px 11px;font-size:12px;color:#54677a;text-align:center}
+.nr-required-compact-chart{
+ padding:14px 8px 10px;background:#283444;
+ min-width:0;flex:1;
+ display:flex;flex-direction:column;justify-content:center;
+}
+.nr-required-chart-key{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:15px;color:#fff;font-size:12px;font-weight:650}
+.nr-required-chart-key>span{display:inline-flex;align-items:center;gap:5px}
+.nr-required-chart-key i{width:11px;height:11px;display:inline-block}
+.nr-required-key-eps{background:#80ad63}
+.nr-required-key-div{background:#d7b35e}
+.nr-required-io-empty{font-size:14px;color:#fff;text-align:center;line-height:1.5}
+@media(max-width:1100px){
+ .nr-workspace--required .nr-required-io{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .nr-required-io-chart{grid-column:1/-1;grid-row:2}
+ .nr-required-io-rows label>span,.nr-required-io-rows>div>span{font-size:16px}
+ .nr-workspace--required .nr-required-lead{width:calc((100% - 12px)/2)}
+}
+@media(max-width:650px){
+ .nr-workspace--required .nr-required-io{grid-template-columns:minmax(0,1fr)}
+ .nr-required-io-chart{grid-column:auto;grid-row:auto}
+ .nr-workspace--required .nr-required-lead{width:100%}
+ .nr-required-io-rows label>span,.nr-required-io-rows>div>span{font-size:16px}
+ .nr-required-io-rows>div>strong{min-width:89px;font-size:17px}
+}
