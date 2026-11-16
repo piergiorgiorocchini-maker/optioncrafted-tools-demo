@@ -832,3 +832,70 @@
  font-size:12px;font-weight:700;cursor:pointer;
 }
 .nr-required-dividend-reset:hover{background:#e8f1f9}
+
+/* OptionWeaver 2-stage fidelity: three visually distinct groups, no row rules.
+   Retain OptionsCrafted navy in place of Excel green. */
+.nr-workspace--required .nr-required-io-inputs,
+.nr-workspace--required .nr-required-io-outputs{background:#f0f0f0}
+.nr-workspace--required .nr-required-input-groups{
+ display:flex;
+ flex-direction:column;
+ gap:21px;
+ padding:16px 12px 13px;
+}
+.nr-workspace--required .nr-required-input-group{
+ display:grid;
+ grid-template-columns:minmax(0,1fr);
+ gap:2px;
+ min-width:0;
+}
+.nr-workspace--required .nr-required-input-group label{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) 98px;
+ align-items:center;
+ gap:9px;
+ min-height:34px;
+}
+.nr-workspace--required .nr-required-input-group label>span{
+ text-align:right;
+ justify-self:stretch;
+ color:#111;
+ font-size:16px;
+ font-weight:500;
+ line-height:1.25;
+}
+.nr-workspace--required .nr-required-input-group input{
+ width:100%;
+ min-width:0;
+ box-sizing:border-box;
+ min-height:31px;
+ padding:4px 6px;
+ border:2px solid #173d60;
+ border-radius:0;
+ background:#fff;
+ color:#111;
+ font-size:16px;
+ text-align:center;
+ font-weight:500;
+}
+.nr-workspace--required .nr-required-input-group input:read-only{
+ opacity:1;background:#fff;color:#111;
+}
+.nr-workspace--required .nr-required-input-group .nr-required-input-dividend{margin:0}
+.nr-workspace--required .nr-required-input-group .nr-required-input-dividend>span{font-weight:500}
+.nr-workspace--required .nr-required-io-inputs>small{padding:0 10px 13px;font-size:11px}
+.nr-workspace--required .nr-required-io-panel>h3{padding:4px 10px;font-size:17px}
+@media(max-width:1250px){
+ .nr-workspace--required .nr-required-input-group label{grid-template-columns:minmax(0,1fr) 84px}
+ .nr-workspace--required .nr-required-input-group label>span{font-size:15px}
+ .nr-workspace--required .nr-required-input-group input{font-size:15px}
+}
+@media(max-width:1100px){
+ .nr-workspace--required .nr-required-input-group label{grid-template-columns:minmax(0,1fr) 102px}
+ .nr-workspace--required .nr-required-input-group label>span{font-size:16px}
+ .nr-workspace--required .nr-required-input-group input{font-size:16px}
+}
+@media(max-width:650px){
+ .nr-workspace--required .nr-required-input-groups{gap:18px}
+ .nr-workspace--required .nr-required-input-group label{grid-template-columns:minmax(0,1fr) 104px}
+}
