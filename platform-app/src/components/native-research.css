@@ -821,3 +821,14 @@
  .nr-required-annual-table th{font-size:13px}
  .nr-required-io-chart .nr-required-compact-chart{overflow:hidden}
 }
+
+/* Required Return annual dividend is a first-class, editable per-share input. */
+.nr-required-io-inputs .nr-required-input-dividend{margin:1px 0 10px}
+.nr-required-io-inputs .nr-required-input-dividend>span{font-weight:650}
+.nr-required-dividend-reset{
+ display:inline-block;margin-left:7px;
+ padding:2px 5px;border:1px solid #91b3ce;
+ border-radius:3px;background:#fff;color:#174f7e;
+ font-size:12px;font-weight:700;cursor:pointer;
+}
+.nr-required-dividend-reset:hover{background:#e8f1f9}
