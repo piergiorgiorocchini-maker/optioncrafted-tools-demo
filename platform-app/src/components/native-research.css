@@ -773,3 +773,51 @@
  .nr-required-io-rows label>span,.nr-required-io-rows>div>span{font-size:16px}
  .nr-required-io-rows>div>strong{min-width:89px;font-size:17px}
 }
+
+/* OptionWeaver Two-Stage Excel alignment: year-by-year EPS and annual dividends
+   belong inside OUTPUTS. Reinvested-dividend FV remains a distinct total. */
+.nr-workspace--required .nr-required-io-outputs{align-self:stretch}
+.nr-required-annual-table-wrap{
+ width:100%;
+ min-width:0;
+ padding:2px 12px 12px;
+ margin-top:6px;
+ overflow-x:auto;
+ overscroll-behavior-x:contain;
+}
+.nr-required-annual-table{
+ border-collapse:collapse;
+ width:100%;
+ table-layout:fixed;
+ font-variant-numeric:tabular-nums;
+ color:#152f45;
+}
+.nr-required-annual-table th{
+ background:#e4e4e4;
+ color:#172f44;
+ font-weight:800;
+ font-size:14px;
+ padding:6px 6px;
+ text-align:right;
+}
+.nr-required-annual-table th:first-child,
+.nr-required-annual-table td:first-child{width:22%;text-align:center}
+.nr-required-annual-table td{
+ padding:6px 6px;
+ font-size:15px;
+ font-weight:600;
+ text-align:right;
+}
+.nr-required-annual-table tbody tr:nth-child(odd){background:#fafafa}
+.nr-required-annual-table tbody tr:nth-child(even){background:#e6e6e6}
+.nr-required-io-outputs .nr-required-io-rows{padding-bottom:10px}
+.nr-required-io-chart .nr-required-compact-chart{
+ justify-content:center;
+ min-height:0;
+}
+.nr-required-io-chart .nr-required-chart-key{margin-top:5px}
+@media(max-width:650px){
+ .nr-required-annual-table td{font-size:14px}
+ .nr-required-annual-table th{font-size:13px}
+ .nr-required-io-chart .nr-required-compact-chart{overflow:hidden}
+}
