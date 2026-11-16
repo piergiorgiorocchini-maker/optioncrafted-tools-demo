@@ -109,7 +109,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    <section className="nr-required-io-panel nr-required-io-chart" aria-label="Expected ten-year growth chart">
     <h3>EXPECTED GROWTH</h3>
     <div className="nr-required-compact-chart">
-     {required?<ResponsiveContainer width="100%" height={225}>
+     {required?<ResponsiveContainer width="100%" height={470}>
       <BarChart data={required.projection} margin={{top:12,right:3,left:0,bottom:0}} barGap={1} barCategoryGap="14%">
        <CartesianGrid stroke="#46566a" vertical={false} strokeDasharray="3 3"/>
        <XAxis dataKey="year" tick={{fontSize:11,fill:"#e6edf4"}} tickLine={false} axisLine={false}/>
@@ -134,9 +134,15 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
     <div className="nr-required-io-rows">
      <div><span>Sale price in year 10</span><strong>{money(required?.exitValue??null,currency)}</strong></div>
      <div><span>Dividend yield at sale</span><strong>{requiredSaleYield===null?"N/D":requiredSaleYield.toFixed(2)+"%"}</strong></div>
-     <div><span>FV of reinvested dividends</span><strong>{money(required&&financials.dividend!==null?required.futureDividends:null,currency)}</strong></div>
+     <div><span>Sum of reinvested dividends</span><strong>{money(required&&financials.dividend!==null?required.futureDividends:null,currency)}</strong></div>
      <div><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong></div>
      <div className="nr-required-io-key-result"><span>Buy Now Below</span><strong>{money(required?.entry??null,currency)}</strong></div>
+    </div>
+    <div className="nr-required-annual-table-wrap">
+     <table className="nr-required-annual-table" aria-label="Ten-year expected EPS and annual dividends">
+      <thead><tr><th>Year</th><th>{requiredMetricName}</th><th>Dividends / Share</th></tr></thead>
+      <tbody>{required?required.projection.map(year=><tr key={year.year}><td>{year.year}</td><td>{money(year.eps,currency)}</td><td>{financials.dividend===null?"N/D":money(year.dividend,currency)}</td></tr>):<tr><td colSpan={3}>Awaiting valid financial inputs</td></tr>}</tbody>
+     </table>
     </div>
    </section>
   </div>}
