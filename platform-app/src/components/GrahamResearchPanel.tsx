@@ -50,10 +50,10 @@ export function GrahamResearchPanel({bridgeGraham,grahamComponents,ticker,price,
    <strong>{money(bridgeGraham,currency)}</strong>
   </section>
   <section className="nr-graham-summary" aria-label="Graham Lynch model outputs">
-   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM / LYNCH · EARNINGS VALUATION</span><h3>Six research outputs</h3></div><span className="nr-status">SCENARIO · NOT A QUOTE</span></div>
+   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM CALCULATOR · CLASSIC / AAA / PEG</span><h3>Six research outputs</h3></div><span className="nr-status">SCENARIO · NOT A QUOTE</span></div>
    <div className="nr-graham-metrics">
     <div className="nr-metric"><span>Classic Graham value</span><strong>{money(result?.classic??null,currency)}</strong><small>EPS × (8.5 + 2g)</small></div>
-    <div className="nr-metric nr-graham-primary"><span>Primary output · Aaa-adjusted Graham</span><strong>{money(adjusted,currency)}</strong><small>Bond-adjusted earnings anchor</small></div>
+    <div className="nr-metric nr-graham-primary"><span>Calculator scenario · Aaa-adjusted Graham</span><strong>{money(adjusted,currency)}</strong><small>Bond-adjusted earnings anchor</small></div>
     <div className="nr-metric"><span>Upside / downside</span><strong className={upside!==null?(upside<0?"nr-graham-down":"nr-graham-up"):""}>{signedPct(upside)}</strong><small>Adjusted value vs reference price</small></div>
     <div className="nr-metric"><span>PEG</span><strong>{multiple(peg)}</strong><small>P/E ÷ expected growth %</small></div>
     <div className="nr-metric"><span>Dividend-adjusted PEG</span><strong>{multiple(pegDividend)}</strong><small>P/E ÷ (growth % + dividend yield %)</small></div>
