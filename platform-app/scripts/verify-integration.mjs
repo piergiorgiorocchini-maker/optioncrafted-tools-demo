@@ -62,6 +62,12 @@ for(const marker of [".premium-analysis-sheet>.nr-workspace","grid-template-colu
  if(!responsive.includes(marker))throw new Error("Missing mobile DCF containment rule: "+marker);
  checks++;
 }
+const grahamBridge=read("platform-app/src/core/valuationTriangulation.ts");
+const grahamPanel=read("platform-app/src/components/GrahamResearchPanel.tsx");
+const grahamWorkspace=read("platform-app/src/components/ValuationWorkspace.tsx");
+if(!grahamBridge.includes("grahamComponents.reduce")||!grahamBridge.includes("aaaYieldSnapshot.value"))throw new Error("Published Graham Composite must average classic and Aaa adjusted values");
+if(!grahamPanel.includes("bridgeGraham")||!grahamWorkspace.includes("bridgeGraham={publishedValuation.methods.find"))throw new Error("Graham worksheet and synthesis must share the published Graham Composite");
+checks+=2;
 const football=read("platform-app/src/components/ValuationFootballField.tsx");
 if(football.includes("averageCandidates")||football.includes("averageValuation"))throw new Error("Football Field must not invent an independent arithmetic Fair Value");
 if(!football.includes("triangulatedValue")||!football.includes("methods=candidates.filter"))throw new Error("Football Field must plot eligible methods and use the shared triangulated Fair Value");
