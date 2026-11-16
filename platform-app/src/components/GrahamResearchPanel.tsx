@@ -23,18 +23,26 @@ const multiple=(n:number|null)=>n!==null&&Number.isFinite(n)?n.toFixed(2)+"×":"
 const signedPct=(n:number|null)=>n!==null&&Number.isFinite(n)?(n>=0?"+":"")+(n*100).toFixed(2)+"%":"N/D";
 const cleanTicker=(ticker:string)=>ticker.trim().toUpperCase().replace(/[^A-Z0-9.\-]/g,"");
 
+export function GrahamInterpretationPanel({ticker,price,eps,aaaYield,currency,result}:{ticker:string;price:number|null;eps:number|null;aaaYield:number|null;currency:string;result:GrahamResult}){
+ const symbol=cleanTicker(ticker);
+ const adjusted=result?.adjusted??null;
+ const upside=adjusted!==null&&price!==null&&price>0?adjusted/price-1:null;
+ const reading=grahamLynchVerdict(upside,result?.pegDividend??null);
+ return <section className="nr-graham-interpretation nr-graham-interpretation--top">
+  <h3>MODEL INTERPRETATION</h3>
+  {result?<p>For <strong>{symbol}</strong>, the classic Graham estimate is <strong>{money(result.classic,currency)}</strong>. Applying the <strong>{pct(aaaYield)}</strong> Aaa corporate yield produces <strong>{money(adjusted,currency)}</strong>. Against the reference price of <strong>{money(price,currency)}</strong>, that implies <strong>{signedPct(upside)}</strong>. The PEG is <strong>{multiple(peg)}</strong> and the dividend-adjusted PEG is <strong>{multiple(pegDividend)}</strong>. The legacy screening rules classify this combination as <strong>{reading}</strong>. This is a deliberately conservative earnings heuristic and does not, by itself, establish intrinsic value.</p>:<p>Enter valid diluted EPS and expected growth to calculate the Graham value and PEG ratios. A positive Aaa yield is required for the interest-adjusted estimate.</p>}
+     <small>Financial inputs come from the selected OptionsCrafted snapshot or user entries. Growth is a user assumption. The bond observation is dated; source links may contain more recent data than the application snapshot.</small>
+ </section>;
+}
+
 export function GrahamResearchPanel({valuationMode,ticker,price,eps,dividendYield,growth,aaaYield,currency,result,aaaObservationDate,aaaSourceUrl,aaaIsManual}:Props){
  const symbol=cleanTicker(ticker);
  const stockAnalysis="https://stockanalysis.com/stocks/"+encodeURIComponent(symbol.toLowerCase())+"/statistics/";
  const yahoo="https://finance.yahoo.com/quote/"+encodeURIComponent(symbol)+"/key-statistics/";
  const sec="https://www.sec.gov/edgar/search/?entityName="+encodeURIComponent(symbol);
  const pe=price!==null&&eps!==null&&eps>0?price/eps:null;
- const adjusted=result?.adjusted??null;
- const upside=adjusted!==null&&price!==null&&price>0?adjusted/price-1:null;
  const peg=result?.peg??null;
  const pegDividend=result?.pegDividend??null;
- const reading=grahamLynchVerdict(upside,pegDividend);
- const bondDate=aaaIsManual?"USER OVERRIDE":"FRED SNAPSHOT · "+aaaObservationDate;
  const data=[
   {name:"Diluted EPS",preferred:"TTM diluted EPS; use normalized EPS if a cycle distorts earnings.",source:"Stock Analysis · "+symbol,url:stockAnalysis},
   {name:"Expected EPS growth",preferred:"Forward 3–5 year annual growth assumption; do not confuse it with historical growth.",source:"Yahoo Finance · "+symbol,url:yahoo},
@@ -57,11 +65,7 @@ export function GrahamResearchPanel({valuationMode,ticker,price,eps,dividendYiel
      </div>
      <div className="nr-graham-caveat"><strong>What this model misses</strong><span>Capital allocation, reinvestment returns, buybacks, debt, cash conversion, moat durability and the distribution of future growth. Use the output as one valuation anchor, never as the entire thesis.</span></div>
     </div>
-    <div className="nr-graham-interpretation">
-     <span className="nr-eyebrow">MODEL INTERPRETATION</span>
-     {result?<p>For <strong>{symbol}</strong>, the classic Graham estimate is <strong>{money(result.classic,currency)}</strong>. Applying the <strong>{pct(aaaYield)}</strong> Aaa corporate yield produces <strong>{money(adjusted,currency)}</strong>. Against the reference price of <strong>{money(price,currency)}</strong>, that implies <strong>{signedPct(upside)}</strong>. The PEG is <strong>{multiple(peg)}</strong> and the dividend-adjusted PEG is <strong>{multiple(pegDividend)}</strong>. The legacy screening rules classify this combination as <strong>{reading}</strong>. This is a deliberately conservative earnings heuristic and does not, by itself, establish intrinsic value.</p>:<p>Enter valid diluted EPS and expected growth to calculate the Graham value and PEG ratios. A positive Aaa yield is required for the interest-adjusted estimate.</p>}
-     <small>Financial inputs come from the selected OptionsCrafted snapshot or user entries. Growth is a user assumption. The bond observation is dated; source links may contain more recent data than the application snapshot.</small>
-    </div>
+
    </div>
    <div className="nr-control-card nr-graham-sources">
     <div className="nr-section-title"><div><span className="nr-eyebrow">INPUT GUIDE / DATA SOURCES</span><h3>Find data for {symbol}</h3></div><span className="nr-status"><Database size={13}/> RESEARCH LINKS</span></div>
