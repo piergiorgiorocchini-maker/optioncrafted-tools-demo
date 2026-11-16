@@ -68,11 +68,11 @@ const grahamWorkspace=read("platform-app/src/components/ValuationWorkspace.tsx")
 if(!grahamBridge.includes("grahamComponents.reduce")||!grahamBridge.includes("aaaYieldSnapshot.value"))throw new Error("Published Graham Composite must average classic and Aaa adjusted values");
 if(!grahamPanel.includes("bridgeGraham")||!grahamWorkspace.includes("bridgeGraham={publishedValuation.methods.find"))throw new Error("Graham worksheet and synthesis must share the published Graham Composite");
 if(!grahamBridge.includes("grahamManual?:")||!grahamBridge.includes("grahamManual?")&& !grahamBridge.includes("manualGraham?"))throw new Error("Graham Manual mode must be available in valuation bridge");
-if(!grahamWorkspace.includes('mode==="automatic"?grahamGrowthEvidence.rate')||!grahamWorkspace.includes("onGrahamManualChange"))throw new Error("Graham Automatic must use historical SEC growth and Manual must stay synchronized");
-const growthEvidence=read("platform-app/src/core/grahamGrowth.ts");
-if(!grahamBridge.includes("automaticGrahamGrowth(history)")||!growthEvidence.includes("epsCagr3y")||!growthEvidence.includes("epsCagr5y"))throw new Error("Graham Automatic growth requires source-backed SEC EPS CAGR");
-if(growthEvidence.includes("modelDefaults.growth"))throw new Error("Graham Automatic must not fall back to fixed growth");
-checks++;
+if(!grahamWorkspace.includes('mode==="automatic"?grahamGrowthPolicy.rate')||!grahamWorkspace.includes("onGrahamManualChange"))throw new Error("Graham Automatic must use sector policy and Manual must stay synchronized");
+const sectorPolicy=read("platform-app/src/core/grahamSectorGrowth.ts");
+if(!grahamBridge.includes("grahamSectorGrowth(asset.sector)")||!sectorPolicy.includes("technology?7:5"))throw new Error("Graham Automatic must use conservative 5% industrial / 7% tech assumptions");
+if(!grahamWorkspace.includes("grahamGrowthEvidence.rawPercent"))throw new Error("Historical EPS CAGR must remain visible as diagnostic only");
+checks+=2;
 if(grahamPanel.includes('className="nr-graham-published"'))throw new Error("Remove redundant second published Graham panel");
 checks+=3;
 const football=read("platform-app/src/components/ValuationFootballField.tsx");
