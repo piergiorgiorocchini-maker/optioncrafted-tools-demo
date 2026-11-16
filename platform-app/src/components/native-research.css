@@ -911,47 +911,75 @@
  padding:0 10px 12px;
 }
 
-/* Excel-accurate INPUTS grouping: joined white cells, navy outlines, no row
-   spacing within a group; only the three calculation groups have separation. */
+/* Excel-like Required Return INPUTS: one shared right-aligned input column per panel.
+   Three grouped blocks; continuous navy cell borders; separation only between blocks. */
 .nr-workspace--required .nr-required-input-groups{
+ display:grid;
+ grid-template-columns:minmax(0,1fr);
+ align-items:start;
  gap:22px;
- padding:15px 0 7px 9px;
+ width:100%;
+ min-width:0;
+ padding:15px 10px 7px 9px;
+ box-sizing:border-box;
 }
 .nr-workspace--required .nr-required-input-group{
- display:flex;
- flex-direction:column;
+ display:grid;
+ grid-template-columns:minmax(0,1fr);
  gap:0;
+ width:100%;
+ min-width:0;
+ margin:0;
 }
 .nr-workspace--required .nr-required-input-group label{
  display:grid;
- grid-template-columns:minmax(0,1fr) 91px;
+ grid-template-columns:minmax(0,1fr) 90px;
  align-items:stretch;
  gap:0;
- min-height:0;
+ width:100%;
+ min-width:0;
  margin:0;
+ padding:0;
+ min-height:30px;
 }
 .nr-workspace--required .nr-required-input-group label>span{
  display:flex;
  align-items:center;
  justify-content:flex-end;
- padding:0 9px 0 0;
  min-width:0;
- line-height:1.2;
+ margin:0;
+ padding:0 9px 0 0;
  text-align:right;
+ line-height:1.15;
+ font-size:15px;
+ color:#111;
+ font-weight:500;
 }
 .nr-workspace--required .nr-required-input-group input{
- box-sizing:border-box;
  display:block;
+ box-sizing:border-box;
  width:100%;
- min-height:0;
+ min-width:0;
+ max-width:none;
  height:30px;
+ min-height:30px;
  margin:0;
  padding:0 5px;
  border:2px solid #173d60;
  border-radius:0;
  background:#fff;
+ color:#111;
  text-align:center;
+ font-size:15px;
+ font-weight:500;
+ appearance:textfield;
+ -moz-appearance:textfield;
  box-shadow:none;
+}
+.nr-workspace--required .nr-required-input-group input::-webkit-inner-spin-button,
+.nr-workspace--required .nr-required-input-group input::-webkit-outer-spin-button{
+ -webkit-appearance:none;
+ margin:0;
 }
 .nr-workspace--required .nr-required-input-group label+label input{
  border-top:0;
@@ -961,18 +989,10 @@
  margin-top:10px;
  padding:0 8px 12px;
 }
-@media(max-width:1250px){
- .nr-workspace--required .nr-required-input-group label{
-  grid-template-columns:minmax(0,1fr) 84px;
- }
-}
 @media(max-width:1100px){
- .nr-workspace--required .nr-required-input-group label{
-  grid-template-columns:minmax(0,1fr) 102px;
- }
+ .nr-workspace--required .nr-required-input-group label{grid-template-columns:minmax(0,1fr) 92px}
 }
 @media(max-width:650px){
- .nr-workspace--required .nr-required-input-group label{
-  grid-template-columns:minmax(0,1fr) 98px;
- }
+ .nr-workspace--required .nr-required-input-groups{gap:19px}
+ .nr-workspace--required .nr-required-input-group label{grid-template-columns:minmax(0,1fr) 98px}
 }
