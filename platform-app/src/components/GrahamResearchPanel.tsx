@@ -4,6 +4,8 @@ import "./graham-research.css";
 
 type GrahamResult=ReturnType<typeof grahamModel>;
 type Props={
+ bridgeGraham:number|null;
+ grahamComponents:{id:"classic"|"aaa";label:string;value:number}[];
  ticker:string;
  price:number|null;
  eps:number|null;
@@ -22,7 +24,7 @@ const multiple=(n:number|null)=>n!==null&&Number.isFinite(n)?n.toFixed(2)+"×":"
 const signedPct=(n:number|null)=>n!==null&&Number.isFinite(n)?(n>=0?"+":"")+(n*100).toFixed(2)+"%":"N/D";
 const cleanTicker=(ticker:string)=>ticker.trim().toUpperCase().replace(/[^A-Z0-9.\-]/g,"");
 
-export function GrahamResearchPanel({ticker,price,eps,dividendYield,growth,aaaYield,currency,result,aaaObservationDate,aaaSourceUrl,aaaIsManual}:Props){
+export function GrahamResearchPanel({bridgeGraham,grahamComponents,ticker,price,eps,dividendYield,growth,aaaYield,currency,result,aaaObservationDate,aaaSourceUrl,aaaIsManual}:Props){
  const symbol=cleanTicker(ticker);
  const stockAnalysis="https://stockanalysis.com/stocks/"+encodeURIComponent(symbol.toLowerCase())+"/statistics/";
  const yahoo="https://finance.yahoo.com/quote/"+encodeURIComponent(symbol)+"/key-statistics/";
@@ -43,6 +45,10 @@ export function GrahamResearchPanel({ticker,price,eps,dividendYield,growth,aaaYi
   {name:"Financial filings",preferred:"Primary filings to validate EPS, share count, dividend payments and unusual items.",source:"SEC EDGAR · "+symbol,url:sec}
  ];
  return <div className="nr-graham-panel">
+  <section className="nr-graham-published" aria-label="Published Graham Composite for Valuation Synthesis">
+   <div><span className="nr-eyebrow">PUBLISHED GRAHAM · VALUATION SYNTHESIS / FOOTBALL FIELD</span><h3>Graham Composite</h3><p>{grahamComponents.length?grahamComponents.map(part=>part.label+": "+money(part.value,currency)).join(" · "):"Awaiting a valid earnings valuation."}</p><small>Equal-weight mean of eligible classic and Aaa-adjusted estimates using a shared normalized EPS and growth basis. The independent calculator below can use different user-adjusted assumptions.</small></div>
+   <strong>{money(bridgeGraham,currency)}</strong>
+  </section>
   <section className="nr-graham-summary" aria-label="Graham Lynch model outputs">
    <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM / LYNCH · EARNINGS VALUATION</span><h3>Six research outputs</h3></div><span className="nr-status">SCENARIO · NOT A QUOTE</span></div>
    <div className="nr-graham-metrics">
