@@ -187,3 +187,46 @@ RIFERIMENTI
 - Repository: https://github.com/piergiorgiorocchini-maker/optioncrafted-tools-demo
 - Preview: https://piergiorgiorocchini-maker.github.io/optioncrafted-tools-demo/platform-preview/
 - Commit significativi: 59419076 (etichette chart), dab4d2ce (collisioni), 624d7e2b (identità ticker), d40f7f5a (scala unica), 0ed9a9e4 (prima integrazione WACC), 4681e3a4 (Composite da modelli visibili), 2e93fcc7 (responsive e test).
+
+2026-11-16 — RESTYLING GRAHAM / REQUIRED RETURN E AUDIT DIVIDENDI
+
+FATTO / GRAHAM VALUATION
+- Confermata la logica della crescita di medio periodo del modello Graham: assumption conservativa di settore (5% industriali/non-tech, 7% tecnologia) nella modalità Automatic; valori modificabili in Manual. Il CAGR storico EPS resta diagnostico, non una previsione inserita automaticamente nel modello.
+- Graham Classic e Graham Aaa-adjusted sono presentati come due stime; il Graham Composite pubblicato è la media a pesi uguali delle stime eleggibili con base coerente. L’input Manual deve prevalere sullo scenario Automatic quando selezionato, senza una seconda media tra i due stati.
+- Conservato il riquadro superiore Graham Composite come risultato principale, in posizione stabile.
+- Ricostruiti i moduli INPUTS e OUTPUTS come tabelle pulite ispirate al foglio OptionWeaver: sfondo grigio chiaro, barra navy, campi input bianchi con bordo navy, output navy su testo bianco, caratteri ingranditi; conservato Automatic/Manual.
+- Tre moduli allineati in alto: INPUTS, OUTPUTS, MODEL INTERPRETATION. La descrizione interpretativa è stata spostata nella terza colonna e rimossa dalla vecchia posizione duplicata. Le sezioni inferiori di formule, spiegazione e fonti sono state mantenute per revisione successiva.
+- Principali revisioni del 16/11, nell’ordine operativo: e359d3ea (prima sostituzione dei moduli), a2fc78fd (stile gray/navy), 42067d0f (dimensioni), 868c2ae5 (larghezze e bordi), 76ad9c52 (allineamenti/sezioni), 165a13fe (Model Interpretation in terza colonna), 91503b22 (font +20% per INPUTS/OUTPUTS). Le verifiche visive dell’utente hanno guidato successive correzioni.
+
+FATTO / REQUIRED RETURN — MODELLO OPTIONWEAVER TWO-STAGE
+- Riconosciuto esplicitamente che la scheda Required Return replica l’Excel Two-Stage Valuation Model (crescita in due blocchi da cinque anni), NON il Detailed One-Stage Model che ricava la crescita EPS da volumi, prezzi, margini e riduzione delle azioni.
+- Confermata la struttura superiore: Buy Now Below come soglia d’ingresso in evidenza, NON intrinsic Fair Value; sotto, tre moduli nell’ordine INPUTS (sinistra, più stretto), OUTPUTS (centro), EXPECTED GROWTH (destra, grafico più largo).
+- INPUTS riordinati in tre gruppi, come nell’Excel: (1) Current Annual EPS o FCF/share e crescita anni 1–5 / 6–10; (2) Current Annual Dividend e crescita dividendi anni 1–5 / 6–10; (3) Target Return ed Exit P/E o P/FCF. Gruppi separati da spazi; all’interno, caselle bianche unite, riga sotto riga, con bordi navy. La colonna valori è stata infine resa comune e coerente dopo gli screenshot di disallineamento.
+- Il campo Current Annual Dividend è ora visibile nel gruppo dividendi, derivato per default dallo snapshot disponibile e modificabile con override locale relativo al ticker; presente Reset dividend. Gli override alimentano la proiezione e i risultati di Required Return, senza alterare automaticamente gli altri modelli.
+- OUTPUTS contiene i cinque risultati principali (sale price in year 10, dividend yield at sale, sum of reinvested dividends, total terminal value, Buy Now Below) e, subito sotto, la tabella per anni 1–10 con EPS/FCF per azione e dividendo ANNUALE per azione. I dividendi annuali non vanno confusi con i rispettivi valori futuri capitalizzati.
+- La formula del modello capitalizza ciascun dividendo fino all’anno 10: futureDividend_t = Dividend_t × (1 + r)^(10 − t). Il totale dei dividendi reinvestiti entra nel valore terminale complessivo e quindi nel Buy Now Below scontato al target return per 10 anni. Il valore futuro può superare il dividendo annuale; sono grandezze diverse. Nessuna modifica alle formule necessaria per aggiungere la tabella.
+- Il grafico EXPECTED GROWTH usa la stessa proiezione dei dieci anni, con barre EPS/FCF e dividendi e una nuova area più alta per accompagnare OUTPUTS. La cornice INPUTS ora termina appena dopo i suoi contenuti, con la dicitura Projection basis ancora presente. I dettagli inferiori (model configuration, riepilogo legacy, forecast transparency, grafico legacy e model interpretation) NON sono stati eliminati: la pulizia delle ridondanze è rinviata.
+- Correzione finale richiesta dall’utente: nei quattro output ordinari i numeri sono neri su sfondo grigio, senza badge pieni; SOLO Buy Now Below ha il box navy con testo bianco, come il riferimento Excel.
+- Principali commit Required Return: 280fda51 (nuovo layout iniziale), 9fe937f6 (ordine input/output/grafico), cc9f06da (tabella decennale), 30b80a57 (Current Annual Dividend), a6946f06 (gruppi distinti), 813cb342 (INPUTS più basso), 9928f5f4 (caselle unite), 8ff10a07 (riallineamento della colonna), 5e50f738 (evidenziare soltanto Buy Now Below).
+
+FATTO / BUG DI SCALA DEL DIVIDEND YIELD E CORREZIONI
+- Individuato un errore di unità in ValuationWorkspace.tsx: il campo assetsSnapshot.dividendYield è salvato come FRAZIONE DECIMALE, non come percentuale già moltiplicata per 100. Il codice ricavava per errore dividend/share come price × dividendYield / 100; corretto in price × dividendYield. L’errore riguardava tutti i ticker che utilizzavano quel percorso di derivazione, non solo KO.
+- Caso di controllo KO sullo snapshot del 2026-11-16: price $100.32, dividendYield 0.0216 = 2.16%. Dividendo annuo stimato corretto $2.166912/share contro circa $0.021669/share con la formula precedente. Il dividendo stimato non è una dichiarazione ufficiale della società.
+- Impatti sul percorso Valuation Lab: Required Return (proiezione dividendi, reinvestimento e buy-under), Dividend DDM e dividend yield usato come diagnostica PEG/Graham. Il valore Graham Classic/Aaa non dipende direttamente da questa conversione; i risultati cash-flow DCF non sono stati modificati da questo intervento.
+- Corrette anche le percentuali del dividend yield nelle visualizzazioni RealResearch/Company Intelligence e LiveUniverseExplorer (×100 al momento della formattazione). Verificato che la funzione quotePercent in FDVEResearch già applicava ×100 e che la triangolazione Graham usava l’unità percentuale corretta.
+- Inseriti test di regressione nel controllo di integrazione per la scala di KO, la rimozione della doppia divisione e la formattazione in altre viste. Commit significativi: a0e299fb (calcolo e gruppi), 11498b99 / e6dc37da (display), 8ed9cc9f (test).
+- DA VERIFICARE: preferire in futuro il dividendo annuo dichiarato e datato dal provider affidabile, usando price × yield solo come fallback chiaramente etichettato. Verificare la coerenza delle unità nella pipeline Sheets/export e in tutti i consumer, anche fuori da platform-app/src. Evitare che dividend null o N/D sia trattato silenziosamente come dividendo zero per finalità di investimento.
+
+VERIFICA AUTOMATICA / PUBBLICAZIONE
+- Ultima correzione visiva degli OUTPUTS: commit sorgente 5e50f738. GitHub Actions build app preview run 43938964485: Validate and build SUCCESS; Publish static preview within repository SUCCESS.
+- Ultimo deploy Pages riferito ai compilati conseguenti: run 43939075820, step Deploy to GitHub Pages SUCCESS, verificato nel workflow.
+- URL preview stabile: https://piergiorgiorocchini-maker.github.io/optioncrafted-tools-demo/platform-preview/
+- La riuscita di TypeScript/Vite, controlli d’integrazione e deploy NON certifica da sola un controllo pixel-perfect nel browser. Gli screenshot dell’utente hanno evidenziato e guidato i fix; resta DA VERIFICARE il rendering finale dei tre pannelli e la parità visiva con OptionWeaver su desktop/mobile, incluso il solo risultato Buy Now Below evidenziato.
+
+IN CORSO / PROSSIMI PUNTI
+1. Verifica visiva finale Required Return (allineamento di tutti gli input, stacco gruppi, altezze, dimensione font, proporzioni output/chart); non dichiarare fedeltà al 99% prima di vedere un rendering confermato.
+2. Confronto numerico su casi campione fra Excel Two-Stage e piattaforma a input identici, incluse modalità EPS/FCF, dividendi assenti, crescita zero/negativa e override; distinguere sempre dato di partenza, assunto di crescita e prezzo-obiettivo.
+3. Audit della fonte dei dividendi/normalizzazione yield, definizione ufficiale della priorità dato dichiarato → fallback; controllo dei dati mancanti e di eventuali percentuali con scala errata in pipeline.
+4. Solo dopo approvazione visiva, riordinare o rimuovere i pannelli inferiori ridondanti di Required Return e Graham, senza eliminare spiegazioni metodologiche e provenance utili.
+5. Conservare lo stesso principio nelle prossime schede: il risultato prioritario in alto, moduli compatti e leggibili, chiara distinzione fra input automatici e manuali, valori di output non enfatizzati indiscriminatamente.
+
