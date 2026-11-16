@@ -51,6 +51,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const [aaaManual,setAaaManual]=useState(false);
  const [rateMode,setRateMode]=useState<DiscountTab>(()=>{try{const saved=localStorage.getItem("optionscrafted.valuation.dcf-rate-tab.v1");return saved==="capm"||saved==="wacc"?saved:"manual"}catch{return"manual"}});
  const [requiredBasis,setRequiredBasis]=useState<"eps"|"fcf">("eps");
+ const [requiredDividendOverride,setRequiredDividendOverride]=useState<{ticker:string;value:string}|null>(null);
  const [riskFree,setRiskFree]=useState(4);
  const [erp,setErp]=useState(5.5);
  const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield/100:null;
@@ -75,7 +76,8 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const grahamYield=active==="graham"&&mode==="automatic"?aaaYieldSnapshot.value:a.aaaYield;
  const graham=grahamModel(financials.eps,grahamGrowth??Number.NaN,grahamYield,financials.price,currentDividendYield);
  const ddm=dividendModel(financials.dividend,a.dividendGrowth,a.dividendTerminal,a.dividendDiscount);
- const required=requiredReturnModel(financials[requiredBasis],financials.dividend,a);
+ const requiredDividend=requiredDividendOverride?.ticker===asset.ticker?num(requiredDividendOverride.value):financials.dividend;
+ const required=requiredReturnModel(financials[requiredBasis],requiredDividend,a);
  const currency=financials.currency;
  const hybridScenario=mode==="hybrid"&&Object.keys(overrides).length>0?base?.value??null:null;
  const grahamManual=active==="graham"&&mode==="manual"?{eps:financials.eps,growth:a.growth,aaaYield:a.aaaYield}:grahamManualOverride??undefined;
@@ -90,7 +92,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const selected=tabs.find(t=>t.id===active)!;
  const lastRequiredYear=required?.projection[required.projection.length-1]??null;
  const requiredTotal=required?required.exitValue+required.futureDividends:null;
- const requiredSaleYield=lastRequiredYear&&required&&required.exitValue>0&&financials.dividend!==null?lastRequiredYear.dividend/required.exitValue*100:null;
+ const requiredSaleYield=lastRequiredYear&&required&&required.exitValue>0&&requiredDividend!==null?lastRequiredYear.dividend/required.exitValue*100:null;
  const requiredMetricName=requiredBasis==="eps"?"EPS":"FCF / share";
  const requiredMultipleName=requiredBasis==="eps"?"P/E":"P/FCF";
  const requiredReturnText=Number.isFinite(a.requiredReturn)?a.requiredReturn.toFixed(2)+"%":"N/D";
@@ -125,23 +127,24 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    <section className="nr-required-io-panel nr-required-io-inputs" aria-label="Two-stage required return inputs">
     <h3>INPUTS</h3>
     <div className="nr-required-io-rows">
+     <label className="nr-required-input-dividend"><span>Current Annual Dividend</span><input type="number" min="0" step="0.01" aria-label="Current Annual Dividend per share" value={requiredDividendOverride?.ticker===asset.ticker?requiredDividendOverride.value:valueString(financials.dividend)} onChange={e=>setRequiredDividendOverride({ticker:asset.ticker,value:e.target.value})} placeholder="N/D"/></label>
      {assumptionsByTab["required-return"].map(f=><label key={f.key}><span>{requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?Number.NaN:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}))}}/></label>)}
     </div>
-    <small>Projection basis: {requiredBasis==="eps"?"EPS / P/E":"FCF / P/FCF"} · 10 years</small>
+    <small>Projection basis: {requiredBasis==="eps"?"EPS / P/E":"FCF / P/FCF"} · 10 years{requiredDividendOverride?.ticker===asset.ticker?" · Annual dividend override":""}{requiredDividendOverride?.ticker===asset.ticker&&<button className="nr-required-dividend-reset" type="button" onClick={()=>setRequiredDividendOverride(null)}>Reset dividend</button>}</small>
    </section>
    <section className="nr-required-io-panel nr-required-io-outputs" aria-label="Two-stage required return outputs">
     <h3>OUTPUTS</h3>
     <div className="nr-required-io-rows">
      <div><span>Sale price in year 10</span><strong>{money(required?.exitValue??null,currency)}</strong></div>
      <div><span>Dividend yield at sale</span><strong>{requiredSaleYield===null?"N/D":requiredSaleYield.toFixed(2)+"%"}</strong></div>
-     <div><span>Sum of reinvested dividends</span><strong>{money(required&&financials.dividend!==null?required.futureDividends:null,currency)}</strong></div>
+     <div><span>Sum of reinvested dividends</span><strong>{money(required&&requiredDividend!==null?required.futureDividends:null,currency)}</strong></div>
      <div><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong></div>
      <div className="nr-required-io-key-result"><span>Buy Now Below</span><strong>{money(required?.entry??null,currency)}</strong></div>
     </div>
     <div className="nr-required-annual-table-wrap">
      <table className="nr-required-annual-table" aria-label="Ten-year expected EPS and annual dividends">
       <thead><tr><th>Year</th><th>{requiredMetricName}</th><th>Dividends / Share</th></tr></thead>
-      <tbody>{required?required.projection.map(year=><tr key={year.year}><td>{year.year}</td><td>{money(year.eps,currency)}</td><td>{financials.dividend===null?"N/D":money(year.dividend,currency)}</td></tr>):<tr><td colSpan={3}>Awaiting valid financial inputs</td></tr>}</tbody>
+      <tbody>{required?required.projection.map(year=><tr key={year.year}><td>{year.year}</td><td>{money(year.eps,currency)}</td><td>{requiredDividend===null?"N/D":money(year.dividend,currency)}</td></tr>):<tr><td colSpan={3}>Awaiting valid financial inputs</td></tr>}</tbody>
      </table>
     </div>
    </section>
@@ -214,7 +217,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
     <div className="nr-required-metrics">
      <div className="nr-metric"><span>Sale price in year 10</span><strong>{money(required?.exitValue??null,currency)}</strong><small>Projected {requiredMetricName} × exit {requiredMultipleName}</small></div>
      <div className="nr-metric"><span>Dividend yield at sale</span><strong>{requiredSaleYield===null?"N/D":requiredSaleYield.toFixed(2)+"%"}</strong><small>Year-10 dividend / sale price</small></div>
-     <div className="nr-metric"><span>FV of reinvested dividends</span><strong>{money(required&&financials.dividend!==null?required.futureDividends:null,currency)}</strong><small>Compounded at target return</small></div>
+     <div className="nr-metric"><span>FV of reinvested dividends</span><strong>{money(required&&requiredDividend!==null?required.futureDividends:null,currency)}</strong><small>Compounded at target return</small></div>
      <div className="nr-metric"><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong><small>Sale + future-value dividends</small></div>
      <div className="nr-metric nr-required-primary"><span>Primary output · Buy now below</span><strong>{money(required?.entry??null,currency)}</strong><small>Target return {requiredReturnText} / year</small></div>
     </div>
@@ -225,7 +228,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    <div className="nr-control-card nr-required-schedule">
     <div className="nr-section-title"><div><span className="nr-eyebrow">FORECAST TRANSPARENCY</span><h3>10-Year {requiredMetricName} / Dividend Schedule</h3></div><span className="nr-status">YEAR BY YEAR</span></div>
     <p className="nr-source-note">Two growth stages project {requiredMetricName} and dividends independently. Each dividend is compounded to year 10 using the selected target return. These are model assumptions, not historical observations.</p>
-    {required?<div className="nr-schedule-scroll"><table className="nr-schedule-table"><thead><tr><th>Year</th><th>{requiredMetricName}</th><th>Dividend / share</th><th>Future value of dividend</th></tr></thead><tbody>{required.projection.map(row=><tr key={row.year}><td>{row.year}</td><td>{money(row.eps,currency)}</td><td>{financials.dividend===null?"N/D":money(row.dividend,currency)}</td><td>{financials.dividend===null?"N/D":money(row.futureDividend,currency)}</td></tr>)}</tbody></table></div>:<div className="nr-empty">Enter a positive {requiredMetricName} and valid model assumptions to see the complete ten-year schedule.</div>}
+    {required?<div className="nr-schedule-scroll"><table className="nr-schedule-table"><thead><tr><th>Year</th><th>{requiredMetricName}</th><th>Dividend / share</th><th>Future value of dividend</th></tr></thead><tbody>{required.projection.map(row=><tr key={row.year}><td>{row.year}</td><td>{money(row.eps,currency)}</td><td>{requiredDividend===null?"N/D":money(row.dividend,currency)}</td><td>{requiredDividend===null?"N/D":money(row.futureDividend,currency)}</td></tr>)}</tbody></table></div>:<div className="nr-empty">Enter a positive {requiredMetricName} and valid model assumptions to see the complete ten-year schedule.</div>}
    </div>
    <div className="nr-required-visual-column">
    <div className="nr-chart-card nr-required-chart">
@@ -244,7 +247,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    </div>
    <div className="nr-required-interpretation">
     <span className="nr-eyebrow">MODEL INTERPRETATION</span>
-    {required&&lastRequiredYear?<p>Under these assumptions, year-10 {requiredMetricName} reaches <strong>{money(lastRequiredYear.eps,currency)}</strong>. Applying an exit {requiredMultipleName} of <strong>{a.exitPe.toFixed(1)}×</strong> gives a projected sale price of <strong>{money(required.exitValue,currency)}</strong>. {financials.dividend!==null?<>The final-year dividend is <strong>{money(lastRequiredYear.dividend,currency)}</strong> (a <strong>{requiredSaleYield?.toFixed(2)??"N/D"}%</strong> yield on the modeled exit price). Assuming reinvestment at the target return, dividends contribute <strong>{money(required.futureDividends,currency)}</strong> at year 10. </>:"Dividend/share is unavailable; the model assumes zero dividends. Supply a dividend input to include them. "}The combined terminal value is <strong>{money(requiredTotal,currency)}</strong>. To target <strong>{requiredReturnText} annually</strong> over ten years, the maximum buy-now price is <strong>{money(required.entry,currency)}</strong>.</p>:<p>Once financial inputs are valid, this section will explain the exit multiple, dividend contribution, total terminal value and discounted buy-now threshold.</p>}
+    {required&&lastRequiredYear?<p>Under these assumptions, year-10 {requiredMetricName} reaches <strong>{money(lastRequiredYear.eps,currency)}</strong>. Applying an exit {requiredMultipleName} of <strong>{a.exitPe.toFixed(1)}×</strong> gives a projected sale price of <strong>{money(required.exitValue,currency)}</strong>. {requiredDividend!==null?<>The final-year dividend is <strong>{money(lastRequiredYear.dividend,currency)}</strong> (a <strong>{requiredSaleYield?.toFixed(2)??"N/D"}%</strong> yield on the modeled exit price). Assuming reinvestment at the target return, dividends contribute <strong>{money(required.futureDividends,currency)}</strong> at year 10. </>:"Dividend/share is unavailable; the model assumes zero dividends. Supply a dividend input to include them. "}The combined terminal value is <strong>{money(requiredTotal,currency)}</strong>. To target <strong>{requiredReturnText} annually</strong> over ten years, the maximum buy-now price is <strong>{money(required.entry,currency)}</strong>.</p>:<p>Once financial inputs are valid, this section will explain the exit multiple, dividend contribution, total terminal value and discounted buy-now threshold.</p>}
     <small>This is a required-return purchase threshold, not an intrinsic fair value estimate. Growth, terminal multiple and reinvestment returns are assumptions.</small>
    </div>
    </div>
