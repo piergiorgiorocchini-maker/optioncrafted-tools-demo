@@ -163,3 +163,74 @@
  .nr-graham-io-rows label{grid-template-columns:minmax(0,1fr) 112px;font-size:16px}
  .nr-graham-io-result{font-size:16px}
 }
+
+/* Graham readability and alignment pass: do not alter the lead composite card. */
+.nr-workspace--graham .nr-graham-io{align-items:stretch}
+.nr-workspace--graham .nr-graham-io-panel{height:100%}
+.nr-workspace--graham .nr-graham-io-rows label>span{
+ text-align:left;
+ justify-self:stretch;
+ font-size:17px;
+ line-height:1.35;
+}
+.nr-workspace--graham .nr-graham-io-rows input{
+ border:2.5px solid #173d60;
+ min-height:37px;
+ font-size:17px;
+}
+.nr-workspace--graham .nr-graham-io-output{
+ display:flex;
+ flex-direction:column;
+ justify-content:flex-start;
+}
+.nr-workspace--graham .nr-graham-io-output .nr-graham-io-rows{
+ align-content:start;
+ gap:21px;
+ padding:22px 17px;
+}
+.nr-workspace--graham .nr-graham-io-result>span{
+ text-align:left;
+ font-size:17px;
+ line-height:1.35;
+}
+.nr-workspace--graham .nr-graham-io-result>strong{font-size:19px}
+
+/* Align the two research modules directly beneath the matching input/output columns. */
+.nr-workspace--graham .nr-graham-body{
+ width:calc(66.666667% + 6px);
+ max-width:100%;
+ margin:0;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:18px;
+ align-items:start;
+}
+.nr-workspace--graham .nr-graham-left{min-width:0}
+.nr-workspace--graham .nr-graham-panel .nr-section-title h3{font-size:17px}
+.nr-workspace--graham .nr-graham-method>p,
+.nr-workspace--graham .nr-graham-sources>p{font-size:14px;line-height:1.6}
+.nr-workspace--graham .nr-graham-formulas span{font-size:13px}
+.nr-workspace--graham .nr-graham-formulas code{font-size:13px}
+.nr-workspace--graham .nr-graham-formulas small,
+.nr-workspace--graham .nr-graham-formulas b{font-size:12px}
+.nr-workspace--graham .nr-graham-caveat strong,
+.nr-workspace--graham .nr-graham-caveat span{font-size:12px}
+.nr-workspace--graham .nr-graham-interpretation p{font-size:14px}
+.nr-workspace--graham .nr-graham-interpretation>small{font-size:12px}
+.nr-workspace--graham .nr-graham-source-links a{font-size:12px}
+.nr-workspace--graham .nr-graham-table th{font-size:11px}
+.nr-workspace--graham .nr-graham-table td{font-size:12px}
+.nr-workspace--graham .nr-graham-panel .nr-graham-sources-foot{font-size:12px}
+@media(max-width:850px){
+ .nr-workspace--graham .nr-graham-body{
+  width:100%;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+ }
+ .nr-workspace--graham .nr-graham-io-rows label>span,
+ .nr-workspace--graham .nr-graham-io-result>span{font-size:16px}
+}
+@media(max-width:600px){
+ .nr-workspace--graham .nr-graham-body{grid-template-columns:minmax(0,1fr);gap:12px}
+ .nr-workspace--graham .nr-graham-io-rows label>span,
+ .nr-workspace--graham .nr-graham-io-result>span{font-size:16px}
+}
