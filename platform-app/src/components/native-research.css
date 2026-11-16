@@ -910,3 +910,69 @@
  margin-top:9px;
  padding:0 10px 12px;
 }
+
+/* Excel-accurate INPUTS grouping: joined white cells, navy outlines, no row
+   spacing within a group; only the three calculation groups have separation. */
+.nr-workspace--required .nr-required-input-groups{
+ gap:22px;
+ padding:15px 0 7px 9px;
+}
+.nr-workspace--required .nr-required-input-group{
+ display:flex;
+ flex-direction:column;
+ gap:0;
+}
+.nr-workspace--required .nr-required-input-group label{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) 91px;
+ align-items:stretch;
+ gap:0;
+ min-height:0;
+ margin:0;
+}
+.nr-workspace--required .nr-required-input-group label>span{
+ display:flex;
+ align-items:center;
+ justify-content:flex-end;
+ padding:0 9px 0 0;
+ min-width:0;
+ line-height:1.2;
+ text-align:right;
+}
+.nr-workspace--required .nr-required-input-group input{
+ box-sizing:border-box;
+ display:block;
+ width:100%;
+ min-height:0;
+ height:30px;
+ margin:0;
+ padding:0 5px;
+ border:2px solid #173d60;
+ border-radius:0;
+ background:#fff;
+ text-align:center;
+ box-shadow:none;
+}
+.nr-workspace--required .nr-required-input-group label+label input{
+ border-top:0;
+}
+.nr-workspace--required .nr-required-input-group .nr-required-input-dividend{margin:0}
+.nr-workspace--required .nr-required-io-inputs>small{
+ margin-top:10px;
+ padding:0 8px 12px;
+}
+@media(max-width:1250px){
+ .nr-workspace--required .nr-required-input-group label{
+  grid-template-columns:minmax(0,1fr) 84px;
+ }
+}
+@media(max-width:1100px){
+ .nr-workspace--required .nr-required-input-group label{
+  grid-template-columns:minmax(0,1fr) 102px;
+ }
+}
+@media(max-width:650px){
+ .nr-workspace--required .nr-required-input-group label{
+  grid-template-columns:minmax(0,1fr) 98px;
+ }
+}
