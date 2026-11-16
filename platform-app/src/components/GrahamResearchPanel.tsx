@@ -44,19 +44,6 @@ export function GrahamResearchPanel({valuationMode,ticker,price,eps,dividendYiel
   {name:"Financial filings",preferred:"Primary filings to validate EPS, share count, dividend payments and unusual items.",source:"SEC EDGAR · "+symbol,url:sec}
  ];
  return <div className="nr-graham-panel">
-  <section className="nr-graham-summary" aria-label="Graham Lynch model outputs">
-   <div className="nr-section-title"><div><span className="nr-eyebrow">GRAHAM CALCULATOR · CLASSIC / AAA / PEG</span><h3>Graham Valuation</h3></div><span className="nr-status">{valuationMode==="automatic"?"SECTOR GROWTH ASSUMPTION":"MANUAL SCENARIO"}</span></div>
-   <div className="nr-graham-metrics">
-    
-    <div className="nr-metric"><span>Classic Graham value</span><strong>{money(result?.classic??null,currency)}</strong><small>EPS × (8.5 + 2g)</small></div>
-    <div className="nr-metric"><span>Aaa-adjusted Graham</span><strong>{money(adjusted,currency)}</strong><small>Bond-adjusted earnings anchor</small></div>
-    <div className="nr-metric"><span>Upside / downside</span><strong className={upside!==null?(upside<0?"nr-graham-down":"nr-graham-up"):""}>{signedPct(upside)}</strong><small>Adjusted value vs reference price</small></div>
-    <div className="nr-metric"><span>PEG</span><strong>{multiple(peg)}</strong><small>P/E ÷ medium-term growth assumption %</small></div>
-    <div className="nr-metric"><span>Dividend-adjusted PEG</span><strong>{multiple(pegDividend)}</strong><small>P/E ÷ (growth % + dividend yield %)</small></div>
-    
-   </div>
-   <div className="nr-graham-provenance"><span>Reference price: <b>{money(price,currency)}</b></span><span>Derived P/E: <b>{multiple(pe)}</b></span><span>Bond input: <b>{pct(aaaYield)}</b></span><span>{bondDate}</span><a href={aaaSourceUrl} target="_blank" rel="noopener noreferrer">Verify on FRED <ExternalLink size={12}/></a></div>
-  </section>
   <section className="nr-graham-body">
    <div className="nr-graham-left">
     <div className="nr-control-card nr-graham-method">
