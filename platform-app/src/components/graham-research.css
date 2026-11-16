@@ -234,3 +234,54 @@
  .nr-workspace--graham .nr-graham-io-rows label>span,
  .nr-workspace--graham .nr-graham-io-result>span{font-size:16px}
 }
+
+/* Three aligned Graham modules: Inputs, Outputs, Model Interpretation. */
+.nr-workspace--graham .nr-graham-io{
+ width:100%;
+ max-width:100%;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:18px;
+ align-items:stretch;
+}
+.nr-workspace--graham .nr-graham-interpretation--top{
+ display:flex;
+ flex-direction:column;
+ min-width:0;
+ height:100%;
+ margin:0;
+ padding:0 16px 16px;
+ border:2px solid #173d60;
+ border-radius:0;
+ background:#f1f1f1;
+ overflow-wrap:anywhere;
+}
+.nr-workspace--graham .nr-graham-interpretation--top h3{
+ margin:0 -16px 12px;
+ padding:4px 10px;
+ font-size:18px;
+ font-weight:800;
+ letter-spacing:0;
+ line-height:1.2;
+ text-align:center;
+ color:white;
+ background:#173d60;
+}
+.nr-workspace--graham .nr-graham-interpretation--top p{
+ margin:0 0 12px;
+ font-size:15px;
+ line-height:1.55;
+ color:#18334a;
+}
+.nr-workspace--graham .nr-graham-interpretation--top>small{
+ font-size:12px;
+ line-height:1.5;
+ color:#506779;
+}
+@media(max-width:1050px){
+ .nr-workspace--graham .nr-graham-io{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .nr-workspace--graham .nr-graham-interpretation--top{grid-column:1/-1}
+}
+@media(max-width:600px){
+ .nr-workspace--graham .nr-graham-io{grid-template-columns:minmax(0,1fr)}
+ .nr-workspace--graham .nr-graham-interpretation--top{grid-column:auto}
+}
