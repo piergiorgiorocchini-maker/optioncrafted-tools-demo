@@ -899,3 +899,14 @@
  .nr-workspace--required .nr-required-input-groups{gap:18px}
  .nr-workspace--required .nr-required-input-group label{grid-template-columns:minmax(0,1fr) 104px}
 }
+
+/* Required Return: INPUTS follows its content, like the OptionWeaver Excel panel.
+   OUTPUTS and EXPECTED GROWTH keep their full equal-height grid tracks. */
+.nr-workspace--required .nr-required-io-inputs{
+ align-self:start;
+ height:auto;
+}
+.nr-workspace--required .nr-required-io-inputs>small{
+ margin-top:9px;
+ padding:0 10px 12px;
+}
