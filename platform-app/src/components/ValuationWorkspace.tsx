@@ -9,7 +9,7 @@ import {verifiedAnnualHistory,verifiedFcf} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 import {SecurityLogo} from "./SecurityLogo";
 import {DividendResearchPanel} from "./DividendResearchPanel";
-import {GrahamResearchPanel} from "./GrahamResearchPanel";
+import {GrahamInterpretationPanel,GrahamResearchPanel} from "./GrahamResearchPanel";
 import {WaccResearchPanel} from "./WaccResearchPanel";
 import aaaYieldSnapshot from "../data/aaaYieldSnapshot.json";
 import {automaticGrahamGrowth} from "../core/grahamGrowth";
@@ -142,6 +142,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
      <div className="nr-graham-io-result"><span>Dividend-Adjusted P/E/G Ratio</span><strong>{graham?.pegDividend===null||graham?.pegDividend===undefined?"N/D":graham.pegDividend.toFixed(2)+"×"}</strong></div>
     </div>
    </section>
+   <GrahamInterpretationPanel ticker={asset.ticker} price={financials.price} aaaYield={grahamYield} currency={currency} result={graham}/>
   </div>}
   {showOtherValuationControls&&<>
   <section className="nr-control-card">
