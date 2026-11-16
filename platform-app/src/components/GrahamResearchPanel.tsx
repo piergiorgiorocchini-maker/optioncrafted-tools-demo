@@ -45,6 +45,7 @@ export function GrahamResearchPanel({valuationMode,ticker,price,eps,dividendYiel
  const pe=price!==null&&eps!==null&&eps>0?price/eps:null;
  const peg=result?.peg??null;
  const pegDividend=result?.pegDividend??null;
+ const adjusted=result?.adjusted??null;
  const data=[
   {name:"Diluted EPS",preferred:"TTM diluted EPS; use normalized EPS if a cycle distorts earnings.",source:"Stock Analysis · "+symbol,url:stockAnalysis},
   {name:"Expected EPS growth",preferred:"Forward 3–5 year annual growth assumption; do not confuse it with historical growth.",source:"Yahoo Finance · "+symbol,url:yahoo},
