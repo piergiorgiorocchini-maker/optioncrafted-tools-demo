@@ -110,6 +110,39 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    {[["Intrinsic Value",base?.value??null,"DCF · CASH FLOW"],["Graham Anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend Value",ddm?.value??null,"DDM · INTRINSIC"],["Entry Price",required?.entry??null,"REQUIRED RETURN · NOT FAIR VALUE"]].map(([label,v,tag])=><div className={"nr-metric"+(label==="Intrinsic Value"?" nr-dcf-primary-value":"")} key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
   </div>}
   {active==="dcf"&&sensitivityPanel}
+  {active==="graham"&&<div className="nr-graham-io">
+   <section className="nr-graham-io-panel" aria-label="Graham inputs">
+    <h3>INPUTS</h3>
+    <div className="nr-graham-io-mode" role="group" aria-label="Graham data mode">
+     <button type="button" className={mode==="automatic"?"active":""} aria-pressed={mode==="automatic"} onClick={()=>{setMode("automatic");onGrahamManualChange?.(asset.ticker,null)}}>Automatic</button>
+     <button type="button" className={mode==="manual"?"active":""} aria-pressed={mode==="manual"} onClick={()=>{
+      if(mode!=="manual"){
+       setManual(prev=>({...prev,eps:valueString(source.eps),price:valueString(source.price),dividend:valueString(source.dividend),beta:valueString(source.beta),fcf:valueString(source.fcf)}));
+       setA(prev=>({...prev,growth:grahamGrowthPolicy.rate,aaaYield:aaaYieldSnapshot.value}));
+       onGrahamManualChange?.(asset.ticker,{eps:source.eps,growth:grahamGrowthPolicy.rate,aaaYield:aaaYieldSnapshot.value});
+      }
+      setMode("manual");
+     }}>Manual</button>
+    </div>
+    <div className="nr-graham-io-rows">
+     <label><span>Current Annual EPS</span><input type="number" step="any" value={mode==="manual"?manual.eps:valueString(source.eps)} disabled={mode!=="manual"} onChange={e=>setField("eps",e.target.value)} placeholder="N/D"/></label>
+     <label><span>Current Dividend Yield</span><div className="nr-graham-input-unit"><input type="number" step="any" min="0" value={currentDividendYield===null?"":Number(currentDividendYield.toFixed(5))} disabled={mode!=="manual"} onChange={e=>{const rate=e.target.value===""?null:Number(e.target.value);setManual(prev=>({...prev,dividend:rate===null||!Number.isFinite(rate)||financials.price===null?"":String(financials.price*rate/100)}))}} placeholder="N/D"/><span>%</span></div></label>
+     <label><span>Current Stock Price</span><input type="number" step="any" value={mode==="manual"?manual.price:valueString(source.price)} disabled={mode!=="manual"} onChange={e=>setField("price",e.target.value)} placeholder="N/D"/></label>
+     <label><span>Expected Long-Term Growth</span><div className="nr-graham-input-unit"><input type="number" step="0.5" value={mode==="automatic"?grahamGrowthPolicy.rate:a.growth??""} disabled={mode!=="manual"} onChange={e=>setA(prev=>({...prev,growth:e.target.value===""?null:Number(e.target.value)}))}/><span>%</span></div></label>
+     <label><span>Corporate Aaa Bond Yield</span><div className="nr-graham-input-unit"><input type="number" step="0.1" value={mode==="automatic"?aaaYieldSnapshot.value:a.aaaYield??""} disabled={mode!=="manual"} onChange={e=>{setA(prev=>({...prev,aaaYield:e.target.value===""?null:Number(e.target.value)}));setAaaManual(true)}}/><span>%</span></div></label>
+    </div>
+    <small>{mode==="automatic"?"Sector assumption "+grahamGrowthPolicy.rate+"% · FRED Aaa "+aaaYieldSnapshot.observationDate:"Manual inputs · Graham Composite updates automatically"}</small>
+   </section>
+   <section className="nr-graham-io-panel nr-graham-io-output" aria-label="Graham outputs">
+    <h3>OUTPUTS</h3>
+    <div className="nr-graham-io-rows">
+     <div className="nr-graham-io-result"><span>Graham Fair Value (Original Formula)</span><strong>{money(graham?.classic??null,currency)}</strong></div>
+     <div className="nr-graham-io-result"><span>Graham Fair Value (Interest-Adjusted)</span><strong>{money(graham?.adjusted??null,currency)}</strong></div>
+     <div className="nr-graham-io-result"><span>Dividend-Adjusted P/E/G Ratio</span><strong>{graham?.pegDividend===null||graham?.pegDividend===undefined?"N/D":graham.pegDividend.toFixed(2)+"×"}</strong></div>
+    </div>
+   </section>
+  </div>}
+  {active!=="graham"&&<>
   <section className="nr-control-card">
    <div className="nr-section-title"><div><span className="nr-eyebrow">VALUATION INPUTS</span><h3>Valuation inputs</h3></div></div>
    <div className="nr-mode" role="group" aria-label="Valuation data mode">
@@ -129,6 +162,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
     </>}
     {noValue&&<div className="nr-empty" role="status">Model awaiting valid financial inputs and assumptions. No value is published until the required fields are available.</div>}
    </section>
+  </>}
   {active==="required-return"?<section className="nr-required-summary" aria-label="Required return valuation outputs">
     <div className="nr-section-title"><div><span className="nr-eyebrow">TEN-YEAR RETURN MODEL / OUTPUTS</span><h3>Projected exit & entry price</h3></div><span className="nr-status">SCENARIO · NOT A QUOTE</span></div>
     <div className="nr-required-metrics">
