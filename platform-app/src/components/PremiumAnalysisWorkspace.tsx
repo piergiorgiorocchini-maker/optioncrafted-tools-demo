@@ -13,7 +13,7 @@ const tabs:{id:PremiumTab;label:string}[]=[
  {id:"comparables",label:"Comparables"},
  {id:"precedent-transactions",label:"Precedent Transactions"}
 ];
-export function PremiumAnalysisWorkspace({asset,tab,valuation,onUpdate}:{asset:RealAsset|null;tab:string;valuation:ValuationBridge|null;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void}){
+export function PremiumAnalysisWorkspace({asset,tab,valuation,onUpdate,grahamManualOverride,onGrahamManualChange}:{asset:RealAsset|null;tab:string;valuation:ValuationBridge|null;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void;grahamManualOverride?:{eps:number|null;growth:number;aaaYield:number|null}|null;onGrahamManualChange?:(ticker:string,inputs:{eps:number|null;growth:number;aaaYield:number|null}|null)=>void}){
  const active=tabs.find(item=>item.id===tab)?.id??"synthesis";
  return <div className="premium-analysis-workbook">
   <nav className="premium-analysis-tabs" aria-label="Premium Analysis worksheets">
@@ -21,7 +21,7 @@ export function PremiumAnalysisWorkspace({asset,tab,valuation,onUpdate}:{asset:R
   </nav>
   <div className="premium-analysis-sheet">
    {active==="synthesis"?<ValuationSynthesis valuation={valuation} companyName={asset?.name}/>:
-    active==="dcf"?(asset?<ValuationWorkspace key={asset.ticker} asset={asset} tab="dcf" premiumDcf onUpdate={onUpdate}/>:<section className="premium-analysis-placeholder"><h2>DCF Engine</h2><p>No financial snapshot available for the selected security.</p></section>):
+    active==="dcf"?(asset?<ValuationWorkspace key={asset.ticker} asset={asset} tab="dcf" premiumDcf onUpdate={onUpdate} grahamManualOverride={grahamManualOverride} onGrahamManualChange={onGrahamManualChange}/>:<section className="premium-analysis-placeholder"><h2>DCF Engine</h2><p>No financial snapshot available for the selected security.</p></section>):
     <section className="premium-analysis-placeholder" aria-label={tabs.find(item=>item.id===active)?.label}>
      <span className="nr-eyebrow">PREMIUM ANALYSIS / WORKSHEET</span>
      <h2>{tabs.find(item=>item.id===active)?.label}</h2>
