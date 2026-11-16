@@ -71,3 +71,26 @@
 .nr-graham-top-summary p{font-size:11px;line-height:1.5;color:#617c94;margin:0}
 @media(max-width:850px){.nr-graham-top-summary{max-width:calc((100% - 9px)/2)}}
 @media(max-width:600px){.nr-graham-top-summary{max-width:100%;padding:15px 16px}.nr-graham-top-summary strong{font-size:28px}}
+
+/* Compact Graham input/output ledger: navy rather than green. */
+.nr-graham-io{display:grid;grid-template-columns:minmax(0,0.82fr) minmax(0,1.18fr);gap:18px;align-items:start;min-width:0}
+.nr-graham-io-panel{min-width:0;border:1.5px solid #153e65;background:#fff;overflow:hidden;border-radius:3px}
+.nr-graham-io-panel h3{margin:0;padding:8px 14px;text-align:center;background:#153e65;color:#fff;font-size:14px;line-height:1.3;letter-spacing:.5px;font-weight:800}
+.nr-graham-io-mode{display:flex;gap:0;border-bottom:1px solid #d9e4ee}
+.nr-graham-io-mode button{flex:1;padding:9px 12px;background:#fff;border:0;color:#486680;font-size:12px;font-weight:750;cursor:pointer}
+.nr-graham-io-mode button+button{border-left:1px solid #d9e4ee}
+.nr-graham-io-mode button.active{background:#eaf2f9;color:#153e65}
+.nr-graham-io-rows{display:grid;gap:0;padding:8px 12px}
+.nr-graham-io-rows label,.nr-graham-io-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(85px,29%);gap:12px;align-items:center;min-height:41px;font-size:13px}
+.nr-graham-io-rows label+label,.nr-graham-io-result+.nr-graham-io-result{border-top:1px solid #e6edf3}
+.nr-graham-io-rows label>span,.nr-graham-io-result>span{color:#163953;line-height:1.35;font-weight:550}
+.nr-graham-io-rows input{width:100%;min-width:0;border:1px solid #9db8ce;background:#f7fafd;color:#133958;border-radius:3px;padding:7px 6px;text-align:right;font-size:13px;font-variant-numeric:tabular-nums}
+.nr-graham-io-rows input:disabled{background:#f0f4f8;color:#34566f;opacity:1}
+.nr-graham-input-unit{position:relative;min-width:0}
+.nr-graham-input-unit input{padding-right:22px}
+.nr-graham-input-unit>span{position:absolute;right:7px;top:50%;transform:translateY(-50%);color:#4e6982;font-size:12px;pointer-events:none}
+.nr-graham-io-panel>small{display:block;border-top:1px solid #e6edf3;padding:9px 12px;color:#617c94;font-size:11px;line-height:1.5}
+.nr-graham-io-output .nr-graham-io-rows{padding:14px 12px}
+.nr-graham-io-result{grid-template-columns:minmax(0,1fr) auto;min-height:51px}
+.nr-graham-io-result>strong{background:#eaf2f9;border:1px solid #b9ccdd;color:#153e65;padding:7px 10px;min-width:104px;text-align:right;font-size:15px;font-variant-numeric:tabular-nums;border-radius:3px}
+@media(max-width:760px){.nr-graham-io{grid-template-columns:minmax(0,1fr);gap:12px}.nr-graham-io-rows label,.nr-graham-io-result{grid-template-columns:minmax(0,1fr) minmax(95px,34%)}}
