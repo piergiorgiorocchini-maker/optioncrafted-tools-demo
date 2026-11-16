@@ -97,6 +97,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
  const chooseRateTab=(next:DiscountTab)=>{setRateMode(next);try{localStorage.setItem("optionscrafted.valuation.dcf-rate-tab.v1",next)}catch{}};
  const isWaccTab=active==="dcf"&&rateMode==="wacc";
+ const showOtherValuationControls=active!=="graham";
  const sensitivityPanel=active==="dcf"?<section className="nr-panel nr-sensitivity"><div className="nr-section-title"><div><span className="nr-eyebrow">SENSITIVITY ANALYSIS</span></div></div>{base?<div className="nr-sensitivity-wrap"><table><thead><tr><th>FCF growth ↓ · Return →</th>{[-2,-1,0,1,2].map(d=><th key={d}>{(rate!+d).toFixed(1)}%</th>)}</tr></thead><tbody>{[-2,-1,0,1,2].map(gap=>{const growth=a.growth+gap;return <tr key={gap}><th>{growth.toFixed(1)}%</th>{[-2,-1,0,1,2].map(d=>{const r=rate!+d,result=dcfModel(financials.fcf,growth,r,a.terminal,a.years),isBase=gap===0&&d===0;return <td key={d} className={isBase?"is-base":""}>{result&&r>a.terminal?money(result.value,currency):"—"}</td>})}</tr>})}</tbody></table></div>:<p className="nr-chart-empty">Enter a positive FCF/share and valid discount assumptions to see the sensitivity table.</p>}</section>:null;
  return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"?" nr-workspace--graham":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">{premiumDcf?"PREMIUM ANALYSIS / CASH FLOW":"OPTIONSCRAFTED / VALUATION INTELLIGENCE"}</span><h2>{premiumDcf?"DCF Engine":<>Valuation Lab <span>2.0</span></>}</h2><p>{premiumDcf?"Manual DCF, CAPM and WACC methods with explicit assumptions and sensitivity analysis.":"Standalone valuation calculators. Results depend on the data and assumptions entered for each method."}</p></div><div className="nr-hero-meta"><SecurityLogo ticker={asset.ticker}/><strong>{asset.ticker}</strong></div></header>
@@ -128,7 +129,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
      <label><span>Current Annual EPS</span><input type="number" step="any" value={mode==="manual"?manual.eps:valueString(source.eps)} disabled={mode!=="manual"} onChange={e=>setField("eps",e.target.value)} placeholder="N/D"/></label>
      <label><span>Current Dividend Yield</span><div className="nr-graham-input-unit"><input type="number" step="any" min="0" value={currentDividendYield===null?"":Number(currentDividendYield.toFixed(5))} disabled={mode!=="manual"} onChange={e=>{const rate=e.target.value===""?null:Number(e.target.value);setManual(prev=>({...prev,dividend:rate===null||!Number.isFinite(rate)||financials.price===null?"":String(financials.price*rate/100)}))}} placeholder="N/D"/><span>%</span></div></label>
      <label><span>Current Stock Price</span><input type="number" step="any" value={mode==="manual"?manual.price:valueString(source.price)} disabled={mode!=="manual"} onChange={e=>setField("price",e.target.value)} placeholder="N/D"/></label>
-     <label><span>Expected Long-Term Growth</span><div className="nr-graham-input-unit"><input type="number" step="0.5" value={mode==="automatic"?grahamGrowthPolicy.rate:a.growth??""} disabled={mode!=="manual"} onChange={e=>setA(prev=>({...prev,growth:e.target.value===""?null:Number(e.target.value)}))}/><span>%</span></div></label>
+     <label><span>Expected Long-Term Growth</span><div className="nr-graham-input-unit"><input type="number" step="0.5" value={mode==="automatic"?grahamGrowthPolicy.rate:a.growth??""} disabled={mode!=="manual"} onChange={e=>setA(prev=>({...prev,growth:e.target.value===""?Number.NaN:Number(e.target.value)}))}/><span>%</span></div></label>
      <label><span>Corporate Aaa Bond Yield</span><div className="nr-graham-input-unit"><input type="number" step="0.1" value={mode==="automatic"?aaaYieldSnapshot.value:a.aaaYield??""} disabled={mode!=="manual"} onChange={e=>{setA(prev=>({...prev,aaaYield:e.target.value===""?null:Number(e.target.value)}));setAaaManual(true)}}/><span>%</span></div></label>
     </div>
     <small>{mode==="automatic"?"Sector assumption "+grahamGrowthPolicy.rate+"% · FRED Aaa "+aaaYieldSnapshot.observationDate:"Manual inputs · Graham Composite updates automatically"}</small>
@@ -142,7 +143,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
     </div>
    </section>
   </div>}
-  {active!=="graham"&&<>
+  {showOtherValuationControls&&<>
   <section className="nr-control-card">
    <div className="nr-section-title"><div><span className="nr-eyebrow">VALUATION INPUTS</span><h3>Valuation inputs</h3></div></div>
    <div className="nr-mode" role="group" aria-label="Valuation data mode">
