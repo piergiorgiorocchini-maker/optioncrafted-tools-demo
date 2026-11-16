@@ -102,6 +102,44 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"?" nr-workspace--graham":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">{premiumDcf?"PREMIUM ANALYSIS / CASH FLOW":"OPTIONSCRAFTED / VALUATION INTELLIGENCE"}</span><h2>{premiumDcf?"DCF Engine":<>Valuation Lab <span>2.0</span></>}</h2><p>{premiumDcf?"Manual DCF, CAPM and WACC methods with explicit assumptions and sensitivity analysis.":"Standalone valuation calculators. Results depend on the data and assumptions entered for each method."}</p></div><div className="nr-hero-meta"><SecurityLogo ticker={asset.ticker}/><strong>{asset.ticker}</strong></div></header>
   {!premiumDcf&&<nav className="nr-tabbar" aria-label="Standalone valuation methods">{tabs.filter(t=>t.id!=="dcf"&&t.id!=="peers").map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>}
+  {active==="required-return"&&<section className="nr-required-lead" aria-label="Required return primary result">
+    <div><span className="nr-eyebrow">REQUIRED RETURN · ENTRY DISCIPLINE</span><h3>Buy Now Below</h3><strong>{money(required?.entry??null,currency)}</strong><small>Target return {requiredReturnText} per year · entry threshold, not Fair Value</small></div>
+   </section>}
+  {active==="required-return"&&<div className="nr-required-io" aria-label="Required return two-stage model">
+   <section className="nr-required-io-panel nr-required-io-chart" aria-label="Expected ten-year growth chart">
+    <h3>EXPECTED GROWTH</h3>
+    <div className="nr-required-compact-chart">
+     {required?<ResponsiveContainer width="100%" height={225}>
+      <BarChart data={required.projection} margin={{top:12,right:3,left:0,bottom:0}} barGap={1} barCategoryGap="14%">
+       <CartesianGrid stroke="#46566a" vertical={false} strokeDasharray="3 3"/>
+       <XAxis dataKey="year" tick={{fontSize:11,fill:"#e6edf4"}} tickLine={false} axisLine={false}/>
+       <YAxis width={43} tick={{fontSize:10,fill:"#e6edf4"}} tickLine={false} axisLine={false} tickFormatter={v=>Number(v).toFixed(0)}/>
+       <Tooltip contentStyle={{background:"#fff",border:"1px solid #cad9e9",borderRadius:5}} formatter={v=>money(Number(v),currency)} labelFormatter={v=>"Year "+v}/>
+       <Bar dataKey="eps" name={requiredMetricName} fill="#80ad63" maxBarSize={17}/>
+       <Bar dataKey="dividend" name="Dividends / share" fill="#d7b35e" maxBarSize={17}/>
+      </BarChart>
+     </ResponsiveContainer>:<p className="nr-required-io-empty">Enter valid inputs to see the forecast.</p>}
+     <div className="nr-required-chart-key"><span><i className="nr-required-key-eps"/>{requiredMetricName}</span><span><i className="nr-required-key-div"/>Dividends</span></div>
+    </div>
+   </section>
+   <section className="nr-required-io-panel nr-required-io-inputs" aria-label="Two-stage required return inputs">
+    <h3>INPUTS</h3>
+    <div className="nr-required-io-rows">
+     {assumptionsByTab["required-return"].map(f=><label key={f.key}><span>{requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?Number.NaN:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}))}}/></label>)}
+    </div>
+    <small>Projection basis: {requiredBasis==="eps"?"EPS / P/E":"FCF / P/FCF"} · 10 years</small>
+   </section>
+   <section className="nr-required-io-panel nr-required-io-outputs" aria-label="Two-stage required return outputs">
+    <h3>OUTPUTS</h3>
+    <div className="nr-required-io-rows">
+     <div><span>Sale price in year 10</span><strong>{money(required?.exitValue??null,currency)}</strong></div>
+     <div><span>Dividend yield at sale</span><strong>{requiredSaleYield===null?"N/D":requiredSaleYield.toFixed(2)+"%"}</strong></div>
+     <div><span>FV of reinvested dividends</span><strong>{money(required&&financials.dividend!==null?required.futureDividends:null,currency)}</strong></div>
+     <div><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong></div>
+     <div className="nr-required-io-key-result"><span>Buy Now Below</span><strong>{money(required?.entry??null,currency)}</strong></div>
+    </div>
+   </section>
+  </div>}
   {active==="graham"&&<section className="nr-graham-top-summary" aria-label="Graham valuation result">
    <div><span className="nr-eyebrow">GRAHAM VALUATION · {mode==="manual"?"MANUAL":"AUTOMATIC"}</span><h3>Graham Composite</h3><strong>{money(publishedValuation.methods.find(method=>method.family==="earnings"&&method.status==="AVAILABLE")?.value??null,currency)}</strong><p>Classic {money(publishedValuation.grahamComponents.find(part=>part.id==="classic")?.value??null,currency)} + Aaa-adjusted {money(publishedValuation.grahamComponents.find(part=>part.id==="aaa")?.value??null,currency)} · equal-weight mean</p></div>
   </section>}
