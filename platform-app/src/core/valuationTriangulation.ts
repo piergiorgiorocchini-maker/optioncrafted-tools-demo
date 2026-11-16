@@ -4,7 +4,7 @@ import {googleSheetsSecAnnualHistory,googleSheetsSecFinancialsMetadata,type SecA
 import {verifiedFinancialProfile} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 import {buildVisibleDcfComposite} from "./visibleDcfComposite";
-import {automaticGrahamGrowth} from "./grahamGrowth";
+import {grahamSectorGrowth} from "./grahamSectorGrowth";
 
 type AssetForValuation = {
   ticker:string;
@@ -204,24 +204,14 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     // replace the automatic calculator's current EPS and growth assumptions.
     const manualGraham=options.grahamManual;
     const grahamEps=manualGraham?manualGraham.eps:currentEps;
-    const growthEvidence=automaticGrahamGrowth(history);
-    const grahamGrowthRate=manualGraham?manualGraham.growth:growthEvidence.rate;
+    const growthPolicy=grahamSectorGrowth(asset.sector);
+    const grahamGrowthRate=manualGraham?manualGraham.growth:growthPolicy.rate;
     const grahamAaaYield=manualGraham?manualGraham.aaaYield:aaaYieldSnapshot.value;
     if(!validPositive(grahamEps)){
       const noEps=manualGraham?true:history.every(year=>year.dilutedEps===null)&&!validPositive(asset.eps)&&!validPositive(manualTtm?.dilutedEps);
       earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",noEps?(manualGraham?"Enter a positive EPS to publish a Manual Graham estimate.":"No positive diluted EPS is available in the current snapshot or SEC history."):"Latest EPS is not positive; a Graham earnings value is not published.");
     }else if(grahamGrowthRate===null||!Number.isFinite(grahamGrowthRate)||grahamGrowthRate<=-4.25){
-      earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",manualGraham?"Manual Graham growth must be above -4.25%.":growthEvidence.note);
-    }else if(!manualGraham){
-      // Historical EPS CAGR is an observed backward-looking statistic, not a
-      // defensible forward-growth forecast. Calculate it in the Graham Lab as
-      // a diagnostic scenario, but do not insert it as an independent family
-      // into Fair Value or the investment-decision Football Field.
-      earningsMethod=methodPending(
-        "earnings","Graham · historical growth scenario","earnings",
-        "Only historical EPS CAGR is available ("+grahamGrowthRate.toFixed(2)+"%). It is not a validated forward earnings-growth forecast. The Graham historical scenario remains visible in Valuation Lab but is excluded from triangulated Fair Value."
-      );
-      qualityNotes.push("Graham Automatic is scenario-only: historical EPS growth "+grahamGrowthRate.toFixed(2)+"% does not establish sustainable future growth; no Graham contribution to Fair Value until a validated forward basis exists.");
+      earningsMethod=methodPending("earnings","Normalized earnings · Graham","earnings",manualGraham?"Manual Graham growth must be above -4.25%.":"Sector growth assumption is invalid.");
     }else{
       const graham=grahamModel(grahamEps,grahamGrowthRate,grahamAaaYield,asset.price,asset.dividendYield===null?null:asset.dividendYield*100);
       if(validPositive(graham?.classic))grahamComponents.push({id:"classic",label:"Classic Graham",value:graham!.classic});
@@ -229,11 +219,11 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
       const value=grahamComponents.length?grahamComponents.reduce((sum,part)=>sum+part.value,0)/grahamComponents.length:null;
       const grahamReason=manualGraham
         ?"Manual Graham valuation: entered EPS, growth and Aaa yield are the published inputs."
-        :"Automatic Graham valuation: uses the current EPS, historical SEC EPS growth proxy and dated FRED Aaa yield. Historical growth is not a forward consensus forecast.";
+        :"Automatic Graham valuation: uses current EPS and the "+growthPolicy.rate+"% conservative "+growthPolicy.label+" medium-term growth assumption, with a dated FRED Aaa yield. Historical EPS CAGR is a diagnostic, not a forecast.";
       const epsBaseAssumption=`EPS: ${grahamEps?.toFixed(2)??"N/D"} ${currency}/share; ${manualGraham?"user input":currentEpsSource}`;
-      const epsGrowthAssumption=manualGraham?`Graham growth: ${grahamGrowthRate}% (manual input)`:`Graham growth: ${grahamGrowthRate}% from ${growthEvidence.source}; ${growthEvidence.note}`;
-      earningsMethod=value===null?methodPending("earnings","Normalized earnings · Graham","earnings","EPS and growth did not produce a valid positive estimate."):{id:"earnings",label:manualGraham?"Graham Composite · Manual":"Graham Composite · Automatic",family:"earnings",status:"AVAILABLE",value,low:value,high:value,quality:profile.quality*(manualGraham?0.4:growthEvidence.source==="EPS CAGR 3Y + 5Y"?0.7:0.55),reason:grahamReason,assumptions:[epsBaseAssumption,epsGrowthAssumption,`Graham composite: ${grahamComponents.map(part=>part.label+" "+part.value.toFixed(2)).join("; ")}. Equal-weight mean of available variants; Aaa yield ${grahamAaaYield??"N/D"}% (${manualGraham?"manual":"FRED snapshot "+aaaYieldSnapshot.observationDate}). Both variants use the same EPS and growth.`],fiscalPeriod:manualTtm?.periodEnd??latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.epsDiluted?.sourceUrl??null,estimateBasis:manualGraham?"USER_SCENARIO":"ASSUMPTION"};
-      qualityNotes.push(manualGraham?"Graham Manual mode is active; the entered EPS, growth and bond yield determine the published Graham valuation.":growthEvidence.note);
+      const epsGrowthAssumption=manualGraham?`Graham growth: ${grahamGrowthRate}% (manual input)`:`Graham growth: ${grahamGrowthRate}% (${growthPolicy.label} medium-term scenario assumption; not historical CAGR or forward consensus)`;
+      earningsMethod=value===null?methodPending("earnings","Normalized earnings · Graham","earnings","EPS and growth did not produce a valid positive estimate."):{id:"earnings",label:manualGraham?"Graham Composite · Manual":"Graham Composite · Automatic",family:"earnings",status:"AVAILABLE",value,low:value,high:value,quality:profile.quality*(manualGraham?0.4:0.48),reason:grahamReason,assumptions:[epsBaseAssumption,epsGrowthAssumption,`Graham composite: ${grahamComponents.map(part=>part.label+" "+part.value.toFixed(2)).join("; ")}. Equal-weight mean of available variants; Aaa yield ${grahamAaaYield??"N/D"}% (${manualGraham?"manual":"FRED snapshot "+aaaYieldSnapshot.observationDate}). Both variants use the same EPS and growth.`],fiscalPeriod:manualTtm?.periodEnd??latest?.fiscalYear??null,filedDate:latest?.filedDate??null,sourceUrl:latest?.sources.epsDiluted?.sourceUrl??null,estimateBasis:manualGraham?"USER_SCENARIO":"ASSUMPTION"};
+      qualityNotes.push(manualGraham?"Graham Manual mode is active; the entered EPS, growth and bond yield determine the published Graham valuation.":`Graham Automatic uses a conservative ${growthPolicy.rate}% medium-term ${growthPolicy.label} growth assumption; the historical EPS CAGR does not substitute for a forward forecast.`);
     }
   }
 
