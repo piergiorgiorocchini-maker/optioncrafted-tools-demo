@@ -54,7 +54,8 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const [requiredDividendOverride,setRequiredDividendOverride]=useState<{ticker:string;value:string}|null>(null);
  const [riskFree,setRiskFree]=useState(4);
  const [erp,setErp]=useState(5.5);
- const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield/100:null;
+ // assetsSnapshot dividendYield is a decimal fraction (KO 0.0216 = 2.16%), not a percent.
+ const snapshotDividend=asset.price!==null&&asset.dividendYield!==null?asset.price*asset.dividendYield:null;
  const fcfEvidence=verifiedFcf(asset.ticker,asset.currency);
  const manualTtm=getManualTtmFinancials(asset.ticker,asset.currency);
  const secAnnual=verifiedAnnualHistory(asset.ticker,asset.currency).at(-1);
@@ -126,9 +127,18 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    </section>
    <section className="nr-required-io-panel nr-required-io-inputs" aria-label="Two-stage required return inputs">
     <h3>INPUTS</h3>
-    <div className="nr-required-io-rows">
-     <label className="nr-required-input-dividend"><span>Current Annual Dividend</span><input type="number" min="0" step="0.01" aria-label="Current Annual Dividend per share" value={requiredDividendOverride?.ticker===asset.ticker?requiredDividendOverride.value:valueString(financials.dividend)} onChange={e=>setRequiredDividendOverride({ticker:asset.ticker,value:e.target.value})} placeholder="N/D"/></label>
-     {assumptionsByTab["required-return"].map(f=><label key={f.key}><span>{requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth").replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>{const n=e.target.value===""?Number.NaN:Number(e.target.value);setA(prev=>({...prev,[f.key]:n}))}}/></label>)}
+    <div className="nr-required-io-rows nr-required-input-groups">
+     <div className="nr-required-input-group">
+      <label><span>Current Annual {requiredBasis==="eps"?"EPS":"FCF / Share"}</span><input type="number" value={valueString(financials[requiredBasis])} readOnly aria-label={requiredBasis==="eps"?"Current Annual EPS":"Current Annual FCF per share"} title="From selected financial snapshot; edit in valuation inputs below"/></label>
+      {assumptionsByTab["required-return"].filter(f=>f.key==="growth"||f.key==="growth2").map(f=><label key={f.key}><span>{requiredBasis==="fcf"?f.label.replace("EPS growth","FCF growth"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>setA(prev=>({...prev,[f.key]:e.target.value===""?Number.NaN:Number(e.target.value)}))}/></label>)}
+     </div>
+     <div className="nr-required-input-group">
+      <label className="nr-required-input-dividend"><span>Current Annual Dividend</span><input type="number" min="0" step="0.01" aria-label="Current Annual Dividend per share" value={requiredDividendOverride?.ticker===asset.ticker?requiredDividendOverride.value:valueString(financials.dividend)} onChange={e=>setRequiredDividendOverride({ticker:asset.ticker,value:e.target.value})} placeholder="N/D"/></label>
+      {assumptionsByTab["required-return"].filter(f=>f.key==="divGrowth"||f.key==="divGrowth2").map(f=><label key={f.key}><span>{f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>setA(prev=>({...prev,[f.key]:e.target.value===""?Number.NaN:Number(e.target.value)}))}/></label>)}
+     </div>
+     <div className="nr-required-input-group">
+      {assumptionsByTab["required-return"].filter(f=>f.key==="requiredReturn"||f.key==="exitPe").map(f=><label key={f.key}><span>{requiredBasis==="fcf"?f.label.replace("Exit P/E","Exit P/FCF"):f.label}</span><input type="number" step={f.step} value={a[f.key]??""} onChange={e=>setA(prev=>({...prev,[f.key]:e.target.value===""?Number.NaN:Number(e.target.value)}))}/></label>)}
+     </div>
     </div>
     <small>Projection basis: {requiredBasis==="eps"?"EPS / P/E":"FCF / P/FCF"} · 10 years{requiredDividendOverride?.ticker===asset.ticker?" · Annual dividend override":""}{requiredDividendOverride?.ticker===asset.ticker&&<button className="nr-required-dividend-reset" type="button" onClick={()=>setRequiredDividendOverride(null)}>Reset dividend</button>}</small>
    </section>
