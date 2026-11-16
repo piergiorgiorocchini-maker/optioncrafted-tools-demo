@@ -23,9 +23,11 @@ const multiple=(n:number|null)=>n!==null&&Number.isFinite(n)?n.toFixed(2)+"×":"
 const signedPct=(n:number|null)=>n!==null&&Number.isFinite(n)?(n>=0?"+":"")+(n*100).toFixed(2)+"%":"N/D";
 const cleanTicker=(ticker:string)=>ticker.trim().toUpperCase().replace(/[^A-Z0-9.\-]/g,"");
 
-export function GrahamInterpretationPanel({ticker,price,eps,aaaYield,currency,result}:{ticker:string;price:number|null;eps:number|null;aaaYield:number|null;currency:string;result:GrahamResult}){
+export function GrahamInterpretationPanel({ticker,price,aaaYield,currency,result}:{ticker:string;price:number|null;aaaYield:number|null;currency:string;result:GrahamResult}){
  const symbol=cleanTicker(ticker);
  const adjusted=result?.adjusted??null;
+ const peg=result?.peg??null;
+ const pegDividend=result?.pegDividend??null;
  const upside=adjusted!==null&&price!==null&&price>0?adjusted/price-1:null;
  const reading=grahamLynchVerdict(upside,result?.pegDividend??null);
  return <section className="nr-graham-interpretation nr-graham-interpretation--top">
