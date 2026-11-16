@@ -39,12 +39,12 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Perpetual growth Y11+ %",step:0.25},{key:"dividendDiscount",label:"Target rate of return %",step:0.5}],
  peers:[]
 };
-export function ValuationWorkspace({asset,tab="required-return",onUpdate,premiumDcf=false}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void;premiumDcf?:boolean}){
+export function ValuationWorkspace({asset,tab="required-return",onUpdate,premiumDcf=false,grahamManualOverride=null,onGrahamManualChange}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void;premiumDcf?:boolean;grahamManualOverride?:{eps:number|null;growth:number;aaaYield:number|null}|null;onGrahamManualChange?:(ticker:string,inputs:{eps:number|null;growth:number;aaaYield:number|null}|null)=>void}){
  const active=(premiumDcf?"dcf":(tabs.find(x=>x.id===tab&&x.id!=="dcf"&&x.id!=="peers")?.id||"required-return")) as ValuationMethod;
- const [mode,setMode]=useState<ValuationMode>("automatic");
- const [manual,setManual]=useState<Record<Field,string>>({price:"",eps:"",fcf:"",dividend:"",beta:""});
+ const [mode,setMode]=useState<ValuationMode>(grahamManualOverride&&tab==="graham"?"manual":"automatic");
+ const [manual,setManual]=useState<Record<Field,string>>({price:"",eps:grahamManualOverride?.eps===null||grahamManualOverride?.eps===undefined?"":String(grahamManualOverride.eps),fcf:"",dividend:"",beta:""});
  const [overrides,setOverrides]=useState<Partial<Record<Field,string>>>({});
- const [a,setA]=useState<ModelInputs>({...modelDefaults,aaaYield:aaaYieldSnapshot.value});
+ const [a,setA]=useState<ModelInputs>({...modelDefaults,aaaYield:grahamManualOverride?.aaaYield??aaaYieldSnapshot.value,growth:grahamManualOverride?.growth??modelDefaults.growth});
  const [aaaManual,setAaaManual]=useState(false);
  const [rateMode,setRateMode]=useState<DiscountTab>(()=>{try{const saved=localStorage.getItem("optionscrafted.valuation.dcf-rate-tab.v1");return saved==="capm"||saved==="wacc"?saved:"manual"}catch{return"manual"}});
  const [requiredBasis,setRequiredBasis]=useState<"eps"|"fcf">("eps");
@@ -71,9 +71,13 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const required=requiredReturnModel(financials[requiredBasis],financials.dividend,a);
  const currency=financials.currency;
  const hybridScenario=mode==="hybrid"&&Object.keys(overrides).length>0?base?.value??null:null;
- const grahamManual=active==="graham"&&mode==="manual"?{eps:financials.eps,growth:a.growth,aaaYield:a.aaaYield}:undefined;
+ const grahamManual=active==="graham"&&mode==="manual"?{eps:financials.eps,growth:a.growth,aaaYield:a.aaaYield}:grahamManualOverride??undefined;
  const publishedValuation=useMemo(()=>{const result=buildValuationTriangulation(asset,{dcfScenarioValue:hybridScenario,dcfScenarioLabel:"Valuation Lab DCF scenario with user overrides",marginOfSafety:a.mos,grahamManual});return hybridScenario!==null?{...result,source:"Google Sheets SEC_Raw + Valuation Lab DCF scenario + family-balanced model"}:result;},[asset,hybridScenario,a.mos,grahamManual?.eps,grahamManual?.growth,grahamManual?.aaaYield]);
  useEffect(()=>{onUpdate?.(asset.ticker,publishedValuation);},[asset.ticker,publishedValuation,onUpdate]);
+ useEffect(()=>{
+  if(active!=="graham"||mode!=="manual"||!onGrahamManualChange)return;
+  onGrahamManualChange(asset.ticker,{eps:financials.eps,growth:a.growth,aaaYield:a.aaaYield});
+ },[active,mode,asset.ticker,financials.eps,a.growth,a.aaaYield,onGrahamManualChange]);
  const setField=(key:Field,value:string)=>{if(mode==="manual")setManual(prev=>({...prev,[key]:value}));else setOverrides(prev=>({...prev,[key]:value}))};
  const chartRows=useMemo(()=>base?.projection.map(x=>({year:"Y"+x.year,cashflow:x.cashflow,presentValue:x.pv}))||[],[base]);
  const selected=tabs.find(t=>t.id===active)!;
@@ -99,7 +103,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
   <section className="nr-control-card">
    <div className="nr-section-title"><div><span className="nr-eyebrow">VALUATION INPUTS</span><h3>Valuation inputs</h3></div></div>
    <div className="nr-mode" role="group" aria-label="Valuation data mode">
-    {(active==="graham"?["automatic","manual"]:["automatic","hybrid","manual"] as ValuationMode[]).map(m=><button type="button" key={m} className={mode===m?"active":""} onClick={()=>{if(m==="manual"&&active==="graham"){setManual(prev=>({...prev,eps:valueString(source.eps),price:valueString(source.price),dividend:valueString(source.dividend),beta:valueString(source.beta),fcf:valueString(source.fcf)}))}setMode(m)}}>{m==="automatic"?"Automatic snapshot":m==="hybrid"?"Hybrid · overrides":"Manual · free-hand"}</button>)}
+    {(active==="graham"?["automatic","manual"]:["automatic","hybrid","manual"] as ValuationMode[]).map(m=><button type="button" key={m} className={mode===m?"active":""} onClick={()=>{if(active==="graham"){if(m==="manual"){setManual(prev=>({...prev,eps:valueString(source.eps),price:valueString(source.price),dividend:valueString(source.dividend),beta:valueString(source.beta),fcf:valueString(source.fcf)}));onGrahamManualChange?.(asset.ticker,{eps:source.eps,growth:a.growth,aaaYield:a.aaaYield})}else if(m==="automatic"){onGrahamManualChange?.(asset.ticker,null)}}setMode(m)}}>{m==="automatic"?"Automatic snapshot":m==="hybrid"?"Hybrid · overrides":"Manual · free-hand"}</button>)}
    </div>
    <div className="nr-field-grid">{inputFields.map(f=><label key={f.key}><span>{f.label}</span><input type="number" step="any" value={mode==="manual"?manual[f.key]:mode==="hybrid"?(overrides[f.key]??valueString(source[f.key])):valueString(source[f.key])} disabled={mode==="automatic"} onChange={e=>setField(f.key,e.target.value)} placeholder="N/D"/></label>)}</div>
    {mode==="hybrid"&&<button className="nr-text-button" type="button" onClick={()=>setOverrides({})}><RefreshCcw size={13}/> Clear overrides</button>}
