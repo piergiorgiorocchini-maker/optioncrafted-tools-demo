@@ -870,10 +870,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-17": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "CAT:income",
+            "at": "2026-11-17T17:37:35.460Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "CAT:balance",
+            "at": "2026-11-17T17:37:35.767Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 14
+    "ALPHA_VANTAGE": 15
   }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T18:30:15.322Z",
+  "generatedAt": "2026-11-17T17:37:35.460Z",
   "budgets": {
     "FMP": 0,
     "ALPHA_VANTAGE": 3
@@ -15,12 +15,12 @@
       "requestsToday": 2,
       "attempts": [
         {
-          "ticker": "PG",
+          "ticker": "CAT",
           "statement": "income",
           "status": "AVAILABLE"
         },
         {
-          "ticker": "PG",
+          "ticker": "CAT",
           "statement": "balance",
           "status": "PREMIUM_REQUIRED"
         }
