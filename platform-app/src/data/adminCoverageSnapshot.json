@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T13:11:57.985Z",
+  "generatedAt": "2026-11-17T13:50:39.122Z",
   "definition": "Present means the ticker has at least one non-empty sheet value or one SEC-derived annual value with the same metric meaning. FY counts show the number of annual SEC observations; annual values never fill or relabel TTM fields. Presence does not mean the full history is complete.",
   "source": "Google Sheets · Assets, JSON_assets, SEC_Raw, Fundamentals · SEC annual calculations",
   "universeCount": 229,
@@ -7360,7 +7360,7 @@
           "normalizedEps5y": 2,
           "epsCagr3y": 3,
           "epsCagr5y": 1,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 6,
           "freeCashFlowPerShare": 6,
           "fcfCagr5y": 1,
@@ -7426,7 +7426,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -7440,8 +7439,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -7465,7 +7463,6 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "fcfCagr5y",
@@ -15579,7 +15576,7 @@
           "normalizedEps5y": 2,
           "epsCagr3y": 3,
           "epsCagr5y": 1,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 6,
           "freeCashFlowPerShare": 6,
           "fcfCagr5y": 1,
@@ -15645,7 +15642,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -15659,8 +15655,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -15688,7 +15683,6 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "fcfCagr5y",
@@ -31042,7 +31036,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -31348,7 +31341,7 @@
           "normalizedEps5y": 2,
           "epsCagr3y": 3,
           "epsCagr5y": 1,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 6,
           "freeCashFlowPerShare": 6,
           "fcfCagr5y": 1,
@@ -31414,7 +31407,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -31456,7 +31448,6 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "fcfCagr5y",
@@ -31726,7 +31717,7 @@
           "normalizedEps5y": 0,
           "epsCagr3y": 0,
           "epsCagr5y": 0,
-          "historicalPe": 1,
+          "historicalPe": 0,
           "freeCashFlow": 4,
           "freeCashFlowPerShare": 4,
           "fcfCagr5y": 0,
@@ -31792,7 +31783,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -31829,7 +31819,6 @@
         ],
         "calculated": [
           "revenueCagr3y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "currentRatio",
@@ -31898,7 +31887,7 @@
           "normalizedEps5y": 3,
           "epsCagr3y": 4,
           "epsCagr5y": 2,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 7,
           "freeCashFlowPerShare": 7,
           "fcfCagr5y": 2,
@@ -31964,7 +31953,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -31978,8 +31966,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -32007,7 +31994,6 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "fcfCagr5y",
@@ -32087,7 +32073,7 @@
           "normalizedEps5y": 0,
           "epsCagr3y": 0,
           "epsCagr5y": 0,
-          "historicalPe": 4,
+          "historicalPe": 0,
           "freeCashFlow": 6,
           "freeCashFlowPerShare": 6,
           "fcfCagr5y": 0,
@@ -32153,7 +32139,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -32167,8 +32152,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -32192,7 +32176,6 @@
         "calculated": [
           "revenueCagr3y",
           "revenueCagr5y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "currentRatio",
@@ -32603,7 +32586,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "avgVolume",
@@ -32613,8 +32595,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [],
         "calculated": [],
@@ -33004,7 +32985,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -33015,8 +32995,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [],
         "calculated": [],
@@ -33159,7 +33138,7 @@
           "normalizedEps5y": 0,
           "epsCagr3y": 0,
           "epsCagr5y": 0,
-          "historicalPe": 1,
+          "historicalPe": 0,
           "freeCashFlow": 4,
           "freeCashFlowPerShare": 4,
           "fcfCagr5y": 0,
@@ -33225,7 +33204,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -33238,8 +33216,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -33264,7 +33241,6 @@
         ],
         "calculated": [
           "revenueCagr3y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "currentRatio",
@@ -33337,7 +33313,7 @@
           "normalizedEps5y": 2,
           "epsCagr3y": 3,
           "epsCagr5y": 1,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 6,
           "freeCashFlowPerShare": 6,
           "fcfCagr5y": 1,
@@ -33448,7 +33424,6 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "fcfCagr5y",
@@ -39121,7 +39096,7 @@
           "normalizedEps5y": 2,
           "epsCagr3y": 3,
           "epsCagr5y": 1,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 0,
           "freeCashFlowPerShare": 0,
           "fcfCagr5y": 0,
@@ -39187,7 +39162,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -39201,8 +39175,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -39225,7 +39198,6 @@
           "normalizedEps5y",
           "epsCagr3y",
           "epsCagr5y",
-          "historicalPe",
           "grossMargin",
           "netMargin",
           "roe"
@@ -41291,7 +41263,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "avgVolume",
@@ -41301,8 +41272,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [],
         "calculated": [],
@@ -41480,7 +41450,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -41491,8 +41460,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [],
         "calculated": [],
@@ -41539,7 +41507,7 @@
           "normalizedEps5y": 1,
           "epsCagr3y": 2,
           "epsCagr5y": 0,
-          "historicalPe": 5,
+          "historicalPe": 0,
           "freeCashFlow": 6,
           "freeCashFlowPerShare": 6,
           "fcfCagr5y": 0,
@@ -41605,7 +41573,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -41619,8 +41586,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [
           "revenue",
@@ -41643,7 +41609,6 @@
           "revenueCagr5y",
           "normalizedEps5y",
           "epsCagr3y",
-          "historicalPe",
           "freeCashFlow",
           "freeCashFlowPerShare",
           "currentRatio",
@@ -41836,7 +41801,6 @@
       "present": {
         "market": [
           "price",
-          "change5d",
           "name",
           "currency",
           "marketCap",
@@ -41847,8 +41811,7 @@
           "dividendYield",
           "sector",
           "category",
-          "change1d",
-          "changeYtd"
+          "change1d"
         ],
         "sec": [],
         "calculated": [],
