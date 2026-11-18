@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "provider": "ALPHA_VANTAGE",
+  "ticker": "DE",
+  "statements": {
+    "income": [
+      {
+        "date": "2025-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 44665000000,
+          "netIncome": 5027000000,
+          "operatingIncome": 8416000000
+        }
+      },
+      {
+        "date": "2024-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 50518000000,
+          "netIncome": 7100000000,
+          "operatingIncome": 11427000000
+        }
+      },
+      {
+        "date": "2023-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 60248000000,
+          "netIncome": 10166000000,
+          "operatingIncome": 14591000000
+        }
+      },
+      {
+        "date": "2022-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 51282000000,
+          "netIncome": 7131000000,
+          "operatingIncome": 9026000000
+        }
+      },
+      {
+        "date": "2021-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 43033000000,
+          "netIncome": 5963000000,
+          "operatingIncome": 7663000000
+        }
+      },
+      {
+        "date": "2020-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 34722000000,
+          "netIncome": 2751000000,
+          "operatingIncome": 4368000000
+        }
+      },
+      {
+        "date": "2019-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 38379000000,
+          "netIncome": 3253000000,
+          "operatingIncome": 4834000000
+        }
+      },
+      {
+        "date": "2018-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 36458000000,
+          "netIncome": 2368000000,
+          "operatingIncome": 4375000000
+        }
+      },
+      {
+        "date": "2017-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 28617000000,
+          "netIncome": 2159000000,
+          "operatingIncome": 2932000000
+        }
+      },
+      {
+        "date": "2016-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 25898500000,
+          "netIncome": 1523900000,
+          "operatingIncome": 2242500000
+        }
+      },
+      {
+        "date": "2015-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 28156300000,
+          "netIncome": 1940000000,
+          "operatingIncome": 2753700000
+        }
+      },
+      {
+        "date": "2014-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 35242700000,
+          "netIncome": 3161700000,
+          "operatingIncome": 4637500000
+        }
+      },
+      {
+        "date": "2013-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 37113000000,
+          "netIncome": 3537300000,
+          "operatingIncome": 5541900000
+        }
+      },
+      {
+        "date": "2012-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 35482200000,
+          "netIncome": 3064700000,
+          "operatingIncome": 4841800000
+        }
+      },
+      {
+        "date": "2011-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 31388700000,
+          "netIncome": 2799900000,
+          "operatingIncome": 4358400000
+        }
+      },
+      {
+        "date": "2010-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 25398500000,
+          "netIncome": 1865000000,
+          "operatingIncome": 3230600000
+        }
+      },
+      {
+        "date": "2009-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 22598200000,
+          "netIncome": 873500000,
+          "operatingIncome": 1867400000
+        }
+      },
+      {
+        "date": "2008-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 27871900000,
+          "netIncome": 2052800000,
+          "operatingIncome": 3695800000
+        }
+      },
+      {
+        "date": "2007-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 23543900000,
+          "netIncome": 1821700000,
+          "operatingIncome": 3311500000
+        }
+      },
+      {
+        "date": "2006-10-31",
+        "currency": "USD",
+        "values": {
+          "revenue": 21660800000,
+          "netIncome": 1693800000,
+          "operatingIncome": 2811100000
+        }
+      }
+    ]
+  },
+  "updatedAt": "2026-11-18T17:14:27.544Z"
+}
