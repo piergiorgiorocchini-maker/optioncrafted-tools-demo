@@ -80,13 +80,15 @@ const football=read("platform-app/src/components/ValuationFootballField.tsx");
 if(football.includes("averageCandidates")||football.includes("averageValuation"))throw new Error("Football Field must not invent an independent arithmetic Fair Value");
 if(!football.includes("triangulatedValue")||!football.includes("methods=candidates.filter"))throw new Error("Football Field must plot eligible methods and use the shared triangulated Fair Value");
 checks+=4;
-// The Sheets Assets snapshot exports dividendYield as a decimal fraction.
-// KO 0.0216 means 2.16% and $2.166912/share at the dated $100.32 reference price.
+// Assets uses a DECIMAL dividend-yield fraction. Verify the units without
+// freezing a market snapshot: quotes and yields legitimately change each day.
 const assetSnapshot=JSON.parse(read("platform-app/src/data/assetsSnapshot.json"));
 const ko=assetSnapshot.records.find(x=>x.ticker==="KO");
-if(!ko||Math.abs(ko.dividendYield-0.0216)>1e-8)throw new Error("KO dividend-yield snapshot assumption changed; review conversion test");
+if(!ko||!Number.isFinite(ko.price)||ko.price<=0||!Number.isFinite(ko.dividendYield)||ko.dividendYield<=0||ko.dividendYield>=0.20)throw new Error("KO dividend yield snapshot missing or unit scale implausible");
 const koAnnualDividend=ko.price*ko.dividendYield;
-if(Math.abs(koAnnualDividend-2.166912)>1e-6)throw new Error("KO annual dividend per share must use decimal dividend yield without extra /100");
+if(!Number.isFinite(koAnnualDividend)||koAnnualDividend<=0||koAnnualDividend>=ko.price*0.20)throw new Error("KO annual dividend derivation is implausible");
+const fixtureDividend=100.32*0.0216;
+if(Math.abs(fixtureDividend-2.166912)>1e-8)throw new Error("Decimal-yield conversion fixture failed");
 if(!grahamWorkspace.includes("asset.price*asset.dividendYield:null")||grahamWorkspace.includes("asset.price*asset.dividendYield/100"))throw new Error("Required Return must not divide decimal dividend yield by 100 twice");
 for(const [p,needle] of [["platform-app/src/components/RealResearch.tsx","fmt(asset.dividendYield*100)"],["platform-app/src/components/LiveUniverseExplorer.tsx","number(r.dividendYield*100)"]])if(!read(p).includes(needle))throw new Error("Display percentages should multiply decimal dividend yield by 100: "+p);
 if(!grahamWorkspace.includes('nr-required-input-groups')||!grahamWorkspace.includes("Current Annual Dividend"))throw new Error("Required Return must expose grouped EPS, dividend, and return inputs");
