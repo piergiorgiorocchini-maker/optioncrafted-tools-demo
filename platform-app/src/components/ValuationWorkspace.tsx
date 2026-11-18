@@ -10,7 +10,7 @@ import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 import {SecurityLogo} from "./SecurityLogo";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamInterpretationPanel,GrahamResearchPanel} from "./GrahamResearchPanel";
-import {LynchValuationPanel} from "./LynchValuationPanel";
+import {LynchValuationPanel,type LynchScenario} from "./LynchValuationPanel";
 import {WaccResearchPanel} from "./WaccResearchPanel";
 import aaaYieldSnapshot from "../data/aaaYieldSnapshot.json";
 import {automaticGrahamGrowth} from "../core/grahamGrowth";
@@ -45,7 +45,7 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Perpetual growth Y11+ %",step:0.25},{key:"dividendDiscount",label:"Target rate of return %",step:0.5}],
  peers:[]
 };
-export function ValuationWorkspace({asset,tab="required-return",onUpdate,premiumDcf=false,grahamManualOverride=null,onGrahamManualChange}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void;premiumDcf?:boolean;grahamManualOverride?:{eps:number|null;growth:number;aaaYield:number|null}|null;onGrahamManualChange?:(ticker:string,inputs:{eps:number|null;growth:number;aaaYield:number|null}|null)=>void}){
+export function ValuationWorkspace({asset,tab="required-return",onUpdate,premiumDcf=false,grahamManualOverride=null,onGrahamManualChange,lynchManualOverride=null,onLynchManualChange}:{asset:RealAsset;tab?:string;onUpdate?:(ticker:string,bridge:ValuationBridge)=>void;premiumDcf?:boolean;grahamManualOverride?:{eps:number|null;growth:number;aaaYield:number|null}|null;onGrahamManualChange?:(ticker:string,inputs:{eps:number|null;growth:number;aaaYield:number|null}|null)=>void;lynchManualOverride?:LynchScenario|null;onLynchManualChange?:(ticker:string,inputs:LynchScenario|null)=>void}){
  const active=(premiumDcf?"dcf":(tabs.find(x=>x.id===tab&&x.id!=="dcf"&&x.id!=="peers")?.id||"required-return")) as ValuationMethod;
  const [mode,setMode]=useState<ValuationMode>(grahamManualOverride&&tab==="graham"?"manual":"automatic");
  const [manual,setManual]=useState<Record<Field,string>>({price:"",eps:grahamManualOverride?.eps===null||grahamManualOverride?.eps===undefined?"":String(grahamManualOverride.eps),fcf:"",dividend:"",beta:""});
@@ -85,7 +85,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const currency=financials.currency;
  const hybridScenario=mode==="hybrid"&&Object.keys(overrides).length>0?base?.value??null:null;
  const grahamManual=active==="graham"&&mode==="manual"?{eps:financials.eps,growth:a.growth,aaaYield:a.aaaYield}:grahamManualOverride??undefined;
- const publishedValuation=useMemo(()=>{const result=buildValuationTriangulation(asset,{dcfScenarioValue:hybridScenario,dcfScenarioLabel:"Valuation Lab DCF scenario with user overrides",marginOfSafety:a.mos,grahamManual});return hybridScenario!==null?{...result,source:"Google Sheets SEC_Raw + Valuation Lab DCF scenario + family-balanced model"}:result;},[asset,hybridScenario,a.mos,grahamManual?.eps,grahamManual?.growth,grahamManual?.aaaYield]);
+ const publishedValuation=useMemo(()=>{const result=buildValuationTriangulation(asset,{dcfScenarioValue:hybridScenario,dcfScenarioLabel:"Valuation Lab DCF scenario with user overrides",marginOfSafety:a.mos,grahamManual,lynchManual:lynchManualOverride??undefined});return hybridScenario!==null?{...result,source:"Google Sheets SEC_Raw + Valuation Lab DCF scenario + family-balanced model"}:result;},[asset,hybridScenario,a.mos,grahamManual?.eps,grahamManual?.growth,grahamManual?.aaaYield,lynchManualOverride?.eps,lynchManualOverride?.growth,lynchManualOverride?.dividendYield,lynchManualOverride?.price]);
  useEffect(()=>{onUpdate?.(asset.ticker,publishedValuation);},[asset.ticker,publishedValuation,onUpdate]);
  useEffect(()=>{
   if(active!=="graham"||mode!=="manual"||!onGrahamManualChange)return;
@@ -162,7 +162,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
     </div>
    </section>
   </div>}
-  {active==="lynch"&&<LynchValuationPanel key={asset.ticker} asset={asset}/>}
+  {active==="lynch"&&<LynchValuationPanel key={asset.ticker} asset={asset} scenario={lynchManualOverride} onScenarioChange={onLynchManualChange}/>}
   {active==="graham"&&<section className="nr-graham-top-summary" aria-label="Graham valuation result">
    <div><span className="nr-eyebrow">GRAHAM VALUATION · {mode==="manual"?"MANUAL":"AUTOMATIC"}</span><h3>Graham Composite</h3><strong>{money(publishedValuation.methods.find(method=>method.family==="earnings"&&method.status==="AVAILABLE")?.value??null,currency)}</strong><p>Classic {money(publishedValuation.grahamComponents.find(part=>part.id==="classic")?.value??null,currency)} + Aaa-adjusted {money(publishedValuation.grahamComponents.find(part=>part.id==="aaa")?.value??null,currency)} · equal-weight mean</p></div>
   </section>}
