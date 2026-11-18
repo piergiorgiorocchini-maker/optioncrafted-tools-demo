@@ -276,10 +276,29 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   methods.push(dividendMethod,peersMethod);
 
   const available=methods.filter(method=>method.status==="AVAILABLE"&&method.value!==null&&method.quality!==null);
+  // Distinct method displays do NOT imply independent valuation families:
+  // both Graham and Lynch depend on the same EPS earnings economics.
+  // Form one quality-weighted earnings vote from their separately displayed
+  // estimates. DCF remains the independent cash-flow vote.
+  const earningsMembers=available.filter(m=>m.family==="earnings"||m.family==="growth_relative");
+  const nonEarnings=available.filter(m=>m.family!=="earnings"&&m.family!=="growth_relative");
   const uniqueByFamily=new Map<ValuationFamily,ValuationMethodResult>();
-  for(const method of available){
+  for(const method of nonEarnings){
     const prior=uniqueByFamily.get(method.family);
     if(!prior||((method.quality??0)>(prior.quality??0)))uniqueByFamily.set(method.family,method);
+  }
+  if(earningsMembers.length){
+    const weight=earningsMembers.reduce((total,m)=>total+Math.max(0.01,m.quality??0.01),0);
+    const value=earningsMembers.reduce((total,m)=>total+m.value!*Math.max(0.01,m.quality??0.01),0)/weight;
+    const quality=Math.max(...earningsMembers.map(m=>m.quality??0))*0.85;
+    uniqueByFamily.set("earnings",{
+      ...earningsMembers[0],id:"earnings-family",label:"Earnings composite · Graham + Lynch",
+      family:"earnings",value,low:value,high:value,quality,
+      reason:"Graham and Lynch are separate published estimates but contribute together as one earnings-family vote, weighted by their model quality; no double-counting of EPS.",
+      assumptions:earningsMembers.map(m=>m.label+" "+m.value!.toFixed(2)+" · quality "+(m.quality??0).toFixed(3)),
+      estimateBasis:"ASSUMPTION"
+    });
+    qualityNotes.push("Fair Value combines Graham and Lynch within ONE earnings vote (quality-weighted), not two independent votes. Lynch PEG and PEGY first form a single equal-weight Lynch Composite when both are available.");
   }
   const eligibleMethods=[...uniqueByFamily.values()];
   const familyValues=eligibleMethods.map(method=>method.value!);
