@@ -818,21 +818,31 @@ const expectedHeader = ['Ticker', 'CIK', 'Metric', 'Value USD', 'Period Start', 
 if (oldHeader.length < 14 || expectedHeader.some((value, index) => index !== 3 && oldHeader[index] !== value) || !['Value USD', 'Value (native unit)'].includes(oldHeader[3])) {
   throw new Error('Unexpected SEC_Raw headers; refusing to overwrite the sheet.');
 }
-const oldRawRows = oldRaw.slice(1).filter(row => row.some(value => value !== '' && value !== null && value !== undefined));
 function secRawFactKey(row) {
   return [normTicker(row?.[0]), String(row?.[2] ?? '').trim(), String(row?.[4] ?? ''), String(row?.[5] ?? '')].join('|');
 }
-const incomingFactKeys = new Set(newFactRows.map(secRawFactKey));
-const retainedRawRows = oldRawRows
-  .map(normalizeSecRawRow)
-  .filter(row => !incomingFactKeys.has(secRawFactKey(row)));
-const mergedRawRows = [rawHeader, ...retainedRawRows, ...newFactRows];
+const isSheetRow = row => Array.isArray(row) && row.some(value => value !== '' && value !== null && value !== undefined);
+const oldRawRows = oldRaw.slice(1).filter(isSheetRow);
+const oldRawIndex = new Map();
+for (let n = 1; n < oldRaw.length; n++) {
+  if (!isSheetRow(oldRaw[n])) continue;
+  const key = secRawFactKey(oldRaw[n]);
+  const indices = oldRawIndex.get(key) || [];
+  indices.push(n + 1); // Google Sheets is 1-indexed; oldRaw[0] is the header.
+  oldRawIndex.set(key, indices);
+}
+// Preserve history for every other security and period. Keep the latest incoming
+// observation per exact key, as the prior full-sheet merge did.
+const incomingByKey = new Map(newFactRows.map(row => [secRawFactKey(row), row]));
+const retainedRawRows = oldRawRows.map(normalizeSecRawRow)
+  .filter(row => !incomingByKey.has(secRawFactKey(row)));
+const mergedRawRows = [rawHeader, ...retainedRawRows, ...incomingByKey.values()];
 if (mergedRawRows.length > rawCapacity) throw new Error('SEC_Raw merged data exceeds row capacity.');
 
 const oldLog = await readValues('Sync_Log!A1:I5000');
 const logHeader = ['Ticker', 'Provider', 'Last Attempt', 'Last Success', 'Next Check', 'Status', 'Records Updated', 'Error', 'Source Version'];
 if (!oldLog[0] || logHeader.some((value, index) => oldLog[0][index] !== value)) throw new Error('Unexpected Sync_Log headers; refusing to overwrite the sheet.');
-const oldLogRows = oldLog.slice(1).filter(row => row.some(value => value !== '' && value !== null && value !== undefined));
+const oldLogRows = oldLog.slice(1).filter(isSheetRow);
 const oldSecLog = new Map(oldLogRows.filter(row => String(row[1]).toUpperCase() === 'SEC').map(row => [normTicker(row[0]), row]));
 const outcomeTickers = new Set(outcomes.map(outcome => outcome.ticker));
 const retainedLogRows = oldLogRows.filter(row => !(String(row[1]).toUpperCase() === 'SEC' && outcomeTickers.has(normTicker(row[0]))));
@@ -848,21 +858,63 @@ const nextLogRows = outcomes.map(outcome => {
 const mergedLogRows = [logHeader, ...retainedLogRows, ...nextLogRows];
 if (mergedLogRows.length > 5000) throw new Error('Sync_Log exceeds its configured row capacity.');
 
-const writeData = [
-  { range: 'SEC_Raw!A1:N' + mergedRawRows.length, values: mergedRawRows },
-  { range: 'Sync_Log!A1:I' + mergedLogRows.length, values: mergedLogRows }
-];
-await sheetsApi('/values:batchUpdate', {
-  method: 'POST',
-  body: JSON.stringify({ valueInputOption: 'RAW', data: writeData })
-});
-if (oldRaw.length > mergedRawRows.length) {
-  await sheetsApi('/values/' + encodeURIComponent('SEC_Raw!A' + (mergedRawRows.length + 1) + ':N' + oldRaw.length) + ':clear', { method: 'POST', body: '{}' });
+// Targeted, idempotent writes. Never rewrite SEC_Raw or Sync_Log in full.
+// Build a new snapshot in memory for the existing normalizer, but only upsert
+// the selected tickers' rows on Sheets. Clear duplicate rows for exact keys
+// because the former full-sheet merge also deduplicated those rows.
+const writes = [];
+const emptyRaw = Array(14).fill('');
+for (const [key, row] of incomingByKey) {
+  const positions = oldRawIndex.get(key) || [];
+  if (positions.length) {
+    const current = normalizeSecRawRow(oldRaw[positions[0] - 1] || []);
+    // Imported At is bookkeeping, not a changed financial fact.
+    const sameContent = Array.from({ length: 14 }, (_, n) => n)
+      .filter(n => n !== 12)
+      .every(n => String(current[n] ?? '') === String(row[n] ?? ''));
+    if (!sameContent) writes.push({range: 'SEC_Raw!A' + positions[0] + ':N' + positions[0], values: [row]});
+    for (const duplicate of positions.slice(1)) {
+      writes.push({range: 'SEC_Raw!A' + duplicate + ':N' + duplicate, values: [emptyRaw]});
+    }
+  }
 }
-if (oldLog.length > mergedLogRows.length) {
-  await sheetsApi('/values/' + encodeURIComponent('Sync_Log!A' + (mergedLogRows.length + 1) + ':I' + oldLog.length) + ':clear', { method: 'POST', body: '{}' });
+const appendRaw = [...incomingByKey].filter(([key]) => !oldRawIndex.has(key)).map(([,row]) => row);
+const lastRawRow = Math.max(1, ...[...oldRawIndex.values()].flat());
+if (lastRawRow + appendRaw.length > rawCapacity) {
+  throw new Error('Incremental SEC_Raw append exceeds capacity: ' + (lastRawRow + appendRaw.length));
 }
+if (appendRaw.length) writes.push({range: 'SEC_Raw!A' + (lastRawRow + 1) + ':N' + (lastRawRow + appendRaw.length), values: appendRaw});
 
+const logPositions = new Map();
+for (let n = 1; n < oldLog.length; n++) {
+  const row = oldLog[n] || [];
+  if (String(row[1] || '').toUpperCase() !== 'SEC') continue;
+  const key = normTicker(row[0]);
+  if (!logPositions.has(key)) logPositions.set(key, []);
+  logPositions.get(key).push(n + 1);
+}
+const emptyLog = Array(9).fill('');
+const appendLog = [];
+for (const row of nextLogRows) {
+  const positions = logPositions.get(row[0]) || [];
+  if (!positions.length) { appendLog.push(row); continue; }
+  writes.push({range:'Sync_Log!A' + positions[0] + ':I' + positions[0], values:[row]});
+  for (const duplicate of positions.slice(1)) writes.push({range:'Sync_Log!A' + duplicate + ':I' + duplicate, values:[emptyLog]});
+}
+const lastLogRow = Math.max(1, ...oldLog.map((row,n)=>isSheetRow(row)?n+1:1));
+if (lastLogRow + appendLog.length > 5000) throw new Error('Incremental Sync_Log append exceeds capacity.');
+if (appendLog.length) writes.push({range:'Sync_Log!A' + (lastLogRow+1) + ':I' + (lastLogRow+appendLog.length), values:appendLog});
+const rawUpdateCount = writes.filter(w=>w.range.startsWith('SEC_Raw!')).length;
+const logUpdateCount = writes.length - rawUpdateCount;
+console.log('Incremental Sheets writes:', JSON.stringify({rawRanges:rawUpdateCount,rawAppended:appendRaw.length,logRanges:logUpdateCount,logAppended:appendLog.length}));
+// Google Sheets values:batchUpdate is not transactional. Keep ranges small and
+// make all upserts idempotent so a failed run is safely retryable.
+for (let offset = 0; offset < writes.length; offset += 80) {
+  await sheetsApi('/values:batchUpdate', {
+    method:'POST',
+    body:JSON.stringify({valueInputOption:'RAW', data:writes.slice(offset,offset+80)})
+  });
+}
 
 const [assetsGrid, fundamentalsGrid, jsonAssetsGrid, classificationGrid, financialHistoryGrid] = await Promise.all([
   readValues('Assets!A1:U1000'),
