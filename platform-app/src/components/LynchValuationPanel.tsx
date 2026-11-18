@@ -21,7 +21,8 @@ export function LynchValuationPanel({asset,scenario,onScenarioChange}:{asset:Rea
  // Historical growth is a documented proxy, not a verified forward forecast.
  const baseGrowth=policy.growth;
  const ttm=getManualTtmFinancials(asset.ticker,asset.currency);
- const defaultEps=finitePositive(ttm?.dilutedEps)?ttm.dilutedEps:finitePositive(asset.eps)?asset.eps:null;
+ // Match the shared triangulation EPS precedence exactly; negative EPS stays ineligible.
+ const defaultEps=ttm?.dilutedEps??asset.eps??recent?.dilutedEps??null;
  const defaultPrice=finitePositive(asset.price)?asset.price:null;
  // Provider yield is a decimal FRACTION, e.g. 0.0216 = 2.16%.
  const defaultYield=typeof asset.dividendYield==="number"&&Number.isFinite(asset.dividendYield)&&asset.dividendYield>=0?asset.dividendYield*100:null;
@@ -99,7 +100,7 @@ export function LynchValuationPanel({asset,scenario,onScenarioChange}:{asset:Rea
     <p className="nr-source-note">These outputs are valuation heuristics associated with Peter Lynch's PEG approach. They are not DCF estimates, guaranteed entry prices, independent valuation votes or predictions of market returns.</p>
    </section>
    <section className="nr-control-card"><div className="nr-section-title"><div><span className="nr-eyebrow">INPUT GUIDE / DATA SOURCES</span><h3>Data for {asset.ticker}</h3></div></div>
-    <p className="nr-source-note"><strong>EPS:</strong> {finitePositive(ttm?.dilutedEps)?"Manual TTM financials":finitePositive(asset.eps)?"Assets snapshot EPS":"N/D; enter manually"}. <strong>Price / dividend yield:</strong> Assets snapshot. <strong>Growth:</strong> {sourceLabel}. {recent?.periodEnd?"Latest historical annual period: "+recent.periodEnd+".":""}</p>
+    <p className="nr-source-note"><strong>EPS:</strong> {ttm?.dilutedEps!==null&&ttm?.dilutedEps!==undefined?"Manual TTM financials":asset.eps!==null?"Assets snapshot EPS":recent?.dilutedEps!==null&&recent?.dilutedEps!==undefined?"Latest SEC/FMP annual diluted EPS":"N/D; enter manually"}. <strong>Price / dividend yield:</strong> Assets snapshot. <strong>Growth:</strong> {sourceLabel}. {recent?.periodEnd?"Latest historical annual period: "+recent.periodEnd+".":""}</p>
     <p className="nr-source-note">If earnings are cyclical or an exceptional year distorts CAGR, select a defensible normalized forward growth assumption. Dividend yield is read as a decimal fraction from Assets and converted to percentage points for PEGY. A missing yield stays N/D; it is not silently assumed to be zero.</p>
    </section>
   </div>
