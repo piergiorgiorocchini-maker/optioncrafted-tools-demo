@@ -5,6 +5,7 @@ import {verifiedFinancialProfile} from "../data/verifiedFinancials";
 import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 import {buildVisibleDcfComposite} from "./visibleDcfComposite";
 import {grahamSectorGrowth} from "./grahamSectorGrowth";
+import {lynchGrowthAssumption,lynchModel} from "./lynchValuation";
 
 type AssetForValuation = {
   ticker:string;
@@ -19,7 +20,7 @@ type AssetForValuation = {
   beta?:number|null;
 };
 
-export type ValuationFamily = "cash_flow"|"earnings"|"dividend"|"trading_comps";
+export type ValuationFamily = "cash_flow"|"earnings"|"growth_relative"|"dividend"|"trading_comps";
 export type ValuationMethodStatus = "AVAILABLE"|"PENDING"|"NOT_APPLICABLE";
 export type ValuationMethodResult = {
   id:string;
@@ -77,6 +78,7 @@ export type ValuationBuildOptions = {
   dcfScenarioLabel?:string;
   marginOfSafety?:number;
   grahamManual?:{eps:number|null;growth:number;aaaYield:number|null};
+  lynchManual?:{eps:number|null;growth:number;dividendYield:number|null;price:number|null};
 };
 
 const MOS=modelDefaults.mos;
@@ -228,6 +230,45 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
   }
 
   methods.push(dcfMethod!,earningsMethod!);
+  // PEG and PEGY are correlated variations of ONE growth-relative valuation family.
+  // This shares earnings inputs with Graham: low weight and explicit caveats.
+  let lynchMethod:ValuationMethodResult;
+  if(!profile.eligible){
+    lynchMethod=methodPending("lynch","Lynch PEG / PEGY · growth-relative","growth_relative",profile.reason??"Operating-company profile not verified.");
+  }else{
+    const currentEps=manualTtm?.dilutedEps??asset.eps??latest?.dilutedEps??null;
+    const fallback=lynchGrowthAssumption(latest?.epsCagr3y);
+    const scenario=options.lynchManual;
+    const eps=scenario?scenario.eps:currentEps;
+    const growth=scenario?scenario.growth:fallback.growth;
+    const yieldPct=scenario?scenario.dividendYield:(asset.dividendYield===null?null:asset.dividendYield*100);
+    const price=scenario?scenario.price:asset.price;
+    const result=lynchModel(eps,growth,yieldPct,price);
+    if(!result){
+      lynchMethod=methodPending("lynch","Lynch PEG / PEGY · growth-relative","growth_relative",
+       "Lynch requires positive EPS and a growth assumption above 0% and at most 50%. Missing or invalid data is not replaced silently.");
+    }else{
+      const growthBasis=scenario?"user-entered scenario":fallback.basis==="HISTORICAL_PROXY"?"historical SEC/FMP 3Y EPS CAGR proxy":"explicit default assumption of 10%";
+      lynchMethod={
+        id:"lynch",label:"Lynch PEG / PEGY Composite",family:"growth_relative",status:"AVAILABLE",
+        value:result.value,low:result.low,high:result.high,
+        quality:profile.quality*(scenario?0.22:fallback.basis==="HISTORICAL_PROXY"?0.30:0.20),
+        reason:"Growth-relative PEG=1 and, where dividend yield is known, PEGY=1 estimates are combined once. This is a heuristic and is correlated with Graham; it is not an independent cash-flow model.",
+        assumptions:[
+          `EPS ${eps?.toFixed(2)??"N/D"} ${currency}/share; growth ${growth.toFixed(2)}% (${growthBasis}); dividend yield ${yieldPct===null?"N/D":yieldPct.toFixed(3)+"%"}.`,
+          `PEG=1 estimate ${result.basic.toFixed(2)}; ${result.withDividend===null?"PEGY unavailable (no verified yield)": "PEGY=1 estimate "+result.withDividend.toFixed(2)}. One composite vote, not two independent estimates.`,
+          "Historical EPS CAGR is not a forward forecast. Market P/E, cyclicality and earnings quality require independent review."
+        ],
+        fiscalPeriod:manualTtm?.periodEnd??latest?.fiscalYear??null,
+        filedDate:latest?.filedDate??null,
+        sourceUrl:latest?.sources.epsDiluted?.sourceUrl??null,
+        estimateBasis:scenario?"USER_SCENARIO":"ASSUMPTION"
+      };
+      qualityNotes.push("Lynch growth-relative family shares earnings sensitivity with Graham. PEG and PEGY form a single discounted-quality model vote, not two separate methods.");
+      if(fallback.basis==="STANDARD_ASSUMPTION"&&!scenario)qualityNotes.push("Lynch uses an editable 10% standard growth assumption because an eligible historical EPS CAGR proxy is unavailable.");
+    }
+  }
+  methods.push(lynchMethod);
   const dividendMethod:ValuationMethodResult=asset.dividendYield===0
     ?{...methodPending("ddm","Dividend discount","dividend","Current snapshot reports a zero dividend yield; DDM is not applicable."),status:"NOT_APPLICABLE"}
     :methodPending("ddm","Dividend discount","dividend",asset.dividendYield!==null&&asset.dividendYield>0?"A positive snapshot yield exists, but the annual dividend-per-share history and sustainability checks are not in the imported SEC facts.":"Dividend-per-share history and sustainability are not yet mapped.");
