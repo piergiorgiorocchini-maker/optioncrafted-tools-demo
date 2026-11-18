@@ -1,7 +1,7 @@
 /* Pure, source-aware valuation models. All values are per share.
    No implicit substitute for missing financial data. */
 export type ValuationMode="manual"|"hybrid"|"automatic";
-export type ValuationMethod="dcf"|"required-return"|"graham"|"dividend"|"peers";
+export type ValuationMethod="dcf"|"required-return"|"graham"|"lynch"|"dividend"|"peers";
 export type Financials={price:number|null;eps:number|null;fcf:number|null;dividend:number|null;beta:number|null;currency:string};
 export type ModelInputs={growth:number;discount:number;terminal:number;years:number;mos:number;exitPe:number;growth2:number;divGrowth:number;divGrowth2:number;aaaYield:number|null;dividendDiscount:number;dividendTerminal:number;dividendGrowth:number;requiredReturn:number};
 export type DcfResult={value:number;pvCashflows:number;pvTerminal:number;projection:{year:number;cashflow:number;pv:number}[]};
