@@ -437,7 +437,10 @@ function parseXbrlInstance(xml, filing) {
     const tagIndex = metricSpec.tags.indexOf(localName);
     found.push({ metric: metricSpec.key, value, start: context.start || '', end: context.end, unit, tag: match[1] + localName, filed: filing.filed, form: filing.form, accession: filing.accession, sourceUrl: filing.sourceUrl, dimensional: context.dimensional, tagIndex: tagIndex < 0 ? 999 : tagIndex });
   }
-  if (filing.audit) console.log('SEC XBRL exception audit ' + (filing.ticker || filing.cik || '') + ' ' + filing.reportEnd + ': ' + JSON.stringify(auditTags));
+  // Raw XBRL audit logs can be enormous: opt in for focused diagnostics only.
+  if (filing.audit && process.env.SEC_XBRL_AUDIT === 'true') {
+    console.log('SEC XBRL exception audit ' + (filing.ticker || filing.cik || '') + ' ' + filing.reportEnd + ': ' + JSON.stringify(auditTags.slice(0, 25)));
+  }
   return found.sort((a, b) => Number(a.dimensional) - Number(b.dimensional) || a.tagIndex - b.tagIndex || b.filed.localeCompare(a.filed));
 }
 async function fetchRecentAnnualXbrlFacts(cik, desiredPeriodEnds = [], auditTicker = '') {
@@ -451,7 +454,7 @@ async function fetchRecentAnnualXbrlFacts(cik, desiredPeriodEnds = [], auditTick
     const form = recent.form[index];
     const reportEnd = recent.reportDate?.[index] || '';
     if (!annualForms.has(form) || !reportEnd) continue;
-    const filing = { form, reportEnd, filed: recent.filingDate?.[index] || '', accession: recent.accessionNumber?.[index] || '', primaryDocument: recent.primaryDocument?.[index] || '', ticker: auditTicker || '', audit: Boolean(auditTicker) || cik === '0001559720' };
+    const filing = { form, reportEnd, filed: recent.filingDate?.[index] || '', accession: recent.accessionNumber?.[index] || '', primaryDocument: recent.primaryDocument?.[index] || '', ticker: auditTicker || '', audit: process.env.SEC_XBRL_AUDIT === 'true' && (Boolean(auditTicker) || cik === '0001559720') };
     const prior = latestByReportEnd.get(reportEnd);
     if (!prior || filing.filed > prior.filed) latestByReportEnd.set(reportEnd, filing);
   }
@@ -612,7 +615,30 @@ const unknownBatchTickers = requestedBatchTickers.filter(ticker => !assetTickerS
 if (unknownBatchTickers.length) {
   throw new Error('SEC_TICKER_BATCH contains tickers not present in Assets: ' + unknownBatchTickers.join(', '));
 }
-const processingTickers = requestedBatchTickers.length ? requestedBatchTickers : assetTickers;
+// Scheduled/ad-hoc runs must never silently process the entire universe.
+// Rotate a small deterministic window by UTC day; explicit batches are capped.
+const batchSize = Number(process.env.SEC_BATCH_SIZE || '8');
+if (!Number.isInteger(batchSize) || batchSize < 1 || batchSize > 12) {
+  throw new Error('SEC_BATCH_SIZE must be an integer between 1 and 12');
+}
+if (requestedBatchTickers.length > batchSize) {
+  throw new Error('SEC_TICKER_BATCH has ' + requestedBatchTickers.length +
+    ' tickers; limit is ' + batchSize + '. Split into smaller runs.');
+}
+const batchCount = Math.ceil(assetTickers.length / batchSize);
+const utcDay = Math.floor(Date.now() / 86400000);
+const startIndex = (utcDay % batchCount) * batchSize;
+const processingTickers = requestedBatchTickers.length
+  ? requestedBatchTickers
+  : assetTickers.slice(startIndex, startIndex + batchSize);
+console.log('SEC bounded batch:', JSON.stringify({
+  mode: requestedBatchTickers.length ? 'explicit' : 'daily-rotation',
+  size: processingTickers.length,
+  universe: assetTickers.length,
+  batchCount,
+  batchIndex: requestedBatchTickers.length ? null : utcDay % batchCount,
+  tickers: processingTickers
+}));
 
 const { map: secTickerMap, source: tickerMapSource } = await loadTickerMap();
 // Deere & Company is CIK 0000315189; retain this explicit mapping if the SEC ticker file omits it.
@@ -705,6 +731,9 @@ for (const ticker of processingTickers) {
   } catch (error) {
     outcomes.push({ ticker, status: 'SOURCE_ERROR', records: [], cik: match.cik, error: error.message });
   }
+  // Each issuer's SEC CompanyFacts JSON can be large. Retain only this batch's
+  // normalized rows in outcomes; XOM legacy facts are consumed before clearing.
+  factsCache.clear();
 }
 
 
