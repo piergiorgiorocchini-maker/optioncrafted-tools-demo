@@ -1,0 +1,52 @@
+OPTIONSCRAFTED — FORWARD DIVIDEND YIELD PILOT
+Data: 2026-11-18
+Stato: Google Sheets TEST OPERATIVO; acquisizione automatica FMP NON ANCORA ATTIVA.
+Repository: https://github.com/piergiorgiorocchini-maker/optioncrafted-tools-demo
+Google Sheet: https://docs.google.com/spreadsheets/d/1Qw5cxoUEwGKExwWv3IRRSyiWvCykZFdfFfqKs3FVrgw/edit
+
+OBIETTIVO
+Standardizzare Forward Dividend Yield = dividendo annuo regolare / prezzo correntemente disponibile da GOOGLEFINANCE.
+Non usare automaticamente il Dividend Yield o il campo lastDividend di FMP profile come sostituto.
+
+MODIFICHE GOOGLE SHEETS
+- Nuova tab nascosta DividendCache (sheetId 1599353341):
+  A Ticker | B Regular dividend/share | C Frequency | D Annualized dividend/share |
+  E Source | F Verified on | G Status.
+  Colonna D: =IF(OR(B2="";C2="");"";IFERROR(B2*SWITCH(C2;"Quarterly";4;"Semiannual";2;"Annual";1;"Monthly";12);""))
+- Assets colonna V: Forward Annual Dividend. Lookup keyed by ticker:
+  =IF(B2="";"";IFERROR(VLOOKUP(B2;DividendCache!$A:$G;4;FALSE);""))
+- Assets colonna W: Forward Dividend Yield:
+  =IF(OR(B2="";C2="";V2="";C2<=0);"";V2/C2)
+- Formule V/W estese fino alla riga 1001. W in formato percentuale 0,00%.
+- Colonna O (FMP yield attuale), ProviderCache, JSON export, Graham, Lynch e triangolazione
+  NON modificati. La piattaforma continua a mostrare il valore della colonna O.
+
+PILOT VALIDATO SU GOOGLE SHEETS
+NVDA: $0.25 trimestrale, annualizzato $1.00. W ~0.66% con GOOGLEFINANCE ~151.69.
+PEP:  $1.48 trimestrale, annualizzato $5.92. W ~4.16% con GOOGLEFINANCE ~142.14.
+Le due osservazioni in DividendCache sono VERIFIED_MANUAL.
+Fonti primarie:
+NVDA https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/
+PEP https://www.pepsico.com/newsroom/press-releases/2026/pepsico-declares-quarterly-dividend-0726
+
+COLLETTORE PREPARATO SU GITHUB
+File: docs/apps-script/OCForwardDividends.gs
+Endpoint: https://financialmodelingprep.com/stable/dividends?symbol=<TICKER>&apikey=<API_KEY>
+Pilot: refreshOCForwardDividendsPilot() (2 richieste).
+Batch: refreshOCForwardDividendsBatch() (massimo 15 richieste/giorno, conteggio duraturo).
+Trigger opzionale: installOCForwardDividendTrigger().
+Script progettato per il progetto Apps Script esistente, legge FMP_API_KEY da Script Properties.
+Non scrive dati senza l'installazione e l'esecuzione nel progetto Apps Script.
+Test unitari eseguiti sul parser con fixture NVDA, PEP, special dividend e frequenza assente: 4/4 PASS.
+Endpoint FMP non interrogato con la chiave del progetto: permessi del piano e valori reali NON VERIFICATI.
+
+PROSSIME VERIFICHE
+1. Installare lo script nel progetto Apps Script collegato allo stesso foglio.
+2. Eseguire refreshOCForwardDividendsPilot(); controllare accesso /stable/dividends e
+   righe NVDA/PEP in DividendCache. Se 402/403/errore piano, non attivare trigger.
+3. Solo dopo validazione, abilitare batch e verificare frequenze/special dividends,
+   inclusi i casi senza distribuzione e senza dato.
+4. Adattare exportAssetsJSON_v2 per preferire la colonna W SOLO quando il dato
+   annualizzato in V e la fonte sono validi; mantenere O come fallback distinto
+   (etichetta trailing/provider yield) oppure N/D in modalità forward rigorosa.
+5. Testare snapshot, triangolazione Graham/Lynch, build e browser prima del deploy.
