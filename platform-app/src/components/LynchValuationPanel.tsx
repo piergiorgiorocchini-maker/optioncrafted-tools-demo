@@ -13,7 +13,8 @@ const parse=(s:string)=>s.trim()===""?null:Number.isFinite(Number(s))?Number(s):
 export function LynchValuationPanel({asset}:{asset:RealAsset}){
  const rows=googleSheetsSecAnnualHistory(asset.ticker,asset.currency);
  const recent=rows.at(-1);
- const historic=recent?.epsCagr3y;
+ // SEC EPS CAGR is stored as a decimal (0.20 = 20 percentage points).
+ const historic=typeof recent?.epsCagr3y==="number"?recent.epsCagr3y*100:null;
  const historicalUsable=typeof historic==="number"&&Number.isFinite(historic)&&historic>0&&historic<=30;
  // A historical CAGR is only a transparent proxy, never a verified forecast.
  const baseGrowth=historicalUsable?historic:10;
