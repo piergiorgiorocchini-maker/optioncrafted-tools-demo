@@ -18,6 +18,7 @@ export function ValuationSynthesis({valuation,companyName}:{valuation:ValuationB
  const formatComparison=comparison===null?"N/D":(comparison>0?"+":"")+comparison.toFixed(1)+"%";
  const cash=valuation?.methods.find(method=>method.family==="cash_flow"&&method.status==="AVAILABLE");
  const earnings=valuation?.methods.find(method=>method.family==="earnings"&&method.status==="AVAILABLE");
+ const lynch=valuation?.methods.find(method=>method.id==="lynch"&&method.status==="AVAILABLE");
  const dividend=valuation?.methods.find(method=>method.family==="dividend"&&method.status==="AVAILABLE");
  const dcfValue=cash?.value??null;
  const dcfRange=valuation?.dcfHorizonRange;
@@ -40,6 +41,7 @@ export function ValuationSynthesis({valuation,companyName}:{valuation:ValuationB
    base={dcfValue}
    bull={dcfRange?.high??dcfValue}
    graham={earnings?.value??null}
+   lynch={lynch?{value:lynch.value,low:lynch.low,high:lynch.high,detail:lynch.reason}:null}
    dividend={dividend?.value??null}
    triangulatedValue={fairValue}
    mos={valuation.marginOfSafety}
