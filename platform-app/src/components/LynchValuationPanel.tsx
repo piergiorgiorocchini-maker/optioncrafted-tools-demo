@@ -11,12 +11,11 @@ const fmtRate=(n:number|null)=>n===null?"N/D":n.toFixed(2)+"%";
 const parse=(s:string)=>s.trim()===""?null:Number.isFinite(Number(s))?Number(s):null;
 
 /** Standalone PEG/PEGY heuristic. It is NOT an independent cash-flow valuation. */
-export type LynchScenario={eps:number|null;growth:number;dividendYield:number|null;price:number|null};
+export type LynchScenario={eps:number|null;growth:number;dividendYield:number|null;price:number|null;mode?:"automatic"|"manual"};
 export function LynchValuationPanel({asset,scenario,onScenarioChange}:{asset:RealAsset;scenario?:LynchScenario|null;onScenarioChange?:(ticker:string,scenario:LynchScenario|null)=>void}){
  const rows=googleSheetsSecAnnualHistory(asset.ticker,asset.currency);
  const recent=rows.at(-1);
  // SEC EPS CAGR is stored as a decimal (0.20 = 20 percentage points).
- const historic=typeof recent?.epsCagr3y==="number"?recent.epsCagr3y*100:null;
  const policy=lynchGrowthAssumption(recent?.epsCagr3y);
  const historicalUsable=policy.basis==="HISTORICAL_PROXY";
  // Historical growth is a documented proxy, not a verified forward forecast.
@@ -26,7 +25,7 @@ export function LynchValuationPanel({asset,scenario,onScenarioChange}:{asset:Rea
  const defaultPrice=finitePositive(asset.price)?asset.price:null;
  // Provider yield is a decimal FRACTION, e.g. 0.0216 = 2.16%.
  const defaultYield=typeof asset.dividendYield==="number"&&Number.isFinite(asset.dividendYield)&&asset.dividendYield>=0?asset.dividendYield*100:null;
- const [manual,setManual]=useState(Boolean(scenario));
+ const [manual,setManual]=useState(scenario?.mode==="manual");
  const [touched,setTouched]=useState(Boolean(scenario));
  const [growth,setGrowth]=useState(String(scenario?.growth??baseGrowth));
  const [epsText,setEpsText]=useState(scenario?String(scenario.eps??""):defaultEps===null?"":String(defaultEps));
@@ -36,9 +35,6 @@ export function LynchValuationPanel({asset,scenario,onScenarioChange}:{asset:Rea
  const eps=manual?parse(epsText):defaultEps;
  const price=manual?parse(priceText):defaultPrice;
  const yieldPct=manual?parse(yieldText):defaultYield;
- const validEps=eps!==null&&eps>0;
- const validGrowth=g!==null&&g>0&&g<=50;
- const validYield=yieldPct!==null&&yieldPct>=0&&yieldPct<=100;
  const result=lynchModel(eps,g??Number.NaN,yieldPct,price);
  const pe=result?.pe??null;
  const peg=result?.peg??null;
@@ -49,8 +45,8 @@ export function LynchValuationPanel({asset,scenario,onScenarioChange}:{asset:Rea
  const upside=result?.upside??null;
  useEffect(()=>{
   if(!onScenarioChange)return;
-  onScenarioChange(asset.ticker,touched?{eps,growth:g??Number.NaN,dividendYield:yieldPct,price}:null);
- },[asset.ticker,touched,eps,g,yieldPct,price,onScenarioChange]);
+  onScenarioChange(asset.ticker,touched?{eps,growth:g??Number.NaN,dividendYield:yieldPct,price,mode:manual?"manual":"automatic"}:null);
+ },[asset.ticker,touched,manual,eps,g,yieldPct,price,onScenarioChange]);
  const input=(name:string,value:string,change:(v:string)=>void,disabled=false,unit?:string)=><label><span>{name}</span><div className="nr-graham-input-unit"><input type="number" step="any" value={value} disabled={disabled} onChange={e=>change(e.target.value)} placeholder="N/D"/>{unit&&<span>{unit}</span>}</div></label>;
  const setGrowthInput=(v:string)=>{setGrowth(v);setTouched(true)};
  const setEpsInput=(v:string)=>{setEpsText(v);setTouched(true)};
