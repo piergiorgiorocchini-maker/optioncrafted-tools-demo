@@ -250,10 +250,10 @@ export function buildValuationTriangulation(asset:AssetForValuation,options:Valu
     }else{
       const growthBasis=scenario?"user-entered scenario":fallback.basis==="HISTORICAL_PROXY"?"historical SEC/FMP 3Y EPS CAGR proxy":"explicit default assumption of 10%";
       lynchMethod={
-        id:"lynch",label:"Lynch PEG / PEGY Composite",family:"growth_relative",status:"AVAILABLE",
+        id:"lynch",label:result.composite!==null?"Lynch Composite · PEG / PEGY":"Lynch PEG-only value",family:"growth_relative",status:"AVAILABLE",
         value:result.value,low:result.low,high:result.high,
-        quality:profile.quality*(scenario?0.22:fallback.basis==="HISTORICAL_PROXY"?0.30:0.20),
-        reason:"Growth-relative PEG=1 and, where dividend yield is known, PEGY=1 estimates are combined once. This is a heuristic and is correlated with Graham; it is not an independent cash-flow model.",
+        quality:profile.quality*(scenario?0.22:fallback.basis==="HISTORICAL_PROXY"?0.30:0.20)*(result.composite===null?0.7:1),
+        reason:result.composite===null?"PEG-only estimate: unavailable dividend yield prevents the two-part Lynch Composite. This heuristic shares EPS dependence with Graham.":"Equal-weight composite of Lynch PEG=1 and dividend-adjusted PEGY=1 estimates. One correlated growth-relative heuristic, not a second independent cash-flow model.",
         assumptions:[
           `EPS ${eps?.toFixed(2)??"N/D"} ${currency}/share; growth ${growth.toFixed(2)}% (${growthBasis}); dividend yield ${yieldPct===null?"N/D":yieldPct.toFixed(3)+"%"}.`,
           `PEG=1 estimate ${result.basic.toFixed(2)}; ${result.withDividend===null?"PEGY unavailable (no verified yield)": "PEGY=1 estimate "+result.withDividend.toFixed(2)}. One composite vote, not two independent estimates.`,
