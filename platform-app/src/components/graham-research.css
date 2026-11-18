@@ -308,3 +308,25 @@
  .nr-workspace--graham .nr-graham-io-rows label>span,
  .nr-workspace--graham .nr-graham-io-result>span{font-size:18px}
 }
+
+/* Lynch shares the Graham Valuation Lab design system; only its explanatory
+   cards and growth-reset affordance require Lynch-specific rules. */
+.nr-workspace--graham .nr-lynch-reset{
+ display:inline-block;margin-left:6px;
+ border:1px solid #9cb6ce;background:#fff;color:#173d60;
+ border-radius:3px;padding:2px 7px;font-size:12px;font-weight:700;
+ cursor:pointer;
+}
+.nr-workspace--graham .nr-lynch-reset:hover{background:#e7f1fa}
+.nr-lynch-details{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:18px;align-items:start;width:calc(66.666667% + 6px);max-width:100%;
+}
+.nr-lynch-details .nr-control-card{min-width:0}
+.nr-lynch-formulas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.nr-lynch-formulas>div{display:flex;flex-direction:column;gap:8px;min-width:0;border:1px solid #d1dfed;background:#f7fafc;padding:12px}
+.nr-lynch-formulas strong{font-size:13px;color:#173d60}
+.nr-lynch-formulas code{background:#e9f2f9;padding:7px 8px;color:#153d5f;overflow-wrap:anywhere;font-size:12px}
+.nr-lynch-formulas span{font-size:12px;line-height:1.5;color:#496477}
+@media(max-width:1050px){.nr-lynch-details{width:100%;gap:12px}}
+@media(max-width:700px){.nr-lynch-details{grid-template-columns:1fr}.nr-lynch-formulas{grid-template-columns:1fr}}
