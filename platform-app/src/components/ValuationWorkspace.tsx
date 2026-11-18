@@ -10,6 +10,7 @@ import {getManualTtmFinancials} from "../data/googleSheetsManualFinancials";
 import {SecurityLogo} from "./SecurityLogo";
 import {DividendResearchPanel} from "./DividendResearchPanel";
 import {GrahamInterpretationPanel,GrahamResearchPanel} from "./GrahamResearchPanel";
+import {LynchValuationPanel} from "./LynchValuationPanel";
 import {WaccResearchPanel} from "./WaccResearchPanel";
 import aaaYieldSnapshot from "../data/aaaYieldSnapshot.json";
 import {automaticGrahamGrowth} from "../core/grahamGrowth";
@@ -22,6 +23,7 @@ const tabs:{id:ValuationMethod;label:string;sub:string}[]=[
  {id:"dcf",label:"DCF Engine",sub:"Intrinsic cash flow"},
  {id:"required-return",label:"Required Return",sub:"Entry-price discipline"},
  {id:"graham",label:"Graham Valuation",sub:"Graham formula"},
+ {id:"lynch",label:"Lynch Valuation",sub:"PEG / PEGY growth"},
  {id:"dividend",label:"Dividend Value",sub:"30-year DDM"},
  {id:"peers",label:"Peer Comparables",sub:"Verified peers only"}
 ];
@@ -39,6 +41,7 @@ const assumptionsByTab:Record<ValuationMethod,{key:keyof ModelInputs;label:strin
  dcf:[{key:"growth",label:"FCF growth %",step:0.5},{key:"discount",label:"Equity discount %",step:0.5},{key:"terminal",label:"Terminal growth %",step:0.25},{key:"years",label:"Forecast years",step:1},{key:"mos",label:"Margin of safety %",step:1}],
  "required-return":[{key:"growth",label:"EPS growth Y1–5 %",step:0.5},{key:"growth2",label:"EPS growth Y6–10 %",step:0.5},{key:"divGrowth",label:"Dividend growth Y1–5 %",step:0.5},{key:"divGrowth2",label:"Dividend growth Y6–10 %",step:0.5},{key:"requiredReturn",label:"Target return %",step:0.5},{key:"exitPe",label:"Exit P/E",step:0.5}],
  graham:[{key:"growth",label:"Expected EPS growth %",step:0.5},{key:"aaaYield",label:"AAA corporate bond yield %",step:0.1}],
+ lynch:[],
  dividend:[{key:"dividendGrowth",label:"Dividend growth Y1–10 %",step:0.5},{key:"dividendTerminal",label:"Perpetual growth Y11+ %",step:0.25},{key:"dividendDiscount",label:"Target rate of return %",step:0.5}],
  peers:[]
 };
@@ -100,9 +103,9 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
  const noValue=active==="dcf"&&!base||active==="graham"&&!graham||active==="dividend"&&!ddm||active==="required-return"&&!required;
  const chooseRateTab=(next:DiscountTab)=>{setRateMode(next);try{localStorage.setItem("optionscrafted.valuation.dcf-rate-tab.v1",next)}catch{}};
  const isWaccTab=active==="dcf"&&rateMode==="wacc";
- const showOtherValuationControls=active!=="graham";
+ const showOtherValuationControls=active!=="graham"&&active!=="lynch";
  const sensitivityPanel=active==="dcf"?<section className="nr-panel nr-sensitivity"><div className="nr-section-title"><div><span className="nr-eyebrow">SENSITIVITY ANALYSIS</span></div></div>{base?<div className="nr-sensitivity-wrap"><table><thead><tr><th>FCF growth ↓ · Return →</th>{[-2,-1,0,1,2].map(d=><th key={d}>{(rate!+d).toFixed(1)}%</th>)}</tr></thead><tbody>{[-2,-1,0,1,2].map(gap=>{const growth=a.growth+gap;return <tr key={gap}><th>{growth.toFixed(1)}%</th>{[-2,-1,0,1,2].map(d=>{const r=rate!+d,result=dcfModel(financials.fcf,growth,r,a.terminal,a.years),isBase=gap===0&&d===0;return <td key={d} className={isBase?"is-base":""}>{result&&r>a.terminal?money(result.value,currency):"—"}</td>})}</tr>})}</tbody></table></div>:<p className="nr-chart-empty">Enter a positive FCF/share and valid discount assumptions to see the sensitivity table.</p>}</section>:null;
- return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"?" nr-workspace--graham":"")}>
+ return <div className={"nr-workspace"+(active==="required-return"||active==="dividend"?" nr-workspace--required":"")+(active==="graham"||active==="lynch"?" nr-workspace--graham":"")}>
   <header className="nr-hero"><div><span className="nr-eyebrow">{premiumDcf?"PREMIUM ANALYSIS / CASH FLOW":"OPTIONSCRAFTED / VALUATION INTELLIGENCE"}</span><h2>{premiumDcf?"DCF Engine":<>Valuation Lab <span>2.0</span></>}</h2><p>{premiumDcf?"Manual DCF, CAPM and WACC methods with explicit assumptions and sensitivity analysis.":"Standalone valuation calculators. Results depend on the data and assumptions entered for each method."}</p></div><div className="nr-hero-meta"><SecurityLogo ticker={asset.ticker}/><strong>{asset.ticker}</strong></div></header>
   {!premiumDcf&&<nav className="nr-tabbar" aria-label="Standalone valuation methods">{tabs.filter(t=>t.id!=="dcf"&&t.id!=="peers").map(t=><NavLink key={t.id} to={"/valuation/"+t.id} className={active===t.id?"active":""}><b>{t.label}</b><small>{t.sub}</small></NavLink>)}</nav>}
   {active==="required-return"&&<section className="nr-required-lead" aria-label="Required return primary result">
@@ -159,6 +162,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
     </div>
    </section>
   </div>}
+  {active==="lynch"&&<LynchValuationPanel key={asset.ticker} asset={asset}/>}
   {active==="graham"&&<section className="nr-graham-top-summary" aria-label="Graham valuation result">
    <div><span className="nr-eyebrow">GRAHAM VALUATION · {mode==="manual"?"MANUAL":"AUTOMATIC"}</span><h3>Graham Composite</h3><strong>{money(publishedValuation.methods.find(method=>method.family==="earnings"&&method.status==="AVAILABLE")?.value??null,currency)}</strong><p>Classic {money(publishedValuation.grahamComponents.find(part=>part.id==="classic")?.value??null,currency)} + Aaa-adjusted {money(publishedValuation.grahamComponents.find(part=>part.id==="aaa")?.value??null,currency)} · equal-weight mean</p></div>
   </section>}
@@ -231,7 +235,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
      <div className="nr-metric"><span>Total terminal value</span><strong>{money(requiredTotal,currency)}</strong><small>Sale + future-value dividends</small></div>
      <div className="nr-metric nr-required-primary"><span>Primary output · Buy now below</span><strong>{money(required?.entry??null,currency)}</strong><small>Target return {requiredReturnText} / year</small></div>
     </div>
-   </section>:active==="dividend"?<DividendResearchPanel result={ddm} currentDividend={financials.dividend} currency={currency} growth={a.dividendGrowth} terminalGrowth={a.dividendTerminal} discount={a.dividendDiscount}/>:active==="graham"?<GrahamResearchPanel valuationMode={mode==="manual"?"manual":"automatic"} ticker={asset.ticker} price={financials.price} eps={financials.eps} dividendYield={currentDividendYield} growth={grahamGrowth??Number.NaN} aaaYield={grahamYield} currency={currency} result={graham} aaaObservationDate={aaaYieldSnapshot.observationDate} aaaSourceUrl={aaaYieldSnapshot.sourceUrl} aaaIsManual={aaaManual}/>:active==="dcf"?null:<div className="nr-metric-grid">
+   </section>:active==="dividend"?<DividendResearchPanel result={ddm} currentDividend={financials.dividend} currency={currency} growth={a.dividendGrowth} terminalGrowth={a.dividendTerminal} discount={a.dividendDiscount}/>:active==="lynch"?null:active==="graham"?<GrahamResearchPanel valuationMode={mode==="manual"?"manual":"automatic"} ticker={asset.ticker} price={financials.price} eps={financials.eps} dividendYield={currentDividendYield} growth={grahamGrowth??Number.NaN} aaaYield={grahamYield} currency={currency} result={graham} aaaObservationDate={aaaYieldSnapshot.observationDate} aaaSourceUrl={aaaYieldSnapshot.sourceUrl} aaaIsManual={aaaManual}/>:active==="dcf"?null:<div className="nr-metric-grid">
    {[["DCF intrinsic",base?.value??null,"CASH FLOW"],["Graham anchor",graham?.adjusted??graham?.classic??null,graham?.adjusted!==null&&graham?.adjusted!==undefined?"BOND-ADJUSTED":"CLASSIC"],["Dividend DDM",ddm?.value??null,"INTRINSIC"],["Required-return entry",required?.entry??null,"ENTRY PRICE · NOT FAIR VALUE"]].map(([label,v,tag])=><div className="nr-metric" key={label as string}><span>{label as string}</span><strong>{money(v as number|null,currency)}</strong><small>{tag as string}</small></div>)}
   </div>}
   {active==="required-return"&&<section className="nr-required-details" aria-label="Ten-year projection and interpretation">
@@ -262,7 +266,7 @@ export function ValuationWorkspace({asset,tab="required-return",onUpdate,premium
    </div>
    </div>
   </section>}
-  {active!=="required-return"&&active!=="dividend"&&active!=="graham"&&<section className="nr-model-output">
+  {active!=="required-return"&&active!=="dividend"&&active!=="graham"&&active!=="lynch"&&<section className="nr-model-output">
    <div className={"nr-chart-card"+(active==="dcf"?" nr-dcf-chart-light":"")}>
     <div className="nr-section-title"><div><span className="nr-eyebrow">MODEL VISUALIZATION</span><h3>{active==="dcf"?"Projected free cash flow per share":"Comparable valuation coverage"}</h3>{active==="dcf"&&<small className="nr-dcf-unit-label">{currency} per share</small>}</div>{active==="dcf"&&<div className="nr-dcf-chart-legend" aria-label="DCF chart legend"><span><i className="nr-dcf-legend-navy"/>FCF / share</span><span><i className="nr-dcf-legend-gold"/>PV / share</span></div>}</div>
     {active==="dcf"&&base?<>
