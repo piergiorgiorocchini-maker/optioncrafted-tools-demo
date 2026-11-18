@@ -93,7 +93,7 @@ if(!grahamWorkspace.includes("asset.price*asset.dividendYield:null")||grahamWork
 for(const [p,needle] of [["platform-app/src/components/RealResearch.tsx","fmt(asset.dividendYield*100)"],["platform-app/src/components/LiveUniverseExplorer.tsx","number(r.dividendYield*100)"]])if(!read(p).includes(needle))throw new Error("Display percentages should multiply decimal dividend yield by 100: "+p);
 if(!grahamWorkspace.includes('nr-required-input-groups')||!grahamWorkspace.includes("Current Annual Dividend"))throw new Error("Required Return must expose grouped EPS, dividend, and return inputs");
 checks+=5;
-console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
+
 
 
 /* Lynch / PEG integration: check the actual TypeScript model numerically, not
@@ -127,3 +127,4 @@ if(!lynchBridge.includes('uniqueByFamily.set("earnings"')||!lynchBridge.includes
 if(!lynchBridge.includes('id:"lynch"')||!footballSource.includes('id:"lynch"')||!synthesisSource.includes('lynch={lynch?{value:lynch.value'))throw new Error("Lynch Composite must be included in Football Field");
 if(!lynchUi.includes("onScenarioChange(asset.ticker")||!mainSource.includes("lynchManual:lynchByTicker[ticker]")||!mainSource.includes("onLynchManualChange={updateLynchMode}"))throw new Error("Lynch editable inputs must update global fair value and Premium synthesis");
 checks+=13;
+console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
