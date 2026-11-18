@@ -17,7 +17,7 @@ export function lynchModel(eps:number|null,growth:number,dividendYieldPercent:nu
  const value=values.reduce((sum,v)=>sum+v,0)/values.length;
  if(!validPositive(value))return null;
  const pe=validPositive(price)?price/eps:null;
- return {value,low:Math.min(...values),high:Math.max(...values),basic,withDividend,
+ return {value,composite:withDividend===null?null:value,low:Math.min(...values),high:Math.max(...values),basic,withDividend,
   pe,peg:pe!==null?pe/growth:null,
   pegy:pe!==null&&validYield?pe/(growth+dividendYieldPercent):null,
   upside:validPositive(price)?(value/price-1)*100:null};
