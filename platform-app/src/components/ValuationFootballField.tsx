@@ -18,6 +18,7 @@ type Props={
  source?:string;
  extra?:Method[];
  graham?:number|null;
+ lynch?:{value:number|null;low:number|null;high:number|null;detail?:string}|null;
  dividend?:number|null;
  triangulatedValue?:number|null;
 };
@@ -28,7 +29,7 @@ const prettyStep=(range:number)=>{
  const power=10**Math.floor(Math.log10(raw));
  return ([1,2,2.5,5,10].find(n=>n*power>=raw)??10)*power;
 };
-export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,extra=[],graham=null,dividend=null,triangulatedValue=null}:Props){
+export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=25,extra=[],graham=null,lynch=null,dividend=null,triangulatedValue=null}:Props){
  const isoCurrency=/^[A-Z]{3}$/.test(currency)?currency:"USD";
  const money=(value:number|null)=>valid(value)?new Intl.NumberFormat("en-US",{style:"currency",currency:isoCurrency,maximumFractionDigits:2}).format(value):"N/D";
  const axisValue=(value:number)=>new Intl.NumberFormat("en-US",{maximumFractionDigits:1,notation:value>=10000?"compact":"standard"}).format(value);
@@ -38,6 +39,7 @@ export function ValuationFootballField({price,currency="USD",bear,base,bull,mos=
  const candidates:Series[]=[
   {id:"dcf",label:"DCF",low:dcfRange.length?Math.min(...dcfRange):null,mid:valid(base)?base:null,high:dcfRange.length?Math.max(...dcfRange):null,detail:"DCF range across available scenarios"},
   {id:"earnings",label:"Graham Valuation",low:graham,mid:graham,high:graham,detail:"Graham earnings-based valuation; not EPS"},
+  {id:"lynch",label:"Lynch Valuation",low:lynch?.low??null,mid:lynch?.value??null,high:lynch?.high??null,detail:lynch?.detail??"PEG and PEGY growth-relative estimates (one family)"},
   {id:"dividend",label:"Dividend",low:dividend,mid:dividend,high:dividend,detail:"DDM method"},
   ...extra.filter(m=>m.kind!=="entry").map((m,i)=>({id:"extra-"+i,label:m.label,low:m.low,mid:m.mid,high:m.high,detail:m.detail}))
  ];
