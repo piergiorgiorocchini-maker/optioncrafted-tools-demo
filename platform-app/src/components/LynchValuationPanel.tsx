@@ -5,8 +5,8 @@ import {googleSheetsSecAnnualHistory} from "../data/googleSheetsSecFinancials";
 import {money} from "../core/valuationModels";
 
 const finitePositive=(n:number|null|undefined):n is number=>typeof n==="number"&&Number.isFinite(n)&&n>0;
-const display=n=>n===null?"N/D":n.toFixed(2)+"×";
-const fmtRate=n=>n===null?"N/D":n.toFixed(2)+"%";
+const display=(n:number|null)=>n===null?"N/D":n.toFixed(2)+"×";
+const fmtRate=(n:number|null)=>n===null?"N/D":n.toFixed(2)+"%";
 const parse=(s:string)=>s.trim()===""?null:Number.isFinite(Number(s))?Number(s):null;
 
 /** Standalone PEG/PEGY heuristic. It is NOT an independent cash-flow valuation. */
