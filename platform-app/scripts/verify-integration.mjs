@@ -94,3 +94,36 @@ for(const [p,needle] of [["platform-app/src/components/RealResearch.tsx","fmt(as
 if(!grahamWorkspace.includes('nr-required-input-groups')||!grahamWorkspace.includes("Current Annual Dividend"))throw new Error("Required Return must expose grouped EPS, dividend, and return inputs");
 checks+=5;
 console.log("OptionsCrafted integration checks passed: "+checks+" assertions (native valuation and options modules plus preserved standalone legacy engines).");
+
+
+/* Lynch / PEG integration: check the actual TypeScript model numerically, not
+   simply a duplicated calculation. Growth and yield use percentage points. */
+const typescript=(await import("typescript")).default;
+const lynchSrc=read("platform-app/src/core/lynchValuation.ts");
+const lynchJs=typescript.transpileModule(lynchSrc,{compilerOptions:{module:typescript.ModuleKind.ESNext,target:typescript.ScriptTarget.ES2022}}).outputText;
+const lynch=await import("data:text/javascript;base64,"+Buffer.from(lynchJs).toString("base64"));
+const near=(actual,expected,context)=>{if(actual===null||Math.abs(actual-expected)>1e-8)throw new Error("Lynch model regression: "+context+" (got "+actual+", expected "+expected+")")};
+const sample=lynch.lynchModel(10,20,2,100);
+if(!sample)throw new Error("Lynch model must accept valid EPS, growth and yield");
+near(sample.basic,200,"PEG=1");
+near(sample.withDividend,220,"PEGY=1");
+near(sample.composite,210,"equal-weight Lynch Composite");
+near(sample.value,210,"published Lynch Composite");
+near(sample.peg,0.5,"current PEG");
+near(sample.pegy,10/22,"current PEGY");
+const noDividend=lynch.lynchModel(10,20,null,100);
+if(!noDividend||noDividend.composite!==null||noDividend.withDividend!==null)throw new Error("No dividend yield must not fabricate a two-method Lynch Composite");
+const zeroDividend=lynch.lynchModel(10,20,0,100);
+if(!zeroDividend||zeroDividend.composite!==200)throw new Error("Explicit zero yield must produce identical PEG and PEGY components");
+if(lynch.lynchModel(null,20,2,100)!==null||lynch.lynchModel(10,0,2,100)!==null)throw new Error("Invalid Lynch EPS or growth cannot produce a fair value");
+near(lynch.lynchGrowthAssumption(0.2).growth,20,"annual EPS CAGR decimal conversion");
+near(lynch.lynchGrowthAssumption(null).growth,10,"fallback growth assumption");
+const lynchBridge=read("platform-app/src/core/valuationTriangulation.ts");
+const lynchUi=read("platform-app/src/components/LynchValuationPanel.tsx");
+const synthesisSource=read("platform-app/src/components/ValuationSynthesis.tsx");
+const footballSource=read("platform-app/src/components/ValuationFootballField.tsx");
+const mainSource=read("platform-app/src/main.tsx");
+if(!lynchBridge.includes('uniqueByFamily.set("earnings"')||!lynchBridge.includes("earningsMembers")||!lynchBridge.includes("lynchModel(eps,growth,yieldPct,price)"))throw new Error("Graham and Lynch must share one earnings-family vote while preserving one PEG/PEGY composite");
+if(!lynchBridge.includes('id:"lynch"')||!footballSource.includes('id:"lynch"')||!synthesisSource.includes('lynch={lynch?{value:lynch.value'))throw new Error("Lynch Composite must be included in Football Field");
+if(!lynchUi.includes("onScenarioChange(asset.ticker")||!mainSource.includes("lynchManual:lynchByTicker[ticker]")||!mainSource.includes("onLynchManualChange={updateLynchMode}"))throw new Error("Lynch editable inputs must update global fair value and Premium synthesis");
+checks+=13;
