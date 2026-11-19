@@ -912,10 +912,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-19": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "CVX:income",
+            "at": "2026-11-19T17:21:54.598Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "CVX:balance",
+            "at": "2026-11-19T17:21:54.735Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 16
+    "ALPHA_VANTAGE": 17
   }
 }
