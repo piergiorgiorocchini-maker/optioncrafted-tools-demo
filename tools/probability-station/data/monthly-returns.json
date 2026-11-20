@@ -1210,7 +1210,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 14.49,
+      "avgReturn": 14.56,
       "medianReturn": 15.47,
       "positivePct": 72.7,
       "bestReturn": 44.98,
@@ -1276,10 +1276,10 @@
   "AMGN": [
     {
       "month": "January",
-      "avgReturn": 1.39,
+      "avgReturn": 0.58,
       "medianReturn": 0,
-      "positivePct": 27.3,
-      "bestReturn": 8.92,
+      "positivePct": 18.2,
+      "bestReturn": 4.84,
       "worstReturn": 0
     },
     {
@@ -1364,11 +1364,11 @@
     },
     {
       "month": "December",
-      "avgReturn": -0.17,
+      "avgReturn": -0.13,
       "medianReturn": 0,
       "positivePct": 27.3,
       "bestReturn": 12.24,
-      "worstReturn": -8.08
+      "worstReturn": -7.6
     }
   ],
   "AMLP": [
@@ -2680,7 +2680,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 1.16,
+      "avgReturn": 1.21,
       "medianReturn": 0.13,
       "positivePct": 54.5,
       "bestReturn": 15.8,
@@ -3366,7 +3366,7 @@
     },
     {
       "month": "May",
-      "avgReturn": -1.66,
+      "avgReturn": -1.63,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 6.18,
@@ -3464,8 +3464,8 @@
     },
     {
       "month": "May",
-      "avgReturn": 5.68,
-      "medianReturn": 5.64,
+      "avgReturn": 5.75,
+      "medianReturn": 6.36,
       "positivePct": 72.7,
       "bestReturn": 23.08,
       "worstReturn": -8.66
@@ -4052,8 +4052,8 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.42,
-      "medianReturn": 1.08,
+      "avgReturn": 0.36,
+      "medianReturn": 0.89,
       "positivePct": 63.6,
       "bestReturn": 12.13,
       "worstReturn": -12.4
@@ -4248,7 +4248,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 3.35,
+      "avgReturn": 3.12,
       "medianReturn": 0.63,
       "positivePct": 63.6,
       "bestReturn": 15.49,
@@ -5032,7 +5032,7 @@
     },
     {
       "month": "May",
-      "avgReturn": -0.49,
+      "avgReturn": -0.42,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 11.74,
@@ -6208,7 +6208,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 2.12,
+      "avgReturn": 2.02,
       "medianReturn": 1.39,
       "positivePct": 54.5,
       "bestReturn": 11.97,
@@ -6224,7 +6224,7 @@
     },
     {
       "month": "July",
-      "avgReturn": 0.29,
+      "avgReturn": 0.28,
       "medianReturn": -0.22,
       "positivePct": 45.5,
       "bestReturn": 9.28,
@@ -6404,11 +6404,11 @@
     },
     {
       "month": "May",
-      "avgReturn": -1.81,
+      "avgReturn": -1.8,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 15.55,
-      "worstReturn": -15.05
+      "worstReturn": -14.91
     },
     {
       "month": "June",
@@ -6796,7 +6796,7 @@
     },
     {
       "month": "May",
-      "avgReturn": -0.96,
+      "avgReturn": -0.83,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 16.21,
@@ -7286,8 +7286,8 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.74,
-      "medianReturn": 1.36,
+      "avgReturn": 0.7,
+      "medianReturn": 0.9,
       "positivePct": 54.5,
       "bestReturn": 13.08,
       "worstReturn": -13.49
@@ -7678,7 +7678,7 @@
     },
     {
       "month": "May",
-      "avgReturn": -1.84,
+      "avgReturn": -1.88,
       "medianReturn": -1.85,
       "positivePct": 27.3,
       "bestReturn": 8.9,
@@ -7972,8 +7972,8 @@
     },
     {
       "month": "May",
-      "avgReturn": 7.02,
-      "medianReturn": -1.18,
+      "avgReturn": 6.86,
+      "medianReturn": -2.64,
       "positivePct": 36.4,
       "bestReturn": 109.79,
       "worstReturn": -26.95
@@ -8462,7 +8462,7 @@
     },
     {
       "month": "May",
-      "avgReturn": -0.25,
+      "avgReturn": -0.28,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 14.08,
@@ -9622,7 +9622,7 @@
     },
     {
       "month": "March",
-      "avgReturn": -0.71,
+      "avgReturn": -0.84,
       "medianReturn": 0.63,
       "positivePct": 54.5,
       "bestReturn": 6.76,
@@ -10030,11 +10030,11 @@
     },
     {
       "month": "May",
-      "avgReturn": -2.42,
+      "avgReturn": -2.39,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 16.07,
-      "worstReturn": -20.74
+      "worstReturn": -20.45
     },
     {
       "month": "June",
@@ -11010,7 +11010,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 6.76,
+      "avgReturn": 6.83,
       "medianReturn": 11.18,
       "positivePct": 81.8,
       "bestReturn": 14.83,
@@ -12382,8 +12382,8 @@
     },
     {
       "month": "May",
-      "avgReturn": -0.29,
-      "medianReturn": 2.08,
+      "avgReturn": -0.22,
+      "medianReturn": 2.4,
       "positivePct": 72.7,
       "bestReturn": 5.87,
       "worstReturn": -15.7
@@ -12480,11 +12480,11 @@
     },
     {
       "month": "May",
-      "avgReturn": 5.38,
+      "avgReturn": 5.51,
       "medianReturn": 4.03,
       "positivePct": 72.7,
       "bestReturn": 18.47,
-      "worstReturn": -6.78
+      "worstReturn": -5.32
     },
     {
       "month": "June",
@@ -12578,8 +12578,8 @@
     },
     {
       "month": "May",
-      "avgReturn": -0.85,
-      "medianReturn": 0.38,
+      "avgReturn": -0.99,
+      "medianReturn": 0.04,
       "positivePct": 54.5,
       "bestReturn": 5.84,
       "worstReturn": -10.01
@@ -14146,10 +14146,10 @@
     },
     {
       "month": "May",
-      "avgReturn": 1.82,
+      "avgReturn": 1.65,
       "medianReturn": 0,
       "positivePct": 45.5,
-      "bestReturn": 18.38,
+      "bestReturn": 17.3,
       "worstReturn": -11.11
     },
     {
@@ -14244,7 +14244,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 6.54,
+      "avgReturn": 6.61,
       "medianReturn": 1.3,
       "positivePct": 72.7,
       "bestReturn": 49.11,
@@ -15126,7 +15126,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.97,
+      "avgReturn": 0.94,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 11.24,
@@ -16596,7 +16596,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 1.04,
+      "avgReturn": 1.14,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 15.47,
@@ -17380,7 +17380,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 2.13,
+      "avgReturn": 2.07,
       "medianReturn": 0.13,
       "positivePct": 54.5,
       "bestReturn": 23.02,
@@ -17645,7 +17645,7 @@
       "avgReturn": 15.66,
       "medianReturn": 0,
       "positivePct": 9.1,
-      "bestReturn": 172.25,
+      "bestReturn": 172.3,
       "worstReturn": 0
     },
     {
@@ -17653,7 +17653,7 @@
       "avgReturn": 0.47,
       "medianReturn": 0,
       "positivePct": 9.1,
-      "bestReturn": 5.14,
+      "bestReturn": 5.15,
       "worstReturn": 0
     },
     {
@@ -17662,35 +17662,35 @@
       "medianReturn": 0,
       "positivePct": 9.1,
       "bestReturn": 2.7,
-      "worstReturn": -1.81
+      "worstReturn": -1.82
     },
     {
       "month": "April",
       "avgReturn": 3.24,
       "medianReturn": 0,
       "positivePct": 9.1,
-      "bestReturn": 68.1,
-      "worstReturn": -32.47
+      "bestReturn": 68.09,
+      "worstReturn": -32.49
     },
     {
       "month": "May",
       "avgReturn": 7.39,
       "medianReturn": 0,
       "positivePct": 18.2,
-      "bestReturn": 66.33,
+      "bestReturn": 66.32,
       "worstReturn": 0
     },
     {
       "month": "June",
-      "avgReturn": 4.74,
+      "avgReturn": 4.75,
       "medianReturn": 0,
       "positivePct": 18.2,
-      "bestReturn": 31.34,
+      "bestReturn": 31.35,
       "worstReturn": 0
     },
     {
       "month": "July",
-      "avgReturn": -4.35,
+      "avgReturn": -4.34,
       "medianReturn": 0,
       "positivePct": 0,
       "bestReturn": 0,
@@ -17717,8 +17717,8 @@
       "avgReturn": 3.48,
       "medianReturn": 0,
       "positivePct": 9.1,
-      "bestReturn": 76.3,
-      "worstReturn": -38.05
+      "bestReturn": 76.36,
+      "worstReturn": -38.04
     },
     {
       "month": "November",
@@ -17726,14 +17726,14 @@
       "medianReturn": 0,
       "positivePct": 0,
       "bestReturn": 0,
-      "worstReturn": -0.32
+      "worstReturn": -0.34
     },
     {
       "month": "December",
       "avgReturn": 1.1,
       "medianReturn": 0,
       "positivePct": 9.1,
-      "bestReturn": 12.06,
+      "bestReturn": 12.05,
       "worstReturn": 0
     }
   ],
@@ -18458,7 +18458,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 6.2,
+      "avgReturn": 6.02,
       "medianReturn": 5.76,
       "positivePct": 81.8,
       "bestReturn": 22.5,
@@ -18556,7 +18556,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.02,
+      "avgReturn": 0.03,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 1.77,
@@ -19046,7 +19046,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 3.51,
+      "avgReturn": 3.29,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 24.98,
@@ -19830,9 +19830,9 @@
     },
     {
       "month": "May",
-      "avgReturn": 2.57,
-      "medianReturn": -1.02,
-      "positivePct": 36.4,
+      "avgReturn": 2.76,
+      "medianReturn": 0,
+      "positivePct": 45.5,
       "bestReturn": 37.13,
       "worstReturn": -16.42
     },
@@ -20810,8 +20810,8 @@
     },
     {
       "month": "May",
-      "avgReturn": 7.95,
-      "medianReturn": 7.3,
+      "avgReturn": 8.3,
+      "medianReturn": 10.62,
       "positivePct": 81.8,
       "bestReturn": 34.46,
       "worstReturn": -27.87
@@ -21104,7 +21104,7 @@
     },
     {
       "month": "May",
-      "avgReturn": -1.05,
+      "avgReturn": -1.22,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 10.88,
@@ -21202,7 +21202,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.31,
+      "avgReturn": 0.33,
       "medianReturn": 2.05,
       "positivePct": 54.5,
       "bestReturn": 6.32,
@@ -21986,8 +21986,8 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.17,
-      "medianReturn": 1.06,
+      "avgReturn": 0.07,
+      "medianReturn": 0.6,
       "positivePct": 63.6,
       "bestReturn": 3.45,
       "worstReturn": -4.4
@@ -22280,7 +22280,7 @@
     },
     {
       "month": "May",
-      "avgReturn": 0.39,
+      "avgReturn": 0.31,
       "medianReturn": 0,
       "positivePct": 45.5,
       "bestReturn": 19.31,
