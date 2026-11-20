@@ -933,10 +933,31 @@
         ],
         "count": 2
       }
+    },
+    "2026-11-20": {
+      "FMP": {
+        "attempts": [],
+        "count": 0
+      },
+      "ALPHA_VANTAGE": {
+        "attempts": [
+          {
+            "id": "JNJ:income",
+            "at": "2026-11-20T16:56:26.487Z",
+            "status": "AVAILABLE"
+          },
+          {
+            "id": "JNJ:balance",
+            "at": "2026-11-20T16:56:26.725Z",
+            "status": "PREMIUM_REQUIRED"
+          }
+        ],
+        "count": 2
+      }
     }
   },
   "cursor": {
     "FMP": 1,
-    "ALPHA_VANTAGE": 17
+    "ALPHA_VANTAGE": 18
   }
 }
