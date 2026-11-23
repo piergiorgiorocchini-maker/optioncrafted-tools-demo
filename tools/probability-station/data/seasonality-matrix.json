@@ -1604,7 +1604,7 @@
         "February": 3.47,
         "March": 0.93,
         "April": 3.16,
-        "May": 12.91,
+        "May": 12.06,
         "June": -2.91,
         "July": 1.51,
         "August": 7.56,
@@ -1612,7 +1612,7 @@
         "October": -9.57,
         "November": 2.12,
         "December": -13.22,
-        "sum": 5.96
+        "sum": 5.1
       },
       {
         "year": 2017,
@@ -1652,7 +1652,7 @@
       "February": -2.75,
       "March": 0.18,
       "April": 1.47,
-      "May": 5.18,
+      "May": 5.11,
       "June": 3.01,
       "July": 4.85,
       "August": 4.12,
@@ -1798,39 +1798,39 @@
       },
       {
         "year": 2018,
-        "value": 71.96
+        "value": 71.11
       },
       {
         "year": 2019,
-        "value": 106.96
+        "value": 106.1
       },
       {
         "year": 2020,
-        "value": 150.59
+        "value": 149.74
       },
       {
         "year": 2021,
-        "value": 171.92
+        "value": 171.07
       },
       {
         "year": 2022,
-        "value": 131.38
+        "value": 130.53
       },
       {
         "year": 2023,
-        "value": 191.53
+        "value": 190.68
       },
       {
         "year": 2024,
-        "value": 172.48
+        "value": 171.63
       },
       {
         "year": 2025,
-        "value": 156.23
+        "value": 155.37
       },
       {
         "year": 2026,
-        "value": 126.9
+        "value": 126.05
       }
     ]
   },
@@ -2338,7 +2338,7 @@
         "February": -7.18,
         "March": -1.76,
         "April": 2.46,
-        "May": 15.42,
+        "May": 15.96,
         "June": 3.25,
         "July": 1.76,
         "August": 12.7,
@@ -2346,7 +2346,7 @@
         "October": -4.82,
         "November": 2.55,
         "December": -12.11,
-        "sum": 12.26
+        "sum": 12.8
       },
       {
         "year": 2017,
@@ -2386,7 +2386,7 @@
       "February": 0.72,
       "March": 0.5,
       "April": 1.33,
-      "May": 2.43,
+      "May": 2.48,
       "June": 0.36,
       "July": 5.77,
       "August": 1.67,
@@ -2532,39 +2532,39 @@
       },
       {
         "year": 2018,
-        "value": 52.83
+        "value": 53.37
       },
       {
         "year": 2019,
-        "value": 75.58
+        "value": 76.12
       },
       {
         "year": 2020,
-        "value": 91.21
+        "value": 91.76
       },
       {
         "year": 2021,
-        "value": 126.73
+        "value": 127.27
       },
       {
         "year": 2022,
-        "value": 136.52
+        "value": 137.06
       },
       {
         "year": 2023,
-        "value": 143.78
+        "value": 144.32
       },
       {
         "year": 2024,
-        "value": 150.97
+        "value": 151.51
       },
       {
         "year": 2025,
-        "value": 144.55
+        "value": 145.09
       },
       {
         "year": 2026,
-        "value": 162.07
+        "value": 162.62
       }
     ]
   },
@@ -2705,7 +2705,7 @@
         "February": 0.02,
         "March": 4.07,
         "April": 1.08,
-        "May": 3.03,
+        "May": 3.25,
         "June": 1.23,
         "July": -1.22,
         "August": 20.6,
@@ -2713,7 +2713,7 @@
         "October": -16.96,
         "November": 11.15,
         "December": -13.12,
-        "sum": 9.88
+        "sum": 10.09
       },
       {
         "year": 2017,
@@ -2753,7 +2753,7 @@
       "February": -1.03,
       "March": -1.73,
       "April": 3.04,
-      "May": 4.68,
+      "May": 4.7,
       "June": -0.99,
       "July": 6.05,
       "August": 4.03,
@@ -2899,39 +2899,39 @@
       },
       {
         "year": 2018,
-        "value": 103.35
+        "value": 103.56
       },
       {
         "year": 2019,
-        "value": 129.02
+        "value": 129.24
       },
       {
         "year": 2020,
-        "value": 194.65
+        "value": 194.86
       },
       {
         "year": 2021,
-        "value": 198.74
+        "value": 198.96
       },
       {
         "year": 2022,
-        "value": 173.12
+        "value": 173.33
       },
       {
         "year": 2023,
-        "value": 179.11
+        "value": 179.33
       },
       {
         "year": 2024,
-        "value": 173.8
+        "value": 174.01
       },
       {
         "year": 2025,
-        "value": 164.76
+        "value": 164.98
       },
       {
         "year": 2026,
-        "value": 156.39
+        "value": 156.61
       }
     ]
   },
@@ -4540,7 +4540,7 @@
         "February": -12.63,
         "March": -22.27,
         "April": 8.91,
-        "May": 27.61,
+        "May": 26.78,
         "June": 8.44,
         "July": 23.85,
         "August": 37.24,
@@ -4548,7 +4548,7 @@
         "October": -40.66,
         "November": 15.7,
         "December": -17.88,
-        "sum": 28.31
+        "sum": 27.47
       },
       {
         "year": 2017,
@@ -4588,7 +4588,7 @@
       "February": 0.25,
       "March": 1.54,
       "April": 8.12,
-      "May": 14.56,
+      "May": 14.49,
       "June": 5.68,
       "July": 13.74,
       "August": 3.94,
@@ -4734,39 +4734,39 @@
       },
       {
         "year": 2018,
-        "value": 195.99
+        "value": 195.16
       },
       {
         "year": 2019,
-        "value": 251.86
+        "value": 251.03
       },
       {
         "year": 2020,
-        "value": 336.32
+        "value": 335.49
       },
       {
         "year": 2021,
-        "value": 402.4
+        "value": 401.57
       },
       {
         "year": 2022,
-        "value": 356.96
+        "value": 356.13
       },
       {
         "year": 2023,
-        "value": 408.89
+        "value": 408.06
       },
       {
         "year": 2024,
-        "value": 371.33
+        "value": 370.5
       },
       {
         "year": 2025,
-        "value": 468.4
+        "value": 467.57
       },
       {
         "year": 2026,
-        "value": 598.52
+        "value": 597.69
       }
     ]
   },
@@ -6300,10 +6300,10 @@
         "July": 0,
         "August": 0,
         "September": 0,
-        "October": -7.83,
-        "November": 23.97,
+        "October": 163.56,
+        "November": 0,
         "December": 0,
-        "sum": 16.13
+        "sum": 163.56
       },
       {
         "year": 2022,
@@ -6428,8 +6428,8 @@
       "July": -4.83,
       "August": 0.47,
       "September": 2.17,
-      "October": -2.07,
-      "November": 0.01,
+      "October": 13.51,
+      "November": -2.17,
       "December": -2.38
     },
     "empirical10Y": {
@@ -6442,8 +6442,8 @@
       "July": 0,
       "August": 9.09,
       "September": 9.09,
-      "October": 9.09,
-      "November": 9.09,
+      "October": 18.18,
+      "November": 0,
       "December": 0
     },
     "bestMonth10Y": "Best M",
@@ -6510,10 +6510,10 @@
         "July": 0,
         "August": 0,
         "September": 0,
-        "October": -7.83,
-        "November": 23.97,
+        "October": 163.56,
+        "November": 0,
         "December": 0,
-        "sum": 16.13
+        "sum": 163.56
       },
       {
         "year": 2022,
@@ -6542,8 +6542,8 @@
       "July": -10.64,
       "August": 1.03,
       "September": 4.77,
-      "October": -4.55,
-      "November": 0.03,
+      "October": 29.72,
+      "November": -4.77,
       "December": -5.23
     },
     "empirical5Y": {
@@ -6556,8 +6556,8 @@
       "July": 0,
       "August": 20,
       "September": 20,
-      "October": 20,
-      "November": 20,
+      "October": 40,
+      "November": 0,
       "December": 0
     },
     "bestMonth5Y": "Best M",
@@ -6589,19 +6589,19 @@
       },
       {
         "year": 2023,
-        "value": 16.13
+        "value": 163.56
       },
       {
         "year": 2024,
-        "value": 106.18
+        "value": 253.61
       },
       {
         "year": 2025,
-        "value": 78.91
+        "value": 226.34
       },
       {
         "year": 2026,
-        "value": 204.99
+        "value": 352.42
       }
     ]
   },
@@ -8210,7 +8210,7 @@
         "February": -3.85,
         "March": -6.97,
         "April": 6.02,
-        "May": -0.53,
+        "May": 0.17,
         "June": -0.34,
         "July": 2.18,
         "August": 6.09,
@@ -8218,7 +8218,7 @@
         "October": -4.71,
         "November": 8.73,
         "December": -16.38,
-        "sum": -9.77
+        "sum": -9.07
       },
       {
         "year": 2017,
@@ -8258,7 +8258,7 @@
       "February": 0.96,
       "March": -3.04,
       "April": 3.43,
-      "May": 0.79,
+      "May": 0.85,
       "June": 1.64,
       "July": 1.59,
       "August": 0.4,
@@ -8272,7 +8272,7 @@
       "February": 54.55,
       "March": 36.36,
       "April": 81.82,
-      "May": 36.36,
+      "May": 45.45,
       "June": 54.55,
       "July": 54.55,
       "August": 36.36,
@@ -8404,39 +8404,39 @@
       },
       {
         "year": 2018,
-        "value": 45.07
+        "value": 45.77
       },
       {
         "year": 2019,
-        "value": 68.01
+        "value": 68.7
       },
       {
         "year": 2020,
-        "value": 82.58
+        "value": 83.27
       },
       {
         "year": 2021,
-        "value": 107.5
+        "value": 108.2
       },
       {
         "year": 2022,
-        "value": 94.51
+        "value": 95.21
       },
       {
         "year": 2023,
-        "value": 95.5
+        "value": 96.19
       },
       {
         "year": 2024,
-        "value": 128.34
+        "value": 129.04
       },
       {
         "year": 2025,
-        "value": 136.72
+        "value": 137.41
       },
       {
         "year": 2026,
-        "value": 126.23
+        "value": 126.92
       }
     ]
   },
@@ -8577,7 +8577,7 @@
         "February": -0.92,
         "March": -11.01,
         "April": 2.57,
-        "May": 5.91,
+        "May": 7.73,
         "June": -5.54,
         "July": 7.74,
         "August": -3.19,
@@ -8585,7 +8585,7 @@
         "October": -5.41,
         "November": -3,
         "December": -11.48,
-        "sum": -24.32
+        "sum": -22.51
       },
       {
         "year": 2017,
@@ -8625,7 +8625,7 @@
       "February": 1.23,
       "March": -6.63,
       "April": -1.54,
-      "May": 0.47,
+      "May": 0.63,
       "June": 3.02,
       "July": 4.83,
       "August": -1.48,
@@ -8771,39 +8771,39 @@
       },
       {
         "year": 2018,
-        "value": 55.13
+        "value": 56.95
       },
       {
         "year": 2019,
-        "value": 26.17
+        "value": 27.98
       },
       {
         "year": 2020,
-        "value": 26.89
+        "value": 28.7
       },
       {
         "year": 2021,
-        "value": 25.8
+        "value": 27.61
       },
       {
         "year": 2022,
-        "value": 21.91
+        "value": 23.72
       },
       {
         "year": 2023,
-        "value": 32.16
+        "value": 33.98
       },
       {
         "year": 2024,
-        "value": 37.68
+        "value": 39.49
       },
       {
         "year": 2025,
-        "value": 61.46
+        "value": 63.28
       },
       {
         "year": 2026,
-        "value": 37.61
+        "value": 39.42
       }
     ]
   },
@@ -9311,7 +9311,7 @@
         "February": -6.23,
         "March": -4.81,
         "April": 5.3,
-        "May": 7.32,
+        "May": 6.57,
         "June": -3.45,
         "July": 7.22,
         "August": -6.48,
@@ -9319,7 +9319,7 @@
         "October": -7.65,
         "November": -7.11,
         "December": 3.06,
-        "sum": -12.83
+        "sum": -13.58
       },
       {
         "year": 2017,
@@ -9359,7 +9359,7 @@
       "February": 0.64,
       "March": -1.8,
       "April": 1.72,
-      "May": 3.28,
+      "May": 3.21,
       "June": 0.44,
       "July": 3.87,
       "August": -0.77,
@@ -9505,39 +9505,39 @@
       },
       {
         "year": 2018,
-        "value": 42.01
+        "value": 41.26
       },
       {
         "year": 2019,
-        "value": 59.04
+        "value": 58.29
       },
       {
         "year": 2020,
-        "value": 95.6
+        "value": 94.85
       },
       {
         "year": 2021,
-        "value": 83.72
+        "value": 82.97
       },
       {
         "year": 2022,
-        "value": 106.42
+        "value": 105.67
       },
       {
         "year": 2023,
-        "value": 90.94
+        "value": 90.19
       },
       {
         "year": 2024,
-        "value": 57.74
+        "value": 56.99
       },
       {
         "year": 2025,
-        "value": 69.91
+        "value": 69.16
       },
       {
         "year": 2026,
-        "value": 112.66
+        "value": 111.91
       }
     ]
   },
@@ -9678,7 +9678,7 @@
         "February": 0.03,
         "March": 0.02,
         "April": 0.11,
-        "May": 0.15,
+        "May": 0.13,
         "June": -0.01,
         "July": 0.14,
         "August": 0.16,
@@ -9686,7 +9686,7 @@
         "October": 0.16,
         "November": 0.16,
         "December": 0.01,
-        "sum": 0.95
+        "sum": 0.93
       },
       {
         "year": 2017,
@@ -9872,39 +9872,39 @@
       },
       {
         "year": 2018,
-        "value": 1.45
+        "value": 1.43
       },
       {
         "year": 2019,
-        "value": 2.13
+        "value": 2.11
       },
       {
         "year": 2020,
-        "value": 2.33
+        "value": 2.31
       },
       {
         "year": 2021,
-        "value": 2.22
+        "value": 2.2
       },
       {
         "year": 2022,
-        "value": 3.07
+        "value": 3.05
       },
       {
         "year": 2023,
-        "value": 5.86
+        "value": 5.84
       },
       {
         "year": 2024,
-        "value": 7.77
+        "value": 7.74
       },
       {
         "year": 2025,
-        "value": 9.26
+        "value": 9.24
       },
       {
         "year": 2026,
-        "value": 10.85
+        "value": 10.83
       }
     ]
   },
@@ -10412,7 +10412,7 @@
         "February": -16.52,
         "March": 4.99,
         "April": 28.46,
-        "May": -3.41,
+        "May": -0.34,
         "June": -5.83,
         "July": 5.33,
         "August": -3.71,
@@ -10420,7 +10420,7 @@
         "October": -21.29,
         "November": -15.2,
         "December": -7.88,
-        "sum": -35.06
+        "sum": -31.99
       },
       {
         "year": 2017,
@@ -10460,7 +10460,7 @@
       "February": 1.37,
       "March": -1.81,
       "April": 2.61,
-      "May": 0.33,
+      "May": 0.61,
       "June": -1.6,
       "July": -0.18,
       "August": -0.07,
@@ -10606,39 +10606,39 @@
       },
       {
         "year": 2018,
-        "value": -60.92
+        "value": -57.84
       },
       {
         "year": 2019,
-        "value": -37.93
+        "value": -34.86
       },
       {
         "year": 2020,
-        "value": -2.47
+        "value": 0.6
       },
       {
         "year": 2021,
-        "value": -7.43
+        "value": -4.36
       },
       {
         "year": 2022,
-        "value": 11.99
+        "value": 15.06
       },
       {
         "year": 2023,
-        "value": 16.3
+        "value": 19.37
       },
       {
         "year": 2024,
-        "value": 60.03
+        "value": 63.1
       },
       {
         "year": 2025,
-        "value": 50.82
+        "value": 53.89
       },
       {
         "year": 2026,
-        "value": 74.6
+        "value": 77.67
       }
     ]
   },
@@ -11494,18 +11494,18 @@
       {
         "year": 2019,
         "January": 0,
-        "February": 32.73,
-        "March": -6.57,
-        "April": 18.56,
-        "May": -20.83,
-        "June": -34.9,
-        "July": -38.25,
+        "February": -33.86,
+        "March": 13.75,
+        "April": 0,
+        "May": 0,
+        "June": 13.82,
+        "July": -3.02,
         "August": 0,
         "September": 0,
-        "October": -22.73,
-        "November": -30.43,
-        "December": -13.92,
-        "sum": -116.35
+        "October": 8.41,
+        "November": -24.31,
+        "December": 32.63,
+        "sum": 7.43
       },
       {
         "year": 2018,
@@ -11558,31 +11558,31 @@
     ],
     "average10Y": {
       "January": 4.1,
-      "February": 9.24,
-      "March": -22.48,
-      "April": 32.11,
-      "May": 9.05,
-      "June": -28.22,
-      "July": 3.32,
+      "February": 3.19,
+      "March": -20.63,
+      "April": 30.43,
+      "May": 10.95,
+      "June": -23.79,
+      "July": 6.52,
       "August": 9.98,
       "September": -7.57,
-      "October": -8.68,
-      "November": 24.58,
-      "December": -9.19
+      "October": -5.85,
+      "November": 25.13,
+      "December": -4.96
     },
     "empirical10Y": {
       "January": 9.09,
-      "February": 45.45,
-      "March": 9.09,
-      "April": 54.55,
+      "February": 36.36,
+      "March": 18.18,
+      "April": 45.45,
       "May": 45.45,
-      "June": 0,
+      "June": 9.09,
       "July": 36.36,
       "August": 36.36,
       "September": 9.09,
-      "October": 27.27,
+      "October": 36.36,
       "November": 27.27,
-      "December": 9.09
+      "December": 18.18
     },
     "bestMonth10Y": "Best M",
     "worstMonth10Y": "Worst M",
@@ -11711,35 +11711,35 @@
       },
       {
         "year": 2019,
-        "value": -36.3
+        "value": 87.48
       },
       {
         "year": 2020,
-        "value": 281.7
+        "value": 405.49
       },
       {
         "year": 2021,
-        "value": 185.62
+        "value": 309.41
       },
       {
         "year": 2022,
-        "value": 97.4
+        "value": 221.18
       },
       {
         "year": 2023,
-        "value": 38.34
+        "value": 162.12
       },
       {
         "year": 2024,
-        "value": 203.57
+        "value": 327.36
       },
       {
         "year": 2025,
-        "value": 235.26
+        "value": 359.05
       },
       {
         "year": 2026,
-        "value": 178.72
+        "value": 302.51
       }
     ]
   },
@@ -11880,7 +11880,7 @@
         "February": -6.83,
         "March": -6.36,
         "April": -1.42,
-        "May": 6.17,
+        "May": 8.65,
         "June": -11.1,
         "July": 7.47,
         "August": -2.88,
@@ -11888,7 +11888,7 @@
         "October": -21.02,
         "November": 10.67,
         "December": -10.44,
-        "sum": -35.73
+        "sum": -33.25
       },
       {
         "year": 2017,
@@ -11928,7 +11928,7 @@
       "February": 2.64,
       "March": 1.19,
       "April": 1.22,
-      "May": -0.05,
+      "May": 0.18,
       "June": 3.38,
       "July": 2.36,
       "August": 0.36,
@@ -12074,39 +12074,39 @@
       },
       {
         "year": 2018,
-        "value": 54.09
+        "value": 56.57
       },
       {
         "year": 2019,
-        "value": 66.41
+        "value": 68.89
       },
       {
         "year": 2020,
-        "value": 108.63
+        "value": 111.11
       },
       {
         "year": 2021,
-        "value": 112.12
+        "value": 114.6
       },
       {
         "year": 2022,
-        "value": 128.99
+        "value": 131.47
       },
       {
         "year": 2023,
-        "value": 129.65
+        "value": 132.13
       },
       {
         "year": 2024,
-        "value": 132.76
+        "value": 135.24
       },
       {
         "year": 2025,
-        "value": 170.27
+        "value": 172.75
       },
       {
         "year": 2026,
-        "value": 199.81
+        "value": 202.29
       }
     ]
   },
@@ -12614,15 +12614,15 @@
         "February": -4.64,
         "March": 7.49,
         "April": -5.9,
-        "May": -2.01,
+        "May": -2.37,
         "June": 5.66,
         "July": 1.5,
         "August": 3.52,
         "September": 0,
         "October": -0.11,
-        "November": 6.14,
-        "December": -5.31,
-        "sum": 6.35
+        "November": 0,
+        "December": 0,
+        "sum": 5.15
       },
       {
         "year": 2017,
@@ -12662,14 +12662,14 @@
       "February": 2.11,
       "March": -0.99,
       "April": 4.06,
-      "May": -1.63,
+      "May": -1.66,
       "June": 0.65,
       "July": 3.64,
       "August": -1.08,
       "September": -2.88,
       "October": -0.74,
-      "November": 1.76,
-      "December": 1.31
+      "November": 1.2,
+      "December": 1.79
     },
     "empirical10Y": {
       "January": 18.18,
@@ -12682,7 +12682,7 @@
       "August": 36.36,
       "September": 9.09,
       "October": 18.18,
-      "November": 54.55,
+      "November": 45.45,
       "December": 27.27
     },
     "bestMonth10Y": "Best M",
@@ -12808,39 +12808,39 @@
       },
       {
         "year": 2018,
-        "value": -12.43
+        "value": -13.63
       },
       {
         "year": 2019,
-        "value": -4.7
+        "value": -5.89
       },
       {
         "year": 2020,
-        "value": 8.62
+        "value": 7.43
       },
       {
         "year": 2021,
-        "value": 21.24
+        "value": 20.05
       },
       {
         "year": 2022,
-        "value": 12.41
+        "value": 11.21
       },
       {
         "year": 2023,
-        "value": 21.12
+        "value": 19.92
       },
       {
         "year": 2024,
-        "value": 22.82
+        "value": 21.62
       },
       {
         "year": 2025,
-        "value": 48.59
+        "value": 47.39
       },
       {
         "year": 2026,
-        "value": 72.26
+        "value": 71.06
       }
     ]
   },
@@ -12981,7 +12981,7 @@
         "February": -13.9,
         "March": -7.7,
         "April": 9.19,
-        "May": 6.36,
+        "May": 5.64,
         "June": 2.48,
         "July": 2.65,
         "August": 6.4,
@@ -12989,7 +12989,7 @@
         "October": -1.96,
         "November": 1.26,
         "December": -5.46,
-        "sum": -0.66
+        "sum": -1.39
       },
       {
         "year": 2017,
@@ -13029,7 +13029,7 @@
       "February": 3.59,
       "March": 2.01,
       "April": 5.41,
-      "May": 5.75,
+      "May": 5.68,
       "June": 3.36,
       "July": 4.92,
       "August": 2.52,
@@ -13175,39 +13175,39 @@
       },
       {
         "year": 2018,
-        "value": 88.37
+        "value": 87.64
       },
       {
         "year": 2019,
-        "value": 136.8
+        "value": 136.08
       },
       {
         "year": 2020,
-        "value": 215.05
+        "value": 214.32
       },
       {
         "year": 2021,
-        "value": 256.52
+        "value": 255.79
       },
       {
         "year": 2022,
-        "value": 254.12
+        "value": 253.39
       },
       {
         "year": 2023,
-        "value": 298.65
+        "value": 297.93
       },
       {
         "year": 2024,
-        "value": 306.2
+        "value": 305.48
       },
       {
         "year": 2025,
-        "value": 318.52
+        "value": 317.8
       },
       {
         "year": 2026,
-        "value": 326.37
+        "value": 325.64
       }
     ]
   },
@@ -18853,7 +18853,7 @@
         "February": -10.8,
         "March": 0.64,
         "April": 9.85,
-        "May": 0.91,
+        "May": 0.22,
         "June": -0.99,
         "July": 0.79,
         "August": -5.47,
@@ -18861,7 +18861,7 @@
         "October": -9.31,
         "November": 6.41,
         "December": -9.92,
-        "sum": -17.87
+        "sum": -18.57
       },
       {
         "year": 2017,
@@ -18901,7 +18901,7 @@
       "February": 2.34,
       "March": 2.14,
       "April": 1.97,
-      "May": -0.42,
+      "May": -0.49,
       "June": -1.2,
       "July": 2.58,
       "August": -1.02,
@@ -19047,39 +19047,39 @@
       },
       {
         "year": 2018,
-        "value": 20.04
+        "value": 19.35
       },
       {
         "year": 2019,
-        "value": 28.09
+        "value": 27.39
       },
       {
         "year": 2020,
-        "value": 26.57
+        "value": 25.88
       },
       {
         "year": 2021,
-        "value": 51.73
+        "value": 51.03
       },
       {
         "year": 2022,
-        "value": 102.6
+        "value": 101.9
       },
       {
         "year": 2023,
-        "value": 79.7
+        "value": 79.01
       },
       {
         "year": 2024,
-        "value": 85.4
+        "value": 84.71
       },
       {
         "year": 2025,
-        "value": 84.57
+        "value": 83.88
       },
       {
         "year": 2026,
-        "value": 134.39
+        "value": 133.69
       }
     ]
   },
@@ -22156,7 +22156,7 @@
         "February": -6.28,
         "March": -1.41,
         "April": 1.92,
-        "May": -1.78,
+        "May": -1.16,
         "June": -5.09,
         "July": 4.33,
         "August": -2.08,
@@ -22164,7 +22164,7 @@
         "October": -8.43,
         "November": -0.37,
         "December": -7.8,
-        "sum": -26.98
+        "sum": -26.36
       },
       {
         "year": 2017,
@@ -22204,7 +22204,7 @@
       "February": -0.51,
       "March": -0.58,
       "April": 2.13,
-      "May": 1.44,
+      "May": 1.5,
       "June": -1.94,
       "July": 2.08,
       "August": -0.47,
@@ -22350,39 +22350,39 @@
       },
       {
         "year": 2018,
-        "value": -8.08
+        "value": -7.45
       },
       {
         "year": 2019,
-        "value": -0.03
+        "value": 0.59
       },
       {
         "year": 2020,
-        "value": 15.07
+        "value": 15.69
       },
       {
         "year": 2021,
-        "value": 16.42
+        "value": 17.04
       },
       {
         "year": 2022,
-        "value": -0.97
+        "value": -0.34
       },
       {
         "year": 2023,
-        "value": -1.06
+        "value": -0.44
       },
       {
         "year": 2024,
-        "value": -5.68
+        "value": -5.06
       },
       {
         "year": 2025,
-        "value": 8.39
+        "value": 9.01
       },
       {
         "year": 2026,
-        "value": 17.1
+        "value": 17.72
       }
     ]
   },
@@ -23257,7 +23257,7 @@
         "February": -9.02,
         "March": -3.58,
         "April": 9.51,
-        "May": 7.23,
+        "May": 8.24,
         "June": -5.46,
         "July": 5.45,
         "August": -2.22,
@@ -23265,7 +23265,7 @@
         "October": -7.1,
         "November": -2.42,
         "December": -7.83,
-        "sum": -15.44
+        "sum": -14.43
       },
       {
         "year": 2017,
@@ -23305,7 +23305,7 @@
       "February": 1.97,
       "March": -1.43,
       "April": 2.96,
-      "May": 2.03,
+      "May": 2.12,
       "June": -0.52,
       "July": 0.28,
       "August": -0.94,
@@ -23451,39 +23451,39 @@
       },
       {
         "year": 2018,
-        "value": -24.96
+        "value": -23.95
       },
       {
         "year": 2019,
-        "value": -21.55
+        "value": -20.54
       },
       {
         "year": 2020,
-        "value": -24.31
+        "value": -23.3
       },
       {
         "year": 2021,
-        "value": -20.04
+        "value": -19.03
       },
       {
         "year": 2022,
-        "value": -6.98
+        "value": -5.97
       },
       {
         "year": 2023,
-        "value": -2.92
+        "value": -1.91
       },
       {
         "year": 2024,
-        "value": 12.06
+        "value": 13.07
       },
       {
         "year": 2025,
-        "value": 14.27
+        "value": 15.28
       },
       {
         "year": 2026,
-        "value": 37.25
+        "value": 38.26
       }
     ]
   },
@@ -23991,7 +23991,7 @@
         "February": -2.84,
         "March": -3.31,
         "April": -5.35,
-        "May": -14.91,
+        "May": -15.05,
         "June": -11.77,
         "July": 14.1,
         "August": -10.11,
@@ -23999,7 +23999,7 @@
         "October": 19.17,
         "November": -2.28,
         "December": -6.1,
-        "sum": -23.39
+        "sum": -23.53
       },
       {
         "year": 2017,
@@ -24039,7 +24039,7 @@
       "February": -1.9,
       "March": 0.17,
       "April": 1.02,
-      "May": -1.8,
+      "May": -1.81,
       "June": -0.24,
       "July": 4.37,
       "August": -1.63,
@@ -24185,39 +24185,39 @@
       },
       {
         "year": 2018,
-        "value": 42.07
+        "value": 41.92
       },
       {
         "year": 2019,
-        "value": 49.96
+        "value": 49.82
       },
       {
         "year": 2020,
-        "value": 57.47
+        "value": 57.33
       },
       {
         "year": 2021,
-        "value": 20.34
+        "value": 20.2
       },
       {
         "year": 2022,
-        "value": 31.99
+        "value": 31.85
       },
       {
         "year": 2023,
-        "value": 44.06
+        "value": 43.91
       },
       {
         "year": 2024,
-        "value": -1.41
+        "value": -1.55
       },
       {
         "year": 2025,
-        "value": 4.89
+        "value": 4.75
       },
       {
         "year": 2026,
-        "value": 12.11
+        "value": 11.96
       }
     ]
   },
@@ -25459,7 +25459,7 @@
         "February": -4.68,
         "March": -8.59,
         "April": -13.43,
-        "May": 13.23,
+        "May": 11.77,
         "June": -0.06,
         "July": -3.06,
         "August": -12.84,
@@ -25467,7 +25467,7 @@
         "October": -15.64,
         "November": 0.67,
         "December": -17.19,
-        "sum": -61.58
+        "sum": -63.03
       },
       {
         "year": 2017,
@@ -25507,7 +25507,7 @@
       "February": 9.94,
       "March": -0.48,
       "April": 2.6,
-      "May": -0.83,
+      "May": -0.96,
       "June": 2.1,
       "July": 3.22,
       "August": -0.94,
@@ -25653,39 +25653,39 @@
       },
       {
         "year": 2018,
-        "value": 77.04
+        "value": 75.59
       },
       {
         "year": 2019,
-        "value": 110.33
+        "value": 108.88
       },
       {
         "year": 2020,
-        "value": 234.04
+        "value": 232.59
       },
       {
         "year": 2021,
-        "value": 256.35
+        "value": 254.89
       },
       {
         "year": 2022,
-        "value": 255.77
+        "value": 254.31
       },
       {
         "year": 2023,
-        "value": 236.99
+        "value": 235.54
       },
       {
         "year": 2024,
-        "value": 221.23
+        "value": 219.77
       },
       {
         "year": 2025,
-        "value": 254.21
+        "value": 252.75
       },
       {
         "year": 2026,
-        "value": 291.43
+        "value": 289.97
       }
     ]
   },
@@ -26560,7 +26560,7 @@
         "February": -9.22,
         "March": -3.65,
         "April": 0.23,
-        "May": -0.17,
+        "May": -0.98,
         "June": -10.43,
         "July": 3.51,
         "August": -0.91,
@@ -26568,7 +26568,7 @@
         "October": -8.82,
         "November": 5.1,
         "December": -9.18,
-        "sum": -33.53
+        "sum": -34.34
       },
       {
         "year": 2017,
@@ -26608,7 +26608,7 @@
       "February": -0.52,
       "March": -1,
       "April": -0.61,
-      "May": -0.09,
+      "May": -0.16,
       "June": -0.18,
       "July": 1.14,
       "August": 0.03,
@@ -26754,39 +26754,39 @@
       },
       {
         "year": 2018,
-        "value": 4.8
+        "value": 3.98
       },
       {
         "year": 2019,
-        "value": 7.24
+        "value": 6.43
       },
       {
         "year": 2020,
-        "value": 24.95
+        "value": 24.14
       },
       {
         "year": 2021,
-        "value": -9.29
+        "value": -10.1
       },
       {
         "year": 2022,
-        "value": -35.07
+        "value": -35.88
       },
       {
         "year": 2023,
-        "value": -59.93
+        "value": -60.74
       },
       {
         "year": 2024,
-        "value": -53.23
+        "value": -54.04
       },
       {
         "year": 2025,
-        "value": -42.62
+        "value": -43.43
       },
       {
         "year": 2026,
-        "value": -54.05
+        "value": -54.86
       }
     ]
   },
@@ -30597,7 +30597,7 @@
         "February": -8,
         "March": -9.15,
         "April": -0.53,
-        "May": 7.04,
+        "May": 5.35,
         "June": 2.55,
         "July": 10.76,
         "August": -0.8,
@@ -30605,7 +30605,7 @@
         "October": -10.25,
         "November": 1.73,
         "December": -7.8,
-        "sum": -14.45
+        "sum": -16.15
       },
       {
         "year": 2017,
@@ -30645,7 +30645,7 @@
       "February": -3.72,
       "March": 0.5,
       "April": 6.53,
-      "May": 3.9,
+      "May": 3.74,
       "June": -0.39,
       "July": 6.36,
       "August": 0.85,
@@ -30791,39 +30791,39 @@
       },
       {
         "year": 2018,
-        "value": 15.98
+        "value": 14.29
       },
       {
         "year": 2019,
-        "value": 39.94
+        "value": 38.24
       },
       {
         "year": 2020,
-        "value": 69.85
+        "value": 68.16
       },
       {
         "year": 2021,
-        "value": 113.01
+        "value": 111.31
       },
       {
         "year": 2022,
-        "value": 79.68
+        "value": 77.99
       },
       {
         "year": 2023,
-        "value": 118.07
+        "value": 116.37
       },
       {
         "year": 2024,
-        "value": 155.44
+        "value": 153.75
       },
       {
         "year": 2025,
-        "value": 178.51
+        "value": 176.81
       },
       {
         "year": 2026,
-        "value": 172.84
+        "value": 171.14
       }
     ]
   },
@@ -30964,7 +30964,7 @@
         "February": -8.89,
         "March": -8.74,
         "April": -0.88,
-        "May": 8.23,
+        "May": 6,
         "June": 2.64,
         "July": 10.02,
         "August": -0.6,
@@ -30972,7 +30972,7 @@
         "October": -10.09,
         "November": 1.67,
         "December": -7.7,
-        "sum": -14.34
+        "sum": -16.57
       },
       {
         "year": 2017,
@@ -31012,7 +31012,7 @@
       "February": -3.79,
       "March": 0.44,
       "April": 6.24,
-      "May": 4.11,
+      "May": 3.91,
       "June": -0.53,
       "July": 6.48,
       "August": 0.71,
@@ -31158,39 +31158,39 @@
       },
       {
         "year": 2018,
-        "value": 13.11
+        "value": 10.89
       },
       {
         "year": 2019,
-        "value": 36.19
+        "value": 33.97
       },
       {
         "year": 2020,
-        "value": 65.35
+        "value": 63.13
       },
       {
         "year": 2021,
-        "value": 106.82
+        "value": 104.6
       },
       {
         "year": 2022,
-        "value": 71.47
+        "value": 69.25
       },
       {
         "year": 2023,
-        "value": 109.87
+        "value": 107.65
       },
       {
         "year": 2024,
-        "value": 147.45
+        "value": 145.23
       },
       {
         "year": 2025,
-        "value": 170.44
+        "value": 168.21
       },
       {
         "year": 2026,
-        "value": 164.91
+        "value": 162.68
       }
     ]
   },
@@ -33900,7 +33900,7 @@
         "February": -5.9,
         "March": -5.16,
         "April": -2.89,
-        "May": 4.78,
+        "May": 4.84,
         "June": 1.43,
         "July": 6.99,
         "August": 4.99,
@@ -33908,7 +33908,7 @@
         "October": -14.85,
         "November": 4.48,
         "December": -13.24,
-        "sum": -19.36
+        "sum": -19.31
       },
       {
         "year": 2017,
@@ -34094,39 +34094,39 @@
       },
       {
         "year": 2018,
-        "value": 1.07
+        "value": 1.12
       },
       {
         "year": 2019,
-        "value": 16.64
+        "value": 16.7
       },
       {
         "year": 2020,
-        "value": 51.63
+        "value": 51.68
       },
       {
         "year": 2021,
-        "value": 46.93
+        "value": 46.98
       },
       {
         "year": 2022,
-        "value": 35.01
+        "value": 35.07
       },
       {
         "year": 2023,
-        "value": 24.11
+        "value": 24.17
       },
       {
         "year": 2024,
-        "value": 23.98
+        "value": 24.04
       },
       {
         "year": 2025,
-        "value": 35.69
+        "value": 35.75
       },
       {
         "year": 2026,
-        "value": 61.44
+        "value": 61.5
       }
     ]
   },
@@ -37937,7 +37937,7 @@
         "February": -8.2,
         "March": -5.38,
         "April": -8.79,
-        "May": 3.3,
+        "May": 1.86,
         "June": -4.43,
         "July": 4.42,
         "August": -2.54,
@@ -37945,7 +37945,7 @@
         "October": -10.3,
         "November": 9,
         "December": -10.01,
-        "sum": -32.94
+        "sum": -34.38
       },
       {
         "year": 2017,
@@ -37985,7 +37985,7 @@
       "February": 2.05,
       "March": -1.51,
       "April": 1.14,
-      "May": -0.6,
+      "May": -0.73,
       "June": 0.74,
       "July": 4.87,
       "August": -0.55,
@@ -38131,39 +38131,39 @@
       },
       {
         "year": 2018,
-        "value": 34.25
+        "value": 32.81
       },
       {
         "year": 2019,
-        "value": 62.17
+        "value": 60.73
       },
       {
         "year": 2020,
-        "value": 88.24
+        "value": 86.8
       },
       {
         "year": 2021,
-        "value": 109.36
+        "value": 107.92
       },
       {
         "year": 2022,
-        "value": 101.69
+        "value": 100.25
       },
       {
         "year": 2023,
-        "value": 111.02
+        "value": 109.59
       },
       {
         "year": 2024,
-        "value": 102.66
+        "value": 101.22
       },
       {
         "year": 2025,
-        "value": 97.39
+        "value": 95.95
       },
       {
         "year": 2026,
-        "value": 118.4
+        "value": 116.96
       }
     ]
   },
@@ -40139,7 +40139,7 @@
         "February": -2.02,
         "March": -6.61,
         "April": -1.07,
-        "May": -1.33,
+        "May": -0.09,
         "June": -3.01,
         "July": 10.83,
         "August": -1.01,
@@ -40147,7 +40147,7 @@
         "October": -3.84,
         "November": 1.43,
         "December": -13.13,
-        "sum": -19.76
+        "sum": -18.53
       },
       {
         "year": 2017,
@@ -40187,7 +40187,7 @@
       "February": 0.93,
       "March": -3.65,
       "April": 2.95,
-      "May": 0.61,
+      "May": 0.73,
       "June": 1.3,
       "July": 3.56,
       "August": 0.35,
@@ -40333,39 +40333,39 @@
       },
       {
         "year": 2018,
-        "value": 34.41
+        "value": 35.64
       },
       {
         "year": 2019,
-        "value": 64.49
+        "value": 65.73
       },
       {
         "year": 2020,
-        "value": 76.73
+        "value": 77.96
       },
       {
         "year": 2021,
-        "value": 88.21
+        "value": 89.44
       },
       {
         "year": 2022,
-        "value": 74.04
+        "value": 75.28
       },
       {
         "year": 2023,
-        "value": 87.02
+        "value": 88.26
       },
       {
         "year": 2024,
-        "value": 121.47
+        "value": 122.7
       },
       {
         "year": 2025,
-        "value": 137.18
+        "value": 138.42
       },
       {
         "year": 2026,
-        "value": 145.08
+        "value": 146.31
       }
     ]
   },
@@ -40508,13 +40508,13 @@
         "April": 1.26,
         "May": -0.29,
         "June": 3.12,
-        "July": -80.21,
-        "August": -5.28,
+        "July": 0,
+        "August": 0,
         "September": 0,
-        "October": 11.64,
-        "November": 3.25,
-        "December": -4.15,
-        "sum": -71.09
+        "October": 0,
+        "November": 0,
+        "December": 0,
+        "sum": 3.66
       },
       {
         "year": 2017,
@@ -40556,12 +40556,12 @@
       "April": 2.41,
       "May": -0.36,
       "June": 1.21,
-      "July": -5.74,
-      "August": -0.78,
+      "July": 1.56,
+      "August": -0.3,
       "September": -3.38,
-      "October": 2.56,
-      "November": 2.47,
-      "December": 0.01
+      "October": 1.5,
+      "November": 2.17,
+      "December": 0.39
     },
     "empirical10Y": {
       "January": 9.09,
@@ -40573,8 +40573,8 @@
       "July": 45.45,
       "August": 18.18,
       "September": 0,
-      "October": 54.55,
-      "November": 54.55,
+      "October": 45.45,
+      "November": 45.45,
       "December": 27.27
     },
     "bestMonth10Y": "Best M",
@@ -40700,39 +40700,39 @@
       },
       {
         "year": 2018,
-        "value": -81.96
+        "value": -7.21
       },
       {
         "year": 2019,
-        "value": -71.46
+        "value": 3.29
       },
       {
         "year": 2020,
-        "value": -51.22
+        "value": 23.53
       },
       {
         "year": 2021,
-        "value": -40.74
+        "value": 34.01
       },
       {
         "year": 2022,
-        "value": -37.23
+        "value": 37.52
       },
       {
         "year": 2023,
-        "value": -50.38
+        "value": 24.37
       },
       {
         "year": 2024,
-        "value": -52.65
+        "value": 22.1
       },
       {
         "year": 2025,
-        "value": -39.57
+        "value": 35.18
       },
       {
         "year": 2026,
-        "value": -8.17
+        "value": 66.58
       }
     ]
   },
@@ -40873,7 +40873,7 @@
         "February": -14.38,
         "March": -10.55,
         "April": -8.98,
-        "May": 2.06,
+        "May": 4.47,
         "June": 7.72,
         "July": -3.6,
         "August": -2.88,
@@ -40881,7 +40881,7 @@
         "October": -0.94,
         "November": -7.27,
         "December": -16.26,
-        "sum": -55.08
+        "sum": -52.66
       },
       {
         "year": 2017,
@@ -40921,7 +40921,7 @@
       "February": -3.4,
       "March": -0.77,
       "April": 2.87,
-      "May": -2.59,
+      "May": -2.37,
       "June": -0.51,
       "July": 2.06,
       "August": -1.99,
@@ -41067,39 +41067,39 @@
       },
       {
         "year": 2018,
-        "value": -58.19
+        "value": -55.78
       },
       {
         "year": 2019,
-        "value": -79.09
+        "value": -76.67
       },
       {
         "year": 2020,
-        "value": -45.23
+        "value": -42.81
       },
       {
         "year": 2021,
-        "value": -41.24
+        "value": -38.83
       },
       {
         "year": 2022,
-        "value": -30.98
+        "value": -28.57
       },
       {
         "year": 2023,
-        "value": -45.81
+        "value": -43.39
       },
       {
         "year": 2024,
-        "value": -61.36
+        "value": -58.94
       },
       {
         "year": 2025,
-        "value": -72.62
+        "value": -70.2
       },
       {
         "year": 2026,
-        "value": -73.46
+        "value": -71.05
       }
     ]
   },
@@ -41240,7 +41240,7 @@
         "February": 1.74,
         "March": -6.73,
         "April": -6.09,
-        "May": 12.2,
+        "May": 11.42,
         "June": -9.34,
         "July": 15.89,
         "August": -1.36,
@@ -41248,7 +41248,7 @@
         "October": -10.73,
         "November": 7.17,
         "December": -10.95,
-        "sum": -8.2
+        "sum": -8.98
       },
       {
         "year": 2017,
@@ -41288,7 +41288,7 @@
       "February": 2.65,
       "March": 1.63,
       "April": 1.69,
-      "May": 6.83,
+      "May": 6.76,
       "June": 8.21,
       "July": 3.27,
       "August": -2.13,
@@ -41434,39 +41434,39 @@
       },
       {
         "year": 2018,
-        "value": 29.84
+        "value": 29.05
       },
       {
         "year": 2019,
-        "value": 67.22
+        "value": 66.43
       },
       {
         "year": 2020,
-        "value": 123.94
+        "value": 123.15
       },
       {
         "year": 2021,
-        "value": 165.77
+        "value": 164.99
       },
       {
         "year": 2022,
-        "value": 167.15
+        "value": 166.36
       },
       {
         "year": 2023,
-        "value": 203.5
+        "value": 202.71
       },
       {
         "year": 2024,
-        "value": 221.28
+        "value": 220.49
       },
       {
         "year": 2025,
-        "value": 256.13
+        "value": 255.34
       },
       {
         "year": 2026,
-        "value": 319.65
+        "value": 318.87
       }
     ]
   },
@@ -44543,7 +44543,7 @@
         "February": -32.48,
         "March": -48.88,
         "April": 53.39,
-        "May": -17.75,
+        "May": -23.08,
         "June": -31.88,
         "July": 15.38,
         "August": -6.67,
@@ -44551,7 +44551,7 @@
         "October": -20.34,
         "November": 2.92,
         "December": -40.57,
-        "sum": -126.88
+        "sum": -132.2
       },
       {
         "year": 2017,
@@ -44591,7 +44591,7 @@
       "February": 14.83,
       "March": -12.25,
       "April": 0.55,
-      "May": 4.04,
+      "May": 3.56,
       "June": 11.08,
       "July": 20.65,
       "August": 1.9,
@@ -44737,39 +44737,39 @@
       },
       {
         "year": 2018,
-        "value": 4.97
+        "value": -0.36
       },
       {
         "year": 2019,
-        "value": 31.23
+        "value": 25.91
       },
       {
         "year": 2020,
-        "value": 416.57
+        "value": 411.24
       },
       {
         "year": 2021,
-        "value": 584.03
+        "value": 578.7
       },
       {
         "year": 2022,
-        "value": 523.3
+        "value": 517.97
       },
       {
         "year": 2023,
-        "value": 577.16
+        "value": 571.84
       },
       {
         "year": 2024,
-        "value": 627.69
+        "value": 622.37
       },
       {
         "year": 2025,
-        "value": 558.46
+        "value": 553.13
       },
       {
         "year": 2026,
-        "value": 564.9
+        "value": 559.57
       }
     ]
   },
@@ -45277,7 +45277,7 @@
         "February": -1.67,
         "March": -7.41,
         "April": -4.98,
-        "May": -0.38,
+        "May": 0.66,
         "June": 3.76,
         "July": 5.99,
         "August": -1.29,
@@ -45285,7 +45285,7 @@
         "October": -2.42,
         "November": 7.02,
         "December": -10.71,
-        "sum": -12.1
+        "sum": -11.06
       },
       {
         "year": 2017,
@@ -45325,7 +45325,7 @@
       "February": -0.36,
       "March": -0.23,
       "April": 3.74,
-      "May": -0.56,
+      "May": -0.47,
       "June": -0.87,
       "July": 2.36,
       "August": -1.15,
@@ -45339,7 +45339,7 @@
       "February": 27.27,
       "March": 36.36,
       "April": 81.82,
-      "May": 36.36,
+      "May": 45.45,
       "June": 36.36,
       "July": 72.73,
       "August": 18.18,
@@ -45471,39 +45471,39 @@
       },
       {
         "year": 2018,
-        "value": -19.04
+        "value": -18
       },
       {
         "year": 2019,
-        "value": -5.3
+        "value": -4.26
       },
       {
         "year": 2020,
-        "value": 6.93
+        "value": 7.97
       },
       {
         "year": 2021,
-        "value": 20.42
+        "value": 21.46
       },
       {
         "year": 2022,
-        "value": 23.86
+        "value": 24.9
       },
       {
         "year": 2023,
-        "value": 31.03
+        "value": 32.07
       },
       {
         "year": 2024,
-        "value": 1.5
+        "value": 2.54
       },
       {
         "year": 2025,
-        "value": 1.55
+        "value": 2.59
       },
       {
         "year": 2026,
-        "value": 20.26
+        "value": 21.3
       }
     ]
   },
@@ -45644,7 +45644,7 @@
         "February": -0.1,
         "March": -10.67,
         "April": -2.48,
-        "May": -14.31,
+        "May": -10.94,
         "June": 1.13,
         "July": 16.58,
         "August": 0.1,
@@ -45652,7 +45652,7 @@
         "October": -5.62,
         "November": 6.37,
         "December": -18.86,
-        "sum": -27.86
+        "sum": -24.49
       },
       {
         "year": 2017,
@@ -45692,7 +45692,7 @@
       "February": 1.58,
       "March": -1.58,
       "April": 3.58,
-      "May": 7.67,
+      "May": 7.97,
       "June": 0.39,
       "July": 7.76,
       "August": 3.79,
@@ -45838,39 +45838,39 @@
       },
       {
         "year": 2018,
-        "value": 72.36
+        "value": 75.73
       },
       {
         "year": 2019,
-        "value": 131.86
+        "value": 135.23
       },
       {
         "year": 2020,
-        "value": 248.31
+        "value": 251.69
       },
       {
         "year": 2021,
-        "value": 234.52
+        "value": 237.89
       },
       {
         "year": 2022,
-        "value": 201.75
+        "value": 205.13
       },
       {
         "year": 2023,
-        "value": 239.12
+        "value": 242.49
       },
       {
         "year": 2024,
-        "value": 215.87
+        "value": 219.24
       },
       {
         "year": 2025,
-        "value": 224.45
+        "value": 227.82
       },
       {
         "year": 2026,
-        "value": 212.79
+        "value": 216.16
       }
     ]
   },
@@ -46378,7 +46378,7 @@
         "February": -6.51,
         "March": -9.96,
         "April": -10.86,
-        "May": 2.4,
+        "May": 1.65,
         "June": -1.62,
         "July": 8.63,
         "August": -0.03,
@@ -46386,7 +46386,7 @@
         "October": -10.42,
         "November": 9.09,
         "December": -9.79,
-        "sum": -29.08
+        "sum": -29.83
       },
       {
         "year": 2017,
@@ -46426,7 +46426,7 @@
       "February": -0.46,
       "March": -0.08,
       "April": -0.04,
-      "May": -0.22,
+      "May": -0.29,
       "June": 1.41,
       "July": 4.95,
       "August": -1.13,
@@ -46572,39 +46572,39 @@
       },
       {
         "year": 2018,
-        "value": 20.78
+        "value": 20.03
       },
       {
         "year": 2019,
-        "value": 13.14
+        "value": 12.39
       },
       {
         "year": 2020,
-        "value": 29.45
+        "value": 28.7
       },
       {
         "year": 2021,
-        "value": 25.37
+        "value": 24.62
       },
       {
         "year": 2022,
-        "value": -7.27
+        "value": -8.01
       },
       {
         "year": 2023,
-        "value": -23.05
+        "value": -23.79
       },
       {
         "year": 2024,
-        "value": 23.63
+        "value": 22.88
       },
       {
         "year": 2025,
-        "value": 27.62
+        "value": 26.87
       },
       {
         "year": 2026,
-        "value": 38.21
+        "value": 37.46
       }
     ]
   },
@@ -46745,7 +46745,7 @@
         "February": -20.19,
         "March": -3.13,
         "April": -3.31,
-        "May": -5.32,
+        "May": -6.78,
         "June": 11.71,
         "July": 4.89,
         "August": 2.15,
@@ -46753,7 +46753,7 @@
         "October": -9.95,
         "November": 12.6,
         "December": -16.88,
-        "sum": -27.42
+        "sum": -28.88
       },
       {
         "year": 2017,
@@ -46793,7 +46793,7 @@
       "February": -0.87,
       "March": -1.16,
       "April": 3.86,
-      "May": 5.51,
+      "May": 5.38,
       "June": 1.76,
       "July": 2.87,
       "August": -0.22,
@@ -46939,39 +46939,39 @@
       },
       {
         "year": 2018,
-        "value": 11.47
+        "value": 10.01
       },
       {
         "year": 2019,
-        "value": 36.08
+        "value": 34.62
       },
       {
         "year": 2020,
-        "value": 76.88
+        "value": 75.43
       },
       {
         "year": 2021,
-        "value": 87.64
+        "value": 86.18
       },
       {
         "year": 2022,
-        "value": 93.05
+        "value": 91.59
       },
       {
         "year": 2023,
-        "value": 102.38
+        "value": 100.92
       },
       {
         "year": 2024,
-        "value": 95.08
+        "value": 93.63
       },
       {
         "year": 2025,
-        "value": 133.02
+        "value": 131.56
       },
       {
         "year": 2026,
-        "value": 154.63
+        "value": 153.18
       }
     ]
   },
@@ -51883,7 +51883,7 @@
         "February": -2.52,
         "March": -8.6,
         "April": -1.75,
-        "May": 12.3,
+        "May": 12.66,
         "June": -4.57,
         "July": 4.62,
         "August": 14.15,
@@ -51891,7 +51891,7 @@
         "October": -25.77,
         "November": -22.98,
         "December": -22.69,
-        "sum": -57.8
+        "sum": -57.44
       },
       {
         "year": 2017,
@@ -51931,7 +51931,7 @@
       "February": 5.66,
       "March": 4.51,
       "April": 0.66,
-      "May": 16.04,
+      "May": 16.07,
       "June": 5.37,
       "July": 8.17,
       "August": 5.91,
@@ -52077,39 +52077,39 @@
       },
       {
         "year": 2018,
-        "value": 133.71
+        "value": 134.07
       },
       {
         "year": 2019,
-        "value": 179.88
+        "value": 180.23
       },
       {
         "year": 2020,
-        "value": 268.83
+        "value": 269.18
       },
       {
         "year": 2021,
-        "value": 348.92
+        "value": 349.27
       },
       {
         "year": 2022,
-        "value": 313.98
+        "value": 314.34
       },
       {
         "year": 2023,
-        "value": 413.09
+        "value": 413.45
       },
       {
         "year": 2024,
-        "value": 490.82
+        "value": 491.18
       },
       {
         "year": 2025,
-        "value": 532.74
+        "value": 533.09
       },
       {
         "year": 2026,
-        "value": 552.47
+        "value": 552.83
       }
     ]
   },
@@ -52250,7 +52250,7 @@
         "February": 2.42,
         "March": -7.36,
         "April": -10.34,
-        "May": 8.66,
+        "May": 10.17,
         "June": -3.98,
         "July": -12.21,
         "August": -2.98,
@@ -52258,7 +52258,7 @@
         "October": -13.24,
         "November": 3.03,
         "December": -15.73,
-        "sum": -51.73
+        "sum": -50.22
       },
       {
         "year": 2017,
@@ -52298,7 +52298,7 @@
       "February": 2.45,
       "March": -3.55,
       "April": 6.33,
-      "May": 4.08,
+      "May": 4.22,
       "June": -0.59,
       "July": 1.53,
       "August": -0.34,
@@ -52444,39 +52444,39 @@
       },
       {
         "year": 2018,
-        "value": -1.98
+        "value": -0.47
       },
       {
         "year": 2019,
-        "value": 30.84
+        "value": 32.35
       },
       {
         "year": 2020,
-        "value": 68.09
+        "value": 69.6
       },
       {
         "year": 2021,
-        "value": 88.85
+        "value": 90.35
       },
       {
         "year": 2022,
-        "value": 66.83
+        "value": 68.34
       },
       {
         "year": 2023,
-        "value": 82.9
+        "value": 84.41
       },
       {
         "year": 2024,
-        "value": 91.94
+        "value": 93.45
       },
       {
         "year": 2025,
-        "value": 100.18
+        "value": 101.68
       },
       {
         "year": 2026,
-        "value": 137.54
+        "value": 139.05
       }
     ]
   },
@@ -53351,7 +53351,7 @@
         "February": -3.21,
         "March": -11.68,
         "April": 0.04,
-        "May": 3.66,
+        "May": 2.93,
         "June": -4.52,
         "July": 8.46,
         "August": 1.4,
@@ -53359,7 +53359,7 @@
         "October": -4.65,
         "November": -0.41,
         "December": -8.68,
-        "sum": -19.58
+        "sum": -20.31
       },
       {
         "year": 2017,
@@ -53399,7 +53399,7 @@
       "February": -0.76,
       "March": 2.52,
       "April": 1.39,
-      "May": 6.61,
+      "May": 6.54,
       "June": 4.71,
       "July": 3.25,
       "August": 1.71,
@@ -53545,39 +53545,39 @@
       },
       {
         "year": 2018,
-        "value": 15.29
+        "value": 14.56
       },
       {
         "year": 2019,
-        "value": 24.95
+        "value": 24.22
       },
       {
         "year": 2020,
-        "value": 52.75
+        "value": 52.03
       },
       {
         "year": 2021,
-        "value": 83.51
+        "value": 82.78
       },
       {
         "year": 2022,
-        "value": 83.76
+        "value": 83.04
       },
       {
         "year": 2023,
-        "value": 116.56
+        "value": 115.83
       },
       {
         "year": 2024,
-        "value": 136.63
+        "value": 135.91
       },
       {
         "year": 2025,
-        "value": 150.05
+        "value": 149.32
       },
       {
         "year": 2026,
-        "value": 125.12
+        "value": 124.4
       }
     ]
   },
@@ -53718,7 +53718,7 @@
         "February": -7.47,
         "March": -3.08,
         "April": 4.28,
-        "May": 6.02,
+        "May": 7.67,
         "June": 1.72,
         "July": 12.33,
         "August": 10.8,
@@ -53726,7 +53726,7 @@
         "October": -8.2,
         "November": 8.7,
         "December": -1.71,
-        "sum": 23.39
+        "sum": 25.04
       },
       {
         "year": 2017,
@@ -53766,7 +53766,7 @@
       "February": 1.34,
       "March": 1.29,
       "April": 2.32,
-      "May": -0.31,
+      "May": -0.16,
       "June": 1.59,
       "July": 5.13,
       "August": -0.33,
@@ -53912,39 +53912,39 @@
       },
       {
         "year": 2018,
-        "value": 16.76
+        "value": 18.42
       },
       {
         "year": 2019,
-        "value": 36.46
+        "value": 38.11
       },
       {
         "year": 2020,
-        "value": 62.08
+        "value": 63.74
       },
       {
         "year": 2021,
-        "value": 114.59
+        "value": 116.24
       },
       {
         "year": 2022,
-        "value": 141.2
+        "value": 142.86
       },
       {
         "year": 2023,
-        "value": 163.18
+        "value": 164.83
       },
       {
         "year": 2024,
-        "value": 175.61
+        "value": 177.26
       },
       {
         "year": 2025,
-        "value": 176.18
+        "value": 177.84
       },
       {
         "year": 2026,
-        "value": 175.05
+        "value": 176.71
       }
     ]
   },
@@ -57388,7 +57388,7 @@
         "February": -1.74,
         "March": 2.25,
         "April": -1.2,
-        "May": -0.84,
+        "May": -0.94,
         "June": -4.1,
         "July": -2.46,
         "August": -2.33,
@@ -57396,7 +57396,7 @@
         "October": 2.95,
         "November": -0.61,
         "December": 4.46,
-        "sum": -3.62
+        "sum": -3.71
       },
       {
         "year": 2017,
@@ -57436,7 +57436,7 @@
       "February": 2.01,
       "March": 1.53,
       "April": 1.11,
-      "May": -0.24,
+      "May": -0.25,
       "June": -1.27,
       "July": 1.94,
       "August": 0.37,
@@ -57582,39 +57582,39 @@
       },
       {
         "year": 2018,
-        "value": 8.58
+        "value": 8.49
       },
       {
         "year": 2019,
-        "value": 16.61
+        "value": 16.51
       },
       {
         "year": 2020,
-        "value": 32.58
+        "value": 32.49
       },
       {
         "year": 2021,
-        "value": 19.15
+        "value": 19.05
       },
       {
         "year": 2022,
-        "value": 15.24
+        "value": 15.15
       },
       {
         "year": 2023,
-        "value": 22.03
+        "value": 21.94
       },
       {
         "year": 2024,
-        "value": 36.53
+        "value": 36.43
       },
       {
         "year": 2025,
-        "value": 64.34
+        "value": 64.25
       },
       {
         "year": 2026,
-        "value": 56.86
+        "value": 56.77
       }
     ]
   },
@@ -58489,7 +58489,7 @@
         "February": -2.2,
         "March": -5.91,
         "April": -17.66,
-        "May": -2.29,
+        "May": -1.33,
         "June": 0.99,
         "July": 7.05,
         "August": -9.46,
@@ -58497,7 +58497,7 @@
         "October": 8.18,
         "November": -2.04,
         "December": -22.85,
-        "sum": -46.19
+        "sum": -45.23
       },
       {
         "year": 2017,
@@ -58537,7 +58537,7 @@
       "February": 4.88,
       "March": -1.46,
       "April": 1.23,
-      "May": 0.68,
+      "May": 0.76,
       "June": 0.52,
       "July": 2.75,
       "August": -1.03,
@@ -58683,39 +58683,39 @@
       },
       {
         "year": 2018,
-        "value": -39.13
+        "value": -38.17
       },
       {
         "year": 2019,
-        "value": -20.49
+        "value": -19.53
       },
       {
         "year": 2020,
-        "value": -8.22
+        "value": -7.26
       },
       {
         "year": 2021,
-        "value": 6.91
+        "value": 7.86
       },
       {
         "year": 2022,
-        "value": 10.09
+        "value": 11.04
       },
       {
         "year": 2023,
-        "value": -4.5
+        "value": -3.54
       },
       {
         "year": 2024,
-        "value": 18.65
+        "value": 19.61
       },
       {
         "year": 2025,
-        "value": 50.62
+        "value": 51.58
       },
       {
         "year": 2026,
-        "value": 73.44
+        "value": 74.4
       }
     ]
   },
@@ -59957,7 +59957,7 @@
         "February": -2.17,
         "March": -7.04,
         "April": 1.22,
-        "May": 5.95,
+        "May": 6.02,
         "June": 1.12,
         "July": 3.77,
         "August": 5.53,
@@ -59965,7 +59965,7 @@
         "October": -9.1,
         "November": -0.42,
         "December": -10.88,
-        "sum": -12.02
+        "sum": -11.95
       },
       {
         "year": 2017,
@@ -60005,7 +60005,7 @@
       "February": -0.15,
       "March": -0.12,
       "April": 2.86,
-      "May": 4.2,
+      "May": 4.21,
       "June": 2.41,
       "July": 3.44,
       "August": 1.86,
@@ -60151,39 +60151,39 @@
       },
       {
         "year": 2018,
-        "value": 23.43
+        "value": 23.5
       },
       {
         "year": 2019,
-        "value": 47.35
+        "value": 47.42
       },
       {
         "year": 2020,
-        "value": 91.6
+        "value": 91.66
       },
       {
         "year": 2021,
-        "value": 114.06
+        "value": 114.13
       },
       {
         "year": 2022,
-        "value": 86.22
+        "value": 86.29
       },
       {
         "year": 2023,
-        "value": 115.85
+        "value": 115.91
       },
       {
         "year": 2024,
-        "value": 133.29
+        "value": 133.36
       },
       {
         "year": 2025,
-        "value": 143.8
+        "value": 143.87
       },
       {
         "year": 2026,
-        "value": 159.98
+        "value": 160.05
       }
     ]
   },
@@ -61058,7 +61058,7 @@
         "February": -6.35,
         "March": -3.37,
         "April": 6.25,
-        "May": 3.62,
+        "May": 3.64,
         "June": -5.93,
         "July": 2.49,
         "August": -11.4,
@@ -61066,7 +61066,7 @@
         "October": -3.14,
         "November": -6.74,
         "December": -0.02,
-        "sum": -24.6
+        "sum": -24.58
       },
       {
         "year": 2017,
@@ -61252,39 +61252,39 @@
       },
       {
         "year": 2018,
-        "value": 28.35
+        "value": 28.37
       },
       {
         "year": 2019,
-        "value": 41.48
+        "value": 41.49
       },
       {
         "year": 2020,
-        "value": 84.83
+        "value": 84.84
       },
       {
         "year": 2021,
-        "value": 69.68
+        "value": 69.7
       },
       {
         "year": 2022,
-        "value": 73.15
+        "value": 73.17
       },
       {
         "year": 2023,
-        "value": 54.99
+        "value": 55.01
       },
       {
         "year": 2024,
-        "value": 30.3
+        "value": 30.31
       },
       {
         "year": 2025,
-        "value": 49.6
+        "value": 49.62
       },
       {
         "year": 2026,
-        "value": 64.94
+        "value": 64.95
       }
     ]
   },
@@ -62159,7 +62159,7 @@
         "February": -4.61,
         "March": -0.15,
         "April": -5.88,
-        "May": 5.57,
+        "May": 4.47,
         "June": -1.38,
         "July": 10.11,
         "August": -1.05,
@@ -62167,7 +62167,7 @@
         "October": -5.42,
         "November": 4.94,
         "December": -11.56,
-        "sum": -9.43
+        "sum": -10.53
       },
       {
         "year": 2017,
@@ -62207,7 +62207,7 @@
       "February": 1.41,
       "March": 1.69,
       "April": 1.31,
-      "May": 1.14,
+      "May": 1.05,
       "June": 1.37,
       "July": 3.77,
       "August": -0.13,
@@ -62353,39 +62353,39 @@
       },
       {
         "year": 2018,
-        "value": 42.06
+        "value": 40.96
       },
       {
         "year": 2019,
-        "value": 63.31
+        "value": 62.21
       },
       {
         "year": 2020,
-        "value": 83.71
+        "value": 82.61
       },
       {
         "year": 2021,
-        "value": 101.31
+        "value": 100.22
       },
       {
         "year": 2022,
-        "value": 90.96
+        "value": 89.87
       },
       {
         "year": 2023,
-        "value": 116.48
+        "value": 115.39
       },
       {
         "year": 2024,
-        "value": 110.97
+        "value": 109.87
       },
       {
         "year": 2025,
-        "value": 94.87
+        "value": 93.78
       },
       {
         "year": 2026,
-        "value": 112.3
+        "value": 111.2
       }
     ]
   },
@@ -68398,7 +68398,7 @@
         "February": -9.53,
         "March": 2.67,
         "April": 10.91,
-        "May": 4.63,
+        "May": 5.55,
         "June": 1.66,
         "July": 4.54,
         "August": -1.48,
@@ -68406,7 +68406,7 @@
         "October": -15.05,
         "November": -4.41,
         "December": -15.19,
-        "sum": -21.25
+        "sum": -20.33
       },
       {
         "year": 2017,
@@ -68446,7 +68446,7 @@
       "February": 3.13,
       "March": -0.99,
       "April": 4.12,
-      "May": 0.26,
+      "May": 0.35,
       "June": -2.55,
       "July": 0.64,
       "August": 0.1,
@@ -68592,39 +68592,39 @@
       },
       {
         "year": 2018,
-        "value": 23.44
+        "value": 24.37
       },
       {
         "year": 2019,
-        "value": 15.83
+        "value": 16.75
       },
       {
         "year": 2020,
-        "value": -7.9
+        "value": -6.98
       },
       {
         "year": 2021,
-        "value": 19.72
+        "value": 20.64
       },
       {
         "year": 2022,
-        "value": 47.38
+        "value": 48.3
       },
       {
         "year": 2023,
-        "value": 37.96
+        "value": 38.88
       },
       {
         "year": 2024,
-        "value": 53.55
+        "value": 54.47
       },
       {
         "year": 2025,
-        "value": 63.7
+        "value": 64.62
       },
       {
         "year": 2026,
-        "value": 129.75
+        "value": 130.67
       }
     ]
   },
@@ -74270,7 +74270,7 @@
         "February": -5.58,
         "March": 3.92,
         "April": 6.32,
-        "May": 1.02,
+        "May": -1.02,
         "June": 11.56,
         "July": -4.8,
         "August": 4.4,
@@ -74278,7 +74278,7 @@
         "October": -11.03,
         "November": -22.58,
         "December": -14.29,
-        "sum": -31.07
+        "sum": -33.11
       },
       {
         "year": 2017,
@@ -74318,7 +74318,7 @@
       "February": 2.22,
       "March": 1.1,
       "April": -1.25,
-      "May": 2.76,
+      "May": 2.57,
       "June": 1.96,
       "July": 1.35,
       "August": 1.71,
@@ -74332,7 +74332,7 @@
       "February": 45.45,
       "March": 63.64,
       "April": 54.55,
-      "May": 45.45,
+      "May": 36.36,
       "June": 63.64,
       "July": 45.45,
       "August": 45.45,
@@ -74464,39 +74464,39 @@
       },
       {
         "year": 2018,
-        "value": -8.81
+        "value": -10.85
       },
       {
         "year": 2019,
-        "value": 4.98
+        "value": 2.93
       },
       {
         "year": 2020,
-        "value": -32.16
+        "value": -34.2
       },
       {
         "year": 2021,
-        "value": -3.87
+        "value": -5.91
       },
       {
         "year": 2022,
-        "value": 25.41
+        "value": 23.37
       },
       {
         "year": 2023,
-        "value": 20.34
+        "value": 18.29
       },
       {
         "year": 2024,
-        "value": 39.44
+        "value": 37.39
       },
       {
         "year": 2025,
-        "value": 35.18
+        "value": 33.13
       },
       {
         "year": 2026,
-        "value": 144.64
+        "value": 142.59
       }
     ]
   },
@@ -77940,7 +77940,7 @@
         "February": -0.2,
         "March": 2.94,
         "April": -14.84,
-        "May": 10.62,
+        "May": 6.75,
         "June": -7.32,
         "July": -8.3,
         "August": -9.91,
@@ -77948,7 +77948,7 @@
         "October": -25.75,
         "November": 4.86,
         "December": -20.1,
-        "sum": -68.01
+        "sum": -71.88
       },
       {
         "year": 2017,
@@ -77988,7 +77988,7 @@
       "February": 1.58,
       "March": -2.52,
       "April": 5.86,
-      "May": 8.3,
+      "May": 7.95,
       "June": 3.36,
       "July": 0.79,
       "August": -4,
@@ -78134,39 +78134,39 @@
       },
       {
         "year": 2018,
-        "value": -41.66
+        "value": -45.54
       },
       {
         "year": 2019,
-        "value": -7.32
+        "value": -11.19
       },
       {
         "year": 2020,
-        "value": 4.22
+        "value": 0.35
       },
       {
         "year": 2021,
-        "value": 11.96
+        "value": 8.09
       },
       {
         "year": 2022,
-        "value": -32.34
+        "value": -36.22
       },
       {
         "year": 2023,
-        "value": -17.69
+        "value": -21.56
       },
       {
         "year": 2024,
-        "value": -9.74
+        "value": -13.62
       },
       {
         "year": 2025,
-        "value": 85.3
+        "value": 81.43
       },
       {
         "year": 2026,
-        "value": 210.69
+        "value": 206.81
       }
     ]
   },
@@ -79408,7 +79408,7 @@
         "February": -5.47,
         "March": 3.83,
         "April": 2.72,
-        "May": -2.65,
+        "May": -2.84,
         "June": 1.36,
         "July": 2.23,
         "August": 3.24,
@@ -79416,7 +79416,7 @@
         "October": 4.34,
         "November": 6.89,
         "December": -5.65,
-        "sum": 10.84
+        "sum": 10.65
       },
       {
         "year": 2017,
@@ -79456,7 +79456,7 @@
       "February": -0.84,
       "March": 2.96,
       "April": 2.47,
-      "May": 0.33,
+      "May": 0.31,
       "June": -1.8,
       "July": 3.18,
       "August": -0.58,
@@ -79602,39 +79602,39 @@
       },
       {
         "year": 2018,
-        "value": 38.67
+        "value": 38.48
       },
       {
         "year": 2019,
-        "value": 48.58
+        "value": 48.38
       },
       {
         "year": 2020,
-        "value": 57.13
+        "value": 56.94
       },
       {
         "year": 2021,
-        "value": 61.65
+        "value": 61.45
       },
       {
         "year": 2022,
-        "value": 64.17
+        "value": 63.98
       },
       {
         "year": 2023,
-        "value": 48.84
+        "value": 48.65
       },
       {
         "year": 2024,
-        "value": 48.63
+        "value": 48.44
       },
       {
         "year": 2025,
-        "value": 47.09
+        "value": 46.9
       },
       {
         "year": 2026,
-        "value": 52.96
+        "value": 52.77
       }
     ]
   },
@@ -79775,7 +79775,7 @@
         "February": -5.6,
         "March": -6.54,
         "April": 0.46,
-        "May": 2.61,
+        "May": 3.49,
         "June": -1.47,
         "July": 3.61,
         "August": -0.54,
@@ -79783,7 +79783,7 @@
         "October": -9.68,
         "November": 1.94,
         "December": -9.36,
-        "sum": -24.57
+        "sum": -23.69
       },
       {
         "year": 2017,
@@ -79823,7 +79823,7 @@
       "February": 1.38,
       "March": -0.81,
       "April": 2.34,
-      "May": 0.27,
+      "May": 0.35,
       "June": -0.28,
       "July": 2.58,
       "August": 0.26,
@@ -79969,39 +79969,39 @@
       },
       {
         "year": 2018,
-        "value": 15.09
+        "value": 15.97
       },
       {
         "year": 2019,
-        "value": 28.62
+        "value": 29.5
       },
       {
         "year": 2020,
-        "value": 63.79
+        "value": 64.67
       },
       {
         "year": 2021,
-        "value": 79.61
+        "value": 80.49
       },
       {
         "year": 2022,
-        "value": 68.55
+        "value": 69.43
       },
       {
         "year": 2023,
-        "value": 66.47
+        "value": 67.35
       },
       {
         "year": 2024,
-        "value": 61.18
+        "value": 62.06
       },
       {
         "year": 2025,
-        "value": 60.76
+        "value": 61.64
       },
       {
         "year": 2026,
-        "value": 80.48
+        "value": 81.36
       }
     ]
   },
@@ -81977,7 +81977,7 @@
         "February": -3.73,
         "March": 1.99,
         "April": 1.86,
-        "May": -1.09,
+        "May": -1.24,
         "June": 2.91,
         "July": 1.54,
         "August": 1.87,
@@ -81985,7 +81985,7 @@
         "October": 2.29,
         "November": 3.38,
         "December": -4.51,
-        "sum": 6.51
+        "sum": 6.36
       },
       {
         "year": 2017,
@@ -82025,7 +82025,7 @@
       "February": 0.33,
       "March": 2.17,
       "April": 1.37,
-      "May": 1.2,
+      "May": 1.18,
       "June": -0.83,
       "July": 2.87,
       "August": -0.81,
@@ -82171,39 +82171,39 @@
       },
       {
         "year": 2018,
-        "value": 26.26
+        "value": 26.11
       },
       {
         "year": 2019,
-        "value": 34.33
+        "value": 34.18
       },
       {
         "year": 2020,
-        "value": 38.37
+        "value": 38.21
       },
       {
         "year": 2021,
-        "value": 55.7
+        "value": 55.55
       },
       {
         "year": 2022,
-        "value": 53.48
+        "value": 53.33
       },
       {
         "year": 2023,
-        "value": 40.92
+        "value": 40.77
       },
       {
         "year": 2024,
-        "value": 49.27
+        "value": 49.11
       },
       {
         "year": 2025,
-        "value": 56.99
+        "value": 56.84
       },
       {
         "year": 2026,
-        "value": 57.64
+        "value": 57.49
       }
     ]
   },
