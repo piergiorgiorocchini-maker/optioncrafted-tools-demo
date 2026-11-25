@@ -5,6 +5,15 @@
   "statements": {
     "income": [
       {
+        "date": "2026-09-30",
+        "currency": "USD",
+        "values": {
+          "revenue": 478834000000,
+          "netIncome": 132175000000,
+          "operatingIncome": 158063000000
+        }
+      },
+      {
         "date": "2025-09-30",
         "currency": "USD",
         "values": {
@@ -174,17 +183,8 @@
           "netIncome": 3495000000,
           "operatingIncome": 4409000000
         }
-      },
-      {
-        "date": "2006-09-30",
-        "currency": "USD",
-        "values": {
-          "revenue": 19315000000,
-          "netIncome": 1989000000,
-          "operatingIncome": 2453000000
-        }
       }
     ]
   },
-  "updatedAt": "2026-11-01T13:02:51.792Z"
+  "updatedAt": "2026-11-25T18:38:40.650Z"
 }
