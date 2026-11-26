@@ -27,7 +27,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AAPL",
@@ -57,7 +57,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ABNB",
@@ -87,7 +87,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ACN",
@@ -117,7 +117,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ADBE",
@@ -147,7 +147,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ADI",
@@ -177,7 +177,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ADP",
@@ -207,7 +207,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ADSK",
@@ -237,7 +237,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AEP",
@@ -267,7 +267,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ALAB",
@@ -297,7 +297,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ALNY",
@@ -327,7 +327,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AMAT",
@@ -357,7 +357,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AMD",
@@ -387,7 +387,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AMGN",
@@ -417,7 +417,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AMLP",
@@ -447,7 +447,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AMZN",
@@ -477,7 +477,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "APP",
@@ -507,7 +507,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ARM",
@@ -537,7 +537,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ASML",
@@ -551,7 +551,7 @@
     "ytdChange": 21.8,
     "dividendYield": 0.7,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 495703864234,
+    "marketCap": 456306426643,
     "averageVolume": 1713570,
     "beta": 1.8,
     "pe": 33.96,
@@ -567,7 +567,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ASST",
@@ -597,7 +597,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AVGO",
@@ -627,7 +627,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AXON",
@@ -641,7 +641,7 @@
     "ytdChange": -39.6,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 26003090000,
+    "marketCap": 27935490000,
     "averageVolume": 1441080,
     "beta": 1.48,
     "pe": null,
@@ -657,7 +657,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "AXP",
@@ -687,7 +687,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BA",
@@ -717,7 +717,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BAC",
@@ -747,7 +747,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BHP",
@@ -761,7 +761,7 @@
     "ytdChange": 17.23,
     "dividendYield": 4.94,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 131388000710,
+    "marketCap": 136241116550,
     "averageVolume": 3559653,
     "beta": 0.77,
     "pe": 18.31,
@@ -777,7 +777,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BIL",
@@ -807,7 +807,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BKNG",
@@ -837,7 +837,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BKR",
@@ -867,7 +867,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BTBT",
@@ -897,7 +897,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BTC",
@@ -927,7 +927,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "BTCS",
@@ -957,7 +957,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CAT",
@@ -987,7 +987,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CCCM",
@@ -997,12 +997,12 @@
     "currency": "CAD",
     "defaultSpot": 0.46,
     "defaultIV": 22,
-    "dailyChange": 4.55,
+    "dailyChange": 0,
     "ytdChange": -60.34,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 57631009,
-    "averageVolume": 82529,
+    "marketCap": 57631030,
+    "averageVolume": 83663,
     "beta": 0.18,
     "pe": null,
     "eps": -0.03,
@@ -1017,7 +1017,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CCEP",
@@ -1047,7 +1047,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CDNS",
@@ -1077,7 +1077,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CEG",
@@ -1107,7 +1107,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CI",
@@ -1137,7 +1137,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CMCSA",
@@ -1167,7 +1167,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "COIN",
@@ -1197,7 +1197,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CONL",
@@ -1227,7 +1227,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "COST",
@@ -1257,7 +1257,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CPA",
@@ -1287,7 +1287,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CPRT",
@@ -1317,7 +1317,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CRCL",
@@ -1327,7 +1327,7 @@
     "currency": "USD",
     "defaultSpot": 48.27,
     "defaultIV": 22,
-    "dailyChange": 1.07,
+    "dailyChange": 1.15,
     "ytdChange": -39.13,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -1347,7 +1347,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CRM",
@@ -1377,7 +1377,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CRWD",
@@ -1407,7 +1407,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CRWV",
@@ -1437,7 +1437,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CSCO",
@@ -1467,7 +1467,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CSX",
@@ -1497,7 +1497,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CTAS",
@@ -1527,7 +1527,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "CVX",
@@ -1557,7 +1557,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "DASH",
@@ -1587,7 +1587,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "DDOG",
@@ -1617,7 +1617,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "DE",
@@ -1647,7 +1647,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "DFS",
@@ -1655,20 +1655,20 @@
     "category": "Stock",
     "sector": "Financial Services",
     "currency": "GBX",
-    "defaultSpot": 116.5,
+    "defaultSpot": 119.2,
     "defaultIV": 22,
-    "dailyChange": 0.43,
-    "ytdChange": -33.05,
+    "dailyChange": 1.29,
+    "ytdChange": -31.49,
     "dividendYield": 2.36,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 274940000,
-    "averageVolume": 397367,
+    "marketCap": 281311992,
+    "averageVolume": 394957,
     "beta": null,
-    "pe": 7.86,
+    "pe": 8.05,
     "eps": 0.15,
     "high52": 204,
     "low52": 113,
-    "drawdown52W": -42.89,
+    "drawdown52W": -41.57,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
     "dataFiles": {
@@ -1677,7 +1677,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "DURA",
@@ -1707,7 +1707,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "DXCM",
@@ -1722,7 +1722,7 @@
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 31641152990,
-    "averageVolume": 4655130,
+    "averageVolume": 4705899,
     "beta": 1.45,
     "pe": 33.33,
     "eps": 2.55,
@@ -1737,7 +1737,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EA",
@@ -1767,7 +1767,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EEM",
@@ -1797,7 +1797,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EFA",
@@ -1827,7 +1827,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EL",
@@ -1837,7 +1837,7 @@
     "currency": "USD",
     "defaultSpot": 109.61,
     "defaultIV": 22,
-    "dailyChange": 1.37,
+    "dailyChange": 1.31,
     "ytdChange": 4.67,
     "dividendYield": 1.29,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -1857,7 +1857,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ENVL",
@@ -1887,7 +1887,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EPD",
@@ -1917,7 +1917,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ETH",
@@ -1947,7 +1947,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EWZ",
@@ -1977,7 +1977,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "EXC",
@@ -2007,7 +2007,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "FANG",
@@ -2037,7 +2037,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "FAST",
@@ -2052,12 +2052,12 @@
     "dividendYield": 1.91,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 60726642280,
-    "averageVolume": 7901067,
+    "averageVolume": 8105924,
     "beta": 0.65,
     "pe": 42.93,
     "eps": 1.23,
     "high52": 56.27,
-    "low52": 38.97,
+    "low52": 39.81,
     "drawdown52W": -5.94,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
@@ -2067,7 +2067,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "FCX",
@@ -2097,7 +2097,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "FER",
@@ -2111,7 +2111,7 @@
     "ytdChange": -8.5,
     "dividendYield": 2.84,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 38392127998,
+    "marketCap": 39133345846,
     "averageVolume": 2842269,
     "beta": 1,
     "pe": null,
@@ -2127,7 +2127,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "FTNT",
@@ -2157,7 +2157,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "FXI",
@@ -2187,7 +2187,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GBTC",
@@ -2217,7 +2217,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GDX",
@@ -2247,7 +2247,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GDXY",
@@ -2277,7 +2277,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GE",
@@ -2287,7 +2287,7 @@
     "currency": "USD",
     "defaultSpot": 316.98,
     "defaultIV": 22,
-    "dailyChange": -0.33,
+    "dailyChange": -0.35,
     "ytdChange": 2.91,
     "dividendYield": 0.56,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -2307,7 +2307,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GEHC",
@@ -2337,7 +2337,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GILD",
@@ -2367,7 +2367,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GLD",
@@ -2397,7 +2397,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GLDM",
@@ -2427,7 +2427,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GME",
@@ -2457,7 +2457,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GOLD",
@@ -2467,7 +2467,7 @@
     "currency": "USD",
     "defaultSpot": 38.85,
     "defaultIV": 22,
-    "dailyChange": 5.11,
+    "dailyChange": 5.13,
     "ytdChange": 14.1,
     "dividendYield": 4.87,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -2487,7 +2487,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GOOG",
@@ -2517,7 +2517,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GOOGL",
@@ -2547,7 +2547,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "GUNR",
@@ -2577,7 +2577,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "HD",
@@ -2587,7 +2587,7 @@
     "currency": "USD",
     "defaultSpot": 361.26,
     "defaultIV": 22,
-    "dailyChange": 2.14,
+    "dailyChange": 2.17,
     "ytdChange": 4.99,
     "dividendYield": 2.63,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -2607,7 +2607,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "HDB",
@@ -2621,7 +2621,7 @@
     "ytdChange": -22.41,
     "dividendYield": 4.37,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 140104426135,
+    "marketCap": 6641058435250,
     "averageVolume": 9811941,
     "beta": 0.69,
     "pe": 19.19,
@@ -2637,7 +2637,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "HON",
@@ -2667,7 +2667,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "HONA",
@@ -2697,7 +2697,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "HOOD",
@@ -2727,7 +2727,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IAU",
@@ -2757,7 +2757,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IBB",
@@ -2787,7 +2787,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IBIT",
@@ -2817,7 +2817,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ICE",
@@ -2827,9 +2827,9 @@
     "currency": "USD",
     "defaultSpot": 177.81,
     "defaultIV": 22,
-    "dailyChange": 1.67,
+    "dailyChange": 1.68,
     "ytdChange": 9.79,
-    "dividendYield": 1.18,
+    "dividendYield": 1.15,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 99370610739,
     "averageVolume": 3417643,
@@ -2847,7 +2847,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IDXX",
@@ -2877,7 +2877,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IEMG",
@@ -2889,7 +2889,7 @@
     "defaultIV": 22,
     "dailyChange": -0.42,
     "ytdChange": 2.32,
-    "dividendYield": 2.55,
+    "dividendYield": 2.61,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 1124191986,
     "averageVolume": 15517745,
@@ -2907,7 +2907,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "INDA",
@@ -2915,9 +2915,9 @@
     "category": "Stock",
     "sector": "Financial Services",
     "currency": "GBX",
-    "defaultSpot": 725.5,
+    "defaultSpot": 737.4,
     "defaultIV": 22,
-    "dailyChange": -0.75,
+    "dailyChange": -0.16,
     "ytdChange": null,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -2928,7 +2928,7 @@
     "eps": null,
     "high52": 744.4,
     "low52": 615.85,
-    "drawdown52W": -2.54,
+    "drawdown52W": -0.94,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
     "dataFiles": {
@@ -2937,7 +2937,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "INDEXNASDAQ:.IXIC",
@@ -2967,7 +2967,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "INTC",
@@ -2997,7 +2997,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "INTU",
@@ -3027,7 +3027,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ISRG",
@@ -3057,7 +3057,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ITUB",
@@ -3067,11 +3067,11 @@
     "currency": "USD",
     "defaultSpot": 6.88,
     "defaultIV": 22,
-    "dailyChange": 2.38,
+    "dailyChange": 2.3,
     "ytdChange": -3.91,
     "dividendYield": 7.77,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 462620806892,
+    "marketCap": 478598949225,
     "averageVolume": 33246661,
     "beta": 0.59,
     "pe": 9.62,
@@ -3087,7 +3087,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ITW",
@@ -3097,7 +3097,7 @@
     "currency": "USD",
     "defaultSpot": 285.08,
     "defaultIV": 22,
-    "dailyChange": 0.47,
+    "dailyChange": 0.44,
     "ytdChange": 15.75,
     "dividendYield": 2.31,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -3117,7 +3117,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IWM",
@@ -3147,7 +3147,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IXC",
@@ -3177,7 +3177,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "IYR",
@@ -3207,7 +3207,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "JD",
@@ -3221,7 +3221,7 @@
     "ytdChange": -8.08,
     "dividendYield": 3.89,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 35761650162,
+    "marketCap": 284084144600,
     "averageVolume": 9688286,
     "beta": 0.3,
     "pe": 15.54,
@@ -3237,7 +3237,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "JNJ",
@@ -3267,7 +3267,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "JPM",
@@ -3297,7 +3297,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "KDP",
@@ -3327,7 +3327,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "KHC",
@@ -3337,7 +3337,7 @@
     "currency": "USD",
     "defaultSpot": 26.51,
     "defaultIV": 22,
-    "dailyChange": 3.68,
+    "dailyChange": 3.64,
     "ytdChange": 9.32,
     "dividendYield": 6.26,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -3357,7 +3357,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "KLAC",
@@ -3387,7 +3387,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "KO",
@@ -3417,7 +3417,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "KWEB",
@@ -3447,7 +3447,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "LIN",
@@ -3461,7 +3461,7 @@
     "ytdChange": 23.04,
     "dividendYield": 1.22,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 240839945593,
+    "marketCap": 88851752250,
     "averageVolume": 2030437,
     "beta": 0.67,
     "pe": 34.84,
@@ -3477,7 +3477,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "LITE",
@@ -3507,7 +3507,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "LOW",
@@ -3517,7 +3517,7 @@
     "currency": "USD",
     "defaultSpot": 235.65,
     "defaultIV": 22,
-    "dailyChange": 2,
+    "dailyChange": 2.04,
     "ytdChange": -2.28,
     "dividendYield": 2.12,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -3537,7 +3537,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "LRCX",
@@ -3552,12 +3552,12 @@
     "dividendYield": 0.57,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 231109119848,
-    "averageVolume": 12474418,
+    "averageVolume": 13673596,
     "beta": 1.94,
     "pe": 27.53,
     "eps": 6.72,
     "high52": 438.5,
-    "low52": 135.5,
+    "low52": 152.5,
     "drawdown52W": -57.81,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
@@ -3567,7 +3567,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "LULU",
@@ -3597,7 +3597,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MAR",
@@ -3627,7 +3627,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MARA",
@@ -3657,7 +3657,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MCHP",
@@ -3687,7 +3687,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MDLZ",
@@ -3717,7 +3717,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MELI",
@@ -3747,7 +3747,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "META",
@@ -3777,7 +3777,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MMM",
@@ -3807,7 +3807,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MNST",
@@ -3837,7 +3837,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MO",
@@ -3847,7 +3847,7 @@
     "currency": "USD",
     "defaultSpot": 76.28,
     "defaultIV": 22,
-    "dailyChange": 1.95,
+    "dailyChange": 1.92,
     "ytdChange": 32.29,
     "dividendYield": 5.73,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -3867,7 +3867,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MPWR",
@@ -3897,7 +3897,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MRK",
@@ -3907,7 +3907,7 @@
     "currency": "USD",
     "defaultSpot": 140.29,
     "defaultIV": 22,
-    "dailyChange": -0.9,
+    "dailyChange": -0.97,
     "ytdChange": 33.28,
     "dividendYield": 2.4,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -3927,7 +3927,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MRNA",
@@ -3957,7 +3957,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MRVL",
@@ -3971,7 +3971,7 @@
     "ytdChange": 54.07,
     "dividendYield": 0.18,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 114954975502,
+    "marketCap": 243595302,
     "averageVolume": 27610937,
     "beta": 2.32,
     "pe": 43.21,
@@ -3987,7 +3987,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MSFT",
@@ -4017,7 +4017,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MSTR",
@@ -4047,7 +4047,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MSTY",
@@ -4077,7 +4077,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "MU",
@@ -4087,7 +4087,7 @@
     "currency": "USD",
     "defaultSpot": 601.25,
     "defaultIV": 22,
-    "dailyChange": -4.53,
+    "dailyChange": -4.57,
     "ytdChange": 110.66,
     "dividendYield": 0.09,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -4107,7 +4107,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "NBIS",
@@ -4117,12 +4117,12 @@
     "currency": "USD",
     "defaultSpot": 84.99,
     "defaultIV": 22,
-    "dailyChange": -2.66,
+    "dailyChange": -2.64,
     "ytdChange": 1.53,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 24893774350,
-    "averageVolume": 28053089,
+    "averageVolume": 31031743,
     "beta": null,
     "pe": null,
     "eps": -0.05,
@@ -4137,7 +4137,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "NFLX",
@@ -4167,7 +4167,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "NKE",
@@ -4197,7 +4197,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "NTR",
@@ -4207,11 +4207,11 @@
     "currency": "USD",
     "defaultSpot": 66.84,
     "defaultIV": 22,
-    "dailyChange": 0.77,
+    "dailyChange": 0.75,
     "ytdChange": 8.3,
     "dividendYield": 3.31,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 45023441341,
+    "marketCap": 45426451628,
     "averageVolume": 2129595,
     "beta": 0.67,
     "pe": null,
@@ -4227,7 +4227,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "NVDA",
@@ -4242,12 +4242,12 @@
     "dividendYield": 0.6698,
     "dividendYieldBasis": "FORWARD_CALCULATED",
     "marketCap": 3598130073547,
-    "averageVolume": 206562430,
+    "averageVolume": 258657850,
     "beta": 2.21,
     "pe": 16.04,
     "eps": 9.31,
     "high52": 243.37,
-    "low52": 141.17,
+    "low52": 124.5,
     "drawdown52W": -38.65,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
@@ -4257,7 +4257,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "NXPI",
@@ -4287,7 +4287,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "O",
@@ -4317,7 +4317,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ODFL",
@@ -4347,7 +4347,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ORCL",
@@ -4377,7 +4377,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ORLY",
@@ -4407,7 +4407,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "OXY",
@@ -4437,7 +4437,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PAAS",
@@ -4451,7 +4451,7 @@
     "ytdChange": -37.15,
     "dividendYield": 2.35,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 13447143815,
+    "marketCap": 19292546757,
     "averageVolume": 5708595,
     "beta": 0.76,
     "pe": 8.72,
@@ -4467,7 +4467,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PANW",
@@ -4497,7 +4497,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PAYX",
@@ -4527,7 +4527,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PCAR",
@@ -4557,7 +4557,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PDD",
@@ -4572,7 +4572,7 @@
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 124433275713,
-    "averageVolume": 6994509,
+    "averageVolume": 6362955,
     "beta": -0.03,
     "pe": 9.31,
     "eps": 9.39,
@@ -4587,7 +4587,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PEP",
@@ -4617,7 +4617,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PFE",
@@ -4627,11 +4627,11 @@
     "currency": "USD",
     "defaultSpot": 28.46,
     "defaultIV": 22,
-    "dailyChange": 0,
+    "dailyChange": -0.07,
     "ytdChange": 14.3,
     "dividendYield": 6.04,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 162217782701,
+    "marketCap": 3985702253,
     "averageVolume": 35074257,
     "beta": 0.31,
     "pe": 40.7,
@@ -4647,7 +4647,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PG",
@@ -4677,7 +4677,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PHYS",
@@ -4707,7 +4707,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PLD",
@@ -4717,7 +4717,7 @@
     "currency": "USD",
     "defaultSpot": 127.03,
     "defaultIV": 22,
-    "dailyChange": -0.23,
+    "dailyChange": -0.24,
     "ytdChange": -0.49,
     "dividendYield": 3.31,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -4737,7 +4737,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PLTR",
@@ -4767,7 +4767,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PM",
@@ -4777,7 +4777,7 @@
     "currency": "USD",
     "defaultSpot": 184.32,
     "defaultIV": 22,
-    "dailyChange": 0.2,
+    "dailyChange": 0.18,
     "ytdChange": 14.91,
     "dividendYield": 3.27,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -4797,7 +4797,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PPLT",
@@ -4827,7 +4827,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "PYPL",
@@ -4842,7 +4842,7 @@
     "dividendYield": 1,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 48020357463,
-    "averageVolume": 10936872,
+    "averageVolume": 10709651,
     "beta": 1.33,
     "pe": 11,
     "eps": 5.25,
@@ -4857,7 +4857,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "QCOM",
@@ -4887,7 +4887,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "QQQ",
@@ -4902,7 +4902,7 @@
     "dividendYield": 0.48,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 247581295246,
-    "averageVolume": 48234556,
+    "averageVolume": 54991827,
     "beta": 1.23,
     "pe": null,
     "eps": null,
@@ -4917,7 +4917,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "RBLX",
@@ -4947,7 +4947,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "REGN",
@@ -4977,7 +4977,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "RIO",
@@ -4987,11 +4987,11 @@
     "currency": "USD",
     "defaultSpot": 74.58,
     "defaultIV": 22,
-    "dailyChange": 1.9,
+    "dailyChange": 1.91,
     "ytdChange": -6.81,
     "dividendYield": 6.35,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 127761062056,
+    "marketCap": 97308798810,
     "averageVolume": 3150466,
     "beta": 0.65,
     "pe": 10.1,
@@ -5007,7 +5007,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "RIOT",
@@ -5037,7 +5037,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "RKLB",
@@ -5067,7 +5067,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ROP",
@@ -5097,7 +5097,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "ROST",
@@ -5127,7 +5127,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "RSP",
@@ -5157,7 +5157,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SBET",
@@ -5187,7 +5187,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SBUX",
@@ -5217,7 +5217,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SHOP",
@@ -5231,7 +5231,7 @@
     "ytdChange": -17.13,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 171621893547,
+    "marketCap": 247549181655,
     "averageVolume": 8324179,
     "beta": 2.65,
     "pe": 81.35,
@@ -5247,7 +5247,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SHY",
@@ -5277,7 +5277,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SIVR",
@@ -5307,7 +5307,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SLV",
@@ -5337,7 +5337,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SLYV",
@@ -5367,7 +5367,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SMLR",
@@ -5397,7 +5397,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SNDK",
@@ -5427,7 +5427,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SNPS",
@@ -5457,7 +5457,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SPCX",
@@ -5472,7 +5472,7 @@
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 1730770319556,
-    "averageVolume": 105142824,
+    "averageVolume": 108319380,
     "beta": null,
     "pe": null,
     "eps": -0.25,
@@ -5487,7 +5487,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SPY",
@@ -5517,7 +5517,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "STRC",
@@ -5547,7 +5547,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "STX",
@@ -5562,12 +5562,12 @@
     "dividendYield": 0.61,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 108428544047,
-    "averageVolume": 5647012,
+    "averageVolume": 5644150,
     "beta": 2.16,
     "pe": 24.81,
     "eps": 19.04,
     "high52": 1145,
-    "low52": 228.61,
+    "low52": 250.53,
     "drawdown52W": -58.75,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
@@ -5577,7 +5577,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SU",
@@ -5591,7 +5591,7 @@
     "ytdChange": 45.22,
     "dividendYield": 2.72,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 74099747093,
+    "marketCap": 108122862052,
     "averageVolume": 4010898,
     "beta": 0.19,
     "pe": 9.74,
@@ -5607,7 +5607,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "SYM",
@@ -5637,7 +5637,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TER",
@@ -5667,7 +5667,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TIP",
@@ -5697,7 +5697,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TMUS",
@@ -5727,7 +5727,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TQQQ",
@@ -5757,7 +5757,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TRI",
@@ -5771,8 +5771,8 @@
     "ytdChange": -18.37,
     "dividendYield": 3.79,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 47375471308,
-    "averageVolume": 1881493,
+    "marketCap": 67030068567,
+    "averageVolume": 1984281,
     "beta": 0.69,
     "pe": 30.63,
     "eps": 3.57,
@@ -5787,7 +5787,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TRV",
@@ -5797,7 +5797,7 @@
     "currency": "USD",
     "defaultSpot": 406.86,
     "defaultIV": 22,
-    "dailyChange": 1.49,
+    "dailyChange": 1.48,
     "ytdChange": 40.27,
     "dividendYield": 1.17,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -5817,7 +5817,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TSLA",
@@ -5847,7 +5847,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TSLT",
@@ -5877,7 +5877,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TTWO",
@@ -5907,7 +5907,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "TXN",
@@ -5937,7 +5937,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "UNH",
@@ -5947,7 +5947,7 @@
     "currency": "USD",
     "defaultSpot": 346.19,
     "defaultIV": 22,
-    "dailyChange": 1.26,
+    "dailyChange": 1.18,
     "ytdChange": 4.87,
     "dividendYield": 2.65,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -5967,7 +5967,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "UNP",
@@ -5977,7 +5977,7 @@
     "currency": "USD",
     "defaultSpot": 298.38,
     "defaultIV": 22,
-    "dailyChange": 2.6,
+    "dailyChange": 2.62,
     "ytdChange": 28.99,
     "dividendYield": 1.91,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -5997,7 +5997,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "URA",
@@ -6027,7 +6027,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "USB",
@@ -6037,7 +6037,7 @@
     "currency": "USD",
     "defaultSpot": 58.55,
     "defaultIV": 22,
-    "dailyChange": 0.83,
+    "dailyChange": 0.81,
     "ytdChange": 9.73,
     "dividendYield": 3.62,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -6057,7 +6057,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "USO",
@@ -6087,7 +6087,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "V",
@@ -6117,7 +6117,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "VEA",
@@ -6147,7 +6147,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "VIX",
@@ -6155,10 +6155,10 @@
     "category": "Index",
     "sector": "Consumer Cyclical",
     "currency": null,
-    "defaultSpot": 28.29,
+    "defaultSpot": 26.77,
     "defaultIV": 22,
-    "dailyChange": 7.32,
-    "ytdChange": 89.23,
+    "dailyChange": 1.56,
+    "ytdChange": 79.06,
     "dividendYield": 11.05,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": null,
@@ -6168,7 +6168,7 @@
     "eps": null,
     "high52": 40.03,
     "low52": 13.38,
-    "drawdown52W": -29.33,
+    "drawdown52W": -33.13,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
     "dataFiles": {
@@ -6177,7 +6177,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "VNQ",
@@ -6207,7 +6207,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "VRTX",
@@ -6237,7 +6237,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "VTV",
@@ -6267,7 +6267,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "VWO",
@@ -6297,7 +6297,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "WBD",
@@ -6305,20 +6305,20 @@
     "category": "Stock",
     "sector": "Communication Services",
     "currency": "EUR",
-    "defaultSpot": 2.09,
+    "defaultSpot": 2.19,
     "defaultIV": 22,
-    "dailyChange": -3.24,
-    "ytdChange": -38.89,
+    "dailyChange": 4.78,
+    "ytdChange": -35.96,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 2135636580,
-    "averageVolume": 2998188,
+    "marketCap": 2243326558,
+    "averageVolume": 3050053,
     "beta": null,
-    "pe": 8.5,
+    "pe": 8.93,
     "eps": 0.25,
     "high52": 3.68,
     "low52": 1.81,
-    "drawdown52W": -43.21,
+    "drawdown52W": -40.49,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
     "dataFiles": {
@@ -6327,7 +6327,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "WDAY",
@@ -6342,13 +6342,13 @@
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
     "marketCap": 43486040588,
-    "averageVolume": 2287415,
+    "averageVolume": 2187358,
     "beta": 1.02,
     "pe": 35.36,
     "eps": 5.1,
-    "high52": 227.49,
+    "high52": 236.8,
     "low52": 110.36,
-    "drawdown52W": -20.68,
+    "drawdown52W": -23.8,
     "optionLiquidity": "Manual check required",
     "dataCoverage": "Monthly + seasonality",
     "dataFiles": {
@@ -6357,7 +6357,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "WDC",
@@ -6387,7 +6387,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "WELL",
@@ -6397,7 +6397,7 @@
     "currency": "USD",
     "defaultSpot": 246.18,
     "defaultIV": 22,
-    "dailyChange": 0.42,
+    "dailyChange": 0.44,
     "ytdChange": 32.63,
     "dividendYield": 1.3,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -6417,7 +6417,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "WHR",
@@ -6427,7 +6427,7 @@
     "currency": "USD",
     "defaultSpot": 27.14,
     "defaultIV": 22,
-    "dailyChange": 5.73,
+    "dailyChange": 5.85,
     "ytdChange": -62.38,
     "dividendYield": 17.34,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -6447,7 +6447,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "WMT",
@@ -6477,7 +6477,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XEL",
@@ -6507,7 +6507,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLB",
@@ -6537,7 +6537,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLC",
@@ -6567,7 +6567,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLE",
@@ -6597,7 +6597,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLF",
@@ -6627,7 +6627,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLK",
@@ -6657,7 +6657,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLP",
@@ -6687,7 +6687,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLU",
@@ -6717,7 +6717,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLV",
@@ -6747,7 +6747,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XLY",
@@ -6777,7 +6777,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XOM",
@@ -6787,7 +6787,7 @@
     "currency": "USD",
     "defaultSpot": 158.08,
     "defaultIV": 22,
-    "dailyChange": -0.09,
+    "dailyChange": -0.18,
     "ytdChange": 31.36,
     "dividendYield": 2.63,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
@@ -6807,7 +6807,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XOP",
@@ -6837,7 +6837,7 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   },
   {
     "ticker": "XYZ",
@@ -6847,11 +6847,11 @@
     "currency": "USD",
     "defaultSpot": 76.1,
     "defaultIV": 22,
-    "dailyChange": 2.63,
+    "dailyChange": 2.59,
     "ytdChange": 16.92,
     "dividendYield": 0,
     "dividendYieldBasis": "PROVIDER_UNVERIFIED",
-    "marketCap": 44825300000,
+    "marketCap": 46004130000,
     "averageVolume": 6248664,
     "beta": 2.58,
     "pe": null,
@@ -6867,6 +6867,6 @@
       "seasonalityMatrix": true
     },
     "marketDataSource": "Google Finance + Google Sheet + Financial Modeling Prep",
-    "lastUpdated": "2026-11-25T22:47:08.910Z"
+    "lastUpdated": "2026-11-26T15:39:54.765Z"
   }
 ]
