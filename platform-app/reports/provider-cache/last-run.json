@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T18:38:40.331Z",
+  "generatedAt": "2026-11-26T18:24:33.456Z",
   "budgets": {
     "FMP": 0,
     "ALPHA_VANTAGE": 3
@@ -15,12 +15,12 @@
       "requestsToday": 2,
       "attempts": [
         {
-          "ticker": "AAPL",
+          "ticker": "MSFT",
           "statement": "income",
           "status": "AVAILABLE"
         },
         {
-          "ticker": "AAPL",
+          "ticker": "MSFT",
           "statement": "balance",
           "status": "PREMIUM_REQUIRED"
         }
