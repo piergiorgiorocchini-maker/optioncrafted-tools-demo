@@ -14,7 +14,7 @@
  *
  * Pilot: refreshOCForwardDividendsPilot()              (2 FMP requests)
  * Gradual collection: refreshOCForwardDividendsBatch() (up to 15 / day)
- * Once the pilot is accepted, optionally run installOCForwardDividendTrigger().
+ * After installing this update run auditOCForwardDividendCache() once.\n * Once the pilot is accepted, optionally run installOCForwardDividendTrigger().
  *
  * Does not alter ProviderCache, Assets!O or existing export scripts.
  */
@@ -41,25 +41,40 @@ function ocDivFrequency_(value) {
   return null;
 }
 
+// Allow a little payment slippage, but NEVER promote a historical distribution
+// to a forward dividend. Frequency controls the maximum permitted age.
+function ocDivMaxAgeDays_(frequency) {
+  return {Monthly:75,Quarterly:200,Semiannual:300,Annual:500}[frequency] || 0;
+}
+
+function ocDivAgeDays_(dateText, today) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateText)) return null;
+  const d=Date.parse(dateText+'T00:00:00Z');
+  const now=Date.parse(today+'T00:00:00Z');
+  if (!Number.isFinite(d)||!Number.isFinite(now)) return null;
+  const age=(now-d)/86400000;
+  return Number.isInteger(age)&&age>=0?age:null;
+}
+
 function ocDivFindLatest_(records, today) {
   if (!Array.isArray(records)) return null;
-  const eligible = records.map(event => {
-    if (!event || typeof event !== 'object') return null;
-    const freq = ocDivFrequency_(event.frequency);
-    const amount = Number(event.dividend);
-    if (!freq || !Number.isFinite(amount) || amount <= 0) return null;
-    const type = String(event.type || event.dividendType || '').toLowerCase();
+  const eligible=records.map(event=>{
+    if (!event || typeof event!=='object') return null;
+    const freq=ocDivFrequency_(event.frequency);
+    const amount=Number(event.dividend);
+    if (!freq||!Number.isFinite(amount)||amount<=0) return null;
+    const type=String(event.type||event.dividendType||'').toLowerCase();
     if (/special|extraordinary|irregular|one.time/.test(type)) return null;
-    const declared = String(event.declarationDate || '');
-    const exDate = String(event.date || '');
-    if (declared && declared > today) return null;
-    if (!declared && (!exDate || exDate > today)) return null;
-    const eventDate = declared || exDate;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(eventDate)) return null;
+    const declared=String(event.declarationDate||'');
+    const exDate=String(event.date||'');
+    const eventDate=declared||exDate;
+    const age=ocDivAgeDays_(eventDate,today);
+    // Ignore future declarations, unparseable dates and stale historical dividends.
+    if(age===null||age>ocDivMaxAgeDays_(freq.name)) return null;
     return {amount,frequency:freq.name,date:eventDate,exDate};
   }).filter(Boolean);
-  eligible.sort((a,b) => (b.date.localeCompare(a.date) || b.exDate.localeCompare(a.exDate)));
-  return eligible[0] || null;
+  eligible.sort((a,b)=>(b.date.localeCompare(a.date)||b.exDate.localeCompare(a.exDate)));
+  return eligible[0]||null;
 }
 
 function ocDivSheet_() {
@@ -70,13 +85,26 @@ function ocDivSheet_() {
   return {cache,assets};
 }
 
-function ocDivUpsert_(cache,ticker,selected,today) {
-  const last = Math.max(1,cache.getLastRow());
-  const existing = last>1?cache.getRange(2,1,last-1,1).getDisplayValues().flat():[];
-  const ix=existing.indexOf(ticker);
+function ocDivCacheRow_(cache,ticker) {
+  const last=Math.max(1,cache.getLastRow());
+  const tickers=last>1?cache.getRange(2,1,last-1,1).getDisplayValues().flat():[];
+  const ix=tickers.indexOf(ticker);
   const row=ix>=0?ix+2:last+1;
-  if (row>cache.getMaxRows()) throw Error('DividendCache is out of rows');
-  // Keep annualization in Google Sheets. Never replace the formula with static yield.
+  if(row>cache.getMaxRows()) throw Error('DividendCache is out of rows');
+  return row;
+}
+
+function ocDivInvalidate_(cache,ticker,today,reason) {
+  const row=ocDivCacheRow_(cache,ticker);
+  // Blank numeric inputs and annualization so Assets!V:W cannot use stale values.
+  cache.getRange(row,1,1,7).setValues([[
+    ticker,'','','','FMP stable/dividends',today,reason
+  ]]);
+  return row;
+}
+
+function ocDivUpsert_(cache,ticker,selected,today) {
+  const row=ocDivCacheRow_(cache,ticker);
   const annualFormula='=IF(OR(B'+row+'="";C'+row+'="");"";IFERROR(B'+row+
       '*SWITCH(C'+row+';"Quarterly";4;"Semiannual";2;"Annual";1;"Monthly";12);""))';
   cache.getRange(row,1,1,7).setValues([[
@@ -84,6 +112,29 @@ function ocDivUpsert_(cache,ticker,selected,today) {
     'FMP stable/dividends; declaration '+selected.date,today,'FMP_AUTO'
   ]]);
   return row;
+}
+
+// Run once after installation (and periodically if desired). Keeps ticker rows,
+// removes only dividends that have become too old to qualify as forward.
+function auditOCForwardDividendCache() {
+  const {cache}=ocDivSheet_(),today=ocDivDate_(),last=cache.getLastRow();
+  if(last<2)return {checked:0,invalidated:0};
+  const records=cache.getRange(2,1,last-1,7).getValues();
+  let invalidated=0;
+  records.forEach((values,i)=>{
+    const ticker=String(values[0]||'').trim().toUpperCase();
+    const amount=Number(values[1]);
+    const freq=ocDivFrequency_(values[2]);
+    const dateMatch=String(values[4]||'').match(/declaration\s+(\d{4}-\d{2}-\d{2})/i);
+    if(!ticker||!(amount>0))return;
+    const age=dateMatch?ocDivAgeDays_(dateMatch[1],today):null;
+    if(!freq||age===null||age>ocDivMaxAgeDays_(freq.name)){
+      ocDivInvalidate_(cache,ticker,today,'STALE_OR_UNVERIFIED');
+      invalidated++;
+    }
+  });
+  Logger.log('DividendCache audit: '+JSON.stringify({checked:records.length,invalidated}));
+  return {checked:records.length,invalidated};
 }
 
 function ocDivPull_(ticker,key,today) {
@@ -122,7 +173,8 @@ function ocDivRun_(tickers) {
       try{
         const candidate=ocDivPull_(ticker,key,today);
         if (!candidate) {
-          output.push({ticker,status:'NO_VALID_REGULAR_DIVIDEND'});
+          const row=ocDivInvalidate_(cache,ticker,today,'NO_CURRENT_REGULAR_DIVIDEND');
+          output.push({ticker,status:'NO_CURRENT_REGULAR_DIVIDEND',row});
           continue;
         }
         const row=ocDivUpsert_(cache,ticker,candidate,today);
@@ -165,5 +217,6 @@ function installOCForwardDividendTrigger() {
   const handler='refreshOCForwardDividendsBatch';
   ScriptApp.getProjectTriggers().filter(t=>t.getHandlerFunction()===handler)
       .forEach(t=>ScriptApp.deleteTrigger(t));
-  ScriptApp.newTrigger(handler).timeBased().everyDays(1).atHour(14).create();
+  ScriptApp.newTrigger(handler).timeBased().everyDays(1).atHour(14)
+      .inTimezone(OC_FORWARD_DIVIDENDS.timezone).create();
 }
